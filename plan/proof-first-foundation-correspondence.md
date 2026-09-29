@@ -1881,3 +1881,85 @@ Prior Oracle14findings disposed; final narrowed review mir-w4-invocation-delta-r
 W4-Cの通常代入列について、到達履歴から文位置・実際の応答受理・確定記録との対応を導くLean候補を統合しました。失効前後の同一要求と偽造した試行の識別を含む171依存moduleを監査しています。Oracleの主要reviewは回収済みで、追加補強は機械検証済み・差分review未了です。Rustの識別子試作は元の引数定義と文位置を保持しますが、下位M8入口から2文目を先に実行できる反例が残り、局所source dispatchも未完了のため採用していません。Cは実装入口・順序・現在の文脈を接続する段階、Dは未着手です。
 
 The existing candidate A retains exact ordered Core references and per-invocation cursor; B whole-handler execution owes the same boundaries. Static operation identity, dynamic invocation/ordinal, and actual request identity remain distinct. New all-Admitted history/request-pairing proof excludes counterfeits that preserve older predicates; actual-tick completion is not an arbitrary successor validator. Initial attachment may follow commits and is not source termination. Metadata retirement after service still permits actual-model acknowledgment, with stale packet independently checked; no Q18 policy is selected. Post-review successor is mechanically checked and remains a LAB candidate pending changed-cut review. No new plan/lifecycle/product acceptance.
+
+
+### 同じW4-C consumerの実行入口差分 — 2026-09-29T05:19:35.137000+00:00
+
+W4-Cの通常代入列について、到達履歴・元の文位置・実応答受理と確定記録を結ぶLean候補を統合しました。最新差分は、実行前の失効による要求保持、更新後の同じ実行状態での再試行拒否、独立した宣言的前提からの確定を検査し、172依存moduleを監査しています。履歴・入口Oracleは回収済みで、この追加差分はreview中です。Rustの局所実行試作はST/OW1とST保存・復元の対象5検査に通りましたが、同期経路に限る未採用実験です。識別子だけの試作では、下位M8の2文目への直接入口とキュー複製後の二重実行を再現しました。Cは保護された実行権と全入口の接続が現在地で、Dは未着手です。
+
+候補Aは完全な元handler manifestとlive invocation、候補Bは同じ義務を持つhandler interpreterのままです。入口検査はenqueueだけでなく実effect時にも必要です。保存した要求やバックエンドの複製は実行権になりません。Leanの更新後stateに対する排他は、物理的に唯一のstateを所有・公開する実装を仮定しており、その実現を証明済みとはしません。複数ownerのmetadata選択・全資源上限・private物理入口は引き続き前提consumer gateです。下位OwnerReadのphase nodeと実際のper-key読取りを区別し、Canonの既存nodeを勝手に消しません。進行はC→D、D後pause/E前停止を保持します。詳細はReport2614とW4_CHECKの前方記録。
+
+
+### W4-C per-owner metadata successor — 2026-09-29T05:58:25.115575+00:00
+
+Same W4-C direct consumer; this is forward LAB evidence, not a roadmap recut.
+The single-registry limitation is narrowed by a finite per-owner bank selected
+from the actual saved operation/current catalog. `Selected`/`select` are exact;
+actual source/service and all defined authority/control/metadata/continuation
+entries preserve the admitted source-prefix/history facts. Empty-bank admission
+starts from an actual fresh launch. Initial installation requires an absent slot
+and empty registry plus current attachment; it remains trusted schema input,
+not source-derived construction or auth issuance. Populated reset is refused.
+
+S–T–S succeeds from A and S in the checked model, with source ordinals intact.
+T retirement preserves S's commit and blocks the suffix. Replacing or omitting
+T's registry, reviving the old packet and resetting its slot do not authorize an
+effect. Advancing only the authority generation permits current revalidation of
+the same valid witness under the existing model; revoking its actual used claims
+produces a typed lower refusal/attempt without a commit. The false expectation
+that generation change alone is revocation is retained as a negative control.
+This neither resolves Q18 nor adopts a new authority policy.
+
+Fresh3module/all175owned audit/26qualified negative guards:30commands,4zero and
+26intentionalone,18122owned, RESULTb692ff613a53a7170674f6a4dd9ce0bb34efd64213b93281d9f8d958339ce5c1.
+Prior exact source/object pins remain unchanged. The new bank delta is pending
+Oracle review. The effect delta's first consult failed login; owner logged in,
+same packet was resent once to the ordinary visible Chrome, actual6Pro/max and
+submission confirmed. Source manifest and companion preserve executable recipes.
+Direct next consumer remains the protected source invocation and owner effect
+point, with full args/current metadata/resources, lower/public/async/FIFO/clone/
+image/patch closure. Rust local prototype remains unadopted. C incomplete, D
+unstarted; stop after D before E. Canon/THM/OBL/119/Plan250 unchanged.
+
+### 2026-09-29 15:33 JST — C: designated execution and retained reporting state
+
+Same goal and direct consumer; no roadmap/Canon change. Effect review17 and bank
+review16 findings are dispositioned. Same-label reactivation now isolates old
+metadata generation refusal; missing T installation is checked before actual
+source publication, and S metadata mutation while T is queued is exercised.
+Full installation elimination retains every guard. Raw empty field packets can
+pass local current predicates but cannot have the admitted construction path.
+
+A local owning-custodian candidate invokes the existing bank service on its own
+state. Report absence, report production and source acceptance are separate;
+dispatch serials never duplicate across their cycles, and serial/history slots
+stay within the declared bound. This is not a total resource bound or a model
+of uncertain remote-worker outcomes. Fresh177module audit/37qualified false
+controls passed (40commands3zero37intentionalone/18311owned). The new delta is
+under separate Oracle review. No number of declarations is completion evidence.
+
+Actual restored Rust probes distinguish protected lower enqueue/service from
+execution inside an owning custodian. Wrong backend rejects before pop/body;
+two intentional operations use200→190→180; postcommit report loss retains190
+andblocksretry. Raw private-image flag erasure and lowerplan replacement still
+bypass that flag outside sealed expected-source/designated-owner admission.
+This is neither an external auth attack nor an acceptable unconditional import
+contract. A remains retained fullmanifest/cursor + existing checked leaves;
+minimal B is a whole-handler execution entry that removes actual child exposure.
+Both owe authentic activation, current arguments/authority/resources, returned
+result provenance and all supported mutation/restore/patch/async/FIFO routes.
+No production statementadapter adopted. C incomplete, D unstarted; stopafterD.
+
+### W4-C same-world ordinary source consumer — 2026-09-29 16:33 JST
+
+Same W4-C/PL1-2 S4/S6 goal. No new roadmap, Canon/THM/OBL/119 or Plan250 lifecycle change. A remains provisional original handler/full checked manifest/protected live cursor; B whole-handler representation remains smallest alternative, not adopted.
+
+Evidence: ordinary2statement200→190→17 on actual ST/OW1; A/S→S/T/S allordinals; exactdependent190→187; next intentional invocation on SAME livefabric17→7→17 with unchangedcurrent authority and4distinctrequestIDs. Oldactivationtokenrefuses despite samephysicaldesignation/ordinal. Completion differsfromunfinishedcapacityexhaustion; boundedone-result redelivery addressesactualdelivered-tokenloss. Existing finite-localM9 issuer unchanged; sourcecheckedinventory receivesseparateexisting scopes, notgrantinheritance. T0fact/source callertrusted, externalattack-onlygrantcompatibilitynotestablished. All15Rustreferencechecks pass, temporaryfilesrestored/unadopted.
+
+Generalmodel source composition usesexistingBanktick/transfer/service/report/typedconsume; realAccepted witness extendscompletedprefix, notmerecustodyrelease. Admittedtwo-statementpath tracedfromactuallaunch/install; source179 freshaudit+45falseguards; standardlogicaxiomsonly. This isnotwhole-Rustrefinement orindependentend-to-endavailabilitytheorem. The initialsource-consumerOracle16findingsaredispositioned; subsequentproof/Rustdelta reviewowed.
+
+Direct nextconsumer: keepindependentlytrustedoriginalsource/currentinvocationfixed, eraselowerclassificationflag, attemptotherwisevalidwrongorderchild atlowestentry. Real rejectionmustdependonprotectedroot, withsingle-root-checkmutationcounterexample. Inparallelwithinthissameconsumer, prepareallnecessarycounter/resources BEFOREownerwrite andretainactualtypedowneroutcome BEFOREfalliblereporting. ExistingouterVecreserve cannotclosepostcommitpanicwindow; knownretainedreportloss anduncertainOW1outcome remainseparate. Same-instanceimage/currentactivation, enabledpatch/restore/metadata/async/FIFO entriesandfullresourceremaingates. Do notmove Cpreconditionsinto E orclaimαwithunimplementedpaths.
+
+Owner boundaries unchanged: nonewissuer/privacy/Q18/publicwire/keys/productiondecisions. DafterC, pausebeforeE. No subagents ornotification. Exactreceipts/failures/hashpins inW4_CHECK/Report2614; neverreplayunchangedbaselinesjustforcontextrestore.
+
+- 2026-09-29T08:02:11.200197+00:00: Same C frontier: admitted model continuation now has a four-statement path and generic state/history/serial preservation with activation increment (179-module audit49false guards). Actual lower-root RED proves metadata classification and custody alone permit valid child1 before child0. Reference six tests and isolated root-check mutation discriminate independent source-root enforcement, full bound arguments and stage/use checks. This single-owner lower prototype remains separate from SYS4 source consumer; global source ordinal across S→T→S, unique activation, install/restore/equivalence and lower outcome retention are still direct obligations. New Oracle mir-w4-source-root-r1 running on frozen35files593225bytes. No production or Canon promotion.

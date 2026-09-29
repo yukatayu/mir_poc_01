@@ -622,6 +622,13 @@ to a caller-selected existing external directory using create-new semantics;
 it does not generate expected runtime events or establish import authority.
 
 W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](../samples/lean/foundations/OwnerStatementAdmission.md) に記録します。
-171依存moduleのsource-only再構築と全所有宣言auditを用い、到達履歴・元の文位置・
-実応答受理・確定履歴を分けます。Rustの文順序・局所dispatch・全entry接続は未完了です。
+169依存moduleのsource-only再構築と追加差分による175module全所有宣言auditを用い、到達履歴・元の文位置・
+実応答受理・確定履歴を分け、所有者ごとの現在の登録情報を選びます。登録差分はreview待ちです。
+初期schema・物理custody・総資源量、Rustの文順序・局所dispatch・全entry接続は未完了です。
 既存W4-B manifest、sample root、host runnerの契約は変更しません。
+
+W4-Cのsource受理接続は `OwnerStatementAdmission.md` の179module/58反例recipe、
+W4_CHECKの `c_statement_source_consumer_20260929` とreview後続recordを参照。
+実tick/transfer/service/typed consumeの一般命題と受理済み2文経路を検査しています。
+Rust参照版は実2文・S→T→S・同じworldでの継続を検査済みですが、全下位入口、
+書込み前資源と下位結果保持は未閉鎖で、production採用・α完成ではありません。

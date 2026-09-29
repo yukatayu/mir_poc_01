@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-29 13:37 JST
+最終更新: 2026-09-29 15:33 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列について、到達履歴から文位置・実際の応答受理・確定記録との対応を導くLean候補を統合しました。失効前後の同一要求と偽造した試行の識別を含む171依存moduleを監査しています。Oracleの主要reviewは回収済みで、追加補強は機械検証済み・差分review未了です。Rustの識別子試作は元の引数定義と文位置を保持しますが、下位M8入口から2文目を先に実行できる反例が残り、局所source dispatchも未完了のため採用していません。Cは実装入口・順序・現在の文脈を接続する段階、Dは未着手です。
+W4-Cの通常代入列は、元handler・完全な引数・文順序を保持する参照実装で、実M9認可からST/OW1の200→190→17、A/SからS→T→Sの順序、同じ稼働中の状態で次の呼出しが17→7と続くところまで検査できました。別の実行・古いactivationの実結果によるcursor更新、2文目の権限失効、古い受理情報でのsource変更、途中の資源上限、結果通知の欠落を分けて検査しています。一般Lean命題では、実際のsource tickによる返信受理だけが完了済み文を増やすことと、元の受理履歴・保持枠・実行番号の保存を確認しました。依存179moduleの継続呼出しを含む公理監査と49件の誤った主張の拒否、Rust参照版15検査が通過しています。初版consumerのOracle review16指摘は照合済みで、後続の証明・修正差分は追加review待ちです。独立した元sourceを保持しても下位の分類情報を消すと二番目の文が先に動く反例を再現し、下位参照修正6検査と照合を外す変異検査で拒否理由を確認しました。この下位保護と通常source入口の実接続、書込み前の資源確保、書込み後・応答前の実結果保持が次の必須条件です。Rust変更は復元済み・未採用で、全資源・外部結果不明・復旧・秘密観測の保証には広げません。C未完了、D未着手、D完了後に停止します。
 
-次の直接consumerは元handler・完全な引数・元文位置を持つmanifestと、実応答受理でだけ進む保護されたinvocation cursorです。M8直接entry、SYS4 submit/FIFO/局所経路、private image/restoreとpatchを同じ条件へ閉じる必要があります。下位入口の制約をSYS4だけで代用しません。全entry/current labels/resources/物理custodyもCの残件です。
+現在の直接consumerは、元handlerの完全な正本と稼働中のinvocationを、下位実行入口でも失わずに照合する仕組みです。参照版のcursor接続を、実結果保持・資源事前確保とともに通常入口へ接続します。M8直接entry、SYS4 submit/FIFO/局所経路、private image/restoreとpatchを同じ条件へ閉じる必要があります。下位入口の制約をSYS4だけで代用しません。全entry/current labels/resources/物理custodyもCの残件です。
 
 ## ordered self-driven packages
 

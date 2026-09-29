@@ -49391,5 +49391,432 @@
     "status": "full-read",
     "role": "authored/full selected excerpts; entire underlying Rust files not newly claimed read by this excerpt",
     "at": "2026-09-29T04:47:17.637260+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-entry-v1/OwnerStatementEntryGate.lean",
+    "sha256": "6a9e4aa061d0b1198ba36e4f54db6400f26e9a588442844222503ee7bd753eaa",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-entry-v1/OwnerStatementRetainedControls.lean",
+    "sha256": "3016135f5f7c8f2b1ea1316bb790d77a0a5b291dcd6e3fc71d0f4dada9660a77",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-entry/ANSWER_RECOVERED.txt",
+    "sha256": "eeecfb4c6050a0146267af8bd61c0d416020d3bb0b8016a1c49518e0f5c86fb7",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-entry/DISPOSITIONS.json",
+    "sha256": "dfdd56310d3d3b8beb18bb4a27d927a4d9948ae06cf7ff41447adebd1eae3986",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-effect/QUESTION.md",
+    "sha256": "93e79b560e29abe0f53ba5b84a1e6805dd1cd68215117cb1ff9d22331b222665",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/local_owner_probe_method.rs",
+    "sha256": "11ed23dc63895a54727eecf54e7c795488d6b2eb3120afca97126c4f927b2a93",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/local_owner_probe_tests.rs",
+    "sha256": "3930f66f12b12989b18f2ed649fdffa80d13fff5c727fd9d7cf8c0c2f2b995b3",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/identity_adapter_probe_extra.rs",
+    "sha256": "50c3da94be0d2bf894210586c18d67cf425a9493921cc06d74346709c29f59b2",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataManagement.lean",
+    "sha256": "3981aa35ca09bc8366bb4903435cff364a58b726ef82f81fb16b6a117d78d2f2",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataSessionInvariant.lean",
+    "sha256": "8d18d336fe0dc4c4751dc8a314d9043f2e22ff3617befb23a72875739dd159c2",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementAdmission.lean",
+    "sha256": "ecf3fe52e768e931e12832136b0c28ba2bad9dfd03ef971b465b302abf149620",
+    "status": "full-read",
+    "role": "sameC full source/advisory answer/authored delta; finite checks separate from proofs",
+    "at": "2026-09-29T05:17:17.518677+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-registry-v1/OwnerStatementRegistrySelection.lean",
+    "sha256": "0765a8ba5b1c4416f20ac0d4c11a8bf479d1187f3f4d5abf92eb4d7ea32e4511",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-registry-v1/OwnerStatementRegistryInvariant.lean",
+    "sha256": "4c89b3c758d9428a08b0cc51cee42cc1caee288cd8efdbc56de2acdc0b271b88",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-registry-v1/OwnerStatementRegistryControls.lean",
+    "sha256": "ce29e73beb03540bb28e7260f4466c30da216825b946aa66c3fe9480ba774078",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_owner_admission_gate.rs",
+    "sha256": "0edf62518ac9031f685a9108b1f7f9aaab89a8a4ea7cd3f82f832b7e6293aa78",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataPending.lean",
+    "sha256": "830819478021ce2c51e6c929c938ce1c2b4369159445afb902cb26a374c97b75",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean",
+    "sha256": "48be33304d0aba0f79eb0fff03d7655e2e6adec70d53185998ba291663269642",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerEffectService.lean",
+    "sha256": "89a134f098515bc60ed077870b7ae54323951c1da5c4cc05c8e15c7d5aee59a2",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerSavedPending.lean",
+    "sha256": "9df88e102bd0bdc617fd9a0762368a4e272a86e83182d6fe3bffecae7e530d8d",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MixedOwnerAttemptQueue.lean",
+    "sha256": "0752aafc884b4e85743810e7471d3de6f6c0dc21b921ba4ac7db9c7771dc18e6",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MixedOwnerSourceFootprint.lean",
+    "sha256": "e4ad9a716fd50694ad3b7f0040f5c34cabd2dfdf4b30afa6f3af605ea0302e9a",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataSession.lean",
+    "sha256": "ae71fe751351f7ea532dd99046866d49a1c8b829e1bf580a33ca97d1904828c7",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataSessionInvariant.lean",
+    "sha256": "8d18d336fe0dc4c4751dc8a314d9043f2e22ff3617befb23a72875739dd159c2",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementMetadataCursor.lean",
+    "sha256": "543414c4c8c0e19023e54c55ad3135d14f0fda8f87ae775828f828ebe2ad399f",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementMetadataBinding.lean",
+    "sha256": "b6bf601aac2a9dcbd86fc77fe7a0bd47159ab093b0ce7bbedea0d82bf2377a01",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementMetadataHistory.lean",
+    "sha256": "c320e31fb16a16a3ecdfec62de5a963b05d18b4d4fbf2a8b8a8fcd7c25fbcf1f",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementExecutionControls.lean",
+    "sha256": "c92c6e8efd2ffeff473465bf7739a138089576a0ca7a437f11cf84ee2ac81012",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerMetadataStoreControls.lean",
+    "sha256": "0c132cb29749e9d0e1766357cc452561ead7fde799e5be1628d302d8e4084211",
+    "status": "full-read",
+    "role": "same C exact source/delta, not a coverage claim from indexing",
+    "at": "2026-09-29T05:56:27.964631+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-effect-r2/ANSWER_RECOVERED.txt",
+    "sha256": "edf9918b096abed01d13414a6f53dff8b1bfcb6692ec5a1f497fa03e1e06ea69",
+    "status": "full-read",
+    "role": "same C independent Oracle answer, static advisory;17 dispositions",
+    "at": "2026-09-29T06:07:43.352064+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-bank/ANSWER_RECOVERED.txt",
+    "sha256": "7c07a404190d83b400e2e40da1ca530114f9db08eb502bf7f05c1e38776728a6",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-custody-v1/OwnerStatementLiveCustodian.lean",
+    "sha256": "581b5bbd6de630663386a27173f7f03156c54d4b6e2469aaf4a26cf8e521fe10",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-custody-v1/OwnerStatementRegistryReviewControls.lean",
+    "sha256": "48c010175d5203bfcaaa09dabac92424ce78e2b704e8a2dadb4ffeeadce52380",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/custody_probe_tests.rs",
+    "sha256": "3d68a421c9989c5215cd51c2226639aa7d3356060a2e7efc266f18c602b567d1",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/custody_probe_owner.rs",
+    "sha256": "9a3339651814315acbbf88324a3a663d90cf19b32e3a89c261b5d84ebccfbf42",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/custody_probe_positive.rs",
+    "sha256": "bf429ac66903f524e2266ae7282c36fda3db196192cc8c79a8d1156266bd0b43",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/custody_probe_image_countertests.rs",
+    "sha256": "db8c42f22b44899b52014b9a08dde594da8a3f3e974823339cf06a163795cd3d",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_custody_red_v1.py",
+    "sha256": "925201f6dbd53afeb94b62921b5412cfe4c81c2f55e09fdf514a814c0df5132f",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_custody_green_v1.py",
+    "sha256": "9619dbe7fb49bd3b879eaeb5940f8b8d667b8796534366957c4c3bb4eea29690",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_custody_green_v2.py",
+    "sha256": "6048bbb6cb714bd307b25fa14f9d34e5928cc67161e1ec6563782f3f4c180480",
+    "status": "full-read",
+    "role": "same C authored/inspected exact delta or full independent review; not index-only coverage",
+    "at": "2026-09-29T06:31:52.775443+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-statement-custody/ANSWER_RECOVERED.txt",
+    "sha256": "775b58064759a8b6743ae68f7823341d70686530eb83a719709ff1e958115718",
+    "status": "full-read",
+    "role": "254lines independentlyreviewed and16dispositions; noreplay/acceptance",
+    "at": "2026-09-29T06:44:33.014190+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-custody-v1/OwnerStatementSourceCustodian.lean",
+    "sha256": "127747290f01a8b7f0a900f34e4992d4be0a468b2e4aa377fe6b0b4e15e3d988",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-custody-v1/OwnerStatementSourceCustodianControls.lean",
+    "sha256": "ae9895d24600ba121ca34176c0443cdbd17ac5bc8b1a9619e11c644f699c595a",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_cursor_consumer.rs",
+    "sha256": "75c74771bb43ea54f3ba438e3235b81989c1f595033ff46cebc29570b1f2fe9c",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_cursor_tests.rs",
+    "sha256": "9b5b0fadcc20c0aca81f25fd1e978a3b2dc597aec83ad8325e9c540408e44d02",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_cursor_multi_tests.rs",
+    "sha256": "e742af1bfe4d427e463713a4b62c885b8cbe13433f614d59c6daad00c26d8c8a",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_admission_countertests.rs",
+    "sha256": "259ba2dc492f6aa4ded3e1cdb5991bfde943edb967e9368f2711fc565cb8493e",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_cursor_green_v2.py",
+    "sha256": "f5b8286b8975c591c4c36ba7edc2e6bfae326c80e3bbbe307529da80450031bf",
+    "status": "full-read",
+    "role": "same C authored/inspected exact source-driver delta; no whole-repo coverage claim",
+    "at": "2026-09-29T07:22:27.717786+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-consumer/ANSWER_RECOVERED.txt",
+    "sha256": "d807eb8c2e6ebef7eb473b350de909f29f4624f35c9064d09f6348780d40f871",
+    "status": "full-read",
+    "role": "316lines read in1-160/161-316;16dispositions; advice notacceptance",
+    "at": "2026-09-29T07:31:31.586126+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-custody-v2/OwnerStatementSourceCustodian.lean",
+    "sha256": "ee39be78505fc28d8c930e80e9d7e0010cecb7dcaf24f4d81a71771b082a1bff",
+    "status": "full-read",
+    "role": "same C authored and inspected actual continuation successor; not new corpus-completion claim",
+    "at": "2026-09-29T07:54:14.426960+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-custody-v2/OwnerStatementSourceCustodianControls.lean",
+    "sha256": "da0e20a6ede82fd0bb6d3cb3b1f8dc7dc79ae7aadbfda2aef4a6b3ca5c32cb3e",
+    "status": "full-read",
+    "role": "same C authored and inspected actual continuation successor; not new corpus-completion claim",
+    "at": "2026-09-29T07:54:14.426960+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/audit_source_custodian_continue_delta.py",
+    "sha256": "5f10410b53082f90acfa0bc2636327f6307b56f139520364e2e1d3d65148772d",
+    "status": "full-read",
+    "role": "same C authored and inspected actual continuation successor; not new corpus-completion claim",
+    "at": "2026-09-29T07:54:14.426960+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_root_tests.rs",
+    "sha256": "00e4cb719ef1e7546e697458a962582d4c87f09f78a79936842809433d6c2db1",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_root_green_tests.rs",
+    "sha256": "6678f86a2a9d250038f19c3297bc573e991296ba91a8c30ac18ca9bbc0e233ed",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_root_red_v2.py",
+    "sha256": "4cf11c527b959fc4d2041a6366b6dcaea96617b02f38cfc35fb59a0edbbd1d9c",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_root_green_v1.py",
+    "sha256": "8c75150d705d5e9e17139247efe1d8916b4df4c054f9a0f01215a757dcad4efb",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_root_mutant_v1.py",
+    "sha256": "5f62cbd5320fbf23ecabc0c144840143090d476b3593819d0d3cf7c5edf7cc8b",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/OwnerStatementCounterBudget.lean",
+    "sha256": "296bd1e218dfdc7e0da79ae18c3310dc3464b3746ef6d2ae4c81ee387ff57248",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-root/QUESTION.md",
+    "sha256": "48a6a6cbf6001946a057eaf68952d5490b867896cb22333fae5248c300bfb65b",
+    "status": "full-read",
+    "role": "authored/read exact C source-root and result-retention dependency; no whole-corpus claim",
+    "at": "2026-09-29T08:02:11.200197+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_result_tests.rs",
+    "sha256": "f751d720133cdcd5f86959403937ad710cb182753b77309079506e21b2b1358f",
+    "status": "full-read",
+    "role": "authored actual lower-result preparation/retention experiment; temporary Rust restored",
+    "at": "2026-09-29T08:10:00.641815+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_result_red_v1.py",
+    "sha256": "b73479990a1aa79e2816552021b7c129b3fb919a17c93e7692d2d5c17d25de21",
+    "status": "full-read",
+    "role": "authored actual lower-result preparation/retention experiment; temporary Rust restored",
+    "at": "2026-09-29T08:10:00.641815+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/probe_source_result_green_v1.py",
+    "sha256": "1d3db22b56e10cf935d2097f27c2867ec04ebbf5ab3f01e85c2d4f8e4e9aca5a",
+    "status": "full-read",
+    "role": "authored actual lower-result preparation/retention experiment; temporary Rust restored",
+    "at": "2026-09-29T08:10:00.641815+00:00"
   }
 ]

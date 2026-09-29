@@ -7,13 +7,14 @@ The current implementation still needs a handler manifest, protected invocation
 cursor, local dispatch, and closure over all admitted entry and image routes.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 171 dependency
-modules: 65 reused and 106 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 179 dependency
+modules: 65 reused and 114 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
-dispositioned. The retained-history successor is mechanically checked; it has not
-yet received a separate changed-cut review and does not close the production gate.
+dispositioned. The retained-history successor received a separate entry review; its 16 findings
+are dispositioned. The effect and local custody reviews below are dispositioned. The initial actual
+source-consumer review is dispositioned; the successor difference still needs review. Neither closes the production gate.
 
 ## General statements
 
@@ -79,6 +80,24 @@ consumer owes admission before publishing any request, enqueue or event.
 `completion_changed_iff` characterizes write growth for the actual metadata tick.
 The Accepted helper alone does not validate every field of an arbitrary successor.
 Unchanged completion is not a no-effect or no-commit guarantee.
+
+`OwnerStatementEntryGate` compares candidate saved-request data with the actual
+live queue and calls the existing metadata service. `refused_exact` retains the
+whole state on a false current check. `no_repeated_execution` proves that an
+actual changed service cannot be repeated against the **updated same live
+state**, even with another candidate. `execute_committed_complete` derives
+actual history append from declarative current metadata, queued/waiting/pending
+custody, materialization and lower `Commits`; it does not assume a successful
+new gateway call. The proof does not establish exclusive physical ownership of
+that live state. Independently executable copies of the old state remain a
+countermodel and an explicit runtime obligation.
+
+A pre-service control forks one genuinely transferred request. Its actual
+queued payload equals the waiting and packet payload; the current branch
+commits, while retirement before service retains the queue and creates no
+attempt, committed record or reply. This now discriminates the service guard
+without relying on an already drained queue. The postcommit-retirement/ack
+control remains separate; no new acknowledgment policy follows.
 
 ## Discriminators and limits
 
@@ -216,12 +235,99 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                           'MirroreaProofFirst.MixedOwnerContinuation\n'
                           '#guard (OwnerStatementPosition.indexed 0 sparse.items).map Prod.fst = '
                           '[0,1]\n',
+ 'FalseAbsentRegistryFallsBack.lean': 'import OwnerStatementRegistryControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                      'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                      '#guard (absentT.map fun s => (service s '
+                                      '(FallibleFlow.signed '
+                                      '63)).session.state.owner.history.length) = some 2\n',
+ 'FalseAllRefuseCandidate.lean': 'import OwnerStatementRetainedControls\n'
+                                 'open MirroreaProofFirst '
+                                 'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                 'MirroreaProofFirst.OwnerMetadataSession\n'
+                                 '#guard (candidateRun.map fun s => '
+                                 's.session.state.owner.history.length) = some 0\n',
+ 'FalseAllRefuseRegistry.lean': 'import OwnerStatementRegistryControls\n'
+                                'open MirroreaProofFirst '
+                                'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                '#guard (acceptedLast.map fun s => '
+                                's.session.state.owner.history.length) = some 0\n',
+ 'FalseCallerOwnerCannotExecute.lean': 'import OwnerStatementRegistryControls\n'
+                                       'open MirroreaProofFirst '
+                                       'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                       'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                       '#guard (sequenceFrom 0).isNone\n',
  'FalseCounterfeitSameRequest.lean': 'import OwnerStatementRetainedControls\n'
                                      'open MirroreaProofFirst '
                                      'MirroreaProofFirst.OwnerStatementRetainedControls '
                                      'MirroreaProofFirst.OwnerMetadataSession\n'
                                      '#guard (counterfeit.map fun (written,substituted,_) => '
                                      'decide (written.pending = substituted)) = some true\n',
+ 'FalseCustodianAllRefuses.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                  'open MirroreaProofFirst '
+                                  'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                  'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                  '#guard dispatched.isNone\n',
+ 'FalseCustodianDoesNotUpdateOwnedState.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                               'open MirroreaProofFirst '
+                                               'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                               'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                               '#guard (dispatched.map fun s => '
+                                               's.live.session.state.owner.store 1) = some (some '
+                                               '10)\n',
+ 'FalseCustodianRepeatExecutes.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                      'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                      '#guard (staged.bind fun (s,ticket) => do let next ← '
+                                      'OwnerStatementLiveCustodian.execute s ticket '
+                                      '(FallibleFlow.signed 63); '
+                                      'OwnerStatementLiveCustodian.execute next ticket '
+                                      '(FallibleFlow.signed 63)).isSome\n',
+ 'FalseCustodianUnreportedAccepted.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                          'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                          '#guard (staged.bind fun (s,ticket) => do let next ← '
+                                          'OwnerStatementLiveCustodian.execute s ticket '
+                                          '(FallibleFlow.signed 63); '
+                                          'OwnerStatementLiveCustodian.accept next '
+                                          'ticket).isSome\n',
+ 'FalseCustodianUnreportedReleasesSlot.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                              'open MirroreaProofFirst '
+                                              'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                              'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                              '#guard (dispatched.bind fun s => '
+                                              'OwnerStatementLiveCustodian.stage 2 s).isSome\n',
+ 'FalseCustodianWrongDesignationAllowed.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                               'open MirroreaProofFirst '
+                                               'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                               'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                               '#guard (staged.bind fun (s,ticket) => '
+                                               'OwnerStatementLiveCustodian.execute {s with '
+                                               'designation := 9} ticket (FallibleFlow.signed '
+                                               '63)).isSome\n',
+ 'FalseErasedPacketLocalCheckFails.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                          'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                          '#guard (erasedFields.map '
+                                          'OwnerStatementLiveCustodian.currentCheck) = some '
+                                          'false\n',
+ 'FalseMismatchExecutes.lean': 'import OwnerStatementRetainedControls\n'
+                               'open MirroreaProofFirst '
+                               'MirroreaProofFirst.OwnerStatementRetainedControls '
+                               'MirroreaProofFirst.OwnerMetadataSession\n'
+                               '#guard (mismatchedCandidate.map fun s => '
+                               's.session.state.owner.store 0) = some (some 15)\n',
+ 'FalseMissingInstallPublishesQueue.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                           'open MirroreaProofFirst '
+                                           'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                           'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                           '#guard (missingBeforeIssue.map fun s => '
+                                           's.session.state.owner.queued.isSome) = some true\n',
  'FalseNoCompletedGrowth.lean': 'import OwnerStatementRetainedControls\n'
                                 'open MirroreaProofFirst '
                                 'MirroreaProofFirst.OwnerStatementRetainedControls '
@@ -229,6 +335,20 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                 '#guard OwnerStatementPosition.writes (tick changed 0 '
                                 '7).session.cursor.completed = OwnerStatementPosition.writes '
                                 'changed.session.cursor.completed\n',
+ 'FalseOldCopiesAreExclusive.lean': 'import OwnerStatementRetainedControls\n'
+                                    'open MirroreaProofFirst '
+                                    'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                    'MirroreaProofFirst.OwnerMetadataSession\n'
+                                    '#guard (candidateRun.bind fun x => oldCopyAgain.map fun y => '
+                                    'x.session.state.owner.attempts.length + '
+                                    'y.session.state.owner.attempts.length) = some 1\n',
+ 'FalseOtherOwnerRetirementBlocksT.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                          'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                          '#guard (changedSWhileTQueued.map fun s => (service s '
+                                          '(FallibleFlow.signed '
+                                          '63)).session.state.owner.history.length) = some 1\n',
  'FalsePacketInitiallyStale.lean': 'import OwnerStatementRetainedControls\n'
                                    'open MirroreaProofFirst '
                                    'MirroreaProofFirst.OwnerStatementRetainedControls '
@@ -242,6 +362,57 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                    '#guard '
                                    '(OwnerStatementBoundaryControls.changedAfterService.bind '
                                    'packetCurrent) = some true\n',
+ 'FalsePreServiceConsumesQueue.lean': 'import OwnerStatementRetainedControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                      'MirroreaProofFirst.OwnerMetadataSession\n'
+                                      '#guard (refusedBeforeService.map fun s => '
+                                      's.session.state.owner.queued.isNone) = some true\n',
+ 'FalsePreServiceRecordsAttempt.lean': 'import OwnerStatementRetainedControls\n'
+                                       'open MirroreaProofFirst '
+                                       'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                       'MirroreaProofFirst.OwnerMetadataSession\n'
+                                       '#guard (refusedBeforeService.map fun s => '
+                                       's.session.state.owner.attempts.length) = some 1\n',
+ 'FalsePreServiceRemainsCurrent.lean': 'import OwnerStatementRetainedControls\n'
+                                       'open MirroreaProofFirst '
+                                       'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                       'MirroreaProofFirst.OwnerMetadataSession\n'
+                                       '#guard (retiredBeforeService.map '
+                                       'OwnerStatementEntryGate.serviceCheck) = some true\n',
+ 'FalseReactivatedOldPacket.lean': 'import OwnerStatementRegistryControls\n'
+                                   'open MirroreaProofFirst '
+                                   'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                   'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                   '#guard (reactivatedT.map fun s => (service s '
+                                   '(FallibleFlow.signed 63)).session.state.owner.history.length) '
+                                   '= some 2\n',
+ 'FalseRegistryRepeatedAttempt.lean': 'import OwnerStatementRegistryControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                      'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                      '#guard (servedT.map fun s => (service s '
+                                      '(FallibleFlow.signed '
+                                      '63)).session.state.owner.attempts.length) = some 3\n',
+ 'FalseRegistryReset.lean': 'import OwnerStatementRegistryControls\n'
+                            'open MirroreaProofFirst '
+                            'MirroreaProofFirst.OwnerStatementRegistryControls '
+                            'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                            '#guard (retiredT.bind fun s => do let old ← installedT; let original '
+                            '← old.bank 1; return (install s 1 original).isSome) = some true\n',
+ 'FalseRegistrySelectCaller.lean': 'import OwnerStatementRegistryControls\n'
+                                   'open MirroreaProofFirst '
+                                   'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                   'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                   '#guard (queuedT.bind fun s => do let saved ← '
+                                   's.session.state.owner.queued; let (place,_) ← select s.session '
+                                   's.bank saved; return place.val) = some 2\n',
+ 'FalseRetiredContinues.lean': 'import OwnerStatementRegistryControls\n'
+                               'open MirroreaProofFirst '
+                               'MirroreaProofFirst.OwnerStatementRegistryControls '
+                               'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                               '#guard (blockedLast.map fun s => (OwnerStatementPosition.writes '
+                               's.session.cursor.completed).map Prod.fst) = some [0,1,2]\n',
  'FalseRetirementBlocksActualAck.lean': 'import OwnerStatementRetainedControls\n'
                                         'open MirroreaProofFirst '
                                         'MirroreaProofFirst.OwnerStatementRetainedControls '
@@ -252,7 +423,134 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                      'open MirroreaProofFirst '
                                      'MirroreaProofFirst.OwnerStatementRetainedControls '
                                      'MirroreaProofFirst.OwnerMetadataSession\n'
-                                     '#guard changed.session.state.owner.history.length = 0\n'}
+                                     '#guard changed.session.state.owner.history.length = 0\n',
+ 'FalseRevokedAuthorityCommits.lean': 'import OwnerStatementRegistryControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                      'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                      '#guard (authorityRevoked.map fun s => (service s '
+                                      '(FallibleFlow.signed '
+                                      '63)).session.state.owner.history.length) = some 2\n',
+ 'FalseRevokedAuthorityNoAttempt.lean': 'import OwnerStatementRegistryControls\n'
+                                        'open MirroreaProofFirst '
+                                        'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                        'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                        '#guard (authorityRevoked.map fun s => (service s '
+                                        '(FallibleFlow.signed '
+                                        '63)).session.state.owner.attempts.length) = some 1\n',
+ 'FalseSameLabelLowerRejects.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                    'open MirroreaProofFirst '
+                                    'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                    'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                    '#guard (sameLabel.bind bypassMetadata |>.map fun s => '
+                                    's.owner.history.length) = some 1\n',
+ 'FalseSameLabelReactivationCommits.lean': 'import OwnerStatementRegistryReviewControls\n'
+                                           'open MirroreaProofFirst '
+                                           'MirroreaProofFirst.OwnerStatementRegistryReviewControls '
+                                           'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                           '#guard (sameLabel.map fun s => (service s '
+                                           '(FallibleFlow.signed '
+                                           '63)).session.state.owner.history.length) = some 2\n',
+ 'FalseSourceContinueResetsSerial.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                         'open MirroreaProofFirst '
+                                         'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                         'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                         '#guard (continued.map fun s => s.nextSerial) = some 0\n',
+ 'FalseSourceContinueResetsStore.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                        'open MirroreaProofFirst '
+                                        'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                        'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                        '#guard (continued.map fun s => '
+                                        's.live.session.state.owner.store 0) = some (some 200)\n',
+ 'FalseSourceContinueReusesActivation.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                             'open MirroreaProofFirst '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                             '#guard (continued.map fun s => '
+                                             's.live.session.activation) = some 0\n',
+ 'FalseSourceContinueWhileHeld.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                      'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                      '#guard (executed.bind fun (s,_) => invokeAgain s).isSome\n',
+ 'FalseSourceCustodianAcceptsAgain.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                          '#guard (reported.bind fun (s,ticket) => consume s '
+                                          'ticket 0 7 |>.bind fun next => consume next ticket 0 '
+                                          '7).isSome\n',
+ 'FalseSourceCustodianAcceptsOtherDesignation.lean': 'import '
+                                                     'OwnerStatementSourceCustodianControls\n'
+                                                     'open MirroreaProofFirst '
+                                                     'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                                     'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                                     '#guard (reported.bind fun (s,ticket) => '
+                                                     'consume s {ticket with designation := 9} 0 '
+                                                     '7).isSome\n',
+ 'FalseSourceCustodianAllRefuses.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                        'open MirroreaProofFirst '
+                                        'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                        'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                        '#guard first.isNone\n',
+ 'FalseSourceCustodianCapacityIgnored.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                             'open MirroreaProofFirst '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                             '#guard (first.bind fun s => runOne 1 3 s 0 '
+                                             '7).isSome\n',
+ 'FalseSourceCustodianConsumesBeforeReport.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                                  'open MirroreaProofFirst '
+                                                  'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                                  'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                                  '#guard (executed.bind fun (s,ticket) => consume '
+                                                  's ticket 0 7).isSome\n',
+ 'FalseSourceCustodianRepeatsFirst.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                          '#guard (second.map fun s => '
+                                          's.live.session.state.owner.store 0) = some (some 180)\n',
+ 'FalseSourceCustodianReportMeansAccepted.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                                 'open MirroreaProofFirst '
+                                                 'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                                 'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                                 '#guard (executed.map fun (s,_) => count '
+                                                 's.live.session) = some 1\n',
+ 'FalseSourceCustodianWrongOrdinal.lean': 'import OwnerStatementSourceCustodianControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
+                                          '#guard (reported.bind fun (s,ticket) => consume s '
+                                          '{ticket with saved := {ticket.saved with origin := '
+                                          '{ticket.saved.origin with ordinal := 1}}} 0 7).isSome\n',
+ 'FalseSourceOwnerCompaction.lean': 'import OwnerStatementRegistryControls\n'
+                                    'open MirroreaProofFirst '
+                                    'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                    'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                    '#guard (sequenceFrom 0 |>.map fun s => '
+                                    '(OwnerStatementPosition.writes '
+                                    's.session.cursor.completed).map Prod.fst) = some [0,2]\n',
+ 'FalseUnrevokedGenerationMustReject.lean': 'import OwnerStatementRegistryControls\n'
+                                            'open MirroreaProofFirst '
+                                            'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                            'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                            '#guard (authorityChanged.map fun s => (service s '
+                                            '(FallibleFlow.signed 63)).session.state.owner.store '
+                                            '1) = some (some 10)\n',
+ 'FalseUpdatedLiveRepeatsAttempt.lean': 'import OwnerStatementRetainedControls\n'
+                                        'open MirroreaProofFirst '
+                                        'MirroreaProofFirst.OwnerStatementRetainedControls '
+                                        'MirroreaProofFirst.OwnerMetadataSession\n'
+                                        '#guard (candidateTwice.map fun s => '
+                                        's.session.state.owner.attempts.length) = some 2\n',
+ 'FalseWrongRegistrySubstitute.lean': 'import OwnerStatementRegistryControls\n'
+                                      'open MirroreaProofFirst '
+                                      'MirroreaProofFirst.OwnerStatementRegistryControls '
+                                      'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
+                                      '#guard (swappedT.map fun s => (service s '
+                                      '(FallibleFlow.signed '
+                                      '63)).session.state.owner.history.length) = some 2\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -279,3 +577,194 @@ all 171 modules (17,861 owned declarations), and qualified six additional false
 guards: 3 exit-zero commands and 6 intentional exit-one commands. Original
 169-module reconstruction evidence remains frozen. Oracle advice is not execution,
 independent signature, authority issuance or formal acceptance.
+
+The next successor freshly compiles `OwnerStatementEntryGate` and the changed
+`OwnerStatementRetainedControls`, audits all 172 modules (17,895 owned
+declarations), and qualifies 13 false guards: 3 exit-zero and 13 intentional
+exit-one commands. It binds the unchanged prior source and object hashes.
+The complete source recipe above includes the union of 22 distinct false guards;
+its newly added sources match those executed in the successor. The unchanged
+whole closure is not rerun merely to relabel this checkpoint. No runtime,
+physical custody, network or recovery theorem is inferred from these counts.
+
+## Per-owner registry successor (LAB, review dispositioned)
+
+`OwnerStatementRegistrySelection` selects metadata from the actual saved
+operation decoded in the same current catalog. Missing or incorrectly attached
+owner entries have no fallback. The declaration `Selected` is independent of
+`select`, with exact soundness and completeness. `Rooted` contains the actual
+source step, transfer, service, metadata mutation, authority/control mutation,
+continue/replace/cancel and initial-install entries. A populated registry cannot
+be overwritten by `install`. Other owner entries survive a metadata mutation.
+
+`OwnerStatementRegistryInvariant` derives the source assignment prefix, cursor
+and request binding, committed history and exact attempt projection for every
+such path. Initial admission requires a fresh actual source launch and an empty
+bank and packet. `Facts` alone still is not admission. Packet origin is derived
+from actual source binding; an empty field packet cannot arise on the admitted
+path. `service_committed_complete` retains independently declared `Selected`,
+current metadata, source custody, materialization and lower `Commits` premises;
+it does not assume that the new service succeeds. Repeating service on its
+updated live state cannot execute again. Independent copies remain outside
+that single-live-state conclusion.
+
+The controls execute the same S–T–S program from A and S, retain all three
+ordinals and S's original registry, and stop after the committed S prefix if T
+retires. Wrong/missing owner metadata, reactivation with an old packet, and
+registry reset are rejected. `actual_completed_admitted` connects the actual
+Option computation to the admitted path; nonempty execution is separately
+checked by finite guards. No fixture is substituted for a transition.
+
+A deliberately false new expectation exposed a scope distinction: a generation
+advance with the same still-valid selected witness is allowed by the existing
+`AdmissionPhases.resolve`. Actual selected-claim revocation produces an authority
+refusal with a recorded attempt and drained queue, preserving T's old store and
+S's commit. Both cases are retained; no Q18 policy or semantics change was made.
+
+The initial schema installer remains explicit trusted input. This does not
+prove source-derived schema authenticity, physical exclusive custody, total
+resource bounds, or persistence/recovery. Neither finite bank evaluation nor
+an initial trusted schema input counts as network construction. The later
+resource and implementation consumers remain gated.
+
+Fresh successor evidence: 3 new modules plus the all-175-module owned-declaration
+kernel audit and 26 qualified false guards: 4 exit-zero and 26 intentional
+exit-one commands, 18,122 owned declarations, only the standard logical axioms.
+The prior source/object closure is hash-bound. The recipe above contains the
+union of 35 distinct false guards. The original bank delta has an independent Oracle review with 16 recorded
+dispositions. The successor controls below address the confounded reactivation
+and missing-install examples; their separate review is running. These remain
+LAB candidates, not adopted production contracts.
+
+## Owned service and reporting successor (LAB, review dispositioned)
+
+`OwnerStatementLiveCustodian` adds a local lifecycle around the actual bank
+service. Staging reads the actual queue. Execution compares the full ticket,
+current metadata and source readiness, and calls service on its own retained
+state. A missing report keeps the held invocation occupied; reporting and custody
+release are separate transitions. The function named `accept` releases only the
+local custody phase: it is not typed source acceptance or permission to advance
+the source cursor. Generic checker equivalence, service
+refinement, admission preservation, distinct dispatch serials across complete
+report/accept cycles, and custody serial/history-slot bounds are kernel checked.
+This local Path has no source issue/tick/transfer entry: after its first changing
+service, its methods cannot produce the next queued source statement. Serial
+uniqueness here is not evidence of two productive source steps.
+The bound is not total source, string, trace, CPU or transport accounting.
+Dispatch records are not automatically commits. A mathematical designation is
+not an authentication token or a proof that a copied state cannot execute.
+
+This models a completed local service whose report has not been produced. It
+does not model an uncertain remote worker result or authenticate such a result.
+Physical exclusive ownership, authenticated initial designation, arbitrary
+metadata/control/import/patch entry closure and external uncertainty remain
+implementation obligations. There is no populated-custodian import rule.
+
+`OwnerStatementRegistryReviewControls` adds same-label reactivation: the old
+packet refuses without dequeue or attempt, while bypassing only its outer
+metadata gate allows the actual lower commit. The bypass is deliberately not
+admitted. Missing T installation before issue retains the S prefix and publishes
+no T queue. An actual S metadata retirement while T is queued still permits T.
+The full `install_exact` conclusion includes every executable installation
+condition; `erased_not_admitted` separates raw packet erasure from closed
+admission. The controls also inhabit the local custodian's positive execution.
+
+Fresh evidence: 2 modules plus the all-177-module audit and 37 qualified false
+controls, 40 commands (3 zero, 37 intentional one), 18,311 owned declarations.
+Prior sources and objects are hash-bound. The recipe contains 46 distinct false
+controls across the retained closure. Only standard logical axioms are used.
+
+A restored Rust reference experiment confirms wrong-custodian refusal before
+queue pop/body, designated state continuity 200→190→180, and retention of an
+actual commit when report generation is suppressed. It also demonstrates that
+raw private-image erasure of a protection flag and lower plan replacement can
+bypass that flag. These are actual lower-code probes, not production adoption,
+authorization attacks, full source sequencing or network evidence. The owning
+custodian and sealed expected-source admission still need a complete connection.
+
+Custody review returned16 findings. The wrong-custodian test also lacked a
+matching pending ticket, so it did not isolate designation equality. A successor
+experiment arms both equal runtime copies and removes only the designation
+comparison as a mutation check. The next direct consumer is an actual two-step
+source invocation (200→190→17), with exact typed source acceptance, retained
+outcomes and authentic expected-source admission. No standalone protocol or
+repeated first child substitutes for that connection.
+
+## Actual source-driver composition (LAB, successor review pending)
+
+`OwnerStatementSourceCustodian` adds the missing source operations to the same
+owned bank. `progress` prepares an original source tick only when custody is
+free and no owner acknowledgment is waiting; `transfer` uses the real issued
+request. `consume` performs the original typed source tick and releases custody
+only when its completed-write prefix actually grows by one. It does not reuse
+the older local custodian's custody-only `accept` as source acceptance.
+
+`consume_sound` derives the full original `OwnerStatementCompletion.Accepted`
+witness: stopped source statement, saved request, consumed inbox reply, real
+owner history and unchanged owner state. `consume_complete` is relative to an
+accepted original bank tick, not end-to-end source availability. The composed
+Path preserves bank admission, dispatch serial uniqueness and retained-slot
+bounds. It enables static source progress/transfer/service/report/consume only;
+it does not add image activation, recovery or arbitrary mutation authority.
+
+`OwnerStatementSourceCustodianControls` executes two distinct assignments on
+actual model states, 200→190→17, through those functions and proves the resulting
+path is admitted from its actual launch and initial schema installation. The
+schema installer remains explicit trusted input. Fixed controls reject all-refusal,
+repeating the first statement, consuming before report, another designation,
+wrong ordinal, replay and insufficient capacity. They are not general proofs.
+A fresh two-module and all-179-module audit checked45 qualified false guards;
+only standard logical axioms are used. Declaration counts are not coverage.
+
+An external nonproduction Rust consumer now follows one original handler using
+its full checked manifest and arguments on an owned LocalFabric. Existing,
+unchanged M9 finite-local candidate/issuer supplies the sealed authority
+inventory from one authenticated membership; tests do not add child grants or
+reinterpret an original-handler grant. Actual ST and OW1 execution produces
+200→190→17. Equal real receipts from another live invocation cannot advance the
+cursor; retained result reporting loss blocks repeat; capacity one stops the
+second statement. Missing authority, malformed argument domains and changed
+source with old admission reject. Actual second-leaf revocation preserves190.
+A further real counterexample exposed a SYS4 data-read event for constant17;
+the reference fix emits it only when actual read rows exist, retaining the
+lower canonical owner-read phase. All temporary Rust is restored; this is not
+production adoption, an all-entry proof or a network claim.
+
+The Rust consumer and model are connected evidence at this bounded cut, not a
+machine-checked whole-Rust refinement. Remaining obligations include exact
+current metadata/labels, source authenticity/current unique activation across
+all enabled lower/image/patch/restore routes, full resource accounting and
+unknown external outcomes. Private result retention is not authorized public
+observation. The current Oracle packet contains the Rust V1 consumer and existing
+M9/SYS4 bodies; the new source-driver proof and later V2 trace/revocation delta
+still require narrow review before dependent production adoption.
+
+The first source-consumer review is now final with16 dispositions. Subsequent
+reference V4 passes15 checks and explicitly distinguishes finished from
+unfinished capacity exhaustion. It supports bounded redelivery of the same
+retained result and rejects repeated acceptance. A new intentional invocation
+uses the same live fabric: after17, its first real write is7, and a completion
+from the old activation cannot advance the new cursor. This is not old-image
+activation or recovery. The lower protected-root and commit-before-return
+result-retention gates remain open; the successor proof and reference changes
+have not yet received the next narrow review.
+
+## Same live-state continuation successor (LAB, review pending)
+
+The current source custodian also exposes `invokeAgain` through the existing
+`Bank.continueWith` on the same program. It requires empty custody and the
+original continuation's drained/completed-source check. `invokeAgain_keeps`
+proves exact owner/source state preservation, activation increment, unchanged
+serial and retained dispatch history. All Path invariants include this entry.
+`actual_four_statement_admitted` derives the actual second invocation's path
+from initial launch, schema installation and both source drivers. Executable
+controls distinguish 200→190→17 then 17→7→17 from resetting the world, serials
+or activation; held and unfinished invocations refuse continuation. These are
+still ordinary finite-source model claims, not a whole-Rust refinement theorem.
+
+The successor's fresh audit checks the same179 modules with49 qualified false
+guards; the reproducible recipe includes58 unique historical/current negative
+sources. Only standard logical axioms occur. Initial elaboration errors were
+retained and excluded; no authored proof holes or Mir axioms were added.
+The separate root-erasure Rust investigation and postcommit result-retention
+obligations remain open. No dependent production change is adopted here.
