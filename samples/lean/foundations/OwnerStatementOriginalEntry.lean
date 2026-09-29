@@ -158,3 +158,175 @@ theorem manifest_original_accepted [DecidableEq α] [DecidableEq κ]
 #print axioms manifest_rejects_length_loss
 #print axioms manifest_original_accepted
 end MirroreaProofFirst.OwnerStatementOriginalEntry
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry
+variable {α : Type u} {κ : Type v}
+-- A different handler may be added without changing any position of the
+-- retained handler. This establishes source-list preservation independently
+-- of FIFO/phase; admission, ownership and the physical write frame are separate.
+theorem selectSource_append_unrelated [DecidableEq κ]
+ (handler : α → κ) (original extra : List α) (name : κ)
+ (disjoint : ∀ p ∈ extra, handler p ≠ name) :
+ selectSource handler (original ++ extra) name = selectSource handler original name := by
+ simp only [selectSource,List.filter_append]
+ have empty : extra.filter (fun p => decide (handler p = name)) = [] := by
+   apply List.filter_eq_nil_iff.mpr
+   intro p present
+   simp [disjoint p present]
+ rw [empty,List.append_nil]
+
+theorem manifest_disjoint_addition_preserved [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original extra manifest : List α) (first : α)
+ (head : manifest.head? = some first)
+ (accepted : manifestCheck handler original manifest = true)
+ (disjoint : ∀ p ∈ extra, handler p ≠ handler first) :
+ manifestCheck handler (original ++ extra) manifest = true := by
+ apply (manifestCheck_exact handler (original ++ extra) manifest).mpr
+ have ready := (manifestCheck_exact handler original manifest).mp accepted
+ refine ⟨ready.1, ?_⟩
+ intro p hp i
+ have same : p = first := Option.some.inj (hp.symm.trans head)
+ subst p
+ rw [selectSource_append_unrelated handler original extra (handler first) disjoint]
+ exact ready.2 first head i
+
+-- Equality of the filtered source is a semantic condition with a separately
+-- executable checker; equality of arbitrary source-control pointers is absent.
+def ReplacementAdmissible [DecidableEq κ] (handler : α → κ)
+ (original next : List α) (name : κ) : Prop :=
+ ∀ i : Nat, (selectSource handler next name)[i]? = (selectSource handler original name)[i]?
+def replacementCheck [DecidableEq α] [DecidableEq κ] (handler : α → κ)
+ (original next : List α) (name : κ) : Bool :=
+ decide (selectSource handler next name = selectSource handler original name)
+theorem replacementCheck_exact [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original next : List α) (name : κ) :
+ replacementCheck handler original next name = true ↔ ReplacementAdmissible handler original next name := by
+ simp only [replacementCheck,decide_eq_true_eq,ReplacementAdmissible]
+ constructor
+ · intro same i; rw [same]
+ · exact List.ext_getElem?
+
+theorem replacement_manifest_exact [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original next manifest : List α) (first : α)
+ (head : manifest.head? = some first)
+ (accepted : manifestCheck handler original manifest = true) :
+ replacementCheck handler original next (handler first) = true ↔
+ manifestCheck handler next manifest = true := by
+ have eqOriginal : manifest = selectSource handler original (handler first) := by
+   apply List.ext_getElem?
+   intro i
+   exact manifest_ready_index handler original manifest first accepted head i
+ cases manifest with
+ | nil => simp at head
+ | cons p rest =>
+   have same : p = first := by simpa using head
+   subst p
+   simp only [replacementCheck,manifestCheck,decide_eq_true_eq]
+   rw [← eqOriginal]
+   exact eq_comm
+
+#print axioms selectSource_append_unrelated
+#print axioms replacement_manifest_exact
+#print axioms manifest_disjoint_addition_preserved
+#print axioms replacementCheck_exact
+end MirroreaProofFirst.OwnerStatementOriginalEntry
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.Publication
+universe u v
+variable {σ : Type u} {γ : Type v}
+-- A mathematical pair of exclusive slots. Source is the full protected
+-- logical frame, not a pointer/serialized label. Candidate carries a copy of
+-- data and has no executable slot. Physical exclusive ownership, complete
+-- frame extraction, authenticated origin and exclusion during check/move are
+-- independent refinement obligations; copying this model grants no authority.
+structure Owned (σ : Type u) (γ : Type v) where
+ source : σ
+ configuration : γ
+ deriving DecidableEq
+structure Candidate (σ : Type u) (γ : Type v) where
+ basis : σ
+ preview : σ
+ configuration : γ
+ deriving DecidableEq
+abbrev Slots (σ : Type u) (γ : Type v) := Option (Owned σ γ) × Option (Owned σ γ)
+
+def Ready (slots : Slots σ γ) (candidate : Candidate σ γ) : Prop :=
+ ∃ current, slots.1 = some current ∧ slots.2 = none ∧
+   current.source = candidate.basis ∧ candidate.preview = current.source
+
+def publish [DecidableEq σ] (slots : Slots σ γ) (candidate : Candidate σ γ) : Option (Slots σ γ) :=
+ match slots.1,slots.2 with
+ | some current,none =>
+   if current.source = candidate.basis ∧ candidate.preview = current.source then
+     some (none,some ⟨current.source,candidate.configuration⟩)
+   else none
+ | _,_ => none
+
+def Published (slots next : Slots σ γ) (candidate : Candidate σ γ) : Prop :=
+ ∃ current, slots.1 = some current ∧ slots.2 = none ∧
+   current.source = candidate.basis ∧ candidate.preview = current.source ∧
+   next = (none,some ⟨current.source,candidate.configuration⟩)
+
+theorem publish_exact [DecidableEq σ] (slots next : Slots σ γ) (candidate : Candidate σ γ) :
+ publish slots candidate = some next ↔ Published slots next candidate := by
+ rcases slots with ⟨old,destination⟩
+ cases old with
+ | none => simp [publish,Published]
+ | some current =>
+   cases destination with
+   | some occupied => simp [publish,Published]
+   | none =>
+     simp only [publish,Published,Option.some.injEq,exists_eq_left']
+     split <;> simp_all [eq_comm]
+
+theorem publish_complete [DecidableEq σ] (slots : Slots σ γ) (candidate : Candidate σ γ) :
+ (∃ next, publish slots candidate = some next) ↔ Ready slots candidate := by
+ constructor
+ · rintro ⟨next,run⟩
+   obtain ⟨current,old,free,basis,preview,_⟩ := (publish_exact slots next candidate).mp run
+   exact ⟨current,old,free,basis,preview⟩
+ · rintro ⟨current,old,free,basis,preview⟩
+   exact ⟨_,(publish_exact slots _ candidate).mpr ⟨current,old,free,basis,preview,rfl⟩⟩
+
+theorem published_single_owner [DecidableEq σ] {slots next : Slots σ γ} {candidate : Candidate σ γ}
+ (run : publish slots candidate = some next) :
+ next.1 = none ∧ ∃ owner, next.2 = some owner := by
+ obtain ⟨current,_,_,_,_,rfl⟩ := (publish_exact slots next candidate).mp run
+ exact ⟨rfl,_,rfl⟩
+
+theorem published_preserves_source [DecidableEq σ] {slots next : Slots σ γ} {candidate : Candidate σ γ}
+ (run : publish slots candidate = some next) (property : σ → Prop)
+ (original : ∀ current, slots.1 = some current → property current.source) :
+ ∀ current, next.2 = some current → property current.source := by
+ obtain ⟨current,old,_,_,_,rfl⟩ := (publish_exact slots next candidate).mp run
+ intro other found
+ have same : other = ⟨current.source,candidate.configuration⟩ := (Option.some.inj found).symm
+ subst other
+ exact original current old
+
+theorem published_no_repeat [DecidableEq σ] {slots next : Slots σ γ} {candidate : Candidate σ γ}
+ (run : publish slots candidate = some next) (other : Candidate σ γ) : publish next other = none := by
+ obtain ⟨current,_,_,_,_,rfl⟩ := (publish_exact slots next candidate).mp run
+ rfl
+
+theorem arbitrary_configuration_accepted [DecidableEq σ] (current : Owned σ γ) (configuration : γ) :
+ publish (some current,none) ⟨current.source,current.source,configuration⟩ =
+   some (none,some ⟨current.source,configuration⟩) := by simp [publish]
+
+theorem stale_basis_refused [DecidableEq σ] (current : Owned σ γ) (candidate : Candidate σ γ)
+ (changed : current.source ≠ candidate.basis) :
+ publish (some current,none) candidate = none := by simp [publish,changed]
+
+theorem changed_preview_refused [DecidableEq σ] (current : Owned σ γ) (candidate : Candidate σ γ)
+ (changed : candidate.preview ≠ current.source) :
+ publish (some current,none) candidate = none := by simp [publish,changed]
+
+#print axioms publish_exact
+#print axioms publish_complete
+#print axioms published_single_owner
+#print axioms published_preserves_source
+#print axioms published_no_repeat
+#print axioms arbitrary_configuration_accepted
+#print axioms stale_basis_refused
+#print axioms changed_preview_refused
+end MirroreaProofFirst.OwnerStatementOriginalEntry.Publication

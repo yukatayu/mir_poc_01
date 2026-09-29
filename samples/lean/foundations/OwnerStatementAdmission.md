@@ -770,7 +770,42 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                             'open MirroreaProofFirst.OwnerStatementOriginalEntry '
                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
                             '#guard manifestCheck SourcePlan.handler sourceRoot '
-                            '[sourceFirst,sourceOther,sourceSecond] = true\n'}
+                            '[sourceFirst,sourceOther,sourceSecond] = true\n',
+ 'FalsePatchDisjointAddition.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                    'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                    '#guard manifestCheck SourcePlan.handler (completeSource ++ '
+                                    '[sourceOther]) completeSource = false\n',
+ 'FalsePatchPartialRoot.lean': 'import OwnerStatementOriginalEntryControls\n'
+                               'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                               'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                               '#guard replacementCheck SourcePlan.handler completeSource '
+                               '[sourceSecond] 1 = true\n',
+ 'FalsePatchReorderedRoot.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                 '#guard replacementCheck SourcePlan.handler completeSource '
+                                 '[sourceSecond,sourceFirst] 1 = true\n',
+ 'FalsePublicationAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                   'open '
+                                   'MirroreaProofFirst.OwnerStatementOriginalEntry.Publication '
+                                   'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                   '#guard publish (some ownedSource,none) stagedSource = none\n',
+ 'FalsePublicationStale.lean': 'import OwnerStatementOriginalEntryControls\n'
+                               'open MirroreaProofFirst.OwnerStatementOriginalEntry.Publication '
+                               'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                               '#guard (publish (some {ownedSource with source := 20},none) '
+                               'stagedSource).isSome\n',
+ 'FalsePublicationCopiesCustody.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                       'open '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntry.Publication '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                       '#guard publish (some ownedSource,none) stagedSource = some '
+                                       '(some ownedSource,some ⟨19,7⟩)\n',
+ 'FalsePublicationNoOwner.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry.Publication '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                 '#guard (publish (none,none) stagedSource).isSome\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1202,3 +1237,61 @@ so its equality must not be presented as a completed full-source-Core mapping.
 Audit190 modules/18808 owned/93 qualified false controls;96 commands reused the
 pinned dependencies from the earlier fresh190 build and rechecked both changed
 modules and all owned declarations. Production and Canon remain unchanged.
+
+## Preserving a held source across compatible additions (forward LAB)
+
+`ReplacementAdmissible` states independent positional equality of the retained
+handler before/after candidate root replacement. `replacementCheck_exact`
+checks soundness and relative completeness of filtered-list equality.
+`replacement_manifest_exact` connects that check to the already accepted
+original complete manifest. `manifest_disjoint_addition_preserved` proves for
+arbitrary inventories that appending only other handlers preserves that manifest.
+This is useful addition, not a rule that rejects all changes.
+
+The reference lower installer refuses a candidate that changes the held handler
+or shadows an evaluation name before local mutation. Six phase controls cover
+Reserved, Queued, actual failed, committed/unacknowledged, between statements and
+completed activation. Genuine unrelated-handler addition succeeds and the
+original source continues (or retains its actual failure). The generic M8 patch
+and M10 diagnostic callers propagate the refusal. Specialized SYS4 patch callers,
+outer audit/lifecycle frames, source-root provenance, original-order promotion,
+logical snapshot freezing, allocation/unwind and all other mutators remain open.
+The static source-list theorem alone proves none of those physical obligations.
+
+Audit190 modules/18816 owned/96 qualified false controls,99 commands. Both changed
+modules plus all-owned audit were freshly checked against pinned earlier190
+objects. This is not a second full fresh190 reproduction. The addition lemmas use
+standard `Classical.choice`, `propext`, `Quot.sound`; no Mir axioms or authored
+holes. No production, Canon, public schema or acceptance promotion.
+
+## Frozen source and candidate publication (forward LAB)
+
+`Publication.Ready` requires a live original slot, an empty destination, equality
+with the separately saved basis and preservation of the proposed source frame.
+`publish_exact` and `publish_complete` prove soundness and relative completeness
+of the executable checker. Publication removes the old slot, installs exactly
+one new slot and preserves every predicate of the original source payload.
+The old slot cannot publish again. Arbitrary unrelated configuration values are
+accepted, so the rule does not rely on rejecting all useful changes.
+
+This is a two-slot logical custody theorem. It does not make mathematical copies
+of records into independent physical owners. The Rust reference moves the actual
+binding only after all ST session frames and the existing M9 floor are checked.
+The independent frozen state detects shared-control changes; actual report/work
+and queue/context are preserved. Lower clone-publication controls cover ready,
+committed/unacknowledged, between-statement and completed source. Additional
+controls refuse actual progress, shared-value drift, altered candidate report or
+store, and missing outer control while preserving the same live source.
+
+Physical frame completeness, all callers, exclusion during check/move, failure
+and allocation boundaries, real relation/patch consumers, authenticated decoded
+origin and same-instance recovery remain separate obligations. Source-bearing
+restore remains refused. Outer patch rejection audit rows are existing retained
+audit semantics; the lower unchanged-state claim does not erase those records.
+No production, public schema, Canon, phase or acceptance promotion is made.
+
+Audit190 modules/18885 owned/100 qualified false controls,103 commands, with the
+two changed modules and whole owned-declaration audit against pinned earlier190
+dependencies. This is not another full fresh190 rebuild. New publication lemmas
+use only `propext`/`Quot.sound`; existing addition lemmas also use standard
+`Classical.choice`. No authored holes or Mir-specific axioms.

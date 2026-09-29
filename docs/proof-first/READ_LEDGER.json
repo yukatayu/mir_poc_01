@@ -50154,5 +50154,75 @@
     "status": "full-read",
     "role": "sole-main authored/read general positional manifest/checker correspondence and finite discriminators; kernelchecked",
     "at": "2026-09-29T14:01:00.675080+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-patch-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "0543326f3241526c326503659b97d7e1f8b7f58efe86fcf5fcbb965772d6fc96",
+    "status": "full-read",
+    "role": "sole-main authored/read source replacement and disjoint addition generalproofs/controls; actual kernelchecked",
+    "at": "2026-09-29T14:35:56.213060+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-patch-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "08741060190043303cbf84b24e25071e78d22dcb94837f4ea7acf3d3f5585cee",
+    "status": "full-read",
+    "role": "sole-main authored/read source replacement and disjoint addition generalproofs/controls; actual kernelchecked",
+    "at": "2026-09-29T14:35:56.213060+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/augment_source_special_patch.py",
+    "sha256": "65c243414d87dd6a94825f192b6975df820d1eab9c7528b533326276130b23bc",
+    "status": "full-read",
+    "role": "sole-main reference correction/counterexample source; no production adoption",
+    "at": "2026-09-29T14:58:32.843519+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/augment_source_patch_frame.py",
+    "sha256": "6a7a99d9969dd9dfc5b806e98ef2a237045a36697d800a03b8d6aa78e5282094",
+    "status": "full-read",
+    "role": "sole-main reference correction/counterexample source; no production adoption",
+    "at": "2026-09-29T14:58:32.843519+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/augment_source_local_frame.py",
+    "sha256": "64597d71c9c65e5caa59946a22d24df2200fabbde5c8ee13e46526f181bfaeae",
+    "status": "full-read",
+    "role": "sole-main reference correction/counterexample source; no production adoption",
+    "at": "2026-09-29T14:58:32.843519+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_local_frame_probe.rs",
+    "sha256": "e321cc92a56913c021ec10c66e37e731405e5eab95b9484c3b7007ecce25bc5e",
+    "status": "full-read",
+    "role": "sole-main reference correction/counterexample source; no production adoption",
+    "at": "2026-09-29T14:58:32.843519+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_candidate_custody_invocation.rs",
+    "sha256": "862b13119ce5bb329f115728b77d3a8d9c3a10e9c4e6598ffa250762c6730132",
+    "status": "full-read",
+    "role": "sole-main reference correction/counterexample source; no production adoption",
+    "at": "2026-09-29T14:58:32.843519+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-publication-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "88d4df61012547f82e7b1665865a891971c84d53a934ebfb0d33f34130f9c8d8",
+    "status": "full-read",
+    "role": "sole-main authored/read frozen-source publication generalproof and controls; kernelchecked",
+    "at": "2026-09-29T15:06:47.090254+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-publication-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "07e6b7e654af0b2c4625d608f54df6306426f8e93017e9db84316486a50b9e8b",
+    "status": "full-read",
+    "role": "sole-main authored/read frozen-source publication generalproof and controls; kernelchecked",
+    "at": "2026-09-29T15:06:47.090254+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_regression_expectations_tests.rs",
+    "sha256": "49b742195f50684d917164b43e45c51174ecb8f827460592f70b4fca6c49b041",
+    "status": "full-read",
+    "role": "sole-main revised obsolete regression expectations with sourcepositive/typedambiguity/providerentry distinctions; whitespace-only normalization afterrun",
+    "at": "2026-09-29T15:24:52.994585+00:00"
   }
 ]

@@ -4224,3 +4224,17 @@ C incomplete/D unstarted, stopafterD beforeE. Own5docsdirty; no userdirt, no sub
 2026-09-29T14:11:06.090169+00:00: 初回実行の失敗保持RED32475全4反例→GREEN74934参照136成功、8Rust原状復帰。初回local/remoteで実失敗を返却前に保持し、同じ実ownerが後で不在でも既知の失敗を消さない。途中GREEN33433は135成功1失敗：保持済み失敗で問い合わせ不要になったためworker停止の注入が発火しない旧テスト。実問い合わせを明示して停止/返却消失を検査し直した。引き続き再開adapterの型付き失敗保存、fresh decoded root/no-shadow、bound patch全frame、全Core対応が未解決。C未完了/D未着手。
 
 2026-09-29T14:15:37.023405+00:00: 再開adapterの既知型付き失敗保持RED24509全4反例→GREEN1029参照140成功、8Rust復元。ST/OW1が返した実AttemptedUnobservedを保存し、後の同owner不在/worker返却消失/停止でも消去しない。最初の試験はObserved行を誤って期待したため除外、実際は本体1回後の書込み準備拒否でservice行なし。typed lower resultとworker通信失敗を分離。make docs64069成功、190source pin/recipe構文/readledger旧prefix一致。C未完了/D未着手、full regression旧556/558は別cut。
+
+2026-09-29T14:31:34.649276+00:00: HEAD396f0163 proof/docs15files commit・normalpush78789exit0、parity0/0確認。未採用参照Core-origin142成功(33437)とbound-patch148成功(60136)、全10Rust復元。6phaseで不適合patch無変更拒否、別handler追加を受け入れて元処理を継続。raw freshdecode2反例(7931)は未修正・公開attackとは未判定。source-list追加/差替一般Lean2moduleは78576/v2で成功、standardClassical.choiceを含む；全190audit92323実行中で未回収。Oracle mir-w4-origin-r1稼働中(33008)、packet37files967065bytes、最終確認14:28:33、次14:31:34以降。全caller/特殊patch入口/frozenframe/復旧は未完了。Copen/Dunstarted。
+
+2026-09-29T14:35:56.213060+00:00: source差替え/無関係handler追加の一般Leanを既存2moduleへ統合。監査92323whole0:190module/18816owned/96qualifiedfalse/99commands、RESULT 5cf6da20aeeb3816f7b0abc9d9bccecbd8dc9fa959509b68e54936ea77b3a83b。位置ごとの保存条件と実checker同値、受理済manifestへの接続、任意の無関係追加で元列を保存。Classical.choice/propext/Quot.soundのみ。原出自/全physicalframeをこの定理から数えない。
+
+2026-09-29T14:38:10.857831+00:00: Oracle mir-w4-origin-r1 FINAL33008exit0、回答30190chars/SHA 6796368c9ca43d26d474db78330ab96ede8c2535e54a991d785c6bb890fd9431を全文読了し20項目disposition。可視Chrome6Pro/max4of4確認14:32:00。初回/Reservedの下位失敗型消失とreport()再上書きが追加反例候補、80745で実検査中。decoded実行可能性、evaluation-only no-shadow、順序だけ改変、patch全caller/外側lifecycle/共有frameも未解消。後発148/149およびpatchLeanはOracle未review。署名・proof・受理に数えない。
+
+2026-09-29T14:56:31.681698+00:00: 下位失敗情報の8初回/Reserved＋4再報告の実反例を修正し157検査、専用SYS4patchの6段階反例を修正し163検査、報告/待機処理/trace対応表の3保存frame反例を修正し166検査が成功。10Rust原本を都度復元、参照のみ。clone候補の確定で元source制御が消える4反例(9371)を追加、修正は検査中。外側patch拒否の監査記録は既存仕様どおり残し、無変更主張は実処理状態へ限定する。Lean190/18816/96、OracleOA20dispositions保持。C未完了/D未着手。
+
+2026-09-29T15:06:47.090254+00:00: 複製候補確定の一般Leanを既存2moduleへ前方追加。190module/18885owned/100qualifiedfalse/103commands、監査68362whole0、RESULT 5c3de8ea6b464e5b234172e8a15e472c6b74fa6ae3ed92686607203f96fe1b79。独立保存basis/空きslot/元source一致と実checker同値、元sourceの任意性質の保存、一つの所有slotへの移動、旧slotの再利用拒否、任意の別configurationの正例を一般証明。物理move・全frame・実排他・全callerの実現義務を残す。参照175検査成功(76533)、実関係consumerを検査中。C未完了/D未着手。
+
+2026-09-29T15:20:49.151814+00:00: 実source二代入とrelation fallback S→Aの併用で4反例(88362)を再現、参照修正後179検査成功(87652)。実生成endpointとexact受信receiptを検査し、同じソースを残りまで実行。RED-v1/v2は参加factのfixture誤りで対象反例から除外。Oracle新規1回 mir-w4-publicatio-r1(要求名はpublicationだがOracleが短縮)、15:14:29UTC送信、15:19:25可視6Pro/max4of4確認、38file840436bytes、packet 0d2e6731fd776ccaf49ac4f81ab50b408b8430287b3cd622cf1ad244cac4379e。正常稼働、未回収。M9successor/publicpatch/sourceorigin/全mutator義務を残す。
+
+2026-09-29T15:24:52.994585+00:00: 旧2件の静的期待を、複数代入の一意な実行識別子の正例、同名handler二重宣言のDuplicateEvent拒否、provider静的正例と通常build入口拒否へ更新。選択2検査2529成功後、現在参照の全runtime623件70528が全成功(0ignored/0filtered,102.16s)。11Rustを復元。本番未採用、rawdecode2既知反例はこのsuite外に残り、全workspace/release/実network/全mutatorの成功とはしない。Oracle凍結179cut後のtest更新でありOracle未review。

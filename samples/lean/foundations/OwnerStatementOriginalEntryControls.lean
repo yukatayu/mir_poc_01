@@ -52,3 +52,24 @@ def completeSource := [sourceFirst,sourceSecond]
 -- Authentic membership alone admits the decisive second-only counterexample.
 #guard [sourceSecond].all (fun p => sourceRoot.contains p)
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls
+open OwnerStatementOriginalEntry
+#guard replacementCheck SourcePlan.handler completeSource sourceRoot 1
+#guard manifestCheck SourcePlan.handler (completeSource ++ [sourceOther]) completeSource
+#guard !(replacementCheck SourcePlan.handler completeSource [sourceSecond] 1)
+#guard !(replacementCheck SourcePlan.handler completeSource [sourceSecond,sourceFirst] 1)
+#guard !(replacementCheck SourcePlan.handler completeSource (completeSource ++ [sourceFirst]) 1)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls
+open OwnerStatementOriginalEntry.Publication
+-- Frozen logical payload and unrelated configuration vary independently.
+def ownedSource : Owned Nat Nat := ⟨19,2⟩
+def stagedSource : Candidate Nat Nat := ⟨19,19,7⟩
+#guard publish (some ownedSource,none) stagedSource = some (none,some ⟨19,7⟩)
+#guard publish (some {ownedSource with source := 20},none) stagedSource = none
+#guard publish (some ownedSource,none) {stagedSource with preview := 20} = none
+#guard publish (none,none) stagedSource = none
+#guard publish (some ownedSource,some ownedSource) stagedSource = none
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls
