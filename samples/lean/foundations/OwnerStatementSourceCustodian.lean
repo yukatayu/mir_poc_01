@@ -157,8 +157,49 @@ theorem no_repeat_consume (run : consume s ticket member principal = some next) 
  obtain ⟨_,_,_,_,_,_,rfl⟩ := consume_exact.mp run
  simp [consume]
 
--- Only source progress, real request transfer, guarded original service,
--- reporting and typed completion are enabled by this static invocation cut.
+
+-- The current concrete consumer permits an authority-head installation only
+-- between source owner requests. The head remains a separately authenticated
+-- input; this wrapper checks scheduling, never issues authority from a proof.
+def refreshAuthority (s : State p a) (authority : WorldProjection.AuthorityView a) : Option (State p a) := do
+ if s.held ≠ none ∨ MixedOwnerSourceIssue.ownerWaiting s.live.session.state.source.waiting ≠ none then none else do
+ let live ← OwnerStatementRegistrySelection.authorityHead s.live authority
+ return {s with live := live}
+
+theorem refreshAuthority_exact : refreshAuthority s authority = some next ↔
+ s.held = none ∧ MixedOwnerSourceIssue.ownerWaiting s.live.session.state.source.waiting = none ∧
+ ∃ live, OwnerStatementRegistrySelection.authorityHead s.live authority = some live ∧ next = {s with live := live} := by
+ unfold refreshAuthority
+ by_cases idle : s.held = none
+ · by_cases waiting : MixedOwnerSourceIssue.ownerWaiting s.live.session.state.source.waiting = none
+   · simp only [idle,waiting,ne_eq,not_true_eq_false,or_self,↓reduceIte,Option.bind_eq_bind,true_and]
+     cases run : OwnerStatementRegistrySelection.authorityHead s.live authority <;> simp [eq_comm]
+   · simp [idle,waiting]
+ · simp [idle]
+
+theorem refreshAuthority_keeps (run : refreshAuthority s authority = some next) :
+ next.live.session.cursor = s.live.session.cursor ∧ next.live.session.program = s.live.session.program ∧
+ next.live.session.activation = s.live.session.activation ∧ next.live.session.state.owner = s.live.session.state.owner ∧
+ next.live.session.state.outbox = s.live.session.state.outbox ∧ next.live.session.state.inbox = s.live.session.state.inbox ∧
+ next.live.bank = s.live.bank ∧ next.held = s.held ∧ next.nextSerial = s.nextSerial ∧ next.dispatched = s.dispatched := by
+ obtain ⟨_,_,live,changed,rfl⟩ := refreshAuthority_exact.mp run
+ unfold OwnerStatementRegistrySelection.authorityHead MixedOwnerContinuation.authorityHead at changed
+ cases stepped : MixedOwnerSourceTrace.authorityHead s.live.session.state authority with
+ | none => simp [stepped] at changed
+ | some state =>
+   simp only [stepped,Option.map_some,Option.some.injEq] at changed
+   subst live
+   obtain ⟨source,rfl⟩ := MixedOwnerSourceTrace.authority_parts stepped
+   exact ⟨rfl,rfl,rfl,rfl,rfl,rfl,rfl,rfl,rfl,rfl⟩
+
+theorem held_no_refresh (held : s.held = some value) : refreshAuthority s authority = none := by
+ simp [refreshAuthority,held]
+
+theorem waiting_no_refresh (waiting : MixedOwnerSourceIssue.ownerWaiting s.live.session.state.source.waiting = some value) :
+ refreshAuthority s authority = none := by simp [refreshAuthority,waiting]
+
+-- Source progress, real request transfer, guarded original service, reporting,
+-- typed completion, continuation and idle authority refresh are enabled here.
 -- Initial schema/authentic activation/control mutation and recovery are NOT
 -- silently granted by this path. Existing bank reachability is retained.
 inductive Path (capacity : Nat) (initial : State p a) : State p a → Prop where
@@ -170,6 +211,7 @@ inductive Path (capacity : Nat) (initial : State p a) : State p a → Prop where
  | report : Path capacity initial s → report s ticket = some next → Path capacity initial next
  | consume : Path capacity initial s → consume s ticket member principal = some next → Path capacity initial next
  | invokeAgain : Path capacity initial s → invokeAgain s = some next → Path capacity initial next
+ | authority : Path capacity initial s → refreshAuthority s authority = some next → Path capacity initial next
 
 theorem path_trans (before : Path capacity initial middle) (after : Path capacity middle final) : Path capacity initial final := by
  induction after with
@@ -181,6 +223,7 @@ theorem path_trans (before : Path capacity initial middle) (after : Path capacit
  | report _ run ih => exact .report ih run
  | consume _ run ih => exact .consume ih run
  | invokeAgain _ run ih => exact .invokeAgain ih run
+ | authority _ run ih => exact .authority ih run
 
 theorem path_refines (path : Path capacity initial s) : Bank.Rooted initial.live s.live := by
  induction path with
@@ -192,6 +235,7 @@ theorem path_refines (path : Path capacity initial s) : Bank.Rooted initial.live
  | report _ run ih => obtain ⟨_,rfl⟩ := report_exact.mp run; exact ih
  | consume _ run ih => obtain ⟨_,_,_,_,_,_,rfl⟩ := consume_exact.mp run; exact .tick ih
  | invokeAgain _ run ih => obtain ⟨_,_,continued,rfl⟩ := invokeAgain_exact.mp run; exact .continued ih continued
+ | authority _ run ih => obtain ⟨_,_,_,changed,rfl⟩ := refreshAuthority_exact.mp run; exact .authority ih changed
 
 theorem path_admitted (initialAdmitted : OwnerStatementRegistryInvariant.Admitted realm authority policy store initial.live)
  (path : Path capacity initial s) : OwnerStatementRegistryInvariant.Admitted realm authority policy store s.live := by
@@ -218,6 +262,7 @@ theorem path_bounded (initialBounded : Bounded capacity initial) (path : Path ca
  | report _ run ih => exact report_bounded ih run
  | consume _ run ih => exact consume_bounded ih run
  | invokeAgain _ run ih => obtain ⟨_,_,_,rfl⟩ := invokeAgain_exact.mp run; exact ih
+ | authority _ run ih => obtain ⟨_,_,_,_,rfl⟩ := refreshAuthority_exact.mp run; exact ih
 
 theorem path_serials (initialValid : Serials initial) (path : Path capacity initial s) : Serials s := by
  induction path with
@@ -229,7 +274,12 @@ theorem path_serials (initialValid : Serials initial) (path : Path capacity init
  | report _ run ih => exact report_serials ih run
  | consume _ run ih => exact consume_serials ih run
  | invokeAgain _ run ih => obtain ⟨_,_,_,rfl⟩ := invokeAgain_exact.mp run; exact ih
+ | authority _ run ih => obtain ⟨_,_,_,_,rfl⟩ := refreshAuthority_exact.mp run; exact ih
 
+#print axioms refreshAuthority_exact
+#print axioms refreshAuthority_keeps
+#print axioms held_no_refresh
+#print axioms waiting_no_refresh
 #print axioms invokeAgain_exact
 #print axioms invokeAgain_keeps
 #print axioms consume_exact

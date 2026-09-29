@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-29 17:53 JST
+最終更新: 2026-09-29 18:25 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、一つのsource進行状態を実際のSYS4→ST/OW1→M8へ接続した未採用参照版まで進みました。A/SからS→T→S、同じworldでの次の呼出し、実際の下層入口への順序飛ばし・分類消去の拒否、現在の許可を渡してもsnapshot複製を実行させないことを検査しています。複製を実行可能にする箇所だけを外すと、実際に190へ書き込んで拒否条件を破る変異検査も得ました。書込み後のpanicでもlocal状態と要求IDに結び付いた実結果を保持し、再実行せず回収できましたが、SYS4の報告全体とsource完了の復旧は未達です。元source受理との一般証明に加え、nativeカウンタ予約の健全性・相対完全性・非wrapを機械検査し、依存180moduleを監査しました。直近の統合参照23検査が通過しました。生きたworkerの返信欠落は実結果を回収でき、終了したworkerの結果未回収は再実行せず保持します。STまでの差分Oracleを実行中で、後続OW1差分は未reviewです。全入口・保存/復元・資源・SYS4結果回収は残り、C未完了、D未着手、D完了後に停止します。
+W4-Cの通常代入列は、単一のsource進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。同じworldでの継続、現在の認可、複製の実行拒否と実結果の保持を検査しています。文間の権限更新を実状態遷移へ接続した一般Lean証明と公理監査が通り、180module・67反例を再検査しました。Oracle最終回答を照合し、古いcutが値だけを巻き戻す反例と、実処理後の失敗を未実行と呼ぶ反例を再現しました。参照版で未対応復元の明示拒否と実処理段階の保持を加え、対象28検査が通過しています。SYS4報告全体・source完了の同一要求での回収、全入口・patch・資源は未完了です。後続差分のreviewも残ります。C未完了、D未着手、D完了後に停止します。
 
-現在の直接consumerは、同じ要求の実結果を保持したままSYS4報告とsource受理を再開する仕組みと、全entry/資源の閉鎖です。単一source進行からST/OW1への実行接続は参照検査済みですが、本番採用前に、M8直接entry・SYS4 submit/FIFO/局所経路・private image/restore・patchの条件をそろえます。現在の認可、機密性label、全資源、物理custodyはCの残件です。
+現在の直接consumerは、実処理段階を保持した同一要求のSYS4報告・source受理の再開と、全entry/資源の閉鎖です。文間authority更新の一般証明は検査済みで、source失敗の終端・報告・復元の状態対応を補います。単一source進行からST/OW1への実行接続は参照検査済みですが、本番採用前に、M8直接entry・SYS4 submit/FIFO/局所経路・private image/restore・patchの条件をそろえます。現在の認可、機密性label、全資源、物理custodyはCの残件です。
 
 ## ordered self-driven packages
 
@@ -41,7 +41,7 @@ W4-Cの通常代入列は、一つのsource進行状態を実際のSYS4→ST/OW1
 |---|---|---|
 | W4-A / Macro1/2/5 | 保存済み限定モデルと実process証拠をB/Cへ渡す | 完了済みの限定範囲。既存結果を保持 |
 | W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | 限定LAB統合候補として完了。境界review回収・主担当照合済み |
-| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | **現在地**。受理可能性と現在の要求文脈の一つのgoalから開始。GPT-6 Astra high、難所xhigh。所要時間はconsumer具体化後に再評価 |
+| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespace、結果回収・失敗・復元入口の必要条件を閉じる→D | **現在地**。受理可能性と現在の要求文脈の一つのgoalから開始。GPT-6 Astra high、難所xhigh。所要時間はconsumer具体化後に再評価 |
 | W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
 | W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | D後のowner再開待ち。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
 | Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。歴史example612まで全文。既存docsの通読も進め、広域sample/archive JSONは保存済みbatch64まで読了。未照合の生成receipt等を一括読了とはしない。現在の206module依存coneは全文/equivalent hash照合済み |

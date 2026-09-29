@@ -48043,5 +48043,200 @@
       0
     ],
     "scope": "V7realOW1private SourceUse command andsingleworkerbinding withsameglobalactivation:21pass. V8liveworker losesrealreplychannel aftercommit, later exactrequestcollection returnsactual200→190/bodyonce. Deadworkerafteractualcommit hasDisconnectedcollection/bodyonce, sourceheld/cursor0 andoutererror remain, no retry.23pass inclpriorST/OW1sourcechecks. Sharedlocalcontrol mayknowcommit bit; resultunavailable isnotafalseclaimthatcommitdidnotoccur,norfullprocess/networkunknown proof. All8Rustrestored; laterthan OraclepacketV6, reviewowed. FullSYS4receipt/sourcecompletion collection andallentry/resources stillopen."
+  },
+  "c_statement_source_integrated_review_20260929": {
+    "at": "2026-09-29T09:12:39.979834+00:00",
+    "session": "mir-w4-source-integrated-r1",
+    "tool": 89498,
+    "whole_exit": 0,
+    "answer_sha256": "9a5a95c2f079325751458f01ca4f0e58470690696905ef682a927638c8157365",
+    "chars": 28350,
+    "manifest_sha256": "76984cd5d6f2dcbe3fceaca743583fc2becf147c6fb70a2fe102f8986daaf794",
+    "question_sha256": "e065274e9adb2f8cf9afe0352b4df791b47bc64e7942d434ef1ac63700f77f15",
+    "recovered": "same final conversation full DOM; wrapper identifier-only answer retained/excluded",
+    "findings": [
+      {
+        "issue": "Actual connection and A/B",
+        "status": "accepted provisional A",
+        "local": "V6 ties full checked source/globalcursor to existingexecutor and separate M9 issuer. No shown designated same-instance bypass; not universal allentry proof. B shares result/lifecycle obligations."
+      },
+      {
+        "issue": "Submission not retained before observable publication",
+        "status": "confirmed/open",
+        "local": "submit_source_action and local origin allocate/arm before retained outer outcome; postcommitV4 lower190 but sourcecursor0/outcomesempty. Need actual phased collection not resubmit."
+      },
+      {
+        "issue": "Local completed receipt asymmetry",
+        "status": "confirmed/open",
+        "local": "Local origin returns directly, remote completed_receipts retention alone does not repair localtrace/receipt/sourceconsumption."
+      },
+      {
+        "issue": "M9 live floor unwind poison",
+        "status": "confirmed/open",
+        "local": "Execution under authority floor guard can unwind and poison. Lower result collection does not authorize future operations; no ignore-poison workaround."
+      },
+      {
+        "issue": "Save/restore owner rollback and inert custody",
+        "status": "confirmed body; reproduction next",
+        "local": "save clones inert source binding sharing livecontrol; livefloor lacks source/commit frontier; try_restore can install oldstore andinertowner. Need pre-mutation typed refusal or proved move. Not public Invocation attack."
+      },
+      {
+        "issue": "Projection/equivalence omitted source/result",
+        "status": "confirmed/open",
+        "local": "canonical_store_projection/equivalent_without_plans do not include source/result tuple. Current Arc equality is identity only, not snapshot proof."
+      },
+      {
+        "issue": "Checked-patch clone",
+        "status": "confirmed scoped",
+        "local": "Candidate clones inertowner and clears source_control; promotion omitted inpacket. SYS4 designated-only patch is not owner-body substitution."
+      },
+      {
+        "issue": "No-row is not unattempted",
+        "status": "confirmed static/open",
+        "local": "Prepared trace allocation refusal occurs afterFIFO pop/evaluation. LocalUnattempted inference from no rows unsound; explicit phase needed."
+      },
+      {
+        "issue": "Claim before independently fallible enqueue",
+        "status": "confirmed/open",
+        "local": "Source slotclaimed before I3/targetpresence checks. Need retain terminal failure or verifiedreservation cancellation; no automatic retry ofcommitted/uncertain."
+      },
+      {
+        "issue": "Local origin drops observed failure",
+        "status": "confirmed/open",
+        "local": "Maps backend failure onlykind unlike remoteobserved branch; needs actual diagnosticassociation, not fabricated row."
+      },
+      {
+        "issue": "Carrier provenance corruption",
+        "status": "conditional/open",
+        "local": "Owner envelope arm lacks fullcontext comparison; CorruptSourceRef admission omitted. Inspect existing faultadmission and add discriminating current-permit substitutions before successfulM9/M8 use."
+      },
+      {
+        "issue": "Frozen source state discriminator",
+        "status": "accepted next test",
+        "local": "ArcPartialEq clone comparison cannotdetect interior sourceprogress changes. Add privatefrozen fields in tests only, noobserverexport."
+      },
+      {
+        "issue": "Causal consumption discriminator",
+        "status": "accepted next test",
+        "local": "Reachability ownerwrite→nextrequest admitsdirectlink mutant. Require exact keyed consumption and both edges; observerlookup not finalresult authority."
+      },
+      {
+        "issue": "Constructor completeness/designation",
+        "status": "retained TCB",
+        "local": "Containment alone admitsreordered/subsetnewmanifest on unboundruntime. CheckedInvocation constructor supplies fullroot; no liveflag orselfdecodedroot authority."
+      },
+      {
+        "issue": "Permit issuance vs claim",
+        "status": "claim narrowed",
+        "local": "Multiple issue values possiblebeforeclaim; guarantees one successfulclaim, notlinearissue."
+      },
+      {
+        "issue": "Singleton and I3 eligibility",
+        "status": "confirmed/open",
+        "local": "Broadsource_rootguard breaksordinarysingleop baseline; immutableadmitted classification needed. I3sourceunsupported explicitlyrefusebeforearm/claim; source permit notbudgetauthority."
+      },
+      {
+        "issue": "OW1 reply custody",
+        "status": "later partial evidence",
+        "local": "V7/V8 later23checks actualworker SourceUse and exactresultcollection; live replyloss bodyonce vsdeadworkerDisconnected. Notincludedinreview, nofullSYS4reportrecovery/Dclosure."
+      },
+      {
+        "issue": "Lean source refresh/failure and resource scope",
+        "status": "accepted boundary",
+        "local": "Originalsourceproof relativeAccepted, CounterBudgetonlynativeocc/trace. Lateridleauthority generalPathproof/controls nowauditing; failure/report/patch/fullresources stillopen. No inferred Rustrefinement."
+      },
+      {
+        "issue": "Independent live source/result floor",
+        "status": "open technicalcandidate",
+        "local": "Outsidecandidateimage retain designation/fullroot/args/sourcephase/request/ownercommit/noreuse/context/reporting; queued/committed/consumed notjustnumeric frontier. Auth/observation remain separate."
+      },
+      {
+        "issue": "Review limits",
+        "status": "retained",
+        "local": "28file staticadvice, noexecutedtests/Lean/kernel/Canon119 audit/signedindependence. Selectedbodies omitted and disclosed. Oracle notacceptance. C incomplete,Dunstarted, stopbeforeE."
+      }
+    ],
+    "adoption": "No production/Canon/THM/OBL/phase or authority promotion"
+  },
+  "c_statement_source_authority_20260929": {
+    "at": "2026-09-29T09:15:33.027507+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-authority-v1/RESULT.json",
+    "sha256": "22ac5b2f521a9123778dee9aaab3180d7070a63acc3713735acea2843d50ef9c",
+    "tool": 57503,
+    "whole_exit": 0,
+    "fresh_commands": 70,
+    "qualified_false": 67,
+    "owned_count": 18542,
+    "source_count": 180,
+    "scope": "Idle-only source authority refresh through actual Bank.authorityHead, exact scheduling/checker correspondence, frame for source cursor/program/activation/owner/history/inbox/outbox/registry/custody/serials; all actual Path inductions include refresh. Real positive190 then17 under successor and fresh adversarial stale/held/waiting/revocation controls. Head authentication remains external; no queued refresh/Q18 change or complete Rust refinement/liveness/restore/resource proof. All previously retained false source controls rerun against changed Path; no production promotion.",
+    "review": "delta owed; after NI packet",
+    "development_tools": [
+      56142,
+      75579
+    ],
+    "development_exits": [
+      0,
+      0
+    ]
+  },
+  "c_statement_lifecycle_failure_reference_20260929": {
+    "at": "2026-09-29T09:25:03.253307+00:00",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_LIFECYCLE_RED-V1.json",
+        "sha256": "c0e53e65e69f759afd83fde5b7e740a98f559652f0daf099f39772a97138d800",
+        "tool": 5610,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "log_sha256": "f4385fbee5185d95eb4f70cdcf54a12a18f725064d6ff5c6b5fca0c114b00141",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-lifecycle-red-v1/RESTORED.json"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_LIFECYCLE_GREEN-V1.json",
+        "sha256": "8a3faeff8210649880decdd607e03be6ac319956eefaff8141eaa37c7844c57e",
+        "tool": 31673,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "log_sha256": "9a7560b79a62f9ec9015329d069d084a2d43a8cc3c32752f4bb2f998c2aa8954",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-lifecycle-green-v1/RESTORED.json"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_LIFECYCLE_GREEN-V2.json",
+        "sha256": "67c87d87fb1b82929669e081393edd4c3382264a3f657651e96bf22fa0aa88ee",
+        "tool": 5081,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "log_sha256": "d524fae7f6db269166ee4acf8a6a8a29b2c102b066bab1dc4ccaca7ef374f599",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-lifecycle-green-v2/RESTORED.json"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PHASE_RED-V1.json",
+        "sha256": "2ccf55347729016188192c3898a74ee1667b4ba36f47de598d15d247f6e8208a",
+        "tool": 16761,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "log_sha256": "29e3bdc96d3fce19eecb1b81aa8514cc693b942d19266249acc3ce10e4be1393",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-phase-red-v1/RESTORED.json"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PHASE_GREEN-V1.json",
+        "sha256": "867db92a0db9b5bedd76f030c6ae8c4d4cc771b02bf4829edc295dfaeceb948b",
+        "tool": 44263,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "log_sha256": "61f2ff50450790ef89f42f0e4f4bbcfecc9b1979d4e42a6e3187028b71d6c9a3",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-phase-green-v1/RESTORED.json"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PHASE_GREEN-V2.json",
+        "sha256": "1d6a8a8619cbc64864537baa2eaf93cbc0bf1eea0365ab42ca2f312b4aa33e60",
+        "tool": 80485,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "log_sha256": "e85a305f08460c5a72b34f26fa58877e47b077fc1f6f4621262940dead595c94",
+        "restore": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-phase-green-v2/RESTORED.json"
+      }
+    ],
+    "scope": "LifecycleRED twoactualfailures oldowner190to200rollback/sourcecursor1 andsamecutinertinstall; GREENv1twentyfive/GREENv2twentyseven allpass includingincomingunbound, genuinelyqueued andpostcommitreportpending. SourcebearingrestoreexplicitSourceCustodyUnsupported refusesbeforepayloadmutation, diagnostictraceallowed; saveobjectremainsobservationalnotresumable. PhaseREDactualbodyonce/poppedFIFO/preparation-reservefailuremisclassifiedUnattempted; GREENv1compilefailedprivatecontrol visibility (no test success), GREENv2twentyeightpass. Explicit reserved/claimed/queued/attempting/refusedbeforeenqueue/attemptednocommit/committed phases and keyedactualdiagnostics; servicepop marksattempt, no-row alone doesnotclaimunattempted forsource. Frozen source testview replaces Arcidentity-only assurance. All8temporaryfilesrestored; no productionadoption, allentry/patch/result-fullcollection/totalresourceclosure stillopen."
   }
 }

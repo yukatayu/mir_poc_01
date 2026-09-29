@@ -227,6 +227,50 @@ theorem actual_four_statement_admitted : AdmittedResult nextSecond := by
   exact driver_admitted (driver_admitted initial_admitted)
  exact driver_admitted (driver_admitted (invocation_admitted htwo))
 
+
+-- Idle successor installation uses the same authenticated-head boundary as
+-- the source machine. Neither freshness nor these controls issue authority.
+def successor (s : OwnerStatementLiveCustodian.State 3 1) : WorldProjection.AuthorityView 1 :=
+ let old := s.live.session.state.source.machine.store.core.system.view
+ {old with generation := old.generation+1}
+
+def refreshed := first.bind fun s => refreshAuthority s (successor s)
+def afterRefresh := refreshed.bind fun s => runOne 2 3 s 0 7
+#guard refreshed.isSome && afterRefresh.isSome
+#guard (refreshed.map fun s => (s.live.session.state.owner.store 0,count s.live.session,s.nextSerial,s.dispatched.length)) = some (some 190,1,1,1)
+#guard (afterRefresh.map fun s => (s.live.session.state.owner.store 0,count s.live.session,s.nextSerial,s.dispatched.length)) = some (some 17,2,2,2)
+#guard (first.bind fun s => refreshAuthority s s.live.session.state.source.machine.store.core.system.view).isNone
+#guard (staged.bind fun (s,_) => refreshAuthority s (successor s)).isNone
+#guard (executed.bind fun (s,_) => refreshAuthority s (successor s)).isNone
+#guard (reported.bind fun (s,_) => refreshAuthority s (successor s)).isNone
+-- Waiting already exists before stage acquires custody; held = none alone is
+-- insufficient to establish the supported scheduling boundary.
+def issued := initial.bind fun s => issue 1 s 0 7
+#guard (issued.map fun s => (s.held.isNone,(MixedOwnerSourceIssue.ownerWaiting s.live.session.state.source.waiting).isSome)) = some (true,true)
+#guard (issued.bind fun s => refreshAuthority s (successor s)).isNone
+
+def revokeAll (s : OwnerStatementLiveCustodian.State 3 1) : WorldProjection.AuthorityView 1 :=
+ let next := successor s
+ {next with authority := {next.authority with revoked := next.authority.issued.map CurrentUse.Claim.id ++ next.authority.revoked}}
+def revoked := first.bind fun s => refreshAuthority s (revokeAll s)
+#guard revoked.isSome
+#guard (revoked.map fun s => (s.live.session.state.owner.store 0,count s.live.session,s.nextSerial,s.dispatched.length)) = some (some 190,1,1,1)
+#guard (revoked.bind fun s => runOne 2 3 s 0 7).isNone
+
+private theorem refresh_admitted {input : Option (OwnerStatementLiveCustodian.State 3 1)}
+ (prior : AdmittedResult input) : AdmittedResult (input.bind fun s => refreshAuthority s (successor s)) := by
+ intro next run
+ cases found : input with
+ | none => simp [found] at run
+ | some s =>
+   simp only [found,Option.bind_some] at run
+   exact OwnerStatementSourceCustodian.path_admitted (capacity:=2) (prior s found) (.authority .initial run)
+
+theorem actual_refreshed_two_statement_admitted : AdmittedResult afterRefresh :=
+ driver_admitted (refresh_admitted (driver_admitted initial_admitted))
+
+#print axioms actual_refreshed_two_statement_admitted
+
 #print axioms actual_four_statement_admitted
 
 #print axioms actual_two_statement_admitted

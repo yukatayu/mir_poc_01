@@ -49902,5 +49902,96 @@
     "status": "full-read",
     "role": "authored/read exact existing OW1 reference consumer integration",
     "at": "2026-09-29T09:01:48.925502+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-integrated/ANSWER_RECOVERED.txt",
+    "sha256": "9a5a95c2f079325751458f01ca4f0e58470690696905ef682a927638c8157365",
+    "status": "full-read",
+    "role": "integrated Oracle final/local authority dependency",
+    "at": "2026-09-29T09:12:39.979834+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+    "sha256": "24eba9de0f7ace2ffcb2ae2a56a8ba75d1e9bb74e5cae0cda4b8ba5e54a94f39",
+    "status": "full-read",
+    "role": "integrated Oracle final/local authority dependency",
+    "at": "2026-09-29T09:12:39.979834+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-authority-v1/OwnerStatementSourceCustodian.lean",
+    "sha256": "b9830f6fff6fb66c22f47e5347f44d9d74ba13f32356c1f669c1c3b8ba5ef273",
+    "status": "full-read",
+    "role": "authored/audited actual source idle-authority successor",
+    "at": "2026-09-29T09:15:33.027507+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-source-authority-v1/OwnerStatementSourceCustodianControls.lean",
+    "sha256": "fa4b771dff40d255c463879be814bc55103ed16fd13a837b5f9d049662f41577",
+    "status": "full-read",
+    "role": "authored/audited actual source idle-authority successor",
+    "at": "2026-09-29T09:15:33.027507+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_lifecycle_probe_methods.rs",
+    "sha256": "7566ecead760523b1c507e37f948410aee41fb9374cea82781b46418adbe3fee",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_lifecycle_local_v2.rs",
+    "sha256": "b53a7df6ebdc779f9592fee634c4fe2cfd0c6530640d1339a5548b47683c41f2",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_lifecycle_methods_v2.rs",
+    "sha256": "340febc9b3d799ceef87396651e0f43308f6c84b3fadb987d3fdb200fec5fc6a",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_lifecycle_tests.rs",
+    "sha256": "d50087789643a480aeeae6b77cbdec3d49f8bbe2ca621953050dad12df936391",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_lifecycle_tests_v2.rs",
+    "sha256": "bb5e3b463e1b0143a7506df1a09ee022dbd26ee52eb5ab89ea258a25d622b635",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_phase_local.rs",
+    "sha256": "96fba8f76cc2834d8cf2da66cbba0a406b91b542d8ad67d57c071d9909ef4a34",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_phase_methods.rs",
+    "sha256": "9fbc08c0bd9a93281444496b8d366482f66d5e288a83206e2702a9c744b9213e",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_phase_tests.rs",
+    "sha256": "33fbcbd79bc5ddfc254b55433e8c68fb33d08b0c698fe49031f725d653521651",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/augment_source_phase.py",
+    "sha256": "8b3d9c6876d199bb643713c25566d7df2c9cf940ce3a5faa8a9ac78e59235737",
+    "status": "full-read",
+    "role": "authored/read actual lifecycle and service-phase falsifier/reference",
+    "at": "2026-09-29T09:25:03.253307+00:00"
   }
 ]
