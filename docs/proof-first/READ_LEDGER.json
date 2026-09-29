@@ -50098,5 +50098,47 @@
     "status": "full-read",
     "role": "sole-main authored/kernel audited independent current acknowledgment or checked full Oracle advice",
     "at": "2026-09-29T12:11:35.004630+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-acknowledgment-scope-v1/OwnerStatementAcknowledgmentControls.lean",
+    "sha256": "287562e0ea08bec84011441a51cd3c40552cdd92667f5d4a5c724aac9451c1cc",
+    "status": "full-read",
+    "role": "sole-main authored and kernel checked finite Facts scope controls",
+    "at": "2026-09-29T12:49:36.402285+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-acknowledgment/ANSWER_RECOVERED.txt",
+    "sha256": "70b50356a8806fd43c43af313828e9dcb2027e0a8f1b78d69dd7b3ae6b370b6b",
+    "status": "full-read",
+    "role": "sole-main full advice read and25dispositions, primary falsifier independently reproduced",
+    "at": "2026-09-29T12:49:36.402285+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-original-entry-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "deb956bf0007d18e737d2ff8ca0cdeb87c368057521063a3094cabf0ae51580a",
+    "status": "full-read",
+    "role": "sole-main full-read and kernel checked general entry definitions/proofs",
+    "at": "2026-09-29T13:19:20.261076+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-original-entry-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "44bea3fdad73856e0a2691e7dc2022f1d3ba28afd45fea4fcdfeba93d7070118",
+    "status": "full-read",
+    "role": "sole-main full-read and kernel checked finite alternatives/falsifiers",
+    "at": "2026-09-29T13:19:20.261076+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-prepared/ANSWER_RECOVERED.txt",
+    "sha256": "41cbd658da1449ad5938fbb757f14adbf5b4b38c549cd47ded0964393498327b",
+    "status": "full-read",
+    "role": "sole-main full advice read;20 dispositions retained; no authority or proof credit",
+    "at": "2026-09-29T13:19:20.261076+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-entry/ANSWER_RECOVERED.txt",
+    "sha256": "0e141d38d47f86ded3f8bc6ffd9089ca9e67ae43e8a217929c4e2c32e3244a28",
+    "status": "full-read",
+    "role": "sole-main full25023char staticreview;21dispositions; newmanifest/constructor/initialfailure falsifiers requirelocalverification",
+    "at": "2026-09-29T13:45:32.106728+00:00"
   }
 ]

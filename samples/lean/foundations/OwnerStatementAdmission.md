@@ -8,8 +8,8 @@ and local/remote dispatch. Production integration still requires closure over
 all admitted entry/image routes and the physical failure/resource obligations.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 188 dependency
-modules: 65 reused and 123 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 190 dependency
+modules: 65 reused and 125 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
@@ -714,7 +714,33 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseAckUsedStillAccepted.lean': 'import OwnerStatementAcknowledgmentControls\n'
                                    'open MirroreaProofFirst.OwnerStatementAcknowledgment '
                                    'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
-                                   '#guard (consumedId.map fun (s,t) => check s t) = some true\n'}
+                                   '#guard (consumedId.map fun (s,t) => check s t) = some true\n',
+ 'FalseAckGuardRechecksStop.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                                   'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                                   'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                                   '#guard (wrongStopped.map fun (s,t) => check s t) = some '
+                                   'false\n',
+ 'FalseAckGuardRechecksHistory.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                                      'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                                      'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                                      '#guard (missingHistory.map fun (s,t) => check s t) = some '
+                                      'false\n',
+ 'FalseAckSkipsWrongHead.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                                'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                                'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                                '#guard (wrongHead.map fun (s,t) => check s t) = some true\n',
+ 'FalseOriginalEntryAllRejects.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                      'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                      '#guard check Plan.ordinal root false ordinary = false\n',
+ 'FalseOriginalEntryMutableClass.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                        'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                        'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                        '#guard check Plan.ordinal root false erased = true\n',
+ 'FalseOriginalEntryBoundOptional.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                         'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                         'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                         '#guard check Plan.ordinal root true ordinary = true\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1082,3 +1108,40 @@ Fresh audit:188 modules/18706 owned declarations,81 qualified false controls,
 axioms. Physical field decoding, all eligible callers, coherent Rust publication
 and resource/authority/metadata framing remain implementation obligations.
 The unadopted Rust adapter is not certified by this theorem.
+
+## Receipt checker scope controls (forward LAB evidence)
+
+The general `check_consume_exact` theorem still assumes admitted `Facts`.
+New private-constructor controls make the boundary explicit: changing only the
+stopped ordinal breaks the original waiting/origin binding, yet the receipt
+checker and raw consume still succeed. Erasing owner attempts/history also
+leaves readiness true while original historical result collection refuses.
+Neither state is claimed to be reachable through admitted transitions. Entry,
+restore and mutator proofs must establish binding and history separately;
+receipt readiness cannot replace admission or recovery provenance.
+
+A different first inbox reply is refused even if the genuine matching reply
+follows it; no search-ahead completion is permitted. These are finite controls,
+not new general preservation or implementation-refinement proofs. Fresh scope
+audit:188 modules/18715 owned declarations,84 qualified false controls,
+86 commands (controls + integrated audit + false guards). General theorem and
+axiom policy unchanged; no authored holes or Mir-specific axioms.
+
+## Original checked-plan entry (forward LAB candidate)
+
+`OwnerStatementOriginalEntry.check_exact` proves soundness and relative
+completeness for an unbound ordinary entry whose entire checked plan belongs
+to independently retained original plans and has no statement ordinal. Under
+the independent no-shadow uniqueness premise, `protected_rejected` rejects any
+candidate sharing a protected original operation identity, even when current
+ordinal or checked payload is changed. Bound and unknown entries are rejected;
+ordinary entries remain usable beside protected siblings. Retaining original
+plans under addition preserves this entry check, but grants no addition authority.
+
+The payload is generic and represents the full checked plan. The theorem does
+not prove the physical constructor, authenticated patch transition, restoration,
+or all-caller provenance of that original inventory. In particular a valid code
+patch needs an explicit root transition; blindly refreshing from mutable plans
+would discard the protection. Current Rust is an unadopted reference. Fresh
+audit:190 modules,18759 owned declarations,87 qualified false controls,90 commands.
+Only standard logical axioms occur; no authored holes or Mir-specific axioms.

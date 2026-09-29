@@ -1,11 +1,9 @@
 # Project status
 
-最終更新: 2026-09-29 18:25 JST
+最終更新: 2026-09-29 22:23 JST
 
-**Canon notice:** `mirrorea_canon/` is the normative source for project
-direction, theory, ADRs, conformance, and process. Everything outside
-`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
-notes. If LAB text conflicts with canon, canon wins.
+**Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
+Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 Plan250 owner control: I3-3 is accepted at the finite source/evidence cut and execution
 is paused. I3-3 accepted; owner pause leaves no active semantic milestone. Plan
@@ -57,7 +55,9 @@ W3は有限の研究・参照実装候補として検証・review・source統合
 
 2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。成功書込み後の故障から同じ要求IDで実返信・receipt・source報告を回収し、一度だけ完了を進める経路が、同一locus・別locusで通りました。生存workerの返信喪失は回収し、停止workerは結果不明のまま保持します。実結果の唯一性・失敗結果の非成功扱い・元source報告との一般対応に加え、正規admissionの履歴・元serviceからの回収・現在待っているsourceとの接続をLeanで検査し、188moduleの公理監査と81反例が通過しました。参照82検査では、報告行の再課金、無関係な診断行の混入、観測索引によるsource完了阻害の実反例も修正しています。ST/生存workerでは未実行キューを元要求のまま一度だけ再開し、複製の再開を拒否しました。要求・返信の搬送途中でIDが不足すると元キューから失われる反例も修正し、実搬送と記録の一括確定を検査しました。元の書込み準備失敗はST/生存workerで元要求・文脈・実診断を回収でき、再評価・成功完了を拒否しました。下層enqueue直後の対応付けと返信受領の故障も、元のキュー・実受領から回復する参照検査が通りました。送信準備・故障選択の保持・再開拒否の診断保持・実受領から消費への直接因果にも参照検査を追加しました。実際のキュー・実行前拒否・実処理から返った拒否の保持も検査しました。現在の消費条件と元Bank.tickの同値性はLeanで検査済みですが、Rustへの対応・全入口・patch・資源は継続中です。Oracleの差分review指摘を照合中で本番未採用、C未完了・D未着手。D完了後に停止します。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と87反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+
+参照118検査では、実キュー・搬送・返信・元権限の現在照合に加え、M9準備後の再開で最初の実拒否が欠落する問題を修正しました。要求を再実行せず、同じ下位処理の実結果を保持します。誤った所有者指定や他の要求の拒否理由によって元処理が変更される経路も閉じました。広い回帰は入口と受信結果保持範囲の修正により、558件中556成功・2失敗です。正規patch時の元plan更新を分離し、配置/provider入口の適用範囲を照合中です。本番未採用であり、全入口・復元・資源・worker故障・物理対応は継続します。C未完了・D未着手、D完了後に停止します。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
