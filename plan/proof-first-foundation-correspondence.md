@@ -1977,3 +1977,19 @@ A remains provisional protected single source activation over existing executor;
 W4-Cの通常代入列は、単一のsource進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。同じworldでの継続、現在の認可、複製の実行拒否と実結果の保持を検査しています。文間の権限更新を実状態遷移へ接続した一般Lean証明と公理監査が通り、180module・67反例を再検査しました。Oracle最終回答を照合し、古いcutが値だけを巻き戻す反例と、実処理後の失敗を未実行と呼ぶ反例を再現しました。参照版で未対応復元の明示拒否と実処理段階の保持を加え、対象28検査が通過しています。SYS4報告全体・source完了の同一要求での回収、全入口・patch・資源は未完了です。後続差分のreviewも残ります。C未完了、D未着手、D完了後に停止します。
 
 Same A provisional vs B whole-handler; no roadmap/Canon change. SourceCustodian idle refresh uses actual Bank.authorityHead and preserves source/owner/history/custody, authenticated-head TCB and Q18 unchanged. RESULT22ac5b2f521a9123778dee9aaab3180d7070a63acc3713735acea2843d50ef9c; complete source/result reporting and physical failure refinement remain open. Oracle NI fullanswer9a5a95c2f079325751458f01ca4f0e58470690696905ef682a927638c8157365 disposed20. New restore refusal is a temporary finite-profile boundary, not permanent removal of hot-plug or successful source recovery. Declaration/use/proof authorizes no new observer.
+
+### 2026-09-29T10:12:38.189171+00:00 同一要求の報告回復と実結果収集
+
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。成功書込み後の故障から同じ要求IDで実返信・receipt・source報告を回収し、一度だけ完了を進める経路が、同一locus・別locusで通りました。生存workerの返信喪失は回収し、停止workerは結果不明のまま保持します。実結果の唯一性・失敗結果の非成功扱い・元source報告との一般対応をLeanで検査し、182moduleの公理監査と74反例が通過しました。参照34検査では、報告行の再課金、無関係な診断行の混入、観測索引によるsource完了阻害の実反例も修正しています。未実行キューの報告失敗・通常失敗の回収、搬送中の故障、現在の受理条件、全入口・patch・資源は継続中です。差分review前で本番未採用、C未完了・D未着手。D完了後に停止します。
+
+Oracle NTの20指摘を照合。Aの単一source進行＋既存executorに、元action/request/carrier/dequeue/lineageを保持するprivate報告記録を加える参照案を継続する。成功後の回収は再評価せず、enqueue済み未実行の再開は別の既存service遷移とする。最小代替は実評価に基づく報告の事前準備だがOW1の結果保持は依然必要。Q18・失敗のskip/retry/取消・過去結果のdisclosure/current ackを自動採用しない。
+
+2026-09-29T10:19:01.999508+00:00: 同じ参照を37検査へ更新。実enqueue projection失敗後、元の全request/context/SourceUse/FIFO occurrenceを保持してbody0→1だけ実行するST/liveOW1経路が通過。複製runtimeは保持permitを持っても再開拒否、ordinary authority installはheld sourceを拒否。全故障位置・失敗sum・current ack・残entryは未完。新cutをmir-w4-source-continuation-r1へ一度だけ送信、独立観点照合待ち。
+
+2026-09-29T10:33:12.382007+00:00: source movement reference66272全体/子0・40検査。ID枯渇時の要求/返信喪失を5776の別々の2反例で再現（65364は先行要求のみ）。実moveと元envelope/source/targetに束縛したTransportStepを一括確定し、前後故障・同ID再取得・誤route拒否を確認。全8Rust復元。本番未採用、network原子性・durability・返信receipt・typed failure・全入口は未保証。Oracle実slugはmir-w4-source-continuati-r1、可視6Pro/max確認済み、同job8821継続。
+
+2026-09-29T10:42:42.265224+00:00: Oracle NU回答29140chars（dcf5c4f0…）を同相談DOMから回収、20指摘を照合。失敗結果の欠落を実再現し、未採用42検査ではST local/remote・eligible OW1で元request/context/実typed診断を回収、実在しないservice行・成功完了・再評価なし。GREEN71724の40pass/1failはunsupported3locusOW1試験設定のため、既存対応構成へ直した23152で全42通過、8Rust復元。Leanのリスト所属と実行由来は別と明記し、正規Admittedからのhistory対応と元guarded service接続を外部で補強中。下層enqueue handoff、request preparation、reply receipt、fault選択、current ack、ordinary singleton互換・全入口を継続、C未完/D未着手。make docs30427 exit0（先行16947はheader失敗を保持）。
+
+2026-09-29T10:50:30.935135+00:00: ResultOrigin successor7693全体0・79commands（3zero/76qualifiedfalse）、184modules18601decls、公理監査RESULT3bdf3e40358a9127df7087c60711d1fbae8c122faa6589756bd611dbbe60c940。正規Admittedから元saved/history対応、独立current guardから元service/lower advance/collector対応、declarative Commitsから成功回収の相対完全性を一般証明。singleton架空17/store200/history空のraw反例でlist lookupとadmissionを分離。2Lean+audit+manifest+recipeをLAB統合。開発時の型引数・simp・layout・非可判定Invariantのcompile失敗は記録して除外し、sorry/admit/Mir固有公理なし。物理故障simulation・current ack・全caller closureは未完。
+
+2026-09-29T10:52:28.809800+00:00: 同一原要求のenqueue→local occurrence handoffを36332実反例/18241全43検査で、reply dequeue→completed receipt保持を69601実反例/59909全45検査で照合。後者は実受信前にreceiptを作らず、実step_locusのdequeue/receipt/受領stepを同じlocal transactionで確定。公開前後故障と同じreceipt回収でbody1維持。全8Rust原状復元、未採用参照。初回送信準備・in-transit fault選択・current ack・全入口/資源は未完。関連6snapshot同期、同じreport2614/planへ前方記録。

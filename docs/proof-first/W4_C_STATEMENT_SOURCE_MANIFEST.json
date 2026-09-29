@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "at": "2026-09-29T09:15:33.027507+00:00",
+  "at": "2026-09-29T10:50:30.935135+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
-  "source_count": 180,
+  "source_count": 184,
   "reused": 65,
-  "added": 115,
+  "added": 119,
   "import_renames": 8,
   "rows": [
     {
@@ -2003,6 +2003,50 @@
       "canonical_module": "OwnerStatementCounterBudget",
       "staged_sha256": "296bd1e218dfdc7e0da79ae18c3310dc3464b3746ef6d2ae4c81ee387ff57248",
       "transformation": "identity; two native counter reserve, not full resource closure"
+    },
+    {
+      "module": "OwnerStatementResultCollection",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollection.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultCollection.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "05aa2b6023383a5067af4b7c7f565775f0bccc44978338da09d412c3c62014a5",
+      "canonical_module": "OwnerStatementResultCollection",
+      "staged_sha256": "05aa2b6023383a5067af4b7c7f565775f0bccc44978338da09d412c3c62014a5",
+      "transformation": "identity; actual retained attempt collection/reporting LAB proof candidate"
+    },
+    {
+      "module": "OwnerStatementResultCollectionControls",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollectionControls.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultCollectionControls.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "4024890d503f5f6334c8bcd2b60052f73ef5ecb0b9d3e3fe5638046a08d7b016",
+      "canonical_module": "OwnerStatementResultCollectionControls",
+      "staged_sha256": "4024890d503f5f6334c8bcd2b60052f73ef5ecb0b9d3e3fe5638046a08d7b016",
+      "transformation": "identity; actual retained attempt collection/reporting LAB proof candidate"
+    },
+    {
+      "module": "OwnerStatementResultOrigin",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-origin-v1/OwnerStatementResultOrigin.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultOrigin.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+      "canonical_module": "OwnerStatementResultOrigin",
+      "staged_sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+      "transformation": "identity; admitted history and original guarded service collection bridge LAB candidate"
+    },
+    {
+      "module": "OwnerStatementResultOriginControls",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-origin-v1/OwnerStatementResultOriginControls.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultOriginControls.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "54083eba83f34b43525bfbf67542336945a1f4c66bfd99ef490fe07065a65cca",
+      "canonical_module": "OwnerStatementResultOriginControls",
+      "staged_sha256": "54083eba83f34b43525bfbf67542336945a1f4c66bfd99ef490fe07065a65cca",
+      "transformation": "identity; admitted history and original guarded service collection bridge LAB candidate"
     }
   ],
   "audit": {
@@ -2100,5 +2144,19 @@
     "qualified_false_exits": 67,
     "all_owned": 18542,
     "review": "later than integrated packet; delta review owed before dependent production adoption"
+  },
+  "result_collection_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/RESULT.json",
+    "sha256": "a6bb998c8694d6e9108fcdafc36ec9b0d526037855937914205123b40df37dc5",
+    "fresh_commands": 77,
+    "qualified_false": 74,
+    "owned": 18583
+  },
+  "result_origin_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-origin-v1/RESULT.json",
+    "sha256": "3bdf3e40358a9127df7087c60711d1fbae8c122faa6589756bd611dbbe60c940",
+    "fresh_commands": 79,
+    "qualified_false": 76,
+    "owned": 18601
   }
 }

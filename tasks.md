@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-29 18:25 JST
+最終更新: 2026-09-29 19:52 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、単一のsource進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。同じworldでの継続、現在の認可、複製の実行拒否と実結果の保持を検査しています。文間の権限更新を実状態遷移へ接続した一般Lean証明と公理監査が通り、180module・67反例を再検査しました。Oracle最終回答を照合し、古いcutが値だけを巻き戻す反例と、実処理後の失敗を未実行と呼ぶ反例を再現しました。参照版で未対応復元の明示拒否と実処理段階の保持を加え、対象28検査が通過しています。SYS4報告全体・source完了の同一要求での回収、全入口・patch・資源は未完了です。後続差分のreviewも残ります。C未完了、D未着手、D完了後に停止します。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。成功書込み後の故障から同じ要求IDで実返信・receipt・source報告を回収し、一度だけ完了を進める経路が、同一locus・別locusで通りました。生存workerの返信喪失は回収し、停止workerは結果不明のまま保持します。実結果の唯一性・失敗結果の非成功扱い・元source報告との一般対応に加え、正規admissionの履歴と元serviceからの回収の接続をLeanで検査し、184moduleの公理監査と76反例が通過しました。参照45検査では、報告行の再課金、無関係な診断行の混入、観測索引によるsource完了阻害の実反例も修正しています。ST/生存workerでは未実行キューを元要求のまま一度だけ再開し、複製の再開を拒否しました。要求・返信の搬送途中でIDが不足すると元キューから失われる反例も修正し、実搬送と記録の一括確定を検査しました。元の書込み準備失敗はST/生存workerで元要求・文脈・実診断を回収でき、再評価・成功完了を拒否しました。下層enqueue直後の対応付けと返信受領の故障も、元のキュー・実受領から回復する参照検査が通りました。失敗各種の全経路、初回送信準備、故障選択の保持、現在の受理条件、全入口・patch・資源は継続中です。Oracleの差分review指摘を照合中で本番未採用、C未完了・D未着手。D完了後に停止します。
 
-現在の直接consumerは、実処理段階を保持した同一要求のSYS4報告・source受理の再開と、全entry/資源の閉鎖です。文間authority更新の一般証明は検査済みで、source失敗の終端・報告・復元の状態対応を補います。単一source進行からST/OW1への実行接続は参照検査済みですが、本番採用前に、M8直接entry・SYS4 submit/FIFO/局所経路・private image/restore・patchの条件をそろえます。現在の認可、機密性label、全資源、物理custodyはCの残件です。
+現在の直接consumerは、元要求の未実行キューと実失敗を保持する継続、搬送・返信の各確定点、全entry/資源の閉鎖です。成功後の同一要求回収とobserver索引に依存しない受理は参照検査済みですが、本番採用前にcurrent Bank.tick受理・M8直接entry・SYS4/FIFO/局所経路・private image/restore・patchの条件をそろえます。一般Lean結果の回収規則は物理故障対応そのものの証明ではありません。
 
 ## ordered self-driven packages
 

@@ -49993,5 +49993,68 @@
     "status": "full-read",
     "role": "authored/read actual lifecycle and service-phase falsifier/reference",
     "at": "2026-09-29T09:25:03.253307+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source_local_reporting.rs",
+    "sha256": "d8f78a132dd2911cb2dba6f1cbe61eec972288537b9849307a18d42d74b79ce2",
+    "status": "full-read",
+    "role": "authored/read local actual contextual collection and neutral frozen question",
+    "at": "2026-09-29T09:40:46.826510+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/augment_source_local_reporting.py",
+    "sha256": "2f4272fd4f7648925864aa824eebe245952639b7e54a19bbe1859208096ecf78",
+    "status": "full-read",
+    "role": "authored/read local actual contextual collection and neutral frozen question",
+    "at": "2026-09-29T09:40:46.826510+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-reporting/QUESTION.md",
+    "sha256": "0bba9a30fc3d0196c1d474fd071037e3526bf65485b74bfd7b64cff14c316da0",
+    "status": "full-read",
+    "role": "authored/read local actual contextual collection and neutral frozen question",
+    "at": "2026-09-29T09:40:46.826510+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-reporting/ANSWER_RECOVERED.txt",
+    "sha256": "a80831e5c38a042ba982903c913778e4aa60fcb20439ad0a0f3559605017e699",
+    "range": "1-308",
+    "status": "full",
+    "role": "sole-main full Oracle final read;20 locally checked dispositions; advisory only"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollection.lean",
+    "sha256": "05aa2b6023383a5067af4b7c7f565775f0bccc44978338da09d412c3c62014a5",
+    "status": "full-read",
+    "role": "sole-main authored/audited source actual-result collection successor",
+    "at": "2026-09-29T10:05:57.020876+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollectionControls.lean",
+    "sha256": "4024890d503f5f6334c8bcd2b60052f73ef5ecb0b9d3e3fe5638046a08d7b016",
+    "status": "full-read",
+    "role": "sole-main authored/audited source actual-result collection successor",
+    "at": "2026-09-29T10:05:57.020876+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-continuation/ANSWER_RECOVERED.txt",
+    "sha256": "dcf5c4f029227e3646ba4624f27bab27b90ea154b13b22ea7cc1a7e8f2df7f78",
+    "read_at": "2026-09-29T10:42:42.265224+00:00",
+    "mode": "full text read",
+    "purpose": "same-job final continuation review29140chars;20dispositions, static adviceonly"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-origin-v1/OwnerStatementResultOrigin.lean",
+    "sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+    "status": "full-read",
+    "role": "sole-main authored and kernel audited admitted-result bridge",
+    "at": "2026-09-29T10:50:30.935135+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-origin-v1/OwnerStatementResultOriginControls.lean",
+    "sha256": "54083eba83f34b43525bfbf67542336945a1f4c66bfd99ef490fe07065a65cca",
+    "status": "full-read",
+    "role": "sole-main authored and kernel audited admitted-result bridge",
+    "at": "2026-09-29T10:50:30.935135+00:00"
   }
 ]

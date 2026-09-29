@@ -3,18 +3,19 @@
 This is the same W4-C consumer, PL1/PL2 S4/S6. It connects an ordinary
 assignment sequence to the existing checked owner executor. It neither closes
 C nor starts D, resumes Plan250/I3-4, or promotes Canon/THM/OBL/119 status.
-The current implementation still needs a handler manifest, protected invocation
-cursor, local dispatch, and closure over all admitted entry and image routes.
+An unadopted reference retains the handler manifest, protected invocation cursor
+and local/remote dispatch. Production integration still requires closure over
+all admitted entry/image routes and the physical failure/resource obligations.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 180 dependency
-modules: 65 reused and 115 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 184 dependency
+modules: 65 reused and 119 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
 dispositioned. The retained-history successor received a separate entry review; its 16 findings
 are dispositioned. The effect and local custody reviews below are dispositioned. The initial actual
-source-consumer and lower-root reviews are dispositioned; the integrated ST and native-counter difference is under review. Neither closes the production gate.
+source-consumer and lower-root reviews are dispositioned; the integrated and local-reporting reviews are dispositioned. The later complete SYS4 reporting continuation remains under development and needs delta review. Neither closes the production gate.
 
 ## General statements
 
@@ -599,7 +600,87 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                         'MirroreaProofFirst.OwnerStatementSourceCustodian '
                                         'MirroreaProofFirst.OwnerStatementSourceCustodianControls\n'
                                         '#guard (issued.bind fun s => refreshAuthority s '
-                                        '(successor s)).isSome\n'}
+                                        '(successor s)).isSome\n',
+ 'FalseCollectionAmbiguousAccepted.lean': 'import OwnerStatementResultCollectionControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                          'MirroreaProofFirst.OwnerStatementResultCollection '
+                                          'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                          '#guard (ambiguated.bind fun (s,t) => collect s '
+                                          't).isSome\n',
+ 'FalseCollectionConsumedStillHeld.lean': 'import OwnerStatementResultCollectionControls\n'
+                                          'open MirroreaProofFirst '
+                                          'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                          'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                          'MirroreaProofFirst.OwnerStatementResultCollection '
+                                          'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                          '#guard (exactReported.bind fun (s,t) => (consume s t 0 '
+                                          '7).bind fun n => collect n t).isSome\n',
+ 'FalseCollectionDeniesActual.lean': 'import OwnerStatementResultCollectionControls\n'
+                                     'open MirroreaProofFirst '
+                                     'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                     'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                     'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                     'MirroreaProofFirst.OwnerStatementResultCollection '
+                                     'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                     '#guard actual.isNone\n',
+ 'FalseCollectionFailureAsSuccess.lean': 'import OwnerStatementResultCollectionControls\n'
+                                         'open MirroreaProofFirst '
+                                         'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                         'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                         'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                         'MirroreaProofFirst.OwnerStatementResultCollection '
+                                         'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                         '#guard (refused.bind fun (s,t) => reportActual s '
+                                         't).isSome\n',
+ 'FalseCollectionQueuedIsResult.lean': 'import OwnerStatementResultCollectionControls\n'
+                                       'open MirroreaProofFirst '
+                                       'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                       'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                       'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                       'MirroreaProofFirst.OwnerStatementResultCollection '
+                                       'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                       '#guard (staged.bind fun (s,t) => collect s t).isSome\n',
+ 'FalseCollectionReportAdvancesSource.lean': 'import OwnerStatementResultCollectionControls\n'
+                                             'open MirroreaProofFirst '
+                                             'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                             'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                             'MirroreaProofFirst.OwnerStatementResultCollection '
+                                             'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                             '#guard (exactReported.map fun (s,_) => count '
+                                             's.live.session) = some 1\n',
+ 'FalseCollectionReportChangesOwner.lean': 'import OwnerStatementResultCollectionControls\n'
+                                           'open MirroreaProofFirst '
+                                           'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                           'MirroreaProofFirst.OwnerStatementResultCollection '
+                                           'MirroreaProofFirst.OwnerStatementResultCollectionControls\n'
+                                           '#guard (exactReported.map fun (s,_) => '
+                                           's.live.session.state.owner.store 0) = some (some '
+                                           '200)\n',
+ 'FalseOriginInventedWriteInHistory.lean': 'import OwnerStatementResultOriginControls\n'
+                                           'open MirroreaProofFirst '
+                                           'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                           'MirroreaProofFirst.OwnerStatementResultCollection '
+                                           'MirroreaProofFirst.OwnerStatementResultOriginControls\n'
+                                           '#guard (forged.map fun (s,_) => '
+                                           's.live.session.state.owner.history.isEmpty) = some '
+                                           'false\n',
+ 'FalseOriginRawLookupAuthenticates.lean': 'import OwnerStatementResultOriginControls\n'
+                                           'open MirroreaProofFirst '
+                                           'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                           'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                           'MirroreaProofFirst.OwnerStatementResultCollection '
+                                           'MirroreaProofFirst.OwnerStatementResultOriginControls\n'
+                                           '#guard (forged.bind fun (s,t) => collect s t).isNone\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -859,3 +940,54 @@ choose Q18, support queued authority refresh, authorize historical disclosure,
 or establish Rust failure/report/restore/resource refinement. The delta was
 created after the integrated Oracle packet and remains pending delta review
 before dependent production adoption.
+
+## Actual attempt collection and successful reporting (LAB successor)
+
+`OwnerStatementResultCollection.lookup_exact` proves the executable collector
+agrees with an independent unique-occurrence rule over the attempt-history
+field and the full saved request. Raw list membership and queue uniqueness do
+not authenticate these fields; their use requires a separately established
+admission/reachability lineage. Ambiguous rows refuse. `lookup_actual_advance`
+shows that an actual lower advance under the original queue invariant produces a
+collectible result; it does not assert that every operation succeeds. Collection
+retains typed refusals as refusals, grants no authority and does not advance source.
+
+`reportActual` enters successful reporting only with a collected committed record
+bound to the same saved request. Its general refinement reaches the existing
+source Path's report transition and preserves the full live state, dispatched
+history and serial accounting. Source acknowledgment still uses the original
+checked Bank tick; historical collection does not establish its current authority
+or permission to disclose a result. Controls use the actual prior driver: successful
+190, real arithmetic refusal retaining200, wrong custodian/body, queued state,
+duplicated attempts and a consumed result. Fixed controls remain finite evidence.
+
+The fresh audit compiled the two new modules and checked all182 owned modules,
+18583 declarations, and74 qualified false controls (77 commands). Only the standard
+logical axiom allowlist is permitted. The proof does not yet cover physical SYS4
+publication rollback, enqueue-only reporting failure, transport movement, complete
+failure reporting/discharge, arbitrary recovery or total resource availability.
+Those are direct consumer obligations, not deferred proof holes.
+
+## Admission and actual execution bridge (LAB successor)
+
+`OwnerStatementResultOrigin.admitted_collected_commit` composes the collector
+with the original registry admission lifecycle: the collected record binds to
+the same saved request and occurs in the retained owner history. Uniqueness of
+an arbitrary attempts list is insufficient. An explicit raw-data control has a
+singleton committed17 row, store200 and no history; lookup/report accept that
+raw field, while the general admission theorem excludes the missing-history
+state. This is an invalid-data boundary test, not an admitted import attack.
+
+`checked_service_route` and `checked_service_owner` inspect the actual metadata,
+source and registry guards and identify the original lower queue advance.
+`execute_collect_lower` connects that original guarded execution to collection
+of its actual success or refusal. `execute_collect_committed` derives executable
+collection from independently admitted materialization and declarative lower
+`Commits`, rather than assuming a successful wrapper execution. Admission is a
+separate lineage premise, not authority issued by a proof or an image field.
+
+The fresh successor audit checks184 modules/18601 declarations and76 qualified
+false controls in79 commands. Only standard logical axioms are used. This closes
+the named mathematical bridge, not physical fault simulation, current Bank.tick
+correspondence, custody uniqueness, disclosure permission or all reporting
+callers: the earlier phase-only Path remains broader than reportActual.
