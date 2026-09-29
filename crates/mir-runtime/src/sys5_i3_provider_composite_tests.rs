@@ -720,3 +720,100 @@ fn i3_provider_composite_reloads_actual_setup_currentness_after_structural_valid
         "the final receipt currentness reload rejects a real setup retirement after structural validation",
     );
 }
+
+#[test]
+fn proof_first_invocation_provider_nested_signature_version_and_scope() {
+    use crate::m8_runtime_admission::M8I3PrivateProviderComponentSnapshot;
+    use mir_semantics::surface_v0_pipeline::private_snapshot::SnapshotCheckedEvaluationSignature;
+    let (setup, inactive, checked) = sealed_provider_composite();
+    let nonce = setup.i3_private_resource_runtime_nonce();
+    let mut cohort = inactive
+        .into_inactive_process_cohort(provider_slots())
+        .unwrap();
+    let expected = cohort.parent_held_expected_start_binding(B_SLOT).unwrap();
+    let encoded =
+        encode_inactive_provider_image(&mut cohort, B_SLOT, "invocation nested provider scope");
+    let image: serde_json::Value = serde_json::from_slice(&encoded[4..]).unwrap();
+    let component = image["component_snapshot"].clone();
+    let rows = component["component"]["owner_execution_plans"]
+        .as_array()
+        .unwrap();
+    assert!(!rows.is_empty());
+    for row in rows {
+        let signature = checked
+            .static_environment()
+            .evaluation_signatures()
+            .iter()
+            .find(|s| s.name() == row["evaluation"].as_str().unwrap())
+            .unwrap();
+        assert_eq!(
+            row["signature"],
+            serde_json::to_value(SnapshotCheckedEvaluationSignature::from_checked(signature))
+                .unwrap()
+        );
+    }
+    let original: M8I3PrivateProviderComponentSnapshot =
+        serde_json::from_value(component.clone()).unwrap();
+    assert!(original.is_scoped_component_snapshot());
+    let installed = original
+        .clone()
+        .restore_for_inherited_provider_install(&nonce)
+        .unwrap();
+    let scoped = installed
+        .scoped_instance_for_local_provider_runtime(installed.component_binding_ref())
+        .unwrap();
+    assert!(scoped.i3_private_snapshot().is_err());
+    assert!(
+        installed
+            .scoped_instance_for_local_provider_runtime("foreign-binding")
+            .is_none()
+    );
+    let mut foreign_nonce = nonce;
+    foreign_nonce[0] ^= 1;
+    assert!(
+        original
+            .restore_for_inherited_provider_install(&foreign_nonce)
+            .is_err()
+    );
+    for mutation in [
+        "old-version",
+        "missing-signature",
+        "wrong-coordinate",
+        "ordinary-scope",
+    ] {
+        let mut changed = component.clone();
+        match mutation {
+            "old-version" => changed["component"]["version"] = serde_json::json!(2),
+            "missing-signature" => {
+                changed["component"]["owner_execution_plans"][0]
+                    .as_object_mut()
+                    .unwrap()
+                    .remove("signature");
+            }
+            "wrong-coordinate" => {
+                changed["component"]["owner_execution_plans"][0]["signature"]["name"] =
+                    serde_json::json!("foreign")
+            }
+            "ordinary-scope" => changed["component"]["scope"] = serde_json::json!("ordinary"),
+            _ => unreachable!(),
+        }
+        if let Ok(decoded) = serde_json::from_value::<M8I3PrivateProviderComponentSnapshot>(changed)
+        {
+            assert!(
+                decoded
+                    .restore_for_inherited_provider_install(&nonce)
+                    .is_err(),
+                "{mutation}"
+            );
+        } else {
+            assert_eq!(mutation, "missing-signature");
+        }
+    }
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    cohort
+        .validate_inactive_untrusted_image(
+            codec.decode_untrusted_image(&encoded).unwrap(),
+            expected,
+        )
+        .unwrap();
+}

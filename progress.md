@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-29 02:30 JST
+最終更新: 2026-09-29 10:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -66,7 +66,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、必要な型宣言の欠落修正に続き、通常sourceの代入先・右辺で明示引数の添字型と一意性を検査する限定修正を接続しました。独立した宣言的規則との一致・引数束縛・宣言保持をLeanで検査し、40依存moduleの全所有宣言を監査しました。実source11件を含む意味解析46件、runtime425件が通過し、3種類の壊した検査を捕捉、既存4正常sourceの配置結果全体は一致しています。Oracle回答は回収・照合済みです。実行時の引数真正性や認可はこの型検査から導けません。実sourceの複数代入・継続、別owner間識別子、現在の入力・分類・資源・物理custody・全復元入口は継続中です。C未完了、D未着手、D完了後に一旦停止します。
+W4-Cでは、完全な引数定義を保持し、現在の認可後・計算開始前に引数の欠落や余分な項目を拒否する限定実装を接続しました。一般Lean命題は43依存moduleでfresh監査済みです。実行・保存・復元・パッチの候補検査とruntime全444件、M8/M10の6検査バイナリが通過し、Oracle指摘の2検査不足も補強して新規19件が通りました。使わない引数の値だけを改変する反例も検出しています。統合後の新規19件の並列検査と、既存I3実process通信46件も通過しました。これは既存経路の回帰証拠であり、W4-Eの新しい実network検証の完了ではありません。実sourceの複数代入・継続、別owner間識別子、分類・資源・物理custodyは残件です。C未完了、D未着手、D完了後に一旦停止します。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -531,3 +531,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-29 01:43 JST: W4-C required-schema一般証明をrepoへ接続し、実SYS3の別namespace欠落を修正。runtime425/M7関連8、変異2拒否、旧正常4一致とOracle2件を照合。C継続、D未着手。
 
 - 2026-09-29 02:30 JST: W4-C explicit-index一般証明・実M7修正を接続。fresh40module監査、意味解析46/runtime425、変異3拒否・旧正常4一致とOracle指摘を照合。C継続/D未着手。
+
+- 2026-09-29 09:49 JST: W4-C引数・復元文脈の43module一般証明監査と候補runtime444／M8-M10回帰を確認。破壊した10検査を捕捉、差分Oracle待ち。C継続／D未着手。
+
+- 2026-09-29 10:09 JST: W4-C exact invocation increment integrated; 新規19並列・既存I3実process46通過。Cの複数代入・継続と全entry対応は継続、D未着手。

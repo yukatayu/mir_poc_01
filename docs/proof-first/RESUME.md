@@ -1,76 +1,66 @@
-# RESUME — W4-C active
-Updated 2026-09-28T17:32:00.038771+00:00. Sole main, NO SUBAGENTS. Existing whole-W4 goal active.
-Finish C then D; PAUSE after D, STOP BEFORE E. Quota stop waived this run;
-owner resets. No Canon/THM/OBL/119 promotion, Plan250 resume, keys/public/prod,
-force/reset/cleanup/hostshare/notifications. No user dirty work detected.
-
-HEAD442fc213c34a40efbc781e730124c21887c2e7be main pushed/parity:
-P/REQUIRED_SCHEMA_GIT.json. Own typed-index checkpoint dirty. No temporary
-mutants/probes active; runtime schema test restored exactly. Prior d2358777 and
-all frozen evidence retained. Current W4_CHECK266keys/READ_LEDGER6455entries;
-prior265/6440 prefixes retained. Same C semantic goal, no new roadmap.
+# RESUME — W4-C active; stop after D BEFORE E
+Updated 2026-09-29T01:10:30.298687+00:00. Sole main, NO SUBAGENTS. User authorizes C→D;
+after D pause existing whole-W4 goal and STOP BEFORE E. Goal tool stale blocked,
+owner continuation active; do not recreate/complete. C incomplete, D unstarted.
+Quota stop waived this run; owner resets. No notifications/Chrome changes.
+HEAD813ad37cd3793c0664451c5592762d720c5dc6aa main previously pushed; own31-file
+invocation increment dirty, verified, commit/push next. No user dirty overwritten.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
-P=I/c-source-effect; D=P/owner-session-development; OP=I/c-operation-identity.
-Immutable158module baseline KP=P/kernel-owner-program-v1. All prior source/
-Session cuts/reviews in W4_CHECK. Do NOT rerun one-shot launchers or overwrite.
+P=I/c-source-effect, OP=I/c-operation-identity. Long predecessor archived at
+P/RESUME_BEFORE_INVOCATION_COMMIT.md. READ_LEDGER6501/W4_CHECK269 preserve prefixes.
+Single Report2614 and plan/status mirrors updated. No Canon/THM/OBL/119 promotion,
+Plan250/I3-4 resume, public wire/production/key/authority/privacy relaxation.
 
-Current cut: c_explicit_index_20260929. Actual M7 now checks accessed explicit
-index parameter uniqueness/type at assignment target and recursive RHS. Existing
-nonparameter/scalar-only/unused duplicate boundaries preserved. Exact reviewed
-pipeline proposal applied, then only rustfmt line wrap. FORMAT_APPLIED before
-66c329978e03dd4e7c618350f6cb3812dc5cf9c2fbd5086c5ed893990672dec9,
-after7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431.
-Current11tests cover declared sorts/duplicates/later RHS/self/namespace/handler/
-diagnostics; reviewed RED3pass8assertfail, GREEN11. Three mutants each intended
-assertfail101; four complete prior actual projections byte-identical. Final46
-semantics + full425runtime whole3378exit0 collected. Runtime at preformatcut,
-final46 repeated formattedcut whole72358exit0; no identicalhash claim. 30 existing
-runtimewarnings. TYPED_INDEX_MUTATION_AND_POSITIVE/FORMATTED_SEMANTICS and
-OP/TYPED_INDEX_FINAL_RUNTIME retain exact childstatus/hash; driver0alone insufficient.
+Exact invocation context increment ADOPTED under original task delegation:
+P/invocation-integration-candidate-v4/MANIFEST.json pins12Rust/test files;
+P/INVOCATION_ADOPTION.json. Full signature, distinct exact argument domain after
+current auth before body, full owner inventory at fresh/restore/bootstrap/patch;
+M8 private v3/projection v2, scoped provider checks. Unused values not scalar
+validated. Explicit other=other positive, omission refused. Actual full-map custody
+and independent expected image start remain distinct. Q18/pending migration unchanged.
+GenericCode Lean theorem is not Rust compiler/interpreter proof; immutable M7,
+actual ownership/copy and authenticated image provenance remain TCB/obligations.
 
-General OwnerTypedIndex independent checker/declarative exactness, supplied
-capture binding/no fallback/current onecapture, required-schema preservation.
-External fresh v3 RESULT87fdc5122161198e5ad79d0394fbc78f8eb8677362466729a979f74e39da6a72,
-12commands/132owned/10falseguards whole59395exit0. Failed v1/v2 retained/excluded;
-no authored holes/Miraxioms. Repo newmodule import-only renamed, previous39unchanged.
-Fresh40modules+audit41commands/7874owned whole91434exit0, RESULT
-88c96c0e97a9b6ec5cd7f436d9d27456b40f87fe9df24424576606e2688d85e6.
-Repo10falseguards RESULT4411a20bc7b469c1a8903afcb24a013ea087c7e149caa789318bb4ca59c8cb88,
-whole83012exit0. Seven finite strongerclaim controls separate. Only standard3.
-P/TYPED_INDEX_REPO_SOURCES mapping; companion gives externalcopy reproduction.
-B206manifest untouched; these are not general Rust/compiler/auth proofs.
+Fresh new3modules285owned/24false; fresh repo43module+audit44commands8159owned
+whole7472exit0 RESULT568ea66f53ae953e5dbb8314f7ad58bb0ff1ad0422884a271575543543e5042e.
+Repo24falsecontrols whole78925exit0 RESULT2cdf025a2f569ad2a7f3eeb9d427648a565b95b5934b290f5255e2fbaf87c2aa.
+Only standard axioms (new propext/Quot.sound; cone also Classical.choice), no
+sorry/admit/Mir axioms. Proof mirror changes import filenames only; all in W4_CHECK.
 
-Oracle FINAL no current job/question/login request. I/oracle-c-typed-index
-mir-w4-typed-index-r1 final24630chars SHA
-2352d8ced0ccc6c15a2f77e8d692460cd07e8e912b537ecd09e052d31f33643d,
-whole48325exit0collected, visibleexacttab/modelmaxverified. All12findings disposed;
-DISPOSITIONS_VERIFIED.json successor retains preapplyhistory. Prior checked/
-required-schema and Session Oracle also final. Do NOT resend. Readonlyadvice,
-not signed independentacceptance/kernelreplay. Main owns all commands/review.
+Oracle FINAL, NO PENDING JOB/LOGIN/RESEND:
+I/oracle-c-invocation-context mir-w4-invocation-context-r1: whole91429exit0,
+27551chars;14dispositions V2. Latest I/oracle-c-invocation-delta session
+mir-w4-invocation-delta-r1: whole25170exit0,15162chars SHA
+329ff7f62fd01c4752180e984e7e29986bf3837fc374fa82abf4143f29e17dcd.
+All9dispositions verified; no bounded blocker, 2 test gaps strengthened. Actual
+visible6Pro/max verified; advisory only, not signedreview/authority. No semantic
+source change after latest review, only cfg(test) observation/control strengtheners.
 
-Checkpoint script P/checkpoint_typed_index.py ran ONCE. Currentreport2614/plan/
-status/tasks/samples/README/ledger updated. Focused rustfmt2024 and gitdiffcheck
-pass. make docs whole47123exit0 collected; P/TYPED_INDEX_DOCS.json.
-Next verify JSONprefix/source hashes, append actualdocs result, ownexplicitcommit
---no-gpg-sign, ordinarypush/parity. Do not stop/complete aftercheckpoint.
+Validation: frozenv2 full444library/19parallel pass; v3 onlyintegrationtestAPI fixes,
+6M8/M10 binaries117pass whole88801exit0. v4 stronger19pass whole17409exit0.
+Actual unused-copy7→8 mutant kills consumed-map assertion, child/whole67135exit101
+qualified negative, original restored.11distinct guard/entry/copy mutants caught.
+Final adopted source19parallel4 + existing I3 localnet46 pass whole85610exit0;
+P/INVOCATION_ADOPTED_REGRESSION.json inputs350/loghashes rechecked. Existing I3
+regression NOT new W4-E network/alpha. Whole make docs91339exit0,218Canon/800paths/
+1764reports; rustfmt12files and diffcheck pass. No temporary mutant/prototype active.
+Failed prototype/compile/architecture tests retained in report; not wholepasses.
 
-Next same C: runtime capture/fullsignature/currentlabel/sourceattachment. Actual
-M8OwnerExecutionPlan drops signature; source-free execution materializes missing
-index from literal variable name (existing explicit lowleveltest, notnewdefect).
-SourceAction maps duplicate arguments last-wins; actual typed_input_signature
-accessor used for patch shape, not known executable callvalidation. Inspect SYS4
-source entry and owner serve/allrestore with original schema/identity. Current
-newproof Binds assumes alreadytypedvalues, does NOT establish physicaladmission.
-Other knownopen: OP/probe.rs distinct-owner samehandler projects/verifies/builds/
-FabricProgram but private restore fails; requester artifact_ref collision and
-snapshotbudgetvalidator owner selection. Multiple source statements/continuation,
-metadata multiowner/resource/custody/all populatedimage entries beforedependentD.
-No new scheduler/trustissuer from proofs, no namespace/globalDAG collapse. D
-unstarted; no network/IFC/recovery/alpha completion.
-
-Lastresources17:32UTC root4.4GiBfree98%,RAM9GiBavailable/swap12GiBfree.
-/mnt/mirrorea-work unmounted. LeanAS6GiB/j1; RustAS8GiBcached/offline/j1.
-No freshheavycache/LLVM/cleanup. Measure before heavier runs.
-
-2026-09-28T17:37:04.038434+00:00: Actual source entry capture probe whole38812exit0, four cases ST/OW1 × present/absent target. Missing argument reaches write of live entity literally named target (200→190), while supplied self writes self100→90. P/capture_probe.rs / OP/CAPTURE_SOURCE_ENTRY_V1.json; restored exact test. This is current profile observation, not approval or authentication exploit. Next candidate must keep declaration/signature through owner plan/private restore; no production adoption yet.
+NEXT command: git diff --check; explicit31file staging; own --no-gpg-sign commit,
+ordinary push and remote parity. Then continue SAME C with actual source statements.
+P/NEXT_STATEMENT_CONSUMER.md is preparatory, not adoptedsecondplan. Concrete gaps:
+M7 one OwnerRmw per assignment repeats event name; SYS3 sameowner requiresone
+signature; crossowner callerrefs collide; M8 namefirstmatch; SYS4 fullinstance
+perlocalsession (not filtered); owner-local noRequester UnknownSourceAction.
+Need read remaining M6 AST/order/SYS3/M9/SYS4/SYS5 source/entry cone. Compare A
+sourcegenerated occurrenceidentity+orderedcontinuation vs B handleraggregation
+(no implicitmultiowneratomicity). Existing immutable kernel-owner-program-v1
+158module model general compiler/cursor/session facts reusable, do not rerun
+unchangedbaseline. Two dependentwritesS, S→T→S, localonly, laterfailure preserves
+firstwrite, rejectedreply preservescommit are direct positive/negative consumers.
+C still owes source labels/currentresources/auth/physicalnamespace/custody/allentries;
+D not started. Remaining D estimate20–40activehours lowconfidence, no completionclaim.
+Resource root4.4GiBfree98%, RAM7.7GiBavailable, swap11GiBfree lastchecked;
+/mnt/mirrorea-work unmounted; no cleanup. Cached Rust locked/offline/j1 AS8GiB;
+Lean trust0/j1 AS6GiB. Only persistent externalworkdir, no hostsharedfolder.

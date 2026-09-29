@@ -781,7 +781,7 @@ fn proof_first_owner_aliases_share_one_cell_and_keep_each_write() {
 }
 
 #[test]
-fn proof_first_owner_distinct_keys_and_index_fallback_preserve_frame() {
+fn proof_first_owner_distinct_keys_and_explicit_literal_argument_preserve_frame() {
     let (path, original) = load_surface_fixture("m7_owner_only_no_residuals.mir");
     let source = original
         .replace(
@@ -794,9 +794,11 @@ fn proof_first_owner_distinct_keys_and_index_fallback_preserve_frame() {
         );
     let named = M8StateKey::indexed_field("player", "named", "hp");
     let fallback = M8StateKey::indexed_field("player", "other", "hp");
-    for (argument, expected, read_key, read_value) in
-        [(Some("named"), 107, &named, 7), (None, 111, &fallback, 11)]
-    {
+    for (argument, expected, read_key, read_value) in [
+        (Some("named"), 107, &named, 7),
+        (Some("other"), 111, &fallback, 11),
+        (None, 100, &fallback, 11),
+    ] {
         let checked =
             check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
                 .unwrap();
@@ -815,6 +817,18 @@ fn proof_first_owner_distinct_keys_and_index_fallback_preserve_frame() {
             request = request.with_argument("other", argument);
         }
         runtime.try_enqueue(request).unwrap();
+        if argument.is_none() {
+            // Exact-call-domain profile: a required name must be supplied,
+            // even when a live entity happens to have that same literal name.
+            let before = runtime.snapshot().clone();
+            let error = runtime.serve_next_owner("S").unwrap_err();
+            assert_eq!(
+                error.primary().kind(),
+                M8ServeDiagnosticKind::DeclaredFailure(M8DeclaredFailure::RouteUnavailable)
+            );
+            assert_eq!(runtime.snapshot(), before);
+            continue;
+        }
         let actual = runtime.serve_next_owner("S").unwrap();
         assert_eq!(actual.read_int(&hp_key()), Some(100));
         assert_eq!(actual.read_int(read_key), Some(read_value));
@@ -824,8 +838,8 @@ fn proof_first_owner_distinct_keys_and_index_fallback_preserve_frame() {
         assert_eq!(runtime.snapshot().int(&fallback), Some(11));
         assert_eq!(runtime.snapshot().int(&atk_key()), Some(10));
     }
-    // Records the current low-level index fallback; this is not approval for
-    // omitting required arguments at a source/transport admission boundary.
+    // Earlier evidence recorded the omitted-name fallback. This forward profile
+    // keeps explicit other=other positive and rejects omission at actual use.
 }
 
 #[test]

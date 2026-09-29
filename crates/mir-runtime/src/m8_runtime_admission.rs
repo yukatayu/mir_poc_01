@@ -5,25 +5,26 @@
 //! matched by typed evidence.  Deferred authorization and verification remain
 //! explicitly outside this boundary and are reported to M9.
 
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use mir_semantics::m9_finite_refinement::M9ReadOnlyProviderEffectCoverage;
 use mir_semantics::surface_v0_pipeline::private_snapshot::{
-    SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore,
-    SnapshotOwnerAdmissionBudgetCondition, SnapshotRelationCheckedCore, SnapshotSourceRef,
-    SnapshotTypedExpression, SnapshotTypedStateRead,
+    SnapshotCheckedEvaluationSignature, SnapshotCheckedProgramIdentity,
+    SnapshotDesignatedCheckedCore, SnapshotOwnerAdmissionBudgetCondition,
+    SnapshotRelationCheckedCore, SnapshotSourceRef, SnapshotTypedExpression,
+    SnapshotTypedStateRead,
 };
 use mir_semantics::{
     evaluation_materialization::{EvaluationPolicy, InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, SourceRef},
     surface_v0_classification::{OwnerAdmissionBudgetCondition, SourceToCoreKind},
     surface_v0_pipeline::{
-        CheckedEvaluationKind, CheckedProgramIdentity, CheckedSurfaceV0, DesignatedCheckedCore,
-        RelationCheckedCore, ResidualObligation, ResidualObligationKind, TypedExpression,
-        TypedStateRead,
+        CheckedEvaluationKind, CheckedEvaluationSignature, CheckedProgramIdentity,
+        CheckedSurfaceV0, DesignatedCheckedCore, OwnerRmwCheckedCore, RelationCheckedCore,
+        ResidualObligation, ResidualObligationKind, TypedExpression, TypedStateRead,
     },
 };
 
@@ -880,6 +881,7 @@ impl M8DesignatedExecutionPlan {
 /// a parser or fixture.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct M8OwnerExecutionPlan {
+    signature: CheckedEvaluationSignature,
     evaluation: String,
     actor: String,
     owner_locus: String,
@@ -890,6 +892,36 @@ pub(crate) struct M8OwnerExecutionPlan {
 }
 
 impl M8OwnerExecutionPlan {
+    fn signature_matches_context(&self) -> bool {
+        self.signature.name() == self.evaluation
+            && self.signature.kind() == CheckedEvaluationKind::OwnerRmw
+            && self.signature.actor() == Some(self.actor.as_str())
+            && self.signature.owner_locus() == Some(self.owner_locus.as_str())
+            && self.signature.source_ref() == &self.source_ref
+    }
+
+    pub(crate) fn accepts_arguments(&self, arguments: &BTreeMap<String, String>) -> bool {
+        let parameters = self.signature.parameters();
+        let names = parameters.iter().map(|p| p.name()).collect::<BTreeSet<_>>();
+        self.signature_matches_context()
+            && names.len() == parameters.len()
+            && arguments.keys().all(|name| names.contains(name.as_str()))
+            && names.iter().all(|name| arguments.contains_key(*name))
+    }
+
+    pub(crate) fn matches_checked_owner(
+        &self,
+        signature: &CheckedEvaluationSignature,
+        core: &OwnerRmwCheckedCore,
+    ) -> bool {
+        self.signature_matches_context()
+            && &self.signature == signature
+            && self.owner_locus == core.owner_locus()
+            && &self.target == core.target()
+            && &self.expression == core.expression()
+            && self.owner_admission_budget.as_ref() == core.owner_admission_budget()
+    }
+
     pub(crate) fn evaluation(&self) -> &str {
         &self.evaluation
     }
@@ -1476,12 +1508,16 @@ impl M8RuntimeInstance {
                 redaction: plan.redaction.clone(),
             })
             .collect();
+        // The immutable M7 constructor derives exactly one signature per
+        // evaluation in this same order; it exposes no mutable/decoded artifact.
         let owner_execution_plans = checked
             .evaluations()
             .iter()
-            .filter_map(|evaluation| {
+            .zip(checked.static_environment().evaluation_signatures())
+            .filter_map(|(evaluation, signature)| {
                 let owner = evaluation.owner_rmw_core()?;
                 Some(M8OwnerExecutionPlan {
+                    signature: signature.clone(),
                     evaluation: evaluation.name().to_string(),
                     actor: evaluation.actor_authority_origin().to_string(),
                     owner_locus: owner.owner_locus().to_string(),
@@ -1899,6 +1935,7 @@ struct PrivateM8DesignatedExecutionPlanSnapshot {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct PrivateM8OwnerExecutionPlanSnapshot {
+    signature: SnapshotCheckedEvaluationSignature,
     evaluation: String,
     actor: String,
     owner_locus: String,
@@ -1924,7 +1961,7 @@ struct PrivateM8RelationExecutionPlanSnapshot {
 }
 
 impl M8I3PrivateSnapshot {
-    const VERSION: u32 = 2;
+    const VERSION: u32 = 3;
 
     fn from_instance(instance: &M8RuntimeInstance) -> Self {
         Self {
@@ -2393,6 +2430,7 @@ impl PrivateM8DesignatedExecutionPlanSnapshot {
 impl PrivateM8OwnerExecutionPlanSnapshot {
     fn from_plan(plan: &M8OwnerExecutionPlan) -> Self {
         Self {
+            signature: SnapshotCheckedEvaluationSignature::from_checked(&plan.signature),
             evaluation: plan.evaluation.clone(),
             actor: plan.actor.clone(),
             owner_locus: plan.owner_locus.clone(),
@@ -2413,7 +2451,11 @@ impl PrivateM8OwnerExecutionPlanSnapshot {
             .map(|condition| condition.into_checked(&owner_locus))
             .transpose()
             .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?;
-        Ok(M8OwnerExecutionPlan {
+        let plan = M8OwnerExecutionPlan {
+            signature: self
+                .signature
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
             evaluation: self.evaluation,
             actor: self.actor,
             owner_locus,
@@ -2430,7 +2472,11 @@ impl PrivateM8OwnerExecutionPlanSnapshot {
                 .into_checked()
                 .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
             owner_admission_budget,
-        })
+        };
+        if !plan.signature_matches_context() {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
+        Ok(plan)
     }
 }
 

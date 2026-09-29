@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-29 02:30 JST
+最終更新: 2026-09-29 10:09 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、必要な型宣言の欠落修正に続き、通常sourceの代入先・右辺で明示引数の添字型と一意性を検査する限定修正を接続しました。独立した宣言的規則との一致・引数束縛・宣言保持をLeanで検査し、40依存moduleの全所有宣言を監査しました。実source11件を含む意味解析46件、runtime425件が通過し、3種類の壊した検査を捕捉、既存4正常sourceの配置結果全体は一致しています。Oracle回答は回収・照合済みです。実行時の引数真正性や認可はこの型検査から導けません。実sourceの複数代入・継続、別owner間識別子、現在の入力・分類・資源・物理custody・全復元入口は継続中です。C未完了、D未着手、D完了後に一旦停止します。
+W4-Cでは、完全な引数定義を保持し、現在の認可後・計算開始前に引数の欠落や余分な項目を拒否する限定実装を接続しました。一般Lean命題は43依存moduleでfresh監査済みです。実行・保存・復元・パッチの候補検査とruntime全444件、M8/M10の6検査バイナリが通過し、Oracle指摘の2検査不足も補強して新規19件が通りました。使わない引数の値だけを改変する反例も検出しています。統合後の新規19件の並列検査と、既存I3実process通信46件も通過しました。これは既存経路の回帰証拠であり、W4-Eの新しい実network検証の完了ではありません。実sourceの複数代入・継続、別owner間識別子、分類・資源・物理custodyは残件です。C未完了、D未着手、D完了後に一旦停止します。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

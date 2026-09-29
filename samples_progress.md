@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-28 20:44 JST
+Last updated: 2026-09-29 10:10 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -47,6 +47,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 | Metadata / same source and Session | `docs/proof-first/W4_CHECK.json` → `c_metadata_source_pending_session_20260929`; external source/pending/session-v1 | Fresh52+2+3module audit and14+9+12 qualified false guards; actual checked-IR write/ack/later source, ABA refusal and admitted packet-origin proofs. Raw empty-packet injection remains a physical custody obligation. Session advisory review recovered/disposed; initial schema/Mir/physical/restore boundaries remain open; LAB evidence, not workflow-ready alpha. |
 | Owner required-schema preservation | `samples/lean/foundations/MirroreaProofFirstOwnerSchema.md`; `docs/proof-first/W4_CHECK.json` → `c_required_schema_20260929` | Fresh39-module cone plus all-owned audit; arbitrary required-schema filtering/binding equality. Actual M7 controls8 and full runtime425 pass;2 semantic mutants fail;4 old complete projections unchanged. Operation schema, aggregate inventory and raw-image admission remain distinct. No source/physical/IFC/alpha completion. |
 | Owner explicit index parameters | `samples/lean/foundations/MirroreaProofFirstOwnerSchema.md`; `docs/proof-first/W4_CHECK.json` → `c_explicit_index_20260929` | Fresh40-module cone/all-owned audit. Independent index checker/binding/retention, 10 false guards, 7 scope controls. Actual source11/focused46 pass, preformat runtime425 pass; 3 checker mutants fail, 4 prior full projections equal. Runtime capture authenticity, nonparameter typing and image admission remain open. |
+| Owner invocation context | `samples/lean/foundations/MirroreaProofFirstOwnerSchema.md`; `docs/proof-first/W4_CHECK.json` → `c_invocation_context_20260929` | Fresh43-module cone/all-owned audit, 24 false guards. Bounded internal increment: pre-strengthening runtime444/parallel19 and 6 M8/M10 integration binaries pass; final advisory review disposed, two evidence gaps strengthened with19pass and unused-value copy mutant caught (11 guard mutants total). Integrated19parallel and existing I3 real-process localnet46 pass; this regression is not new W4 network/source-continuation/privacy/alpha completion. |
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

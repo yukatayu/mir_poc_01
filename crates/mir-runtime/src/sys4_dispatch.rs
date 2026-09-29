@@ -915,6 +915,54 @@ impl Sys4InstalledProviderLocalFabric {
 }
 
 impl FabricProgram {
+    // Structural agreement, not authenticity. The two inventories use
+    // different presentation orders. Preserve each full declaration/Core row
+    // and reject duplicate owner/operation keys before matching both ways.
+    // Expected physical image custody remains a separate required boundary.
+    fn matches_owner_execution_inventory(&self, instance: &M8RuntimeInstance) -> bool {
+        if instance.program_identity() != self.checked_program_identity() {
+            return false;
+        }
+        let inventory = self.projection.sys4_artifact_fragments();
+        let fragments = inventory
+            .entries()
+            .iter()
+            .filter(|f| f.fragment_kind() == ProjectedOperationFragmentKind::OwnerRmwExecution)
+            .collect::<Vec<_>>();
+        let plans = instance.owner_execution_plans();
+        let fragment_keys = fragments
+            .iter()
+            .map(|f| (f.operation_id(), f.locus_tag().as_str()))
+            .collect::<BTreeSet<_>>();
+        let plan_keys = plans
+            .iter()
+            .map(|p| (p.evaluation(), p.owner_locus()))
+            .collect::<BTreeSet<_>>();
+        if fragment_keys.len() != fragments.len() || plan_keys.len() != plans.len() {
+            return false;
+        }
+        let matches =
+            |fragment: &ProjectedOperationFragment,
+             plan: &crate::m8_runtime_admission::M8OwnerExecutionPlan| {
+                let (Some(signature), Some(core)) = (
+                    fragment.owner_input_signature(),
+                    fragment.owner_rmw_checked_core(),
+                ) else {
+                    return false;
+                };
+                fragment.operation_id() == plan.evaluation()
+                    && fragment.source_ref() == plan.source_ref()
+                    && fragment.locus_tag().as_str() == plan.owner_locus()
+                    && plan.matches_checked_owner(signature, core)
+            };
+        fragments
+            .iter()
+            .all(|f| plans.iter().any(|p| matches(f, p)))
+            && plans
+                .iter()
+                .all(|p| fragments.iter().any(|f| matches(f, p)))
+    }
+
     pub(crate) fn from_projection(projection: GlobalProjectionResult) -> Sys4Result<Self> {
         // Stage 2a can retain provider-effect topology only as a dedicated
         // static projection.  It has no installed SYS-4 execution, route,
@@ -2318,6 +2366,11 @@ impl SealedFabricAdmission {
             seam.into_kernel_parts().ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
             })?;
+        if !program.matches_owner_execution_inventory(&instance) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
         Ok(Self {
             program_identity: program.checked_program_identity().clone(),
             program_fingerprint: program.projected_fingerprint(),
@@ -3228,7 +3281,7 @@ impl Sys4I3PrivateSealedAdmissionSnapshot {
         let initial_state_seed = self.initial_state_seed.into_seed().map_err(|_| {
             Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
         })?;
-        if instance.program_identity() != program.checked_program_identity()
+        if !program.matches_owner_execution_inventory(&instance)
             || initial_state_seed.checked_program_identity != *program.checked_program_identity()
             || authority_generation.program_identity()
                 != program.checked_program_identity().stable_key()
@@ -4068,7 +4121,10 @@ fn local_fragment_shape(fragment: &ProjectedOperationFragment) -> String {
     let placement = if let Some(signature) = fragment.typed_input_signature() {
         format!("owner-request:{signature:?}")
     } else if let Some(core) = fragment.owner_rmw_checked_core() {
-        format!("owner-rmw:{core:?}")
+        format!(
+            "owner-rmw:{core:?};signature:{:?}",
+            fragment.owner_input_signature()
+        )
     } else if let Some(core) = fragment.relation_checked_core() {
         format!("relation-checked-core:{core:?}")
     } else if let Some(descriptor) = fragment.consumer_relation_projection() {
@@ -11810,6 +11866,7 @@ impl LocalFabric {
     ) -> Sys4Result<Self> {
         if admission.program_identity != *program.checked_program_identity()
             || admission.program_fingerprint != program.projected_fingerprint()
+            || !program.matches_owner_execution_inventory(&admission.instance)
         {
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::ProgramProjectionMismatch,
@@ -17842,3 +17899,20 @@ verify finite_refinement
         );
     }
 }
+
+#[cfg(test)]
+impl LocalFabric {
+    pub(crate) fn proof_probe_actual_owner_state(
+        &self,
+        locus: &str,
+    ) -> crate::m8_runtime_owner_queue::M8SemanticSnapshot {
+        let M8ExecutionBackend::St(runtimes) = &self.backend else {
+            panic!("actual state probe requires ST")
+        };
+        runtimes.get(locus).unwrap().owner_state().clone()
+    }
+}
+
+#[cfg(test)]
+#[path = "sys4_invocation_tests.rs"]
+mod proof_first_invocation_tests;

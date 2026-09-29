@@ -46622,5 +46622,506 @@
       "Full425 at preformat cut; final46 at formatted cut, one exact wrapping-only hunk verified",
       "No new network/persistence/IFC/alpha/Canon/THM/OBL/119 acceptance"
     ]
+  },
+  "c_invocation_context_20260929": {
+    "at": "2026-09-29T00:50:20.159023+00:00",
+    "base_head": "813ad37cd3793c0664451c5592762d720c5dc6aa",
+    "status": "external runtime candidate validated; LAB proof mirror mechanically checked; final changed-cut Oracle running; no production adoption/C close",
+    "files": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-invocation-context-v3/RESULT.json",
+        "sha256": "eaab67512fb265ab344a61f104f5210e89fd4fc12106ca5f92e81edf280f5752"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-invocation-repo-v1/RESULT.json",
+        "sha256": "568ea66f53ae953e5dbb8314f7ad58bb0ff1ad0422884a271575543543e5042e"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-invocation-repo-controls-v1/RESULT.json",
+        "sha256": "2cdf025a2f569ad2a7f3eeb9d427648a565b95b5934b290f5255e2fbaf87c2aa"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_PROOF_MIRROR.json",
+        "sha256": "73526d56e07ffdcb2d15e96e1fa2da1708234eecfd031ff7d9dd471e6c1183a9"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/MANIFEST.json",
+        "sha256": "8a3d26a6f1b4be040f39b0a640612fd1444bcb4f8cc94a33d42d475cc1dc17ff"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_GATES_MUTANTS.json",
+        "sha256": "221c03cf0e1512d2eb9c911f36db60276b99c7159ed74615af29341404dbbc79"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ACCESS_MUTANTS.json",
+        "sha256": "3c49fe87768b7a6239d5556ce15dc7e482e67682864bfb1af375c0defb2f0685"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ENTRY_MAP_V3.md",
+        "sha256": "34ae7a520bb74e18010e058e60605b86fca6d60a2a3016319b005252207c1c48"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-context/ANSWER_RECOVERED.txt",
+        "sha256": "ffe7d7d3ca3feb33e6d5b7252423ade464edbcc7737ff8a86201770f2885a31f"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-context/DISPOSITIONS_V2.json",
+        "sha256": "8e381e758eb8bd452b9e80878b88703dd3a03838eeb92956a68735cdbf6d7e32"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/MANIFEST.json",
+        "sha256": "353c9ab7eca3508e31b8b4f59541517f084a726ba07c939fa4afd5457fe59aa5"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/QUESTION.md",
+        "sha256": "358a48d0f597700b8b2d048ee4971738f80561688844c598b3cf2caa51f7dce8"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/SUBMISSION.json",
+        "sha256": "40433f49a2cd2e25639591f3d0b1852774e1bb46d4289efebe1935a9f66a556d"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/files/EVIDENCE.json",
+        "sha256": "0191aa86da6f80108c040e0536ae44349d6ac5485a4bb8322f9bad37ba38383a"
+      }
+    ],
+    "receipts": [
+      {
+        "name": "CAPTURE_SOURCE_ENTRY_V1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/CAPTURE_SOURCE_ENTRY_V1.json",
+        "sha256": "b494680d7e962c463ffa0dd6bc6541a75e2954b31b85b00c983720d53aab193a",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "CAPTURE_EXTRA_ENTRY_V1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/CAPTURE_EXTRA_ENTRY_V1.json",
+        "sha256": "13cdb192ce05d08b9f96499414d196c24cc82bcbee6062c4f1ec55493b8a9baf",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "CAPTURE_PRIVATE_RESTORE_V2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/CAPTURE_PRIVATE_RESTORE_V2.json",
+        "sha256": "2b1cfc77c444b82fb1f1d5666055d46ae591dc2d9a14745e94f89ff63541b9ac",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_PROTOTYPE_ALL_V2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_PROTOTYPE_ALL_V2.json",
+        "sha256": "754e9a363ba8518d1528c0163aa7622a99bc9441bff1085235bf1a54b35760a1",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_PROTOTYPE_INTEGRATION_V1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_PROTOTYPE_INTEGRATION_V1.json",
+        "sha256": "fe1c22499f59ca2df5613f0f9e329d03b53d648e97335f3698c7fe0444606991",
+        "exit": 101,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_ACCESS_GOOD_V9",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_ACCESS_GOOD_V9.json",
+        "sha256": "17d94e15df74fbafcd29adf2732508dd6a478ad35d16f3197afb0ffe90fbe1b3",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_PATCH_INTEGRATION_V1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_PATCH_INTEGRATION_V1.json",
+        "sha256": "8b2eb879e554a7e7e0cc2222ba9f85607c9513b82ceeb04758daf22cff94ecb6",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_CUSTODY_GOOD_V1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_CUSTODY_GOOD_V1.json",
+        "sha256": "d189385a1133bb0d8981b1620cd2304626e74161bcd301768646bdbbbef1b746",
+        "exit": 101,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_CUSTODY_GOOD_V2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_CUSTODY_GOOD_V2.json",
+        "sha256": "33b5a3d532cf4682904a3928b29d9c30833cb36730d26df2b39b103674bd1ac2",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_CUSTODY_GOOD_V3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_CUSTODY_GOOD_V3.json",
+        "sha256": "27e3babb2e86d0b71e9a4d8efe713efc5306024b7ae44725663d4e4c3e2edf95",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_CUSTODY_GOOD_V4",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_CUSTODY_GOOD_V4.json",
+        "sha256": "47a6838df0737bfabf29020e50ea466dcaa3841324368e9fb50a5e3101c81f70",
+        "exit": 101,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_FROZEN_V2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_FROZEN_V2.json",
+        "sha256": "444656554fa41499fda8701c2f07da2f2588a9ebc6bf9c474183b87f9276fa10",
+        "exit": 101,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      },
+      {
+        "name": "INVOCATION_FROZEN_V3_INTEGRATION",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_FROZEN_V3_INTEGRATION.json",
+        "sha256": "451fe81d8d3b9ca34ce8062791d3d7c3a0893ec23cd7a9d139c83623ea909c38",
+        "exit": 0,
+        "scope": "exact command/inputs/log hashes retained in receipt; failures not promoted"
+      }
+    ],
+    "proof": {
+      "external_delta_commands": 28,
+      "external_owned": 285,
+      "repo_commands": 44,
+      "repo_modules": 43,
+      "repo_owned": 8159,
+      "false_guards": 24,
+      "repo_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "new_delta_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    "review": {
+      "prior_session": "mir-w4-invocation-context-r1",
+      "prior_final_collected": true,
+      "prior_whole_exit": 0,
+      "delta_session": "mir-w4-invocation-delta-r1",
+      "delta_tool": 25170,
+      "delta_not_before": "2026-09-29T00:50:42.701784+00:00",
+      "role": "sole-main operated read-only advisory, not signed acceptance"
+    },
+    "evidence": {
+      "at": "2026-09-29T00:47:42.272844+00:00",
+      "run_results": [
+        {
+          "label": "INVOCATION_FROZEN_V2",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--lib",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 0,
+          "log_sha256": "09df6a1ce2e9165c7c1bbfc8d18a74a2a3c29cd148d114c36fa797b879b90789",
+          "test_summaries": [
+            "test result: ok. 444 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 103.48s"
+          ],
+          "compile_errors": []
+        },
+        {
+          "label": "INVOCATION_FROZEN_V2",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--lib",
+            "proof_first_invocation_",
+            "--",
+            "--test-threads=4"
+          ],
+          "exit": 0,
+          "log_sha256": "b011f84f776fca8fb600f5e1883ab1d8fffe5f061da83bf9e7c3399b45403f41",
+          "test_summaries": [
+            "test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 425 filtered out; finished in 1.43s"
+          ],
+          "compile_errors": []
+        },
+        {
+          "label": "INVOCATION_FROZEN_V2",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m10_conformance",
+            "--test",
+            "m8_runtime_admission",
+            "--test",
+            "m8_runtime_local_cut",
+            "--test",
+            "m8_runtime_observer",
+            "--test",
+            "m8_runtime_owner_queue",
+            "--test",
+            "m8_runtime_patch",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 101,
+          "log_sha256": "f64a027fbfab488bcd590664e28d97bf01a4746fb70194a91ec6106c18969c8a",
+          "test_summaries": [],
+          "compile_errors": [
+            "error[E0599]: no method named `kind` found for struct `M8ServeDiagnostics` in the current scope",
+            "error[E0308]: mismatched types"
+          ]
+        },
+        {
+          "label": "INVOCATION_FROZEN_V3_INTEGRATION",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m10_conformance",
+            "--test",
+            "m8_runtime_admission",
+            "--test",
+            "m8_runtime_local_cut",
+            "--test",
+            "m8_runtime_observer",
+            "--test",
+            "m8_runtime_owner_queue",
+            "--test",
+            "m8_runtime_patch",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 0,
+          "log_sha256": "9fe89e40b470bc612682215a5590a3a7532e07214781ac97a35b5fc8c8e138e0",
+          "test_summaries": [
+            "test result: ok. 67 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.82s",
+            "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+            "test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s",
+            "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s",
+            "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 16.45s",
+            "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s"
+          ],
+          "compile_errors": []
+        }
+      ],
+      "final_test_only_delta_from_full_library_cut": [
+        "crates/mir-runtime/tests/m8_runtime_owner_queue.rs"
+      ],
+      "full_library_valid_at_same_production_test_library_bytes": true,
+      "all_temporary_sources_restored": true,
+      "proof_repo": {
+        "result_sha256": "568ea66f53ae953e5dbb8314f7ad58bb0ff1ad0422884a271575543543e5042e",
+        "commands": 44,
+        "modules": 43,
+        "owned_declarations": 8159
+      },
+      "false_guards": {
+        "count": 24,
+        "result_sha256": "2cdf025a2f569ad2a7f3eeb9d427648a565b95b5934b290f5255e2fbaf87c2aa"
+      },
+      "limits": "static review evidence, no network/whole source continuation/persistence/authenticity proof"
+    },
+    "nonclaims": [
+      "whole C/D/W4 or alpha completion",
+      "arbitrary source continuation/multiowner name-only selection",
+      "network evidence",
+      "scalar/nominal types or authority from signature",
+      "recovery/persistence or confidentiality",
+      "full Rust compiler theorem"
+    ],
+    "next": "collect/dispose final delta review, integrate only established increment, then same C source continuation/selection/current labels/resources/custody; stop after D before E"
+  },
+  "c_invocation_context_integration_20260929": {
+    "at": "2026-09-29T01:02:15.664540+00:00",
+    "status": "bounded internal increment adopted after reviewed proof/evidence; post-integration regressions running, not C closure",
+    "oracle": {
+      "session": "mir-w4-invocation-delta-r1",
+      "answer_sha256": "329ff7f62fd01c4752180e984e7e29986bf3837fc374fa82abf4143f29e17dcd",
+      "dispositions_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/DISPOSITIONS_VERIFIED.json",
+      "dispositions_sha256": "d5b523f7d287657441074e4438ec5db82cae02c493febae447b75694f1b3b56a",
+      "whole_exit": 0,
+      "chars": 15162
+    },
+    "adoption": {
+      "at": "2026-09-29T01:00:52.491408+00:00",
+      "base_head": "813ad37cd3793c0664451c5592762d720c5dc6aa",
+      "manifest_sha256": "57e97a848920a2bd4a07c9aea4b2e28b800df8f5401f051b750f485e2c36e179",
+      "files": [
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "before_sha256": "8db7ac1266929e6d89bcacf2de35ed1807faf810252fc8535d86e2a45b07a677",
+          "after_sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b"
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "before_sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+          "after_sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys3_projection/model.rs",
+          "before_sha256": "8361b0d32dc3f5abedf0eafa373f37a9423866fdcf3f1417410597f6b288c167",
+          "after_sha256": "9a870a835f417d47cc875f0358ebd99972aa67ef4034f7ce6e199b4ce723baf9"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys3_projection/lowering.rs",
+          "before_sha256": "b4eb3ef80e63a4cc6e22f3f3466c13a558cff42dc29c72e59382e46126c243c5",
+          "after_sha256": "c3fe2befde8b94cf4f17b1a8f5ac4dd1f3c9b1d017292d497c0b545c9df34936"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+          "before_sha256": "d86463afa750b301625f9e83d7eef7e1805a5e9029c1f326460ba1c88ba4937c",
+          "after_sha256": "16f7f2152c07a8248860990af9cd2ed3580756c4c68ce5a0bd40ff40bb1270b6"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "before_sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4",
+          "after_sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b"
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "before_sha256": "4a84e55ec7a2f8aca5036839a68a44c8bfb3439dc5b7e9eed57c28dc426c4be2",
+          "after_sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+          "before_sha256": "010b03c5bd49cc2a918768aac69fa89168b11b718f3466b98116e286d2f0d24a",
+          "after_sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch_tests.rs",
+          "before_sha256": "3fc30efe5fb65c049aca03b1d25c4df3150ef73c18130f49e367352f600414e6",
+          "after_sha256": "d38acb0ea86a80fecc5488761078dce8c456a78d9408df877abbec523995d611"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs",
+          "before_sha256": "5f02da78b5daf9bc6ce6abd4aa52b5aa1579639cdb65aa94ae99fd8f344a3cac",
+          "after_sha256": "fa1dd2ac6c25c54b9f8d559762b89333781a8e40ba69fec68fa193b8c7ab4f1f"
+        },
+        {
+          "path": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+          "before_sha256": "26fe5f8e8db90f8c5e7e633f6bd429d7c71b9385514fc82a10a17228fbf7cef6",
+          "after_sha256": "b973368d7c6b0b86064b47c676d023a81c84082aabd91e9b4a4fa4f51ab72f66"
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_invocation_tests.rs",
+          "before_sha256": null,
+          "after_sha256": "21f66f657d8a3a38b60bd9e7c01d515ad80e94dcaeb41cb97a1b2335202ab41a"
+        }
+      ],
+      "scope": "Evidence-backed reversible bounded LAB internal increment, same objective/invariants; no Canon/THM/OBL/public contract/whole-C acceptance",
+      "review": "mir-w4-invocation-delta-r1 final; only cfg(test) evidence strengthening after review",
+      "mutant_qualified": true
+    },
+    "qualified_copy_mutant": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_UNUSED_VALUE_MUTANT_V1.json",
+      "exit": 101,
+      "whole_tool": 67135,
+      "assertion": "complete consumed map unused8 vs unused7",
+      "source_restored": true
+    },
+    "focused19": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/INVOCATION_REVIEW_STRENGTHENED_V4.json",
+      "whole_tool": 17409,
+      "exit": 0
+    },
+    "docs": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_CANDIDATE_DOCS.json",
+      "whole_tool": 2206,
+      "exit": 0
+    },
+    "integrated_regression": {
+      "tool": 85610,
+      "status": "running"
+    },
+    "new_private_file": "crates/mir-runtime/src/sys4_invocation_tests.rs"
+  },
+  "c_invocation_context_verification_20260929": {
+    "at": "2026-09-29T01:09:07.763502+00:00",
+    "base_head": "813ad37cd3793c0664451c5592762d720c5dc6aa",
+    "status": "bounded adopted increment integrated regression passed; C remains active, D not started",
+    "regressions": [
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_invocation_",
+          "--",
+          "--test-threads=4"
+        ],
+        "exit": 0,
+        "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ADOPTED_REGRESSION_0.log",
+        "log_sha256": "3f9bae77535ddcb831192d38f64c46ae1b63848423cf852be15e128587f70861"
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mirrorea-i3-probe",
+          "--test",
+          "i3_process_localnet",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ADOPTED_REGRESSION_1.log",
+        "log_sha256": "3b6907e373ca6082dcac890841590443e096af6bce28065b8a92c07fb627d29e"
+      }
+    ],
+    "input_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ADOPTED_REGRESSION.json",
+    "input_receipt_sha256": "7ef81e267bc0706f06877443968e409246c10b556955d74bcfcb6ee83d94d5bc",
+    "source_unchanged_verified": true,
+    "counts": {
+      "focused_parallel": 19,
+      "existing_i3_real_process_localnet": 46
+    },
+    "scope": "Same C continues; docs/format/diff passed. Own commit/push next. No new W4-E network/alpha/Canon acceptance.",
+    "docs": {
+      "at": "2026-09-29T01:08:41.753000+00:00",
+      "command": [
+        "make",
+        "docs"
+      ],
+      "exit": 0,
+      "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "scope": "current integrated invocation code/proof/docs"
+    },
+    "format": {
+      "command": "rustfmt --check --edition 2024 [12 manifest files]",
+      "exit": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
   }
 }

@@ -103,17 +103,74 @@ No new network, persistence/recovery, secret noninterference or resource guarant
 follows from this schema correction. Exact runs, initial failures, mutations and
 Oracle dispositions are retained in Report2614 and `docs/proof-first/W4_CHECK.json`.
 
+## Exact invocation context (bounded LAB implementation)
+
+The stronger static index rule does not supply a missing runtime argument. The
+existing executor could use the literal entity named `target` when a declared
+`target` was absent, or let an undeclared `self` argument override a nonparameter
+RHS. These are actual source/executor counterexamples, not authorization bypasses.
+
+`OwnerArgumentPresence` independently defines supplied declarations. It is
+insufficient to exclude extra bindings. `OwnerArgumentDomain` uses a finite map
+and independently defines exact distinct name-domain matching; `check_exact`
+proves both directions. Parameter substitution and nonparameter preservation
+use the actual supplied map. `invoke_exact` relates an explicit state/events/result
+transition to its checker; refusal leaves protected body state and body events
+unchanged. Queue, authorization, lifecycle and failure observations are outside
+that frame. Unused invalid scalar strings can satisfy this domain predicate.
+
+`OwnerInvocationContext` retains artifact, operation, actor, owner, statement and
+parameter source references, full parameter order/multiplicity and generic Code.
+The independent declaration/plan relation includes each field; Code stands for
+all target/expression/budget material consumed by the next interpreter.
+`invocation_code_result` uses separate source-Code and plan-Code interpretations.
+`retained_domain_exact` checks duplicated outer/signature coordinates instead of
+assuming them equal. `ordered_implies_inventory` connects the ordered producer
+relation to distinct-key bidirectional inventory matching. Presentation-order
+independence is not source execution-order independence or lookup correctness.
+
+The bounded internal implementation retains this signature in M8 owner plans and
+SYS3 owner fragments. Current authorization precedes the use-time exact-domain
+guard; the guard precedes body materialization, reads and writes. Sealed creation,
+private restoration and final fabric bootstrap compare complete inventories.
+Private M8/SYS3 versions3/2 require the signature; old/missing forms fail closed.
+Candidate image consistency remains separate from independently held expected
+start binding and actual authority. Provider nested snapshots remain scoped.
+
+This stricter provisional profile requires unused parameters, rejects extra names
+and duplicate declaration names. Explicit `other=other` retains the old111 positive;
+omission now refuses. Old fallback evidence remains historical. An explicitly
+declared `self` still follows parameter lookup, not nonparameter preservation.
+No new optional/default syntax, nominal value checker, issuer or public wire is
+selected. The bounded Rust increment was integrated after the changed-cut review and local
+dispositions recorded in Report2614; whole-C obligations remain open.
+
+Actual finite tests distinguish M8 body/access/state from a result's reported
+reads; cover auth precedence/revocation, copy/pending cut/patch, full private fields,
+actual codec/start and provider scoped restoration. Removed/late/early guards and
+independent image/bootstrap/patch/producer mutations fail their intended checks.
+I3 handoff retains full carrier bytes before a synchronous owned move into M8;
+the lower handoff predicate alone does not compare arguments. A test-only body
+probe checks the complete consumed map, including unused values; a deliberate
+post-verification unused-value change is detected. Expression tree and redundant
+operator-chain mutations are checked separately at the structural decoder. Compiler ownership,
+no mutating callback, live authority and expected-image custody are TCB premises.
+M8 name-only selection across same-event multiple owners, ordinary source
+continuation and the owner-local entry without a requester remain whole-C duties.
+These lemmas/tests do not claim arbitrary Rust correctness, network, privacy,
+persistence/recovery, alpha, or official THM/OBL acceptance.
+
 ## Reproduction and trusted base
 
-These sources are outside the frozen W4-B 206-module manifest. Eleven added modules
+These sources are outside the frozen W4-B 206-module manifest. Fourteen added modules
 preserve the external research definitions and declaration namespaces; only
 imports are renamed to the repository's filenames. The existing identical
 `MirroreaProofFirstOwnerReadReport` is reused rather than defining its symbols
-twice. The full dependency cone has 40 modules. The separate audit checks every
+twice. The full dependency cone has 43 modules. The separate audit checks every
 owned declaration's transitive axioms against `propext`, `Classical.choice` and
-`Quot.sound`; these are not 40 independent correctness claims. The earlier
-39-module required-schema checkpoint is retained separately; the current
-40-module reconstruction includes the explicit index-parameter refinement.
+`Quot.sound`; these are not 43 independent correctness claims. The earlier
+39-module required-schema and 40-module explicit-index checkpoints are retained
+separately; the current 43-module reconstruction adds the invocation definitions.
 
 Run from the repository root with Lean 4.29.1. Set `PROOF_WORKDIR` to an existing
 external working directory with enough space. The following copies source only,
@@ -140,7 +197,7 @@ def visit(name):
 def limits():
     resource.setrlimit(resource.RLIMIT_AS, (6 * 1024**3, 6 * 1024**3))
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
-visit('MirroreaProofFirstOwnerSchemaAudit')
+visit('MirroreaProofFirstOwnerInvocationAudit')
 print(work, flush=True)
 for name in order:
     with (work / (name + '.log')).open('w') as log:
@@ -149,12 +206,14 @@ for name in order:
                        env=dict(os.environ, LEAN_PATH=str(work)),
                        stdout=log, stderr=subprocess.STDOUT,
                        preexec_fn=limits, check=True)
-print((work / 'MirroreaProofFirstOwnerSchemaAudit.log').read_text())
+print((work / 'MirroreaProofFirstOwnerInvocationAudit.log').read_text())
 PY
 
 cargo test --locked --offline -j1 -p mir-semantics --test proof_first_owner_schema
 cargo test --locked --offline -j1 -p mir-semantics --test proof_first_owner_index
 cargo test --locked --offline -j1 -p mir-runtime --lib proof_first_owner_schema -- --test-threads=1
+cargo test --locked --offline -j1 -p mir-runtime --lib proof_first_invocation_ -- --test-threads=4
+cargo test --locked --offline -j1 -p mir-runtime --test m8_runtime_owner_queue -- --test-threads=1
 ```
 
 The trusted base includes Lean/kernel/standard library, Rust/compiler/M7 checking,

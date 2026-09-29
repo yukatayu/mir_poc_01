@@ -48621,5 +48621,373 @@
     "status": "full authored/reviewed",
     "role": "seven stronger-claim counterexamples",
     "at": "2026-09-28T17:30:19.832744+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerArgumentPresence.lean",
+    "sha256": "6e78f3e04594dcfc7fe6830762a1cb23412fd5c812d48816e8fa98b0876b117f",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "finite invocation model; no production/auth theorem",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerArgumentDomain.lean",
+    "sha256": "b5c878bc8f18a172ebe95e5d1afd1452e67c65c22615675c9d4eb355caeb1a2f",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "finite invocation model; no production/auth theorem",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerInvocationContext.lean",
+    "sha256": "60ce6b2769001a68518cfbda5eac6b4ede22826894fcf965463d24898536a3f8",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "finite invocation model; no production/auth theorem",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerInvocationAudit.lean",
+    "sha256": "2e3d466975878d1b2966ba1f24f384d6bec5bff659dd6dec3491ca3890f1654c",
+    "range": "full",
+    "status": "full authored/reviewed",
+    "role": "43-module transitive axiom audit",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_owner_admission_gate.rs",
+    "sha256": "0edf62518ac9031f685a9108b1f7f9aaab89a8a4ea7cd3f82f832b7e6293aa78",
+    "range": "full",
+    "status": "full",
+    "role": "full carrier binding/linear permit/live verification; no lower argument equality shortcut",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_patch.rs",
+    "sha256": "3e4438335481975c9c178d1f5c64acb643f1bb49d43b815d9830b3d4a243f47f",
+    "range": "1-959",
+    "status": "full",
+    "role": "prior turn full read, exact current unchanged patch closure",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+    "sha256": "26fe5f8e8db90f8c5e7e633f6bd429d7c71b9385514fc82a10a17228fbf7cef6",
+    "range": "prior full blob plus complete current109line delta",
+    "status": "cumulative full via exact historical blob hash and complete diff",
+    "role": "historical literal fallback control; forward proposal kept separately",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m10_reference_system.rs",
+    "sha256": "ba045f830dc2cedb1211e3e6994de4a409a67debd51189d6d3349b0fe1224930",
+    "range": "15927-16240 and all four from_m10_resolved call sites",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m9_auth_verification.rs",
+    "sha256": "77eab8343f6304317ea5f90f8d373122bdb8107fef0f974a64d7002c319469b0",
+    "range": "into_m10_execution_seam owned base constructor",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4",
+    "range": "live handoff/staged issuance/permit/full-map copy/bootstrap session inventory excerpts",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "010b03c5bd49cc2a918768aac69fa89168b11b718f3466b98116e286d2f0d24a",
+    "range": "carrier Awaiting/ServeReserved and accept_reserved_owner_admission_handoff excerpts",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch_tests.rs",
+    "sha256": "3fc30efe5fb65c049aca03b1d25c4df3150ef73c18130f49e367352f600414e6",
+    "range": "865-975,9635-9918,11805-11838 and fixture helpers; remaining file not freshly full read",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs",
+    "sha256": "5f02da78b5daf9bc6ce6abd4aa52b5aa1579639cdb65aa94ae99fd8f344a3cac",
+    "range": "1-172,255-312,404-500",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/i3_read_only_provider_composite_tests.rs",
+    "sha256": "2dac2b10fea6a7f8309385ebb45732ceb54e3b913686b897db7fec0d75e29d7c",
+    "range": "253-341,459-521,740-805",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "8db7ac1266929e6d89bcacf2de35ed1807faf810252fc8535d86e2a45b07a677",
+    "range": "provider scope/install/matches_parent/component restore and owner restriction excerpts",
+    "status": "partial reconsult; retain prior full evidence",
+    "role": "actual entry/TCB review; not a new whole file read",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-context/ANSWER_RECOVERED.txt",
+    "sha256": "ffe7d7d3ca3feb33e6d5b7252423ade464edbcc7737ff8a86201770f2885a31f",
+    "range": "full",
+    "status": "full recovered answer read in two chunks; source advice only",
+    "role": "14 finding dispositions, final27551chars",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_ENTRY_MAP_V3.md",
+    "sha256": "34ae7a520bb74e18010e058e60605b86fca6d60a2a3016319b005252207c1c48",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "current frozen review/correspondence",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/INVOCATION_REVIEW_DELTA.md",
+    "sha256": "6f011d13f81a1a36167b7f72e392503c2a004792000f64f14fec8ce19582f3c8",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "current frozen review/correspondence",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-context/DISPOSITIONS_V2.json",
+    "sha256": "8e381e758eb8bd452b9e80878b88703dd3a03838eeb92956a68735cdbf6d7e32",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "current frozen review/correspondence",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/QUESTION.md",
+    "sha256": "358a48d0f597700b8b2d048ee4971738f80561688844c598b3cf2caa51f7dce8",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "current frozen review/correspondence",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "b7c696c1c9a067591fa4f0601f29c5995673e03e16d2f0368f537a5e199819a6",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys3_projection/model.rs",
+    "sha256": "9a870a835f417d47cc875f0358ebd99972aa67ef4034f7ce6e199b4ce723baf9",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys3_projection/lowering.rs",
+    "sha256": "c3fe2befde8b94cf4f17b1a8f5ac4dd1f3c9b1d017292d497c0b545c9df34936",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "16f7f2152c07a8248860990af9cd2ed3580756c4c68ce5a0bd40ff40bb1270b6",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+    "sha256": "fb9ff8c83b4b464cf2b13c7b13de026d3c9c7e65e857d4b3925f11401eff0938",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys4_dispatch_tests.rs",
+    "sha256": "d38acb0ea86a80fecc5488761078dce8c456a78d9408df877abbec523995d611",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs",
+    "sha256": "fa1dd2ac6c25c54b9f8d559762b89333781a8e40ba69fec68fa193b8c7ab4f1f",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+    "sha256": "b973368d7c6b0b86064b47c676d023a81c84082aabd91e9b4a4fa4f51ab72f66",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/invocation-integration-candidate-v3/crates/mir-runtime/src/sys4_invocation_tests.rs",
+    "sha256": "412be38c23cefaadb0ab927fa06f750537e1d3a2c0eaf87a37ad254c8f54aade",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "frozen temporary prototype; not production adoption",
+    "at": "2026-09-29T00:50:20.159023+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/model.rs",
+    "sha256": "9a870a835f417d47cc875f0358ebd99972aa67ef4034f7ce6e199b4ce723baf9",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/lowering.rs",
+    "sha256": "c3fe2befde8b94cf4f17b1a8f5ac4dd1f3c9b1d017292d497c0b545c9df34936",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "16f7f2152c07a8248860990af9cd2ed3580756c4c68ce5a0bd40ff40bb1270b6",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+    "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch_tests.rs",
+    "sha256": "d38acb0ea86a80fecc5488761078dce8c456a78d9408df877abbec523995d611",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs",
+    "sha256": "fa1dd2ac6c25c54b9f8d559762b89333781a8e40ba69fec68fa193b8c7ab4f1f",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+    "sha256": "b973368d7c6b0b86064b47c676d023a81c84082aabd91e9b4a4fa4f51ab72f66",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_invocation_tests.rs",
+    "sha256": "21f66f657d8a3a38b60bd9e7c01d515ad80e94dcaeb41cb97a1b2335202ab41a",
+    "range": "complete authored delta vs pinned base; original full read inherited where recorded",
+    "status": "authored-and-reviewed-delta",
+    "role": "adopted candidate-v4; final review test strengtheners included",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/ANSWER_RECOVERED.txt",
+    "sha256": "329ff7f62fd01c4752180e984e7e29986bf3837fc374fa82abf4143f29e17dcd",
+    "range": "entire file",
+    "status": "full-read",
+    "role": "final advisory response and main verified dispositions; read before adoption",
+    "at": "2026-09-29T01:09:07.763502+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-invocation-delta/DISPOSITIONS_VERIFIED.json",
+    "sha256": "d5b523f7d287657441074e4438ec5db82cae02c493febae447b75694f1b3b56a",
+    "range": "entire file",
+    "status": "full-read",
+    "role": "final advisory response and main verified dispositions; read before adoption",
+    "at": "2026-09-29T01:09:07.763502+00:00"
   }
 ]

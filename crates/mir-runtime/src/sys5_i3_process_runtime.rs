@@ -12166,3 +12166,169 @@ mod i3_original_owner_request_retry_tests {
         // authority, or live QUIC/session scenario.
     }
 }
+
+#[cfg(test)]
+mod proof_first_invocation_process_tests {
+    use super::*;
+    use crate::proof_first_owner_schema_tests::InvocationBodyProbe;
+    use crate::sys4_dispatch::SourceAction;
+    use crate::sys5_local_slice::{Sys5SourceInput, build_project};
+    const PATH: &str = "tests/inline/invocation_process_image.mir";
+    const SOURCE: &str =
+        include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+    fn image() -> (
+        Sys5I3PrivateProcessCodec,
+        Sys5I3ExpectedStartBinding,
+        Vec<u8>,
+    ) {
+        let project = build_project(Sys5SourceInput::inline(PATH, SOURCE)).unwrap();
+        // Real existing image factory/codec/start, executed in this process.
+        // There is no socket or network-conformance claim in this test.
+        let deployment = Sys5I3Deployment::from_checked_project(
+            &project,
+            [
+                Sys5I3DeploymentSlot::new(
+                    "owner-image",
+                    "127.0.0.1:42001",
+                    ["WorldAuthority", "ParticipantA"],
+                ),
+                Sys5I3DeploymentSlot::new(
+                    "other-image",
+                    "127.0.0.1:42002",
+                    ["ParticipantB", "ViewerC"],
+                ),
+            ],
+        )
+        .unwrap();
+        let mut cohort = Sys5I3ProcessCohort::from_checked_project(&project, &deployment).unwrap();
+        let expected = cohort
+            .parent_held_expected_start_binding("owner-image")
+            .unwrap();
+        let image = cohort.take_process_image("owner-image").unwrap();
+        let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+        let bytes = codec.encode_image(image).unwrap();
+        (codec, expected, bytes)
+    }
+    fn change_both_signatures(value: &mut serde_json::Value) {
+        let mut changed = 0;
+        for locus in value["projection"]["locus_programs"]
+            .as_array_mut()
+            .unwrap()
+        {
+            for operation in locus["value"]["operations"].as_array_mut().unwrap() {
+                if operation["operation_id"] == "attack" {
+                    let parameter = operation
+                        .pointer_mut("/placement/fields/signature/parameters/0/type_name")
+                        .unwrap();
+                    assert_eq!(*parameter, serde_json::json!("Player"));
+                    *parameter = serde_json::json!("Int");
+                    changed += 1;
+                }
+            }
+        }
+        assert_eq!(
+            changed, 2,
+            "request and owner retained signature are both present"
+        );
+        let plans = value["admission"]["instance"]["owner_execution_plans"]
+            .as_array_mut()
+            .unwrap();
+        let plan = plans
+            .iter_mut()
+            .find(|p| p["evaluation"] == "attack")
+            .unwrap();
+        plan["signature"]["parameters"][0]["type_name"] = serde_json::json!("Int");
+    }
+    #[test]
+    fn proof_first_invocation_existing_image_codec_checks_independent_expected_custody() {
+        let (codec, expected, bytes) = image();
+        let original: serde_json::Value = serde_json::from_slice(
+            codec
+                .unframe_body(&bytes, Sys5I3PrivateProcessCodec::MAX_IMAGE_BYTES)
+                .unwrap(),
+        )
+        .unwrap();
+        let mut altered = original.clone();
+        change_both_signatures(&mut altered);
+        // Original expected binding was captured before any payload mutation.
+        // The old candidate-side digest cannot vouch for a changed payload.
+        let old_digest_bytes = codec
+            .frame_body(
+                serde_json::to_vec(&altered).unwrap(),
+                Sys5I3PrivateProcessCodec::MAX_IMAGE_BYTES,
+            )
+            .unwrap();
+        assert!(codec.decode_untrusted_image(&old_digest_bytes).is_err());
+        // Deliberately reconstruct both altered sides and their self-consistent
+        // candidate commitment. None of this creates a replacement expectation.
+        let program = FabricProgram::from_i3_private_projection_snapshot(
+            serde_json::from_value(altered["projection"].clone()).unwrap(),
+        )
+        .unwrap();
+        let admission = SealedFabricAdmission::from_i3_private_snapshot(
+            serde_json::from_value(altered["admission"].clone()).unwrap(),
+            &program,
+        )
+        .unwrap();
+        let changed = private_runtime_seed_binding_ref(&program, &admission).unwrap();
+        assert_ne!(
+            changed,
+            original["private_snapshot_binding_ref"].as_str().unwrap()
+        );
+        altered["private_snapshot_binding_ref"] = serde_json::json!(changed);
+        let candidate_bytes = codec
+            .frame_body(
+                serde_json::to_vec(&altered).unwrap(),
+                Sys5I3PrivateProcessCodec::MAX_IMAGE_BYTES,
+            )
+            .unwrap();
+        let candidate = codec
+            .decode_untrusted_image(&candidate_bytes)
+            .expect("altered candidate is internally consistent but still untrusted");
+        assert_eq!(
+            codec
+                .validate_and_start_image(candidate, expected.clone())
+                .unwrap_err()
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch
+        );
+        // The untouched image starts through the actual expected-bound path.
+        let candidate = codec.decode_untrusted_image(&bytes).unwrap();
+        let mut runtime = codec.validate_and_start_image(candidate, expected).unwrap();
+        runtime
+            .fabric
+            .dispatch_source_action(SourceAction::owner_operation("init_avatar_hp"))
+            .unwrap();
+        runtime
+            .fabric
+            .dispatch_source_action(SourceAction::owner_operation("init_avatar_atk"))
+            .unwrap();
+        let probe = InvocationBodyProbe::for_path(PATH);
+        runtime
+            .fabric
+            .dispatch_source_action(
+                SourceAction::owner_operation("attack").with_argument("target", "self"),
+            )
+            .unwrap();
+        assert_eq!(probe.counts()[0], 1);
+        assert!(probe.counts()[2] > 0);
+        assert_eq!(probe.counts()[3], 1);
+        let before = runtime
+            .fabric
+            .proof_probe_actual_owner_state("WorldAuthority");
+        probe.reset();
+        assert!(
+            runtime
+                .fabric
+                .dispatch_source_action(SourceAction::owner_operation("attack"))
+                .is_err()
+        );
+        assert_eq!(
+            runtime
+                .fabric
+                .proof_probe_actual_owner_state("WorldAuthority"),
+            before
+        );
+        assert_eq!(probe.counts(), [0; 5]);
+    }
+}

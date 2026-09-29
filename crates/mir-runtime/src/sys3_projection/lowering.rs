@@ -275,6 +275,7 @@ fn project_owner(
             declared_failure_row: evaluation.declared_failure_row().clone(),
             generated_failure_row: evaluation.generated_failure_row().clone(),
             placement: PlacementSpecificCore::OwnerRmw {
+                signature: signature.clone(),
                 core: core.clone(),
                 local_state_schemas,
             },

@@ -1165,6 +1165,7 @@ impl M8RuntimeExecution {
         // cannot use this preflight to probe target existence. Only an
         // authority-valid caller reaches the pre-occurrence target guard.
         if self.authority_failure(&plan, &authority).is_none()
+            && plan.accepts_arguments(request.arguments())
             && let Some((namespace, identity)) =
                 self.materialize_entity_identity(plan.target(), request.arguments())
             && identity != plan.actor()
@@ -1287,6 +1288,22 @@ impl M8RuntimeExecution {
             return Err(diagnostics);
         }
 
+        // Preserve authority failure precedence. This exact signature/map
+        // guard runs at use, before any assignment-body read or write. Queue
+        // and declared-failure lifecycle events remain real observations.
+        if !plan.accepts_arguments(queued.request.arguments()) {
+            return Err(self.route_failure(
+                &queued.occurrence,
+                &queued.enqueue_trace_node_id,
+                authority,
+                &plan,
+            ));
+        }
+        #[cfg(test)]
+        crate::proof_first_owner_schema_tests::invocation_body_entered(
+            plan.source_ref(),
+            queued.request.arguments(),
+        );
         let target = match self.materialize_key(plan.target(), queued.request.arguments()) {
             Some(target) if plan.target().owner_locus() == plan.owner_locus() => target,
             _ => {
@@ -1321,6 +1338,8 @@ impl M8RuntimeExecution {
         // The read set and write set are completely formed before the one
         // mutation below, so this owner RMW observes service-time state and
         // commits atomically with respect to this deterministic queue.
+        #[cfg(test)]
+        crate::proof_first_owner_schema_tests::invocation_accessed(plan.source_ref(), 3);
         self.snapshot.ints.insert(target, value);
         let validation_trace_node_id = self.append_trace(
             M8QueueTraceKind::AuthorityValidated,
@@ -1438,6 +1457,8 @@ impl M8RuntimeExecution {
         read: &mir_semantics::surface_v0_pipeline::TypedStateRead,
         arguments: &BTreeMap<String, String>,
     ) -> Option<(String, String)> {
+        #[cfg(test)]
+        crate::proof_first_owner_schema_tests::invocation_accessed(&read.source_ref(), 1);
         Some((
             read.namespace().to_string(),
             arguments
@@ -1461,6 +1482,8 @@ impl M8RuntimeExecution {
                     return Err(());
                 }
                 let key = self.materialize_key(read, arguments).ok_or(())?;
+                #[cfg(test)]
+                crate::proof_first_owner_schema_tests::invocation_accessed(&read.source_ref(), 2);
                 let value = self.snapshot.int(&key).ok_or(())?;
                 reads.insert(key, value);
                 Ok(value)
@@ -1527,6 +1550,13 @@ impl M8RuntimeExecution {
         written_values: BTreeMap<M8StateKey, i64>,
         source_ref: SourceRef,
     ) -> String {
+        #[cfg(test)]
+        if matches!(
+            kind,
+            M8QueueTraceKind::OwnerRead | M8QueueTraceKind::OwnerWrite
+        ) {
+            crate::proof_first_owner_schema_tests::invocation_accessed(&source_ref, 4);
+        }
         let trace_node_index = self.next_trace_node;
         self.next_trace_node += 1;
         let trace_node_id = format!("m8-trace-node-{trace_node_index:020}");

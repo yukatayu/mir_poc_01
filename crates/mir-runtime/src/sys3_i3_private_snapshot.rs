@@ -38,7 +38,7 @@ use serde::{Deserialize, Serialize};
 use crate::sys3_projection::model::*;
 
 /// The private schema version for the complete projection snapshot.
-pub(crate) const I3_PRIVATE_PROJECTION_SNAPSHOT_VERSION: u32 = 1;
+pub(crate) const I3_PRIVATE_PROJECTION_SNAPSHOT_VERSION: u32 = 2;
 
 /// Fail-closed rejection of a private SYS-3 projection snapshot.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -958,6 +958,7 @@ enum SnapshotPlacementSpecificCore {
         target_owner_locus: String,
     },
     OwnerRmw {
+        signature: SnapshotCheckedEvaluationSignature,
         core: SnapshotOwnerRmwCheckedCore,
         local_state_schemas: Vec<SnapshotCheckedIndexedStateSchema>,
     },
@@ -995,9 +996,11 @@ impl SnapshotPlacementSpecificCore {
                 target_owner_locus: target_owner_locus.clone(),
             },
             PlacementSpecificCore::OwnerRmw {
+                signature,
                 core,
                 local_state_schemas,
             } => Self::OwnerRmw {
+                signature: SnapshotCheckedEvaluationSignature::from_checked(signature),
                 core: SnapshotOwnerRmwCheckedCore::from_checked(core),
                 local_state_schemas: local_state_schemas
                     .iter()
@@ -1050,9 +1053,11 @@ impl SnapshotPlacementSpecificCore {
                 target_owner_locus,
             },
             Self::OwnerRmw {
+                signature,
                 core,
                 local_state_schemas,
             } => PlacementSpecificCore::OwnerRmw {
+                signature: signature.into_checked()?,
                 core: core.into_checked()?,
                 local_state_schemas: local_state_schemas
                     .into_iter()

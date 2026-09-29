@@ -426,6 +426,7 @@ pub(crate) enum PlacementSpecificCore {
         target_owner_locus: String,
     },
     OwnerRmw {
+        signature: CheckedEvaluationSignature,
         core: OwnerRmwCheckedCore,
         local_state_schemas: Vec<CheckedIndexedStateSchema>,
     },
@@ -497,6 +498,13 @@ impl ProjectedOperationFragment {
     pub(crate) fn typed_input_signature(&self) -> Option<&CheckedEvaluationSignature> {
         match &self.placement {
             PlacementSpecificCore::OwnerRequest { signature, .. } => Some(signature),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn owner_input_signature(&self) -> Option<&CheckedEvaluationSignature> {
+        match &self.placement {
+            PlacementSpecificCore::OwnerRmw { signature, .. } => Some(signature),
             _ => None,
         }
     }

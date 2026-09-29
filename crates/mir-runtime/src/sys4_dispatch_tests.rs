@@ -12014,3 +12014,47 @@ fn extract_balanced_body_from_open_brace(source: &str, open_brace: usize) -> Opt
     }
     None
 }
+
+#[test]
+fn proof_first_invocation_allowed_designated_patch_retains_owner_domain() {
+    let checked = combined_owner_designated_checked();
+    let base = fabric_program(combined_owner_designated_projection(&checked));
+    let mut fabric = boot(&checked, base.clone(), BackendProfile::St);
+    fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .unwrap();
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90)
+    );
+    let activation = fabric
+        .activate_checked_patch(source_first_combined_designated_plus_two_patch_candidate(
+            &base,
+        ))
+        .unwrap();
+    assert_eq!(activation.verdict(), Sys4PatchVerdict::Accepted);
+    fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "invocation-after-patch",
+        ))
+        .unwrap();
+    let designated = fabric
+        .dispatch_source_action(consume_designated_action())
+        .unwrap();
+    assert_eq!(designated.typed_value(), RuntimeValue::int(12));
+    fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .unwrap();
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(80)
+    );
+    let before = fabric.proof_probe_actual_owner_state("S");
+    for malformed in [
+        SourceAction::owner_operation("attack"),
+        owner_attack_action("attack").with_argument("extra", "x"),
+    ] {
+        assert!(fabric.dispatch_source_action(malformed).is_err());
+        assert_eq!(fabric.proof_probe_actual_owner_state("S"), before);
+    }
+}
