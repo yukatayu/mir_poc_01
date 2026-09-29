@@ -740,7 +740,37 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseOriginalEntryBoundOptional.lean': 'import OwnerStatementOriginalEntryControls\n'
                                          'open MirroreaProofFirst.OwnerStatementOriginalEntry '
                                          'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
-                                         '#guard check Plan.ordinal root true ordinary = true\n'}
+                                         '#guard check Plan.ordinal root true ordinary = true\n',
+ 'FalseManifestAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                '#guard manifestCheck SourcePlan.handler sourceRoot completeSource '
+                                '= false\n',
+ 'FalseManifestSecondOnly.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                 '#guard manifestCheck SourcePlan.handler sourceRoot '
+                                 '[sourceSecond] = true\n',
+ 'FalseManifestPrefix.lean': 'import OwnerStatementOriginalEntryControls\n'
+                             'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                             '#guard manifestCheck SourcePlan.handler sourceRoot [sourceFirst] = '
+                             'true\n',
+ 'FalseManifestOrder.lean': 'import OwnerStatementOriginalEntryControls\n'
+                            'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                            '#guard manifestCheck SourcePlan.handler sourceRoot '
+                            '[sourceSecond,sourceFirst] = true\n',
+ 'FalseManifestMultiplicity.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                   'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                                   'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                                   '#guard manifestCheck SourcePlan.handler sourceRoot '
+                                   '[sourceFirst,sourceFirst,sourceSecond] = true\n',
+ 'FalseManifestMixed.lean': 'import OwnerStatementOriginalEntryControls\n'
+                            'open MirroreaProofFirst.OwnerStatementOriginalEntry '
+                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
+                            '#guard manifestCheck SourcePlan.handler sourceRoot '
+                            '[sourceFirst,sourceOther,sourceSecond] = true\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1145,3 +1175,30 @@ patch needs an explicit root transition; blindly refreshing from mutable plans
 would discard the protection. Current Rust is an unadopted reference. Fresh
 audit:190 modules,18759 owned declarations,87 qualified false controls,90 commands.
 Only standard logical axioms occur; no authored holes or Mir-specific axioms.
+
+## Complete original handler manifest (forward LAB evidence)
+
+Authentic membership of each supplied plan is insufficient for source custody:
+an internal caller could bind only a genuine second statement and execute it.
+The actual Rust control reproduced 200→201 instead of the original dependent
+sequence 200→190→191. This is a lower constructor counterexample; the normal
+source consumer already derived its complete handler list.
+
+`ManifestAdmissible` independently requires a nonempty manifest and agreement
+at every optional position with the original inventory filtered to that handler.
+`manifestCheck_exact` proves equivalence to the executable full-list comparison;
+`manifest_ready_index` connects every accepted position to the original source.
+General different-list and length-loss rejection, and acceptance of the nonempty
+original handler, distinguish refusal from a useless all-reject implementation.
+The reference binder now checks exact payload/order/multiplicity/length without
+allocating another list. Five runtime controls reject second-only, first-only,
+reversed, duplicated and mixed-handler manifests; each keeps the same executor
+usable for its genuine dependent source sequence.
+
+Original inventory provenance, unique lookup identity, physical import and
+patch frames remain obligations. The abstract payload can encode full checked
+Core; Rust M8OwnerExecutionPlan alone omits fields such as authority_origin_locus,
+so its equality must not be presented as a completed full-source-Core mapping.
+Audit190 modules/18808 owned/93 qualified false controls;96 commands reused the
+pinned dependencies from the earlier fresh190 build and rechecked both changed
+modules and all owned declarations. Production and Canon remain unchanged.

@@ -27,3 +27,28 @@ def mutableOnly (candidate : Plan) : Bool := candidate.ordinal.isNone
 #guard mutableOnly erased = true
 #guard check Plan.ordinal root false erased = false
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls
+open OwnerStatementOriginalEntry
+structure SourcePlan where
+ handler : Nat
+ ordinal : Nat
+ payload : Nat
+ deriving DecidableEq
+
+def sourceFirst : SourcePlan := ⟨1,0,100⟩
+def sourceSecond : SourcePlan := ⟨1,1,200⟩
+def sourceOther : SourcePlan := ⟨2,0,300⟩
+def sourceRoot := [sourceFirst,sourceOther,sourceSecond]
+def completeSource := [sourceFirst,sourceSecond]
+#guard manifestCheck SourcePlan.handler sourceRoot completeSource
+#guard !(manifestCheck SourcePlan.handler sourceRoot [])
+#guard !(manifestCheck SourcePlan.handler sourceRoot [sourceSecond])
+#guard !(manifestCheck SourcePlan.handler sourceRoot [sourceFirst])
+#guard !(manifestCheck SourcePlan.handler sourceRoot [sourceSecond,sourceFirst])
+#guard !(manifestCheck SourcePlan.handler sourceRoot [sourceFirst,sourceFirst,sourceSecond])
+#guard !(manifestCheck SourcePlan.handler sourceRoot [sourceFirst,sourceOther,sourceSecond])
+#guard manifestCheck SourcePlan.handler sourceRoot [sourceOther]
+-- Authentic membership alone admits the decisive second-only counterexample.
+#guard [sourceSecond].all (fun p => sourceRoot.contains p)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls

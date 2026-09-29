@@ -2015,3 +2015,11 @@ Oracle NTの20指摘を照合。Aの単一source進行＋既存executorに、元
 2026-09-29T13:45:32.106728+00:00: fresh190再現33324whole0:191positiveobjects/87qualifiedfalse/190modules18759owned、RESULT 02307e7767f1f75e3198bb41913d9cb3604b0a8f7a1a2aaf59cc6918198e98ac。NZmir-w4-entry-r1FINAL13:41:21、回収13:43:35.314UTC25023chars SHA0e141d38d47f86ded3f8bc6ffd9089ca9e67ae43e8a217929c4e2c32e3244a28、21dispositions。新規重要反例候補は初回dispatchの既知拒否消失、authentic部分manifestによるsource順序迂回、decodedinstanceからのfreshroot確立、sourcebinding中のpatchroot更新。実証/修正は未了。M8全planとsource全Coreの差(特にauthority_origin_locus)も明示。静的projectionの旧duplicate期待は一意なstatement展開と区別し、実provider入口を検査する。Oracleは未実行の助言、全entry対応未確立。本番未採用/Copen/Dunstarted。
 
 2026-09-29T13:47:21.725341+00:00: worker返信故障の次statementへの持越しを実再現RED82690、original command入口でappointmentを消費する参照修正GREEN21579全119成功。Execute/Resume/Contextual/Failureの指定は追加したが、各境界loss/deathの新規実証は次であり未完了。proof/docsのみcheckpoint統合、fresh190/87・make docs67506pass・NZ21指摘を記録。既存8RustはHEADへ復元。sub-agentなし。Canon/Plan250/THM/OBL変更なし。commit/pushはこの記録後に実行し結果を前方追記する。
+
+2026-09-29T13:53:08.268170+00:00: proof/docs checkpointf705c1b8通常push72750exit0/parity0/0。worker4command×loss/death実証28012全127成功。異なる要求/commandに故障を消費せず、実処理回数1・M9観測不変、liveworkerは同じ結果だけ回収、deadworkerはunknown/no-retry。NW/NZの全worker/資源閉包までは未達。
+
+2026-09-29T14:01:00.675080+00:00: 完全manifest一般定理/controlsを同じ2moduleへ前方統合。監査18475whole0:190modules18808owned/93反例/96commands、RESULT d06b004613d9d924c76a760614b2fd7b40e8537d3d4b5768586da474eb6d7caf。位置ごとの元source一致と実列checkerの健全性/相対完全性、非空の元列positiveを検査。実RED10991全5反例、うち正規p1のみ実行200→201を確認。GREEN74334全132成功、拒否後の同じworldで元列200→190→191が動作。source_root自身の出自/全Core対応/decodedfreshroot/patch/全mutatorは未確立。Copen/Dunstarted。
+
+2026-09-29T14:11:06.090169+00:00: 初回実行の失敗保持RED32475全4反例→GREEN74934参照136成功、8Rust原状復帰。初回local/remoteで実失敗を返却前に保持し、同じ実ownerが後で不在でも既知の失敗を消さない。途中GREEN33433は135成功1失敗：保持済み失敗で問い合わせ不要になったためworker停止の注入が発火しない旧テスト。実問い合わせを明示して停止/返却消失を検査し直した。引き続き再開adapterの型付き失敗保存、fresh decoded root/no-shadow、bound patch全frame、全Core対応が未解決。C未完了/D未着手。
+
+2026-09-29T14:15:37.023405+00:00: 再開adapterの既知型付き失敗保持RED24509全4反例→GREEN1029参照140成功、8Rust復元。ST/OW1が返した実AttemptedUnobservedを保存し、後の同owner不在/worker返却消失/停止でも消去しない。最初の試験はObserved行を誤って期待したため除外、実際は本体1回後の書込み準備拒否でservice行なし。typed lower resultとworker通信失敗を分離。make docs64069成功、190source pin/recipe構文/readledger旧prefix一致。C未完了/D未着手、full regression旧556/558は別cut。

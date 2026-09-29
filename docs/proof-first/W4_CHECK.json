@@ -50750,5 +50750,336 @@
     },
     "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-worker-scope-green-v1",
     "scope": "Actual fault drift RED: projection3 plus execute replyloss1 survivesqueuedresume and affects NEXTdistinctsource statement. Repaired appointment consumedfor selectedoriginal command beforeeveryreplybranch; exactboundary and optionalrequest selection added forExecute/Resume/Contextual/Failure. Existing118+drift all119pass. New explicit four-boundary loss/death controls NOT YET RUN; helpers not proof of their coverage. Postdates NZ. All8Rustrestored, productionunchanged."
+  },
+  "c_statement_worker_boundaries_20260929": {
+    "at": "2026-09-29T13:53:08.268170+00:00",
+    "tool": 28012,
+    "whole_exit": 0,
+    "child_exit": 0,
+    "selected_passes": 127,
+    "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_WORKER_BOUNDARIES_V1.json",
+    "sha256": "4a0c56375355c9ede4f051a5cf85d3b196abe88be4ed42b592e1114dd1d893c6",
+    "log_sha256": "fcd440e03743b104fcd5f37ec58c8008e05d0bf654aa1bccc3f79706bf440364",
+    "restored": {
+      "at": "2026-09-29T13:49:23.460386+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "8 actualOW1 controls Execute/Resume/Contextual/Failure x live-replyloss/workertermination. Exact request+boundary appointment survives otherrequest/differentcommand. Realbody count1 at fault, same M9observations; survivingworker sameoriginal completion thennextstatement, actualfailure retainsheld/noack; deadworker remainsunknown andno retry. All127pass;444filtered, not network/crashrecovery/allresource proof."
+  },
+  "c_entry_checkpoint_git_20260929": {
+    "at": "2026-09-29T13:53:08.268170+00:00",
+    "commit": "f705c1b8376c543e93dc73f95c2deeac3eefc591",
+    "files": 17,
+    "push_tool": 72750,
+    "push_exit": 0,
+    "parity": "0/0",
+    "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/push-original-entry-f705c1b8.log",
+    "scope": "proof/docs only, production e545unchanged"
+  },
+  "c_statement_complete_manifest_20260929": {
+    "at": "2026-09-29T14:01:00.675080+00:00",
+    "theory_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-manifest-v1/RESULT.json",
+    "sha256": "d06b004613d9d924c76a760614b2fd7b40e8537d3d4b5768586da474eb6d7caf",
+    "tool": 18475,
+    "whole_exit": 0,
+    "modules": 190,
+    "owned": 18808,
+    "qualified_false": 93,
+    "commands": 96,
+    "scope": "Complete ordered handler manifest: independent nonempty positional agreement iff executable exact-list check; accepted index equals original position; exact original list positive, differentlist andlengthloss rejected. Physical trusted original inventory, constructor/import/auth/no-shadow/fullCore/patch resource frames separate. Same190modules, six newqualifiedfalse controls. Nonproduction.",
+    "runtime_runs": [
+      {
+        "version": "RED-V1",
+        "tool": 10991,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_MANIFEST_RED-V1.json",
+        "sha256": "3a42681afb1376712ecaf49aad2cbc584c5483dd5460f23545ac0ab2597134e0",
+        "log_sha256": "fdf537d856b442ab31687275175d6da86a535992d9d9a095ddbcdbcb1f201d1f"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 74334,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_MANIFEST_GREEN-V1.json",
+        "sha256": "02831046f501f0067f1fdb38225064f2de975e3adf5a5a8f0cb8817a9fdd2f5f",
+        "log_sha256": "b59376d4b4e3bc81563d086caf4b3c35359e9a372931e0f07fe8dc028cc5a103"
+      }
+    ],
+    "selected_passes": 132,
+    "restored": {
+      "at": "2026-09-29T13:55:33.719012+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "runtime_scope": "Five malformed authentic manifests rejected beforebinding; actual second-only counterexample executes p1 once200→201 ratherthanoriginal190→191. Same liveexecutor remainsusableafterrejectionforfullsource withfirstack required. Internalcaller, notnormalfrontend exploit. Private decoded freshroot/no-shadow/patchframes unresolved."
+  },
+  "c_statement_initial_failure_20260929": {
+    "at": "2026-09-29T14:11:06.090169+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 32475,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INITIAL_FAILURE_RED-V1.json",
+        "sha256": "ade4a2621f9b31494228d14292cd7b9d386c0ecb14d5cc95d121e7d6d4ad0879",
+        "log_sha256": "b2d40520f04361fedcb1b0326527f517aa3352a7b263d0495b92ea687a905805"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 33433,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INITIAL_FAILURE_GREEN-V1.json",
+        "sha256": "6de71bd3c0d8b99e34f4f802b866abfa784f8d9585348a4bfddc0cb1abba11a4",
+        "log_sha256": "58994dfa7088e4cff80b32329171876d3821dd99d6615baa02416758edf05d73"
+      },
+      {
+        "version": "GREEN-V2",
+        "tool": 74934,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INITIAL_FAILURE_GREEN-V2.json",
+        "sha256": "10d8faab03167ed323eb0d6e6257a94721f480be1db95ac58e7a0c2104b9710c",
+        "log_sha256": "77d86783febe0f720f51e276d721cdaa768b878fab77f990c8c804393f6c8be8"
+      }
+    ],
+    "selected_passes": 136,
+    "restored": {
+      "at": "2026-09-29T14:08:02.390475+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Four actual ST A/S x preflight/post-body preparation failures retained before first outward report. Moving the same actual owner out of map cannot erase known failure; body zero/once, unchanged M9 observations, no acknowledgment or next-body. First green135/1: failure-worker appointment never ran because new retained outcome avoids requery. Revised control proves report leaves worker alive, then actually calls original failure-collection command to trigger loss/death and checks retained knowledge. No whole caller closure or production adoption."
+  },
+  "c_statement_resume_lower_20260929": {
+    "at": "2026-09-29T14:15:37.023405+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 95430,
+        "scope": "test compile error Debug; excluded",
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_RED-V1.json",
+        "sha256": "e1f7bcc78e65d34ed4d0071dc91705d4af9702880e09eccb53550431422ebb41",
+        "log_sha256": "e1efb7a7cfc1bdb5b82091525576f8de9a391bb17377f909024859ee4d8f0f04"
+      },
+      {
+        "version": "RED-V2",
+        "tool": 36279,
+        "scope": "OW1 wrong ineligible fixture; ST expectation assumed observed row; excluded",
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_RED-V2.json",
+        "sha256": "9a1e72cb19b3895151c5555aa1ce0822ee54572ac0b1e5cfbab028fc6fca8dd2",
+        "log_sha256": "f026eeb32b3446e5e32f04260b179e594510a317a34d79d23424036a2ef40781"
+      },
+      {
+        "version": "RED-V3",
+        "tool": 10043,
+        "scope": "four missing observed row; later actual failure determined AttemptedUnobserved, not counted as validated falsifier",
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_RED-V3.json",
+        "sha256": "d88646693e4fb06adea87cd0d7539b0a3f59207c42d4aedf5ad08d2ff02fcd1b",
+        "log_sha256": "91c04844167dc6f1070f63c961872d4a2794407da481ffaaf1de956dc0c44fe5"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 3717,
+        "scope": "136pass4fail due incorrect observed-row test premise; excluded",
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_GREEN-V1.json",
+        "sha256": "62e147249708442bf853b57bcb52da1c751ce992d20b39585ff98488bd6ef1d1",
+        "log_sha256": "efc2dfa808d3b61c0cc7dd2b534deed0373f8c156541facf455e5c41c3c22f97"
+      },
+      {
+        "version": "RED-V4",
+        "tool": 24509,
+        "scope": "four actual losses of typed lower failure; storage-only empty diagnostic slot present to observe old adapters",
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_RED-V4.json",
+        "sha256": "241d977a8205bc6c8487479a53c54a9bb78ea1bd9549fed5e1269c263c8cfec1",
+        "log_sha256": "97ad6e7a995fc8a7f2ce548333a5d81ccd6fe3742deb60610b1246471d5b84cc"
+      },
+      {
+        "version": "GREEN-V2",
+        "tool": 1029,
+        "scope": "140pass; actual AttemptedUnobserved preserved across ST/OW1 adapter then original-owner outage/failure-collection loss/death",
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESUME_LOWER_GREEN-V2.json",
+        "sha256": "5c750c4a2fb3b3e8c29104d870ed358692d5586915c3300f877ada91242ca23b",
+        "log_sha256": "8f038fb24ba5dcb7fd367543a9885a9a70c1f4f7a1d447f6864713164a10b7f0"
+      }
+    ],
+    "selected_passes": 140,
+    "restored": {
+      "at": "2026-09-29T14:13:48.196766+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "OW1 nested Result separates actual lower outcome from worker transport; ST retains exact same lower enum. Typed AttemptedUnobserved refusal survives later unavailable collection; bodyonce/M9unchanged/noack. Not every producer/decoder/mutator correspondence or production adoption.",
+    "docs_check": {
+      "tool": 64069,
+      "exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-manifest-20260929T1413Z.log",
+      "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+    }
   }
 }

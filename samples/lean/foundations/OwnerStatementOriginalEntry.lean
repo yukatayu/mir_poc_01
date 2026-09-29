@@ -76,3 +76,85 @@ theorem preserved_original_addition [DecidableEq α]
 #print axioms ordinary_accepted
 #print axioms preserved_original_addition
 end MirroreaProofFirst.OwnerStatementOriginalEntry
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry
+variable {α : Type u} {κ : Type v}
+
+def selectSource [DecidableEq κ] (handler : α → κ) (original : List α) (name : κ) : List α :=
+ original.filter (fun plan => decide (handler plan = name))
+
+-- Declarative positional agreement, including the absence of every extra
+-- position. The independently admitted original inventory supplies order.
+-- Neither an authentic subset nor a prefix establishes source completeness.
+def ManifestAdmissible [DecidableEq κ] (handler : α → κ)
+ (original manifest : List α) : Prop :=
+ manifest ≠ [] ∧ ∀ first, manifest.head? = some first →
+   ∀ i : Nat, manifest[i]? = (selectSource handler original (handler first))[i]?
+
+def manifestCheck [DecidableEq α] [DecidableEq κ] (handler : α → κ)
+ (original manifest : List α) : Bool :=
+ match manifest with
+ | [] => false
+ | first :: rest => decide (first :: rest = selectSource handler original (handler first))
+
+theorem manifestCheck_exact [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original manifest : List α) :
+ manifestCheck handler original manifest = true ↔ ManifestAdmissible handler original manifest := by
+ cases manifest with
+ | nil => simp [manifestCheck,ManifestAdmissible]
+ | cons first rest =>
+   simp only [manifestCheck,decide_eq_true_eq]
+   constructor
+   · intro same
+     refine ⟨by simp, ?_⟩
+     intro head firstEq i
+     have headEq : first = head := by simpa using firstEq
+     subst head
+     rw [same]
+   · intro ready
+     apply List.ext_getElem?
+     intro i
+     exact ready.2 first rfl i
+
+theorem manifest_ready_index [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original manifest : List α) (first : α)
+ (accepted : manifestCheck handler original manifest = true)
+ (head : manifest.head? = some first) (i : Nat) :
+ manifest[i]? = (selectSource handler original (handler first))[i]? :=
+ (manifestCheck_exact handler original manifest).mp accepted |>.2 first head i
+
+theorem manifest_rejects_different_list [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original : List α) (first : α) (rest : List α)
+ (different : first :: rest ≠ selectSource handler original (handler first)) :
+ manifestCheck handler original (first :: rest) = false := by
+ simp [manifestCheck,different]
+
+theorem manifest_rejects_length_loss [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original : List α) (first : α) (rest : List α)
+ (different : (first :: rest).length ≠ (selectSource handler original (handler first)).length) :
+ manifestCheck handler original (first :: rest) = false := by
+ apply manifest_rejects_different_list
+ intro same
+ exact different (congrArg List.length same)
+
+theorem manifest_original_accepted [DecidableEq α] [DecidableEq κ]
+ (handler : α → κ) (original : List α) (name : κ)
+ (nonempty : selectSource handler original name ≠ []) :
+ manifestCheck handler original (selectSource handler original name) = true := by
+ cases selected : selectSource handler original name with
+ | nil => exact False.elim (nonempty selected)
+ | cons first rest =>
+   have member : first ∈ selectSource handler original name := by rw [selected]; simp
+   have same : handler first = name := by
+     simpa [selectSource] using (List.mem_filter.mp member).2
+   simp [manifestCheck,same,selected]
+
+-- Positional exactness is not origin authentication: decoding and trusted
+-- compiler/admission promotion, no-shadow, code/currentness and patch frames
+-- remain distinct obligations. The checker grants no authority.
+#print axioms manifestCheck_exact
+#print axioms manifest_ready_index
+#print axioms manifest_rejects_different_list
+#print axioms manifest_rejects_length_loss
+#print axioms manifest_original_accepted
+end MirroreaProofFirst.OwnerStatementOriginalEntry
