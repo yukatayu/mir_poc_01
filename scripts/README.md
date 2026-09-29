@@ -627,7 +627,7 @@ W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](../samples/le
 初期schema・物理custody・総資源量、Rustの文順序・局所dispatch・全entry接続は未完了です。
 既存W4-B manifest、sample root、host runnerの契約は変更しません。
 
-W4-Cのsource受理接続は `OwnerStatementAdmission.md` の179module/58反例recipe、
+W4-Cのsource受理接続は `OwnerStatementAdmission.md` の180module/61反例recipe、
 W4_CHECKの `c_statement_source_consumer_20260929` とreview後続recordを参照。
 実tick/transfer/service/typed consumeの一般命題と受理済み2文経路を検査しています。
 Rust参照版は実2文・S→T→S・同じworldでの継続を検査済みですが、全下位入口、

@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "at": "2026-09-29T07:54:14.426960+00:00",
+  "at": "2026-09-29T08:41:25.823841+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
-  "source_count": 179,
+  "source_count": 180,
   "reused": 65,
-  "added": 114,
+  "added": 115,
   "import_renames": 8,
   "rows": [
     {
@@ -1992,6 +1992,17 @@
           "scope": "retained previous immutable source-custody v1"
         }
       ]
+    },
+    {
+      "module": "OwnerStatementCounterBudget",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-counter-budget-v1/OwnerStatementCounterBudget.lean",
+      "destination": "samples/lean/foundations/OwnerStatementCounterBudget.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "296bd1e218dfdc7e0da79ae18c3310dc3464b3746ef6d2ae4c81ee387ff57248",
+      "canonical_module": "OwnerStatementCounterBudget",
+      "staged_sha256": "296bd1e218dfdc7e0da79ae18c3310dc3464b3746ef6d2ae4c81ee387ff57248",
+      "transformation": "identity; two native counter reserve, not full resource closure"
     }
   ],
   "audit": {
@@ -2069,6 +2080,16 @@
     "zero_exits": 3,
     "qualified_false_exits": 49,
     "all_owned": 18423,
-    "review": "pending narrow successor review; no production adoption"
+    "review": "mir-w4-source-root-r1 final,20dispositions in W4_CHECK; relative scope retained, no production adoption"
+  },
+  "counter_budget_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-counter-budget-v1/RESULT.json",
+    "sha256": "32b92de846ead5ee527f4947804207ab93e33fe57cffe6dc8506dbccb3dfab92",
+    "fresh_commands": 5,
+    "zero_exits": 2,
+    "qualified_false_exits": 3,
+    "reused_prior_false_controls": 49,
+    "all_owned": 18525,
+    "review": "not in root packet; delta review owed before dependent adoption"
   }
 }

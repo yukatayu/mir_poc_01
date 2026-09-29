@@ -47773,5 +47773,275 @@
       0
     ],
     "scope": "RED real lower postcommit report panic: actual190, bodyonce, outerretainedempty, collectionfails. GREEN7pass prepares actual map/trace/outcome before field-move publication, retains exact owner occurrence/outcome before report, recovers190 without reexecution then next17. Copy-on-write reference only, not fullallocator/resource proof, local snapshot-unwind safety, OW1 durability, allentry or production. Not in current root Oracle packet."
+  },
+  "c_statement_source_root_review_20260929": {
+    "at": "2026-09-29T08:31:39.814937+00:00",
+    "session": "mir-w4-source-root-r1",
+    "whole_tool": 29922,
+    "whole_exit": 0,
+    "answer_sha256": "def9b897ffaf2a665113213e6c0691e20b8b97aefa80a72ec9c1fc4d7aaaa871",
+    "chars": 30016,
+    "recovered": "same final conversation; identifier-only wrapper answer preserved/excluded",
+    "findings": [
+      {
+        "issue": "Root guard mutant changes both enqueue and service",
+        "status": "accepted clarification",
+        "local": "One changed predicate affects two enforcement sites; do not claim isolated per-site proof."
+      },
+      {
+        "issue": "Deleted installed plan bypasses pre-pop refusal",
+        "status": "reproduced and reference fixed",
+        "local": "REDV1 actual pop then panic; GREENV1 rejects unchanged FIFO/store/counters, owning positive still190."
+      },
+      {
+        "issue": "Plan change between stage and use",
+        "status": "tested",
+        "local": "Exact checked plan mismatch refuses unattempted; restoring original plan allows SAME held permit, actual190."
+      },
+      {
+        "issue": "One global source activation across S-T-S",
+        "status": "adopted next reference direction",
+        "local": "Existing lower per-owner source_cursor cannot become global order; integrate single protected activation through actual SYS4/ST, not independent sequencers."
+      },
+      {
+        "issue": "Source label/context is not an activation capability",
+        "status": "accepted",
+        "local": "New lower entry must receive private current binding; existing M9 checks remain conjunctive."
+      },
+      {
+        "issue": "Predecessor completion association",
+        "status": "open",
+        "local": "Global ordinal alone insufficient; bind generated request to actual preceding consumed completion."
+      },
+      {
+        "issue": "Owner commit result retention",
+        "status": "partial later evidence",
+        "local": "Later GREENresultV2 tenpass on actual lower publication and counter/preparation failures; absent from reviewed packet, not end-to-end closure."
+      },
+      {
+        "issue": "Local snapshot swap unwind",
+        "status": "confirmed code",
+        "local": "Plain swap/call/swap can lose facade placement afterpanic; fix must restore custody without pretending rollback."
+      },
+      {
+        "issue": "Submission and completed receipt sole custody",
+        "status": "open",
+        "local": "Preserve actual FabricSubmission before observable enqueue; collect without resubmission, retain primary before delivery."
+      },
+      {
+        "issue": "Full resource bounds",
+        "status": "open",
+        "local": "CounterBudget audited180 only models1occ/4trace, not strings/maps/local/SYS4/transport/diagnostic allocation oravailability."
+      },
+      {
+        "issue": "Live worker reply loss vs worker death",
+        "status": "accepted D distinction",
+        "local": "Live collection is not durable recovery; unknown result never becomes noeffect or automatic retry."
+      },
+      {
+        "issue": "Fresh image incomplete self-consistent root",
+        "status": "accepted",
+        "local": "Activation must compare independent checked expectedsource; live-root erasure mutant notfresh-import proof."
+      },
+      {
+        "issue": "Cursor/root omitted from equivalence and store projection",
+        "status": "confirmed code/open",
+        "local": "acknowledgment changes sourceprogress even with unchanged ownerstore; full tuple needed orprofile refusal."
+      },
+      {
+        "issue": "All existing install/clone/save/restore entry closure",
+        "status": "open",
+        "local": "Compatible update preservation and unsupportedprofile refusal must be explicit; SYS4-specific patch changes onlydesignated, notownerplans."
+      },
+      {
+        "issue": "No-pop failure caller adaptations",
+        "status": "confirmed code/open",
+        "local": "OW1 Serve currentlypopsmirror on everyServeErr; contextual local assumesfailure trace. Must preserve unattempted/no-row separately."
+      },
+      {
+        "issue": "Lean source composition notvacuous butrelative",
+        "status": "accepted",
+        "local": "OriginalAccepted witness and actualpositiveguards substantive; completeness relativeacceptedtick, notglobalreadiness/liveness."
+      },
+      {
+        "issue": "Refresh/failure/report resource transitions missing fromsourcePath",
+        "status": "open",
+        "local": "Modelactualrefresh, attemptedfailure/unattempted/committedreportpending; no inferred inheritance fromunderlyingBank."
+      },
+      {
+        "issue": "A vs B",
+        "status": "provisional A",
+        "local": "One sharedsourceactivation overexistingexecutor smaller candidate; if duplicate sequencers persistreconsiderB. No measuredBsize/adoption."
+      },
+      {
+        "issue": "Observation constant assignment",
+        "status": "merge obligation",
+        "local": "CarryV4 noSYS4datareadevent onemptyactualreads; retainlowercanonicalphase."
+      },
+      {
+        "issue": "Review limits",
+        "status": "retained",
+        "local": "Oracle static advice, noCargo/Lean/hashreexecution/ownerapproval/signedindependence; fullSYS4submission/allocators/restore bodies stillrequired."
+      }
+    ],
+    "adoption": "No production/Canon promotion; C still incomplete,D unstarted; stop before E"
+  },
+  "c_statement_source_gate_review_controls_20260929": {
+    "at": "2026-09-29T08:31:39.814937+00:00",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RESULT_GREEN_V2.json",
+        "sha256": "93ff1239bdc67e417d88e40b6f6b19536c7bdf7a9ee1d0e9ccdd6663bfe7d4ed",
+        "exit": 0,
+        "log_sha256": "8fbe22dfaebd8ba2a927a6d7e0ef922f27cae37aab2d4c58bfaa930305546e80"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_GATE_REVIEW_RED_V1.json",
+        "sha256": "190c1cc94291243aa223e08a055f546648b132f222ec1ab4399a48416c1535c1",
+        "exit": 101,
+        "log_sha256": "440af971106473f29e96c0e2c9a539a8e942b852a77f4290a0ae90a4f01fe04a"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_GATE_REVIEW_GREEN_V1.json",
+        "sha256": "6e3789d4032c89291a41c8e2aa39544e556270b74aeac7ca6e1a24d9eae4cb0a",
+        "exit": 0,
+        "log_sha256": "506fcb886bed1e210f7d01ba6e931fc8b550aea468ee08eaf60bd26bd0561760"
+      }
+    ],
+    "tools": [
+      77298,
+      52127,
+      13805
+    ],
+    "whole_exits": [
+      0,
+      0,
+      0
+    ],
+    "scope": "resultV2tenpass nativeboundary/prepublicationfailure; gateREDactual1failed1passed; gateGREEN12pass includingpreinstalledpendingdeletedplan andstage-to-useexactplan refusal. Alltemporary5filesrestored; rawlowerreference, not integratedsourcepath/allentry closure."
+  },
+  "c_statement_counter_budget_20260929": {
+    "at": "2026-09-29T08:41:25.823841+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-counter-budget-v1/RESULT.json",
+    "sha256": "32b92de846ead5ee527f4947804207ab93e33fe57cffe6dc8506dbccb3dfab92",
+    "tool": 54908,
+    "whole_exit": 0,
+    "fresh_commands": 5,
+    "prior_false_reused": 49,
+    "source_count": 180,
+    "owned_count": 18525,
+    "recipe_negative_sources": 61,
+    "scope": "Fresh native owner occurrence/trace reserve soundness and relative completeness, successful-path charge1/4 representable prefixes and explicit current starting counters. Same prior179 sources/objects pinned and all180 owned axioms checked; prior49false runs reused, only3 new qualified false guards run. NOT fullallocator/CPU/bytes/transport/local-facade resource bound or proof of Rust atomic publication, and no production promotion.",
+    "review": "owed; not in source-root packet"
+  },
+  "c_statement_integrated_reference_20260929": {
+    "at": "2026-09-29T08:53:33.371057+00:00",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V1.json",
+        "sha256": "0d1767524556d7cfa968afddaa361bf296c13c84a24a1a9fdfada53733050590",
+        "exit": 101,
+        "log_sha256": "c1b949352376a7a60848fa207d53fadfb52df903440f181ec16c7fb49be23232"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V2.json",
+        "sha256": "c7f215f5917a084c880999a6edd462b761b6a72ebd4318d488fb766ea0fb0ba8",
+        "exit": 0,
+        "log_sha256": "82e1de5847e8027948d69f3c78b4d094cfef3f0254f7e400aeb23ee22b8622ed"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V3.json",
+        "sha256": "1a99b7dca45f90862a206d8917f4b4a3220e14e6a7af6c618f9b95925543ba65",
+        "exit": 0,
+        "log_sha256": "7fb0ae1b8a074ee53bae375b86515d72810c336b13d6111c5d7d4e7308ea0cea"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V4.json",
+        "sha256": "f4ea474e5fdea97ad7a78f41d68f079a51390374ad6d2c5aa2e5313f3572293a",
+        "exit": 0,
+        "log_sha256": "7920996bcb6c998263f2ba84598cf33063764c95b9e0561637f523909ff0323e"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V5.json",
+        "sha256": "155c8501fa285cb80547715f1b694b36dbf87dcb878c1bf9851ed6bf5199de1f",
+        "exit": 0,
+        "log_sha256": "be2c6e62daf20ff42a3c901ecb29b1e1513c8ba5aa4a425988474398499d705e"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V6.json",
+        "sha256": "ed82c6b436359c11a56892e5e31ef31d2717255fe9a48388b250076cb103ef2c",
+        "exit": 0,
+        "log_sha256": "a2a9ef159399ec16832536d4cca64dfdde3d6f2ba1b27910055d86b27eee076b"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_MUTANT_V1.json",
+        "sha256": "9db42749443e7d65a30e7c8319377c8ec9d74659903a1b27fce05c12548df57b",
+        "exit": 101,
+        "log_sha256": "a3ddfc5053239b54807a3e59eace45986c5925e10bda8f52496c7b2707b6fe1b"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_MUTANT_V2.json",
+        "sha256": "0c62c0d3d50d9a6ad4d3cb9e77e8e8932cd74c16334da0c5e5c79c1714a5afda",
+        "exit": 101,
+        "log_sha256": "8ec0f723f7b8b2a2a9fa0b0e851709926db88dcab718d50461e3bb37e5f9d05f"
+      }
+    ],
+    "tools": [
+      87415,
+      96836,
+      11918,
+      28250,
+      37353,
+      9421,
+      78615
+    ],
+    "whole_exits": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scope": "V1actual1pass1fail missedorigin=owner branch; V2two/V3five/V4six/V5six/V6sixpass. SingleSourceActivation throughactualSYS4/ST andlowerownedM8, fullroot/args/globalcursor; S-T-S A/S, sameworld4distinctrequests, directactual lowerentry/metadataerasure/earlyT/returnS refusals, copiedruntime genuinecurrentpermit refuses. Clone-live-only mutantV2 otherwisevalidactual190thenfailsinertassertion; priorV1failurelessdiscriminatingretained. Exactsource-consumption event andnextrequest predecessors actualcausalitytested. Actualpostcommitpanic preserveslocalshared190 andprimaryoutcome keyedbysubmission withoutreexecute, doesNOTcompleteSY4report/source. All8filesrestored, no production/allmutator/fullresource/recovery/networkclaim. OldlowerProbeCustodianandperownercursorremovedfromintegratedcandidate. STonly, OW1 explicitlyineligible innewconnection.",
+    "oracle": {
+      "at": "2026-09-29T08:51:37.108615+00:00",
+      "session": "mir-w4-source-integrated-r1",
+      "pid": 3802493,
+      "question_sha256": "e065274e9adb2f8cf9afe0352b4df791b47bc64e7942d434ef1ac63700f77f15",
+      "manifest_sha256": "76984cd5d6f2dcbe3fceaca743583fc2becf147c6fb70a2fe102f8986daaf794",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-29T08:54:37.108615+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "oracle_tool": 89498
+  },
+  "c_statement_worker_reference_20260929": {
+    "at": "2026-09-29T09:01:48.925502+00:00",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V7.json",
+        "sha256": "5506b46d218ca02f21cff8eaaa27806fdf79022ad78615d1a2f39d043eaa60c8",
+        "exit": 0,
+        "log_sha256": "170a5685421c796d4e3e39795169552146b15f5eff04e47413ad5a203aa25d7a"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_INTEGRATED_V8.json",
+        "sha256": "eb1e3127a9e7e1e969e063fcd7b588adbaba94bf3a8c9dcd547b642634e6c435",
+        "exit": 0,
+        "log_sha256": "05ca5d7548ea1107c476c68e4ef695efff0fab07a9a5ff66f4c9eeadd54e40fb"
+      }
+    ],
+    "tools": [
+      7377,
+      18500
+    ],
+    "whole_exits": [
+      0,
+      0
+    ],
+    "scope": "V7realOW1private SourceUse command andsingleworkerbinding withsameglobalactivation:21pass. V8liveworker losesrealreplychannel aftercommit, later exactrequestcollection returnsactual200→190/bodyonce. Deadworkerafteractualcommit hasDisconnectedcollection/bodyonce, sourceheld/cursor0 andoutererror remain, no retry.23pass inclpriorST/OW1sourcechecks. Sharedlocalcontrol mayknowcommit bit; resultunavailable isnotafalseclaimthatcommitdidnotoccur,norfullprocess/networkunknown proof. All8Rustrestored; laterthan OraclepacketV6, reviewowed. FullSYS4receipt/sourcecompletion collection andallentry/resources stillopen."
   }
 }

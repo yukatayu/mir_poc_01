@@ -7,14 +7,14 @@ The current implementation still needs a handler manifest, protected invocation
 cursor, local dispatch, and closure over all admitted entry and image routes.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 179 dependency
-modules: 65 reused and 114 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 180 dependency
+modules: 65 reused and 115 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
 dispositioned. The retained-history successor received a separate entry review; its 16 findings
 are dispositioned. The effect and local custody reviews below are dispositioned. The initial actual
-source-consumer review is dispositioned; the successor difference still needs review. Neither closes the production gate.
+source-consumer and lower-root reviews are dispositioned; the integrated ST and native-counter difference is under review. Neither closes the production gate.
 
 ## General statements
 
@@ -550,7 +550,20 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                       'MirroreaProofFirst.OwnerStatementRegistrySelection\n'
                                       '#guard (swappedT.map fun s => (service s '
                                       '(FallibleFlow.signed '
-                                      '63)).session.state.owner.history.length) = some 2\n'}
+                                      '63)).session.state.owner.history.length) = some 2\n',
+ 'FalseNativeCounterShortTrace.lean': 'import OwnerStatementCounterBudget\n'
+                                      'open MirroreaProofFirst.OwnerStatementCounterBudget\n'
+                                      '#guard (reserve Controls.limit ⟨0,maximum 64-3⟩ '
+                                      'ownerLeaf).isSome\n',
+ 'FalseNativeCounterExhaustedOccurrence.lean': 'import OwnerStatementCounterBudget\n'
+                                               'open '
+                                               'MirroreaProofFirst.OwnerStatementCounterBudget\n'
+                                               '#guard (reserve Controls.limit ⟨maximum 64,0⟩ '
+                                               'ownerLeaf).isSome\n',
+ 'FalseNativeCounterIgnoresInterference.lean': 'import OwnerStatementCounterBudget\n'
+                                               'open '
+                                               'MirroreaProofFirst.OwnerStatementCounterBudget\n'
+                                               '#guard current ⟨1,4⟩ ⟨1,5⟩ = true\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -768,3 +781,22 @@ sources. Only standard logical axioms occur. Initial elaboration errors were
 retained and excluded; no authored proof holes or Mir axioms were added.
 The separate root-erasure Rust investigation and postcommit result-retention
 obligations remain open. No dependent production change is adopted here.
+
+## Native queue-counter reservation (LAB, no total resource claim)
+
+`OwnerStatementCounterBudget` defines a separate decidable reservation checker
+and declarative `Fits` relation. It proves soundness and relative completeness,
+prefix representability and absence of unsigned wrapping for every bounded
+prefix. The concrete owner-leaf charge is one occurrence and four queue-trace
+nodes; equality with the live starting counters and exclusive access are
+explicit obligations. `Native` bounds mathematical counters by the chosen
+unsigned word maximum instead of silently assuming unbounded host integers.
+
+The delta audit compiles this module and checks all180 owned modules; three new
+false guards fail as intended. The previous49 false controls are pinned/reused,
+not reported as freshly rerun. The reproducible recipe now holds61 unique
+negative sources. Only standard logical axioms are allowed. This is not a proof
+of allocator availability, trace/string/map bytes, CPU, local-facade/SYS4/transport
+counters, crash durability, or the Rust publication implementation. The next
+consumer is the actual lower owner's pre-effect reserve; reviewed incorporation
+and the remaining resource obligations precede dependent production adoption.
