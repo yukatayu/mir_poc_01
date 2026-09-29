@@ -31,3 +31,21 @@ def refused := staged.bind fun (s,ticket) => (execute s ticket (FallibleFlow.sig
 #guard (refused.bind fun (s,ticket) => reportActual s ticket).isNone
 #guard (refused.bind fun (s,ticket) => consume s ticket 0 7).isNone
 end MirroreaProofFirst.OwnerStatementResultCollectionControls
+
+
+namespace MirroreaProofFirst.OwnerStatementResultCollectionControls.Projection
+open OwnerStatementResultCollection.Projection
+-- Fixed controls only; general statements and original advance connection are
+-- in the imported module. No finite decide result is counted as a theorem.
+def refusedDelivery := refused.bind fun (s,ticket) =>
+ (OwnerStatementResultCollection.collect s ticket).map fun answer => deliver answer (none : Option Nat)
+def projectedDelivery := refused.bind fun (s,ticket) =>
+ (OwnerStatementResultCollection.collect s ticket).map fun answer => deliver answer (some 7)
+def successfulUnreported := actual.map fun answer => deliver answer (none : Option Nat)
+def successfulReported := actual.map fun answer => deliver answer (some 7)
+#guard (refusedDelivery.bind failure).isSome
+#guard (projectedDelivery.bind failure) = (refusedDelivery.bind failure)
+#guard successfulUnreported = some .unavailable
+#guard (successfulReported.map fun r => match r with | .committed _ _ => true | _ => false) = some true
+#guard (refusedDelivery.map fun r => match r with | .committed _ _ => true | _ => false) = some false
+end MirroreaProofFirst.OwnerStatementResultCollectionControls.Projection

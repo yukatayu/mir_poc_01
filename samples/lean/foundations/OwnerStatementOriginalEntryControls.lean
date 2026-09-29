@@ -73,3 +73,18 @@ def stagedSource : Candidate Nat Nat := ⟨19,19,7⟩
 #guard publish (none,none) stagedSource = none
 #guard publish (some ownedSource,some ownedSource) stagedSource = none
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls
+
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame
+open OwnerStatementOriginalEntry.DependencyFrame
+def graph (key : Nat) : Option (List Nat) := if key = 2 then some [1] else none
+def shortcut (key : Nat) : Option (List Nat) := if key = 2 then some [0] else none
+def extended (key : Nat) : Option (List Nat) := if key = 3 then some [2] else graph key
+#guard queriesCheck [2] graph extended
+#guard !(queriesCheck [2] graph shortcut)
+#guard traceCheck [10,11] [10,11,12]
+#guard !(traceCheck [10,11] [10,12])
+def ownerOperation (shared parked : Nat) := (shared+1,parked+1,shared)
+#guard visible (ownerStep ownerOperation ⟨200,0,7⟩) = visible (ownerStep ownerOperation ⟨200,999,7⟩)
+#guard visible (ownerStep ownerOperation ⟨200,0,7⟩) ≠ visible (ownerStep ownerOperation ⟨999,0,7⟩)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "at": "2026-09-29T15:06:47.090254+00:00",
+  "at": "2026-09-29T16:02:23.672108+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
   "source_count": 190,
@@ -2006,25 +2006,25 @@
     },
     {
       "module": "OwnerStatementResultCollection",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollection.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/OwnerStatementResultCollection.lean",
       "destination": "samples/lean/foundations/OwnerStatementResultCollection.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "05aa2b6023383a5067af4b7c7f565775f0bccc44978338da09d412c3c62014a5",
+      "sha256": "516cd22381d0ccaccb9d30dcff90a1e9a278d55817cbd598cf00501c0052643f",
       "canonical_module": "OwnerStatementResultCollection",
-      "staged_sha256": "05aa2b6023383a5067af4b7c7f565775f0bccc44978338da09d412c3c62014a5",
-      "transformation": "identity; actual retained attempt collection/reporting LAB proof candidate"
+      "staged_sha256": "516cd22381d0ccaccb9d30dcff90a1e9a278d55817cbd598cf00501c0052643f",
+      "transformation": "identity; forward actual result/optional projection adapter and original attempt failure preservation. Physical producer/caller correspondence remains separate."
     },
     {
       "module": "OwnerStatementResultCollectionControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-collection-v1/OwnerStatementResultCollectionControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/OwnerStatementResultCollectionControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementResultCollectionControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "4024890d503f5f6334c8bcd2b60052f73ef5ecb0b9d3e3fe5638046a08d7b016",
+      "sha256": "a6392e0da77292b2f6f73cf4110ae368370bd74b3ae3ff7c557dcdef97e14348",
       "canonical_module": "OwnerStatementResultCollectionControls",
-      "staged_sha256": "4024890d503f5f6334c8bcd2b60052f73ef5ecb0b9d3e3fe5638046a08d7b016",
-      "transformation": "identity; actual retained attempt collection/reporting LAB proof candidate"
+      "staged_sha256": "a6392e0da77292b2f6f73cf4110ae368370bd74b3ae3ff7c557dcdef97e14348",
+      "transformation": "identity; forward actual result/optional projection adapter and original attempt failure preservation. Physical producer/caller correspondence remains separate."
     },
     {
       "module": "OwnerStatementResultOrigin",
@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-publication-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "88d4df61012547f82e7b1665865a891971c84d53a934ebfb0d33f34130f9c8d8",
+      "sha256": "e31be33272d700d8a93c51eb2252dbec2dae5908a742cd486510278ef74640b4",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "88d4df61012547f82e7b1665865a891971c84d53a934ebfb0d33f34130f9c8d8",
-      "transformation": "identity; forward frozen-source candidate publication checker and source-preserving exclusive logical-slot move. Physical move/frame/caller/exclusion obligations remain distinct."
+      "staged_sha256": "e31be33272d700d8a93c51eb2252dbec2dae5908a742cd486510278ef74640b4",
+      "transformation": "identity; forward exact dependency-query/trace-prefix preservation and parked/shared snapshot separation. Physical completefootprint/allentry obligations separate."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-publication-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "07e6b7e654af0b2c4625d608f54df6306426f8e93017e9db84316486a50b9e8b",
+      "sha256": "85542c270f8a8fb4bfb47494fa2195869513eee1d3dc98ba7724a2dad9aa6161",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "07e6b7e654af0b2c4625d608f54df6306426f8e93017e9db84316486a50b9e8b",
-      "transformation": "identity; forward frozen-source candidate publication checker and source-preserving exclusive logical-slot move. Physical move/frame/caller/exclusion obligations remain distinct."
+      "staged_sha256": "85542c270f8a8fb4bfb47494fa2195869513eee1d3dc98ba7724a2dad9aa6161",
+      "transformation": "identity; forward exact dependency-query/trace-prefix preservation and parked/shared snapshot separation. Physical completefootprint/allentry obligations separate."
     }
   ],
   "audit": {
@@ -2273,5 +2273,43 @@
     "fresh_commands": 103,
     "qualified_false": 100,
     "owned": 18885
+  },
+  "source_projection_result_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/RESULT.json",
+    "sha256": "2e8b563cc2d5146def812e1b09aff758db7529ea530d174441001ced1fe455ff",
+    "fresh_commands": 114,
+    "qualified_false": 103,
+    "owned": 18964,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "source_dependency_frame_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/RESULT.json",
+    "sha256": "809c2a1a205124df9acd4dc2aa7f941a2a18260644d4340ff449e79b1d6a0253",
+    "fresh_commands": 118,
+    "qualified_false": 107,
+    "owned": 19020,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
   }
 }

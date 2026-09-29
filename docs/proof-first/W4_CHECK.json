@@ -51493,7 +51493,7 @@
   "c_statement_publication_oracle_20260929": {
     "at": "2026-09-29T15:20:49.151814+00:00",
     "tool": 47176,
-    "status": "running; firstactualstatus confirmed",
+    "status": "final recovered; fullyread24dispositions",
     "submission": {
       "at": "2026-09-29T15:14:29.052310+00:00",
       "session": "mir-w4-publication-r1",
@@ -51551,7 +51551,39 @@
     "last_status": {
       "at": "2026-09-29T15:19:24.840749+00:00"
     },
-    "scope": "38frozenfiles840436bytes; static179reference +190/18885/100; unsignedread-only advice only. RequestedslugnormalizedbyOracle, monitorscorrectedwithoutsendingagain."
+    "scope": "38frozenfiles840436bytes; static179reference +190/18885/100; unsignedread-only advice only. RequestedslugnormalizedbyOracle, monitorscorrectedwithoutsendingagain.",
+    "final": {
+      "at": "2026-09-29T15:32:29.020Z",
+      "session": "mir-w4-publicatio-r1",
+      "target": "96F2398491E6B823CD92991AEF3171FF",
+      "identity": true,
+      "stop": false,
+      "controls": [
+        {
+          "label": "Copy message",
+          "text": ""
+        },
+        {
+          "label": "Copy table",
+          "text": ""
+        },
+        {
+          "label": "Copy",
+          "text": ""
+        },
+        {
+          "label": "Regenerate response",
+          "text": ""
+        }
+      ],
+      "answer_sha256": "e18536369b4fee4bddb72018c31643bbf48f4ae926c92811e122962d0d740eb7",
+      "chars": 28090,
+      "scope": "same submitted conversation DOM recovery; wrapper short answer retained and not accepted as review"
+    },
+    "wrapper_exit": 0,
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-publication/DISPOSITION.json",
+    "disposition_sha256": "bcfadb1c02570093415a1d8937a9b8f63973d8c527bb7ed00482bac5c8a1aab6",
+    "disposition_count": 24
   },
   "c_publication_docs_header_failure_20260929": {
     "at": "2026-09-29T15:20:49.151814+00:00",
@@ -51608,5 +51640,232 @@
     "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-publication-20260929T1520Z.log",
     "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
     "scope": "make docs after correcting stale snapshot header; 800required/218canon/1764reports; not semantic acceptance"
+  },
+  "c_publication_commit_20260929": {
+    "at": "2026-09-29T15:34:38.750185+00:00",
+    "head": "cf2e5fd59f1c977575a61a22d8c53fa5b6fdad51",
+    "push_tool": 92318,
+    "push_exit": 0,
+    "parity": "0/0",
+    "scope": "own15proof/docs only; Rust restored; C incomplete,D unstarted"
+  },
+  "c_statement_projection_result_theory_20260929": {
+    "at": "2026-09-29T15:44:38.277926+00:00",
+    "two_module_tool": 8894,
+    "audit_tool": 79657,
+    "whole_exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/RESULT.json",
+    "sha256": "2e8b563cc2d5146def812e1b09aff758db7529ea530d174441001ced1fe455ff",
+    "modules": 190,
+    "owned": 18964,
+    "qualified_false": 103,
+    "commands": 114,
+    "scope": "Forward actual lower result vs optional observation adapter: independent Corresponds iff checker, actual exact failure projection-independent, positive committed observation, missing committed observation not failure/noeffect; original advance unique result linked. Freshly rebuild changed source dependency cone against pinned earlier190 base, then owned audit and103 qualifiedfalse; not full190 rebuild. Runtime projection/output binding/allproducers remain separate."
+  },
+  "c_statement_projection_result_reference_20260929": {
+    "at": "2026-09-29T15:44:38.277926+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 44620,
+        "child_exit": 101,
+        "scope": "four genuine exactfailure-loss controls; two success controls had stalefabricmirror assertion and excluded those expectations; counter-repair code not reached and removed",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PROJECTION_LOSS_RED-V1.json",
+        "sha256": "57b70729590f184f4435620166928b3a387e5ea8c8e88f8a22c0a4b13e67d3af",
+        "log_sha256": "2a88dc847e789ea2a3beddc99a4383774b6feaed70f833862dcb0e96498ab11a",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-projection-loss-red-v1/RESTORED.json",
+        "restored_sha256": "baa3145c4736a64da83b352b327b543231676c57228b016c7da0917908a2f3b1"
+      },
+      {
+        "version": "RED-V2",
+        "tool": 49147,
+        "child_exit": 101,
+        "scope": "four actual typedfailureloss, two successfulwrite/reportunavailable positives with direct lowerstore",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PROJECTION_LOSS_RED-V2.json",
+        "sha256": "c4d908173df8831af68c44844ec783ece63a04fff346c88f958aba5f62ddbab0",
+        "log_sha256": "aa08a3152ccedee15723348573415074516f90a4e49f3ec79d53de2a3ac246ea",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-projection-loss-red-v2/RESTORED.json",
+        "restored_sha256": "c12a2ddb4e1b8c5986297c548c65c362eb5579085147d1f2ca968e67cef3f095"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 82305,
+        "child_exit": 0,
+        "scope": "all187 selected passed; no skips,442filtered. Sameoriginalbody count1, exactdiagnostic retained; successnotinventedfailure",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PROJECTION_LOSS_GREEN-V1.json",
+        "sha256": "3112a42bc9a5f788535555010592bd9e7ec8c020a68bcbdfb89484b6b5174127",
+        "log_sha256": "08d99ada8d3a7636766cd01dd5307ea738174bb7c749542d4131203f6b54519e",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-projection-loss-green-v1/RESTORED.json",
+        "restored_sha256": "a0f7f70ef97b2360680fb83dd94434fc997b524a1a26e56982008418c5948bdc"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-projection-loss-green-v1",
+    "scope": "11 temporaryRust restored; reference only. Full623 baseline predates this fix,187 selected current. No enqueue-adjacent executednegative, wholeworkspace/network/recovery/entryclosure claim."
+  },
+  "c_statement_candidate_dependencies_20260929": {
+    "at": "2026-09-29T15:49:55.749552+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 39561,
+        "exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_CANDIDATE_DEPENDENCIES_RED-V1.json",
+        "sha256": "2e1f3f7bf68b4623165015b0ff10090af07bceb87d64c39d5d5c3d41f3b8bfce",
+        "log_sha256": "dda5b4c1df23b43239a10d8c23426f8a0a2a97bda70369804c5d7c8a51af69ac",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-candidate-dependencies-red-v1/RESTORED.json",
+        "restored_sha256": "81bc8e67190b5875c566e4a1d87fcd240d849ccffe220a63c3bbfc3595e396be"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 39476,
+        "exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_CANDIDATE_DEPENDENCIES_GREEN-V1.json",
+        "sha256": "0bb15dc1703f6ba1f407593ab174280a07de03e7802d4457ce1e302210377188",
+        "log_sha256": "95e39e0879ae1421d4ff476507c6a0cbf44a4a7467af58bdaba9a39fe31f38ae",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-candidate-dependencies-green-v1/RESTORED.json",
+        "restored_sha256": "665af7b45d77d1d29456294a7473f0660e8c001db704db5c8b80f5f7d0ec2599"
+      }
+    ],
+    "scope": "3 actual lowerpublication guard omissions: candidate causalpredecessor replacement, referencedlocaltrace deletion, exhaustedconsumptionID; reference correction190selectedpassed including4actualrelationpositives. Oldgraph exactqueries+localtraceprefix and1existingcommittedconsumeID only; not fullfabricframe/capacity/allcallerclosure ornetworkattack. Theory extractionbridge stillowed; nonproduction."
+  },
+  "c_statement_relation_busy_20260929": {
+    "at": "2026-09-29T16:03:48.719685+00:00",
+    "tool": 40827,
+    "exit": 0,
+    "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_RELATION_BUSY_GREEN-V1.json",
+    "sha256": "3be09dc1855b174025d11e26f8406f07e2006bb4fcc2be3ab1cc989049166437",
+    "log_sha256": "46516045f85b39312dd2d4f7b83b6cc41f319137b519aa9f7b27bbfe9847a35a",
+    "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-relation-busy-green-v1/RESTORED.json",
+    "restored_sha256": "41fff2809c23af97e53e6413d8a1bdd45aade38ad46fdcb10ec3f886c77d816b",
+    "scope": "196selectedpass. Real sourceowner reply insharedS→A path: outboxpending actualrelationpublication succeeds andpreservesreply; inboxhead source reply makesrelationrefuse withloci/graph/report/M9observations unchanged; original2sourcebodies onceeach200→190→191. Actualin-process endpoint/queues, notrealnetwork.11Rustrestored."
+  },
+  "c_statement_publication_runtime_full_20260929": {
+    "at": "2026-09-29T16:05:49.581267+00:00",
+    "tool": 28864,
+    "exit": 0,
+    "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLICATION_REGRESSION_FULL-V1.json",
+    "sha256": "6ca313db92494f15574327d4cf3b6147c27d1652d53775907898d5df29da8b22",
+    "log_sha256": "928988a926d429205c8a95b6656b149d9a6b813cf85f6bb6df194e66dd452c5f",
+    "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-publication-regression-full-v1/RESTORED.json",
+    "restored_sha256": "29f0563bf9d86b3b1694a6c14b9eb038b32ced5dc04be48a458d12879c06e9c5",
+    "scope": "all638mir-runtime lib tests,0failed/0ignored/0filtered,94.48s;11referenceRust restored. Latestproof190/19020/107/118. Knownrawdecoded2RED notincluded, no wholeworkspace/network/generalM9successor/finalproductionadoption claim."
+  },
+  "c_statement_dependency_frame_theory_20260929": {
+    "at": "2026-09-29T16:02:23.672108+00:00",
+    "failed_two_module_tool": 33647,
+    "two_module_tool": 46636,
+    "audit_tool": 6560,
+    "whole_exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/RESULT.json",
+    "sha256": "809c2a1a205124df9acd4dc2aa7f941a2a18260644d4340ff449e79b1d6a0253",
+    "modules": 190,
+    "owned": 19020,
+    "qualified_false": 107,
+    "commands": 118,
+    "scope": "Finite query agreement checker iff declarative relation, original traceprefix checker iff append, existing observation preserved, arbitrary nondependency changes accepted, shared-snapshot owner-step visible behavior independent of parked snapshot. Complete actual continuation footprint and otherentries remain separate; same-authority checked-patch use only, no generalM9successor proof. Changeddependencycone freshlyrebuilt againstpinnedearlier190base thenowned audit107qualifiedfalse, notfull190 rebuild."
+  },
+  "c_statement_checked_patch_reference_20260929": {
+    "at": "2026-09-29T16:02:23.672108+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 47312,
+        "child_exit": 101,
+        "scope": "4actualcheckedpatchrefusals beforeunchangedsourcecontinuation",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_RED-V1.json",
+        "sha256": "41e650ed22248c5494dcc4bbd8d039fc37d76fadd0fba54a42f9b83fbb0997e9",
+        "log_sha256": "98017b0ae35a62c5071fd5a209fea1b40a400c8893ff880d494e7acd6a4f009c",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-red-v1/RESTORED.json",
+        "restored_sha256": "2a3e8d0325d08e207385724a6ddda86ee058e1fd52d8798c2ed4647a2504cb01"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 76876,
+        "child_exit": 101,
+        "scope": "still4fail: purepreviewcompatfix exposesparkedsnapshotfalseequality;190otherpass",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V1.json",
+        "sha256": "53971102719df9b12df968b0c7a7ff858c6fa7fc5895d0fb36c3e8341bc1144f",
+        "log_sha256": "5a8a0fc75ab8866d0fa94d8403639b29c758e72fad0db1a884f143c2b0021f5a",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v1/RESTORED.json",
+        "restored_sha256": "cf5c501f23b2938962f75302758c6b62d5b273a58a7e2faa9f8d24c256d05038"
+      },
+      {
+        "version": "GREEN-V2",
+        "tool": 28852,
+        "child_exit": 101,
+        "scope": "patchaccepted but3continuationfail onwholeprogramfragmentidentity;191pass",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V2.json",
+        "sha256": "628efbfc2ef96d5475539fc6fee9b33950b58a7321592f63a575c393b6624726",
+        "log_sha256": "f939734426c49162cde5d3339f0736ef24ea70e09200ad3f80bd9a8a5a35aef8",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v2/RESTORED.json",
+        "restored_sha256": "fff508b8a5d1fca3ea272e7a0e90146c13f835242d901e27c799810ba2593cd5"
+      },
+      {
+        "version": "GREEN-V3",
+        "tool": 7234,
+        "child_exit": 101,
+        "scope": "same3fail, boolean-only instrumentation isolatesfragmentfalse withallauth/currentnessguardstrue",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V3.json",
+        "sha256": "e4e43e34fa63b2b4cec6c1e1021852c1c41e0abd0bb603b23f43c0e06e9536ed",
+        "log_sha256": "681eca96cb7792c2ea8f54ca68ebb16a1a5bcedf9da1093a2f3039465d433d2e",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v3/RESTORED.json",
+        "restored_sha256": "f0a3305b2421945d6271797e97e59e0d5a182d41d5fec56f395ad47c6ea1d980"
+      },
+      {
+        "version": "GREEN-V4",
+        "tool": 25428,
+        "child_exit": 0,
+        "scope": "all194selectedpassed;4actualexistingcheckedpatch phasescompleteoriginalsource200→190→191/body2",
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V4.json",
+        "sha256": "3ac80818960d543f7b29c4292d82edf5cae1c3db067a53397096b539c2d96d3d",
+        "log_sha256": "c00cdeba90036215f860082750b0dc2152cb754a5cc86e012dc21ccac1e35be4",
+        "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v4/RESTORED.json",
+        "restored_sha256": "6c07e9c726eb43712303de9643be6bc4da1195e9223b1ab78e5298b248f476ee",
+        "summary_status": "overwritten by integration script; use forward recovered evidence and unchanged log/RESTORED"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v4",
+    "scope": "11temporaryRustrestored. ExistinginternalSYS4designated-onlycheckedpatch sameM9authorityrebase. Purepreviewcompat≠livecustody; exactparkedauthorityrefresh; exacttypedfragmentmodulowholeprogramidentity; reportallocationbeforefloor. Newnegativeguards/provenance/callerclosure/generalM9successor/recovery remainopen. No publicAPI/moduleaddition/networkclaim."
+  },
+  "c_evidence_writer_path_correction_20260929": {
+    "at": "2026-09-29T16:16:43.364523+00:00",
+    "classification": "forward evidence recovery; original summary overwritten by integration-script path reuse, not original command receipt",
+    "original_summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V4.json",
+    "original_summary_sha256_before_overwrite": "3ac80818960d543f7b29c4292d82edf5cae1c3db067a53397096b539c2d96d3d",
+    "current_overwritten_sha256": "429248bfb2a50549a10d68ebe3ccb29e0afdaa29b2602054227aeb7d23e26c49",
+    "tool": 25428,
+    "child_exit_previously_recorded": 0,
+    "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V4.log",
+    "log_sha256": "c00cdeba90036215f860082750b0dc2152cb754a5cc86e012dc21ccac1e35be4",
+    "result": "194passed0failed0ignored442filtered",
+    "restored": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-public-patch-green-v4/RESTORED.json",
+    "restored_sha256": "6c07e9c726eb43712303de9643be6bc4da1195e9223b1ab78e5298b248f476ee",
+    "scope": "Original log/frozen11sources/RESTORED unchanged. Later196selected and638full independently reran these tests. No fabricated original timestamp/command/hash restoration. Preserve overwritten file; correct writer target explicitly.",
+    "recovered_evidence": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PUBLIC_PATCH_GREEN-V4.recovered-evidence.json",
+    "recovered_evidence_sha256": "bfc4813059f6048cdab69c42c73676a343019be449e44d8132e904efe6141619"
+  },
+  "c_statement_projection_dependency_docs_20260929": {
+    "at": "2026-09-29T16:16:43.364523+00:00",
+    "tool": 86335,
+    "exit": 0,
+    "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-projection-dependency-checkpoint.log",
+    "pins": 190,
+    "recipe_negative": 107,
+    "read_ledger_prefix_preserved": true
+  },
+  "c_statement_patch_delta_oracle_20260929": {
+    "at": "2026-09-29T16:16:54.757424+00:00",
+    "session": "mir-w4-patch-r1",
+    "pid": 1608551,
+    "question_sha256": "60fb4ed4b5b930586432c984401c2f9114a52ce8c932e57ba68baf8208732150",
+    "manifest_sha256": "b11d9ca604361c9115039de885bcea045ac9aff20487ff8975510449de12ab47",
+    "display": ":0",
+    "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+    "next_status_after": "2026-09-29T16:19:54.757424+00:00",
+    "scope": "current196/full638 and190/19020/107 diff from prior179; read-only advisory, no acceptance",
+    "tool": 69931,
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-patch",
+    "status": "submitted wrapper running; first status due16:19:54UTC",
+    "model": "select strategy; actual UI verification pending"
   }
 }

@@ -805,7 +805,43 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalsePublicationNoOwner.lean': 'import OwnerStatementOriginalEntryControls\n'
                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.Publication '
                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls\n'
-                                 '#guard (publish (none,none) stagedSource).isSome\n'}
+                                 '#guard (publish (none,none) stagedSource).isSome\n',
+ 'FalseProjectionFailureErased.lean': 'import OwnerStatementResultCollectionControls\n'
+                                      'open '
+                                      'MirroreaProofFirst.OwnerStatementResultCollection.Projection '
+                                      'MirroreaProofFirst.OwnerStatementResultCollectionControls.Projection\n'
+                                      '#guard refusedDelivery = some .unavailable\n',
+ 'FalseProjectionInventsFailure.lean': 'import OwnerStatementResultCollectionControls\n'
+                                       'open '
+                                       'MirroreaProofFirst.OwnerStatementResultCollection.Projection '
+                                       'MirroreaProofFirst.OwnerStatementResultCollectionControls.Projection\n'
+                                       '#guard (successfulUnreported.bind failure).isSome\n',
+ 'FalseProjectionAllRefuse.lean': 'import OwnerStatementResultCollectionControls\n'
+                                  'open '
+                                  'MirroreaProofFirst.OwnerStatementResultCollection.Projection '
+                                  'MirroreaProofFirst.OwnerStatementResultCollectionControls.Projection\n'
+                                  '#guard successfulReported = some .unavailable\n',
+ 'FalseDependencyShortcut.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame\n'
+                                 '#guard queriesCheck [2] graph shortcut\n',
+ 'FalseDependencyTraceLoss.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame\n'
+                                  '#guard traceCheck [10,11] [10,12]\n',
+ 'FalseDependencyAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame\n'
+                                  '#guard !(queriesCheck [2] graph extended)\n',
+ 'FalseDependencySharedIgnored.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                      'open '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame\n'
+                                      '#guard visible (ownerStep ownerOperation ⟨200,0,7⟩) = '
+                                      'visible (ownerStep ownerOperation ⟨999,0,7⟩)\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1295,3 +1331,77 @@ two changed modules and whole owned-declaration audit against pinned earlier190
 dependencies. This is not another full fresh190 rebuild. New publication lemmas
 use only `propext`/`Quot.sound`; existing addition lemmas also use standard
 `Classical.choice`. No authored holes or Mir-specific axioms.
+
+## Actual result and optional reporting projection (forward LAB)
+
+`OwnerStatementResultCollection.Projection.deliver_exact` connects the executable
+adapter to an independent three-case relation. An original failure retains its
+exact reason with or without a reporting product; a successful result with an
+observation remains deliverable; a missing observation of a successful result
+is not a semantic failure or evidence of no effect. `failure_exact` and
+`failure_projection_independent` establish the general information-preservation
+property. `actual_failure_not_erased` connects it to the existing actual original
+queue advance and uniquely keyed attempt lookup, not a caller-supplied result.
+
+The reference local producer had a reporting-only early return before matching
+its real service result. Actual arithmetic underflow plus local observation-ID
+exhaustion reproduced loss of the exact failure in four initial/Reserved,
+local/remote-origin cases. Keeping the real diagnostic before optional reporting
+fixes those cases; success-without-report controls preserve the actual write and
+one body attempt without claiming completion. Enqueue has the analogous static
+correction, but no separately reproduced enqueue/projection failure control yet.
+The projected fabric store can remain stale while reporting is unavailable;
+actual lower state is checked directly. No counter rewind or fabricated report
+is part of the accepted controls.
+
+The updated dependency cone of ten modules was freshly compiled, followed by
+all190 owned-module axioms (18964 declarations) and103 qualified false controls,
+114 commands in total. Dependencies outside that cone are pinned earlier fresh
+objects; this is not another full190 rebuild. Axioms are only standard
+`propext`, `Quot.sound`, and, through actual queue lookup, `Classical.choice`.
+No authored holes, Mir-specific axioms, production adoption or C/D acceptance.
+
+## Dependency frame and existing checked-patch coexistence (forward LAB)
+
+`DependencyFrame.queriesCheck_exact` checks the independently stated equality
+of all selected original queries. `dependent_continuation_preserved` preserves
+any continuation that depends on those query results. `outside_change_accepted`
+accepts arbitrary changes outside that dependency set. `traceCheck_exact` checks
+an independently stated append-only extension; `original_observation_preserved`
+keeps the same existing lookup result. This does not establish that a physical
+set of selected queries includes every continuation dependency.
+
+`parked_refresh_keeps_owner_step` covers the local facade's owner call after
+moving the actual shared snapshot into the owner and back. Changing the parked
+snapshot preserves that call's visible result; changing shared authority is not
+justified. The reference permits only the existing checked-patch same-authority
+rebase, retaining every owner field except this exact parked-inventory refresh.
+Ordinary service still requires live custody. Preview manifest compatibility
+therefore does not need, and does not grant, live execution custody.
+
+The actual existing SYS4 checked designated-expression patch previously refused
+all four tested source phases. After the preview/frame correction, an additional
+original-fragment comparison incorrectly rejected its enclosing whole-program
+identity change. The corrected comparison retains the entire typed original
+local fragment and changes only the enclosing program identity in a temporary
+comparison value; it changes no stored original row. Independent checked patch
+admission, existing compatibility, and M9 authority rebase remain prerequisites.
+Preparing the activation report was also moved before canonical floor mutation.
+Four source phases now finish the original 200→190→191 assignments, each body
+once. This is designated-only patch coexistence, not module addition, a public
+API, general authority succession, network or durable recovery.
+
+Candidate causal-edge rewriting, local trace deletion and exhausted consumption
+identifier cases are rejected. Real same-generation relation extension remains
+accepted. The counter guard covers one existing committed-source consumption
+identifier; it does not prove resources for all later statements or reporting.
+Complete local/fabric dependencies, all entry/mutator/caller paths and the
+original source origin after decoding remain open before production adoption.
+
+Ten changed/dependent modules, the complete190 owned-module axiom audit (19020
+declarations) and107 qualified false controls passed in118 commands. The first
+two-module compile failed on elaboration/proof syntax and was not evidence; the
+corrected compile and complete audit contain no authored holes or extra axioms.
+New dependency lemmas use standard propext/Quot.sound, the parked-step lemma no
+axioms. Unchanged dependencies are pinned earlier fresh190 objects, not a new
+full190 rebuild. C remains incomplete and D unstarted.

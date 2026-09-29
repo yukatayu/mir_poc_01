@@ -50224,5 +50224,47 @@
     "status": "full-read",
     "role": "sole-main revised obsolete regression expectations with sourcepositive/typedambiguity/providerentry distinctions; whitespace-only normalization afterrun",
     "at": "2026-09-29T15:24:52.994585+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/OwnerStatementResultCollection.lean",
+    "sha256": "516cd22381d0ccaccb9d30dcff90a1e9a278d55817cbd598cf00501c0052643f",
+    "status": "full-read",
+    "role": "sole-main authored/read originalresult optionalprojection generalproof and controls; kernelchecked",
+    "at": "2026-09-29T15:44:38.277926+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-projection-result-v1/OwnerStatementResultCollectionControls.lean",
+    "sha256": "a6392e0da77292b2f6f73cf4110ae368370bd74b3ae3ff7c557dcdef97e14348",
+    "status": "full-read",
+    "role": "sole-main authored/read originalresult optionalprojection generalproof and controls; kernelchecked",
+    "at": "2026-09-29T15:44:38.277926+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-publication/ANSWER_RECOVERED.txt",
+    "sha256": "e18536369b4fee4bddb72018c31643bbf48f4ae926c92811e122962d0d740eb7",
+    "status": "full-read",
+    "role": "sole-main unsignedOraclepublication review and localdisposition; no acceptance",
+    "at": "2026-09-29T15:44:38.277926+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-publication/DISPOSITION.json",
+    "sha256": "bcfadb1c02570093415a1d8937a9b8f63973d8c527bb7ed00482bac5c8a1aab6",
+    "status": "full-read",
+    "role": "sole-main unsignedOraclepublication review and localdisposition; no acceptance",
+    "at": "2026-09-29T15:44:38.277926+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "e31be33272d700d8a93c51eb2252dbec2dae5908a742cd486510278ef74640b4",
+    "status": "full-read",
+    "role": "sole-main authored/read dependency frame and parked/shared generalproof; kernelchecked",
+    "at": "2026-09-29T16:02:23.672108+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "85542c270f8a8fb4bfb47494fa2195869513eee1d3dc98ba7724a2dad9aa6161",
+    "status": "full-read",
+    "role": "sole-main authored/read dependency frame and parked/shared generalproof; kernelchecked",
+    "at": "2026-09-29T16:02:23.672108+00:00"
   }
 ]

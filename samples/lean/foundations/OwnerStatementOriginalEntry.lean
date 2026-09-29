@@ -330,3 +330,102 @@ theorem changed_preview_refused [DecidableEq σ] (current : Owned σ γ) (candid
 #print axioms stale_basis_refused
 #print axioms changed_preview_refused
 end MirroreaProofFirst.OwnerStatementOriginalEntry.Publication
+
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame
+variable {α κ β σ π : Type}
+-- Dependencies of a retained source must be included in its protected frame.
+-- This finite reader check preserves exactly the selected queries (for example
+-- existing causal predecessor lists), independently of unrelated additions.
+def queriesCheck [DecidableEq α] (keys : List κ) (before after : κ → α) : Bool :=
+ keys.all fun key => decide (before key = after key)
+def Agrees (keys : List κ) (before after : κ → α) : Prop :=
+ ∀ key ∈ keys, before key = after key
+
+variable {keys : List κ} {before after : κ → α}
+
+theorem queriesCheck_exact [DecidableEq α] :
+ queriesCheck keys before after = true ↔ Agrees keys before after := by
+ simp [queriesCheck,Agrees,List.all_eq_true]
+
+theorem query_results_equal [DecidableEq α]
+ (checked : queriesCheck keys before after = true) : keys.map before = keys.map after := by
+ apply List.map_congr_left
+ intro key member
+ exact queriesCheck_exact.mp checked key member
+
+theorem dependent_continuation_preserved [DecidableEq α]
+ (checked : queriesCheck keys before after = true) (continuation : List α → β) :
+ continuation (keys.map before) = continuation (keys.map after) := by
+ rw [query_results_equal checked]
+
+theorem outside_change_accepted [DecidableEq α] [DecidableEq κ]
+ (keys : List κ) (before : κ → α) (changed : κ) (replacement : α)
+ (outside : changed ∉ keys) :
+ queriesCheck keys before (fun key => if key = changed then replacement else before key) = true := by
+ apply queriesCheck_exact.mpr
+ intro key member
+ have different : key ≠ changed := by intro same; subst key; exact outside member
+ simp [different]
+
+def traceCheck [DecidableEq α] : List α → List α → Bool
+ | [],_ => true
+ | _::_,[] => false
+ | first::rest,next::tail => decide (first = next) && traceCheck rest tail
+
+theorem traceCheck_exact [DecidableEq α] (before after : List α) :
+ traceCheck before after = true ↔ ∃ extra, after = before ++ extra := by
+ induction before generalizing after with
+ | nil => simp [traceCheck]
+ | cons first rest ih =>
+   cases after with
+   | nil => simp [traceCheck]
+   | cons next tail =>
+     constructor
+     · intro checked
+       have parts : first = next ∧ traceCheck rest tail = true := by
+         simpa only [traceCheck,Bool.and_eq_true,decide_eq_true_eq] using checked
+       obtain ⟨extra,same⟩ := (ih tail).mp parts.2
+       refine ⟨extra, ?_⟩
+       simp [parts.1,same]
+     · rintro ⟨extra,same⟩
+       have parts : next = first ∧ tail = rest ++ extra := by simpa using same
+       simp only [traceCheck,Bool.and_eq_true,decide_eq_true_eq]
+       exact ⟨parts.1.symm,(ih tail).mpr ⟨extra,parts.2⟩⟩
+
+theorem original_observation_preserved [DecidableEq α] (before after : List α)
+ (checked : traceCheck before after = true) (query : α → Bool)
+ (found : before.find? query = some row) : after.find? query = some row := by
+ obtain ⟨extra,rfl⟩ := (traceCheck_exact before after).mp checked
+ simp [List.find?_append,found]
+
+-- The local owner facade is called only after swapping the actual shared
+-- snapshot into it, and swapped back after the call. Its parked snapshot is
+-- representation state. This theorem covers that call's visible result only;
+-- it does not justify changing shared authority, another direct entry, or a
+-- snapshot observer. Those require independent current-authority/frame checks.
+structure Local (σ π : Type) where
+ shared : σ
+ parked : σ
+ owner : π
+ deriving DecidableEq
+
+def ownerStep (operation : σ → π → σ × π × β) (state : Local σ π) : Local σ π × β :=
+ let result := operation state.shared state.owner
+ (⟨result.1,state.parked,result.2.1⟩,result.2.2)
+def visible (result : Local σ π × β) : σ × π × β :=
+ (result.1.shared,result.1.owner,result.2)
+
+theorem parked_refresh_keeps_owner_step (operation : σ → π → σ × π × β)
+ (state : Local σ π) (parked : σ) :
+ visible (ownerStep operation {state with parked := parked}) =
+ visible (ownerStep operation state) := rfl
+
+#print axioms queriesCheck_exact
+#print axioms query_results_equal
+#print axioms dependent_continuation_preserved
+#print axioms outside_change_accepted
+#print axioms traceCheck_exact
+#print axioms original_observation_preserved
+#print axioms parked_refresh_keeps_owner_step
+end MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame
