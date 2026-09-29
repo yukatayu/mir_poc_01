@@ -8,8 +8,8 @@ and local/remote dispatch. Production integration still requires closure over
 all admitted entry/image routes and the physical failure/resource obligations.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 184 dependency
-modules: 65 reused and 119 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 186 dependency
+modules: 65 reused and 121 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
@@ -680,7 +680,29 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                            'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
                                            'MirroreaProofFirst.OwnerStatementResultCollection '
                                            'MirroreaProofFirst.OwnerStatementResultOriginControls\n'
-                                           '#guard (forged.bind fun (s,t) => collect s t).isNone\n'}
+                                           '#guard (forged.bind fun (s,t) => collect s t).isNone\n',
+ 'FalseLifecycleHistoricalTicketIsCurrent.lean': 'import OwnerStatementResultLifecycleControls\n'
+                                                 'open MirroreaProofFirst '
+                                                 'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                                 'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                                 'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                                 'MirroreaProofFirst.OwnerStatementResultCollection '
+                                                 'MirroreaProofFirst.OwnerStatementResultLifecycleControls\n'
+                                                 '#guard (oldReported.map fun (s,t) => '
+                                                 '(MixedOwnerSourceIssue.ownerWaiting '
+                                                 's.live.session.state.source.waiting).map (fun w '
+                                                 '=> w.saved) == some t.saved) = some true\n',
+ 'FalseLifecyclePhaseReportImpliesCommit.lean': 'import OwnerStatementResultLifecycleControls\n'
+                                                'open MirroreaProofFirst '
+                                                'MirroreaProofFirst.OwnerStatementLiveCustodian '
+                                                'MirroreaProofFirst.OwnerStatementSourceCustodian '
+                                                'MirroreaProofFirst.OwnerStatementSourceCustodianControls '
+                                                'MirroreaProofFirst.OwnerStatementResultCollection '
+                                                'MirroreaProofFirst.OwnerStatementResultLifecycleControls\n'
+                                                '#guard (phaseOnlyFailure.bind fun (s,t) => '
+                                                'collect s t |>.map fun result => match result '
+                                                'with | .committed _ => true | _ => false) = some '
+                                                'true\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -991,3 +1013,32 @@ false controls in79 commands. Only standard logical axioms are used. This closes
 the named mathematical bridge, not physical fault simulation, current Bank.tick
 correspondence, custody uniqueness, disclosure permission or all reporting
 callers: the earlier phase-only Path remains broader than reportActual.
+
+## Rooted actual-result lifecycle (LAB successor)
+
+`OwnerStatementResultLifecycle.Path` replaces the earlier phase-only reporting
+step with `reportActual`, retaining the original source progress, transfer,
+stage, guarded service, checked source consume, continuation and idle authority
+refresh. `path_postHeld` derives the post-execution ticket's correspondence to
+the current waiting saved request and dispatch history from the live start and
+these transitions. Reported status additionally retains an actual collectible
+committed result. The theorem uses independently checked service readiness and
+proves that the original service preserves source waiting; it does not assume
+its desired held/result conclusion as an admission axiom.
+
+With the existing registry admission lineage, `rooted_report_origin` binds that
+current source ticket to actual owner history. `rooted_consume_sound` composes
+the existing checked Bank tick and accepted one-write source prefix. The new
+executable two/four-statement driver has a general derivation into this Path.
+A constructor-level control keeps a genuine old result but replaces outer held
+custody while the next statement waits: raw collection/reporting succeeds,
+checked consumption refuses, and the general waiting invariant excludes that
+state from the new Path. Another control distinguishes the old phase-only
+reporting of a refusal from actual-result reporting. Historical definitions
+remain unchanged.
+
+Fresh audit:186 modules/18664 owned declarations,78 qualified false controls,
+81 commands with the expected outcomes; only standard logical axioms. The named
+mathematical lifecycle is narrower than the old Path. This does not close all
+physical callers, constructor/import provenance, exclusive custody, current
+Rust acknowledgment, resources, failure handoffs or authorized disclosure.

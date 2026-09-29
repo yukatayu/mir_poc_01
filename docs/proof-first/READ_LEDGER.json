@@ -50056,5 +50056,26 @@
     "status": "full-read",
     "role": "sole-main authored and kernel audited admitted-result bridge",
     "at": "2026-09-29T10:50:30.935135+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-lifecycle-v1/OwnerStatementResultLifecycle.lean",
+    "sha256": "8964f648acd07ca565af035a69c444fd48ee1b7dd1e1f9807a5e1536d06b6f33",
+    "status": "full-read",
+    "role": "sole-main authored/kernel audited rooted result lifecycle or independently checked Oracle advice",
+    "at": "2026-09-29T11:31:19.295048+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-lifecycle-v1/OwnerStatementResultLifecycleControls.lean",
+    "sha256": "50312efe79597450a825beba5ee1c42edcdffaabe30be7b930da1eeaec9a3651",
+    "status": "full-read",
+    "role": "sole-main authored/kernel audited rooted result lifecycle or independently checked Oracle advice",
+    "at": "2026-09-29T11:31:19.295048+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-recovery/ANSWER_RECOVERED.txt",
+    "sha256": "1a4f61684f1d2e472ed2c6626e6c9c2631be0646c243c080cca7a451c7926d31",
+    "status": "full-read",
+    "role": "sole-main authored/kernel audited rooted result lifecycle or independently checked Oracle advice",
+    "at": "2026-09-29T11:31:19.295048+00:00"
   }
 ]

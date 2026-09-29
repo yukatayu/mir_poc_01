@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "at": "2026-09-29T10:50:30.935135+00:00",
+  "at": "2026-09-29T11:31:19.295048+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
-  "source_count": 184,
+  "source_count": 186,
   "reused": 65,
-  "added": 119,
+  "added": 121,
   "import_renames": 8,
   "rows": [
     {
@@ -2047,6 +2047,28 @@
       "canonical_module": "OwnerStatementResultOriginControls",
       "staged_sha256": "54083eba83f34b43525bfbf67542336945a1f4c66bfd99ef490fe07065a65cca",
       "transformation": "identity; admitted history and original guarded service collection bridge LAB candidate"
+    },
+    {
+      "module": "OwnerStatementResultLifecycle",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-lifecycle-v1/OwnerStatementResultLifecycle.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultLifecycle.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "8964f648acd07ca565af035a69c444fd48ee1b7dd1e1f9807a5e1536d06b6f33",
+      "canonical_module": "OwnerStatementResultLifecycle",
+      "staged_sha256": "8964f648acd07ca565af035a69c444fd48ee1b7dd1e1f9807a5e1536d06b6f33",
+      "transformation": "identity; rooted actual-result/current-source custody lifecycle LAB candidate"
+    },
+    {
+      "module": "OwnerStatementResultLifecycleControls",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-lifecycle-v1/OwnerStatementResultLifecycleControls.lean",
+      "destination": "samples/lean/foundations/OwnerStatementResultLifecycleControls.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "50312efe79597450a825beba5ee1c42edcdffaabe30be7b930da1eeaec9a3651",
+      "canonical_module": "OwnerStatementResultLifecycleControls",
+      "staged_sha256": "50312efe79597450a825beba5ee1c42edcdffaabe30be7b930da1eeaec9a3651",
+      "transformation": "identity; rooted actual-result/current-source custody lifecycle LAB candidate"
     }
   ],
   "audit": {
@@ -2158,5 +2180,12 @@
     "fresh_commands": 79,
     "qualified_false": 76,
     "owned": 18601
+  },
+  "result_lifecycle_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-result-lifecycle-v1/RESULT.json",
+    "sha256": "67e7c42d2ecdbb8313252bad7fe0020bfc425f16649b60c90fd58791189e3974",
+    "fresh_commands": 81,
+    "qualified_false": 78,
+    "owned": 18664
   }
 }

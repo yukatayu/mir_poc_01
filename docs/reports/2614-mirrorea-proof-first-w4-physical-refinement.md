@@ -4166,3 +4166,17 @@ C incomplete/D unstarted, stopafterD beforeE. Own5docsdirty; no userdirt, no sub
 2026-09-29T10:52:28.809800+00:00: 同一原要求のenqueue→local occurrence handoffを36332実反例/18241全43検査で、reply dequeue→completed receipt保持を69601実反例/59909全45検査で照合。後者は実受信前にreceiptを作らず、実step_locusのdequeue/receipt/受領stepを同じlocal transactionで確定。公開前後故障と同じreceipt回収でbody1維持。全8Rust原状復元、未採用参照。初回送信準備・in-transit fault選択・current ack・全入口/資源は未完。関連6snapshot同期、同じreport2614/planへ前方記録。
 
 - 2026-09-29T10:58:58.601291+00:00: make docs35630 exit0（218index/800hierarchy/scaffold）、184sourcepins・ledger旧6641prefix・diffcheck確認。初回送信準備RED78502 child101をremaining0の実反例として保持し修正継続。新差分review mir-w4-source-recovery-r1/89434へ38files827544bytesを一度送信、回答待ち。現checkpointはproof/docsのみ、productionRust未採用、全8原状復元。
+
+- 2026-09-29T11:05:58.745347+00:00: checkpoint2fb5f24e519b532fd1771eaa60186c60864652a8をcommit/push74661exit0/upstream一致。後続の初回準備6093/47検査で元ID・全prepared経路/lineage保持、4ID境界と公開前後故障・差替拒否を照合、8Rust復元。最初のrequestID/route失敗の境界は未完。既存fault admission入口を追い、選択済みCorruptSourceRefがmove失敗で消えるかRED48303で検査中。
+
+- 2026-09-29T11:10:00.849616+00:00: fault-selection RED48303 child101 / GREEN18758 child0全49検査、8Rust復元。既存fault入口のexactedge/liveenvelope照合を通したCorruptSourceRefの選択喪失を再現し、actualoriginalcarrier/selectedfault/resultとfaultlistを同じsource transport確定へ含めた。receiver拒否/body0、terminal retargetはrollbackせず元診断を保持。remote attacker・debug認可・全fault範囲の証明ではない。外側確定境界のreturn loss・因果2辺・currentAck/entry等を継続。
+
+2026-09-29T11:16:37.522140+00:00: Oracle NV samejob mir-w4-source-recovery-r1 completed11:10:41UTC/full DOM recovered11:13:46UTC,30047chars SHA1a4f61684f1d2e472ed2c6626e6c9c2631be0646c243c080cca7a451c7926d31;22dispositions. Source45/KRO184 frozen cut narrow repairs supported; resumed refusal first-report information loss and later collection erasure now testing; lower preflight/claim/refusal retention, current receive+ack, all-entry/compatibility/resources still open. New preparation47/fault49 postdate packet and require differential review. No production/Canon adoption.
+
+2026-09-29T11:18:23.368610+00:00: NV R1/R2実反例29250 child101/6独立失敗→57294 child0/全55参照検査。ST local/remote/eligible OW1で再開拒否の初回型付き診断回収と取得済み拒否の単調保持、body1/sourceheld/cursor0を確認。全8Rust原状復元。新規production採用なし。次は実receive→consume→next requestおよびformal reported/held/result結合。
+
+2026-09-29T11:22:45.533219+00:00: Source consumption RED52882 child101/7失敗→GREEN5983 child0/全62参照検査。元owner reply payload/routeと実requester receive/receiptを照合、owner完了+実受領→consume→次の実requestの直接依存を確認。5つのassociation改変はprivate constructor scope probeでありadmitted attackerではない。current Bank.tick/auth/refinementは未完。全8Rust復元。新規Lean OwnerStatementResultLifecycle（正規PathのreportActual限定、実sourcewaiting+dispatch+結果history）機械検査66167実行中。
+
+2026-09-29T11:31:19.295048+00:00: ResultLifecycle98543全体0・81commands（3zero/78qualifiedfalse）、186modules18664decls、RESULT67e7c42d2ecdbb8313252bad7fe0020bfc425f16649b60c90fd58791189e3974。正規start→guarded service/reportActualのPathから現在待機saved/dispatch/実committed履歴を一般証明し、元Bank.tickのAcceptedへ接続。実2/4statement driverのPath導出、古い正当結果と別sourceの混同・旧phase-only拒否報告の反例を併記。2Lean+audit+manifest+recipeをLAB統合。Rust62参照は未採用、下層publication/current ack/全caller/資源は未完。差分Oracle83333 mir-w4-lifecycle-r1起動、40files998834bytes。所有者cleanup明示指示でuntracked Cargo incrementalのみ7.27GiB削除、空き8.23GiB、HEAD/ソース差分/全証拠保持。独立署名reviewer/subagentなし。
+
+2026-09-29T11:38:01.274644+00:00: lifecycle統合後make docs76760exit0（agent config/Canon218/source hierarchy800/scaffold1764reports）、source186pins/78recipeAST/historicalREAD_LEDGER6650prefix保持を照合。NWは6Pro最大推論選択を11:34:26UTC確認し同一job継続。lowerClaimed→Queuedの実キュー保存境界は新規参照反例探索中。
