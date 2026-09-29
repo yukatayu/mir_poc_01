@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "at": "2026-09-29T11:31:19.295048+00:00",
+  "at": "2026-09-29T12:11:35.004630+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
-  "source_count": 186,
+  "source_count": 188,
   "reused": 65,
-  "added": 121,
+  "added": 123,
   "import_renames": 8,
   "rows": [
     {
@@ -2069,6 +2069,28 @@
       "canonical_module": "OwnerStatementResultLifecycleControls",
       "staged_sha256": "50312efe79597450a825beba5ee1c42edcdffaabe30be7b930da1eeaec9a3651",
       "transformation": "identity; rooted actual-result/current-source custody lifecycle LAB candidate"
+    },
+    {
+      "module": "OwnerStatementAcknowledgment",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-acknowledgment-v1/OwnerStatementAcknowledgment.lean",
+      "destination": "samples/lean/foundations/OwnerStatementAcknowledgment.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "8b2307b17f48da397a8eaddf3014ea9bc9a36f1affff8497655bbe75fa507966",
+      "canonical_module": "OwnerStatementAcknowledgment",
+      "staged_sha256": "8b2307b17f48da397a8eaddf3014ea9bc9a36f1affff8497655bbe75fa507966",
+      "transformation": "identity; independent current receipt checker and original Bank.tick exactness LAB candidate"
+    },
+    {
+      "module": "OwnerStatementAcknowledgmentControls",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-acknowledgment-v1/OwnerStatementAcknowledgmentControls.lean",
+      "destination": "samples/lean/foundations/OwnerStatementAcknowledgmentControls.lean",
+      "exists": false,
+      "renamed": false,
+      "sha256": "db2e79897d38e4519c72035b547670cb9fcd8d6769bb64c6598ff925fb3b38f2",
+      "canonical_module": "OwnerStatementAcknowledgmentControls",
+      "staged_sha256": "db2e79897d38e4519c72035b547670cb9fcd8d6769bb64c6598ff925fb3b38f2",
+      "transformation": "identity; independent current receipt checker and original Bank.tick exactness LAB candidate"
     }
   ],
   "audit": {
@@ -2187,5 +2209,12 @@
     "fresh_commands": 81,
     "qualified_false": 78,
     "owned": 18664
+  },
+  "acknowledgment_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-acknowledgment-v1/RESULT.json",
+    "sha256": "7475ba6b2864b43420d6ee480b1d8c05d4bf3ad8ac10c472cdf7e7af83218563",
+    "fresh_commands": 84,
+    "qualified_false": 81,
+    "owned": 18706
   }
 }

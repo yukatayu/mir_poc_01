@@ -8,8 +8,8 @@ and local/remote dispatch. Production integration still requires closure over
 all admitted entry/image routes and the physical failure/resource obligations.
 
 The source-only integration manifest is
-`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 186 dependency
-modules: 65 reused and 121 added. Eight import names are translated to existing
+`docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json`. It records 188 dependency
+modules: 65 reused and 123 added. Eight import names are translated to existing
 repository filenames. Definition bodies and namespaces are preserved exactly;
 there is no second copy of an existing definition. W4-B's frozen manifest is
 unchanged. The admission-cut Oracle review is final and its 14 findings are
@@ -702,7 +702,19 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                                 '#guard (phaseOnlyFailure.bind fun (s,t) => '
                                                 'collect s t |>.map fun result => match result '
                                                 'with | .committed _ => true | _ => false) = some '
-                                                'true\n'}
+                                                'true\n',
+ 'FalseAckAllRefused.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                            'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                            'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                            '#guard (good.map fun (s,t) => check s t) = some false\n',
+ 'FalseAckHistoryImpliesCurrent.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                                       'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                                       'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                                       '#guard (changed.map fun (s,t) => check s t) = some true\n',
+ 'FalseAckUsedStillAccepted.lean': 'import OwnerStatementAcknowledgmentControls\n'
+                                   'open MirroreaProofFirst.OwnerStatementAcknowledgment '
+                                   'MirroreaProofFirst.OwnerStatementAcknowledgmentControls\n'
+                                   '#guard (consumedId.map fun (s,t) => check s t) = some true\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1042,3 +1054,31 @@ Fresh audit:186 modules/18664 owned declarations,78 qualified false controls,
 mathematical lifecycle is narrower than the old Path. This does not close all
 physical callers, constructor/import provenance, exclusive custody, current
 Rust acknowledgment, resources, failure handoffs or authorized disclosure.
+
+## Current receipt checker and original source consumption (LAB successor)
+
+`OwnerStatementAcknowledgment.lowerCheck` checks the actual retained pending,
+unused request identity, materialized full saved request and original receipt
+checker. Its independent `LowerReady` rule states exact received binding,
+original service evidence context and current authority/use conditions.
+`check` additionally tests actual designation/reported custody, stopped source
+assignment, current waiting saved request and first inbox reply. `check_exact`
+proves soundness and completeness against the independent `Ready` rule.
+`ready_consume` derives the original `Bank.tick` consumption without a successful
+tick premise; `consumed_ready` gives the converse under existing admitted Facts.
+`check_consume_exact` is the resulting relative equivalence. This is a pure
+receipt check, not another owner evaluator or authority issuer.
+
+The actual broader authority-head installer can retain a genuine historical
+write190 while making its original evidence stale for acknowledgment. The new
+checker and original consume both refuse it; the narrower supported source Path
+still prohibits held refresh. A private already-used-ID control and the genuine
+old-ticket control separate current consumption from mere historical origin.
+The normal actual report passes, ruling out an all-refusing checker. The general
+`current_generation_rejected` theorem is separate from these finite controls.
+
+Fresh audit:188 modules/18706 owned declarations,81 qualified false controls,
+84 commands. Standard logical axioms only; no authored holes or Mir-specific
+axioms. Physical field decoding, all eligible callers, coherent Rust publication
+and resource/authority/metadata framing remain implementation obligations.
+The unadopted Rust adapter is not certified by this theorem.

@@ -49305,7 +49305,7 @@
     "review": "Frozen differential Oracle mir-w4-lifecycle-r1 pending; no dependent production adoption"
   },
   "c_statement_source_lifecycle_review_20260929": {
-    "status": "running",
+    "status": "final",
     "tool": 83333,
     "submission": {
       "at": "2026-09-29T11:29:49.711442+00:00",
@@ -49320,7 +49320,42 @@
     },
     "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-lifecycle",
     "files": 40,
-    "bytes": 998834
+    "bytes": 998834,
+    "final": {
+      "at": "2026-09-29T11:47:22.629Z",
+      "session": "mir-w4-lifecycle-r1",
+      "target": "0A2D279C9AAE5BE628676B03EF273317",
+      "identity": true,
+      "stop": false,
+      "controls": [
+        {
+          "label": "Copy message",
+          "text": ""
+        },
+        {
+          "label": "Copy",
+          "text": ""
+        },
+        {
+          "label": "Copy table",
+          "text": ""
+        },
+        {
+          "label": "Copy",
+          "text": ""
+        },
+        {
+          "label": "Regenerate response",
+          "text": ""
+        }
+      ],
+      "answer_sha256": "de35bc2206ca799a39864880cda02fa93f7d2fd26178daa8de8f29124942ed53",
+      "chars": 30761,
+      "scope": "same submitted conversation DOM recovery; wrapper short answer retained and not accepted as review"
+    },
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-lifecycle/DISPOSITION.json",
+    "disposition_sha256": "6be517e4fd68c88e8145b1ed44b3b27eedc9a8172162150871013a7eb577570e",
+    "disposition_items": 24
   },
   "storage_cleanup_20260929": {
     "record": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-cleanup-20260929T112833Z/RESULT.json",
@@ -49346,6 +49381,394 @@
     "tool": 76760,
     "exit": 0,
     "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-result-lifecycle-20260929T113132Z.log",
+    "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+  },
+  "c_statement_claimed_queue_reference_20260929": {
+    "at": "2026-09-29T11:42:42.924895+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 55751,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_CLAIMED_QUEUE_RED-V1.json",
+        "sha256": "350b66793609ce1c866906f872ba8d63ac36fa0b33128f8c4b9d1f1f49ac6545",
+        "log_sha256": "fbe5ed89a1cd877eec13a1effa842313eadeafa21689f7b2102b1508524d9131"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 4165,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_CLAIMED_QUEUE_GREEN-V1.json",
+        "sha256": "fedcf61b30f31f3dcc364a980abee0d0cde2079eb9b74e24cb1046017c16bf08",
+        "log_sha256": "ec3120f823d5b2843b518628f0fae365fefd15263d60fcd96a0f1400d6e280f6"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-claimed-queue-green-v1",
+    "selected_passes": 64,
+    "restored": {
+      "at": "2026-09-29T11:40:43.897394+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Actual lower enqueue completed FIFO1/body0 then loss before Queued publication leavesClaimed; STlocal/remote reproduced. Reconcile only original live binding/key/fullrequest/root/currentplan and actual FIFO head+enqueue fact, then originalservice once. No fresh enqueue/authority renewal, no empty/partial-to-success inference. Copied executor refuses. Preflight/earlierclaim and actual refusal publication separate/open."
+  },
+  "c_statement_preflight_reference_20260929": {
+    "at": "2026-09-29T11:51:29.268790+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 15549,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PREFLIGHT_RED-V1.json",
+        "sha256": "bcca95dcabbb33674847f0c6437cf69aec74a8b21ad4bdeb7dd5bcd027f0725c",
+        "log_sha256": "a06e939b86e7927466dc18b2a37618449f3fe482e2c58148e4a89ea1f12e81d8"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 82860,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PREFLIGHT_GREEN-V1.json",
+        "sha256": "bbcae05cccb9f7ab37114195aa02ca7c632b465044d006aa87c9bb8a0c8f826e",
+        "log_sha256": "b3ca5a289ee9ed686279219c555ec26f8376632a43e4ddc0c27e8fbb28209773"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-preflight-green-v1",
+    "selected_passes": 72,
+    "restored": {
+      "at": "2026-09-29T11:47:04.865988+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Eight STlocal/remote actual lower counter0..3preflight refusals; exactlivebinding/fullroot/arguments/generation/sourcepending required before retaining original diag. No occurrence fabricated; zero rows,body0,cursor0,held. Diagnostic constructor helper caller closure remains internal reference obligation. Not production/adoption."
+  },
+  "c_statement_primary_reference_20260929": {
+    "at": "2026-09-29T11:58:45.737891+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 80098,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PRIMARY_RED-V1.json",
+        "sha256": "022666913ec911a1490d5287f879220f9ec382da9344440ad227e2aff7e3e8f5",
+        "log_sha256": "3a4324e50ba91e25fa1f9d2319e8ebe3ce79c73d79b48b48a84c0fc83cca0b7c"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 7112,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_PRIMARY_GREEN-V1.json",
+        "sha256": "e756b80fdd1d9a0567790f3f763601b0c5aa9ffd49bf077d31b44ebd1beeda14",
+        "log_sha256": "ce3558b5721e0d0846dfc6da7dc8454db61d48bc14c81afa8a111f906b94b384"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-primary-green-v1",
+    "selected_passes": 76,
+    "restored": {
+      "at": "2026-09-29T11:53:00.666983+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Four real postbody preparation refusals with injected loss after lower terminal result/before source copy; baseline source mutex poisoning at copy hook reproduced. Original actual terminal diagnostic moved into same executor primary with pre-effect full source key, before outward clone. Copy for pending published outside lock; exact original request/root/key recovery sets AttemptedNoCommit, no repeated body. Body1/store200/heldcursor0. Not allocator-abort/process crash/inside-body allocation/allfailurebranches/worker-return proof."
+  },
+  "c_statement_acknowledgment_20260929": {
+    "at": "2026-09-29T12:11:35.004630+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-acknowledgment-v1/RESULT.json",
+    "sha256": "7475ba6b2864b43420d6ee480b1d8c05d4bf3ad8ac10c472cdf7e7af83218563",
+    "tool": 53727,
+    "whole_exit": 0,
+    "fresh_commands": 84,
+    "qualified_false": 81,
+    "source_count": 188,
+    "owned_count": 18706,
+    "scope": "Independent exact receipt/current-use/unused/full-saved checker proved sound and complete for original source consume Bank.tick under existing admitted Facts; no successful tick premise in completeness. Existing broader authority installer preserves historical commit but checker refuses old-current-context; supported heldrefresh remains excluded. Actualreported positive, falseallrefusal and privateusedID discriminators. No new authority, physical field-decoding proof, allcaller closure or Rust adoption.",
+    "review": "Frozen differential Oracle mir-w4-ack-r1 running; no dependent production adoption"
+  },
+  "c_statement_acknowledgment_review_20260929": {
+    "status": "running",
+    "tool": 76174,
+    "submission": {
+      "at": "2026-09-29T12:07:44.956984+00:00",
+      "session": "mir-w4-ack-r1",
+      "pid": 418537,
+      "question_sha256": "697b935c396e1367b1c3df037afa29166775be1d44e592ca31cc6dfc6b4862c6",
+      "manifest_sha256": "801f654cad89f4def0e89465b415d6fbc500f7f43f22c55ca0e4358890ba4c9e",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-29T12:10:44.956984+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-acknowledgment",
+    "files": 58,
+    "bytes": 1213895
+  },
+  "c_statement_acknowledgment_reference_20260929": {
+    "at": "2026-09-29T12:12:50.149567+00:00",
+    "runs": [
+      {
+        "version": "RED-V1",
+        "tool": 78968,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_ACKNOWLEDGMENT_RED-V1.json",
+        "sha256": "d82a5337a7d918ae83629dccdfa40d363767dae2e86ce745c210f9f074015db4",
+        "log_sha256": "27b2efab35257b699830e3db8765e71aed13da12ee73c5d83a8546de3e2a8107"
+      },
+      {
+        "version": "GREEN-V1",
+        "tool": 4090,
+        "whole_exit": 0,
+        "child_exit": 101,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_ACKNOWLEDGMENT_GREEN-V1.json",
+        "sha256": "35a1ee384c332655b9d1446ed1e4a749d3e2fdbead6fcedfe689f9d771f0d4fc",
+        "log_sha256": "b16b80f9b7009dcaab507455d96a8932377df03831936744dcf01dc850c0a717"
+      },
+      {
+        "version": "GREEN-V2",
+        "tool": 85430,
+        "whole_exit": 0,
+        "child_exit": 0,
+        "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_ACKNOWLEDGMENT_GREEN-V2.json",
+        "sha256": "17f7469d15d824e559e434d24f26ee838dcc1f6eb8132b71dbbe239262ff427b",
+        "log_sha256": "be93caaa83907c8e57bb3f7d7e0a60334e6cad07787b8552f6694d91524e62e8"
+      }
+    ],
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-acknowledgment-green-v2",
+    "selected_passes": 82,
+    "restored": {
+      "at": "2026-09-29T12:10:23.007925+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Four scope failures/two existing counter-denial passes STlocal/remote. Existing authentic M9 successor directly installed into sharedfloor TEST ONLY, not admitted heldrefresh; oldphase mutation private. Ack now checks original fullargs/currentprojectedCore/currentownerlineage and existing no-observation M9 revalidate, matching current sharedfloor held during consumption. Preparegraph/event/counter without mutation, exactpendingCommitted checked under source mutex; only field moves publish cursor/graph/counter/held flags. Samecompletion after restoring injectedfault consumes bodyonce/no newM9observation. Full physical decoding to LeanReady/allmutators/publication-interruption/allmetadata still unproved. GREENv1 compile Option owned/reference type mismatch fixed; no production adoption."
+  },
+  "c_statement_ack_publication_reference_20260929": {
+    "at": "2026-09-29T12:15:51.911931+00:00",
+    "tool": 92129,
+    "whole_exit": 0,
+    "child_exit": 0,
+    "summary": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_SOURCE_ACK_PUBLICATION_GREEN-V1.json",
+    "log_sha256": "51b8e331b28c760bcdbe3aae6b17623a17e66ce20a0e57b2baffd51a2c20002b",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-development/source-ack-publication-green-v1",
+    "selected_passes": 86,
+    "restored": {
+      "at": "2026-09-29T12:14:25.726154+00:00",
+      "files": [
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+          "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+          "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+          "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+          "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+          "sha256": "9061124a84ba358db92ff488985adc7ba35ebe17e2146a8c31bd4a77626b2f07",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+          "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+          "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+          "restored": true
+        },
+        {
+          "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+          "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+          "restored": true
+        }
+      ]
+    },
+    "scope": "Four STlocal/remote pre/post coherent source consumption publication injected return losses. Prepublication retains source/graph/counter and same retained duplicate completion can consume; postpublication cursor/graph/counter/held flags alladvanced, duplicate refuses unchanged, next distinct statement executes once. No newM9validation/ownerrepeat/authorityfloorpoison. Validation-only hooks of82repair, no REDcounterclaim. Not physicalReady decoding/allmutators/allocatorabort/durableatomicity."
+  },
+  "c_statement_acknowledgment_docs_20260929": {
+    "at": "2026-09-29T12:19:31.759056+00:00",
+    "tool": 19466,
+    "exit": 0,
+    "command": "make docs",
+    "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-acknowledgment-20260929T121300Z.log",
     "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
   }
 }
