@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-30 20:58 JST
+最終更新: 2026-09-30 21:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,7 +60,7 @@ sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owne
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-週間残量は11:04:18 UTCの確認で77%（使用23%）でした。次の確認は12:04:18 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は12:07:34 UTCの確認で76%（使用24%）でした。次の確認は13:07:34 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -72,13 +72,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用11path参照physical-authority-green-v5で、登録済みprepare入力から実M9・共有floor・同じbackendを更新する11件が通過しました。実owner body後の観測・履歴・未配送replyを保持し、ST sessionと適格な一owner OW1 workerの実更新、更新後ACK喪失時の凍結も確認しました。通常default/private-QUIC buildと同cutの全544feature検査が通り、11pathは元へ復元しています。全SYS5/source/result状態のprepared ACK・親の公開・全endpoint有効化はまだ生成しません。次は実process runtime全体を所有するmodeと実prepared-state保持を接続します。元source cursor・I3 admission・実結果回収・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。Cの元source・結果保持とDの制御・実権限準備を統合した外部未採用23path参照source-control-union-v5で、通常default/private-QUIC buildと全906feature検査が通過しました。通常build用の不透明な状態・保持処理を整え、任意activationの構築と故障注入はtest限定に保っています。通常compiler対照2件はその入口不在で正しく失敗しました。全23pathは元へ復元しています。実M9/floor/backend準備11件も同cutで検査し、全process/source/result状態のprepared ACK・親の公開・全endpoint有効化はまだ生成しません。次は実process runtimeの所有と登録済みbootstrapを、元handler全体・Core・引数・文順序へ接続します。元source cursor・I3 admission・実結果回収・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11/normal default+QUIC/full544 pass in current external D reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + coherent C/D union23/normal default+QUIC/full906 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -615,3 +615,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 19:50 JST: D実M9全体stage/3endpoint制限6件、登録grant/prepare40件・同cut全533件・通常build通過、9path復元。実backend/準備ACK/公開/有効化は次のconsumerとして継続。
 
 - 2026-09-30 20:51 JST: D実M9/floor/backend準備11件・実worker更新後ACK喪失対照・同cut全544件・通常build通過、11path復元。全process/source/result準備ACKと公開/有効化の接続へ継続。
+
+- 2026-09-30 21:32 JST: C/Dの23path統合cutで通常build・全906件通過、通常activation/故障注入入口の不在をcompiler対照2件で確認、23path復元。実process所有/bootstrap/source接続へ継続。

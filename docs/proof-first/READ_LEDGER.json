@@ -51058,5 +51058,40 @@
     "status": "read-with-scope",
     "role": "full prior current task snapshot before whole-file replacement",
     "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5/m8_runtime_owner_queue.rs",
+    "sha256": "c3799aa37c0c15f3ff08cbafdd8a90c83b11f36fae8266651a7731a2ca089932",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial source module/types/retention/binding/factory/gating and lower source-vs-I3 enqueue context; not whole file read; external source-control-union-v5 unadopted",
+    "at": "2026-09-30T12:32:23.807763+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5/m8_runtime_local_cut.rs",
+    "sha256": "b04354c64ae2cd1140f98f3167c14418482172bd44b2783d943c3ec2f50bc815",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial source bind/execution/contextual report/collection/worker accessor/resource/fault/cfg context; not whole file read; external source-control-union-v5 unadopted",
+    "at": "2026-09-30T12:32:23.807763+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5/sys2_execution_backend.rs",
+    "sha256": "c9113f8dea7a772d6f89236fae48dd83e6f580d04fca478fe1fa170c4b74072a",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial merged independent worker appointments/ACK arm, normal source commands/fault-only gates and caller context; external source-control-union-v5 unadopted",
+    "at": "2026-09-30T12:32:23.807763+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5/sys4_dispatch.rs",
+    "sha256": "99a34aa0f5b226642ea9dc892161dac7d57b7fadcddb0c319019a8fb1bb010ee",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial source inventory/cursor/normal resource code and exact final module-append conflict; dormant test constructor retained; external source-control-union-v5 unadopted",
+    "at": "2026-09-30T12:32:23.807763+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5/sys5_i3_process_runtime.rs",
+    "sha256": "31baaddfb8c81feb02262cc20e5386dcd27e4c7394810634999c5ab2c55d4288",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial exact M8 origin helper and shared FD merge plus actual retained fields/start/codec/projection/context for next normal owner; no whole file read; external source-control-union-v5 unadopted",
+    "at": "2026-09-30T12:32:23.807763+00:00"
   }
 ]

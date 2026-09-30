@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Continue same owner-resumed Sol W4-D: whole actual process/source/results ownership/mode, exact retained prepared-state/ACK/actual parent publication/all activation, then original source/I3/result/resource/QUIC connection. Physical M9/floor/backend11/exact-cut normal builds/full544 passed at11path external reference. Sole main/no subagents; Astra only on material semantic falsifier or D acceptance before E. Weekly77%11:04:18UTC; next>=12:04:18UTC; owner reset only.
+Continue same Sol W4-D: actual process/control/source/results ownership and authentic fixed-FD bootstrap/full original source/args/ordinal/image; preserve I3 handoff, real outcomes/resource/QUIC correspondence before use. Current external23path normal builds/full906 and two normal compiler refusals established; no full prepared ACK. Astra for material semantic falsifier or D integrated acceptance before E; sole main/no subagents.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Documentation.md updated: actual physical M9/floor/backend component and remaining whole-process/source/result/ACK/publication gates; no capability promotion.
+Documentation.md updated: coherent23path C/D union, normal builds/full906 and normal raw source/fault gates; actual process/bootstrap/source and full preparation/publication gates remain.
 
 ## docs/project-status.md update status
 
-更新済み: 実M9/floor/backend準備と実worker更新後ACK喪失対照を記録。全process準備ACK/公開/有効化/sourceは未接続。Canon/Plan250 pause保持。
+更新済み: C/D統合906件・通常build・通常構築/fault入口不在を記録。実process/bootstrap/source/全状態準備ACK/公開/有効化は未接続。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-samples_progress.md updated: current11path physical preparation/full library/build evidence, distinct eligible OW1 component and actual two-owner ST, remaining whole source/results prepared-state/ACK/publication/all activation/network gates. Sample roots/taxonomy unchanged.
+samples_progress.md updated: current23path coherent reference/full906/normal compiler refusals and remaining whole process/source/result prepared-state/ACK/publication/network gates. Sample roots/taxonomy unchanged.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: opaque-token actual M9/floor/backend preparation11, held body/history/observations/same physical identities, disconnected/post-install lost worker ACK controls, exact-cut normal builds/full544 pass; main semantic/test/diff review only. Disabled physical owner exports no semantic/mutable escape but whole SYS5/source/results custody/prepared-state ACK still unconnected. OW1 uses distinct eligible one-owner source; actual two-owner D remains ST. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: coherent23path C/D reference; full906 and normal builds, normal raw activation/fault mutation entry absence; exact original I3 handoff retained. Main source/merge/gate/diff review; no new Oracle/subagents. No normal source cursor or whole SYS5/control/results prepared ACK consumer introduced. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: actual M9/floor/backend preparation11, normal default/private-QUIC checks and full544 combined-feature library pass at11path reference. All11 paths restored. Physical authority installs in the same actual runtime with exact local observations; full endpoint/source/result prepared-state ACK is not generated. Whole-process mode/all-entry/static image/source context, authentic ACK/parent publication/all activation, original source/I3/result/resource/QUIC consumers remain unconnected before use. No new D source/network E2E, fresh199 proof audit, whole-language/privacy/recovery/alpha claim. Earlier199 changed-source audit/fresh197 unchanged. E inactive. Prior publisher/prepare make docs v1 success retained; full make docs physical authority v1 passed; later verification metadata focused checked. Main review only; previous Oracle does not cover this implementation. READ_LEDGER scopes preserve partial-reading limits.
+Current Sol checkpoint: coherent C/D23path normal default/privateQUIC/full906 pass plus two exact normal compile-failure controls. All23 paths restored. No normal original source constructor, whole-process/source/results prepared ACK/publication/all activation, combined I3/source admission or new D QUIC E2E yet. No fresh199 proof audit/broad workspace/privacy/recovery/alpha campaign; prior199/fresh197 scopes retained. E inactive. Current source/control union full make docs v1 passed; later verification metadata focused checked. Main review only; old Oracle does not review this source cut.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessor3c2767da committed/pushed with exact0/0 parity. Successor contains only eleven owned status/evidence docs. Production Rust/Lean/Canon unchanged; all11 source paths restored, frozen reference external/unadopted. Actual Git outcome will be recorded in d-source-process/GIT-PHYSICAL-AUTHORITY-v1.json after commit/push/parity; no inferred success. Authorized normal push, commit --no-gpg-sign.
+Current predecessor59171c73 committed/pushed with exact0/0 parity. Successor only eleven owned evidence/status docs; production Rust/Lean/Canon unchanged. All23 overlay paths restored; reference external/unadopted. Actual Git result will be recorded in d-source-process/GIT-SOURCE-CONTROL-UNION-v1.json after authorized --no-gpg-sign commit/normal push/parity.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4586,3 +4586,18 @@ W4-DはSolで実装を継続中です。外部未採用11path参照physical-auth
 - Next direct consumer: whole real process/source/results mode/static binding/full preparation/all-entry closure before authentic ACK/publication/activation. No used premise moves to E, no new normative statement. plan/current docs/whole tasks/sample dashboard/ledger updated in same Report2614; no extra report. Full make docs physical authority v1 passed; final metadata focused checked, actual Git result pending. Sole main/no Oracle/subagents/external notification. Same W4 continues after checkpoint.
 
 - 2026-09-30T11:58:12.482817+00:00: full make docs physical authority v1 exit0; all11 Rust paths restored. Final focused source/log/pin/ledger-prefix/status/diff checks precede eleven-doc checkpoint. Actual Git result GIT-PHYSICAL-AUTHORITY-v1.json; same W4 continues without completion notification.
+
+
+### 2026-09-30T12:32:23.807763+00:00 — C/D coherent normal source/control reference
+
+W4-DはSolで実装を継続中です。Cの元source・結果保持とDの制御・実権限準備を統合した外部未採用23path参照source-control-union-v5で、通常default/private-QUIC buildと全906feature検査が通過しました。通常build用の不透明な状態・保持処理を整え、任意activationの構築と故障注入はtest限定に保っています。通常compiler対照2件はその入口不在で正しく失敗しました。全23pathは元へ復元しています。実M9/floor/backend準備11件も同cutで検査し、全process/source/result状態のprepared ACK・親の公開・全endpoint有効化はまだ生成しません。次は実process runtimeの所有と登録済みbootstrapを、元handler全体・Core・引数・文順序へ接続します。元source cursor・I3 admission・実結果回収・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Start59171c73 clean; 23-path reference. Commands/log hashes/source pins/restoration: W4_CHECK d_source_control_union_20260930. C foreign-fault-retention-green-v1 fifteen paths plus D physical-authority-green-v5 eleven paths: three common paths/23 union. SYS2 independent source result appointment and authority-ACK arm both retained; SYS4 source/resource/retention extensions and separate source_authority module both retained; SYS5 expected-image M8 origin and shared FD3 alias merge cleanly.
+- Union-v2 marker-removal regex truncated worker tail; check-v1 unclosed delimiter. Corrected v3 removes exactly three conflict marker lines, preserves all tails. Check-v2 then64 normal errors due C test-gated source module/method closure. Stage-v4 failed before completion on misplaced cfg assertion; preserved PREPARATION_FAILURE, never compiled. V5 source closure fixes these, full906 pass. No failed predecessor rewritten.
+- Opaque source state/retention types and required actual worker/local access available in normal builds. Raw SourceActivation::new remains cfg(test); normal source cursor/startup factory absent. Source mutation probes and worker source fault commands/arms/methods cfg(test). Original C source branch remains distinct from actual I3 handoff; no combined consumer added.
+- Full9060fail/ignored/filtered at exact same cut; normal default/privateQUIC checks. Two separate normal compiler probes refuse with one expectedE0599 each (raw constructor/mutating worker command); funded companion is the unmodified normal reference. These two are compiler evidence outside906 unit count. All23 restored.
+- Coherent unadopted Rust component reference, not a normal original source cursor, whole-process ownership/prepared-state ACK, publication/all activation, combined source/I3 admission or D QUIC E2E. Existing pure/Lean receipts unchanged; no fresh199 or broad workspace/privacy/recovery/alpha campaign. Tests and source inclusion do not enlarge proof guarantees.
+- Own actual process runtime/control/source/result state; bind authentic fixed-FD bootstrap to actual checked handler/Core/arguments/global ordinal and restricted image. Preserve actual I3 one-use handoff and coherent results/resources before body, then genuine prepared ACK/parent publish/all activate and actual QUIC event correspondence.
+- plan/current docs/whole tasks/sample dashboard/ledger updated; no new report/normative statement/sample root/script taxonomy. Current source/control union full make docs v1 passed; final metadata focused checked, actual Git outcome pending. Main review only; no Oracle/subagents/external notification. Same W4 continues after checkpoint.
+
+- 2026-09-30T12:39:17.946061+00:00: source/control union full make docs v1 exit0 (12:32:57–12:36:57UTC); all23 Rust paths restored. Final focused source/log/pin/ledger-prefix/status/diff checks precede eleven-doc checkpoint; actual Git result GIT-SOURCE-CONTROL-UNION-v1.json. Same W4 continues without completion notification.

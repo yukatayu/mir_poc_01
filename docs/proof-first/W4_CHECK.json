@@ -54648,5 +54648,103 @@
         "scope": "full make docs over restored source/current status; later verification metadata focused checked"
       }
     ]
+  },
+  "d_source_control_union_20260930": {
+    "at": "2026-09-30T12:32:23.807763+00:00",
+    "head": "59171c733c1ef779e3a6a2aa5e14cdc00e520b4f",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-control-union-v5",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "8b88057037c627179ee938fb4bed7b91d1efe993b4b67d517e5c6800f0b4e82b",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "374353872e3cac326706e7f3eb59acd2c745e8028374e6b79551501ec0baec20",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "b04354c64ae2cd1140f98f3167c14418482172bd44b2783d943c3ec2f50bc815",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "c3799aa37c0c15f3ff08cbafdd8a90c83b11f36fae8266651a7731a2ca089932",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "a0449e6ba5385c847c5f58fe701d47b4cbf83284cc70c9820f9ed4f3eb7c6412",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "4a07e26be0c296433fc37fdf11a0dd08823a78df323850b093d9a0bbd1622eb6",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "c9113f8dea7a772d6f89236fae48dd83e6f580d04fca478fe1fa170c4b74072a",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "99a34aa0f5b226642ea9dc892161dac7d57b7fadcddb0c319019a8fb1bb010ee",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "2a2d79033be4a451b89b0c4784cddf0047ffecf8697530020f693f32ab62bd7e",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "ff6124878eefefcb17b52693a36104649d5f84b0f598ac23e85147fed1e6182a",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "31baaddfb8c81feb02262cc20e5386dcd27e4c7394810634999c5ab2c55d4288",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "ce12f876a30d4bb2ba124ab94437c7284dfd29d2e934114af8a14261be405d3d",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "544aca87798d4d124dc16dd51ff9882cb5f7aa69c5a9dc3d206b1e232a101ec9",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59"
+    },
+    "source_pins_sha256": "1ddc53c396bed0d330391be3a97078e89ace476b9a47ede743c81f2f14957b3a",
+    "receipts": [
+      {
+        "name": "source-control-union-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-control-union-check-v1/RESULT.json",
+        "sha256": "d080686bf21309996cd423120f692bb8463582c23ceaa55878421d335c0c5649",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      },
+      {
+        "name": "source-control-union-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-control-union-check-v2/RESULT.json",
+        "sha256": "6af6f4baf19eb3ff51f912d1a702dbdf29f0aad510cf66a4937795d153065d23",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      },
+      {
+        "name": "source-control-union-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-control-union-check-v3/RESULT.json",
+        "sha256": "1f5a134afb6ae0b60446ea0648b532025826a9e5847ffa3e838dda02bc6421b9",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 906 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 120.34s"
+        ]
+      },
+      {
+        "name": "source-control-normal-constructor-negative-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-control-normal-constructor-negative-check-v1/RESULT.json",
+        "sha256": "e7f3364fbd7f05658d030e57e232629d646a2ce7ec22ba2331f73f60e1a1f48b",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      },
+      {
+        "name": "source-control-normal-fault-negative-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-control-normal-fault-negative-check-v1/RESULT.json",
+        "sha256": "415d025c64ed8ae00335c7d075bc742b28e1976b09f787160080062c96c09dfe",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      }
+    ],
+    "result": "Normal default/privateQUIC checks pass; coherent C+D combined-feature library906 pass0fail/ignored/filtered. Two distinct normal compiler falsifiers fail exactly on unavailable raw source activation constructor and worker trace-corruption command. All23 paths restored.",
+    "integration": "C foreign-fault-retention-green-v1 fifteen paths plus D physical-authority-green-v5 eleven paths: three common paths/23 union. SYS2 independent source result appointment and authority-ACK arm both retained; SYS4 source/resource/retention extensions and separate source_authority module both retained; SYS5 expected-image M8 origin and shared FD3 alias merge cleanly.",
+    "normal_changes": "Opaque source state/retention types and required actual worker/local access available in normal builds. Raw SourceActivation::new remains cfg(test); normal source cursor/startup factory absent. Source mutation probes and worker source fault commands/arms/methods cfg(test). Original C source branch remains distinct from actual I3 handoff; no combined consumer added.",
+    "failures": "Union-v2 marker-removal regex truncated worker tail; check-v1 unclosed delimiter. Corrected v3 removes exactly three conflict marker lines, preserves all tails. Check-v2 then64 normal errors due C test-gated source module/method closure. Stage-v4 failed before completion on misplaced cfg assertion; preserved PREPARATION_FAILURE, never compiled. V5 source closure fixes these, full906 pass. No failed predecessor rewritten.",
+    "scope": "Coherent unadopted Rust component reference, not a normal original source cursor, whole-process ownership/prepared-state ACK, publication/all activation, combined source/I3 admission or D QUIC E2E. Existing pure/Lean receipts unchanged; no fresh199 or broad workspace/privacy/recovery/alpha campaign. Tests and source inclusion do not enlarge proof guarantees.",
+    "next": "Own actual process runtime/control/source/result state; bind authentic fixed-FD bootstrap to actual checked handler/Core/arguments/global ordinal and restricted image. Preserve actual I3 one-use handoff and coherent results/resources before body, then genuine prepared ACK/parent publish/all activate and actual QUIC event correspondence.",
+    "resources": "2026-09-30 12:06UTC root16GiB free/RAM5.5GiB available/swap12GiB used. Serial Rust8GiB address-space/-j1/one test thread. No cleanup/mount/host-share assumption.",
+    "review": "Sole main focused source/merge/normal-factory/fault-gate review; no new Oracle/subagents. No normative/public/API/adoption change.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-source-control-union-v1.json",
+        "sha256": "90efc12f5bb519422e3d112b9baf3fd8ab48a7043830a170ac5ff592bc1eb376",
+        "exit": 0,
+        "scope": "full make docs over restored Rust/current evidence/status; later verification metadata focused checked"
+      }
+    ]
   }
 }
