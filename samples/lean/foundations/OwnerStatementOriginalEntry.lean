@@ -1313,3 +1313,84 @@ theorem all_pools_bounded {Pool : Type} (limit upper actual : Pool → Nat)
 #print axioms projection_discharges_actual
 #print axioms all_pools_bounded
 end MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget
+-- The list contains costs of remaining genuine original transitions. Prefix
+-- counts actual foreign inbox heads that must be removed before the original.
+-- Neither is a trace: no future request, write or receipt is asserted to exist.
+def Ready (limit used ahead : Nat) (work : List Nat) : Prop :=
+ ∃ spare, used + work.sum + ahead + spare = limit
+
+def admits (limit used cost addedPrefix ahead : Nat) (work : List Nat) : Bool :=
+ decide (used + cost + work.sum + ahead + addedPrefix ≤ limit)
+
+-- Independent available-space witness, including newly incurred FIFO debt.
+theorem admits_exact (limit used cost addedPrefix ahead : Nat) (work : List Nat) :
+ admits limit used cost addedPrefix ahead work = true ↔
+ ∃ spare, used + work.sum + ahead + spare = limit ∧ cost+addedPrefix ≤ spare := by
+ simp only [admits,decide_eq_true_eq]
+ constructor
+ · intro enough
+   exact ⟨limit-(used+work.sum+ahead),by omega,by omega⟩
+ · rintro ⟨spare,balance,enough⟩;omega
+
+theorem ready_exact (limit used ahead : Nat) (work : List Nat) :
+ Ready limit used ahead work ↔ used+work.sum+ahead ≤ limit := by
+ constructor
+ · rintro ⟨spare,balance⟩;omega
+ · intro enough;exact ⟨limit-(used+work.sum+ahead),by omega⟩
+
+-- Removing exactly one original transition charges its actual cost once.
+-- The before/after decomposition must come from that actual trusted phase.
+theorem original_piece_preserves (limit used ahead cost : Nat) (before after : List Nat)
+ (ready : Ready limit used ahead (before ++ cost::after)) :
+ Ready limit (used+cost) ahead (before++after) := by
+ apply (ready_exact limit (used+cost) ahead (before++after)).mpr
+ have bound := (ready_exact limit used ahead (before++cost::after)).mp ready
+ simp only [List.sum_append,List.sum_cons] at *
+ omega
+
+theorem original_piece_conserves (used ahead cost : Nat) (before after : List Nat) :
+ used+(before++cost::after).sum+ahead = (used+cost)+(before++after).sum+ahead := by
+ simp only [List.sum_append,List.sum_cons]
+ omega
+
+-- A genuine FIFO predecessor consumes its reserved dequeue slot. It is not
+-- charged as an unrelated allocation in addition to that same obligation.
+theorem predecessor_preserves (limit used ahead : Nat) (work : List Nat)
+ (ready : Ready limit used (ahead+1) work) : Ready limit (used+1) ahead work := by
+ apply (ready_exact limit (used+1) ahead work).mpr
+ have bound := (ready_exact limit used (ahead+1) work).mp ready
+ omega
+
+theorem append_before_preserves (limit used cost ahead : Nat) (work : List Nat)
+ (accepted : admits limit used cost 1 ahead work = true) :
+ Ready limit (used+cost) (ahead+1) work := by
+ apply (ready_exact limit (used+cost) (ahead+1) work).mpr
+ simp only [admits,decide_eq_true_eq] at accepted
+ omega
+
+theorem append_behind_preserves (limit used cost ahead : Nat) (work : List Nat)
+ (accepted : admits limit used cost 0 ahead work = true) :
+ Ready limit (used+cost) ahead work := by
+ apply (ready_exact limit (used+cost) ahead work).mpr
+ simpa [admits] using accepted
+
+theorem rejects_spending_original_tail (limit used cost ahead : Nat) (work : List Nat)
+ (notEnough : limit < used+cost+work.sum+ahead) :
+ admits limit used cost 0 ahead work = false := by
+ simp [admits,show ¬used+cost+work.sum+ahead ≤ limit by omega]
+
+def remote : List Nat := [4,3,1,4,3,1,1]
+def localWork : List Nat := [1]
+-- Cost correspondence is verified separately at actual Rust producer calls:
+-- request enqueue/move/dequeue, reply enqueue/move/dequeue, and acceptance.
+#print axioms admits_exact
+#print axioms ready_exact
+#print axioms original_piece_preserves
+#print axioms original_piece_conserves
+#print axioms predecessor_preserves
+#print axioms append_before_preserves
+#print axioms append_behind_preserves
+#print axioms rejects_spending_original_tail
+end MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget

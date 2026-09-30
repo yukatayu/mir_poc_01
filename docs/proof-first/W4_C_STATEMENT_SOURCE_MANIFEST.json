@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "5c959f511e796d1c33a23ffc1b81ce347bb1edfcc2fa2019679a74ef6a8000ca",
+      "sha256": "dcded44cd0b045217129fa27509509aac70b75d6f1e5d17342f6dc4a2e5e08ee",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "5c959f511e796d1c33a23ffc1b81ce347bb1edfcc2fa2019679a74ef6a8000ca",
-      "transformation": "identity; append upper bound vs actual consumption, shared physical pool sum, initial obligation, lower phase growth, terminal actual-debt retention and exact projection discharge. Physical producer identity/costs/entry coverage remain separate."
+      "staged_sha256": "dcded44cd0b045217129fa27509509aac70b75d6f1e5d17342f6dc4a2e5e08ee",
+      "transformation": "identity; append remaining original endpoint work, independent spare witness/admission equivalence, actual piece discharge, genuine predecessor dequeue and before/behind arrival preservation. Actual phase, producer identity and finite cost inventory remain physical duties."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "6dbf94d2505f1cdaa9f3b95fa21a565768dc45ce407b5d3a916dfef619417d76",
+      "sha256": "a9c1524188774ae247ae01c9bbcc3d5e3aa669c0ad4af51818e7e941a78db83b",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "6dbf94d2505f1cdaa9f3b95fa21a565768dc45ce407b5d3a916dfef619417d76",
-      "transformation": "identity; append upper bound vs actual consumption, shared physical pool sum, initial obligation, lower phase growth, terminal actual-debt retention and exact projection discharge. Physical producer identity/costs/entry coverage remain separate."
+      "staged_sha256": "a9c1524188774ae247ae01c9bbcc3d5e3aa669c0ad4af51818e7e941a78db83b",
+      "transformation": "identity; append remaining original endpoint work, independent spare witness/admission equivalence, actual piece discharge, genuine predecessor dequeue and before/behind arrival preservation. Actual phase, producer identity and finite cost inventory remain physical duties."
     }
   ],
   "audit": {
@@ -2416,6 +2416,26 @@
     "owned": 19449,
     "qualified_false": 144,
     "commands": 155,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "endpoint_budget_successor": {
+    "at": "2026-09-30T02:57:03.779766+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/RESULT.json",
+    "sha256": "4510ac16e2049627886e54e953849bc3bd692c1d578a7cbd219d59a54676a868",
+    "owned": 19471,
+    "qualified_false": 149,
+    "commands": 160,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",

@@ -1,0 +1,155 @@
+# W4-C — finite producer and custody inventory
+
+This is LAB implementation correspondence for W4-C's frozen reference, with
+W4-D as its direct consumer. It does not adopt the reference, widen Canon,
+resume Plan250/I3-4, prove all Rust executions, or guarantee delivery after a
+legitimate revocation or process death. The input hashes and searchable call
+sites are in the W4_CHECK-linked `producer-inventory-v1/PINS.json` and
+`CALLS.json`. The latter is a lexical audit aid, not a compiler call-graph proof.
+
+## Selected boundary and physical ownership
+
+The reference's `Invocation::new` derives an ordered, contiguous full original
+owner manifest from checked projected fragments, checks every admitted Core and
+argument map, actually reserves retained result Vec capacity for the full finite
+activation, constructs one source control, boots a real LocalFabric, and binds
+each actual M8 session to that control. `next` selects only that original cursor;
+`report` collects the same retained request; `accept` independently checks original
+receipt dependencies, current original use, authority floor and exact pending
+Committed custody before publishing the one source-consume event. Result storage
+for another activation is checked by `invoke_again` before restarting the cursor.
+
+LocalFabric owns its private backend. ST owns a separate boxed M8LocalRuntime for
+each admitted locus. OW1 owns one M8LocalRuntime on its worker; commands are
+serialized by a zero-capacity synchronous channel. Logical E/C/source roles in
+OW1 share that local projection pool. The lower owner and designated counters are
+separate fields; the budget does not infer physical separation from a role name.
+
+The live M8 fields are not exported by LocalFabric or Invocation. The worker
+snapshot command returns an inert clone: lower source binding loses live executor
+custody. Worker shutdown_extract consumes the handle and terminates its loop;
+LocalFabric exposes no route to it, and its Drop discards the extracted runtime.
+Its separate semantic-kernel caller is a different owning runtime. M8PatchRuntime,
+M8 observer wrappers and M10 helpers construct/own their own M8 sessions; their
+public noncontextual helpers do not obtain this Invocation's private live backend.
+This exclusion depends on the pinned constructors and call sites, not on saying
+that a method is merely old, private, test-only, or outside a sample.
+
+## Numeric resources and actual producers
+
+All costs below are upper bounds for admission; counters advance only by the
+actual producer calls. A successful source body has at most four lower owner rows
+and their four local projections. An already terminal result still owes every
+actual unprojected row; terminalization releases only unused future capacity.
+
+| Resource / producer | Actual route and maximum cost | Admission / preservation boundary |
+| --- | --- | --- |
+| Original result slots | Invocation new / invoke_again; one retained result per original statement | try_reserve_exact before first effect; checked remaining finite manifest capacity before another activation; outcome replacement does not append another slot |
+| Source request ID | submit_source_action or local owner prototype: one SYS4 request ID before arm | checked_add1; no new request ID is needed to resume/collect/accept this original |
+| Source lower occurrence / trace | source permit → M8 enqueue and same queued service: occurrence1, trace≤4 | pure source_initial_resources_available before arm; raw legacy entry refuses a bound source before allocating; genuine source work uses its own owed capacity |
+| Source local projection | project_source_owner_trace from retained actual lower IDs, at most4 | actual projection map discharges once; missing/duplicate/foreign rows cannot clear debt; exact trace cursor addition checked |
+| Contextual owner read | backend read_owner_int_with_context → actual M8 owner value and row: local1 | source_foreign_trace_available1 before read; newest exact lower write must agree with actual current value and have an actual projected origin |
+| Contextual designated evaluation | backend ST or worker E command: designated occurrence1, lower trace≤3, local≤3 | local debt guard3 plus designated_resources_available3,1 before lower evaluation |
+| Contextual designated consumption | ST or worker C command: lower designated trace≤2, local≤2 | local debt guard2 plus designated_resources_available2,0 before consumption |
+| Exact designated import | actual checked delivered publication: local1 only when a new contextual import row is required | preeffect local guard1; no numeric designated lower row; Unavailable is distinct from identity/domain rejection |
+| Cached non-consuming validation | cloned lower designated engine consumes speculatively (trace≤2), live local validation row1 | lower trace headroom2 checked before cloning/consuming; live local debt guard1; cloned overflow cannot kill worker |
+| Relation publication / import | direct live backend publisher and consumer import: local1 each; relation lower trace has no numeric counter | private backend guard1 before either lower call; actual direct relation calls are included, not assumed all staged |
+| Relation invalidation / reacquire | ST candidate transition: local≤2 / ≤1 including rejection row | backend guard2 / guard1 before lower call; final whole candidate checks all retained source debt; OW1 relation lifecycle is explicitly BackendIneligible |
+| Bootstrap / lease / relation observation | bootstrap and fresh lease installation, publication commit, shadow qualification/projection | no local or lower numeric trace increment; source state/authority/frame compatibility is checked separately |
+| M9 authority refresh | genuine lifecycle issuer → backend refresh (OW1 acknowledged) → canonical floor commit | no local or lower trace ID allocation; no source use/result relabeling; historical result and current acknowledgment are separate |
+| Checked patch installation | cloned ST backend installs designated-only plans / actual patch lifecycle string | no local numeric trace allocation; full original owner/relation contracts preserved; final source/counter/floor check precedes custody transfer |
+| Whole-fabric save | backend save_local_cuts → capture_for_sys4_local_cut(false) | zero M8 local save rows; actual raw save_local_cut(true) is a distinct method with no call from this backend |
+| Whole-fabric restore | validates cut, bootstraps fresh candidate, then restore_local_cuts | source-bearing cuts refuse; any RestoreRejected row is in the fresh candidate, never the retained live owner; this is not source recovery |
+
+`advance_anchor_to_frozen`, `note_primary_available_same_lineage`,
+`synchronize_entity_presence`, `initialize_patch_declared_int`, noncontextual
+M8 evaluate/consume, and raw save/restore are real trace-producing methods.
+Their callers in the pinned inventory own separate M10/patch/observer sessions,
+or operate on fresh candidates. They are not called by M8ExecutionBackend or by
+its worker command loop on this source-bound live session. The raw worker
+Enqueue/Serve commands exist, but enqueue rejects source-bound runtime before
+trace/counter mutation, and its legacy FIFO stays empty; SourceInitialResources
+also checks that actual FIFO. Direct lower source-bypass tests retain this guard.
+The same-name methods are not treated as interchangeable.
+
+## Endpoint production and discharge identity
+
+A remote original's remaining work is request enqueue4/move3/dequeue1, reply
+enqueue4/move3/dequeue1, then source acceptance1. A local original uses only the
+acceptance1 SYS4 ID. Initial admission includes the actual owner and origin inbox
+prefixes. Every actual foreign inbox head ahead of the original owes one dequeue;
+new movement/inbox insertion ahead adds one, insertion behind adds zero.
+
+| Allocator | Whole increment | Callers / discharge |
+| --- | --- | --- |
+| enqueue_outbox | 4 | original source submission and original owner report may discharge4; relation publication gets its own request ID, designated input reply/result delivery retains its distinct foreign request ID |
+| enqueue_local_inbox | 6 | cached delivery retry uses a fresh foreign request ID; never discharges original work, and adds a predecessor obligation when appropriate |
+| move_envelope_body | 3 | step_transport uses actual retained outbox envelope; exact original movement is recorded once and repeated collection returns that record; foreign arrival adds prefix debt when needed |
+| dequeue_locus | 1 | removes the actual inbox head; a genuine original or its genuine FIFO predecessor discharges1, with no arbitrary skip |
+| next_mailbox_token / next_endpoint_occurrence | 1 | relation serve, participant leave/reacquire and I3 local-cut admission retain every original obligation; labels never grant discharge |
+| source accept | 1 | checks full original current-use/receipt dependencies, then consume_publish checks exact Committed pending custody and publishes cursor/graph/counter together |
+
+`source_owns_endpoint_request` additionally requires live source_control; an inert
+candidate with a remembered request string cannot discharge original work.
+Request strings are not capabilities. Their meaning here follows the finite
+private caller chain: source submission uses its freshly allocated retained ID;
+source reply is built from the actual dequeued original and M8 result; movement
+and dequeue use actual mailbox records. Relation/foreign source submissions use
+the checked monotone request allocator. Future direct callers of these bulk
+helpers must re-establish this mapping; adding an arbitrary same-ID caller is a
+reopen trigger. Candidate publication cannot substitute the original carrier,
+report, FIFO prefix, protected terminal lookup, graph predecessor or actual local
+trace prefix. It preserves debt using the inert saved stage before custody moves.
+
+The relation endpoint's older aggregate preflight checks its own maximum cost;
+actual constituent allocations still pass the shared source-debt guards. A late
+relation refusal may retain its own prior effects/rows according to that route,
+but cannot spend the original debt. Source report transactions restore only
+unpublished source reporting views on failure; they do not undo committed M8
+state or genuine unrelated effects.
+
+## Current authority versus retained history
+
+The genuine M9 lifecycle apply route now accepts a valid successor while a source
+is held, as prescribed by ADR-0028 / theory18 §4. It refreshes ST or receives the
+OW1 refresh acknowledgment before publishing the successor. The original use,
+request, generation labels and result remain unchanged.
+
+The four actual ST/OW1 controls separate: (1) an old unserved ordinary carrier
+refuses because owner_lineage_ref includes its issuing generation; (2) queued
+original revoked capability gives actual MissingCapability/no write; (3) a
+previously committed write remains historical while current acknowledgment
+refuses; (4) an unrelated revocation leaves a previously queued M8 use valid, so
+its original body executes once, but its old-generation source acknowledgment
+still refuses. The earlier test expecting case1 to become a G2 request was an
+incorrect positive assumption, retained as failed evidence. No carrier/use is
+renewed to make that test pass. The independent existing theorem
+OwnerStatementAcknowledgment.current_generation_rejected matches the ack bound;
+M9 generation issuance/retranslation and Rust call correspondence remain separate.
+
+## Memory, progress and assurance boundary
+
+Only the retained outcome Vec has an actual capacity reservation. Checked u64
+headroom is not a reservation of Vec/BTreeMap/string storage, allocator success,
+OS memory, worker lifetime, or network reliability. Other dynamic allocations
+remain standard Rust allocations under the selected continuing-process profile;
+allocator abort, process death and a permanently disconnected worker do not have
+a source recovery guarantee. A retained actual result never licenses reexecution.
+The tests distinguish unobserved result/worker loss from declared semantic failure.
+No claim of total termination or completion after every allowed interference follows.
+
+A current original can complete conditionally on valid unchanged authority,
+healthy original carriers, adequate admitted numeric headroom and result slots,
+available ordinary working memory, and finite predecessor traffic being stepped.
+The actual mixed scheduler has a 32-pass budget; budget refusal preserves the
+same original continuation. Finite repeated collection controls are not a fairness
+proof. Capacity is admitted per original statement for lower/endpoint pools;
+only result slots cover the entire finite activation up front. Later statements
+may refuse before effect if their own capacity or authority does not fit.
+
+The ReportReservation and EndpointBudget general Lean results prove numeric
+admission/discharge facts and independent checker/Ready equivalence. Actual IDs,
+phases, producers, costs, aliases and caller discipline are this bounded physical
+correspondence obligation, not facts created by Lean. Final Oracle delta review
+and W4-C acceptance remain open. New producers, custody escape, resource sharing,
+authority policy or a broader completion promise reopen this inventory.

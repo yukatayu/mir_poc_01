@@ -50385,5 +50385,54 @@
     "status": "full-read",
     "role": "sole-main authored/read appended reporting phase/bounded actual cost proof/control and audited final source",
     "at": "2026-09-30T02:08:36.878996+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "dcded44cd0b045217129fa27509509aac70b75d6f1e5d17342f6dc4a2e5e08ee",
+    "status": "full-read",
+    "role": "sole-main authored/read appended endpoint work/FIFO debt proof/control and audited final source",
+    "at": "2026-09-30T02:57:03.779766+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "a9c1524188774ae247ae01c9bbcc3d5e3aa669c0ad4af51818e7e941a78db83b",
+    "status": "full-read",
+    "role": "sole-main authored/read appended endpoint work/FIFO debt proof/control and audited final source",
+    "at": "2026-09-30T02:57:03.779766+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/candidate-floor-controls-v1/m8_runtime_local_cut.rs",
+    "sha256": "21296b40b47599f1b5b587f1221fa9052b54ceb1bde5aac85693f7887b21915e",
+    "status": "selected-complete-bodies-read",
+    "role": "local producer methods/context guards/restore/source projection and debt; selected complete bodies",
+    "at": "2026-09-30T03:17:21.474277+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/candidate-floor-controls-v1/sys4_dispatch.rs",
+    "sha256": "59ca4ceefb798eb9d6a40db0c716bff3497a2a0ac801935f88f46136b7adfbf2",
+    "status": "selected-complete-bodies-read",
+    "role": "backend, constructors, entire numeric allocators/callers, genuine M9 apply, candidate publisher and selected reference controls; selected complete bodies",
+    "at": "2026-09-30T03:17:21.474277+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/candidate-floor-controls-v1/sys2_execution_backend.rs",
+    "sha256": "506a7ca3c720bc4e6138813ba8e9d6e8ef8588f1576f27b3aa42cc3e2493c47f",
+    "status": "selected-complete-bodies-read",
+    "role": "worker command interface, ownership, source initial and context commands, snapshot and consuming extraction; selected complete bodies",
+    "at": "2026-09-30T03:17:21.474277+00:00"
+  },
+  {
+    "path": "mirrorea_canon/adr/ADR-0028.md",
+    "sha256": "8754b1731b8b19c610b2ce6fa4f0a080ad2b3da3e82ee1800038a3bec1eecd4b",
+    "status": "full-read",
+    "role": "normative complete successor behavior; no Canon edits",
+    "at": "2026-09-30T03:17:21.474277+00:00"
+  },
+  {
+    "path": "mirrorea_canon/theory/18-m9-auth-verification.md",
+    "sha256": "7c625f0737589572ce4b48d465d809948e97833ade8a5d8992ad31022163af72",
+    "status": "section4-read",
+    "role": "normative section4 successor refresh/publication; no Canon edits",
+    "at": "2026-09-30T03:17:21.474277+00:00"
   }
 ]

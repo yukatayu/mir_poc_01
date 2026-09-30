@@ -1015,7 +1015,27 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseReportPhaseZeroInitial.lean': 'import OwnerStatementOriginalEntryControls\n'
                                      'open '
                                      'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
-                                     '#guard reportOwed 4 0 0 false = 0\n'}
+                                     '#guard reportOwed 4 0 0 false = 0\n',
+ 'FalseEndpointExistingPrefixIgnored.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                            'open '
+                                            'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
+                                            '#guard admits 17 0 0 0 1 remote = true\n',
+ 'FalseEndpointForeignSpendsTail.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                        'open '
+                                        'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
+                                        '#guard admits 17 4 1 0 0 [3,1,4,3,1,1] = true\n',
+ 'FalseEndpointLocalZero.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                'open '
+                                'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
+                                '#guard localWork.sum = 0\n',
+ 'FalseEndpointNewPrefixFree.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                    'open '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
+                                    '#guard admits 20 0 3 1 0 remote = true\n',
+ 'FalseEndpointOnlyRequest.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
+                                  '#guard remote.sum = 8\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1841,3 +1861,40 @@ new request. This preserves capacity given adequate initial headroom. Complete
 initial admission for every resource, numeric vs allocated storage, all producer
 paths, FIFO endpoint budgets and held M9 successor composition remain open.
 The latest full690 record precedes these corrections. No production adoption.
+
+## Remaining endpoint work and actual FIFO debt (forward LAB)
+
+`EndpointBudget.Ready` states an independent spare-space witness for a list of
+remaining actual transition costs and an actual FIFO predecessor count.
+`admits_exact` connects the executable check to that witness. The eight general
+theorems cover initial readiness, exact original-piece discharge and conservation,
+predecessor dequeue, new arrivals before or behind the original, and refusal to
+spend the original tail. The concrete remote list is `[4,3,1,4,3,1,1]` (17 IDs),
+local `[1]`: request enqueue/move/dequeue, reply enqueue/move/dequeue, acceptance.
+The list is an obligation budget, not a fabricated future event trace.
+
+Audit25205 checks190modules/19471owned/149qualified false controls/160commands,
+ten changed/dependent modules rebuilt over the pinned earlier fresh190 audit.
+Standard logic axioms only; no authored holes or Mir axioms. Five false controls
+reject request-only accounting, foreign spending of the original tail, free new
+predecessors, ignored existing predecessors and zero local acknowledgment cost.
+The first standalone invocation54383 rejected reserved Lean identifiers; corrected
+82039 and the full audit pass. The failure and original inputs remain retained.
+
+Actual initial admission checks lower occurrence1/lower trace4/local projection4
+before source arm and request allocation. Under the real remote pipeline, 16 IDs
+was wrongly accepted while exact17 succeeds. After original submission, a genuine
+foreign action spent4 of the remaining13; the original body executed once but its
+report remained unavailable after128 collections. Phase-derived reference guards
+refuse that unrelated spend and preserve the exact original request. Existing FIFO
+predecessors and new before/behind arrivals are charged by actual queue order.
+Targeted10 and later related339 checks pass; endpoint-pipeline-controls-v2 full737
+passes0failed0ignored0filtered116.67s. Fifteen temporary Rust files are restored.
+
+A further real relation publication or import could spend one owed local row and
+strand the original after its actual commit. Two shortage cases fail and the two
+one-spare positives pass. Private backend preeffect guards make all four pass13210;
+invalidation/reacquisition are guarded for their maximum two/one local rows.
+This later relation cut has only targeted validation so far. Lower designated
+counter overflow and the whole producer inventory remain separate open checks.
+No production adoption, C acceptance, public API, or I3-4 resume is implied.

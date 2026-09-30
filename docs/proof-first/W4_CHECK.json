@@ -52810,5 +52810,254 @@
     "source_pins": 190,
     "qualified_recipe": 144,
     "ledger_prefix_retained": 6695
+  },
+  "c_initial_resource_admission_20260930": {
+    "at": "2026-09-30T02:31:11.474249+00:00",
+    "runs": [
+      {
+        "tool": 38546,
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/initial-admission-red-v1-check/RESULT.json",
+        "sha256": "a39381a1a635c81ae98c3b58e887b9591d67c8d68713ac4a8c6cd3f7e848b8d6",
+        "exit": 101
+      },
+      {
+        "tool": 11713,
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/initial-admission-red-v2-check/RESULT.json",
+        "sha256": "d48b2593cf21779b2e589af5b2d1ecaed4abecb1be7d6497f48d35725fd96273",
+        "exit": 101
+      },
+      {
+        "tool": 95088,
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/initial-admission-green-v1-focused-check/RESULT.json",
+        "sha256": "daa24ebf81f4ccca1cd28a6240ac41afb2d184c0a8fee54a30efef758757248e",
+        "exit": 101
+      },
+      {
+        "tool": 98147,
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/initial-admission-green-v2-focused-check/RESULT.json",
+        "sha256": "20e148849bcfdb7962372c572db0c4dc9a0dfdf60f3cb659e7ae1c1480a24efa",
+        "exit": 101
+      },
+      {
+        "tool": 45308,
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/initial-admission-controls-v1-focused-check/RESULT.json",
+        "sha256": "627f62530c297cb7a6a833b2603523d50108c0f2883be4ef266c6087748f0801",
+        "exit": 0
+      }
+    ],
+    "scope": "Pure ST and serialized OW1 pre-arm check lower occurrence1, lower trace4 and local projection4 plus retained debt. Remote/local source entry checked; exact4 positive,3 shortage refused without arm/request/endpoint/semantic change. Endpoint whole budget still open.",
+    "test_correction": "red-v1 OW1 multi-owner fixture ineligible; red-v2 uses eligible actual single owner,3positive3RED. Green-v1 compile lifetime error only. Green-v2 new admission passes but16 preexisting fault probes shrink before admission and therefore no longer reach lower effects. controls-v1 moves only these counter corruptions to explicit post-admission fault at actual lower entry (asserts existing owed4), preserves all original retention assertions, adds4actual local entry controls:323passed0fail0skip398filtered10.88s. No initial admission bypass or all-refusal closure."
+  },
+  "c_endpoint_budget_theory_20260930": {
+    "at": "2026-09-30T02:57:03.779766+00:00",
+    "tool": 25205,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/RESULT.json",
+    "sha256": "4510ac16e2049627886e54e953849bc3bd692c1d578a7cbd219d59a54676a868",
+    "modules": 190,
+    "owned": 19471,
+    "qualified_false": 149,
+    "commands": 160,
+    "scope": "General remaining original transition budget, exact spare admission, actual piece discharge, genuine FIFO prefix removal, new prefix liability and behind-original addition. Remote17/local1 correspond to actual bounded endpoint producer inventory; caller identity and stage authenticity remain physical duties. Capacity obligations do not invent events; authenticity/costs/admission before effects remain physical duties. Earlier actual read origin proofs retained. Counted increments/result slots/carrier frame proofs retained. Decoded origin/general original-entry proofs retained. All actual caller/producer/profile/allocator costs/M9 successor and distributed refinement remain separate. Changed dependency cone rebuilt over pinned earlier fresh190;149 qualified false controls, not a new full fresh190 rebuild."
+  },
+  "c_endpoint_pipeline_and_relation_20260930": {
+    "at": "2026-09-30T02:57:03.779766+00:00",
+    "runs": [
+      {
+        "version": "endpoint-pipeline-red-v1",
+        "suffix": "-check",
+        "tool": 43780,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/endpoint-pipeline-red-v1-check/RESULT.json",
+        "sha256": "a8b7a3de385938159a8f70671fe321c72deab1e5f2a5670a1dcedb107244037b",
+        "log_sha256": "f0dd5b8c278ce3053a161d2ef598b4543ea8c57d44a7422503dd7f72f4dd0c38"
+      },
+      {
+        "version": "endpoint-pipeline-red-v2",
+        "suffix": "-check",
+        "tool": 51718,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/endpoint-pipeline-red-v2-check/RESULT.json",
+        "sha256": "56fa4a13e6ab0d641a439a0cdca6cef7ecddee71d276387279a77f489c8de3a8",
+        "log_sha256": "4aa614cc7c766626ef67876317cd17a850d17dfb56916d367a08bca6d99fe4aa"
+      },
+      {
+        "version": "endpoint-pipeline-green-v1",
+        "suffix": "-check",
+        "tool": 31856,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/endpoint-pipeline-green-v1-check/RESULT.json",
+        "sha256": "cf4a15296ed1d2e18bbd433ef27aaa200ea7b983b1eed8dcc57db3999f31abbb",
+        "log_sha256": "91e3b07427672cf6ef6c995302eab1e914f0860c864612d04c68139754b46768"
+      },
+      {
+        "version": "endpoint-pipeline-controls-v2",
+        "suffix": "-focused-check",
+        "tool": 82481,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/endpoint-pipeline-controls-v2-focused-check/RESULT.json",
+        "sha256": "ddec4d89409af5ce4e34d3dbfa6c663a4bb0459a4ed378b0f06d2a8e6d93372c",
+        "log_sha256": "f04ae28b93d09542793d9304f5f9c14a768b2639251edfd5725aa5b81f100220"
+      },
+      {
+        "version": "endpoint-pipeline-controls-v2",
+        "suffix": "-full-check",
+        "tool": 99802,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/endpoint-pipeline-controls-v2-full-check/RESULT.json",
+        "sha256": "7420f96d6df921b38a8e4cb9ffcb42adb20df12f98067c18b4d778537b96c170",
+        "log_sha256": "3237c178da41f4737e16d782710762661fb4b5c661a4e1bb18ba48e108a30589"
+      },
+      {
+        "version": "relation-resource-red-v1",
+        "suffix": "-check",
+        "tool": 18425,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/relation-resource-red-v1-check/RESULT.json",
+        "sha256": "b909f49b87bec3d5ab912a905c4ba18dd3bad7aa5c79313d5f2fc9b03a7ae48c",
+        "log_sha256": "15ae13b899ae8e42b35081b335287ccf28892849154fce815ba547fb99310f05"
+      },
+      {
+        "version": "relation-resource-green-v1",
+        "suffix": "-check",
+        "tool": 13210,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/relation-resource-green-v1-check/RESULT.json",
+        "sha256": "602ac72678d734e3b4c4dd42bad5c9a5e15011ae8990814c0bc48bd2bfb0c523",
+        "log_sha256": "4cbf2771d5cfda3f119aeffef755791289519a02b4c341e1753aa1c01295f613"
+      }
+    ],
+    "scope": "Actual remote17/local1 admission; entire remaining request+reply+accept pipeline; finite actual FIFO predecessor cost and before/behind arrivals. Full737 precedes relation guards. Actual live relation publisher/import RED two and spare positives two; guarded four pass. Whole producer/caller/storage/M9 closure remains open."
+  },
+  "c_producer_counter_m9_20260930": {
+    "at": "2026-09-30T03:17:21.474277+00:00",
+    "runs": [
+      {
+        "version": "designated-counter-red-v1",
+        "suffix": "-check",
+        "tool": 65622,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/designated-counter-red-v1-check/RESULT.json",
+        "sha256": "ebaaaafe22adf8e48ec2352b40ffb2ff9b1cc6d3180aaf9650fa19651961063e",
+        "log_sha256": "7fe589aaea330e8f34c18c0e6b82694eacd4a16f5c5204e0e4cd51294d3ec4cf"
+      },
+      {
+        "version": "designated-counter-green-v1",
+        "suffix": "-check",
+        "tool": 53299,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/designated-counter-green-v1-check/RESULT.json",
+        "sha256": "71600f297dc3c4ba7c76a18378550d53c52a04011e6c028630ecd1db863eab8b",
+        "log_sha256": "d19023178d04fe8b58bb40f23a7c6e14d32fe9cf155251425f5a757c3009bcf2"
+      },
+      {
+        "version": "designated-counter-green-v1",
+        "suffix": "-focused-check",
+        "tool": 10998,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/designated-counter-green-v1-focused-check/RESULT.json",
+        "sha256": "1ba82f59e2ebcc48873b099f8b46ed8255df3c1f3956451c5a52fe3e775f8584",
+        "log_sha256": "1cde0acdcdf715883ab8a8739eb08e947a84b258d75be2d235b846bd969e3e1f"
+      },
+      {
+        "version": "held-m9-red-v1",
+        "suffix": "-check",
+        "tool": 84975,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/held-m9-red-v1-check/RESULT.json",
+        "sha256": "5e2a58dfa29758e824f0f7a0570ef621ffc744a58b529c8e257107626e63cc57",
+        "log_sha256": "c866101d3f87fb510afce5226807d4879f8be5726084b3b48c61c93d18c00c42"
+      },
+      {
+        "version": "held-m9-green-v1",
+        "suffix": "-check",
+        "tool": 91829,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/held-m9-green-v1-check/RESULT.json",
+        "sha256": "0c294d3012b70165f9957211ca812e8524e042515fd2dca6343a874dbf500ccb",
+        "log_sha256": "43b96e8988c8dd779d400c2fed762b706ce473b8476c30b3a74bbc94f0ffaac1"
+      },
+      {
+        "version": "held-m9-diagnostic-v1",
+        "suffix": "-check",
+        "tool": 27433,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/held-m9-diagnostic-v1-check/RESULT.json",
+        "sha256": "eeb81fb0f535652c4b9a5786f86cf41bb09e27cf19a5413a55e8f3fa19895c1b",
+        "log_sha256": "397ace6ab3aa0990ab68704db12716c08de1dcd2baeaceebd7fadcfce0d0a219"
+      },
+      {
+        "version": "held-m9-controls-v1",
+        "suffix": "-focused-check",
+        "tool": 34072,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/held-m9-controls-v1-focused-check/RESULT.json",
+        "sha256": "ac4ba804997227d15bf7b2e971fc0048a3276ae2b0b0a2d5a287ce3ce95c4f44",
+        "log_sha256": "f524bf9f72ab05c50b1d5ce16dd26ea51d2d24985476fada99790ac3dcfed99b"
+      },
+      {
+        "version": "held-m9-controls-v1",
+        "suffix": "-full-check",
+        "tool": 31925,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/held-m9-controls-v1-full-check/RESULT.json",
+        "sha256": "442ae6c09dcb626d79beea6b653bac13c5eb95e29cf4f79c8edc68938a3099f9",
+        "log_sha256": "e538b2de65dd32b9704907c72afc4ee6d997f58d41d155f4bdf999a268a10fcd"
+      },
+      {
+        "version": "candidate-floor-controls-v1",
+        "suffix": "-check",
+        "tool": 20580,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/candidate-floor-controls-v1-check/RESULT.json",
+        "sha256": "6e4203b14861cc0ec59d2fd0c7a5675dc27f1bd6f75edeca755ed767d96e427a",
+        "log_sha256": "eadae4534e3d75e505843db334922ebf590796477d40c77a527826fb4a6095ab"
+      }
+    ],
+    "scope": "Designated lower overflow8RED+8exact-positive ->16passed and359focused. Actual M9 lifecycle held installation8RED; blanket guard removed under ADR0028. Six valid controls pass, two false test positives expected oldG1carrier to becomeG2; diagnostic confirms generation-bound lineage. Corrected test expectation does not alter carrier/current authority;367focused and765defaultfullpass. Additional3lowest wholecandidate current-floor/remaining-ack controls pass; samecut featurefull pending. All reference unadopted, whole C acceptance pending."
+  },
+  "c_producer_inventory_20260930": {
+    "at": "2026-09-30T03:17:21.474277+00:00",
+    "path": "docs/proof-first/W4_C_PRODUCER_INVENTORY.md",
+    "sha256": "5a7109fc6b21692649bfd1cab62f758c29b8d1b5df6965811532776eef110852",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v1/RESULT.json",
+    "result_sha256": "a9d1960dc90c984ebc02f0750b51c38d600db30f5eb272133c94a7e97cf33af0",
+    "scope": "Finite manually checked actual numeric producer/caller and private custody map; lexical159callsites not compiler reachability proof. Physical result Vec reserved; other allocation availability and finite stepping are explicit conditional premises. No memory-totality/fairness/process-death recovery proof."
+  },
+  "c_producer_oracle_20260930": {
+    "at": "2026-09-30T03:17:21.474277+00:00",
+    "tool": 64308,
+    "status": "submitted-running",
+    "submission": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-closure-v2/SUBMISSION.json",
+    "submission_sha256": "f1ef639f6713ef9b32acce4a305affb8ec4a4bf57cbde5912aa06c030cfb48b7",
+    "question_sha256": "fe8222bfe6dfccd83de66cc8deea98bade15b92085b2c89cf6ed872efea99578",
+    "manifest_sha256": "1f4d5cdcec1b6ef62e7919cf9b78286ccde913676584b0c716a8e4a8b8c1ca63",
+    "files": 43,
+    "bytes": 1515996,
+    "scope": "Frozen765+3/149proof and producer inventory, actual M9Canon distinction. Read-only advisory; no acceptance. Initial packet preparation missing const-fn marker failed before Oracle, preserved separately."
+  },
+  "c_producer_feature_full_20260930": {
+    "at": "2026-09-30T03:20:18.999624+00:00",
+    "tool": 11563,
+    "exit": 0,
+    "tests": 780,
+    "profile": "i3-process-test-seams",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/candidate-floor-controls-v1-feature-full-check/RESULT.json",
+    "sha256": "f661eb9474cd9ca16d9c3bf6bb589d2b2dd4c72cfc90ce70fa557b2c1fe475b4",
+    "log_sha256": "b36df00d8f747660c7e97179cab5b2a562c97a4539f48d825bb26331b192f491",
+    "scope": "candidate-floor-controls-v1 actual full780 feature profile,117.55s,0fail0ignored0filtered;15Rustrestored. Different profile/cut from held-m9-controls-v1 default765. Oracle packet remains frozen765+3/149proof."
+  },
+  "c_producer_docs_checkpoint_20260930": {
+    "at": "2026-09-30T03:25:48.289626+00:00",
+    "command": "make docs",
+    "tool": 71339,
+    "exit": 0,
+    "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-producer-checkpoint-v1.log",
+    "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+    "source_pins": 190,
+    "qualified_recipe": 149,
+    "prior_ledger_prefix": 6697,
+    "rust_restored": 15,
+    "inventory_mirror_exact": true,
+    "scope": "proof/docs checkpoint only; Oracle producer review still pending, C incomplete/D unstarted"
   }
 }

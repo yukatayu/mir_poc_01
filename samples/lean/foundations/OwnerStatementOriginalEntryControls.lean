@@ -207,3 +207,16 @@ open OwnerStatementOriginalEntry.ReportReservation
 #guard foreign 10 1 ⟨6,1⟩ = some ⟨7,1⟩
 #guard foreign 10 2 ⟨6,3⟩ = none
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportPhases
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.EndpointBudget
+open OwnerStatementOriginalEntry.EndpointBudget
+#guard remote.sum = 17
+#guard localWork.sum = 1
+#guard admits 17 0 0 0 0 remote = true
+#guard admits 16 0 0 0 0 remote = false
+#guard admits 17 4 1 0 0 [3,1,4,3,1,1] = false
+#guard admits 18 0 0 0 1 remote = true
+#guard admits 21 0 3 1 0 remote = true
+#guard admits 20 0 3 1 0 remote = false
+#guard admits 20 0 3 0 0 remote = true
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.EndpointBudget
