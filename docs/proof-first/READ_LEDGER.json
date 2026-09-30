@@ -50553,5 +50553,76 @@
     "status": "full-read",
     "role": "sole-main authored/read appended actual-inbox-head proof/control and audited exact final source",
     "at": "2026-09-30T04:39:00.902986+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_classification.rs",
+    "sha256": "60c45bd6b173982d66603791c426352c64d5e9f5e80ae6db60651c05315f853c",
+    "range": "1093-1132",
+    "status": "partial-reconsult",
+    "role": "partial reconsult: actual relation mutation rejection before checked source",
+    "at": "2026-09-30T04:58:35.798884+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+    "range": "2477-2555",
+    "status": "partial-reconsult",
+    "role": "partial reconsult: classification failure propagated before checked artifact",
+    "at": "2026-09-30T04:58:35.798884+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "range": "1480-1585;8425-8585;9240-9435;10170-10365;11320-11495",
+    "status": "partial-reconsult",
+    "role": "partial reconsult: existing independent control/expected image, emitter arguments and actual owner ledger/result path",
+    "at": "2026-09-30T04:58:35.798884+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "range": "1610-1708",
+    "status": "partial-reconsult",
+    "role": "partial reconsult: peer-bound actual frame read/decoder/semantic admission",
+    "at": "2026-09-30T04:58:35.798884+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1/sys4_dispatch.rs",
+    "sha256": "4ad25d6faa6f4cd758b89dc30a8e6bd033b1ba210598e4ed77bcc5f101e228bd",
+    "status": "delta-read with unchanged prior fully-read source",
+    "prior": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2/sys4_dispatch.rs",
+    "prior_sha256": "2b17d4f5aed2e025da8020db285b6b64a2c180d1f21421e3d7354d515983804d",
+    "role": "sole-main authored/read complete exact-fault deferred-consumption change and8controls; no new whole-repo read claim",
+    "at": "2026-09-30T05:14:31.087971+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1/proof_first_owner_schema_tests.rs",
+    "sha256": "4a07e26be0c296433fc37fdf11a0dd08823a78df323850b093d9a0bbd1622eb6",
+    "status": "delta-read with unchanged prior fully-read source",
+    "prior": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2/proof_first_owner_schema_tests.rs",
+    "prior_sha256": "884ab23901ef09cc83e0d4c999fe4f3477664f3eb5d99bd1cec088ac1eb14271",
+    "role": "sole-main authored/read complete exact-fault deferred-consumption change and8controls; no new whole-repo read claim",
+    "at": "2026-09-30T05:14:31.087971+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1/DESIGN.md",
+    "sha256": "74a03ac13fc2513cd8606750cf56cb4bcdfb5b0acdd101ce32b70355af7d9f79",
+    "status": "full-read",
+    "role": "full-read local repair invariant/alternative/falsifier",
+    "at": "2026-09-30T05:14:31.087971+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-final/ANSWER.md",
+    "sha256": "f39bf441880d3232df6e039fa1034be97cadc2b56a35665e3c1a773e5b9083dd",
+    "status": "full-read",
+    "role": "full-read actual final Oracle answer, all14dispositions",
+    "at": "2026-09-30T05:14:31.087971+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v4/INVENTORY.md",
+    "sha256": "130e400482f819c28021c149d027d5d91fc1731aafc05d0cc07597aef621e8fe",
+    "status": "full-read",
+    "role": "full-read current producer/custody map",
+    "at": "2026-09-30T05:14:31.087971+00:00"
   }
 ]

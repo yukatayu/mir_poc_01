@@ -2,17 +2,17 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: active W4; W4-A/B bounded evidence integrated, W4-C active, D/E dependent. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
+- Current state: active W4; W4-A/B bounded evidence integrated, W4-C technical gate closed pending docs/Git checks, D next, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
 
 ## Objective
 
-Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. Stop after W4. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
+Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. The full objective remains W4; the latest owner instruction for this run is to stop after W4-D, before W4-E. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
 
 ## Scope and assumptions
 
 One active semantic goal: W4, PL1/PL2/PL0, S4/S6, theory/refinement before bounded implementation. Sole main; no subagents. Task-specific owner authorization permits this reversible LAB research and evidence-dependent limited internal changes. It does not adopt unpresented auth policy, 119 detailed proposals, Canon THM/OBL/lifecycle, public wire/API, production or signed acceptance.
 
-First dependency: publication of a complete configuration/authority payload at a distinct protocol revision to a finite admitted group, preserving current-use checks across receiver queues and late results. REQ DS-01/02/03/04/08, AU-01/04/05/08, VF-04/05; PT-03/11/14; SC-04/07; U ordinary source, correct distribution, distinct authority and no stale resurrection. Exact U IDs will be retained from the requirement registry, not invented. Q18 and W3 H/H2/C/C2 policies remain distinct and conditional.
+Historical starting scope (2026-09-14; current C/D boundary and later revisions are recorded below): first dependency was publication of a complete configuration/authority payload at a distinct protocol revision to a finite admitted group, preserving current-use checks across receiver queues and late results. REQ DS-01/02/03/04/08, AU-01/04/05/08, VF-04/05; PT-03/11/14; SC-04/07; U ordinary source, correct distribution, distinct authority and no stale resurrection. Exact U IDs will be retained from the requirement registry, not invented. Q18 and W3 H/H2/C/C2 policies remain distinct and conditional.
 
 Candidate A: freeze all protected uses of the explicitly participating finite group, collect exact acknowledgements, publish the checked successor, then install/reopen under matching monotone fences. Compare B: owner-only update/ack while caller may keep a stale head. No whole-world coordinator, ordinary-read snapshot or multi-owner transaction is implied. Missing acknowledgement may remain closed, not success. Full payload/realm/auth provenance, locks/queues, bounded resources and actual Session refinement remain unestablished.
 
@@ -26,7 +26,7 @@ Resource audit: root188GiB/47GiB free; RAM15GiB/9.5GiB available; swap15GiB/1.5G
 
 ## Documents consulted
 
-Current AGENTS/user override, immutable handoff start/context/protocols/workstreams, verifier source; Canon README/MAP/North Star/Constitution/source hierarchy/phase/ADR0043/architectures09/10/plan05 and Plan250 I3-4/5/6 contracts. Identical-hash full reads of supplied MASTER/119requirements and F0.3/F0.2/F0.1 dependencies are inherited from the previous read ledger; current ledger proof/code entries were checked before reuse. Partial current excerpts are not new full reads. W3 RESUME/CURRENT_GOAL, report2613 relevant current evidence, reference companion/Authority/Session, current tasks/progress and progress axes. Mandatory global corpus remains incomplete, next legacy example301; no new whole-repo roadmap adopted.
+Current AGENTS/user override, immutable handoff start/context/protocols/workstreams, verifier source; Canon README/MAP/North Star/Constitution/source hierarchy/phase/ADR0043/architectures09/10/plan05 and Plan250 I3-4/5/6 contracts. Identical-hash full reads of supplied MASTER/119requirements and F0.3/F0.2/F0.1 dependencies are inherited from the previous read ledger; current ledger proof/code entries were checked before reuse. Partial current excerpts are not new full reads. W3 RESUME/CURRENT_GOAL, report2613 relevant current evidence, reference companion/Authority/Session, current tasks/progress and progress axes. At the initial checkpoint the next legacy example was301. That historical cursor is not current: later full reads and exact dependency reconsults are retained in READ_LEDGER and the forward R01–R12 map. No wholesale reading or new roadmap is inferred.
 
 Oracle manuals and actual help/debug-help read. Skills: using-superpowers, discord-report, brainstorming, writing-plans, TDD and systematic-debugging. User single-main/autonomous/one-report instructions supersede skill defaults for delegation, extra approval, extra plan directories or sessions. No tool self-knowledge assumption substitutes for actual help.
 
@@ -37,6 +37,8 @@ Created W4-only active goal; Discord beginfe6c4c recorded silently. Verified han
 W3 fresh-copy source/checker/proof baseline ran998f38 and exited0 at2026-09-13T23:33:56.260063Z. Began external nonproduction Publication generation-fence theory; initial reserved-word/parser and proof-script failures are retained, never counted as success. Corrected explicit proof passes8190ec. No Rust production edit.
 
 ## Files changed
+
+Current C checkpoint: two OwnerStatementOriginalEntry proof/control sources, the existing admission companion and source-pin manifest, producer inventory, READ_LEDGER/W4_CHECK, the one report/plan and current status mirrors. The fifteen Rust reference files remain external and unadopted; all temporary overlays are restored. Earlier integrated file sets below are history.
 
 Forward checkpoint:45 reviewed Lean/support sources in samples/lean/foundations, existing source-check runner --with-owner-boundary, publication explanation, samples/script READMEs and current status/evidence mirrors. No new sample root. Exact45file list/hashes in W4_CHECK external mirror manifest.
 
@@ -58,6 +60,8 @@ Full docs validation248bca passed after fixing the stale progress header and rec
 Read-only git/resource/hash/Canon/code inventory commands as recorded above. python3 sub-agent-pro/mirrorea-proof-first-handoff-v1/tools/verify_bundle.py. python3 scripts/proof_first_reference_source_check.py --work-root /tmp/mirrorea-w4-20260914-a3e0bpks. lean --trust=0 MirroreaProofFirstPublication.lean in external workdir, 4GiB child address-space limit. Oracle browser-only dry-run659ff0 and structured once-only COMMAND.json invocation1dd16e; no paid/API fallback.
 
 ## Evidence / outputs / test results
+
+Current C evidence (2026-09-30T05:14:31.087971+00:00): foreign-fault-retention-green-v1 default806/feature818 all pass0fail0ignored0filtered;8selectedpass,15Rust restored. General190/19502/156/167audit unchanged. Last Oracle N01 reproduced/repaired by main; complete14dispositions retained. Technical C close is bounded to the selected local profile; final docs/Git check pending. D implementation/network evidence remains due. Earlier evidence below retains its original cut.
 
 Bundle:669manifest/614original expanded files,119requirements/30decisions/24scenarios, passed byte integrity only. New W3 baseline mir-w3-reference-ztqpxt8e: passed72foundation+4consumer modules,9055owned declarations,32source cases,13integrity controls,5proof mutants; same manifestbd7af23035a560f1f41f8ec30ef7c5af3589bb8102b2c8e708670613ac40b189. No stale historical result renamed as a rerun.
 
@@ -221,11 +225,11 @@ accepted-I3 arithmetic defect is claimed from this read-only inventory.
 
 ## Open questions
 
-Entry Oracle recovered and disposition recorded below. Complete-head binding, group/realm identity and nonforking publication; source Session correspondence across distributed state; all runtime entries including bootstrap/alternate executor; queue/memory failure atomicity and actual negative network coverage. W5 restart and W6 confidentiality remain later. Need current snapshots synchronization after entry review and dependency reading; provisional remaining work estimate24–60hours, task-work estimate5–10% at this early checkpoint; neither is an acceptance metric.
+C technical conditions are closed in the selected local profile after the reviewed findings and actual fault-retention repair. Final docs/Git close checks remain. D must establish new source-cursor/process custody, source/Core/arguments/activation/ordinal request/result binding, changed resource aliases and unpublished-ID non-escape before dependent use. Wider source/callee/public-label consumers reopen their own prerequisite at first use. E and W5+ remain outside this run's stopping point.
 
 ## Suggested next prompt
 
-Already authorized: continue W4 through final candidate evidence/integration. No new prompt or approval needed for independent research.
+No new prompt is needed. Continue the authorized C→D work, stop after D before E, or at a reasonable checkpoint near50% weekly remaining. Check quota at least one hour apart; reset is owner-only. Current remaining87% was checked04:47:14UTC, next>=05:47:14UTC.
 
 ## Plan update status
 
@@ -252,6 +256,10 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 samples_progress.md updated: W4 active external model evidence and existing baseline distinguished from runnable network workflow. No new sample status or taxonomy promotion.
 
 ## Reviewer findings and follow-up
+
+Current: mir-w4-inbox-r2 completed87886exit0 at04:59:59UTC; full answer and14dispositions match23frozenfiles/QUESTION/actual6Pro-max/finalDOM. It closes prior inbox/reason findings and identifies actual foreign fault loss. Parent reproduced4fail/4positive and repaired deferred consumption;8selected/default806/feature818 pass. Parent reviewed this final tiny delta; no independent re-review or Oracle execution of the fix is claimed. C technical close is conditional on stated local scope/TCB and final docs/Git checks. No active Oracle or subagent.
+
+Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
 Fourth narrow review mir-w4-execution submitted onceb9e932 (exec53193), after
 successful dry-rune4c7fd (36frozen files, browser GPT6Astra). Question
@@ -298,9 +306,11 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Actual W4 Rust/network/continuation integration, remaining I3-3 regression targets and final docs checks not yet run; the external native owner component now has16process controls: implementation gate is still under investigation. No W4 completion claim. Broad global corpus reading remains incomplete; indexes/grep and truncated output are not full reading.
+D's new actual source-cursor/process/private-QUIC integration is not implemented or validated yet; its prerequisite C acceptance is pending. E's full network/fault/regression/119-row completion campaign is outside the current stop-after-D run. The local Rust default/feature and Lean audits above were run; no new fresh190 audit or whole-language/network/privacy/recovery proof is claimed. Broad corpus reading has no blanket completion claim; exact reads/reconsults remain in READ_LEDGER. Historical skipped checks below remain tied to their original dated checkpoints.
 
 ## Commit / push status
+
+Current proof/docs checkpointd526b866 committed with --no-gpg-sign, normal push91741exit0 and HEAD/origin parity0/0 verified. Later application-procedure/current-record synchronization is own dirty work. Productionbaselinee5450e38 is unchanged.
 
 Forward 2026-09-14T18:43:52.368794+00:00: reviewed45file owner proof mirror and runner/status61paths committed96746e206b9e52504c80548e9dc9fe6f4b3eff54 (cc3574), normal push522bb8, remote exact36ad93. Later source-credit/work-interval/coordinator remains external and W4 active.
 
@@ -4371,3 +4381,59 @@ publication. Latest quota03:47:01UTC89%remaining; next check>=04:47:01UTC.
 2026-09-30T04:50:57.781931+00:00: Oracle継続81704は04:44:52UTCに提出前error（savedconversation priorTurns0）で終了、exit1/marker不存在/FAILURE保存。生成中の重複なし。保存済み回答と同じ凍結source/default798/proof156で新規限定review87886を04:49:34UTCに1回提出、23files1503953bytes/manifestb247113e…/question1f07bb1e…、次status>=04:52:34UTC。make docs74992進行中。C未受理/D未着手。
 
 2026-09-30T04:54:25.651990+00:00: make docs74992exit0、190sourcepins/156negative recipe/6718priorledgerprefix/15Rust復元/inventoryv3一致確認。限定Oracle87886は04:53:49UTC running/identitytrue/Stoptrue、実6Pro Latest/最大slider4/4、次status>=04:56:49UTC。C未受理/D未着手のproof/docs checkpoint。
+
+2026-09-30T04:58:35.798884+00:00: C適用手順をLAB planへ具体化。既存source cursor/SourceActivationは参照cfg(test)、実child emitterはoperation ID・引数なしのため、そのままD接続とは扱わない。新一意custody/元引数/実remote結果/currentM9/公開前ID/資源のgateを依拠前に確認する。M6 relation mutation診断→M7前拒否を再参照し、非対応文の黙った完了ではないことを確認。D実装未着手、C受理は限定review待ち。
+
+2026-09-30T05:00:37.534891+00:00: Active reportの共通欄を現在のC gate/798+810/156proof/停止点Dへ同期し、初期cursor・旧review pending・当時のskipを明示的に履歴化。元の日時付き証拠は保持。
+
+### C technical close and first D use — 2026-09-30T05:14:31.087971+00:00
+
+Main accepts W4-C's implementation-before-use conditions for the selected
+existing Surface v0 assignment/local owner profile as a bounded LAB technical
+result, pending the final docs/Git close checks. This consumes the original C
+exit: declarative/checker correspondence, necessary general proofs, ordinary
+source positives, weakened/forged/revoked/alternate-entry controls, explicit TCB,
+planned mechanism/redaction mapping, review and application procedure. It does
+not assert physical network correspondence before D implements it. The15 external
+Rust files remain unadopted and test-only at their source cursor; even a normal
+non-test build is not supplied by these library-test receipts.
+
+The latest Oracle answer f39bf441880d3232df6e039fa1034be97cadc2b56a35665e3c1a773e5b9083dd
+completed04:59:59UTC, exit0; all23 input hashes/QUESTION/actual6Pro-max/finalDOM match.
+Fourteen dispositions preserve its scoped conclusions. Its last new N01 is real:
+initial4 and initial21 foreign-fault schedules lose an admitted transformation on
+failed explicit transport. Red-v2 has4fail/4positive; green-v1 passes8. The fix
+selects inertly and consumes only after successful movement; intentional Retarget
+terminalization and original reporting rollback retain their existing behavior.
+Main reviewed the complete tiny delta and tested default806/feature818,0fail0skip.
+The Oracle did not rerun this last repair. No additional proof theorem is claimed:
+the unchanged failed-movement invariant is restored by the concrete ordering.
+Red-v1's two extra failures were invalid full-collection expectations with8tokens;
+corrected positives observe actual transformed movement. All logs remain.
+
+| Obligation | C close disposition | First D use / reopen gate |
+| --- | --- | --- |
+| R01 | B preserved206inputs and whole observed runners; C190source pins/156false recipe retained | Bind D's exact source/build/import/process artifacts; E final reproducibility union |
+| R02 | Declarative admission/execution/acknowledgment and budget/finite-selection proofs plus actual meaningful ST/OW1 positives; final producer defects repaired | Recompute D changed producer costs/pools; finite stepping/ordinary memory/current authority remain explicit |
+| R03 | Local protected entry, full manifest/Core/arguments, one cursor, inert clone, source-bearing restore refusal and actual custody/caller inventory | One actual requester custodian and inert owner descriptors; every new process ingress/restore must establish correspondence before use |
+| R04 | Current original M9 plus genuine lifecycle controls; independently expected process image/control baseline pinned | TLS/SPKI/preface authenticates peer only; preserve actual semantic M9 and source association; no new issuer/key policy |
+| R05 | Existing checked assignment profile and concrete source/Core/privateQUIC application map specified | Reify test-only cursor into minimal non-test mechanism, not export an Arc or external operation-ID loop; actual network evidence belongs to D |
+| R06 | Actual latest-write origin and consume→next-request causality; selected privateI3 reference/count observation mapped | Same runtime event through network and redaction; raw capture/summary counters are not owner execution or public observer evidence |
+| R07 | Truthful attempted/refused/committed/unknown, no reexecution on report loss, one consume and current generation | Preserve across process request/result custody; process death has no implicit recovery; D targeted controls, E broad campaign |
+| R08 | Accepted I3-3 baseline retained, no lifecycle promotion | Run regressions affected by D; E full required campaign and I3-4/5/6 obligation mapping without resume |
+| R09 | Source/label/capture/control/observer first-consumer boundaries explicitly mapped above; selected assignment syntax rejects unsupported relation mutations | Wider mixed/callee or new public/control-sensitive releases reopen prerequisites before dependency; W6/general NI not discharged here |
+| R10 | Exact source/proof/caller reads and full/delta/partial distinctions retained; old612 cursor historical | Read/hash exact changed process/control/observer cone before design/code decisions |
+| R11 | Final reviewed findings disposed;806/818/8 and unchanged kernel156 evidence verified | Finish docs/Git close below, then D; no signed/owner authentication inferred from advice |
+| R12 | Original and new findings assigned, C-critical local findings closed; no row silently dropped | New used premise assigned before use; E reconciles final originalW4+A–D/119 union, not a deferred D prerequisite |
+
+Rollback/reopen triggers: a new source form, constructor/expected-origin producer,
+entry/restore path, process transfer, authority issuer, pool alias/cost, escaped
+unpublished qualification identity or changed release scope reopens the affected
+condition before its first dependent execution. No C assumption is converted into
+a fact merely by labeling D active. Continue D's boundary theory/design after
+close verification, implement only after its changed correspondence is established,
+then actual process/private QUIC validation and integration; stop before E.
+
+Current update status: plan/、Documentation.md、docs/project-status.md、progress.md、tasks.md（全体snapshot）、samples_progress.mdを同期。新sample root/taxonomyなし。Lean再実行はproof差分なしのため省略し既存hash監査を保持。新D non-test/process/network検査は未実装、E campaignは停止点外。最後の小fixは主担当diff reviewと全検査、追加Oracle再実行なし。Commit/pushはこのclose検証後。sub-agent未使用、外部通知なし。
+
+2026-09-30T05:20:34.527397+00:00: C close make docs41353exit0（218Canon/800hierarchy/1764reports）、190pins/156recipe/6720旧ledgerprefix/15Rust復元/inventoryv4完全一致を確認。全15比較の差分はSYS4とtestのみ、最後のfault修正は主担当review8f805227…で範囲確認。技術条件の限定close記録をcommit/pushし、そのままDの新process境界検証へ進む。

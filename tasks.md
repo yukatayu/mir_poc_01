@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 13:46 JST
+最終更新: 2026-09-30 14:14 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,79 +15,77 @@ remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
 
 ## current promoted package
 
-W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。2026-09-26のowner指示で同じgoalを再開しました。W1〜W3の有限候補と119行U/D/nonacceptanceを保持します。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。
+W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。A→B→C→D→Eは同じW4の作業区切りで、新しいsemantic milestoneではありません。
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日の計画整理と今回の実行再開を区別します。
+W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。現在は文書・Gitのclose検証中で、その完了後にW4-Dへ進みます。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
-2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
+最新の外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
 
-Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
+CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの局所実験です。既存の採用cut e5450e38と通常libraryの動作を置き換えていません。Dでは既存source→checked Core→生成edge→実private QUIC→同じ実行の観測へ接続します。唯一のrequester custodyと他processの非実行descriptor、元source/Core/引数/activation/ordinalと実request/result、M9とTLSの分離、新しい資源poolと未公開識別子の非escapeを使用前に確認します。単に局所Arcを渡す、操作IDを外部loopで順に呼ぶ、手書きreceiptを返す方法では完了にしません。
 
-W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果不明8/16と選択モデルの一般Lean命題です。privileged pipe/capture/compiler TCBに条件付きで、full physical/QUIC/authentication/秘密/復旧の保証ではありません。検証runner全体のexit0、全必須check・入力/import/source-object/hash照合、子processの期待statusとの一致が必要です。注入故障・拒否反例の期待失敗を成功終了へ変えず、途中の成功markerだけでは受理しません。sourceClaim/sourceWireClaimのprivate locator aliasは保持され、canonical-tag injectivityは主張しません。
+観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。次はDのprocess境界設計と前提検証で、Dの実装・実network証拠はまだありません。
 
-W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
-
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と156反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
-
-元ソースの実行権限と依存を保つ未採用参照で、別の受信箱の容量不足が元要求を止める反例と、明示回収時の拒否理由を修正しました。各受信箱の先頭だけを選び、同じ箱のFIFOは保ちます。最新default全798件・追加対照10件が成功し、skipはありません。同じcutのprocess-test feature全810件も成功しました。一般証明は190module・19502宣言・156偽命題対照を監査済みです。Oracleの全体review22項目を記録し、最後の2指摘に絞って差分を再確認中です。C未完了・D未着手、D完了後に停止します。
-
-現在の直接consumerはDの既存Surface v0代入列→checked Core→生成edge→private QUIC→実観測です。R01〜R12とsource/authority/custody/resource/observerの前提をplanに明記し、Cの最終差分reviewを照合します。Dで新設するprocess間の一意custodyと実搬送の対応は、その依拠前に確認します。より広いcallee/混合sourceや公開observerの条件を、今回のowner列やprivate redacted記録で満たしたとは扱いません。
+Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
+`plan/proof-first-foundation-correspondence.md`. Exact receipts/current cursor:
+`docs/proof-first/RESUME.md`, `CURRENT_GOAL.md`, `W4_CHECK.json`, Report2614.
 
 ## ordered self-driven packages
 
-現在の自走順序はC→D、D完了後はpause。Eは全W4計画に保持し、再開指示を待ちます。A〜Eは元W4内の作業区切りで、別semantic milestoneではありません。
-
-| Package / macro position | Required result / first consumer | Startability / suggested model / rough estimate |
+| Package / macro position | Required result / first consumer | Startability / rough estimate |
 |---|---|---|
-| W4-A / Macro1/2/5 | 保存済み限定モデルと実process証拠をB/Cへ渡す | 完了済みの限定範囲。既存結果を保持 |
-| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | 限定LAB統合候補として完了。境界review回収・主担当照合済み |
-| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespace、結果回収・失敗・復元入口の必要条件を閉じる→D | **現在地**。受理可能性と現在の要求文脈の一つのgoalから開始。GPT-6 Astra high、難所xhigh。所要時間はconsumer具体化後に再評価 |
-| W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
-| W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | D後のowner再開待ち。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
-| Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。歴史example612まで全文。既存docsの通読も進め、広域sample/archive JSONは保存済みbatch64まで読了。未照合の生成receipt等を一括読了とはしない。現在の206module依存coneは全文/equivalent hash照合済み |
-| W5/W6/W7 | 永続化/復旧、秘密観測、α統合 | 後段依存、今回のW4 scope外 |
+| W4-A / Macro1/2/5 | Preserved limited models/process evidence for B/C | Bounded evidence complete; retain exact receipts |
+| W4-B / Macro2/5 | Repo-integrated proof/dependencies and observed whole runners for C/D | Bounded integrated candidate complete |
+| W4-C / Macro1/5 | Relative admission, all entries, current authority, custody/resource conditions and application route for D | Technical gate closed in selected local profile; docs/Git close verification pending |
+| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Next: derive/check unique requester handoff, inert owner descriptor and remote binding before code relies on C; then minimal internal implementation and finite actual-process validation |
+| W4-E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign,119 and A–D residual union | Inactive; owner resume after D stop required |
+| Mandatory reading / Macro0 | Exact source/authority/process/observer cone before decisions | READ_LEDGER distinguishes full/hash-equivalent/delta/partial reads; historical612 is not a current unread cursor |
+| W5/W6/W7 | Persistence/recovery, broader secret observation, alpha | Outside this request |
 
-D完了まで20〜40実作業時間を低確度の暫定目安として報告しています。これは前回の1〜2作業日見積もりを更新するものです。Cの実ソース・資源・入口接続とD実装の実測がそろっておらず、反例で延びます。旧24–60実作業時間は過去の集約値です。実際のCore/runtime対応が明らかになった時点で再評価します。Oracleの経過時間を失敗や任意の締切にしません。分割数を進捗率にせず、モデル推奨も未実測の候補です。手動の同一主担当切替を想定し、自動設定やsub-agentを導入しません。
-
-R01〜R12は義務分類で、具体項目の網羅実証ではありません。依拠する判断前に残件を具体化し、Eは台帳とW4に必要な新発見を総照合します。元W4＋A〜D残項目の各行に由来・担当・最初に止めるconsumer・状態・証拠・再開条件を保持し、W4-criticalなOPENを残して完了にはしません。C/Dの前提は最初の依存internal実装・生成経路・証拠主張前に閉じ、Eへの先送り不可。既存のtransport非権威性・source owner評価・request/history・typed failure・redactionをC/Dから保持します。Dで使用前提が変われば該当C義務へ戻し、実装後の証拠はDで得ます。Eで欠陥が見つかれば前段へ戻して前方修正します。
+Dの境界設計はAstra high、確定した実装はSol highを推奨した既存計画を保持します。自動model切替やsub-agentは導入しません。D完了まで20〜40実作業時間という既報見積もりは低確度の過去目安で、経過時間だけで残りを差し引きません。Dの実装差分・検査経路を確定した時点で再評価します。
 
 ## self-driven macro phase reading
 
-Macro0 is corpus/evidence maintenance; Macro1/5 are the selected model and
-proof boundaries. Macro2/3 provide bounded reference FM4/5 evidence; Macro6
-contains the remaining actual fabric/transport correspondence. Macro4 widening,
-Macro7 public tooling and Macro8 domain work remain outside this checkpoint.
+Macro0 is evidence/corpus maintenance; Macro1/5 are the selected theory and
+proof boundaries. Macro2/3 provide reference and implementation evidence;
+Macro6 is the actual transport correspondence. D begins at its protocol/custody
+gate, not at claimed network completion. No whole-project phase recut occurs.
 
 ## user decision gates
 
-No new owner answer is required for already authorized reversible research and
-conditional internal implementation once corresponding theory/procedural gates
-are met. L0/L1 or privacy/authority weakening, public API/ABI/wire, production,
-billing/publication, owner-managed keys and authenticated acceptance remain
-reserved. Q18/H/H2/C/C2 stay distinct conditional cuts. Oracle concurrence
-cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
+No new owner answer is required for the authorized reversible research and
+conditional internal implementation. L0/L1, authority/privacy weakening,
+public API/ABI/wire, production, billing/publication and owner keys remain
+reserved. Q18/H/H2/C/C2, U/D and adoption/demonstration stay distinct.
+Oracle cannot supply an absent owner-authenticated trust anchor or resume Plan250.
 
 ## research discovery items
 
-| Question | Effect / current candidate versus smallest alternative |
+| Question | Effect / current candidate versus smallest alternative / reopen trigger |
 |---|---|
-| Source admission and private state | derive current request/context through same retained source/owner lifetime vs independent preflight; no stale witness refresh |
-| Physical provenance and namespace | bind actual endpoint/cohort/pending/caller; IDs and hashes alone are not authentication |
-| Relative admission / resources | retain independent room/freshness/funding and meaningful positives; reject all-refusal shortcuts or constant-only capacity fixes |
-| Unknown communication | retain last-known state plus actual unresolved physical custody; known/unknown private decoders remain separate rather than unified dispatch |
-| Existing runtime embedding | current pure Int source differs from effectful owner/unit ack; preserve source statement order, immutable pending and committed owner history; distinct-owner identity and source-free restore cuts remain open |
-| Recovery / observation | fresh cohort is not same-instance recovery; faithful privileged capture proves neither passive noninterference nor confidentiality |
+| Source custody across processes | A: one requester cursor, inert checked descriptors at owners; B: external operation-ID loop is inadequate. New restore/transfer must prove no duplicate cursor before use. |
+| Remote original/current-use/result binding | Full source/Core/arguments/activation/ordinal plus actual request and result; semantic M9 remains distinct from TLS peer. A hash or old committed result alone cannot authorize current acknowledgment. |
+| Changed resource/caller graph | Recompute new pool aliases, costs, pending/tombstone limits and actual producers; no unpublished qualified identity may escape a rollback. Any new entry/restore/pruning reopens its C condition. |
+| Faithful observation | Existing private-I3 redacted references/counts from same actual events; generic Public M8 label is not source classification. New released fields or confidentiality claims reopen label/control/capture premises first. |
+| Unknown communication | Keep actual pending/result custody and truthful unknown; no retry-as-new-body, refund or process-death recovery without its protocol. E owns broad campaign, not D prerequisites. |
 
 ## maintenance tasks
 
-Use the persistent external workroot in RESUME. Never rerun one-shot evidence launchers over existing output. No unchanged one-shot evidence replay merely for a label or context change; B's actual import/runner change requires scoped fresh verification. Heavy Lean remains serial --trust=0 -j1 with measured resource limits. Owner-authorized cleanup is limited to known untracked reproducible artifacts; preserve evidence/source/cache inputs and Chrome. No external notifications.
-
-W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。最新指示ではD完了時にgoalをpauseして止め、Eへは進みません。最新owner指示に従って同じW4作業を継続します。goal tool表示はpausedのままですが、主担当toolからresumeはできないため重複goalを作りません。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
+One Report2614 accumulates all packages. Update plan/status/tasks/samples dashboard
+at package close; preserve closed history and exact failed attempts. Use the
+persistent external workroot in RESUME; do not overwrite one-shot outputs.
+Heavy Rust/Lean runs stay serial with measured limits. Only known untracked
+reproducible build artifacts may be cleaned; preserve source/proof/evidence and
+Chrome. No external notifications/publication or host-share workspace.
 
 最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 ## non-promoted references
 
-Keep one accumulating Report2614, forward LAB plan history and concise status mirrors. No new roadmap, sample root or framework. Reports2611–2613 and accepted I3 history remain unchanged. Mir, Mirrorea, Typed-Effect, PrismCascade and upper applications stay separable. A–E completion labels do not promote Canon THM/OBL/phase, public/production contracts or alpha. Detailed package exits, alternatives and falsifiers are in `plan/proof-first-foundation-correspondence.md`.
+C's fifteen Rust files remain external and unadopted; normal non-test build is a
+D entry obligation. General kernel results and finite Rust tests remain distinct.
+A–C closure grants no Canon/THM/OBL/phase/public/production/alpha acceptance.
+R01–R12 and119 rows keep their original owners; no used premise is left to E.
+The existing paused goaltool has no main resume API; explicit owner continuation
+governs without a duplicate goal. Continue after this C checkpoint, stop after D.

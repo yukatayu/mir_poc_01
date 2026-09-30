@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-28T01:49:49.479878+00:00",
+  "timestamp": "2026-09-30T05:14:31.087971+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "B closed as bounded LAB integrated candidate; C current-context admission goal active; W4 incomplete",
+  "status": "C technical gate closed bounded LAB; final docs/Git close verification pending; D next; W4 incomplete",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -53493,5 +53493,136 @@
     "restored_rust": 15,
     "inventory_exact": true,
     "scope": "proof/docs checkpoint; final narrow review still running, C incomplete/Dunstarted"
+  },
+  "c_inbox_review_final_20260930": {
+    "at": "2026-09-30T05:14:31.087971+00:00",
+    "recovery": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-final/FINAL_RECOVERY.json",
+    "sha256": "dab30ad5b723fc0a09706fa8ec23a89f2c02c37e900dcc22feb4f86f1ef58bcf",
+    "dispositions": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-final/DISPOSITION.json",
+    "dispositions_sha256": "04aaf58960cfc01163ffccced07e2954f2c13d99e3169b36f980deba6f564f36",
+    "status": "completed04:59:59UTC exit0; 23files/actual6Pro-max/QUESTION/finalDOM verified; prior2resolved/newN01 reproduced and repaired by parent"
+  },
+  "c_technical_close_20260930": {
+    "at": "2026-09-30T05:14:31.087971+00:00",
+    "status": "C technical conditions closed for selected local source/owner profile; docs/Git close verification pending before D execution",
+    "authority": "owner-authorized task-local LAB C exit; no Canon/production/public/119 acceptance",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1",
+    "inputs": {
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "4a07e26be0c296433fc37fdf11a0dd08823a78df323850b093d9a0bbd1622eb6",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "374353872e3cac326706e7f3eb59acd2c745e8028374e6b79551501ec0baec20",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "c3443dad0b4b1e613675a75e88f5982bb4d87baa13375c63e8d470f1cee4d4d4",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "95486e307c827be21e4745965c1774b7f2960341b062613a058bd09db2c94b81",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "4ad25d6faa6f4cd758b89dc30a8e6bd033b1ba210598e4ed77bcc5f101e228bd",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "5741aea8d490473cf849c165ce9d7c60a92ae78076323142231001113ef4107a",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "3f9510ee9f30844a4539368b3f9b362541ad01753edf4e25785205b448f515cb",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe"
+    },
+    "oracle": {
+      "recovery": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-final/FINAL_RECOVERY.json",
+      "recovery_sha256": "dab30ad5b723fc0a09706fa8ec23a89f2c02c37e900dcc22feb4f86f1ef58bcf",
+      "answer_sha256": "f39bf441880d3232df6e039fa1034be97cadc2b56a35665e3c1a773e5b9083dd",
+      "disposition_sha256": "04aaf58960cfc01163ffccced07e2954f2c13d99e3169b36f980deba6f564f36",
+      "findings": 14,
+      "N01": "Parent reproduced four actual failures, retained four positive controls, repaired deferred exact-fault consumption and checked unchanged Retarget/original transaction. Final tiny repair locally reviewed and full-tested; Oracle did not rerun this repair."
+    },
+    "receipts": [
+      {
+        "cut": "foreign-fault-retention-red-v1",
+        "tool": 42322,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-red-v1-check/RESULT.json",
+        "sha256": "36b72ab969a9bce560b5aa96ee5d91c7dc89c99ef5a75b41232cdbe7a5203843",
+        "exit": 101,
+        "passed": null,
+        "restored": 15
+      },
+      {
+        "cut": "foreign-fault-retention-red-v2",
+        "tool": 81198,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-red-v2-check/RESULT.json",
+        "sha256": "51093a5740699488a92e96824c081413f6ca989a9e52c3ec1d116efe22bd1a5c",
+        "exit": 101,
+        "passed": null,
+        "restored": 15
+      },
+      {
+        "cut": "foreign-fault-retention-green-v1",
+        "tool": 17099,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1-check/RESULT.json",
+        "sha256": "d69860376931ba3cd0373388d76aa99d41ab96590212f341a44653e174f1864a",
+        "exit": 0,
+        "passed": 8,
+        "restored": 15
+      },
+      {
+        "cut": "foreign-fault-retention-green-v1",
+        "tool": 91316,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1-full-check/RESULT.json",
+        "sha256": "e5a510a8c4c85980e38de66bdc08f94103eff62831ad159eb8b2bc5bd8ecc2a7",
+        "exit": 0,
+        "passed": 806,
+        "restored": 15
+      },
+      {
+        "cut": "foreign-fault-retention-green-v1",
+        "tool": 68820,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/foreign-fault-retention-green-v1-feature-full-check/RESULT.json",
+        "sha256": "a61ce721e95695f9c433f2f0ff3ed8f1ccd54fa5ed8358d1549f7d2783e08f4b",
+        "exit": 0,
+        "passed": 818,
+        "restored": 15
+      }
+    ],
+    "proof": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-inbox-heads-v2/RESULT.json",
+      "sha256": "5f01cbb42686bbc47e2ab00775e7c07b2e1071218c13aea96955ed1b4b2fb912",
+      "modules": 190,
+      "owned": 19502,
+      "qualified_false": 156,
+      "commands": 167,
+      "rerun_for_this_no_proof_delta": false
+    },
+    "inventory": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v4/RESULT.json",
+      "sha256": "6033f2d9b03a2a99e519096249e471eb7b2c8fb8ef8fba1b26d4c58874f4c198",
+      "inputs": 20,
+      "lexical_calls": 205
+    },
+    "D_pre_use_gates": [
+      "unique requester cursor and inert owner descriptors through independent expected image/control",
+      "exact checked source/Core/arguments/activation/ordinal/request/result and current M9 association",
+      "changed physical producer costs/aliases/pending ledgers and no unpublished qualification identity escape",
+      "same-event existing private-I3 redaction; no generic Public M8 grant or whole-session NI",
+      "normal non-test build and real child process/QUIC validation after reifying the test-only local reference"
+    ],
+    "non_effects": [
+      "15 external Rust files remain unadopted",
+      "e5450e38 production baseline retained",
+      "Canon/THM/OBL/119/Plan250/I3-4 unchanged",
+      "E/W5+ not started"
+    ],
+    "stop": "after D integration, before E; quota near50% at reasonable checkpoint, >=1h checks"
+  },
+  "c_close_validation_20260930": {
+    "at": "2026-09-30T05:20:34.527397+00:00",
+    "docs_tool": 41353,
+    "docs_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-c-close-v1.json",
+    "docs_sha256": "c22d11b607c7409ba75f8655dd24c3ab49f096ff37bd96e7b23e6df412c4f6db",
+    "docs_exit": 0,
+    "source_pins": 190,
+    "negative_recipe": 156,
+    "old_ledger_prefix": 6720,
+    "restored_Rust": 15,
+    "inventory": "v4 exact;20pins/205lexicalcalls",
+    "main_physical_delta_review": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/c-final-physical-review-v1/RESULT.json",
+    "main_physical_delta_review_sha256": "8f805227b302f9927a7cfefc3c025ae47fb1e9ce51da15f55dd3d09674b10735",
+    "independent_review_of_last_small_fix": false,
+    "status": "all technical/current docs checks pass; own checkpoint commit/push next, continue D afterward"
   }
 }

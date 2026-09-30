@@ -1983,3 +1983,18 @@ inputs/logs are retained. Corrected successor audit passes all required checks.
 The actual Rust head predicate shares cost/discharge with lowest dequeue; explicit
 requested carriers reach ordinary typed resource/route refusal. Numeric guards
 remain separate from source custody and semantic authority.
+
+## Current C technical disposition (2026-09-30)
+
+The dated successor sections above preserve their original then-pending review
+states. Current C technical judgment is in W4_CHECK.c_technical_close_20260930
+and Report2614: the selected local assignment/owner profile is closed after
+review disposition and actual counterexample repair, with final docs/Git close
+checks pending. The general kernel cut remains190/19502/156/167, unchanged by
+the last concrete foreign-fault retention repair. The external test-only reference
+passes default806 and process-test feature818; all15Rust files are restored.
+The reference has not been adopted into the ordinary non-test library. D must
+reify unique requester custody, inert owner descriptors, exact network request/
+result/current-M9/source binding, changed pools/identity publication and existing
+redaction before dependent use. No C prerequisite is left to E, and the full W4
+or119-row/public/production/Canon acceptance is not claimed.

@@ -4,7 +4,7 @@ This is LAB implementation correspondence for W4-C's frozen reference, with
 W4-D as its direct consumer. It does not adopt the reference, widen Canon,
 resume Plan250/I3-4, prove all Rust executions, or guarantee delivery after a
 legitimate revocation or process death. The input hashes and searchable call
-sites are in the W4_CHECK-linked `producer-inventory-v3/PINS.json` and
+sites are in the W4_CHECK-linked `producer-inventory-v4/PINS.json` and
 `CALLS.json`. The latter is a lexical audit aid, not a compiler call-graph proof.
 
 ## Selected boundary and physical ownership
@@ -257,6 +257,35 @@ The ReportReservation and EndpointBudget general Lean results prove numeric
 admission/discharge facts and independent checker/Ready equivalence. Actual IDs,
 phases, producers, costs, aliases and caller discipline are this bounded physical
 correspondence obligation, not facts created by Lean. The completed producer reviews identified concrete outbox/inbox and diagnostic
-deltas. The latest inbox/head repair is under focused verification and final
-changed-cut review; W4-C acceptance remains open. New producers, custody escape, resource sharing,
+deltas. The actual-head review resolves the prior two findings and bounded scan
+correspondence. Its additional exact-foreign-fault finding is reproduced and
+repaired below; final acceptance is recorded separately in W4_CHECK and Report2614. New producers, custody escape, resource sharing,
 authority policy or a broader completion promise reopen this inventory.
+
+## Exact foreign transformation retention (2026-09-30 forward repair)
+
+The explicit-request selection exception correctly reaches a typed ordinary
+resource refusal, but the earlier transport took an admitted exact transformation
+before reserving movement tokens. With initial headroom4, a genuine E.result
+submission spends4; its admitted CorruptSourceRef then disappeared on the failed
+explicit collection while the envelope stayed in the outbox. An initial21 case
+also admits/completes/acknowledges the original once before the explicit foreign
+refusal. Both schedules reproduce in ST and OW1 without post-admission mutation.
+
+Selection now clones that descriptor without consuming it. The unchanged ordinary
+move is attempted, and only a successful move consumes the matching descriptor.
+The existing Retarget terminal branch still consumes the fault and the carrier
+with explicit refusal evidence. Exclusive mutable fabric access prevents a
+concurrent key/association change during this attempt. The original report guard
+still handles unpublished original failures. No resource cost, authority, source
+phase, public contract or broader panic/abort recovery is added. Typed failed
+moves preserve envelope/endpoints/causality/counter and exact fault; successful
+moves actually apply the selected transformation. Separate ordinary-spare
+controls produce genuine foreign11, so preservation is not blanket refusal.
+
+Controls red-v2 has4 discriminating failures plus4 positives; green-v1 passes8.
+Red-v1 additionally expected a full designated collection with only8 tokens;
+that was invalid. The corrected positive observes actual movement and transformed
+provenance, without claiming downstream provenance validation at transport. All
+failed inputs/logs remain retained. The final full profile receipts, source pins,
+and C judgment live in W4_CHECK; this inventory itself grants no acceptance.

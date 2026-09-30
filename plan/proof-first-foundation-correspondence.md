@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C active**; W4-D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C technical gate closed pending docs/Git close checks; W4-D next**; W4-E inactive. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
 
 ## Authority and retained history
 
@@ -2290,3 +2290,96 @@ publication. Latest quota03:47:01UTC89%remaining; next check>=04:47:01UTC.
 2026-09-30T04:50:57.781931+00:00: Oracle継続81704は04:44:52UTCに提出前error（savedconversation priorTurns0）で終了、exit1/marker不存在/FAILURE保存。生成中の重複なし。保存済み回答と同じ凍結source/default798/proof156で新規限定review87886を04:49:34UTCに1回提出、23files1503953bytes/manifestb247113e…/question1f07bb1e…、次status>=04:52:34UTC。make docs74992進行中。C未受理/D未着手。
 
 2026-09-30T04:54:25.651990+00:00: make docs74992exit0、190sourcepins/156negative recipe/6718priorledgerprefix/15Rust復元/inventoryv3一致確認。限定Oracle87886は04:53:49UTC running/identitytrue/Stoptrue、実6Pro Latest/最大slider4/4、次status>=04:56:49UTC。C未受理/D未着手のproof/docs checkpoint。
+
+### C evidence application route (conditional draft) — 2026-09-30T04:58:35.798884+00:00
+
+C acceptance remains pending the narrow final review. The local source reference
+is still external and unadopted. Its SourceActivation and Invocation entry are
+cfg(test); passing library or feature library tests does not expose that source
+cursor in a real child process. D must therefore make the application route
+explicit instead of treating a local Arc or a test-only constructor as a remote
+execution capability.
+
+The reviewed local algorithm and its proofs may supply D's correspondence rules
+only after their exact frozen inputs/assumptions are selected. D then derives the
+full ordered handler and parameter map from the existing checked source once;
+one requester custodian selects the next statement. Other child descriptors
+cannot independently advance that source. The existing ordinary process emitter
+currently accepts an operation ID and constructs an argument-free SourceAction;
+calling it in an external loop does not implement this source contract. Any new
+internal entry must preserve source/Core/argument/activation/ordinal identity,
+block protected-entry bypass, and bind its actual request and retained remote
+result before source acknowledgment. Semantic M9 use/currentness stays separate
+from the existing peer-SPKI/preface delivery evidence.
+
+The parent-held expected image/control channel, receiver-owned pending/tombstone
+ledgers and ordinary private-QUIC decoder are baseline mechanisms, not proof of
+the new source handoff. A changed constructor, expected-binding producer, role,
+carrier field, remote result collector, counter pool, or report publication point
+reopens the corresponding C premise before dependent execution. In particular,
+no rolled-back qualified local identity may escape through a new process send.
+Do not make a second evaluator or copy a live source cursor per owner. A legitimate
+unknown remote result is neither no-write nor permission to issue a fresh request.
+
+This is an application procedure and pre-use gate, not adoption of an unreviewed
+production patch or a new wire/public/language contract. D's exact mechanism must
+be checked against these conditions before implementation relies on it, then
+validated on its actual processes/private QUIC and same-event redacted evidence.
+E retains the full campaign/119-row union; no condition used by D is left to E.
+
+A source-form reconsult confirms that relation mutation is rejected by M6's
+relation_diagnostics as ConsumerRelationMutationDenied; check_and_elaborate
+propagates classification failure before building checked M7. It is not silently
+erased while claiming a completed source handler. The selected executable profile
+remains the existing ordered assignments, with new accepted forms reopening the
+boundary. This restates the first-consumer scope more precisely; it adds no grammar.
+
+### C technical close and first D use — 2026-09-30T05:14:31.087971+00:00
+
+Main accepts W4-C's implementation-before-use conditions for the selected
+existing Surface v0 assignment/local owner profile as a bounded LAB technical
+result, pending the final docs/Git close checks. This consumes the original C
+exit: declarative/checker correspondence, necessary general proofs, ordinary
+source positives, weakened/forged/revoked/alternate-entry controls, explicit TCB,
+planned mechanism/redaction mapping, review and application procedure. It does
+not assert physical network correspondence before D implements it. The15 external
+Rust files remain unadopted and test-only at their source cursor; even a normal
+non-test build is not supplied by these library-test receipts.
+
+The latest Oracle answer f39bf441880d3232df6e039fa1034be97cadc2b56a35665e3c1a773e5b9083dd
+completed04:59:59UTC, exit0; all23 input hashes/QUESTION/actual6Pro-max/finalDOM match.
+Fourteen dispositions preserve its scoped conclusions. Its last new N01 is real:
+initial4 and initial21 foreign-fault schedules lose an admitted transformation on
+failed explicit transport. Red-v2 has4fail/4positive; green-v1 passes8. The fix
+selects inertly and consumes only after successful movement; intentional Retarget
+terminalization and original reporting rollback retain their existing behavior.
+Main reviewed the complete tiny delta and tested default806/feature818,0fail0skip.
+The Oracle did not rerun this last repair. No additional proof theorem is claimed:
+the unchanged failed-movement invariant is restored by the concrete ordering.
+Red-v1's two extra failures were invalid full-collection expectations with8tokens;
+corrected positives observe actual transformed movement. All logs remain.
+
+| Obligation | C close disposition | First D use / reopen gate |
+| --- | --- | --- |
+| R01 | B preserved206inputs and whole observed runners; C190source pins/156false recipe retained | Bind D's exact source/build/import/process artifacts; E final reproducibility union |
+| R02 | Declarative admission/execution/acknowledgment and budget/finite-selection proofs plus actual meaningful ST/OW1 positives; final producer defects repaired | Recompute D changed producer costs/pools; finite stepping/ordinary memory/current authority remain explicit |
+| R03 | Local protected entry, full manifest/Core/arguments, one cursor, inert clone, source-bearing restore refusal and actual custody/caller inventory | One actual requester custodian and inert owner descriptors; every new process ingress/restore must establish correspondence before use |
+| R04 | Current original M9 plus genuine lifecycle controls; independently expected process image/control baseline pinned | TLS/SPKI/preface authenticates peer only; preserve actual semantic M9 and source association; no new issuer/key policy |
+| R05 | Existing checked assignment profile and concrete source/Core/privateQUIC application map specified | Reify test-only cursor into minimal non-test mechanism, not export an Arc or external operation-ID loop; actual network evidence belongs to D |
+| R06 | Actual latest-write origin and consume→next-request causality; selected privateI3 reference/count observation mapped | Same runtime event through network and redaction; raw capture/summary counters are not owner execution or public observer evidence |
+| R07 | Truthful attempted/refused/committed/unknown, no reexecution on report loss, one consume and current generation | Preserve across process request/result custody; process death has no implicit recovery; D targeted controls, E broad campaign |
+| R08 | Accepted I3-3 baseline retained, no lifecycle promotion | Run regressions affected by D; E full required campaign and I3-4/5/6 obligation mapping without resume |
+| R09 | Source/label/capture/control/observer first-consumer boundaries explicitly mapped above; selected assignment syntax rejects unsupported relation mutations | Wider mixed/callee or new public/control-sensitive releases reopen prerequisites before dependency; W6/general NI not discharged here |
+| R10 | Exact source/proof/caller reads and full/delta/partial distinctions retained; old612 cursor historical | Read/hash exact changed process/control/observer cone before design/code decisions |
+| R11 | Final reviewed findings disposed;806/818/8 and unchanged kernel156 evidence verified | Finish docs/Git close below, then D; no signed/owner authentication inferred from advice |
+| R12 | Original and new findings assigned, C-critical local findings closed; no row silently dropped | New used premise assigned before use; E reconciles final originalW4+A–D/119 union, not a deferred D prerequisite |
+
+Rollback/reopen triggers: a new source form, constructor/expected-origin producer,
+entry/restore path, process transfer, authority issuer, pool alias/cost, escaped
+unpublished qualification identity or changed release scope reopens the affected
+condition before its first dependent execution. No C assumption is converted into
+a fact merely by labeling D active. Continue D's boundary theory/design after
+close verification, implement only after its changed correspondence is established,
+then actual process/private QUIC validation and integration; stop before E.
+
+2026-09-30T05:20:34.527397+00:00: C close make docs41353exit0（218Canon/800hierarchy/1764reports）、190pins/156recipe/6720旧ledgerprefix/15Rust復元/inventoryv4完全一致を確認。全15比較の差分はSYS4とtestのみ、最後のfault修正は主担当review8f805227…で範囲確認。技術条件の限定close記録をcommit/pushし、そのままDの新process境界検証へ進む。
