@@ -35,7 +35,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用6path参照finite-cohort-grant-green-v1は、登録済み制御stream/実FD3に加え、3endpoint全体で一つの使用中grantと通し番号を保持し、33件の部品検査を通過しました。6pathは元へ復元しています。通常QUIC build・全513feature検査は直前のFD3/26件cutの別receiptです。次は実権限発行者の全endpoint準備/公開/有効化と、停止中の実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用9path参照registered-prepare-green-v1で、実M9発行者による3endpoint分の候補生成6件と、登録済みstreamのgrant/prepare制御40件を検査しました。通常default/private-QUIC buildと同cutの全533feature検査が通り、9pathは元へ復元しています。prepareは凍結中endpointのstreamで認証したデータであり、実backendの準備ACK・親の公開・全endpoint有効化はまだ生成しません。次は同じ実runtimeのM9/floor/backend更新です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 

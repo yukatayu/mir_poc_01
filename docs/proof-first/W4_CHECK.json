@@ -54377,5 +54377,93 @@
     "scope": "One global active action/serial and sticky failure over fixed actual three Unix-stream pairs with genuine S/T restricted M9 fixture facts; no actual publisher stage/backend/source/result producer/QUIC connection",
     "findings": "Fixed one requester/two owners with unique endpoint instance and same run/cohort/program/source context/current revision/gen; actual child facts remain endpoint-specific. Global active retained before member sends. No next endpoint on delivery loss, exact active channel only can complete. Close drains exact global interval before prepare. Normal bootstrap/sourceactivation supplier still a direct consumer.",
     "unrun": "Current-cohort-cut normal build/full lib not yet rerun; prior26/513 normal-build/full receipt remains at its older exact source. No updated claim from prior receipt; next authority integration before new broad run. Draftred-v1 function name corrected in preserved red-v2 before first test; red-v1 never executed."
+  },
+  "d_publisher_prepare_20260930": {
+    "at": "2026-09-30T10:50:58.010685+00:00",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/registered-prepare-green-v1",
+    "files": {
+      "crates/mir-runtime/src/m9_auth_verification.rs": "5273da6366d59dd81d80634bc5d6761dc94ed5c093eed81319c6fd05924d0aab",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "ac6332fb62ba78dd96f5b7fa7c795e08edff85f95ff92f815673fae2b89ba130",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "ff42b15f375dfe55fa8e4a0faf6aa1f3a0169969d5f6a327d60831a65d5235ed",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "dc83fb3741e5ccb36786d28094d0eba1391dffe38b53113b60ca665d337e38f9",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "e6f390669ba67170eeabbc228c25f7a538d9955df52119f2bc27e14783cd1092",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "1f1d3e84af81f7095dc105c0c8614144b94a5dfb6ce6bdd3c188af11f7463fc4",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "cf625cb1cc42e35e797a8b03b60abb156bae2510baa75789e7ec67b2881acbd1"
+    },
+    "source_pins_sha256": "ef11ead6a1bda18a99bf0516d4bdccaa62a085bfeb89927dc75012b6615a5102",
+    "receipts": [
+      {
+        "version": "publisher-cohort-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/publisher-cohort-red-v1/RESULT.json",
+        "sha256": "5f27ce93f6e350258d683c297ac2eaa3a1eb267810ef2a271e3c9164f037dce7",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 1 passed; 5 failed; 0 ignored; 0 measured; 502 filtered out; finished in 0.06s"
+        ]
+      },
+      {
+        "version": "publisher-cohort-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/publisher-cohort-green-v1/RESULT.json",
+        "sha256": "8c53017384b1d3a150128cfe624f8837bfd3f2628e43505836bc5ecf9381ff47",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 502 filtered out; finished in 0.06s"
+        ]
+      },
+      {
+        "version": "registered-prepare-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-prepare-red-v1/RESULT.json",
+        "sha256": "7d71f844718bd89a7f751ba469e2e0f10661fe77ce99cbbd394fd8c25f940395",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 2 passed; 5 failed; 0 ignored; 0 measured; 508 filtered out; finished in 0.21s"
+        ]
+      },
+      {
+        "version": "registered-prepare-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-prepare-green-v1/RESULT.json",
+        "sha256": "a78b68820d950283723c1c8df56c53d93688e0408e94635938de5a927c439442",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 475 filtered out; finished in 0.70s"
+        ]
+      },
+      {
+        "version": "registered-prepare-full-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-prepare-full-v1/RESULT.json",
+        "sha256": "392202426709eb0b9e3d6aee5e4a3afd86fe02e9c66c10c2bc158f7553dfc834",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 533 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 108.67s"
+        ]
+      }
+    ],
+    "result": "actual publisher focused6, registered control40, normal default/private-QUIC checks and combined feature full533 pass0fail/ignored; all9paths restored",
+    "scope": "Genuine full-parent M9 prestaging/restriction and owned registered Unix-stream preparation data only. No real disabled backend refresh, prepared ACK, actual parent publication/activation, normal source cursor or new QUIC E2E.",
+    "findings": "Consumes actual existing coordinator; strong parent/current and exact child program/restriction/authority/floor checks. Parent retains full stage, current head/revision unchanged. Nonincident T no foreign S metadata. Registered reader checks all static bindings/replay/prior/checked next revision+generation/body hash+1MiB cap with one whole-frame deadline. ACK storage and both direction IDs reserved before token can reach mutation; token loss retains frozen preparation. Generic decode cannot mint token.",
+    "unrun": "Actual M9/floor/backend mutation and authentic prepared/publication/activation producers remain direct consumers. No fresh199 proof audit, broad workspace/new network/whole-language/privacy/recovery or alpha validation; E not started. Main review only, no new Oracle/subagents.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-publisher-prepare-v1.json",
+        "sha256": "4351b6306ccccdea3b9e7a26bc426cf24205b6b79612cfb7c45896845d81e4f6",
+        "exit": 0,
+        "scope": "full make docs over restored source/current status; later verification metadata focused checked"
+      }
+    ]
   }
 }

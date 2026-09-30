@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-30 19:07 JST
+Last updated: 2026-09-30 19:50 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -25,17 +25,17 @@ regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
 2026-09-28のowner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
-2026-09-30追加owner指示: AstraからGPT-6.1-sol xhighへの実装引継ぎで一時停止。再開後もD完了時にE前停止。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+2026-09-30追加owner指示: Solへの切替え後、同じD実装を自走再開。重要な境界変更又はD統合判定でAstraへ戻すため停止。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
+週間残量は10:04:13 UTCの確認で77%（使用23%）。次の確認は11:04:13 UTC以降、約50%で区切り停止、確認間隔1時間以上、resetはownerのみ。D統合判定のAstra checkpointと、E・W5+・Plan250/I3-4の未着手を保持する。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
-| D authority/coordinator/local frame | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK `d_local_frame_proof_20260930` | 199modules/20455owned/177false/187commands;9rebuilt over190pinned C. Prior fresh197/v5 receipt separate. External M9 component7focused/default451pass; historical pre-fix normal private-QUIC E0599 reproduced on baseline; fixed in current external reference. D facts-only DTO reference15controls/full487feature tests and normal QUIC build pass; prior472 receipt separate. Registered Unix control/actual FD3 component26/full513 passed; fixed-three global grant component33 passed; actual publisher/backend/source/network connection incomplete. |
+| D authority/coordinator/local frame | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK `d_local_frame_proof_20260930` | 199modules/20455owned/177false/187commands;9rebuilt over190pinned C. Prior fresh197/v5 receipt separate. External M9 component7focused/default451pass; historical pre-fix normal private-QUIC E0599 reproduced on baseline; fixed in current external reference. D facts-only DTO reference15controls/full487feature tests and normal QUIC build pass; prior472 receipt separate. Registered Unix control/actual FD3 component26/full513 passed; genuine parent M9 stage6/registered control+prepare40, normal builds/full533 at current9path reference passed; actual backend/ACK/publication/source/network connection incomplete. |
 | Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D process custody remains incomplete in owner-resumed Sol implementation; actual network implementation pending. No production/public adoption. |
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
 | Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |

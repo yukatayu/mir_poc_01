@@ -6,10 +6,11 @@ material boundary change or Astra D-acceptance review is needed. E tests can
 use Sol after D acceptance; A–E union/integrated acceptance belongs to Astra.
 Plan250/I3-4 remains separately owner-paused. No automatic model switching.
 
-HEAD7a085f98 pushed/remote parity0/0 at prior checkpoint. New own status records
+HEAD04fd7a1f pushed/remote parity0/0 at prior checkpoint. New own status records
 dirty; production Rust restored after each overlay. No active job currently.
-Next: DTO/registered control/real FD3 component passed; fixed-three global grant33 passed; implement authentic parent publisher/all-endpoint
-prepare/publish/activate and actual disabled M9/floor/backend.
+Next: genuine parent M9 stage6 and registered grant/prepare40 passed; normal builds/full533
+passed at current9path reference. Connect actual disabled M9/floor/backend, then real
+prepared ACK/all-endpoint actual parent publication and activation.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process. New external reference D/d-control-development/normal-quic-fixed-v1
@@ -48,6 +49,18 @@ facts. RED28pass5fail, GREEN33pass;6paths restored. No actual publisher/backend,
 source/result producer or new QUIC E2E yet. Prior normal/513 belongs to FD3 cut.
 Currentdocs v1failed only stale snapshot dateheaders, corrected; v2PASS10:11:44UTC.
 Later metadata focused checked; actual checkpoint Git result GIT-SOL-CONTROL-v1.json.
+
+Current successor D/d-control-development/registered-prepare-green-v1 has9PATHS:
+previous6 + SYS4 module/private actual M9 publisher wrapper/tests. Parent factory
+strongly validates actual parent/child restriction/floor; actual full prestage
+produces3 restricted bodies, leaves parent head/revision held. Registered child
+reader alone mints borrowed preparation data while frozen, checks exact static
+bindings/replay/prior/next/cap/hash and reserves ACK bytes/IDs before mutation.
+Token loss retains stage/frozen mode. PublisherRED1pass5fail then6pass;
+prepareRED2pass5fail then40control pass; normal default/privateQUIC build and
+combined-feature full533 pass. All9paths restored. No actual backend/prepared
+ACK/publication/activation/source/QUIC E2E yet; full make docs v1 passed.
+Final metadata focused checked; actual Git result GIT-PUBLISHER-PREPARE-v1.json.
 
 The prior handoff details below are historical starting evidence; above supersedes
 its pause/next-job wording. Preserve all frozen source and failure receipts.

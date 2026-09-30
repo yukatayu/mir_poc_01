@@ -50911,5 +50911,54 @@
     "status": "authored-main-reviewed",
     "role": "exact finite-cohort-grant-green-v1 global interval/serial/control tests; actual source/backend/publisher consumer absent",
     "at": "2026-09-30T10:07:44.817907+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/registered-prepare-green-v1/sys4_i3_source_authority.rs",
+    "sha256": "1f1d3e84af81f7095dc105c0c8614144b94a5dfb6ce6bdd3c188af11f7463fc4",
+    "status": "authored-main-reviewed",
+    "role": "full new normal-build source; genuine parent stage, exact restriction/strong registration, no actual publication; external unadopted registered-prepare-green-v1",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/registered-prepare-green-v1/sys4_i3_source_authority_tests.rs",
+    "sha256": "cf625cb1cc42e35e797a8b03b60abb156bae2510baa75789e7ec67b2881acbd1",
+    "status": "authored-main-reviewed",
+    "role": "full6 real fixture/source restriction controls; external unadopted registered-prepare-green-v1",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/registered-prepare-green-v1/sys5_i3_source_control.rs",
+    "sha256": "ff42b15f375dfe55fa8e4a0faf6aa1f3a0169969d5f6a327d60831a65d5235ed",
+    "status": "authored-main-reviewed",
+    "role": "full registered prepare addition plus retained existing channel/FD/grant context; external unadopted registered-prepare-green-v1",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/registered-prepare-green-v1/sys5_i3_source_control_tests.rs",
+    "sha256": "dc83fb3741e5ccb36786d28094d0eba1391dffe38b53113b60ca665d337e38f9",
+    "status": "authored-main-reviewed",
+    "role": "full7 prepare tests plus retained existing33 controls; external unadopted registered-prepare-green-v1",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "read-with-scope",
+    "role": "partial: coordinator/sealed admission/process restriction/M9floor/refresh/LocalFabric fields and exact restriction helper; no blanket full source claim",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "mirrorea_canon/theory/18-m9-auth-verification.md",
+    "sha256": "7c625f0737589572ce4b48d465d809948e97833ade8a5d8992ad31022163af72",
+    "status": "read-with-scope",
+    "role": "partial: SYS2 immutable successor §4 currentness contract and indexed relevant references",
+    "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "sha256": "ec497d66e937857e437f8f88b66030507304cd43c4246b502a7f7864d408347d",
+    "status": "read-with-scope",
+    "role": "full selected fixed D boundary/consumer/stop contract reconsult",
+    "at": "2026-09-30T10:50:58.010685+00:00"
   }
 ]
