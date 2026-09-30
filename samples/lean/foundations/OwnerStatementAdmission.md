@@ -995,7 +995,27 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                            'open '
                                            'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
                                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
-                                           '#guard (release 4 held).isSome\n'}
+                                           '#guard (release 4 held).isSome\n',
+ 'FalseReportPhaseAliasSplit.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                    'open '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
+                                    '#guard foreign 10 2 ⟨6,3⟩ = some ⟨8,3⟩\n',
+ 'FalseReportPhaseBoundAsActual.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                       'open '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
+                                       '#guard foreign 10 1 ⟨6,1⟩ = some ⟨9,1⟩\n',
+ 'FalseReportPhasePrematureDischarge.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                            'open '
+                                            'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
+                                            '#guard reportOwed 4 4 1 true = 2\n',
+ 'FalseReportPhaseTerminalDropsActual.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                             'open '
+                                             'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
+                                             '#guard reportOwed 4 4 1 true = 0\n',
+ 'FalseReportPhaseZeroInitial.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                     'open '
+                                     'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation\n'
+                                     '#guard reportOwed 4 0 0 false = 0\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1780,3 +1800,44 @@ relation reporting or OOM/abort/process death. Designated execution reads the
 shared semantic snapshot; the test does not invent an unauthorized designated
 owner-state mutation. Oracle resource-r1 reviews the frozen681cut and139proof,
 not these later three controls. No current-layer/production/Canon acceptance.
+
+## Reporting phase and physical pool refinement (forward LAB)
+
+Eight added general theorems distinguish admission by a proved upper cost bound
+from advancement by the actual row count. Physical aliasing uses summed costs
+in one pool; the pointwise multi-pool result assumes the resource index already
+represents physical ownership. Separate logical OW1 lanes do not establish
+separate physical budgets.
+
+`reportOwed` begins with the bound before any lower row exists. Bounded lower
+history growth preserves that obligation until projection. Terminalization
+keeps every actual unprojected row; only the unused future tail may disappear.
+Projecting actual rows discharges exactly their count. This refines the earlier
+arithmetic-only `release_preserves` theorem, which did not establish terminal
+authenticity or an actual-debt lower bound.
+
+Audit61290 checks190modules/19449owned/144qualified false controls/155commands,
+ten changed/dependent modules rebuilt over the pinned earlier fresh190 audit.
+New proofs use standard `propext`/`Quot.sound`; no authored holes or Mir axioms.
+Five false controls reject zero initial debt, dropping actual debt at terminal,
+charging the upper bound as the actual increment, premature discharge and
+independent admission of costs sharing a pool.
+
+Actual references after the frozen681 Oracle cut: genuine cache retry spent one
+of four queued original slots in OW1 and stranded its report; separate ST pools
+and one extra OW1 slot passed. A valid import with no spare capacity was reported
+as a publication-identity mismatch in ST and OW1. A private reporting-failure
+wrapper now distinguishes unavailable reporting from the unchanged domain
+rejection, and successful non-consuming validation checks its one actual row.
+Relevant304checks passed93763; this is not a full library run.
+
+A second actual counterexample paused after original submission but before its
+lower report existed. The new original obligation was invisible to unrelated
+reads/evaluation. Deriving initial debt from the actual shared source control
+and designated owner gives four passing ST/OW1 controls8736; the same original
+body runs once and spare capacity still permits a foreign read. Inert candidates
+retain that debt, and a retained report from a previous request cannot hide a
+new request. This preserves capacity given adequate initial headroom. Complete
+initial admission for every resource, numeric vs allocated storage, all producer
+paths, FIFO endpoint budgets and held M9 successor composition remain open.
+The latest full690 record precedes these corrections. No production adoption.

@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "632900ddde5df9ad5f3b35ec6b9e93d5d4c7b5efdc465233b16547390dad0ddf",
+      "sha256": "5c959f511e796d1c33a23ffc1b81ce347bb1edfcc2fa2019679a74ef6a8000ca",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "632900ddde5df9ad5f3b35ec6b9e93d5d4c7b5efdc465233b16547390dad0ddf",
-      "transformation": "identity; append reporting budget independent availability/admission equivalence, acquisition/discharge/release conservation and controls. Actual debt/cost/producer closure remains a physical duty."
+      "staged_sha256": "5c959f511e796d1c33a23ffc1b81ce347bb1edfcc2fa2019679a74ef6a8000ca",
+      "transformation": "identity; append upper bound vs actual consumption, shared physical pool sum, initial obligation, lower phase growth, terminal actual-debt retention and exact projection discharge. Physical producer identity/costs/entry coverage remain separate."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "101a003e95c72996ee045c072f2ba5d25f3eede47e23415feb07835461305b25",
+      "sha256": "6dbf94d2505f1cdaa9f3b95fa21a565768dc45ce407b5d3a916dfef619417d76",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "101a003e95c72996ee045c072f2ba5d25f3eede47e23415feb07835461305b25",
-      "transformation": "identity; append reporting budget independent availability/admission equivalence, acquisition/discharge/release conservation and controls. Actual debt/cost/producer closure remains a physical duty."
+      "staged_sha256": "6dbf94d2505f1cdaa9f3b95fa21a565768dc45ce407b5d3a916dfef619417d76",
+      "transformation": "identity; append upper bound vs actual consumption, shared physical pool sum, initial obligation, lower phase growth, terminal actual-debt retention and exact projection discharge. Physical producer identity/costs/entry coverage remain separate."
     }
   ],
   "audit": {
@@ -2396,6 +2396,26 @@
     "owned": 19433,
     "qualified_false": 139,
     "commands": 150,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "report_phase_successor": {
+    "at": "2026-09-30T02:08:36.878996+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/RESULT.json",
+    "sha256": "996f925ca3bf386690e136284af39dc1c9f20a0a16049813efdea15a907a1c43",
+    "owned": 19449,
+    "qualified_false": 144,
+    "commands": 155,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",

@@ -1245,3 +1245,71 @@ theorem foreign_refuses_owed_capacity (limit cost : Nat) (s : State)
 #print axioms release_preserves
 #print axioms foreign_refuses_owed_capacity
 end MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation
+-- Admission may use a proved upper bound. Only the actual produced row
+-- count advances used. This is not foreign_exact with the upper bound.
+theorem bounded_foreign_preserves (limit upper actual : Nat) (s : State)
+ (ready : Available limit upper s) (within : actual ≤ upper) :
+ foreign limit actual s = some ⟨s.used+actual,s.owed⟩ ∧
+ Fits limit ⟨s.used+actual,s.owed⟩ := by
+ have bound := (available_exact limit upper s).mp ready
+ have enough : s.used+actual+s.owed ≤ limit := by omega
+ exact ⟨by simp [foreign,enough],(fits_exact limit _).mpr enough⟩
+
+-- A physical shared pool must account for the sum of all lane costs.
+theorem aliased_foreign_preserves (limit left right : Nat) (s : State)
+ (ready : Available limit (left+right) s) :
+ Fits limit ⟨s.used+left+right,s.owed⟩ := by
+ apply (fits_exact limit _).mpr
+ have bound := (available_exact limit (left+right) s).mp ready
+ simp only
+ omega
+
+def reportOwed (bound actual projected : Nat) (terminal : Bool) : Nat :=
+ (if terminal then actual else max actual bound) - projected
+
+theorem pre_lower_owed (bound : Nat) : reportOwed bound 0 0 false = bound := by
+ simp [reportOwed]
+
+theorem actual_debt_retained (bound actual projected : Nat) (terminal : Bool) :
+ actual-projected ≤ reportOwed bound actual projected terminal := by
+ cases terminal <;> simp [reportOwed] <;> omega
+
+theorem terminal_release_keeps_actual (bound actual projected : Nat) :
+ reportOwed bound actual projected true = actual-projected ∧
+ reportOwed bound actual projected true ≤ reportOwed bound actual projected false := by
+ constructor
+ · simp [reportOwed]
+ · exact actual_debt_retained bound actual projected false
+
+theorem bounded_lower_growth (bound before after projected : Nat)
+ (oldBound : before ≤ bound) (newBound : after ≤ bound) :
+ reportOwed bound before projected false = reportOwed bound after projected false := by
+ simp only [reportOwed,Bool.false_eq_true,↓reduceIte]
+ omega
+
+theorem projection_discharges_actual (bound actual projected count : Nat) (terminal : Bool)
+ (actualRows : projected+count ≤ actual) :
+ reportOwed bound actual projected terminal =
+ count + reportOwed bound actual (projected+count) terminal := by
+ cases terminal <;> simp only [reportOwed,Bool.false_eq_true,↓reduceIte] <;> omega
+
+-- The resource index denotes physical ownership. Mapping two aliased lanes
+-- to different indexes is not established by this pointwise theorem.
+theorem all_pools_bounded {Pool : Type} (limit upper actual : Pool → Nat)
+ (state : Pool → State) (ready : ∀ p, Available (limit p) (upper p) (state p))
+ (within : ∀ p, actual p ≤ upper p) :
+ ∀ p, Fits (limit p) ⟨(state p).used+actual p,(state p).owed⟩ := by
+ intro p
+ exact (bounded_foreign_preserves (limit p) (upper p) (actual p) (state p) (ready p) (within p)).2
+
+#print axioms bounded_foreign_preserves
+#print axioms aliased_foreign_preserves
+#print axioms pre_lower_owed
+#print axioms actual_debt_retained
+#print axioms terminal_release_keeps_actual
+#print axioms bounded_lower_growth
+#print axioms projection_discharges_actual
+#print axioms all_pools_bounded
+end MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation

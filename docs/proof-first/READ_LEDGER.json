@@ -50371,5 +50371,19 @@
     "status": "full-read",
     "role": "sole-main authored/read full appended ReportReservation proof/control module and audited final source",
     "at": "2026-09-30T01:30:47.924062+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "5c959f511e796d1c33a23ffc1b81ce347bb1edfcc2fa2019679a74ef6a8000ca",
+    "status": "full-read",
+    "role": "sole-main authored/read appended reporting phase/bounded actual cost proof/control and audited final source",
+    "at": "2026-09-30T02:08:36.878996+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-phase-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "6dbf94d2505f1cdaa9f3b95fa21a565768dc45ce407b5d3a916dfef619417d76",
+    "status": "full-read",
+    "role": "sole-main authored/read appended reporting phase/bounded actual cost proof/control and audited final source",
+    "at": "2026-09-30T02:08:36.878996+00:00"
   }
 ]

@@ -195,3 +195,15 @@ def held : State := ⟨6,3⟩
 #guard release 4 held = none
 #guard foreign 9 0 held = some held
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportPhases
+open OwnerStatementOriginalEntry.ReportReservation
+#guard reportOwed 4 0 0 false = 4
+#guard reportOwed 4 1 0 false = 4
+#guard reportOwed 4 4 1 true = 3
+#guard reportOwed 4 1 1 true = 0
+#guard reportOwed 4 4 3 true = 1
+#guard foreign 10 3 ⟨6,1⟩ = some ⟨9,1⟩
+#guard foreign 10 1 ⟨6,1⟩ = some ⟨7,1⟩
+#guard foreign 10 2 ⟨6,3⟩ = none
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportPhases
