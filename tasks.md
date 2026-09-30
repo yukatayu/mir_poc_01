@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 12:19 JST
+最終更新: 2026-09-30 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,11 +29,11 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と149反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と153反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限と依存を保つ未採用参照で、元要求の端点予算・関係の公開/取込み・指定値の内部カウンタ枯渇を実反例から修正しました。実M9失効を保留中にも適用し、未実行の拒否・確定済み履歴・現在の受理条件を分けています。最新default全765件が成功し、skipはありません。後続の候補公開3検査に加え、process-test feature構成の全780件も成功しました。一般証明は190module・19471宣言・149偽命題対照を監査済みです。生成経路と容量の条件を `docs/proof-first/W4_C_PRODUCER_INVENTORY.md` にまとめ、Oracleで差分review中です。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、容量不足の別要求や停止中の別経路が元要求を止め続ける反例を修正しました。実記録のないcounter跳躍と旧enqueue経路も検査し、実M9履歴と現在の受理を分けています。最新default全788件が成功し、skipはありません。同じcutのprocess-test feature全800件も成功しました。一般証明は190module・19495宣言・153偽命題対照を監査済みです。生成経路一覧を `docs/proof-first/W4_C_PRODUCER_INVENTORY.md` に更新し、最終差分をOracleでreview中です。C未完了・D未着手、D完了後に停止します。
 
-現在の直接consumerは、元要求の未実行キューと実失敗を保持する継続、搬送・返信の各確定点、全entry/資源の閉鎖です。成功後の同一要求回収とobserver索引に依存しない受理は参照検査済みですが、本番採用前にcurrent Bank.tick受理・M8直接entry・SYS4/FIFO/局所経路・private image/restore・patchの条件をそろえます。一般Lean結果の回収規則は物理故障対応そのものの証明ではありません。
+現在の直接consumerはDの既存Surface v0代入列→checked Core→生成edge→private QUIC→実観測です。R01〜R12とsource/authority/custody/resource/observerの前提をplanに明記し、Cの最終差分reviewを照合します。Dで新設するprocess間の一意custodyと実搬送の対応は、その依拠前に確認します。より広いcallee/混合sourceや公開observerの条件を、今回のowner列やprivate redacted記録で満たしたとは扱いません。
 
 ## ordered self-driven packages
 
@@ -86,7 +86,7 @@ Use the persistent external workroot in RESUME. Never rerun one-shot evidence la
 
 W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。最新指示ではD完了時にgoalをpauseして止め、Eへは進みません。最新owner指示に従って同じW4作業を継続します。goal tool表示はpausedのままですが、主担当toolからresumeはできないため重複goalを作りません。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回02:46:41 UTCのセッションtelemetryは週間使用8%・残り92%でした。次の確認は03:46:41 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回03:47:01 UTCのセッションtelemetryは週間使用11%・残り89%でした。次の確認は04:47:01 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 ## non-promoted references
 

@@ -4,7 +4,7 @@ This is LAB implementation correspondence for W4-C's frozen reference, with
 W4-D as its direct consumer. It does not adopt the reference, widen Canon,
 resume Plan250/I3-4, prove all Rust executions, or guarantee delivery after a
 legitimate revocation or process death. The input hashes and searchable call
-sites are in the W4_CHECK-linked `producer-inventory-v1/PINS.json` and
+sites are in the W4_CHECK-linked `producer-inventory-v2/PINS.json` and
 `CALLS.json`. The latter is a lexical audit aid, not a compiler call-graph proof.
 
 ## Selected boundary and physical ownership
@@ -66,11 +66,80 @@ actual unprojected row; terminalization releases only unused future capacity.
 M8 evaluate/consume, and raw save/restore are real trace-producing methods.
 Their callers in the pinned inventory own separate M10/patch/observer sessions,
 or operate on fresh candidates. They are not called by M8ExecutionBackend or by
-its worker command loop on this source-bound live session. The raw worker
-Enqueue/Serve commands exist, but enqueue rejects source-bound runtime before
-trace/counter mutation, and its legacy FIFO stays empty; SourceInitialResources
-also checks that actual FIFO. Direct lower source-bypass tests retain this guard.
+its worker command loop on this source-bound live session. The raw worker Enqueue/Serve commands exist. The prior inventory's blanket
+raw-enqueue exclusion was false: unknown evaluation appended a lower rejection
+row before the plan-specific invocation guard, and the wrapper projected it.
+Actual direct ST/OW1 controls with four owed slots reproduce this mutation.
+The successor now checks source binding before unknown-operation handling;
+any raw entry into a bound session refuses without occurrence, trace or queue
+mutation. Unbound unknown entry still produces its genuine UnknownEvaluation
+row. Original source enqueue alone reaches the private statement-custody branch
+through the exact checked source permit. This is a lower-entry guard; the tests
+do not establish a reachable ordinary Invocation attack using the raw command.
+
+The exact ownership exclusion also remains: LocalFabric boot constructs each
+ST runtime or the sole OW1 worker from its own sealed admitted instance. Its
+M8ExecutionBackend methods call the contextual/source commands; they never call
+worker.enqueue or M8LocalRuntime.enqueue_owner. SemanticRuntimeKernel's separate
+from-admitted constructor allocates its own runtime and moves it into its own
+OwnerExecutionBackend; its enqueue_owner_request is the real raw-command caller.
+Neither constructor takes a retained source-fabric backend or exports it. An
+inert worker snapshot and consuming shutdown do not transfer live source custody.
+SourceInitialResources checks the legacy FIFO, but FIFO emptiness alone never
+excluded the old unknown-operation producer, because its rejection is not queued.
 The same-name methods are not treated as interchangeable.
+
+## Aggregate and qualification counters
+
+Two further u64 counters have a separate disposition. They are not protected
+merely by the owner-local budget:
+
+| Counter | Pinned invariant on this retained source fabric | Evidence and limits |
+| --- | --- | --- |
+| M8LocalTrace observer aggregate next_node_index | Starts at zero; one increment for each new distinct retained qualified row; never retires a row in the selected source path, hence equals aggregate entries.len | Actual ST/OW1 repeated full snapshot reconciliation and two real source bodies preserve count/index equality; clone-and-publish ST positive preserves it |
+| m8_locus_trace_sequences[locus] | Equals the count of distinct qualified identities issued with that locus prefix; each maps to a retained actual raw row of the fixed physical session | ST locus has one session; OW1 loci share the same session, and each prefix counts a subset of its raw rows; provisional outcomes use actual returned rows and repeated qualification does not allocate again |
+
+The finite argument uses these exact constructors and mutators. LocalFabric
+starts with empty aggregate/registries. The backend returns the complete actual
+local trace, never M8LocalTrace.prefix/suffix; the raw traces append monotonically
+in this source path. Refresh only qualifies previously unregistered raw IDs.
+Direct provisional qualification consumes actual backend outcome observations,
+actual relation publish/import rows, or actual non-consuming validation rows.
+Relation import first installs its newly observed raw local row before SYS4
+qualification; a stored already-qualified shadow is not a new raw producer.
+
+reconcile_fabric_qualified_session contains retain, but its removal condition
+never holds here: every previously registered actual raw row is still present in
+the next complete snapshot, the physical session name is stable, and source
+candidate publication preserves raw trace extension. Existing aggregate rows are
+updated at the same index, new rows append, and no source API installs a prefix,
+suffix, fresh session, or source-bearing restored trace into this live aggregate.
+The source report journal restores aggregate, registry, sequences and graph
+views together to the prior unpublished reporting state; later refresh projects
+the retained actual backend rows again. It does not roll back committed M8 state.
+
+The lowest source candidate publisher now separately checks aggregate count,
+consecutive indices, distinct IDs, retained row-ID/index prefix, exact qualified
+prefix sequences, preservation of existing raw-to-qualified mappings, and that
+aggregate row IDs belong to that registry. Two controls showed that unexplained
+MAX jumps in either candidate counter were previously accepted. Both now refuse
+without changing the live aggregate or source acknowledgment; the authentic
+candidate positive remains. These private-counter mutation controls do not prove
+an ordinary caller can forge a candidate. They make the publication invariant
+explicit. They also do not establish raw-row authenticity by string shape: that
+comes from the preceding finite producer and custody argument.
+
+On the checked x86_64 Rust1.94.1 profile, M8LocalTraceEntry is nonzero-sized.
+A Vec of these entries cannot have more than isize::MAX bytes, so its retained
+row count is strictly below u64::MAX. Thus aggregate count+1 fits before the next
+push, and each per-locus count+1 fits because it counts a subset of one retained
+raw trace. This is a bound on numeric overflow under the stated ordinary-memory
+premise; it is not pre-reserved storage or recovery from allocation failure.
+The Vec size rule is from the [Rust standard library documentation](https://doc.rust-lang.org/std/vec/).
+A new target wider than64bits, trace pruning, partial snapshot, session replacement,
+new raw-ID producer, counter setter, or source restore invalidates this reuse and
+requires a new argument or explicit budget guards. Arbitrary M8LocalTrace values
+and non-source restore histories are outside this cardinality claim.
 
 ## Endpoint production and discharge identity
 
@@ -141,15 +210,24 @@ No claim of total termination or completion after every allowed interference fol
 A current original can complete conditionally on valid unchanged authority,
 healthy original carriers, adequate admitted numeric headroom and result slots,
 available ordinary working memory, and finite predecessor traffic being stepped.
-The actual mixed scheduler has a 32-pass budget; budget refusal preserves the
-same original continuation. Finite repeated collection controls are not a fairness
-proof. Capacity is admitted per original statement for lower/endpoint pools;
+The actual mixed scheduler scans the finite retained outboxes using a pure
+eligibility predicate before attempting delivery. It can select a later actual
+outbox item; inbox service still removes only the actual FIFO head. A foreign
+capacity or known route blockage leaves that foreign request/fault retained while
+other eligible work proceeds. An original route fault still refuses until that
+same route is available; it cannot authorize fabricated completion or replay.
+The six FiniteScan Lean results require independent eligibility/check equivalence,
+and prove actual-member selection, finite inspection and inbox fallback. They do
+not prove service success. The 32-pass budget may require another collection;
+finite repeated collection controls are not a fairness proof. A completion handle can be successfully delivered once plus one redelivery; failed
+collection does not spend that delivery count. Losing both successful handles is
+outside this bounded profile. Capacity is admitted per original statement for lower/endpoint pools;
 only result slots cover the entire finite activation up front. Later statements
 may refuse before effect if their own capacity or authority does not fit.
 
 The ReportReservation and EndpointBudget general Lean results prove numeric
 admission/discharge facts and independent checker/Ready equivalence. Actual IDs,
 phases, producers, costs, aliases and caller discipline are this bounded physical
-correspondence obligation, not facts created by Lean. Final Oracle delta review
-and W4-C acceptance remain open. New producers, custody escape, resource sharing,
+correspondence obligation, not facts created by Lean. The completed producer Oracle identified driver, diagnostic and inventory deltas;
+final changed-cut review and W4-C acceptance remain open. New producers, custody escape, resource sharing,
 authority policy or a broader completion promise reopen this inventory.

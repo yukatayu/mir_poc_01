@@ -53059,5 +53059,275 @@
     "rust_restored": 15,
     "inventory_mirror_exact": true,
     "scope": "proof/docs checkpoint only; Oracle producer review still pending, C incomplete/D unstarted"
+  },
+  "c_first_consumer_reconciliation_20260930": {
+    "at": "2026-09-30T03:30:05.636369+00:00",
+    "plan": "plan/proof-first-foundation-correspondence.md",
+    "scope": "Forward R01-R12 and concrete R09 first-consumer reconciliation; no historical119 disposition or C closure",
+    "source_requirements_sha256": "59cc7366bc3d9d3fc9c756c532764fbdf88587eb15dbe0a00d43e6b8c1317dae",
+    "open_before_C_acceptance": [
+      "Final finite producer Oracle findings",
+      "Selected source/Core/privateQUIC/observer premise map including actual source/label/capture/completion and current release scope"
+    ],
+    "d_obligation": "actual generated/process/network handoff and faithful authorized observation; do not demand future D runs as C evidence",
+    "e_obligation": "final whole-W4 residual/119/regression union audit; not a deferral sink for C/D prerequisites",
+    "git_checkpoint": {
+      "head": "d7cbfc5c6e4f80a4832be0790327882b435437b5",
+      "push_tool": 28757,
+      "exit": 0,
+      "parity": "0 0"
+    }
+  },
+  "c_producer_oracle_final_20260930": {
+    "at": "2026-09-30T03:44:14.649155+00:00",
+    "session": "mir-w4-producers-r1",
+    "wrapper_tool": 64308,
+    "wrapper_exit": 0,
+    "final_recovery": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-closure-v2/FINAL_RECOVERY.json",
+    "final_recovery_sha256": "49f52c0ae331547f1af3b3f736d2eeddeaf794c6b4d3b256dbff11cd358457b3",
+    "answer_sha256": "8be693fb52615c0bfb8bc498f002e87061f663ecbb57ad93181cf9e3ec139f9c",
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-closure-v2/DISPOSITION.json",
+    "disposition_sha256": "df10822fa42a79ffabbb1a5db8cfa2f007aa9b26bcb74a365e980250573c93a0",
+    "findings": 27,
+    "verified_files": 43,
+    "scope": "Actual6Pro/max verified; same finalDOM/exactquestion/manifest verified. Static advice only. New automatic capacity-blocked outbox and contextual read resource reason actually reproduced. Raw unknown enqueue blanket exclusion was wrong; caller/guard disposition and separate aggregate numeric counters still open."
+  },
+  "c_producer_delta_controls_20260930": {
+    "at": "2026-09-30T03:44:14.649155+00:00",
+    "runs": [
+      {
+        "version": "producer-delta-red-v1",
+        "tool": 17877,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-delta-red-v1-check/RESULT.json",
+        "sha256": "c1098e137f4dba3538139a446c956bab5377e1f8ccd83d96be5a14464b1a19e9"
+      },
+      {
+        "version": "producer-delta-green-v1",
+        "tool": 9057,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-delta-green-v1-check/RESULT.json",
+        "sha256": "6fcba2b0d93e2d84d234c028f687fc190d3a1c2207091e3adb3fe15bd5cf6fab"
+      }
+    ],
+    "scope": "RED4actual failures/4spare positives; GREEN8pass. ST/OW1 genuine pre-admission21 endpoint headroom: finite automatic driver now passes blocked foreign outbox to enabled original; original body1 and still-unavailable foreign retains own envelope. Spare128 admits genuine foreign11. Read fourowed/fivespare preserves actual read/absence/reporting-origin channels. Only selected8, broad regression/proof and remaining inventory findings open. FifteenRust restored after selectedruns; focused successor running."
+  },
+  "c_finite_scan_theory_20260930": {
+    "at": "2026-09-30T03:56:23.979861+00:00",
+    "tool": 7719,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/RESULT.json",
+    "sha256": "9c4792c87146dbab6a8bc3f5069a19379cc508449b3b3a50b18b8b11b79fa256",
+    "modules": 190,
+    "owned": 19495,
+    "qualified_false": 153,
+    "commands": 164,
+    "scope": "Six general finite-scan results from independent eligibility/check equivalence; four qualified false controls. Actual candidate enumeration, healthy transitions, per-pass budget and conditional continuation remain separate. Ten changed/dependent modules rebuilt over earlier pinned fresh190."
+  },
+  "c_producer_invariant_driver_successor_20260930": {
+    "at": "2026-09-30T04:15:03.937063+00:00",
+    "runs": [
+      {
+        "version": "producer-delta-green-v1",
+        "suffix": "-focused-check",
+        "tool": 15322,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-delta-green-v1-focused-check/RESULT.json",
+        "sha256": "652033cf667fe5e6cf8db5bc68e39aa255472a88887e79f948e0e0304f67ae11",
+        "log_sha256": "d99ca115e5c522ff4df601f63bee6881f7842edcc8cd2b15463797617826b87e",
+        "restoration_sha256": "5461a9f4a14440637742a502d8d3475eda52f6fb07c7851f285f7c2978913119",
+        "summary": "test result: FAILED. 377 passed; 1 failed; 0 ignored; 0 measured; 398 filtered out; finished in 10.70s"
+      },
+      {
+        "version": "producer-delta-green-v2",
+        "suffix": "-focused-check",
+        "tool": 81888,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-delta-green-v2-focused-check/RESULT.json",
+        "sha256": "cde8c051addb8635db00f4faad36d8cffa4c36ec5aa81a391c73690758e09e28",
+        "log_sha256": "6190d95d0b74ac4590afb94a8113e1723b3bfe2c8a3b6f726deac61504ce33ea",
+        "restoration_sha256": "d7f67c4c203808213f818e8de11673369058eeb84505ca2654c3b03347fb92ef",
+        "summary": "test result: ok. 378 passed; 0 failed; 0 ignored; 0 measured; 398 filtered out; finished in 10.65s"
+      },
+      {
+        "version": "producer-invariant-red-v1",
+        "suffix": "-check",
+        "tool": 42020,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-red-v1-check/RESULT.json",
+        "sha256": "7dab82f4b7024c0b8c517dea816b2621ee60b3d3674288bb46dbdd8c73418ea8",
+        "log_sha256": "59b766076d18f3b30642b23bbad6bb147fdb8ac02dbe0ce43de316acf13ffcdf",
+        "restoration_sha256": "0ebfed6846f5e4c7621aaeded9b8206cfd460b400961a81a07cfb97d0b41c296",
+        "summary": "test result: FAILED. 2 passed; 4 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.03s"
+      },
+      {
+        "version": "producer-invariant-red-v2",
+        "suffix": "-check",
+        "tool": 93944,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-red-v2-check/RESULT.json",
+        "sha256": "d8d1084d46fe1441c6093faf03e2d9e501f7d0604360dd180bdd32831fa797ca",
+        "log_sha256": "f4604d8dae565c304a620d5674434927f1e959a71cb8745f50d89e47ac1b7cc0",
+        "restoration_sha256": "5615560f2ce96bafa6b09c89f77fe03ac5758e4fff856c978ea8fa5a9533850c",
+        "summary": "test result: FAILED. 2 passed; 4 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.03s"
+      },
+      {
+        "version": "producer-invariant-red-v3",
+        "suffix": "-check",
+        "tool": 16889,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-red-v3-check/RESULT.json",
+        "sha256": "50d277d6282a29e4d371d258d2656e4fff31d9f54c368ab928bbff2937ecef20",
+        "log_sha256": "266a0e548ec78925c3dd4b0fe8a9ae88563860ecd9b14bcadd4eb6f174fdad39",
+        "restoration_sha256": "9d40814ce535cdfa317cdc5ea6aa600a1becd31a2d579fbfe010a833e12d6fa9",
+        "summary": "test result: FAILED. 4 passed; 2 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.04s"
+      },
+      {
+        "version": "producer-invariant-red-v4",
+        "suffix": "-check",
+        "tool": 9601,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-red-v4-check/RESULT.json",
+        "sha256": "c6492ae58ebbe097da3c3e2c92996faecbd840cd9b8ada35ae6a197a6a4112d5",
+        "log_sha256": "9f89e84f111b8d9550c72ed574bf1638d2d076ef53126824d6d43d5e367f4490",
+        "restoration_sha256": "46bfa7c4170017af632c3761a7b750b85797b8e1c71aeebd95ba9c692d2f6a14",
+        "summary": "test result: FAILED. 4 passed; 4 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.05s"
+      },
+      {
+        "version": "producer-invariant-green-v1",
+        "suffix": "-check",
+        "tool": 45672,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-green-v1-check/RESULT.json",
+        "sha256": "9e30f2b6ce5e9adc937a705e4d6567be253fe228a13cec5312d48c03017cc650",
+        "log_sha256": "d737e1b90e33cde647f096e5b33dfd40b12e925e57ae6df8e98bbf0399d68f7a",
+        "restoration_sha256": "7b1f0293743a6fa7d87c65c42acf825832c52a86ab3a2d03e4d65e9b1994e5ea",
+        "summary": "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.05s"
+      },
+      {
+        "version": "producer-invariant-green-v1",
+        "suffix": "-focused-check",
+        "tool": 66123,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-invariant-green-v1-focused-check/RESULT.json",
+        "sha256": "16c137535b2a399f6b25bca5e1cd3ac6550ba8eccb431e7e54b467e748182e9d",
+        "log_sha256": "ee3a9b42c2754de5db19118fa38a55b431b19180415d1af6e64d203eb63a4a3c",
+        "restoration_sha256": "4010474ec154a4435d658c9093dca3d4e145745928628fa5f2d5f68acfe44d4c",
+        "summary": "test result: ok. 386 passed; 0 failed; 0 ignored; 0 measured; 398 filtered out; finished in 12.21s"
+      },
+      {
+        "version": "driver-route-red-v1",
+        "suffix": "-check",
+        "tool": 82783,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-red-v1-check/RESULT.json",
+        "sha256": "c428e64520255cd5687a222f1f7d5347a5223e917d99c5f0afa466421ec4c34f",
+        "log_sha256": "145ca22b8f13c20a5018e96b78715ebb4533e5fda2b94658bd072442b8d4c395",
+        "restoration_sha256": "5e8b209966e34ac273326f8377879101ee688a760f98b8b2fe4c786c2d5d19e3",
+        "summary": "compilation failed; no runtime result"
+      },
+      {
+        "version": "driver-route-red-v2",
+        "suffix": "-check",
+        "tool": 67251,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-red-v2-check/RESULT.json",
+        "sha256": "3c93b3adcffc90ffd6b67a751b394dec1652ffbeb47c2b366bc98472db7262a7",
+        "log_sha256": "4ec413a22286d8b502a541a9955ef724e7621f85c509e23836e94c84104bc655",
+        "restoration_sha256": "a59f0f16029ecbb8c20e10c26cac0907033614af1064af88781965385732f02e",
+        "summary": "test result: FAILED. 0 passed; 4 failed; 0 ignored; 0 measured; 784 filtered out; finished in 0.02s"
+      },
+      {
+        "version": "driver-route-red-v3",
+        "suffix": "-check",
+        "tool": 16888,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-red-v3-check/RESULT.json",
+        "sha256": "c9446714cc49ee12f2e29f3a89f1094e4565f748db22df376849f8c9e58f0ec0",
+        "log_sha256": "bdb5ffb3b426d832268d1b8c8a674823c1c6624cc89a40dad5733a5080fdfc40",
+        "restoration_sha256": "7d8d9c7aa0eca14eed49625cb4b2a245f0e4c805f724a3f3da393b756b442dce",
+        "summary": "test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 784 filtered out; finished in 0.04s"
+      },
+      {
+        "version": "driver-route-green-v1",
+        "suffix": "-check",
+        "tool": 80573,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-green-v1-check/RESULT.json",
+        "sha256": "e7cef24091cac07cb928ec04e450497a23453e3fc8670d016eb85e144ecb910f",
+        "log_sha256": "46113bdbba3c9b684208d3fa2f007ab58033b3649642ae8bec60b77603eca314",
+        "restoration_sha256": "2512451987eea3dc72145dc890137e07c0ee710a9dbedd837b103909b19901d1",
+        "summary": "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 784 filtered out; finished in 0.04s"
+      },
+      {
+        "version": "driver-route-controls-v1",
+        "suffix": "-full-check",
+        "tool": 27645,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1-full-check/RESULT.json",
+        "sha256": "2f5ff52ee5ce85d8ef14737f79232af4d6fd30c3199756f450d90e52148be57a",
+        "log_sha256": "0f590bcdeaaed192d166f43d2e5d8f136c1ca0e35adfd296a67751cd2d8458e6",
+        "restoration_sha256": "b047cd48296661702d12cff8e473e4f9b94567e725bbd762db94ba37c68f9208",
+        "summary": "test result: ok. 788 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 113.57s"
+      }
+    ],
+    "status": "latest frozen driver-route-controls-v1 default788 and feature800 passed; final changed-cut review pending; C incomplete",
+    "findings": [
+      "Early source binding guard now precedes unknown raw enqueue diagnostic allocation; original4owed local slots preserved, unbound unknown1row unchanged. Direct lower/worker controls do not establish ordinary source raw reachability.",
+      "Aggregate/per-locus counter cardinality explicit; private candidate MAX jumps were admitted and now refuse at lowest source publisher, authentic candidate preserves live acknowledgment. Actual ST/OW1 repeated reconciliation preserves counts.",
+      "Same actual outbox blocked foreign prefix no longer hides later original; inbox FIFO unchanged. Persistent genuine foreign route fault also stranded original through64reports; pure scan skips known blocked unrelated routes, original/explicit foreign route errors stay typed. After route restoration same foreign11 succeeds.",
+      "Initial raw invariant controls had two invalid fixture preparations; driver route controls had one compile error and one wrong empty-outcome assumption. Corrected red cuts retained separately; failures are not claimed runtime defects.",
+      "FiniteScan6 general proofs integrated separately, independent eligibility/check equivalence; no circular driver-success premise,32-pass completion or fairness promise."
+    ]
+  },
+  "c_producer_inventory_successor_20260930": {
+    "at": "2026-09-30T04:15:03.937063+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v2/RESULT.json",
+    "sha256": "587f0f9947444643aded57659cb431391f1874737a8a2dad9cfa5d935dc5367d",
+    "calls": 205,
+    "scope": "Corrected raw unknown producer; exact separate semantic-kernel ownership; aggregate retained-cardinality and actual qualification producer/caller argument; x86_64 Rust1.94.1 nonzero Vec bound and ordinary allocation premise; candidate counter checks; finite capacity/route scan; no broad restore/architecture guarantee."
+  },
+  "c_producer_final_review_submission_20260930": {
+    "at": "2026-09-30T04:15:03.937063+00:00",
+    "tool": 19159,
+    "submission": {
+      "at": "2026-09-30T04:13:26.913997+00:00",
+      "session": "mir-w4-producers-r2",
+      "pid": 2752639,
+      "question_sha256": "4865e258e60183e50cfc9392f68a4e9bf3ac73ecbf8e46d16abed51beece4e35",
+      "manifest_sha256": "8fec79033b7b029041458986153c775a9b59c89346ac7035fbb6f0125639c7f7",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-30T04:16:26.913997+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "packet_files": 41,
+    "packet_bytes": 1768113,
+    "status": "single submission running; next status >=04:16:26UTC; no answer/acceptance inferred",
+    "scope": "Exact default788/reference15 + finite-scan153 proof and inventory205 callsites, first-consumer map, prior actual review; feature run later and not in packet"
+  },
+  "c_producer_final_feature_full_20260930": {
+    "at": "2026-09-30T04:18:28.211605+00:00",
+    "tool": 94176,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1-feature-full-check/RESULT.json",
+    "sha256": "863ae3cc0c4f34944c3203f0e8f77b9a97c3ca2d97c312c863e62833707fc575",
+    "log_sha256": "97c48d5354c5a11660398042c3b9cefefe294812d3bb50b802da240a5b6e9dd9",
+    "exit": 0,
+    "passed": 800,
+    "failed": 0,
+    "ignored": 0,
+    "filtered": 0,
+    "seconds": 118.29,
+    "restored": 15,
+    "scope": "Same driver-route-controls-v1 source as default788; i3-process-test-seams profile. This run followed Oracle packet freeze and is not part of that packet."
+  },
+  "c_producer_checkpoint_validation_20260930": {
+    "at": "2026-09-30T04:24:49.222294+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-producer-final-v1.json",
+    "sha256": "2255d8bdb8b7c5c825fd463aa9ff273081e26dc7c67a5d5a0715f602821cfba1",
+    "exit": 0,
+    "proof_pins_verified": 190,
+    "negative_recipe_count": 153,
+    "old_read_ledger_prefix": 6704,
+    "restored_rust": 15,
+    "inventory_mirror_exact": true,
+    "scope": "proof/docs checkpoint; review pending, C incomplete and D unstarted"
   }
 }

@@ -1394,3 +1394,96 @@ def localWork : List Nat := [1]
 #print axioms append_behind_preserves
 #print axioms rejects_spending_original_tail
 end MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan
+-- Eligibility is independent of the executable scanner. For the Rust
+-- outbox it is the shared endpoint capacity predicate on an actual envelope.
+-- The list is the finite flattening of retained outboxes, never inbox items.
+def scan {α : Type} (check : α → Bool) : List α → Option α
+ | [] => none
+ | a::rest => if check a then some a else scan check rest
+
+def examined {α : Type} (check : α → Bool) : List α → Nat
+ | [] => 0
+ | a::rest => if check a then 1 else 1 + examined check rest
+
+theorem examined_bound {α : Type} (check : α → Bool) (items : List α) :
+ examined check items ≤ items.length := by
+ induction items with
+ | nil => simp [examined]
+ | cons a rest ih =>
+   simp only [examined,List.length_cons]
+   split <;> omega
+
+theorem none_exact {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (items : List α) :
+ scan check items = none ↔ ∀ a ∈ items, ¬eligible a := by
+ induction items with
+ | nil => simp [scan]
+ | cons a rest ih =>
+   by_cases allowed : check a = true
+   · have ha := (exact a).mp allowed
+     simp [scan,allowed,ha]
+   · have ha : ¬eligible a := fun h => allowed ((exact a).mpr h)
+     simp [scan,allowed,ih,ha]
+
+theorem selects_actual_eligible {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (items : List α) (chosen : α)
+ (selected : scan check items = some chosen) : chosen ∈ items ∧ eligible chosen := by
+ induction items with
+ | nil => simp [scan] at selected
+ | cons a rest ih =>
+   by_cases allowed : check a = true
+   · have eq : a = chosen := by simpa [scan,allowed] using selected
+     subst chosen
+     exact ⟨by simp,(exact a).mp allowed⟩
+   · have selectedRest : scan check rest = some chosen := by simpa [scan,allowed] using selected
+     have found := ih selectedRest
+     exact ⟨by simp [found.1],found.2⟩
+
+theorem enabled_is_considered {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (items : List α)
+ (enabled : ∃ a ∈ items, eligible a) :
+ ∃ chosen, scan check items = some chosen ∧ chosen ∈ items ∧ eligible chosen := by
+ cases h : scan check items with
+ | none =>
+   have disabled := (none_exact eligible check exact items).mp h
+   obtain ⟨a,member,ha⟩ := enabled
+   exact False.elim (disabled a member ha)
+ | some chosen => exact ⟨chosen,rfl,selects_actual_eligible eligible check exact items chosen h⟩
+
+theorem blocked_prefix_does_not_hide {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (blocked rest : List α)
+ (disabled : ∀ a ∈ blocked, ¬eligible a) :
+ scan check (blocked++rest) = scan check rest := by
+ induction blocked with
+ | nil => rfl
+ | cons a tail ih =>
+   have no : ¬check a = true := fun h => disabled a (by simp) ((exact a).mp h)
+   simp only [List.cons_append,scan,if_neg no]
+   apply ih
+   intro x hx
+   exact disabled x (by simp [hx])
+
+-- A caller falls back to the first actual inbox head only after every
+-- outgoing candidate is blocked. This proves availability of selection,
+-- not success of that head's service, 32-pass completion, or network fairness.
+def withFallback {α β : Type} (check : α → Bool) (outgoing : List α)
+ (inboxHead : Option β) : Option (Sum α β) :=
+ match scan check outgoing with
+ | some a => some (.inl a)
+ | none => inboxHead.map Sum.inr
+
+theorem all_blocked_reaches_inbox {α β : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (outgoing : List α)
+ (disabled : ∀ a ∈ outgoing, ¬eligible a) (head : β) :
+ withFallback check outgoing (some head) = some (.inr head) := by
+ simp [withFallback,(none_exact eligible check exact outgoing).mpr disabled]
+
+#print axioms examined_bound
+#print axioms none_exact
+#print axioms selects_actual_eligible
+#print axioms enabled_is_considered
+#print axioms blocked_prefix_does_not_hide
+#print axioms all_blocked_reaches_inbox
+end MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan

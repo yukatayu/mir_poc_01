@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C active**; W4-D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The owner waived quota stopping again for this run on2026-09-27; only the owner resets the account.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C active**; W4-D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
 
 ## Authority and retained history
 
@@ -2093,3 +2093,188 @@ Oracle NTの20指摘を照合。Aの単一source進行＋既存executorに、元
 2026-09-30T03:20:18.999624+00:00: Featurefull11563 candidate-floor-controls-v1 exit0all7800failed0ignored0filtered117.55s;15Rustrestored. Distinct profile/cut from default76531925. Oracle64308 remainsrunning03:19:25UTC actual6Pro/max verified (slider4/4), requestidentitypresent/Stopvisible; nextstatus>=03:22:25UTC. Currentdocs synchronized; proof/docs validation next.
 
 2026-09-30T03:25:48.289626+00:00: make docs71339exit0、190sourcepins/149negative recipe/6697priorledgerprefix保持・15Rust復元・inventory一致とdiffcheckを確認。Proof/docs checkpointのみ、Oracle review継続中、C未完了/D未着手。
+
+
+### W4-C first-consumer reconciliation — 2026-09-30T03:30:05.636369+00:00
+
+This forward reconciliation preserves the original R01–R12 obligations. It is
+not C acceptance and does not revise the historical119-row disposition snapshot.
+The reference's completed owner-statement projection is not a claim that arbitrary
+ordinary/trailing/callee work in the same handler has executed. The current
+physical controls concern the full checked owner sequence of the selected source
+profile. Any wider source driver must retain and execute its other source work.
+
+| Row | Evidence available for the first consumer | Remaining first-consumer condition and later owner |
+| --- | --- | --- |
+| R01 | B's byte-exact206 sources, observed model/native/process whole-run receipts and final scoped review; C's190-source manifest and149-control reproduction recipe | B preservation is discharged for those pinned inputs. Every D delta binds its own input/import/artifact cut; E checks final reproducibility. |
+| R02 | Independent original-entry/manifest/checker rules, metadata/current-use and acknowledgment proofs, ReportReservation/EndpointBudget; actual ordinaryST/OW1 and spare-capacity positives | C's finite producer review remains pending. Numeric headroom, result Vec reservation and ordinary memory availability remain distinct; completion assumes unchanged valid authority and finite stepped traffic. No all-refusal or all-interference guarantee. |
+| R03 | Protected lower source entry, inert clones, one retained source cursor/request, full original Core/arguments, candidate/patch/decoded-image checks; finite producer/custody inventory | C must reconcile final producer findings and the exact selected D source surface. D must recheck every new generated/process entry and custody handoff before using it. Raw image validation is not origin or recovery. |
+| R04 | Actual M9 use retained under shared current-floor guard; genuine idle/held successor controls; full original request/lineage/owner binding; reviewed provider constructor and both restore callers | Existing complete issuer inventory and inherited-control authenticity are pinned TCB, not authority created by proofs or hashes. D must bind the existing mutual-TLS/SPKI peer and reciprocal preface to the actual semantic request while keeping M9 authorization separate. No production key/issuer policy is selected. |
+| R05 | Actual M7/projector and lower M8 reference controls, complete signatures/schema/arguments, single source activation, actual queue/results, separate physical resource pools | C still owes an explicit selected source/Core/observer mechanism map, including the R09 boundaries below. D implements the minimal connection to existing private QUIC and checks its finite correspondence. C does not demand future D network results. |
+| R06 | Actual source-consume→next-request edges, actual exact-key latest-write origin, no invented read/service row; supplied-label M8 correction and older privateI3 redaction mechanisms | D must collect the same execution's actual request/serve/result and authorized redacted observation. Legacy renderer launched/delivered summary fields are not execution evidence. A raw privileged capture is not a public observer. E broadens integration checks. |
+| R07 | Retained exact attempted/refused/unobserved/committed states, no body retry on report loss, same-live worker collection, FIFO continuation, old-generation acknowledgment refusal | D exercises these relevant states across its actual process/network boundary; process death remains unknown without a durable recovery protocol. No rollback/refund/retry policy is inferred. E owns the full fault/regression campaign. |
+| R08 | ADR0043/I3-3 remains the accepted regression baseline; prior46actual private-I3 tests are historical per their exact cuts | E runs the required final I3-3 regressions and maps I3-4/5/6 obligations without resuming Plan250 or claiming its acceptance. D runs regressions needed by its own changes. |
+| R09 | W1 arithmetic abort/alias review, W2 binding/capture/completion rules, mixed source control-floor model, W3 current reference/holding history, actual argument/schema/owner-label repairs | C must finish the concrete source-label/capture/control/observer first-consumer map below; existing mathematical hypotheses are not physical authentication. Q18/H/H2/C/C2 and U/D/adoption/demonstration stay separate. E reconciles119rows; it cannot defer a prerequisite already used in C/D. |
+| R10 | Hash-pinned READ_LEDGER has source/proof reads and current dependency slices; Sep27 tracked-corpus audit2726 text files, later exact C imports/producers | The old612 milestone is history, not a current unread cursor. No wholesale reading claim: before D decisions, read and pin the exact process/control/observer implementation cone. Generated receipts/self-maintained records are not automatically new semantic sources. |
+| R11 | Latest proof/docs checkpointd7cbfc5c pushed with remote parity; make docs71339exit0,190pins/149recipe/prior6697ledger prefix and15Rust restoration checked; full780feature and earlier765default distinguished | Producer Oracle remains pending. Main must dispose its actual findings, then verify any changed cut, update the one Report2614 and current records, and commit/push. Advice supplies no signature or acceptance. |
+| R12 | This table retains original rows plus concrete new producer/counter/custody findings, historical observer-summary and mixed-control counterexamples | Each newly used source/authority/resource/observer premise must have an assigned consumer and evidence before reliance. Final union/zero-unassigned audit belongs to E; no W4-critical item is declared closed by this table. |
+
+R09 first-consumer details (not a new requirement set):
+
+- **Source binding and arithmetic:** DS01/DS03/VF04/VF05, PT03/PT14, SC07.
+  Actual full argument-domain/schema/checked-Core and request binding is available;
+  checked i64 failure, absent field/parameter, actual read origins and successful
+  prefix retention are preserved. Pure/reference support, H/H2 and C/C2 remain
+  their existing contracts. A source owner projection must not stand for omitted
+  ordinary statements or claim whole-handler termination.
+- **Labels, captures and completion control:** OB04/AU01/AU04, PT11/PT14.
+  The reviewed finite models separate supplied labels from actual source/admission
+  provenance. The mixed-model private-overflow/public-suffix counterexample is
+  retained; the arithmetic owner control-floor successor addresses that model's
+  owner sequence, while ordinary/callee/generated-management completion remains
+  conditional. The actual Rust source reference has no whole-session information-
+  flow claim. Before D relies on a secret-bearing control-sensitive public result,
+  its label/capture/completion mapping must be established or that claim remains
+  blocked. Merely using a redacted payload or giving a policy a label is insufficient.
+- **Actual observer boundary:** supplied M8 label/clearance correction proves only
+  consistency of supplied policy and returned rows. M8ObserverRuntime currently
+  takes the generic owner row's label from the supplied policy; it does not derive
+  that class from the source read/continuation. The planned D observer must name
+  the actual grant, source/classification premise and released fields. Existing
+  private-I3 observer-safe summaries are a separate bounded interface, not a
+  universal confidentiality certificate. Current grant/retained-history release,
+  source visibility and general W6 two-run/timing/resource guarantees stay distinct.
+- **Authority and identity:** AU01/AU04/AU05/AU08, PT11, SC04/SC07.
+  Existing genuine M9 issuance/refresh and exact expected Core/image mechanisms
+  are retained. Peer authentication, authorization, source custody and proof are
+  separate. Q18 preparation-versus-use policy, owner keys/bootstrap and fresh import
+  versus same-instance recovery are not resolved by this LAB work.
+- **Capacity and causal order:** DS02/DS04/DS08, PT03, SC07.
+  Same-owner statement order, explicit actual read-from and request dependencies
+  are supported; a QUIC stream order is not a higher memory-order family. Numeric
+  per-statement headroom and whole-activation result slots do not prove allocation,
+  durable knowledge, safe forgetting or fairness. D must preserve the actual pool
+  aliases and queue debts when its connection changes the producer graph.
+
+The next C work is final producer-review disposition and the selected source/Core/
+private-QUIC/observer premise map. This is a concrete dependency gate, not a new
+roadmap or an excuse to mark C complete and leave its hypotheses to E.
+
+
+### Selected C→D mechanism premises — 2026-09-30T03:34:57.251044+00:00
+
+This is the planned first D consumer, subject to final C review. It adds no public
+language, authority, wire or observation contract. It uses the existing checked
+Surface v0 owner-assignment profile and the existing private I3 process/QUIC
+boundary. Wider mixed-model ordinary/callee work remains a separately blocked
+consumer where its completion/capture hypotheses are needed; it is not silently
+executed or claimed complete by the owner projection.
+
+The actual parser's `parse_when` visits every `at` block; `parse_at_block` admits
+assignments or relation-mutation syntax. It does not parse a general pure/callee
+statement and then erase it. M7's actual `build_checked_artifact` consumes every
+parsed assignment in order and retains handler plus ordinal and full Core.
+Relation-mutation syntax remains a non-executable residual under the existing
+classification/admission route. The private statement reference derives every
+owner fragment for the selected handler and checks contiguous original ordinals
+and complete admitted signatures/Core/arguments. Thus the immediate D source
+consumer is that existing source profile, not arbitrary mixed model syntax or a
+new fixed grammar. Any new accepted source form reopens this premise before use.
+
+| Boundary | Planned reuse / retained condition | What D must physically establish |
+| --- | --- | --- |
+| Source and checked code | Actual build_project → M6/M7 → SYS3/SYS4 checked fragments; original ordered handler manifest and full parameter map; no per-node hand-authored receipts | One actual source build yields the emitted operations, endpoints and arguments; source changes alter actual generated behavior. A source cursor, not a probe-selected operation string, chooses the next statement. |
+| Process startup | Existing parent-held expected start binding, one-shot trusted control FD separated from tainted image FD, exact source/projection/M9 identities and restricted per-slot image | Source progression has exactly one live requester custodian. Its owner-side descriptors are not independently executable source cursors. Decoding/copying/startup cannot duplicate that custody; all new transfer fields remain bound to the independently held expected image. |
+| Current use and owner service | Existing M9 complete inventory and current-floor guard, existing owner request/result custody, full checked source and exact original arguments | Every generated network request still passes semantic authorization/currentness and the appropriate original-source association before owner execution. TLS/SPKI identity cannot substitute for that gate. One retained actual result supports collection, never body reexecution. |
+| Delivery | Existing Sys5I3PrivateQuicSession, mutually authenticated run-local TLS, exact peer SPKI and reciprocal preface, strict bounded frame decoder | Same actual source/Core/edge/request must survive request send/receive and reply send/receive. Actual process namespace and fresh session/occurrence identities must remain distinct from semantic operation/activation/ordinal. |
+| Source acknowledgment | Existing original receipt/current-use/committed-custody/one-consume rule, current M9 generation bound | Requester acknowledgment refers to the same retained actual remote result. A remote commit does not imply current source completion; an unknown/lost reply is not no-write, refund or permission to resend. |
+| Resources | C's per-statement debt model plus the actual privateI3 pending/tombstone/frame/session limits | Recompute all changed producer costs and physical aliases before any new entry relies on C. Network admission may truthfully refuse before effect. Existing u64/Vec capacity is not allocated memory or a fairness promise. |
+| Observation | Existing privateI3 reference-only observer-safe delivery/occurrence records and actual redaction, as run-local evidence for this authorized task | Bind every reported fact to the same actual runtime/network event. Keep raw source, values, arguments, credentials, capabilities, witnesses and session/address payloads out of that view. These records do not issue a public observer grant or prove whole-session noninterference. |
+
+The selected observer consumer does **not** call M8ObserverRuntime with a newly
+invented Public policy and claim source-derived release. That generic policy
+bridge remains a named dependency before any such consumer. Existing privateI3
+redacted references/counts are used under their accepted finite contract and
+private run-control custody, with the same source/peer/current-authority limits.
+No general secret-dependent timing/count noninterference, dynamic grant revocation,
+or new observer release is inferred. The wider W6 obligation remains; if D changes
+released fields or claims public control-sensitive behavior, the corresponding
+C label/capture/completion premise reopens first. This preserves the supplied
+observer constraints rather than treating a raw test capture as a release API.
+
+Candidate A is one retained source cursor using existing generated request and
+result paths, with uniquely transferred source custody and inert descriptors for
+other processes. The smallest alternative B is an external probe loop selecting
+one existing operation ID after another. B cannot establish source-issued order,
+parameter binding, completion origin or bypass exclusion, even if its final values
+match; it is therefore inadequate for D. No parallel evaluator or independent
+per-owner source sequencer is selected. A remains to be realized and checked in D;
+its new process transfer/ingress is a mandatory correspondence gate before any
+claim that the local C guard applies remotely.
+
+The exact C proof is the independent admitted source/owner transition model plus
+original-entry/manifest/current-use/result/acknowledgment/resource lemmas. Those
+proofs establish their stated conditional relations; they do not magically make
+a private Arc into a network capability. Existing process constructors and
+transport checks supply pinned baseline premises, and D owes the changed concrete
+handoff. This division avoids demanding future D output to close C while keeping
+every newly introduced physical premise explicit and subject to reopening.
+
+2026-09-30T03:44:14.649155+00:00: Oracle mir-w4-producers-r1最終03:31:25UTC/64308exit0、全文26050chars SHA8be693fb…/43fileshash/実6Pro-max/27dispositions照合。自動driverのforeign outbox容量停止と読取り理由混同を17877でST/OW1各2RED+4positive再現。候補9057全8成功:純粋な端点容量checkをallocationと共有し、全実outgoing候補の有限scanでblocked foreignを残して元inboxへ進む。実inboxFIFOは保持。私的lowerread結果でcapacity/actualorigin unavailable/absentを分離。元body1、foreign spare正例11維持。Raw unknown enqueueはguard前に拒否traceを作るので旧inventoryの一律無変化説明は誤り、実caller exclusion又はguardの対応が必要。aggregate next_node_index/per-locus sequenceも別numeric義務として継続。有限scan一般証明・追加boundarycontrols・広域回帰/最終review未了。D未着手。
+
+2026-09-30T03:56:23.979861+00:00: FiniteScan integrated2Lean/pins/recipe153/ledger:6generaltheorems,190modules19495owned153qualifiedfalse164commands audit7719exit0 RESULT9c4792c87146dbab6a8bc3f5069a19379cc508449b3b3a50b18b8b11b79fa256. Independenteligibility/check equivalence, finiteinspections, actualmemberselection, blockedprefix andactualinboxfallback; no servicesuccess/32passcompletion/fairness theorem. FirstLean98487equalityrewritefailure retained; corrected33675pass. RelatedRustproducer-delta-green-v1 regression15322exit101377pass1staleMissingTypedexpectation; v2 changes only actualprojectionmissing expectation toObserverSnapshotUnavailable, focused81888exit0all378/398filtered10.65s. All15Rustrestored before next test overlay. Currentrawunknown/aggregatecontrol work remains open; no C acceptance/D implementation.
+
+### Producer/driver correspondence successor — 2026-09-30T04:15:03.937063+00:00
+
+The current external reference is `driver-route-controls-v1`. Its default library
+run27645 passes all788 tests,0failed/ignored/filtered,113.57s; all15 Rust files were
+restored before the next profile. The feature run94176 is pending and is not part
+of this default receipt or the new Oracle packet. C remains incomplete and D
+unstarted; productionbaselinee5450e38 and Canon/119/Plan250/I3-4 remain unchanged.
+
+The raw unknown-operation path really allocated a lower rejection and local row
+before the source invocation guard. Direct ST/OW1 controls reproduce the state
+change with4owed slots. The bound-source guard now precedes unknown handling;
+unbound legacy unknown diagnostics still create their genuine row. The selected
+ordinary source facade does not export its backend or invoke raw enqueue; the
+separate semantic kernel constructs its own runtime. This is not evidence of an
+ordinary source exploit. Aggregate/per-locus counters now have a separate retained
+cardinality argument and candidate publication checks. Two private candidate
+counterMAX controls were accepted before the change and now refuse without
+changing live acknowledgment; actual ST/OW1 repeated snapshots and genuine
+candidate publication remain positive. The argument is limited to the retained
+source path and checked64bit host; it excludes pruning, new sessions, arbitrary
+restore/counter setters and allocation-failure recovery.
+
+A same-outbox actual blocked foreign prefix is skipped by the finite outgoing
+scan, while incoming FIFO remains intact. A real persistent foreign route fault
+also stranded the original body0 through64automatic collections; current selection
+skips that known unrelated blockage, retains its envelope/fault, and completes the
+original once. Explicitly collecting the foreign request still returns the typed
+RouteUnavailable; restoring its route later yields actual11. An original route
+fault still refuses/body0 and resumes that same original only after restoration.
+Four route controls pass80573; the final default788 adds the explicit blocked
+foreign diagnostic check. The predecessor invariant cut passed8selected45672 and
+386related66123 before this route delta. Earlier fixture preparation/compile/wrong
+empty-outcome expectations are retained and separated from actual counterexamples.
+
+FiniteScan's six general proofs and153qualified false controls are integrated.
+Inventoryv2 pins20inputs and205lexicalcalls; lexical counts are not a compiler
+reachability proof. It records the aggregate/qualification invariants, source
+memory assumptions, per-statement numeric versus whole-activation result capacity,
+and initial successful delivery plus one redelivery. The first-consumer R01–R12
+map retains broader mixed source/observer dependencies before their own consumers;
+no used C prerequisite is assigned to E. C acceptance still requires judging the
+changed physical correspondence against the exact final review.
+
+Oracle `mir-w4-producers-r2` was submitted once04:13:26UTC (tool19159),41files,
+1768113bytes, manifest8fec79033b7b029041458986153c775a9b59c89346ac7035fbb6f0125639c7f7,
+question4865e258e60183e50cfc9392f68a4e9bf3ac73ecbf8e46d16abed51beece4e35.
+It includes actual default788, proof153, corrected inventory, complete qualification
+slices, exact reference delta and first-consumer map. No feature result or review
+answer is inferred. Main retains acceptance; no subagents, notifications or
+publication. Latest quota03:47:01UTC89%remaining; next check>=04:47:01UTC.
+
+2026-09-30T04:18:28.211605+00:00: 同じdriver-route-controls-v1のfeature full94176も全800件/0failed/0ignored/0filtered118.29s成功、15RustのHEAD復元を照合。default788とはprofileを区別し、後発featureはOracle凍結packetに含まれない。Oracle19159は04:17:28UTC running/identitytrue/Stoptrue、実6Pro/Latest/最大effort slider4/4確認、次status>=04:20:28UTC。現在docs validationへ進む。
+
+2026-09-30T04:24:49.222294+00:00: make docs4573exit0、190sourcepins/153negative recipe/6704previousledgerprefix/15RustのHEAD復元/inventory完全一致を確認。Proof/docs checkpoint、最終Oracle review継続、C未受理/D未着手。

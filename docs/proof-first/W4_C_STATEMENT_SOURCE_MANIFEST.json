@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "dcded44cd0b045217129fa27509509aac70b75d6f1e5d17342f6dc4a2e5e08ee",
+      "sha256": "f0ab76b617a5d9bf80cf905a99147ea7354b211b918c94581e48fe34b1e73b41",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "dcded44cd0b045217129fa27509509aac70b75d6f1e5d17342f6dc4a2e5e08ee",
-      "transformation": "identity; append remaining original endpoint work, independent spare witness/admission equivalence, actual piece discharge, genuine predecessor dequeue and before/behind arrival preservation. Actual phase, producer identity and finite cost inventory remain physical duties."
+      "staged_sha256": "f0ab76b617a5d9bf80cf905a99147ea7354b211b918c94581e48fe34b1e73b41",
+      "transformation": "identity; append general finite selection from independently eligible actual candidates, exact absence, bounded inspection count, blocked-prefix preservation and fallback to actual inbox head. This is not service success or scheduler fairness."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-endpoint-budget-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "a9c1524188774ae247ae01c9bbcc3d5e3aa669c0ad4af51818e7e941a78db83b",
+      "sha256": "653caf69f97ce688ac37e6706b7f6e647e3c3cf2f974360e1cc292afabfb27dc",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "a9c1524188774ae247ae01c9bbcc3d5e3aa669c0ad4af51818e7e941a78db83b",
-      "transformation": "identity; append remaining original endpoint work, independent spare witness/admission equivalence, actual piece discharge, genuine predecessor dequeue and before/behind arrival preservation. Actual phase, producer identity and finite cost inventory remain physical duties."
+      "staged_sha256": "653caf69f97ce688ac37e6706b7f6e647e3c3cf2f974360e1cc292afabfb27dc",
+      "transformation": "identity; append general finite selection from independently eligible actual candidates, exact absence, bounded inspection count, blocked-prefix preservation and fallback to actual inbox head. This is not service success or scheduler fairness."
     }
   ],
   "audit": {
@@ -2436,6 +2436,26 @@
     "owned": 19471,
     "qualified_false": 149,
     "commands": 160,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "finite_scan_successor": {
+    "at": "2026-09-30T03:56:23.979861+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/RESULT.json",
+    "sha256": "9c4792c87146dbab6a8bc3f5069a19379cc508449b3b3a50b18b8b11b79fa256",
+    "owned": 19495,
+    "qualified_false": 153,
+    "commands": 164,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",

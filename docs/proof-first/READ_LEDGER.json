@@ -50434,5 +50434,110 @@
     "status": "section4-read",
     "role": "normative section4 successor refresh/publication; no Canon edits",
     "at": "2026-09-30T03:17:21.474277+00:00"
+  },
+  {
+    "path": "crates/mir-ast/src/surface_v0.rs",
+    "sha256": "dad1ab1035afe3f98991952da2168ca39220ff54c548b7f274722be4e941a851",
+    "range": "1-220;320-460;700-865;1628-1825",
+    "role": "selected parser/accepted source-form reconsult; not a new full read",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+    "range": "1-140",
+    "role": "selected security-label default and evidence type reconsult",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_observer.rs",
+    "sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c",
+    "range": "570-715",
+    "role": "selected actual supplied-policy observer boundary reconsult",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "range": "10135-10295",
+    "role": "selected existing generated-owner emission and pending custody reconsult; prior full plus reviewed delta retained",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mirrorea-i3-probe/src/i3_process_localnet.rs",
+    "sha256": "21ac43d30ebdc0d9a42ae2bfd88e4cd6d4bea75815ad40754d94ac5383d5aa0f",
+    "range": "624-815;1380-1463;4729-4920;11130-11210;13550-13781",
+    "role": "selected existing source/control/TLS/observer dependency reconsult; exact prior full hash match retained",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mirrorea-i3-probe/tests/i3_process_localnet.rs",
+    "sha256": "a35544462bca60d70f70a7276da868b6ec56c2514bd1f9f16a0c78cee3ab21bf",
+    "range": "800-950;1190-1258",
+    "role": "selected actual source-first/owner-budget test reconsult; exact prior full hash match retained",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "range": "1-150",
+    "role": "selected private adapter/peer/preface/effect boundary; exact prior full hash match retained",
+    "status": "partial-reconsult",
+    "at": "2026-09-30T03:34:57.251044+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "f0ab76b617a5d9bf80cf905a99147ea7354b211b918c94581e48fe34b1e73b41",
+    "status": "full-read",
+    "role": "sole-main authored/read appended finite-scan proof/control and audited exact final source",
+    "at": "2026-09-30T03:56:23.979861+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "653caf69f97ce688ac37e6706b7f6e647e3c3cf2f974360e1cc292afabfb27dc",
+    "status": "full-read",
+    "role": "sole-main authored/read appended finite-scan proof/control and audited exact final source",
+    "at": "2026-09-30T03:56:23.979861+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1/m8_runtime_owner_queue.rs",
+    "sha256": "c3443dad0b4b1e613675a75e88f5982bb4d87baa13375c63e8d470f1cee4d4d4",
+    "status": "partial-read",
+    "role": "sole-main delta and actual caller review: source-bound raw-entry guard before unknown diagnostic; exact statement custody entry and trace producers; unchanged baseline portions retain prior pinned reads",
+    "at": "2026-09-30T04:15:03.937063+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1/m8_runtime_local_cut.rs",
+    "sha256": "95486e307c827be21e4745965c1774b7f2960341b062613a058bd09db2c94b81",
+    "status": "partial-read",
+    "role": "sole-main delta and actual caller review: aggregate reconciliation/counter mutation, local append/restore paths, actual relation import and new count/extension predicate; unchanged baseline portions retain prior pinned reads",
+    "at": "2026-09-30T04:15:03.937063+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1/sys4_dispatch.rs",
+    "sha256": "d98f52bc6b45055aec18d1625883108dba23752bf6473ab8b67088c1338c2932",
+    "status": "partial-read",
+    "role": "sole-main delta and actual caller review: complete driver/transport resource-route selection; actual qualification/refresh callers; candidate publication and source journal; unchanged baseline portions retain prior pinned reads",
+    "at": "2026-09-30T04:15:03.937063+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/driver-route-controls-v1/sys2_execution_backend.rs",
+    "sha256": "5741aea8d490473cf849c165ce9d7c60a92ae78076323142231001113ef4107a",
+    "status": "partial-read",
+    "role": "sole-main delta and actual caller review: raw enqueue/serve versus contextual/source command dispatch, snapshot custody and bound local ownership; unchanged baseline portions retain prior pinned reads",
+    "at": "2026-09-30T04:15:03.937063+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v2/semantic_runtime_kernel.rs",
+    "sha256": "4f66e1e80e85c2d2cce20e7d4e6928a64e11af320bbfd564215b19325a95386d",
+    "status": "partial-read",
+    "role": "independent fresh-owning constructor and raw enqueue callsite, source backend not accepted/exported; unchanged earlier full read retained",
+    "at": "2026-09-30T04:15:03.937063+00:00"
   }
 ]

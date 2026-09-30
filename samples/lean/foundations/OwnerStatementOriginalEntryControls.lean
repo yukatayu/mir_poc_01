@@ -220,3 +220,13 @@ open OwnerStatementOriginalEntry.EndpointBudget
 #guard admits 20 0 3 1 0 remote = false
 #guard admits 20 0 3 0 0 remote = true
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.EndpointBudget
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan
+open OwnerStatementOriginalEntry.FiniteScan
+def allows (n : Nat) : Bool := n == 3
+#guard scan allows [1,2,3,4] = some 3
+#guard scan allows [1,2] = none
+#guard examined allows [1,2,3,4] = 3
+#guard withFallback allows [1,2] (some 99) = some (.inr 99)
+#guard withFallback allows [1,3] (some 99) = some (.inl 3)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-30 12:19 JST
+最終更新: 2026-09-30 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -55,12 +55,12 @@ W3は有限の研究・参照実装候補として検証・review・source統合
 
 2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と149反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と153反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限と依存を保つ未採用参照で、元要求の端点予算・関係の公開/取込み・指定値の内部カウンタ枯渇を実反例から修正しました。実M9失効を保留中にも適用し、未実行の拒否・確定済み履歴・現在の受理条件を分けています。最新default全765件が成功し、skipはありません。後続の候補公開3検査に加え、process-test feature構成の全780件も成功しました。一般証明は190module・19471宣言・149偽命題対照を監査済みです。生成経路と容量の条件を `docs/proof-first/W4_C_PRODUCER_INVENTORY.md` にまとめ、Oracleで差分review中です。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、容量不足の別要求や停止中の別経路が元要求を止め続ける反例を修正しました。実記録のないcounter跳躍と旧enqueue経路も検査し、実M9履歴と現在の受理を分けています。最新default全788件が成功し、skipはありません。同じcutのprocess-test feature全800件も成功しました。一般証明は190module・19495宣言・153偽命題対照を監査済みです。生成経路一覧を `docs/proof-first/W4_C_PRODUCER_INVENTORY.md` に更新し、最終差分をOracleでreview中です。C未完了・D未着手、D完了後に停止します。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回02:46:41 UTCのセッションtelemetryは週間使用8%・残り92%でした。次の確認は03:46:41 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回03:47:01 UTCのセッションtelemetryは週間使用11%・残り89%でした。次の確認は04:47:01 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 W4-Cの先行採用cutでは、共有authority floor、観測ラベル、実読取り記録と重複owner操作の配置変換を限定修正しました。その418件の歴史検査を現在の参照検査と混同しません。現在の未採用参照は通常の複数代入・元要求の回収・ST/OW1・共有資源・実M9後継を検査済みですが、C全体の受理には全入口/生成経路の対応と最終差分reviewの照合が残ります。実network・秘密・復旧やW4全体の保証には広げません。

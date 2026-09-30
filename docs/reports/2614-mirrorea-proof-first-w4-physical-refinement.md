@@ -4298,3 +4298,64 @@ C incomplete/D unstarted, stopafterD beforeE. Own5docsdirty; no userdirt, no sub
 2026-09-30T03:20:18.999624+00:00: Featurefull11563 candidate-floor-controls-v1 exit0all7800failed0ignored0filtered117.55s;15Rustrestored. Distinct profile/cut from default76531925. Oracle64308 remainsrunning03:19:25UTC actual6Pro/max verified (slider4/4), requestidentitypresent/Stopvisible; nextstatus>=03:22:25UTC. Currentdocs synchronized; proof/docs validation next.
 
 2026-09-30T03:25:48.289626+00:00: make docs71339exit0、190sourcepins/149negative recipe/6697priorledgerprefix保持・15Rust復元・inventory一致とdiffcheckを確認。Proof/docs checkpointのみ、Oracle review継続中、C未完了/D未着手。
+
+2026-09-30T03:34:57.251044+00:00: R01–R12を前方照合し、R09のsource/Core・ラベル/捕捉/完了依存・既存privateI3観測境界を具体化。現行parserはat内assignment又はdeferred relation mutationであり一般calleeを黙って削除する経路ではない。D候補は単一source cursorと既存生成request/result/privateQUIC、他processはinert descriptor。external probeによるoperation列選択ではsource順序/custodyを証明できない。M8 supplied policyをsource公開権限と誤認せず、既存privateI3 redacted refs/countsの有限契約を使う。新process引継ぎ/入口の対応はDで最初の依存前に検査し、前提変更ならCを再開。元119行/Canon不変、C未受理/D未着手。既読7sourceの範囲再参照をhash台帳へ追記、全文新規読了とは数えない。
+
+2026-09-30T03:44:14.649155+00:00: Oracle mir-w4-producers-r1最終03:31:25UTC/64308exit0、全文26050chars SHA8be693fb…/43fileshash/実6Pro-max/27dispositions照合。自動driverのforeign outbox容量停止と読取り理由混同を17877でST/OW1各2RED+4positive再現。候補9057全8成功:純粋な端点容量checkをallocationと共有し、全実outgoing候補の有限scanでblocked foreignを残して元inboxへ進む。実inboxFIFOは保持。私的lowerread結果でcapacity/actualorigin unavailable/absentを分離。元body1、foreign spare正例11維持。Raw unknown enqueueはguard前に拒否traceを作るので旧inventoryの一律無変化説明は誤り、実caller exclusion又はguardの対応が必要。aggregate next_node_index/per-locus sequenceも別numeric義務として継続。有限scan一般証明・追加boundarycontrols・広域回帰/最終review未了。D未着手。
+
+2026-09-30T03:56:23.979861+00:00: FiniteScan integrated2Lean/pins/recipe153/ledger:6generaltheorems,190modules19495owned153qualifiedfalse164commands audit7719exit0 RESULT9c4792c87146dbab6a8bc3f5069a19379cc508449b3b3a50b18b8b11b79fa256. Independenteligibility/check equivalence, finiteinspections, actualmemberselection, blockedprefix andactualinboxfallback; no servicesuccess/32passcompletion/fairness theorem. FirstLean98487equalityrewritefailure retained; corrected33675pass. RelatedRustproducer-delta-green-v1 regression15322exit101377pass1staleMissingTypedexpectation; v2 changes only actualprojectionmissing expectation toObserverSnapshotUnavailable, focused81888exit0all378/398filtered10.65s. All15Rustrestored before next test overlay. Currentrawunknown/aggregatecontrol work remains open; no C acceptance/D implementation.
+
+### Producer/driver correspondence successor — 2026-09-30T04:15:03.937063+00:00
+
+The current external reference is `driver-route-controls-v1`. Its default library
+run27645 passes all788 tests,0failed/ignored/filtered,113.57s; all15 Rust files were
+restored before the next profile. The feature run94176 is pending and is not part
+of this default receipt or the new Oracle packet. C remains incomplete and D
+unstarted; productionbaselinee5450e38 and Canon/119/Plan250/I3-4 remain unchanged.
+
+The raw unknown-operation path really allocated a lower rejection and local row
+before the source invocation guard. Direct ST/OW1 controls reproduce the state
+change with4owed slots. The bound-source guard now precedes unknown handling;
+unbound legacy unknown diagnostics still create their genuine row. The selected
+ordinary source facade does not export its backend or invoke raw enqueue; the
+separate semantic kernel constructs its own runtime. This is not evidence of an
+ordinary source exploit. Aggregate/per-locus counters now have a separate retained
+cardinality argument and candidate publication checks. Two private candidate
+counterMAX controls were accepted before the change and now refuse without
+changing live acknowledgment; actual ST/OW1 repeated snapshots and genuine
+candidate publication remain positive. The argument is limited to the retained
+source path and checked64bit host; it excludes pruning, new sessions, arbitrary
+restore/counter setters and allocation-failure recovery.
+
+A same-outbox actual blocked foreign prefix is skipped by the finite outgoing
+scan, while incoming FIFO remains intact. A real persistent foreign route fault
+also stranded the original body0 through64automatic collections; current selection
+skips that known unrelated blockage, retains its envelope/fault, and completes the
+original once. Explicitly collecting the foreign request still returns the typed
+RouteUnavailable; restoring its route later yields actual11. An original route
+fault still refuses/body0 and resumes that same original only after restoration.
+Four route controls pass80573; the final default788 adds the explicit blocked
+foreign diagnostic check. The predecessor invariant cut passed8selected45672 and
+386related66123 before this route delta. Earlier fixture preparation/compile/wrong
+empty-outcome expectations are retained and separated from actual counterexamples.
+
+FiniteScan's six general proofs and153qualified false controls are integrated.
+Inventoryv2 pins20inputs and205lexicalcalls; lexical counts are not a compiler
+reachability proof. It records the aggregate/qualification invariants, source
+memory assumptions, per-statement numeric versus whole-activation result capacity,
+and initial successful delivery plus one redelivery. The first-consumer R01–R12
+map retains broader mixed source/observer dependencies before their own consumers;
+no used C prerequisite is assigned to E. C acceptance still requires judging the
+changed physical correspondence against the exact final review.
+
+Oracle `mir-w4-producers-r2` was submitted once04:13:26UTC (tool19159),41files,
+1768113bytes, manifest8fec79033b7b029041458986153c775a9b59c89346ac7035fbb6f0125639c7f7,
+question4865e258e60183e50cfc9392f68a4e9bf3ac73ecbf8e46d16abed51beece4e35.
+It includes actual default788, proof153, corrected inventory, complete qualification
+slices, exact reference delta and first-consumer map. No feature result or review
+answer is inferred. Main retains acceptance; no subagents, notifications or
+publication. Latest quota03:47:01UTC89%remaining; next check>=04:47:01UTC.
+
+2026-09-30T04:18:28.211605+00:00: 同じdriver-route-controls-v1のfeature full94176も全800件/0failed/0ignored/0filtered118.29s成功、15RustのHEAD復元を照合。default788とはprofileを区別し、後発featureはOracle凍結packetに含まれない。Oracle19159は04:17:28UTC running/identitytrue/Stoptrue、実6Pro/Latest/最大effort slider4/4確認、次status>=04:20:28UTC。現在docs validationへ進む。
+
+2026-09-30T04:24:49.222294+00:00: make docs4573exit0、190sourcepins/153negative recipe/6704previousledgerprefix/15RustのHEAD復元/inventory完全一致を確認。Proof/docs checkpoint、最終Oracle review継続、C未受理/D未着手。

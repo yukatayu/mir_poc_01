@@ -1035,7 +1035,27 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseEndpointOnlyRequest.lean': 'import OwnerStatementOriginalEntryControls\n'
                                   'open '
                                   'MirroreaProofFirst.OwnerStatementOriginalEntry.EndpointBudget\n'
-                                  '#guard remote.sum = 8\n'}
+                                  '#guard remote.sum = 8\n',
+ 'FalseScanAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                            'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                            'open '
+                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                            '#guard scan allows [3] = none\n',
+ 'FalseScanFrontOnly.lean': 'import OwnerStatementOriginalEntryControls\n'
+                            'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                            'open '
+                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                            '#guard scan allows [1,3] = none\n',
+ 'FalseScanHidesInbox.lean': 'import OwnerStatementOriginalEntryControls\n'
+                             'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                             'open '
+                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                             '#guard withFallback allows [1,2] (some 99) = none\n',
+ 'FalseScanSelectsBlocked.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                                 'open '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                                 '#guard scan allows [1,3] = some 1\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1898,3 +1918,30 @@ invalidation/reacquisition are guarded for their maximum two/one local rows.
 This later relation cut has only targeted validation so far. Lower designated
 counter overflow and the whole producer inventory remain separate open checks.
 No production adoption, C acceptance, public API, or I3-4 resume is implied.
+
+## Finite eligible outbox selection (forward LAB)
+
+`FiniteScan` has an independent eligibility predicate and an executable check
+whose equivalence is an explicit premise. Its six general results prove bounded
+inspection, exact absence of eligible items, actual membership/eligibility of a
+selection, selection when an eligible item exists, preservation after a blocked
+prefix, and fallback to the actual inbox head when all outgoing work is blocked.
+The premise is not that the driver already succeeds. Four false controls reject
+front-only selection, blanket refusal, selection of a blocked item, and hiding an
+available inbox head. No inbox FIFO skip or invented envelope is allowed.
+
+Audit7719 checks190modules/19495owned/153qualifiedfalse/164commands;10changed and
+dependent modules rebuilt over the earlier pinned fresh190 audit. The first
+standalone invocation98487 exposed a Lean equality rewrite error; corrected33675
+and the audit pass. All failed inputs/logs remain. The six new proofs use standard
+logic only, with no authored holes or Mir axioms.
+
+This selection theorem does not prove a chosen transition succeeds, that 32
+passes finish an activation, or network fairness. Actual finite envelope lists,
+shared capacity predicate, current authority, typed route outcomes, and progress
+across repeated collection remain physical correspondence duties. The real
+Oracle outbox counterexample failed for ST/OW1 without post-admission resource
+corruption; the corrected capacity scan passes selected controls. The owner-read
+resource reason is separately typed as IdentifierExhausted; newest actual writer
+projection loss is ObserverSnapshotUnavailable, and true value absence remains
+MissingTypedDesignatedValue. No fallback to an older equal-valued write is added.
