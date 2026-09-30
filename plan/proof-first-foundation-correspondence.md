@@ -2278,3 +2278,15 @@ publication. Latest quota03:47:01UTC89%remaining; next check>=04:47:01UTC.
 2026-09-30T04:18:28.211605+00:00: 同じdriver-route-controls-v1のfeature full94176も全800件/0failed/0ignored/0filtered118.29s成功、15RustのHEAD復元を照合。default788とはprofileを区別し、後発featureはOracle凍結packetに含まれない。Oracle19159は04:17:28UTC running/identitytrue/Stoptrue、実6Pro/Latest/最大effort slider4/4確認、次status>=04:20:28UTC。現在docs validationへ進む。
 
 2026-09-30T04:24:49.222294+00:00: make docs4573exit0、190sourcepins/153negative recipe/6704previousledgerprefix/15RustのHEAD復元/inventory完全一致を確認。Proof/docs checkpoint、最終Oracle review継続、C未受理/D未着手。
+
+2026-09-30T04:36:05.851343+00:00: Oracle mir-w4-producers-r2最終04:27:49UTC/19159exit0、41fileshash/QUESTION一致/actual6Pro/max/ANSWER409df45e…全読と22dispositions照合。別の受信箱Eの容量停止が元S先頭を隠す反例を独立に61762で2RED+2spare再現。初期32を全submission前に置いた24785でも2inboxRED、明示outbox回収のM8ExecutionRejected理由混同2RED、2spare成功。共有dequeue算術で各箱のfrontのみ選ぶ修正32628全6成功、15Rust復元。一般heads4命題は32619成功、最初のaudit61897はcontrolsのopen欠落で停止し保存、修正v2audit70445進行中。原同一箱FIFO追加controls準備済み。C未受理/D未着手、旧baseline1336003f proof/docscheckpointはpush/parity0/0確認。
+
+2026-09-30T04:39:00.902986+00:00: Actual inbox-head proof integrated2Lean/pins/recipe156/ledger:4generaltheorems,190modules19502owned156qualifiedfalse167commands audit70445exit0 RESULT5f01cbb42686bbc47e2ab00775e7c07b2e1071218c13aea96955ed1b4b2fb912. Independent actual-front coverage/check equivalence, no within-mailbox skip, existseligiblehead→selection, blockedoutbox→actualheadfallback. Standardlogic only. Firstaudit61897controlsnamespaceopen failure retained; correctedv2pass. Tenchanged/dependent cone over earlierfresh190. Same-mailbox FIFO runtimecontrols17352 running; broadcut not yet validated. C incomplete/Dunstarted.
+
+2026-09-30T04:46:43.536277+00:00: inbox-eligibility-controls-v2全798件default91875成功0fail0skip0filtered110.89s/15Rust復元。10対照35479成功、初回17352の同FIFO2失敗はnext内部report再収集の観測境界誤認として保存し、1reportでforeign実拒否/body0→次report元body1を確認。Inventoryv3は20pins/205lexicalcalls、未公開report rollbackのcounter減少と非escape条件を明示。旧Oracle22指摘を処置、実followup81704を04:44:16UTCに1回提出、23files/manifestca75480f…/QUESTIONac944f16…。Feature8185検査中・packet外、C未受理/D未着手。
+
+2026-09-30T04:48:03.342727+00:00: 同cut feature8185全810件成功0fail0skip0filtered122.65s/15Rust復元、default798と区別。後発featureはOracle packet外。週間quota04:47:14UTC使用13%/残87%、次>=05:47:14UTC、owner resetのみ。C未受理、docs156検証へ。
+
+2026-09-30T04:50:57.781931+00:00: Oracle継続81704は04:44:52UTCに提出前error（savedconversation priorTurns0）で終了、exit1/marker不存在/FAILURE保存。生成中の重複なし。保存済み回答と同じ凍結source/default798/proof156で新規限定review87886を04:49:34UTCに1回提出、23files1503953bytes/manifestb247113e…/question1f07bb1e…、次status>=04:52:34UTC。make docs74992進行中。C未受理/D未着手。
+
+2026-09-30T04:54:25.651990+00:00: make docs74992exit0、190sourcepins/156negative recipe/6718priorledgerprefix/15Rust復元/inventoryv3一致確認。限定Oracle87886は04:53:49UTC running/identitytrue/Stoptrue、実6Pro Latest/最大slider4/4、次status>=04:56:49UTC。C未受理/D未着手のproof/docs checkpoint。

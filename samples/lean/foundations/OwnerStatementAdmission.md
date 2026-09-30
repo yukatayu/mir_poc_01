@@ -1055,7 +1055,22 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
                                  'open '
                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
-                                 '#guard scan allows [1,3] = some 1\n'}
+                                 '#guard scan allows [1,3] = some 1\n',
+ 'FalseInboxBypassFIFO.lean': 'import OwnerStatementOriginalEntryControls\n'
+                              'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                              'open '
+                              'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                              '#guard scan allows (heads [[1,3]]) = some 3\n',
+ 'FalseInboxFabricatedHead.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                                  'open '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                                  '#guard scan allows (heads [[1],[2]]) = some 3\n',
+ 'FalseInboxFrontOnly.lean': 'import OwnerStatementOriginalEntryControls\n'
+                             'open MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan\n'
+                             'open '
+                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan\n'
+                             '#guard scan allows (heads [[1,3],[3]]) = none\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1945,3 +1960,26 @@ corruption; the corrected capacity scan passes selected controls. The owner-read
 resource reason is separately typed as IdentifierExhausted; newest actual writer
 projection loss is ObserverSnapshotUnavailable, and true value absence remains
 MissingTypedDesignatedValue. No fallback to an older equal-valued write is added.
+
+## Selection among actual inbox heads (forward LAB)
+
+The outbox-only application was insufficient: one unrelated inbox whose dequeue
+cannot preserve the original budget could hide another inbox's enabled original.
+A real 32-token initial schedule reproduces this for both ST and OW1. The generic
+scanner is now also applied to exactly the front of every nonempty mailbox.
+`head_coverage`, `selected_head_preserves_fifo`, `enabled_head_considered`, and
+`blocked_outbox_enabled_head` prove exact actual-head coverage, FIFO preservation,
+eligible-head selection, and fallback from blocked outgoing work. Eligibility and
+its executable-check equivalence are independent premises. Three false controls
+reject front-locus-only scanning, skipping a same-mailbox predecessor, and an
+invented selected head. Selection still proves neither service success nor current
+authority, 32-pass completion, allocation recovery or network fairness.
+
+Audit70445 checks190modules/19502owned/156qualifiedfalse/167commands;10changed and
+dependent modules rebuilt over the earlier pinned fresh190 audit. The four new
+general proofs pass standalone32619 and use standard logic only. The first audit
+61897 stopped at a missing namespace open in the appended controls; its failed
+inputs/logs are retained. Corrected successor audit passes all required checks.
+The actual Rust head predicate shares cost/discharge with lowest dequeue; explicit
+requested carriers reach ordinary typed resource/route refusal. Numeric guards
+remain separate from source custody and semantic authority.

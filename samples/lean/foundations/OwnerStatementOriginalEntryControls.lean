@@ -230,3 +230,11 @@ def allows (n : Nat) : Bool := n == 3
 #guard withFallback allows [1,2] (some 99) = some (.inr 99)
 #guard withFallback allows [1,3] (some 99) = some (.inl 3)
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan
+open OwnerStatementOriginalEntry.FiniteScan
+#guard heads [[1,3],[],[3]] = [1,3]
+#guard scan allows (heads [[1,3]]) = none
+#guard scan allows (heads [[1,3],[3]]) = some 3
+#guard withFallback allows [1,2] (scan allows (heads [[1,3],[3]])) = some (.inr 3)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.FiniteScan

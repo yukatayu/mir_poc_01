@@ -4,7 +4,7 @@ This is LAB implementation correspondence for W4-C's frozen reference, with
 W4-D as its direct consumer. It does not adopt the reference, widen Canon,
 resume Plan250/I3-4, prove all Rust executions, or guarantee delivery after a
 legitimate revocation or process death. The input hashes and searchable call
-sites are in the W4_CHECK-linked `producer-inventory-v2/PINS.json` and
+sites are in the W4_CHECK-linked `producer-inventory-v3/PINS.json` and
 `CALLS.json`. The latter is a lexical audit aid, not a compiler call-graph proof.
 
 ## Selected boundary and physical ownership
@@ -96,7 +96,7 @@ merely by the owner-local budget:
 
 | Counter | Pinned invariant on this retained source fabric | Evidence and limits |
 | --- | --- | --- |
-| M8LocalTrace observer aggregate next_node_index | Starts at zero; one increment for each new distinct retained qualified row; never retires a row in the selected source path, hence equals aggregate entries.len | Actual ST/OW1 repeated full snapshot reconciliation and two real source bodies preserve count/index equality; clone-and-publish ST positive preserves it |
+| M8LocalTrace observer aggregate next_node_index | Starts at zero; one increment for each new distinct retained qualified row; never retires a published source-history row in the selected path, hence equals aggregate entries.len | Actual ST/OW1 repeated full snapshot reconciliation and two real source bodies preserve count/index equality; clone-and-publish ST positive preserves it |
 | m8_locus_trace_sequences[locus] | Equals the count of distinct qualified identities issued with that locus prefix; each maps to a retained actual raw row of the fixed physical session | ST locus has one session; OW1 loci share the same session, and each prefix counts a subset of its raw rows; provisional outcomes use actual returned rows and repeated qualification does not allocate again |
 
 The finite argument uses these exact constructors and mutators. LocalFabric
@@ -117,6 +117,13 @@ suffix, fresh session, or source-bearing restored trace into this live aggregate
 The source report journal restores aggregate, registry, sequences and graph
 views together to the prior unpublished reporting state; later refresh projects
 the retained actual backend rows again. It does not roll back committed M8 state.
+The aggregate and qualification counters can decrease during this coherent
+rollback of unpublished reporting state; they are not globally monotone through
+failed transactions. The count/vector and injective-registry invariants are
+restored together. Those rolled-back qualification products have no independently
+retained published escape in this local owner/callback boundary. A new D process
+transfer must recheck that no such identity escapes before publication; this is
+not a durable distributed identity-reuse protocol.
 
 The lowest source candidate publisher now separately checks aggregate count,
 consecutive indices, distinct IDs, retained row-ID/index prefix, exact qualified
@@ -210,16 +217,37 @@ No claim of total termination or completion after every allowed interference fol
 A current original can complete conditionally on valid unchanged authority,
 healthy original carriers, adequate admitted numeric headroom and result slots,
 available ordinary working memory, and finite predecessor traffic being stepped.
-The actual mixed scheduler scans the finite retained outboxes using a pure
-eligibility predicate before attempting delivery. It can select a later actual
-outbox item; inbox service still removes only the actual FIFO head. A foreign
-capacity or known route blockage leaves that foreign request/fault retained while
-other eligible work proceeds. An original route fault still refuses until that
-same route is available; it cannot authorize fabricated completion or replay.
-The six FiniteScan Lean results require independent eligibility/check equivalence,
-and prove actual-member selection, finite inspection and inbox fallback. They do
-not prove service success. The 32-pass budget may require another collection;
-finite repeated collection controls are not a fairness proof. A completion handle can be successfully delivered once plus one redelivery; failed
+The actual mixed scheduler scans finite actual outboxes and then the actual
+front of each nonempty inbox. It never flattens inbox contents or skips a
+same-mailbox FIFO predecessor. A requested envelope is eligible for an ordinary
+typed attempt, including resource/route refusal. An unrelated outbox is selected
+only if the shared movement capacity check and the known route/locus conditions
+hold; an unrelated inbox head is selected only if its actual one-token dequeue
+fits. The latter uses source_dequeue_discharge shared with the lowest dequeue:
+only a live original or actual required FIFO prefix discharges that token.
+The requested-ID exception grants selection, never capacity discharge or authority.
+
+The earlier outbox-only repair still stranded the original behind an unrelated
+E inbox. A genuine initial32-token schedule (before either submission) uses15 to
+bring a foreign input receipt to E, admits the original with17, then strands its
+actual S head with10 owed tokens. That foreign E dequeue needs11; the original S
+dequeue needs10. New ST/OW1 controls reproduce the failure without post-admission
+counter mutation. Current selection leaves E retained, completes/acknowledges the
+original once, and explicitly collecting E still reports IdentifierExhausted.
+Ample-capacity controls preserve genuine foreign11. Same-S-inbox controls require
+actual foreign refusal/terminal record with body0 before original service; spare
+positives serve both. The higher Invocation::next may internally collect twice,
+so the discriminator observes one report call, not an assumed public-step count.
+
+Ten FiniteScan general results now include exact actual-head coverage, selected
+head FIFO preservation, enabled-head selection and blocked-outbox/head fallback.
+The independent predicate is eligibility for a transition attempt, not eventual
+body success. Check equivalence and the actual finite candidate list remain
+physical correspondence premises. An original route fault still refuses until
+that same route is available; it cannot fabricate completion or permit replay.
+The 32-pass budget may require another collection. Finite repeated-collection
+controls do not prove fairness or finite completion under arbitrary arrivals.
+A completion handle can be successfully delivered once plus one redelivery; failed
 collection does not spend that delivery count. Losing both successful handles is
 outside this bounded profile. Capacity is admitted per original statement for lower/endpoint pools;
 only result slots cover the entire finite activation up front. Later statements
@@ -228,6 +256,7 @@ may refuse before effect if their own capacity or authority does not fit.
 The ReportReservation and EndpointBudget general Lean results prove numeric
 admission/discharge facts and independent checker/Ready equivalence. Actual IDs,
 phases, producers, costs, aliases and caller discipline are this bounded physical
-correspondence obligation, not facts created by Lean. The completed producer Oracle identified driver, diagnostic and inventory deltas;
-final changed-cut review and W4-C acceptance remain open. New producers, custody escape, resource sharing,
+correspondence obligation, not facts created by Lean. The completed producer reviews identified concrete outbox/inbox and diagnostic
+deltas. The latest inbox/head repair is under focused verification and final
+changed-cut review; W4-C acceptance remains open. New producers, custody escape, resource sharing,
 authority policy or a broader completion promise reopen this inventory.

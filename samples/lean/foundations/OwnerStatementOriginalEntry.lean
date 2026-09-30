@@ -1487,3 +1487,55 @@ theorem all_blocked_reaches_inbox {α β : Type} (eligible : α → Prop) (check
 #print axioms blocked_prefix_does_not_hide
 #print axioms all_blocked_reaches_inbox
 end MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan
+-- This candidate list contains exactly one front per nonempty mailbox.
+-- It does not flatten their contents or authorize service of a later member.
+def heads {α : Type} (mailboxes : List (List α)) : List α :=
+ mailboxes.filterMap List.head?
+
+theorem head_coverage {α : Type} (mailboxes : List (List α)) (a : α) :
+ a ∈ heads mailboxes ↔ ∃ mailbox ∈ mailboxes, mailbox.head? = some a := by
+ simp [heads,List.mem_filterMap]
+
+theorem selected_head_preserves_fifo {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (mailboxes : List (List α)) (a : α)
+ (selected : scan check (heads mailboxes) = some a) :
+ (∃ mailbox ∈ mailboxes, mailbox.head? = some a) ∧ eligible a := by
+ have found := selects_actual_eligible eligible check exact (heads mailboxes) a selected
+ exact ⟨(head_coverage mailboxes a).mp found.1,found.2⟩
+
+theorem enabled_head_considered {α : Type} (eligible : α → Prop) (check : α → Bool)
+ (exact : ∀ a, check a = true ↔ eligible a) (mailboxes : List (List α))
+ (enabled : ∃ mailbox ∈ mailboxes, ∃ a, mailbox.head? = some a ∧ eligible a) :
+ ∃ a, scan check (heads mailboxes) = some a ∧
+   (∃ mailbox ∈ mailboxes, mailbox.head? = some a) ∧ eligible a := by
+ obtain ⟨mailbox,member,a,front,ready⟩ := enabled
+ have available : ∃ a ∈ heads mailboxes, eligible a :=
+  ⟨a,(head_coverage mailboxes a).mpr ⟨mailbox,member,front⟩,ready⟩
+ obtain ⟨chosen,selected,_,_⟩ := enabled_is_considered eligible check exact (heads mailboxes) available
+ exact ⟨chosen,selected,selected_head_preserves_fifo eligible check exact mailboxes chosen selected⟩
+
+-- Outgoing and inbox eligibility are independent predicates with separate
+-- check equivalence. A selected head is available for a service attempt,
+-- not a proof that its body succeeds or its authority is current.
+theorem blocked_outbox_enabled_head {α β : Type}
+ (outEligible : α → Prop) (outCheck : α → Bool)
+ (outExact : ∀ a, outCheck a = true ↔ outEligible a)
+ (inEligible : β → Prop) (inCheck : β → Bool)
+ (inExact : ∀ b, inCheck b = true ↔ inEligible b)
+ (outgoing : List α) (mailboxes : List (List β))
+ (blocked : ∀ a ∈ outgoing, ¬outEligible a)
+ (enabled : ∃ mailbox ∈ mailboxes, ∃ b, mailbox.head? = some b ∧ inEligible b) :
+ ∃ b, withFallback outCheck outgoing (scan inCheck (heads mailboxes)) = some (.inr b) ∧
+   (∃ mailbox ∈ mailboxes, mailbox.head? = some b) ∧ inEligible b := by
+ obtain ⟨b,selected,front,ready⟩ := enabled_head_considered inEligible inCheck inExact mailboxes enabled
+ refine ⟨b,?_,front,ready⟩
+ rw [selected]
+ exact all_blocked_reaches_inbox outEligible outCheck outExact outgoing blocked b
+
+#print axioms head_coverage
+#print axioms selected_head_preserves_fifo
+#print axioms enabled_head_considered
+#print axioms blocked_outbox_enabled_head
+end MirroreaProofFirst.OwnerStatementOriginalEntry.FiniteScan

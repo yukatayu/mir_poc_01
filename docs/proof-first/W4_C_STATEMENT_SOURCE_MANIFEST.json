@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-inbox-heads-v2/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "f0ab76b617a5d9bf80cf905a99147ea7354b211b918c94581e48fe34b1e73b41",
+      "sha256": "48a07071fe404416774bf4d7f765c7bff20306bd7774f8c22f6e101d5a468a19",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "f0ab76b617a5d9bf80cf905a99147ea7354b211b918c94581e48fe34b1e73b41",
-      "transformation": "identity; append general finite selection from independently eligible actual candidates, exact absence, bounded inspection count, blocked-prefix preservation and fallback to actual inbox head. This is not service success or scheduler fairness."
+      "staged_sha256": "48a07071fe404416774bf4d7f765c7bff20306bd7774f8c22f6e101d5a468a19",
+      "transformation": "identity; append four general actual-inbox-head coverage/selection/FIFO/fallback results from independent eligibility and three false controls. A service attempt is not body success/current authority/fairness."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-finite-scan-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-inbox-heads-v2/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "653caf69f97ce688ac37e6706b7f6e647e3c3cf2f974360e1cc292afabfb27dc",
+      "sha256": "a085f8ad5ec7419bc54083021ae3d623a26beff6e36f658979520503ab0a8f9b",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "653caf69f97ce688ac37e6706b7f6e647e3c3cf2f974360e1cc292afabfb27dc",
-      "transformation": "identity; append general finite selection from independently eligible actual candidates, exact absence, bounded inspection count, blocked-prefix preservation and fallback to actual inbox head. This is not service success or scheduler fairness."
+      "staged_sha256": "a085f8ad5ec7419bc54083021ae3d623a26beff6e36f658979520503ab0a8f9b",
+      "transformation": "identity; append four general actual-inbox-head coverage/selection/FIFO/fallback results from independent eligibility and three false controls. A service attempt is not body success/current authority/fairness."
     }
   ],
   "audit": {
@@ -2456,6 +2456,26 @@
     "owned": 19495,
     "qualified_false": 153,
     "commands": 164,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "inbox_heads_successor": {
+    "at": "2026-09-30T04:39:00.902986+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-inbox-heads-v2/RESULT.json",
+    "sha256": "5f01cbb42686bbc47e2ab00775e7c07b2e1071218c13aea96955ed1b4b2fb912",
+    "owned": 19502,
+    "qualified_false": 156,
+    "commands": 167,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",

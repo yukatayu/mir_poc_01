@@ -53329,5 +53329,169 @@
     "restored_rust": 15,
     "inventory_mirror_exact": true,
     "scope": "proof/docs checkpoint; review pending, C incomplete and D unstarted"
+  },
+  "c_producer_final_review_result_20260930": {
+    "at": "2026-09-30T04:36:05.851343+00:00",
+    "tool": 19159,
+    "launcher_exit": 0,
+    "answer": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-final/ANSWER.md",
+    "sha256": "409df45e09cef1e5b21e4dc99dc35e24c603c99df77b82cf10ab4b2b622ceba2",
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-final/DISPOSITION.json",
+    "disposition_sha256": "1c5c452fdd079b1555633373ec020b289e20d9164ebc5d89234d3bedba3189a1",
+    "findings": 22,
+    "verification": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-producer-final/FINAL_RECOVERY.json",
+    "scope": "Static advisory on exact frozen788/proof153 packet; identifies actual inbox selector obstruction and explicit capacity-reason loss; actual local controls separately confirm. C incomplete."
+  },
+  "c_inbox_selection_delta_20260930": {
+    "at": "2026-09-30T04:36:05.851343+00:00",
+    "receipts": [
+      {
+        "cut": "inbox-eligibility-red-v1",
+        "tool": 61762,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-red-v1-check/RESULT.json",
+        "sha256": "eca0d08cb55a21355fd4c3aabe7ca22a590b6a484caac713c5fda3cbc248999c",
+        "exit": 101,
+        "log_sha256": "ccd6a63cc2f890323e6a7bec09416fa415ae183bdeefd5fee907ed9ecddcd136",
+        "restored": 15
+      },
+      {
+        "cut": "inbox-eligibility-red-v2",
+        "tool": 24785,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-red-v2-check/RESULT.json",
+        "sha256": "7f6615b8f036732e3a6fed3a1c56c28d8248eece585f328fd811cf2389ff73e3",
+        "exit": 101,
+        "log_sha256": "7be069ffbda84c0ae8c8425f7e1fe539d289146ed0666aa3161784ba3fddda4f",
+        "restored": 15
+      },
+      {
+        "cut": "inbox-eligibility-green-v1",
+        "tool": 32628,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-green-v1-check/RESULT.json",
+        "sha256": "5ad581710835fba947831bde1c45bb4a750c76c79ab64ce80d2ece4338891872",
+        "exit": 0,
+        "log_sha256": "55745121ffc906cd883b459bfc063eb2ebecd4662684487cabf541dc69edccc4",
+        "restored": 15
+      }
+    ],
+    "result": "v1 actual2RED2spare; v2 authentic initial32 before either submission actual4RED2spare including explicit-outbox diagnostic; green6passed. New same-mailbox FIFO controls and broad regression pending.",
+    "implementation": "Pure selection over actual mailbox fronts; common one-token/original-or-prefix discharge arithmetic with dequeue. Explicit requested carrier reaches ordinary typed refusal for resource or route. No within-mailbox skip/body replay."
+  },
+  "c_inbox_head_theory_20260930": {
+    "at": "2026-09-30T04:39:00.902986+00:00",
+    "tool": 70445,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-inbox-heads-v2/RESULT.json",
+    "sha256": "5f01cbb42686bbc47e2ab00775e7c07b2e1071218c13aea96955ed1b4b2fb912",
+    "modules": 190,
+    "owned": 19502,
+    "qualified_false": 156,
+    "commands": 167,
+    "scope": "Four general actual-head coverage/selection/FIFO/fallback results; three qualified false controls. Ten changed/dependent modules rebuilt over earlier pinned fresh190. Standalone32619 passed; first audit61897 missing open failure retained. Physical enumeration/predicate/custody and service success remain separate."
+  },
+  "c_inbox_selection_final_20260930": {
+    "at": "2026-09-30T04:46:43.536277+00:00",
+    "receipts": [
+      {
+        "cut": "inbox-eligibility-controls-v1",
+        "tool": 17352,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v1-check/RESULT.json",
+        "sha256": "74ab56de39a47cdb07078207e210e90cdcd20ee8f51aea83cfc95c1aca794481",
+        "exit": 101,
+        "log_sha256": "131995457e507e662d1cacbdad37518ab33dbc00fa0d0b0d6b4b63cac28391f6",
+        "restored": 15
+      },
+      {
+        "cut": "inbox-eligibility-controls-v2",
+        "tool": 35479,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2-check/RESULT.json",
+        "sha256": "cf7f92423e90d3273911e51deb165b340df91bde52601337bc747f855ad4ad04",
+        "exit": 0,
+        "log_sha256": "5d6ef29caecca2fe9723cbd3a9985b2293266dc35f426a5c724cf3f5b5e1e501",
+        "restored": 15
+      },
+      {
+        "cut": "inbox-eligibility-controls-v2",
+        "tool": 91875,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2-full-check/RESULT.json",
+        "sha256": "583002ee8cc7e8e9b465e7b99475b16b3d1dabd3eca43a46bc43a7804ca06a33",
+        "exit": 0,
+        "log_sha256": "835ee349330c947bc4b152e4a834dcfd2d3fb43f51f6f581e40f15276c93cda5",
+        "restored": 15
+      }
+    ],
+    "status": "controls-v1 two invalid body0 observation-boundary expectations retained; next internally retries report. controls-v2 observes one actual report, all10passed. Latest default full798passed0failed0ignored0filtered110.89s. Same-cut feature8185all810pass0fail0skip122.65s.",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2"
+  },
+  "c_producer_inventory_v3_20260930": {
+    "at": "2026-09-30T04:46:43.536277+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/producer-inventory-v3/RESULT.json",
+    "sha256": "64ffb51be036d0d8694b972d95ed04178e6612147faa6a66b2247f5e331373b6",
+    "calls": 205,
+    "inputs": 20,
+    "scope": "Actual head selection/shared dequeue arithmetic/typed explicit attempts; unpublished coherent rollback may decrease counters; no independent escape before publication. D new physical transfer reopens this premise."
+  },
+  "c_inbox_review_followup_20260930": {
+    "at": "2026-09-30T04:46:43.536277+00:00",
+    "submission": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-followup/SUBMISSION.json",
+    "sha256": "5119927c991d21c574b0e3de3f5d7c5866b57876f84f5208f790b93c2d6fbaaf",
+    "tool": 81704,
+    "prior_session": "mir-w4-producers-r2",
+    "session": "mir-w4-inbox-r1",
+    "manifest_sha256": "ca75480f8bbded889313b8f1be8916e8c9defcf89ca7ac4c38e06d26601d0ac4",
+    "question_sha256": "ac944f1643132c9bf6a78af1c9c13a6eadada4617300d7446b426ce2b6b11cc7",
+    "status": "FAILED before question submission: saved conversation had zero stable prior turns; wrapper81704exit1. Not an answer/review and not a duplicate generation.",
+    "failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-followup/FAILURE.json",
+      "sha256": "80938e922d500e0c81f79d85decaeef0bffb721f7b21d86e684e99d2c5e4caeb"
+    }
+  },
+  "c_inbox_feature_full_20260930": {
+    "at": "2026-09-30T04:48:03.342727+00:00",
+    "tool": 8185,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/inbox-eligibility-controls-v2-feature-full-check/RESULT.json",
+    "sha256": "01d31438d078dcc61ba033d8440486240f71bd281edd56afe2def1d2956997d0",
+    "log_sha256": "36a913e19c23befd7f78b2830252f7abd23d00327d4ad52eb317cd9e95d0362e",
+    "exit": 0,
+    "passed": 810,
+    "failed": 0,
+    "ignored": 0,
+    "filtered": 0,
+    "seconds": 122.65,
+    "restored": 15,
+    "scope": "Same inbox-eligibility-controls-v2 as default798; distinct i3-process-test-seams profile, completed after narrow Oracle packet freeze and excluded from that packet."
+  },
+  "quota_20260930T044714Z": {
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20260930T044714Z.json",
+    "sha256": "eaa4a91472b3ccaae23b1e4ae5a329bbf1716f9072aea622b09eb50a91207816",
+    "checked_at": "2026-09-30T04:47:14.666696+00:00",
+    "event_at": "2026-09-30T04:46:59.512Z",
+    "weekly_remaining_percent": 87,
+    "next_check_not_before": "2026-09-30T05:47:14.666696+00:00",
+    "owner_stop_remaining_percent": 50,
+    "reset": "owner only; not performed"
+  },
+  "c_inbox_review_fresh_20260930": {
+    "at": "2026-09-30T04:50:57.781931+00:00",
+    "submission": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-inbox-final/SUBMISSION.json",
+    "sha256": "ec6333ac767e1c03979a3073a49b45cdf8919daa8a12048c46686860af188a11",
+    "tool": 87886,
+    "session": "mir-w4-inbox-r2",
+    "manifest_sha256": "b247113e4bcf3e467c01071d325cc67e052f96ea61edd94d44f0584ec4d1c031",
+    "question_sha256": "1f07bb1e83b0652f47c98cb0dcfcb29e3123f028098810716c50c899d367d425",
+    "files": 23,
+    "bytes": 1503953,
+    "status": "single new isolated narrow review after confirmed pre-submission follow-up error. Same frozen source/proof/default798 receipts and prior full answer; nextstatus>=04:52:34UTC. No C acceptance."
+  },
+  "c_inbox_checkpoint_validation_20260930": {
+    "at": "2026-09-30T04:54:25.651990+00:00",
+    "tool": 74992,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/docs-inbox-final-v1.json",
+    "sha256": "49be55bd10ce2b15a006da6372fb57e22ccea942d650207bd208dc9b1f503f04",
+    "exit": 0,
+    "verified_source_pins": 190,
+    "negative_recipe": 156,
+    "old_ledger_prefix": 6718,
+    "restored_rust": 15,
+    "inventory_exact": true,
+    "scope": "proof/docs checkpoint; final narrow review still running, C incomplete/Dunstarted"
   }
 }
