@@ -118,3 +118,66 @@ def future : Trace Nat := ⟨original.rows ++ [(3,99)],3⟩
 #guard push 3 original 30 = some (append original 30)
 #guard (append original 30).rows.find? (fun row => row.1 == 0) = some (0,10)
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.CountedTrace
+open OwnerStatementOriginalEntry.TraceAllocator
+open OwnerStatementOriginalEntryControls.TraceAllocator
+def jumped : Trace Nat := ⟨original.rows,100⟩
+#guard extensionCheck original jumped
+#guard !(countedCheck original jumped)
+#guard countedCheck original (append original 30)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.CountedTrace
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots
+open OwnerStatementOriginalEntry.ResultSlots
+def initial : State Nat Nat := ⟨[0,1],[],[],false,0⟩
+def begun : State Nat Nat := ⟨[0,1],[],[],true,0⟩
+def recorded : State Nat Nat := ⟨[0,1],[],[10],true,0⟩
+def beforeFinalAck : State Nat Nat := ⟨[0,1],[],[10,20],true,1⟩
+def complete : State Nat Nat := ⟨[0,1],[],[10,20],false,2⟩
+#guard (prepare 1 [0,1] ([] : List Nat)).isNone
+#guard (prepare 2 [0,1] ([] : List Nat)).isSome
+#guard (begin initial).isSome
+#guard Owed begun == 2
+#guard (publish begun 10).isSome
+#guard Owed recorded == 1
+#guard (accept begun).isNone
+#guard (publish recorded 99).isNone
+#guard (accept recorded).isSome
+#guard (again 4 beforeFinalAck).isNone
+#guard (again 3 complete).isNone
+#guard (again 4 complete).isSome
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.CarrierFrame
+open OwnerStatementOriginalEntry.CarrierFrame
+-- Even tags identify the original request here; messages are full payloads
+-- in the general theorem. Tag-only fixtures do not authenticate real envelopes.
+def original (n : Nat) : Bool := n % 2 == 0
+def before : Queues Nat := ⟨[2],[1,2,3]⟩
+def lostReply : Queues Nat := ⟨[],before.incoming⟩
+def skippedHead : Queues Nat := ⟨before.outgoing,[2,3]⟩
+def unrelated : Queues Nat := ⟨before.outgoing++[5],before.incoming++[7]⟩
+#guard !(check original before lostReply)
+#guard !(check original before skippedHead)
+#guard check original before unrelated
+#guard barrier original before.incoming == [1,2]
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.CarrierFrame
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin
+open OwnerStatementOriginalEntry.ReadOrigin
+-- Keys stand for exact owner+namespace+index+field, never bare field names.
+def prior : Write Nat Nat := ⟨1,10,1⟩
+def latest : Write Nat Nat := ⟨1,20,2⟩
+def other : Write Nat Nat := ⟨2,20,3⟩
+def history : List (Write Nat Nat) := [other,latest,prior]
+#guard bindRead 1 history 20 = some 2
+#guard bindRead 1 history 10 = none
+#guard bindRead 2 history 20 = some 3
+#guard bindRead 9 history 20 = none
+#guard replay (fun _ => some 99) 1 history = some 20
+#guard replay (fun _ => some 99) 9 history = some 99
+#guard project (fun _ => false) (fun n => n == 2) [2,3] = [2]
+#guard project (fun n => n == 3) (fun n => n == 2) [2,3] = [2,3]
+#guard project (fun _ => false) (fun n => n == 2) [3] = []
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin

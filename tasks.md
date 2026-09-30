@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 09:03 JST
+最終更新: 2026-09-30 10:07 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と115反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と132反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限と依存を保つ未採用参照で、同じ構成への2回のchecked patch後に実S→E→C計算・消費11→12→13、元代入の2回の起動200→190→191→181→182を検査しました。最新runtime library全653検査が成功し、skipはありません。通常の復号値を実行可能値から型で分離し、独立した期待値に対する全image・準備済み更新の位置／有無・全admissionを昇格直前にも照合します。provider内部復元も完全な期待componentと実nonceを要求する候補を検査しました。処理順序の改変1件と、検証後の更新削除／識別情報／接続先改変3件の実反例を拒否し、正規復元を保持しています。一般証明は190 module・19178宣言・115偽命題対照を監査済みです。最新Oracle23項目を照合中で、進行中返信の保持、存在しないsource因果参照、根拠のないallocator前進、起動全体の容量と全経路対応が残ります。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、実更新値の読出し・因果参照、元返信・FIFO、結果枠、対象生存状態・拒否記録を検査しました。修正版のdefault全674件が成功し、skipはありません。後続2検査では正当な無関係拒否記録の追加と、書込み後に失われた同じ報告の回収から読出しを再開する経路が成功しました（後続全676件は未実行）。一般証明は190module・19375宣言・132偽命題対照を監査済みです。Oracle最新22項目を照合し、共有資源の予約・全caller対応・実M9後継を継続中です。C未完了・D未着手、D完了後に停止します。
 
 現在の直接consumerは、元要求の未実行キューと実失敗を保持する継続、搬送・返信の各確定点、全entry/資源の閉鎖です。成功後の同一要求回収とobserver索引に依存しない受理は参照検査済みですが、本番採用前にcurrent Bank.tick受理・M8直接entry・SYS4/FIFO/局所経路・private image/restore・patchの条件をそろえます。一般Lean結果の回収規則は物理故障対応そのものの証明ではありません。
 
@@ -86,7 +86,7 @@ Use the persistent external workroot in RESUME. Never rerun one-shot evidence la
 
 W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。最新指示ではD完了時にgoalをpauseして止め、Eへは進みません。最新owner指示に従って同じW4作業を継続します。goal tool表示はpausedのままですが、主担当toolからresumeはできないため重複goalを作りません。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回23:45 UTCのセッションtelemetryは週間使用0%・残り100%でした。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回00:45 UTCのセッションtelemetryは週間使用3%・残り97%でした。次の確認は01:45:48 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 ## non-promoted references
 

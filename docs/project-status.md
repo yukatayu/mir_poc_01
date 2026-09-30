@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-30 09:03 JST
+最終更新: 2026-09-30 10:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -48,19 +48,19 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 
 今回の別依頼は task-local proof-first LAB 研究と理論gate後の限定実装。
 W2の有限な研究成果は検証・review・Git統合済みで保持しています。
-2026-09-14のowner依頼により、単一goalをW4実分散対応（PL1/PL2/PL0 S4/S6、theory/refinement先行）へ設定しました。W3の有限候補を保持し、W4完了で停止します。
+2026-09-14のowner依頼により、単一goalをW4実分散対応（PL1/PL2/PL0 S4/S6、theory/refinement先行）へ設定しました。W3の有限候補を保持し、現在のowner指定に従いW4-D完了で停止します。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
 W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と115反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と132反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限と依存を保つ未採用参照で、同じ構成への2回のchecked patch後に実S→E→C計算・消費11→12→13、元代入の2回の起動200→190→191→181→182を検査しました。最新runtime library全653検査が成功し、skipはありません。通常の復号値を実行可能値から型で分離し、独立した期待値に対する全image・準備済み更新の位置／有無・全admissionを昇格直前にも照合します。provider内部復元も完全な期待componentと実nonceを要求する候補を検査しました。処理順序の改変1件と、検証後の更新削除／識別情報／接続先改変3件の実反例を拒否し、正規復元を保持しています。一般証明は190 module・19178宣言・115偽命題対照を監査済みです。最新Oracle23項目を照合中で、進行中返信の保持、存在しないsource因果参照、根拠のないallocator前進、起動全体の容量と全経路対応が残ります。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、実更新値の読出し・因果参照、元返信・FIFO、結果枠、対象生存状態・拒否記録を検査しました。修正版のdefault全674件が成功し、skipはありません。後続2検査では正当な無関係拒否記録の追加と、書込み後に失われた同じ報告の回収から読出しを再開する経路が成功しました（後続全676件は未実行）。一般証明は190module・19375宣言・132偽命題対照を監査済みです。Oracle最新22項目を照合し、共有資源の予約・全caller対応・実M9後継を継続中です。C未完了・D未着手、D完了後に停止します。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回23:45 UTCのセッションtelemetryは週間使用0%・残り100%でした。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回00:45 UTCのセッションtelemetryは週間使用3%・残り97%でした。次の確認は01:45:48 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。

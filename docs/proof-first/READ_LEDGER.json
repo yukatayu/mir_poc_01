@@ -50329,5 +50329,33 @@
     "status": "full-read",
     "role": "authored/read wholeimage composition contract",
     "at": "2026-09-29T23:56:31.277725+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-continuation-footprint-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "483c66e8328686840f87a2376544d6c50de015f9b6e52db4f28143ede1a1ab68",
+    "status": "full-read",
+    "role": "sole-main authored/read countedallocator/resultslots/carrierframe definitions/proofs/controls; kernel checked exact full changed modules",
+    "at": "2026-09-30T00:20:31.285260+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-continuation-footprint-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "ded41a67e42744596d569209b0d13fa5fbd03786db4bdca16da11f98931a66e3",
+    "status": "full-read",
+    "role": "sole-main authored/read countedallocator/resultslots/carrierframe definitions/proofs/controls; kernel checked exact full changed modules",
+    "at": "2026-09-30T00:20:31.285260+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-read-origin-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "45caee2e89b43ef3e5d8c80c9c117ede5a830b7264fa68abceece937c205b348",
+    "status": "full-read",
+    "role": "sole-main authored/read full appended ReadOrigin proof/control module and audited final source",
+    "at": "2026-09-30T00:49:42.164362+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-read-origin-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "43150f6fe1e200324fbff051dc62e75c972570f6605284cbfd0f178351ee067c",
+    "status": "full-read",
+    "role": "sole-main authored/read full appended ReadOrigin proof/control module and audited final source",
+    "at": "2026-09-30T00:49:42.164362+00:00"
   }
 ]

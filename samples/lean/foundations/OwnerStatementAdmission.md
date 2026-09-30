@@ -878,7 +878,89 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseTraceAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
                              'open MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
                              'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator\n'
-                             '#guard !(extensionCheck original (append original 30))\n'}
+                             '#guard !(extensionCheck original (append original 30))\n',
+ 'FalseCarrierAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                               'open MirroreaProofFirst.OwnerStatementOriginalEntry.CarrierFrame '
+                               'MirroreaProofFirst.OwnerStatementOriginalEntryControls.CarrierFrame\n'
+                               '#guard !(check original before unrelated)\n',
+ 'FalseCarrierLostReply.lean': 'import OwnerStatementOriginalEntryControls\n'
+                               'open MirroreaProofFirst.OwnerStatementOriginalEntry.CarrierFrame '
+                               'MirroreaProofFirst.OwnerStatementOriginalEntryControls.CarrierFrame\n'
+                               '#guard check original before lostReply\n',
+ 'FalseCarrierSkippedHead.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry.CarrierFrame '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls.CarrierFrame\n'
+                                 '#guard check original before skippedHead\n',
+ 'FalseResultSlotsAcceptBeforeRecord.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                            'open '
+                                            'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                            'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                            '#guard (accept begun).isSome\n',
+ 'FalseResultSlotsAgainShort.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                    'open '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                    '#guard (again 3 complete).isSome\n',
+ 'FalseResultSlotsAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                   'open '
+                                   'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                   'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                   '#guard (again 4 complete).isNone\n',
+ 'FalseResultSlotsInitialShort.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                      'open '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                      '#guard (prepare 1 [0,1] ([] : List Nat)).isSome\n',
+ 'FalseResultSlotsReactivateBeforeAck.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                             'open '
+                                             'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                             '#guard (again 4 beforeFinalAck).isSome\n',
+ 'FalseResultSlotsRepublishHeld.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                       'open '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ResultSlots\n'
+                                       '#guard (publish recorded 99).isSome\n',
+ 'FalseTraceUnexplainedForward.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                      'open '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls.CountedTrace\n'
+                                      '#guard countedCheck original jumped\n',
+ 'FalseReadOriginAbsentEvent.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                    'open '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                    'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                    '#guard project (fun _ => false) (fun n => n == 2) [3] = [2]\n',
+ 'FalseReadOriginAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                  '#guard bindRead 1 history 20 = none\n',
+ 'FalseReadOriginFalseFifo.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                  '#guard project (fun _ => false) (fun n => n == 2) [2,3] = '
+                                  '[2,3]\n',
+ 'FalseReadOriginInventedOrigin.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                       'open '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                       'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                       '#guard bindRead 9 history 20 = some 2\n',
+ 'FalseReadOriginLostCrossLane.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                      'open '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                      'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                      '#guard project (fun _ => false) (fun n => n == 2) [2,3] = '
+                                      '[]\n',
+ 'FalseReadOriginOldSameValue.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                     'open '
+                                     'MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                     'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                     '#guard bindRead 1 history 10 = some 1\n',
+ 'FalseReadOriginWrongKey.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                 'open MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
+                                 'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
+                                 '#guard bindRead 1 history 20 = some 3\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1525,3 +1607,96 @@ qualified false controls in126 commands. The first two proof errors54881 were
 excluded; corrected module91409 and the full audit passed. No authored holes or
 Mir axioms; the new lemmas use standard propext/Quot.sound. This is not another
 fresh full190 rebuild, nor C completion.
+
+## Continuation footprint and result capacity (forward LAB)
+
+The prior `TraceAllocator.Extension` establishes freshness; it does not justify
+an allocator jump or reserve a pending continuation. `CountedExtension` now
+requires counter advance to equal actual raw-row growth. `countedCheck_exact`
+connects that checker to the independent relation; actual append, transitive
+extension and unchanged-row headroom preservation are checked generally.
+Other allocators and actual row producers remain distinct obligations.
+
+`ResultSlots` derives required storage from the original manifest and actual
+retained result lists. `prepare_exact` equates executable preparation with an
+independent existence of sufficient remaining slots. Held attempts whose result
+has not been recorded remain owed a slot. Recording the result keeps the
+invocation held; source acknowledgment is a separate transition. Preparation,
+begin, publication, acknowledgment and deliberate reactivation preserve the
+capacity invariant. A still-unacknowledged final result cannot reactivate.
+This reserves result storage only, not multi-owner atomicity, authority, wire
+capacity, successful evaluation or eventual delivery.
+
+`CarrierFrame` preserves the full original request's outgoing message sequence
+and the incoming FIFO prefix through its last original message. The executable
+checker is equivalent to a positional declarative relation; original pending
+replies cannot disappear and an original incoming carrier retains its actual
+FIFO head, including an unrelated preceding message. Unrelated suffix appends
+are accepted. Physical exact envelope/receipt association, Rust iterator and
+copy behavior and all publication producers remain refinement obligations.
+The actual reference separately preserves completed receipts and old endpoint
+and quarantine history while permitting unrelated new facts.
+
+Actual three candidate mutants (lost reply, fabricated reserved source-consume
+predecessor, cursor-only jump) failed before correction and passed after it;
+258 selected checks retained the real relation and checked-patch positives.
+Result-capacity initial/reactivation mutants failed on ST and OW1; the corrected
+reference checks the full original manifest before bootstrap and reactivation.
+Two older tests that intentionally began with known-short capacity now assert
+refusal before every body; their earlier frozen source/log evidence is kept.
+The combined reference passed all660 runtime-library tests, without skips.
+No new network, recovery, release, production or full C closure is claimed.
+
+Audit82677 rebuilt the ten changed/dependent modules on pinned earlier fresh190
+artifacts and checked all190 modules/19297 owned declarations with125 qualified
+false controls in136 commands. FOURTH77817 compiled the final carrier proof;
+one unused simp argument was removed before the whole audit. Earlier standalone
+FIRST/SECOND/THIRD also passed; SECOND's resource abstraction was refined to
+retain separate held-result acknowledgment in THIRD. No authored holes or Mir
+axioms. New dependencies are the standard propext/Classical.choice/Quot.sound.
+
+## Actual write-to-read origin (forward LAB)
+
+`ReadOrigin.Latest` independently states the newest actual committed write for
+an exact owner/session-scoped state key. `select_exact` proves executable
+selection sound and relatively complete; replay supplies its current value.
+`bind_exact` checks the newest value, never searches backward for an older
+matching value. Unrelated keys remain independent; initial values are not
+relabeled as owner writes. Explicit value-origin edges survive projection across
+physical execution lanes while unrelated worker FIFO edges do not. General
+proofs quantify over arbitrary histories and keys; authentic lower write history,
+exclusive read/commit coherence and real ID qualification remain physical duties.
+
+A checked source really writes self.hp100→90 and reads it at E, evaluating and
+consuming91 before source acknowledgment; the next original statement reaches91.
+The value works under ST and OW1. Actual countercheck v2 fails only OW1 causal
+reachability from the real M8 write; v1 incorrectly targeted a diagnostic alias
+and is not evidence of missing M8 causality. The corrected reference selects the
+actual lower write row by exact key, requires its current value and original
+projected occurrence, records read_from on the real M8 read, and retains/rekeys
+that edge. Six targeted checks pass, including unchanged self.hp when a distinct
+target key is written and no unrelated OW1 FIFO dependence. Full regression and
+all new caller/projection boundaries remain pending; this is unadopted reference.
+
+Audit69764:190modules19375owned132qualified false controls143commands, ten changed
+or dependent modules rebuilt against pinned prior fresh190 artifacts. Standard
+logic axioms only; no authored holes or Mir axioms. The seven new controls reject
+old-value substitution, wrong key, invented origin, all-refusal, lost cross-lane
+edge, spurious FIFO and absent-event synthesis.
+
+A daemon restart interrupted the earlier read-origin-green-v1 runner after its
+4passed log but before exit/restoration receipts. Exact matching15temporaryRust
+were recovered to verified HEAD; that command's exit is unknown and is not counted.
+The successor v2 six checks have a real exit0 and restoration receipt. Oracle
+mir-w4-frame-r1 completed the original submission despite losing its outer Python
+waiter; final session metadata and answer were recovered without resend. Its
+22 dispositions keep new presence/terminal/unwind and remaining caller/resource
+conditions open. Submission metadata verifies6Pro; later UI selection differs.
+
+The initial new proof runner retained its predecessor's workdir and exited before
+Lean because FIRST.log existed. It had already overwritten the old FIRST.lean
+backup; FIRST.log/FIRST.json and the final125-control kernel audit remain intact.
+The mismatch is recorded in read-origin-theory-v1/EVIDENCE_WRITER_FAILURE.json.
+That old backup is not relied on as pinned evidence. The corrected runner checks
+all output paths before writing and the new143-command audit is independently
+hashed. This is a forward evidence correction, not a rewritten past success.

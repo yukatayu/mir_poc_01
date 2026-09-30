@@ -52276,5 +52276,227 @@
     "recipe_negative": 115,
     "read_ledger_prefix_preserved": true,
     "rust_restored": true
+  },
+  "c_continuation_footprint_theory_20260930": {
+    "at": "2026-09-30T00:20:31.285260+00:00",
+    "audit_tool": 82677,
+    "exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-continuation-footprint-v1/RESULT.json",
+    "sha256": "f199490ebf603bab3f9d0e765840d0c3a5dc262cce5ebd5e7e42ed9963d72afd",
+    "modules": 190,
+    "owned": 19297,
+    "qualified_false": 125,
+    "commands": 136,
+    "scope": "General counted raw trace increments, whole-original-manifest retained result reservation across begin/publication/accept/reactivation, original outgoing reply preservation and incoming FIFO barrier with unrelated suffix progress. Decoded origin/general original-entry proofs retained. All actual caller/producer/profile/allocator costs/M9 successor and distributed refinement remain separate. Changed dependency cone rebuilt over pinned earlier fresh190;125 qualified false controls, not a new full fresh190 rebuild."
+  },
+  "c_continuation_footprint_reference_20260930": {
+    "at": "2026-09-30T00:20:31.285260+00:00",
+    "runs": [
+      {
+        "version": "continuation-footprint-red-v1",
+        "suffix": "-check",
+        "tool": 15171,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/continuation-footprint-red-v1-check/RESULT.json",
+        "sha256": "68f2615100548725f0f68b24d9de5a1cb7d76524102f33785cb1c8dd2bd6f3ec",
+        "log_sha256": "1278c68c08a9ad8aec3e73488f94a3bafca2089d2c50c44bd1ffd570f68e46aa"
+      },
+      {
+        "version": "continuation-footprint-green-v1",
+        "suffix": "-check",
+        "tool": 53460,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/continuation-footprint-green-v1-check/RESULT.json",
+        "sha256": "b7a41d84c3ed4f39c4de6ed6ed2e2c911ac0f84f581cbae62abf7189a729bfdd",
+        "log_sha256": "aa954f5e45563d533850c02df205e959062d1d9adc03837771c0c5719a787b80"
+      },
+      {
+        "version": "continuation-footprint-green-v1",
+        "suffix": "-selected-check",
+        "tool": 77283,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/continuation-footprint-green-v1-selected-check/RESULT.json",
+        "sha256": "0d12d197213a7329f700662ea85395fe0527e4f3b3cb9c2557fb820afd70e6f5",
+        "log_sha256": "347f223c52dd60b386aaeee82014efebb6ebcd1da1bea03bba5edb2d0befe0cd"
+      },
+      {
+        "version": "activation-capacity-red-v1",
+        "suffix": "-check",
+        "tool": 91242,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/activation-capacity-red-v1-check/RESULT.json",
+        "sha256": "be0649c33111251e8a5dae0c2265c6f8d0cb0dba81364e71fd38df9af41851b7",
+        "log_sha256": "be38eab04131e69db0149114ea8ab8fbdae7f356fefc938e051ced5ff44f2d37"
+      },
+      {
+        "version": "activation-capacity-green-v1",
+        "suffix": "-check",
+        "tool": 37119,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/activation-capacity-green-v1-check/RESULT.json",
+        "sha256": "d9bfc73b1e048d1f58dacfb372cf3f44b8e4aef05c299ac7948e3d416689208e",
+        "log_sha256": "b8fbcdfe487a87268c0fd4fadbf02df67bc09a3324e88c9831d6c6ff6afb51c6"
+      },
+      {
+        "version": "activation-capacity-green-v1",
+        "suffix": "-full-check",
+        "tool": 89233,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/activation-capacity-green-v1-full-check/RESULT.json",
+        "sha256": "a511acd7e82156c53b80c2a1d1c0735c42fd34c466e81e2b6eee103e228f121e",
+        "log_sha256": "2197b3617466de78b9c396570b602d23a137be3eed9826129382a1f11534d8f0"
+      }
+    ],
+    "full_passed": 660,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "scope": "Unadopted external15Rust. 3candidate and4whole-activation actualREDs corrected, prior selected258 and finalfull660 positive. Result slots only; remaining allocators, field/producer/caller closure and original/current authority separate. No production/network/recovery evidence.",
+    "pre_execution_runner_error": "Selected runner first rejected existing outputdir before mutation; old evidence untouched; successor uses unique-selected-check directory."
+  },
+  "c_read_origin_theory_20260930": {
+    "at": "2026-09-30T00:49:42.164362+00:00",
+    "tool": 69764,
+    "exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-read-origin-v1/RESULT.json",
+    "sha256": "dc14f236dd5d293aee9f5c91312e7299e996314fa6967386e77160f487ad5769",
+    "modules": 190,
+    "owned": 19375,
+    "qualified_false": 132,
+    "commands": 143,
+    "scope": "General newest exact-key actual write selection sound/complete against independent Latest, coherent replay value, no older same-value substitution, no invented events, explicit cross-lane read-from preserved while unrelated physical FIFO filtered. Counted increments/result slots/carrier frame proofs retained. Decoded origin/general original-entry proofs retained. All actual caller/producer/profile/allocator costs/M9 successor and distributed refinement remain separate. Changed dependency cone rebuilt over pinned earlier fresh190;132 qualified false controls, not a new full fresh190 rebuild."
+  },
+  "c_read_origin_reference_20260930": {
+    "at": "2026-09-30T00:49:42.164362+00:00",
+    "runs": [
+      {
+        "version": "snapshot-unwind-green-v1",
+        "suffix": "-feature-full-check",
+        "tool": 39439,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/snapshot-unwind-green-v1-feature-full-check/RESULT.json",
+        "sha256": "67bc65ac07aa4d5f693222eed1a11d31b65e2744244598b1078d8d8446ab4cb5",
+        "log_sha256": "1533d5bcb70b0bce60efaeaa025c9f13a4656ec3ff388c7f24d65fd96e87d8b3"
+      },
+      {
+        "version": "owned-input-countercheck-v1",
+        "suffix": "-check",
+        "tool": 87221,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/owned-input-countercheck-v1-check/RESULT.json",
+        "sha256": "620126b69059ad603741aef0a0faafcfe7675fd2bf177b35753969ad64c6434b",
+        "log_sha256": "a5bebf8a99b615df271e83d95845329e167491646680cd2daa4a021d91f3e861"
+      },
+      {
+        "version": "owned-input-countercheck-v2",
+        "suffix": "-check",
+        "tool": 5091,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/owned-input-countercheck-v2-check/RESULT.json",
+        "sha256": "f92558feb8c9c8e51f6c5638629ad59580eeef401cb2a596d2fe9c7889247bb9",
+        "log_sha256": "c07dc4f79d95e1f4850cda07b03d3a8a97e85b2c6f56286a698f45580a83314a"
+      },
+      {
+        "version": "read-origin-green-v2",
+        "suffix": "-check",
+        "tool": 76870,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/read-origin-green-v2-check/RESULT.json",
+        "sha256": "a8c0b131437ad969277c5702b04a5139c83d4e342217883545e85891a931711b",
+        "log_sha256": "c49bbe5725e91c6fcd5e81a5963b7dc39edc5c594d6a1ba90acc29a9ac706182"
+      }
+    ],
+    "scope": "Owned read actual value and M8 provenance; v1 alias predicate corrected in v2; v2 3passed1failed OW1 actual edge, corrected6passed. Prior674 featurefull is earlier unwind cut, not new read origin full validation. Temporary15Rust restored per completed runner; current independent tests may overlay later frozen reference.",
+    "daemon_recovery": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/read-origin-green-v1-check/INTERRUPTION_RECOVERY.json",
+      "sha256": "dff2b6509a26012f2595981e154a5bfaf7726c63e5d002c128e09fbf06b18209"
+    },
+    "evidence_writer_failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/read-origin-theory-v1/EVIDENCE_WRITER_FAILURE.json",
+      "sha256": "cc58b715a1fd19c52a06528901f114b9086266122ada35296590291c36a9df85"
+    },
+    "oracle_final": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-continuation-frame/RECOVERY_FINAL.json",
+      "sha256": "339c257953d5914cd7ae1ef8260664694b6342edd85fa8b946a03f45bf1b2c18"
+    },
+    "oracle_dispositions": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-continuation-frame/DISPOSITIONS.json",
+      "sha256": "0477c7aaecdc28b35dcd467e383898b9b0023fe887b682cfd526dc6725c77c22"
+    },
+    "cleanup": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-cleanup-20260930T003949Z/RESULT.json",
+      "sha256": "879844b20b76e6bebd49da2d5da567dd986bae7a2dccda00320c31b1eca5e7b6"
+    },
+    "weekly_quota": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20260930T004548Z.json",
+      "sha256": "ba89334f8d17b068aa4ea7ceae9cba05f3a97de863b5f03cd607b096e744e8cd"
+    }
+  },
+  "c_presence_terminal_mixed_20260930": {
+    "at": "2026-09-30T01:01:19.302605+00:00",
+    "runs": [
+      {
+        "version": "mixed-source-checks-v1",
+        "suffix": "-check",
+        "tool": 34779,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/mixed-source-checks-v1-check/RESULT.json",
+        "sha256": "62a672c641f811d0820f787a84b97b92406371d417c093a71b777766e6d43334",
+        "log_sha256": "133a0943226e249aba2826faabd95466b426f26adc966b59bb2bcd71ecea1abd"
+      },
+      {
+        "version": "mixed-source-checks-v2",
+        "suffix": "-check",
+        "tool": 67209,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/mixed-source-checks-v2-check/RESULT.json",
+        "sha256": "fda35fcdef7fee64b8d65f1586e2b8cf01d566d065d9d5034e2d535a11652ff9",
+        "log_sha256": "0658fea576c2336cdb9ed9eee9b5c723952582a6efac51b8c42259b849b3b76c"
+      },
+      {
+        "version": "presence-terminal-red-v1",
+        "suffix": "-check",
+        "tool": 42936,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/presence-terminal-red-v1-check/RESULT.json",
+        "sha256": "93f1f1aa58077dfb9fe0d8b04f79569c55fab1542c4b3bde481467c3e629d1b5",
+        "log_sha256": "2e8446c67b02aa119da786f167ba3f7aa98371c3249921336eb1d6659c0d0c1c"
+      },
+      {
+        "version": "presence-terminal-green-v1",
+        "suffix": "-check",
+        "tool": 48649,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/presence-terminal-green-v1-check/RESULT.json",
+        "sha256": "7620466cfa3a578f335f07a9ebc664113fbdeab52a99462342b15b6a860c582d",
+        "log_sha256": "ce057b175a659fbfa7956902d816eb64930f9172bd2139076d164f3223ae3142"
+      },
+      {
+        "version": "mixed-source-checks-v2",
+        "suffix": "-full-check",
+        "tool": 25965,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/mixed-source-checks-v2-full-check/RESULT.json",
+        "sha256": "c70d376b1888d6c83ce7f8625112d71e645ce930959480c679d98ea41dd10bb5",
+        "log_sha256": "e5dce32171f9ddc5772dcff2698da5f9c9fc56bb38ed8422bd122071a885545e"
+      }
+    ],
+    "full_default_passed": 674,
+    "full_default_failed": 0,
+    "full_default_ignored": 0,
+    "scope": "N1 actual target presence-only mutation changes next original enqueue, N2 adds false original terminal evidence while actual delivery still succeeds. Corrected same-authority frame preserves registry and selected terminal lookup including None; general existing DependencyFrame query equality applies after independently identifying these guards. No network producer/exploit claim. Mixed v1 had invalid test expectations (wrong chosen fault; ignored legitimate foreign stale-publication refusals), v2 correct finite actual scheduler/counterchecks pass4ST/OW1. Last combined default full674119.99s; distinct from earlier unwind feature674125.97s. All15Rust restored. Authoritative caller/resources/current M9 closure still pending."
+  },
+  "c_frame_positive_20260930": {
+    "at": "2026-09-30T01:07:38.775968+00:00",
+    "result": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/frame-positives-v1-check/RESULT.json",
+      "sha256": "cd35b63d0f3324ec6a472b1738a9da8a52e67741a6b64d00c679367332ab0aed"
+    },
+    "restored": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/frame-positives-v1-check/RESTORED.json",
+      "sha256": "9f9d4f265200fce691a105729bcf879d7d5ce1feafd9c6464f57ceb0e0032573"
+    },
+    "tool": 42476,
+    "passed": 2,
+    "scope": "Actual unrelated cache-fault terminal append remains publishable; original two bodies finish91. ST lower postcommit report loss leaves actual90, missing local writer projection refuses read, same report recovery allows actual read/evaluate/consume91 before original ack, no body retry. Successor676 full not run; predecessor mixed default674 passed."
   }
 }

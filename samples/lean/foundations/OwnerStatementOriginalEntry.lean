@@ -659,3 +659,461 @@ theorem steps_valid (valid : Valid initial) (path : Steps initial current) : Val
 #print axioms old_lookup_preserved
 #print axioms steps_valid
 end MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator
+variable {α : Type}
+-- This allocator has no detached reservations: one appended raw row consumes
+-- one counter unit. Count balance is necessary, not occurrence authenticity.
+def CountedExtension (before after : Trace α) : Prop :=
+ Extension before after ∧ after.next + before.rows.length = before.next + after.rows.length
+
+def countedCheck [DecidableEq α] (before after : Trace α) : Bool :=
+ extensionCheck before after &&
+ decide (after.next + before.rows.length = before.next + after.rows.length)
+
+theorem countedCheck_exact [DecidableEq α] (before after : Trace α) :
+ countedCheck before after = true ↔ CountedExtension before after := by
+ simp [countedCheck,CountedExtension,extensionCheck_exact]
+
+theorem append_counted (t : Trace α) (payload : α) (valid : Valid t) :
+ CountedExtension t (append t payload) := by
+ refine ⟨append_extension t payload valid, ?_⟩
+ simp only [append,List.length_append,List.length_cons,List.length_nil]
+ omega
+
+theorem unchanged_rows_no_advance (before after : Trace α)
+ (extension : CountedExtension before after) (rows : after.rows = before.rows) :
+ after.next = before.next := by
+ have balance := extension.2
+ rw [rows] at balance
+ omega
+
+theorem counted_transitive (first middle last : Trace α)
+ (left : CountedExtension first middle) (right : CountedExtension middle last) :
+ CountedExtension first last := by
+ rcases left with ⟨⟨⟨a,rowsA⟩,cursorA,validA⟩,balanceA⟩
+ rcases right with ⟨⟨⟨b,rowsB⟩,cursorB,validB⟩,balanceB⟩
+ refine ⟨⟨⟨a++b, ?_⟩,Nat.le_trans cursorA cursorB,validB⟩, ?_⟩
+ · rw [rowsB,rowsA,List.append_assoc]
+ · omega
+
+-- Under a known row cost, no fabricated cursor-only publication can consume
+-- the original headroom. Actual added rows remain charged and may consume it;
+-- reservation of a pending operation is a separate resource obligation.
+theorem unchanged_headroom (before after : Trace α) (cost limit : Nat)
+ (extension : CountedExtension before after) (rows : after.rows = before.rows) :
+ after.next + cost ≤ limit ↔ before.next + cost ≤ limit := by
+ rw [unchanged_rows_no_advance before after extension rows]
+
+#print axioms countedCheck_exact
+#print axioms append_counted
+#print axioms unchanged_rows_no_advance
+#print axioms counted_transitive
+#print axioms unchanged_headroom
+end MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots
+variable {α β : Type}
+-- Width is derived from the original manifest, not an independently supplied
+-- promise. A held actual attempt whose outer result has not been recorded is
+-- still owed a slot. Accepting an already recorded result consumes no new slot.
+structure State (α β : Type) where
+ manifest : List α
+ prior : List β
+ current : List β
+ held : Bool
+ accepted : Nat
+
+def Owed (s : State α β) : Nat := (s.manifest.drop s.current.length).length
+def Valid (capacity : Nat) (s : State α β) : Prop :=
+ s.current.length ≤ s.manifest.length ∧
+ (s.prior ++ s.current).length + Owed s ≤ capacity
+
+def Ready (capacity : Nat) (manifest : List α) (retained : List β) : Prop :=
+ ∃ room : Nat, retained.length + room = capacity ∧ manifest.length ≤ room
+
+def prepare (capacity : Nat) (manifest : List α) (retained : List β) : Option (State α β) :=
+ if retained.length + manifest.length ≤ capacity then
+ some ⟨manifest,retained,[],false,0⟩ else none
+
+def Prepared (capacity : Nat) (manifest : List α) (retained : List β) (s : State α β) : Prop :=
+ Ready capacity manifest retained ∧ s = ⟨manifest,retained,[],false,0⟩
+
+theorem room_exact (capacity : Nat) (manifest : List α) (retained : List β) :
+ retained.length + manifest.length ≤ capacity ↔ Ready capacity manifest retained := by
+ constructor
+ · intro room
+   exact ⟨capacity-retained.length,by omega,by omega⟩
+ · rintro ⟨room,balance,enough⟩;omega
+
+theorem prepare_exact (capacity : Nat) (manifest : List α) (retained : List β) (s : State α β) :
+ prepare capacity manifest retained = some s ↔ Prepared capacity manifest retained s := by
+ unfold prepare Prepared
+ split
+ · rename_i room
+   have ready := (room_exact capacity manifest retained).mp room
+   simp [ready,eq_comm]
+ · rename_i lack
+   have bad : ¬ Ready capacity manifest retained := by
+    intro ready;exact lack ((room_exact capacity manifest retained).mpr ready)
+   simp [bad]
+
+theorem valid_iff (capacity : Nat) (s : State α β) :
+ Valid capacity s ↔ s.current.length ≤ s.manifest.length ∧
+ s.prior.length+s.manifest.length ≤ capacity := by
+ simp only [Valid,Owed,List.length_append,List.length_drop]
+ omega
+
+theorem prepared_valid (capacity : Nat) (manifest : List α) (retained : List β) (s : State α β)
+ (run : prepare capacity manifest retained = some s) : Valid capacity s := by
+ obtain ⟨ready,rfl⟩ := (prepare_exact capacity manifest retained s).mp run
+ rw [valid_iff]
+ exact ⟨by simp, (room_exact capacity manifest retained).mpr ready⟩
+
+def begin (s : State α β) : Option (State α β) :=
+ if !s.held && s.current.length == s.accepted && s.current.length < s.manifest.length then some {s with held:=true} else none
+
+def publish (s : State α β) (result : β) : Option (State α β) :=
+ if s.held && s.current.length == s.accepted && s.current.length < s.manifest.length then
+ some {s with current:=s.current++[result]} else none
+
+theorem begin_preserves (capacity : Nat) (s next : State α β)
+ (valid : Valid capacity s) (run : begin s = some next) :
+ Valid capacity next ∧ Owed next = Owed s := by
+ unfold begin at run
+ split at run
+ · cases Option.some.inj run
+   exact ⟨valid,rfl⟩
+ · simp at run
+
+theorem publish_preserves (capacity : Nat) (s next : State α β) (result : β)
+ (valid : Valid capacity s) (run : publish s result = some next) :
+ Valid capacity next ∧ Owed next+1 = Owed s := by
+ unfold publish at run
+ split at run
+ · rename_i ready
+   cases Option.some.inj run
+   have bound := (valid_iff capacity s).mp valid
+   simp only [Bool.and_eq_true,decide_eq_true_eq] at ready
+   constructor
+   · rw [valid_iff]
+     simp only [List.length_append,List.length_cons,List.length_nil]
+     exact ⟨by omega,bound.2⟩
+   · simp only [Owed,List.length_drop,List.length_append,List.length_cons,List.length_nil]
+     omega
+ · simp at run
+
+theorem held_result_has_room (capacity : Nat) (s : State α β)
+ (valid : Valid capacity s) (pending : s.current.length < s.manifest.length) :
+ (s.prior++s.current).length < capacity := by
+ have bound := (valid_iff capacity s).mp valid
+ simp only [List.length_append]
+ omega
+
+
+-- Recording a result is distinct from accepting its source completion. The
+-- same held invocation stays held until that separate acknowledgment succeeds.
+def accept (s : State α β) : Option (State α β) :=
+ if s.held && s.current.length == s.accepted+1 then
+ some {s with held:=false,accepted:=s.accepted+1} else none
+
+theorem accept_preserves (capacity : Nat) (s next : State α β)
+ (valid : Valid capacity s) (run : accept s = some next) :
+ Valid capacity next ∧ Owed next = Owed s := by
+ unfold accept at run
+ split at run
+ · cases Option.some.inj run
+   exact ⟨valid,rfl⟩
+ · simp at run
+
+-- Deliberate reactivation uses the actual retained results of the completed
+-- invocation and the original manifest; it is not a retry or history reset.
+def again (capacity : Nat) (s : State α β) : Option (State α β) :=
+ if !s.held && s.accepted == s.manifest.length && s.current.length == s.manifest.length then
+ prepare capacity s.manifest (s.prior++s.current) else none
+
+theorem again_preserves (capacity : Nat) (s next : State α β)
+ (run : again capacity s = some next) :
+ Valid capacity next ∧ next.prior=s.prior++s.current ∧ next.manifest=s.manifest := by
+ unfold again at run
+ split at run
+ · have valid := prepared_valid capacity s.manifest (s.prior++s.current) next run
+   obtain ⟨_,same⟩ := (prepare_exact capacity s.manifest (s.prior++s.current) next).mp run
+   exact ⟨valid,by rw [same],by rw [same]⟩
+ · simp at run
+
+#print axioms room_exact
+#print axioms prepare_exact
+#print axioms valid_iff
+#print axioms prepared_valid
+#print axioms begin_preserves
+#print axioms publish_preserves
+#print axioms held_result_has_room
+#print axioms accept_preserves
+#print axioms again_preserves
+end MirroreaProofFirst.OwnerStatementOriginalEntry.ResultSlots
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.CarrierFrame
+variable {α : Type}
+-- Outbound movement selects envelopes; inbound service is FIFO. Preserve the
+-- entire prefix through the last original-request message, not all unrelated
+-- traffic and not only a filtered inbox that could silently skip its head.
+def barrier (original : α → Bool) : List α → List α
+ | [] => []
+ | x::xs => if xs.any original then x::barrier original xs else if original x then [x] else []
+
+theorem barrier_empty (original : α → Bool) (xs : List α) :
+ barrier original xs = [] ↔ xs.any original = false := by
+ induction xs with
+ | nil => simp [barrier]
+ | cons x xs ih =>
+   cases tail : xs.any original <;> cases head : original x <;>
+    simp [barrier,List.any_cons,tail,head]
+
+theorem barrier_head (original : α → Bool) (xs : List α)
+ (present : xs.any original = true) :
+ (barrier original xs).head? = xs.head? := by
+ cases xs with
+ | nil => simp at present
+ | cons x xs =>
+   simp only [barrier,List.head?_cons]
+   split
+   · rfl
+   · rename_i absent
+     have head : original x = true := by simpa [absent] using present
+     simp [head]
+
+theorem irrelevant_filter (original : α → Bool) (xs : List α)
+ (absent : xs.any original = false) : xs.filter original = [] := by
+ induction xs with
+ | nil => rfl
+ | cons x xs ih =>
+   simp only [List.any_cons,Bool.or_eq_false_iff] at absent
+   simp [absent.1,ih absent.2]
+
+theorem barrier_append_irrelevant (original : α → Bool) (xs extra : List α)
+ (absent : extra.any original = false) :
+ barrier original (xs++extra) = barrier original xs := by
+ induction xs with
+ | nil => simpa using (barrier_empty original extra).mpr absent
+ | cons x xs ih =>
+   simp only [List.cons_append,barrier,List.any_append,absent,Bool.or_false,ih]
+
+structure Queues (α : Type) where
+ outgoing : List α
+ incoming : List α
+ deriving DecidableEq
+
+def Preserves (original : α → Bool) (before after : Queues α) : Prop :=
+ (∀ i : Nat, (before.outgoing.filter original)[i]? = (after.outgoing.filter original)[i]?) ∧
+ barrier original before.incoming = barrier original after.incoming
+
+def check [DecidableEq α] (original : α → Bool) (before after : Queues α) : Bool :=
+ decide (before.outgoing.filter original = after.outgoing.filter original) &&
+ decide (barrier original before.incoming = barrier original after.incoming)
+
+theorem check_exact [DecidableEq α] (original : α → Bool) (before after : Queues α) :
+ check original before after = true ↔ Preserves original before after := by
+ simp only [check,Bool.and_eq_true,decide_eq_true_eq,Preserves]
+ constructor
+ · rintro ⟨outbound,inbound⟩
+   exact ⟨fun i => congrArg (fun xs : List α => xs[i]?) outbound,inbound⟩
+ · rintro ⟨outbound,inbound⟩
+   exact ⟨List.ext_getElem? outbound,inbound⟩
+
+theorem original_reply_retained (original : α → Bool) (before after : Queues α)
+ (frame : Preserves original before after) (message : α)
+ (pending : message ∈ before.outgoing) (owned : original message = true) :
+ message ∈ after.outgoing := by
+ have kept : message ∈ before.outgoing.filter original := List.mem_filter.mpr ⟨pending,owned⟩
+ rw [List.ext_getElem? frame.1] at kept
+ exact (List.mem_filter.mp kept).1
+
+theorem original_fifo_head_preserved (original : α → Bool) (before after : Queues α)
+ (frame : Preserves original before after) (present : before.incoming.any original = true) :
+ after.incoming.head? = before.incoming.head? := by
+ have remains : after.incoming.any original = true := by
+  cases h : after.incoming.any original with
+  | true => rfl
+  | false =>
+    have empty := (barrier_empty original after.incoming).mpr h
+    rw [← frame.2] at empty
+    have bad := (barrier_empty original before.incoming).mp empty
+    simp [present] at bad
+ rw [← barrier_head original after.incoming remains,← frame.2,barrier_head original before.incoming present]
+
+theorem unrelated_append_accepted [DecidableEq α] (original : α → Bool)
+ (before : Queues α) (outbound inbound : List α)
+ (outAbsent : outbound.any original = false) (inAbsent : inbound.any original = false) :
+ check original before ⟨before.outgoing++outbound,before.incoming++inbound⟩ = true := by
+ simp [check,List.filter_append,irrelevant_filter original outbound outAbsent,
+  barrier_append_irrelevant original before.incoming inbound inAbsent]
+
+#print axioms barrier_empty
+#print axioms barrier_head
+#print axioms irrelevant_filter
+#print axioms barrier_append_irrelevant
+#print axioms check_exact
+#print axioms original_reply_retained
+#print axioms original_fifo_head_preserved
+#print axioms unrelated_append_accepted
+end MirroreaProofFirst.OwnerStatementOriginalEntry.CarrierFrame
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin
+-- Newest-first ACTUAL committed writes, not observer-invented events.
+-- Keys include the owner/locus; values are exact; the history's authenticity,
+-- exclusive read/commit boundary and actual allocator are physical obligations.
+structure Write (K V : Type) where
+ key : K
+ value : V
+ occurrence : Nat
+ deriving DecidableEq
+
+variable {K V : Type} [DecidableEq K]
+
+inductive Latest (key : K) : List (Write K V) → Write K V → Prop
+ | here (w : Write K V) (rest) (same : w.key = key) : Latest key (w::rest) w
+ | skip (w : Write K V) (rest) (chosen) (different : w.key ≠ key)
+   (prior : Latest key rest chosen) : Latest key (w::rest) chosen
+
+def select (key : K) : List (Write K V) → Option (Write K V)
+ | [] => none
+ | w::rest => if w.key = key then some w else select key rest
+
+theorem select_exact (key : K) (history : List (Write K V)) (w : Write K V) :
+ select key history = some w ↔ Latest key history w := by
+ induction history with
+ | nil =>
+   constructor
+   · simp [select]
+   · intro h; cases h
+ | cons top rest ih =>
+   by_cases same : top.key = key
+   · simp only [select,if_pos same,Option.some.injEq]
+     constructor
+     · intro eq; subst w; exact .here top rest same
+     · intro h; cases h with
+       | here => rfl
+       | skip _ _ _ different _ => exact False.elim (different same)
+   · simp only [select,if_neg same]
+     constructor
+     · intro h; exact .skip top rest w same (ih.mp h)
+     · intro h; cases h with
+       | here _ _ eq => exact False.elim (same eq)
+       | skip _ _ _ _ prior => exact ih.mpr prior
+
+omit [DecidableEq K] in
+theorem latest_member {key : K} {history : List (Write K V)} {w : Write K V}
+ (h : Latest key history w) : w ∈ history := by
+ induction h with
+ | here => exact List.mem_cons_self
+ | skip _ _ _ _ _ ih => exact List.mem_cons_of_mem _ ih
+
+-- Operational replay updates only the exact key. The initial environment may
+-- be arbitrary and is not relabelled as a runtime write.
+def replay (initial : K → Option V) (key : K) : List (Write K V) → Option V
+ | [] => initial key
+ | w::rest => if w.key = key then some w.value else replay initial key rest
+
+theorem latest_value (initial : K → Option V) {key : K}
+ {history : List (Write K V)} {w : Write K V} (h : Latest key history w) :
+ replay initial key history = some w.value := by
+ induction h with
+ | here _ _ same => simp [replay,same]
+ | skip _ _ _ different _ ih => simp [replay,different,ih]
+
+theorem select_none_initial (initial : K → Option V) (key : K) (history : List (Write K V))
+ (absent : select key history = none) : replay initial key history = initial key := by
+ induction history with
+ | nil => rfl
+ | cons w rest ih =>
+   by_cases same : w.key = key
+   · simp [select,same] at absent
+   · simp only [select,if_neg same] at absent
+     simp [replay,same,ih absent]
+
+variable [DecidableEq V]
+
+def bindRead (key : K) (history : List (Write K V)) (actual : V) : Option Nat :=
+ match select key history with
+ | none => none
+ | some w => if w.value = actual then some w.occurrence else none
+
+theorem bind_exact (key : K) (history : List (Write K V)) (actual : V) (id : Nat) :
+ bindRead key history actual = some id ↔
+ ∃ w, Latest key history w ∧ w.value = actual ∧ w.occurrence = id := by
+ cases found : select key history with
+ | none =>
+   simp only [bindRead,found]
+   constructor
+   · simp
+   · rintro ⟨w,latest,_,_⟩
+     have eq := (select_exact key history w).mpr latest
+     simp [found] at eq
+ | some w =>
+   have latest := (select_exact key history w).mp found
+   simp only [bindRead,found]
+   constructor
+   · intro eq
+     split at eq
+     · exact ⟨w,latest,‹w.value = actual›,Option.some.inj eq⟩
+     · simp at eq
+   · rintro ⟨chosen,h,value,idEq⟩
+     have eq := (select_exact key history chosen).mpr h
+     rw [found] at eq
+     have same := Option.some.inj eq
+     subst chosen
+     simp [value,idEq]
+
+theorem bind_actual_latest (key : K) (history : List (Write K V)) (w : Write K V)
+ (h : Latest key history w) : bindRead key history w.value = some w.occurrence :=
+ (bind_exact key history w.value w.occurrence).mpr ⟨w,h,rfl,rfl⟩
+
+theorem unrelated_write_preserved (key : K) (history : List (Write K V))
+ (w : Write K V) (actual : V) (different : w.key ≠ key) :
+ bindRead key (w::history) actual = bindRead key history actual := by
+ simp [bindRead,select,different]
+
+theorem latest_different_value_refused (key : K) (history : List (Write K V))
+ (w : Write K V) (actual : V) (same : w.key = key) (different : w.value ≠ actual) :
+ bindRead key (w::history) actual = none := by simp [bindRead,select,same,different]
+
+theorem bound_origin_earlier (key : K) (history : List (Write K V)) (actual : V)
+ (readId origin : Nat) (past : ∀ w ∈ history, w.occurrence < readId)
+ (bound : bindRead key history actual = some origin) : origin < readId := by
+ obtain ⟨w,h,_,rfl⟩ := (bind_exact key history actual origin).mp bound
+ exact past w (latest_member h)
+
+-- Keep exact value-origin edges across physical execution lanes; keep ordinary
+-- FIFO dependencies only inside their semantic lane. Qualification must map
+-- only genuine recorded IDs; this function neither creates events nor authority.
+def project (sameLane readFrom : Nat → Bool) (raw : List Nat) : List Nat :=
+ raw.filter (fun origin => sameLane origin || readFrom origin)
+
+theorem project_exact (sameLane readFrom : Nat → Bool) (raw : List Nat) (origin : Nat) :
+ origin ∈ project sameLane readFrom raw ↔
+ origin ∈ raw ∧ (sameLane origin = true ∨ readFrom origin = true) := by
+ simp [project]
+
+theorem actual_origin_retained (sameLane readFrom : Nat → Bool) (raw : List Nat) (origin : Nat)
+ (present : origin ∈ raw) (actual : readFrom origin = true) :
+ origin ∈ project sameLane readFrom raw :=
+ (project_exact sameLane readFrom raw origin).mpr ⟨present,Or.inr actual⟩
+
+theorem unrelated_lane_refused (sameLane readFrom : Nat → Bool) (raw : List Nat) (origin : Nat)
+ (other : sameLane origin = false) (unread : readFrom origin = false) :
+ origin ∉ project sameLane readFrom raw := by simp [project,other,unread]
+
+#print axioms select_exact
+#print axioms latest_member
+#print axioms latest_value
+#print axioms select_none_initial
+#print axioms bind_exact
+#print axioms bind_actual_latest
+#print axioms unrelated_write_preserved
+#print axioms latest_different_value_refused
+#print axioms bound_origin_earlier
+#print axioms project_exact
+#print axioms actual_origin_retained
+#print axioms unrelated_lane_refused
+end MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin
