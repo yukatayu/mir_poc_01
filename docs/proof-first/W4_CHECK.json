@@ -54465,5 +54465,188 @@
         "scope": "full make docs over restored source/current status; later verification metadata focused checked"
       }
     ]
+  },
+  "d_physical_authority_20260930": {
+    "at": "2026-09-30T11:51:19.396400+00:00",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5",
+    "files": {
+      "crates/mir-runtime/src/m9_auth_verification.rs": "a0449e6ba5385c847c5f58fe701d47b4cbf83284cc70c9820f9ed4f3eb7c6412",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "ac89386a5ab0dc46f379b86ddf80272f3127ea0cf11e920f097d41c23b81e2df",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "ce12f876a30d4bb2ba124ab94437c7284dfd29d2e934114af8a14261be405d3d",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "544aca87798d4d124dc16dd51ff9882cb5f7aa69c5a9dc3d206b1e232a101ec9",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "1b5f49e3e233fd99f3e5a81418b62d277ad22fdc7abade6e88df640e7c8dc5c2",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "2a2d79033be4a451b89b0c4784cddf0047ffecf8697530020f693f32ab62bd7e",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "ff6124878eefefcb17b52693a36104649d5f84b0f598ac23e85147fed1e6182a",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "1f9efde0f0f8e3d529856bb82812fb34081506733aba52842cc93f8f1f18b343",
+      "crates/mir-runtime/src/lib.rs": "8b88057037c627179ee938fb4bed7b91d1efe993b4b67d517e5c6800f0b4e82b"
+    },
+    "source_pins_sha256": "a2f67739799d42d79d587e5c51906f11fa77c8fffd6b2658074e8a03b932dae0",
+    "receipts": [
+      {
+        "version": "physical-authority-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-red-v1/RESULT.json",
+        "sha256": "1f14cad483c79b5acbf55235cb5f6081ace12000345fa3cc021b0eba46d76a93",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      },
+      {
+        "version": "physical-authority-red-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-red-v2/RESULT.json",
+        "sha256": "fe35ed94de1d63b083d4775c113d4ef4bc7dad4efeaa92af982388314f8577bf",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 0 passed; 6 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.08s"
+        ]
+      },
+      {
+        "version": "physical-authority-red-v3",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-red-v3/RESULT.json",
+        "sha256": "375345f2c86b08d635f045a2660a3d4b61db24650c6278e0e9a9f4f2ac52c8c5",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 2 passed; 4 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.09s"
+        ]
+      },
+      {
+        "version": "physical-authority-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-green-v1/RESULT.json",
+        "sha256": "5bf16e6c6f45c7f260b5cf39097d7b989080fbebb513a75e8396936990bd4fd6",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.18s"
+        ]
+      },
+      {
+        "version": "physical-authority-worker-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-worker-red-v1/RESULT.json",
+        "sha256": "5b75704b050f475187ccd94c16916e6c01b67701ceda157c6c82f988185636a1",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 2 passed; 8 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.11s"
+        ]
+      },
+      {
+        "version": "physical-authority-worker-red-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-worker-red-v2/RESULT.json",
+        "sha256": "d701d577ae3c6065684129f988f771827bfb39f38d5acf968a9dd1633ab9f3ab",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 2 passed; 8 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.13s"
+        ]
+      },
+      {
+        "version": "physical-authority-green-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-green-v2/RESULT.json",
+        "sha256": "053e50298d831cfd93c74d0f70e8529a6ce81d3cf3b8a4fd738780908913a215",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.22s"
+        ]
+      },
+      {
+        "version": "physical-authority-lost-ack-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-lost-ack-red-v1/RESULT.json",
+        "sha256": "63d733c5cb4bbf0177e01abe1dfb7a6d12de2ce03d37245a38575450ff585b09",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 525 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "version": "physical-authority-green-v3",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-green-v3/RESULT.json",
+        "sha256": "d3265ac2328d8fd0ebb9bce8514ebee5e7cc5b0a9416d916a37672a65354c387",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 515 filtered out; finished in 0.23s"
+        ]
+      },
+      {
+        "version": "physical-authority-full-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-full-v1/RESULT.json",
+        "sha256": "322fcab1f9959e848c9a08d9bfe58958218e45901605c6bf8252a4d2f90e199b",
+        "exits": [
+          0,
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 543 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 108.06s"
+        ]
+      },
+      {
+        "version": "physical-authority-green-v4",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-green-v4/RESULT.json",
+        "sha256": "40a84003fa4299bcddc6956b99ca34d602e3a51eba6916c5f98612ca4643e6be",
+        "exits": [
+          101
+        ],
+        "summaries": []
+      },
+      {
+        "version": "physical-authority-green-v5",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-green-v5/RESULT.json",
+        "sha256": "5d4ad31077cc540e3223ebe84edcb395d381882c7b530ee3537e09f72ed734fb",
+        "exits": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 543 filtered out; finished in 0.08s",
+          "test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 504 filtered out; finished in 0.69s",
+          "test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 533 filtered out; finished in 0.22s"
+        ]
+      },
+      {
+        "version": "physical-authority-full-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/physical-authority-full-v2/RESULT.json",
+        "sha256": "68be16e1efc6907016dfead0bf1bb17bb90d96be4e10d25701c16b53fe0b65af",
+        "exits": [
+          0,
+          0
+        ],
+        "summaries": [
+          "test result: ok. 544 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 107.81s"
+        ]
+      }
+    ],
+    "result": "physical preparation11, normal default/private-QUIC checks and combined-feature full544 pass0fail/ignored; all11paths restored",
+    "scope": "Opaque registered prepare reader -> actual disabled physical SYS4 component -> strong actual canonical floor -> M9 local observation frame -> same actual ST sessions or eligible one-owner OW1 worker refresh/ACK. Real parent M9 bodies staged before restriction. No full SYS5/source/results preparation ACK, parent publication/all activation, combined I3 admission/source cursor or new QUIC E2E.",
+    "findings": "Real owner body ran once before prepare and left reply pending; actual three M9 observation maps and selected runtime fields preserved. Actual floor Arc/ST M8 Box/OW1 worker identities retained. All six exact restriction sets bound privately. Extra-floor authority, wrong prior/next facts/restriction, child publisher and second use refuse. Disconnected worker leaves local/floor old; real worker post-install lost ACK leaves backend next while local/floor old and child unavailable, no rollback/full ACK. Only borrowed owning-reader token reaches new M9 frame seam; generic DTO stays untrusted. Old weak floor/prelaunch APIs unchanged.",
+    "failures": "red-v1 compile failure retained (wrong test type/count API); red-v2 retained fixture mistakes (envelope vs request identity, initial generation0); red-v3 two positives/four expected failures. worker-red-v1 retained multi-owner OW1 BackendIneligible; corrected worker-red-v2 distinct eligible one-owner source reaches expected assertions. Lost-ACK RED0positive1fail. Full-v1 543pass1fail retained: M9 source must not depend on SYS5. Green-v5 moves opaque control/shared FD gate to independent crate-private adapter module, preserves provider same gate; original architecture check1/control40/physical11 pass; green-v4 retained one missed test path compile error after module move; green-v5 fixes only that path; full-v2 successor.",
+    "unrun": "Full endpoint source/result prepared-state binding, all semantic entry paths, authentic prepared ACK/parent publication/all activation/normal source/I3/QUIC integration remain before use. No fresh199 Lean audit, broad workspace/new network/whole-language/privacy/recovery/alpha validation; E inactive. Main review only, no new Oracle/subagents. Test-only worker failure arms add no production recovery semantics.",
+    "resources_before_full": "2026-09-30 ~11:32UTC root16GiB free, RAM7GiB available, swap13GiB used; serial Rust8GiB AS/-j1/one test thread; no cleanup or external mount/host-share assumption.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-physical-authority-v1.json",
+        "sha256": "baf1058235c5a3e8717657bc04eccaba521b5357b63523c3a2db86ff4a7a8c7a",
+        "exit": 0,
+        "scope": "full make docs over restored source/current status; later verification metadata focused checked"
+      }
+    ]
   }
 }

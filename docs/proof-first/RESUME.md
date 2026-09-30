@@ -6,11 +6,12 @@ material boundary change or Astra D-acceptance review is needed. E tests can
 use Sol after D acceptance; A–E union/integrated acceptance belongs to Astra.
 Plan250/I3-4 remains separately owner-paused. No automatic model switching.
 
-HEAD04fd7a1f pushed/remote parity0/0 at prior checkpoint. New own status records
+HEAD3c2767da pushed/remote parity0/0 at prior checkpoint. New own status records
 dirty; production Rust restored after each overlay. No active job currently.
-Next: genuine parent M9 stage6 and registered grant/prepare40 passed; normal builds/full533
-passed at current9path reference. Connect actual disabled M9/floor/backend, then real
-prepared ACK/all-endpoint actual parent publication and activation.
+Next: actual registered M9/floor/backend11, normal builds/full544 passed at
+current11path reference. Own whole real process/source/results runtime under one
+protected mode; retain exact prepared state before authentic ACK, parent publication
+and all activation. Physical component alone emits no full prepared ACK.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process. New external reference D/d-control-development/normal-quic-fixed-v1
@@ -20,7 +21,7 @@ normal i3-private-quic checkPASS, combined process-test-seams checkPASS, full li
 472pass0fail0skip, all3Rust restored. No actual D network run or adoption.
 Storage-sol-resume-v1 records authorized untracked incremental cleanup only:
 root free3.0GiB ->7.3GiB;4620189696bytes reclaimed. No source/evidence deletion.
-週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は11:04:18 UTCの確認で77%（使用23%）でした。次の確認は12:04:18 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 Current DTO successor D/d-control-development/facts-codec-controls-v1 has same3 paths:
 M9 authority source/test changed, QUIC cfg guard unchanged. Exact pins/receipts in
@@ -61,6 +62,23 @@ prepareRED2pass5fail then40control pass; normal default/privateQUIC build and
 combined-feature full533 pass. All9paths restored. No actual backend/prepared
 ACK/publication/activation/source/QUIC E2E yet; full make docs v1 passed.
 Final metadata focused checked; actual Git result GIT-PUBLISHER-PREPARE-v1.json.
+
+Current successor D/d-control-development/physical-authority-green-v5 has11PATHS:
+previous9 + SYS2 test-only real worker failure arms + lib.rs independent crate-private adapter control module/shared FD gate. M9 has no SYS5 dependency; provider shares same gate.
+Opaque borrowed reader token enters new M9 exact facts/frame seam. Strong actual
+canonical guard spans same ST-session/eligible OW1-worker refresh/local M9/floor
+adoption. All3 local maps and held body/history/reply retained. Floor Arc/ST Box/
+OW1 worker identities preserved. Private physical owner moves noncloneable fabric,
+starts disabled, exports no mutable runtime/seed/semantic entry, emits no full ACK.
+It does not yet own/protect whole SYS5/source/results runtime and is not activated.
+RED-v1 compile errors retained; v2 fixture ID/generation mistakes retained;
+v3 two positives/four proper failures. WorkerRED-v1 two-owner OW1 ineligibility;
+eligible one-owner-v2 reaches2positive/8expected failures. Green11/exact-cut full544/
+normal builds pass, all11paths restored. Worker post-install lost ACK leaves actual
+backend next/local+floor old and child unavailable; no rollback/prepared ACK/
+parent publication. Old strict prelaunch/weak restore guards unchanged. Full
+source/I3/grant/result/resource/QUIC producers remain pre-use consumers. Full make docs v1 passed.
+Final metadata focused checked; actual Git result GIT-PHYSICAL-AUTHORITY-v1.json.
 
 The prior handoff details below are historical starting evidence; above supersedes
 its pause/next-job wording. Preserve all frozen source and failure receipts.

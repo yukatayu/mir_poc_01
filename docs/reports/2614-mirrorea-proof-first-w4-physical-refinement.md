@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Continue owner-resumed W4-D on Sol: actual disabled M9/floor/backend in-place preparation, authentic all-endpoint prepared ACK/actual parent publication/activation, then unique source/I3/result/resource/QUIC binding. Genuine parent M9 stage6 and registered control40/normal builds/full533 are verified at9path external reference. Sole main/no subagents. Stop for Astra on material semantic falsifier or D integrated acceptance before E. Weekly77%10:04:13UTC; next check>=11:04:13UTC; owner reset only.
+Continue same owner-resumed Sol W4-D: whole actual process/source/results ownership/mode, exact retained prepared-state/ACK/actual parent publication/all activation, then original source/I3/result/resource/QUIC connection. Physical M9/floor/backend11/exact-cut normal builds/full544 passed at11path external reference. Sole main/no subagents; Astra only on material semantic falsifier or D acceptance before E. Weekly77%11:04:18UTC; next>=12:04:18UTC; owner reset only.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Documentation.md updated: owner-resumed Sol W4-D, current actual-parent/registered-prepare component and remaining physical/source gates; no runtime capability promotion.
+Documentation.md updated: actual physical M9/floor/backend component and remaining whole-process/source/result/ACK/publication gates; no capability promotion.
 
 ## docs/project-status.md update status
 
-更新済み: Sol継続、実parent stage/登録prepareの最新部品検査と、実backend/公開/有効化の未接続を記録。Canon/Plan250のpauseとW3/C履歴を保持。
+更新済み: 実M9/floor/backend準備と実worker更新後ACK喪失対照を記録。全process準備ACK/公開/有効化/sourceは未接続。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-samples_progress.md updated: current9path component/normal builds/full library and remaining backend/ACK/publication/source/network boundaries distinguished from runnable network workflow; historical model-switch/quota wording replaced by current owner-resumed status. Sample roots/taxonomy unchanged.
+samples_progress.md updated: current11path physical preparation/full library/build evidence, distinct eligible OW1 component and actual two-owner ST, remaining whole source/results prepared-state/ACK/publication/all activation/network gates. Sample roots/taxonomy unchanged.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: actual parent stage6 and registered grant/prepare40, exact-cut normal builds/full533 pass; main semantic/test/diff review only, no new Oracle/subagent. Stream-authenticated prepare data does not establish physical backend currentness or produce an ACK. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: opaque-token actual M9/floor/backend preparation11, held body/history/observations/same physical identities, disconnected/post-install lost worker ACK controls, exact-cut normal builds/full544 pass; main semantic/test/diff review only. Disabled physical owner exports no semantic/mutable escape but whole SYS5/source/results custody/prepared-state ACK still unconnected. OW1 uses distinct eligible one-owner source; actual two-owner D remains ST. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: genuine M9 publisher stage6 and registered control/prepare40, normal default/private-QUIC checks and full533 combined-feature library pass at9path reference. All9 paths restored. Actual disabled M9/floor/backend mutation, prepared ACK/parent publication/all activation, source cursor/all-entry/I3/result/resource/QUIC producers remain unconnected. No new D source/network E2E, physical proof, whole-language/privacy/recovery or alpha claim. Current199 fresh recipe remains unexecuted; earlier199 changed-source audit/fresh197 unchanged. E inactive. Full make docs publisher/prepare v1 passed; later Git/receipt verification metadata uses focused checks. Independent Oracle does not cover these post-handoff Rust components; main review only. READ_LEDGER scopes preserve partial-reading limits.
+Current Sol checkpoint: actual M9/floor/backend preparation11, normal default/private-QUIC checks and full544 combined-feature library pass at11path reference. All11 paths restored. Physical authority installs in the same actual runtime with exact local observations; full endpoint/source/result prepared-state ACK is not generated. Whole-process mode/all-entry/static image/source context, authentic ACK/parent publication/all activation, original source/I3/result/resource/QUIC consumers remain unconnected before use. No new D source/network E2E, fresh199 proof audit, whole-language/privacy/recovery/alpha claim. Earlier199 changed-source audit/fresh197 unchanged. E inactive. Prior publisher/prepare make docs v1 success retained; full make docs physical authority v1 passed; later verification metadata focused checked. Main review only; previous Oracle does not cover this implementation. READ_LEDGER scopes preserve partial-reading limits.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessor04fd7a1f is committed/pushed with verified0/0 parity. This successor contains only eleven owned status/evidence docs; baseline Rust/Lean/Canon remain unchanged and new Rust sources stay external/unadopted. Actual Git outcome will be recorded in d-source-process/GIT-PUBLISHER-PREPARE-v1.json after commit/push/parity; do not infer success from the planned path. User-authorized normal push, commit --no-gpg-sign.
+Current predecessor3c2767da committed/pushed with exact0/0 parity. Successor contains only eleven owned status/evidence docs. Production Rust/Lean/Canon unchanged; all11 source paths restored, frozen reference external/unadopted. Actual Git outcome will be recorded in d-source-process/GIT-PHYSICAL-AUTHORITY-v1.json after commit/push/parity; no inferred success. Authorized normal push, commit --no-gpg-sign.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4573,3 +4573,16 @@ W4-DはSolで実装を継続中です。外部未採用9path参照registered-pre
 - plan/status/whole tasks snapshot/samples dashboard/ledger updated; same Report2614 only. Main review, no independent post-handoff Oracle/subagents. Fresh199/actual backend/new network/whole-workspace/alpha unrun because consumers are incomplete. Full make docs publisher/prepare v1 passed; final metadata focused checked and actual Git result remains pending. Same W4 continues; no completion notification.
 
 - 2026-09-30T10:56:12.300205+00:00: make docs publisher/prepare v1 exit0, baseline Rust restored; focused final receipt/pin/ledger-prefix/status/diff checks precede eleven-file checkpoint save. Actual Git result goes to GIT-PUBLISHER-PREPARE-v1.json; same W4 continues without completion notification.
+
+
+### 2026-09-30T11:51:19.396400+00:00 — Actual registered M9/floor/backend preparation
+
+W4-DはSolで実装を継続中です。外部未採用11path参照physical-authority-green-v5で、登録済みprepare入力から実M9・共有floor・同じbackendを更新する11件が通過しました。実owner body後の観測・履歴・未配送replyを保持し、ST sessionと適格な一owner OW1 workerの実更新、更新後ACK喪失時の凍結も確認しました。通常default/private-QUIC buildと同cutの全544feature検査が通り、11pathは元へ復元しています。全SYS5/source/result状態のprepared ACK・親の公開・全endpoint有効化はまだ生成しません。次は実process runtime全体を所有するmodeと実prepared-state保持を接続します。元source cursor・I3 admission・実結果回収・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Start3c2767da clean. Commands/pins/log/exits/restoration: W4_CHECK d_physical_authority_20260930. Eleven external paths, SYS2 additions test-only. RED-v1 compile errors retained; v2 fixture assertions corrected in successor; v3 2positive/4proper failures. WorkerRED-v1 preserves two-owner OW1 ineligibility; corrected one-owner source reaches2positive/8proper failures. Lost-ACK RED0pass1fail. Full-v1 retained543pass1fail on forbidden M9->SYS5 token dependency. Green-v5 moves control/shared FD gate to independent crate-private adapter module, keeps actual provider gate; green-v4 missed test path compile failure retained, green-v5 corrected that test reference; original layer check1/control40/physical11 pass. Final11 allpass; exact-cut normal default/privateQUIC/full5440fail0ignored/filtered. All paths restored after every overlay.
+- New opaque registered M9 frame and all-six-set exact restriction binding; strong actual canonical guard across real same ST-session/eligible one-owner worker refresh+ACK then M9/floor commit. Old weak guard/prelaunch API unchanged. No raw DTO/candidate installation factory, child publisher, mutable runtime/seed or semantic escape; disabled physical owner is not a whole normal SYS5/source owner yet.
+- Real generated body hp100->90 once, genuine M9 owner observation and pending reply. All3 maps/selected exact runtime fields/ST Box/floor Arc/OW1 worker identities/actual worker trace retained. Component evidence, not combined I3 source/network E2E or complete cryptographic prepared-state digest. Parent head/revision held.
+- Disconnected worker refuses. Actual post-install ACK loss leaves worker next and child local M9/floor old/unavailable; no rollback, re-enable or prepared ACK. New worker failure arms are test-only. Existing owning reader reserves both message IDs/ACK bytes before token; receipt strings allocate before backend mutation under ordinary working-memory assumption, no process-death/OOM recovery.
+- Next direct consumer: whole real process/source/results mode/static binding/full preparation/all-entry closure before authentic ACK/publication/activation. No used premise moves to E, no new normative statement. plan/current docs/whole tasks/sample dashboard/ledger updated in same Report2614; no extra report. Full make docs physical authority v1 passed; final metadata focused checked, actual Git result pending. Sole main/no Oracle/subagents/external notification. Same W4 continues after checkpoint.
+
+- 2026-09-30T11:58:12.482817+00:00: full make docs physical authority v1 exit0; all11 Rust paths restored. Final focused source/log/pin/ledger-prefix/status/diff checks precede eleven-doc checkpoint. Actual Git result GIT-PHYSICAL-AUTHORITY-v1.json; same W4 continues without completion notification.

@@ -50960,5 +50960,103 @@
     "status": "read-with-scope",
     "role": "full selected fixed D boundary/consumer/stop contract reconsult",
     "at": "2026-09-30T10:50:58.010685+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys4_i3_source_authority.rs",
+    "sha256": "2a2d79033be4a451b89b0c4784cddf0047ffecf8697530020f693f32ab62bd7e",
+    "status": "authored-main-reviewed",
+    "role": "new physical owner/preparation and retained parent stage fully authored/reviewed; no whole process/source preparation ACK; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys4_i3_source_authority_tests.rs",
+    "sha256": "ff6124878eefefcb17b52693a36104649d5f84b0f598ac23e85147fed1e6182a",
+    "status": "authored-main-reviewed",
+    "role": "full physical11/unchanged parent6 fixture tests reviewed; two-owner ST vs separate eligible one-owner OW1; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys5_i3_source_control.rs",
+    "sha256": "ce12f876a30d4bb2ba124ab94437c7284dfd29d2e934114af8a14261be405d3d",
+    "status": "authored-main-reviewed",
+    "role": "partial new token predicates/metadata and test-only real-stream fixture; retained registered prepare/grant/FD context; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/m9_auth_verification.rs",
+    "sha256": "a0449e6ba5385c847c5f58fe701d47b4cbf83284cc70c9820f9ed4f3eb7c6412",
+    "status": "authored-main-reviewed",
+    "role": "partial new six-set binding/opaque registered M9 frame and strict codec/facts/delta/local-observation context; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys4_dispatch.rs",
+    "sha256": "1b5f49e3e233fd99f3e5a81418b62d277ad22fdc7abade6e88df640e7c8dc5c2",
+    "status": "authored-main-reviewed",
+    "role": "partial new strong guard/LocalFabric fields/refresh/bootstrap/state/carrier/owner-validation context; old APIs unchanged; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys2_execution_backend.rs",
+    "sha256": "1f9efde0f0f8e3d529856bb82812fb34081506733aba52842cc93f8f1f18b343",
+    "status": "authored-main-reviewed",
+    "role": "partial actual refresh/worker ownership/shutdown and new test-only failure arms; not whole file read; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/lib.rs",
+    "sha256": "8b88057037c627179ee938fb4bed7b91d1efe993b4b67d517e5c6800f0b4e82b",
+    "status": "authored-main-reviewed",
+    "role": "partial crate module declarations/new independent adapter control declaration; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/physical-authority-green-v5/sys5_i3_process_runtime.rs",
+    "sha256": "ac89386a5ab0dc46f379b86ddf80272f3127ea0cf11e920f097d41c23b81e2df",
+    "status": "authored-main-reviewed",
+    "role": "partial moved control module/shared FD gate alias and provider actual FD claim; no whole source read; external unadopted physical-authority-green-v5",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "mirrorea_canon/README.md",
+    "sha256": "231dad414dc752e230030af3676f5ffa8626dcb5af1f187f6bbd705ff93b418c",
+    "status": "read-with-scope",
+    "role": "canon hierarchy/current owner pause and read sequence reconsult",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "mirrorea_canon/MAP.md",
+    "sha256": "f7d3b53eac593862ee361af775cf8e97c380ab3fb9e8ecd679415b86f08b5322",
+    "status": "read-with-scope",
+    "role": "partial1-88: hierarchy/ADR0028 profile/current normative program context",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "mirrorea_canon/theory/18-m9-auth-verification.md",
+    "sha256": "7c625f0737589572ce4b48d465d809948e97833ade8a5d8992ad31022163af72",
+    "status": "read-with-scope",
+    "role": "partial§4/§5: exact M9 publisher/inventory/worker ACK/failed install boundary",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "mirrorea_canon/spec/13-sys4-in-process-generated-dispatch.md",
+    "sha256": "9238a23a8d6f3ff21ce9e6c99c3e829e0206c38932c4e4f6f219176380f2c1d1",
+    "status": "read-with-scope",
+    "role": "partial ST/OW1 profiles and boundary headings; exactly-one existing OW1 eligibility, no widening",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "sha256": "ec497d66e937857e437f8f88b66030507304cd43c4246b502a7f7864d408347d",
+    "status": "read-with-scope",
+    "role": "partial45-120 plus indexed remaining gate lines; selected preparation/ownership/ACK/stop contract reconsult",
+    "at": "2026-09-30T11:51:19.396400+00:00"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "8ee58c5b01b6c583a397f61af59804bc1ddc6c64d8448acf101694e58bcbad76",
+    "status": "read-with-scope",
+    "role": "full prior current task snapshot before whole-file replacement",
+    "at": "2026-09-30T11:51:19.396400+00:00"
   }
 ]

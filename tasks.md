@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 19:50 JST
+最終更新: 2026-09-30 20:58 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -23,14 +23,14 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-DはSolで実装を継続中です。外部未採用9path参照registered-prepare-green-v1で、実M9発行者による3endpoint分の候補生成6件と、登録済みstreamのgrant/prepare制御40件を検査しました。通常default/private-QUIC buildと同cutの全533feature検査が通り、9pathは元へ復元しています。prepareは凍結中endpointのstreamで認証したデータであり、実backendの準備ACK・親の公開・全endpoint有効化はまだ生成しません。次は同じ実runtimeのM9/floor/backend更新です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用11path参照physical-authority-green-v5で、登録済みprepare入力から実M9・共有floor・同じbackendを更新する11件が通過しました。実owner body後の観測・履歴・未配送replyを保持し、ST sessionと適格な一owner OW1 workerの実更新、更新後ACK喪失時の凍結も確認しました。通常default/private-QUIC buildと同cutの全544feature検査が通り、11pathは元へ復元しています。全SYS5/source/result状態のprepared ACK・親の公開・全endpoint有効化はまだ生成しません。次は実process runtime全体を所有するmodeと実prepared-state保持を接続します。元source cursor・I3 admission・実結果回収・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 ## ordered self-driven packages
 
 | Package / macro position | Direct consumer and required result | Readiness |
 |---|---|---|
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
-| D control/M9 preparation / Macro3/6 early | Actual parent M9 stage6 + registered control/prepare40, normal builds/full533 reference; actual disabled backend/ACK/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D control/M9 preparation / Macro3/6 early | Actual parent M9 stage6/control40 + physical M9/floor/backend11, normal builds/full544; owned whole-process mode/real prepared-state/ACK/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
 | D source/I3/result/network / Macro3/6 | One original source cursor, full Core/args/activation/ordinal, existing I3 permit, retained actual result and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
@@ -87,17 +87,17 @@ One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain sourc
 commands, failures and review scope. No used premise moves to E merely because
 E performs broad regression. Current D199 recipe is preserved/syntax-checked;
 actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
-Current publisher/prepare full make docs v1 passed; later verification metadata is focused checked. Final
+Current physical authority full make docs v1 passed; later verification metadata focused checked. Final
 pins/diff and actual Git result are retained in the external handoff receipts.
 ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
 Heavy commands serial, measured resources; no external notification/publication
 or host-share workspace; preserve all source/evidence/browser state.
 
-週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は11:04:18 UTCの確認で77%（使用23%）でした。次の確認は12:04:18 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 ## non-promoted references
 
-C's fifteen Rust files and D's current nine-path M9 publisher/registered prepare component remain external/unadopted.
+C's fifteen Rust files and D's current eleven-path physical authority preparation component remain external/unadopted.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
