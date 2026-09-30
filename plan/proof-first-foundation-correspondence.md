@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C bounded technical/integration close complete; W4-D boundary design active**; W4-E inactive. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C bounded technical/integration close complete; W4-D model-switch checkpoint owner-paused**; W4-E inactive. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction adds a pause at the Astra→GPT-6.1-sol implementation handoff; after resume retain C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
 
 ## Authority and retained history
 
@@ -2413,3 +2413,31 @@ D/DESIGN-v2.md (sha256 67c76317235897360061ec32f61f434f88a7dff565708fd7e232a5fc2
 
 
 2026-09-30T06:28:58.396092+00:00: D M9 review92088 complete/verified17inputs, answer25d0318d…,16dispositions. Selected NEW M9-owned restricted predecessor/successor with EXACT actual child3observation-map preservation; full genuine delta before restriction, separate incident/unaﬀected generation-only postconditions; no global merge or weakening old prelaunch. Registered actual supervisor FD mints token, raw decoded control never provenance. Prepare in place, retain coherent body/result state until finish, actual parent commit before enable. v6 external prepared-record invariant standalone passes; audit/integration pending before use. No D Rust implementation.
+
+
+### 2026-09-30T06:37:19.588559+00:00 — D derived prepared-record invariant
+
+Checkpoint13e7b893 contains prior197/v5 proof/recipe/status, push77385exit0/parity0/0. Successor v6 adds PreparedCorrect plus apply/reached/prepared-at-publication derivations; no Allowed premise added. Audit34608exit0 rechecks197module/20283owned/168false/176command, seven compiled over190 pinned unchanged C objects. RESULT 42d28becd670469bed36d41214ed2bda0b8d8467238698acfab53c5fe2ee0fb7. Source+independentDmanifest+recipe description+ledger updated; prior fresh197/20278/366 receipt remains v5, not upgraded by wording. New AuthorityLocalFrame standalone passed; generic exact map/runtime preservation is conditional on authentic M9 stage/projection/FD custody and not yet integrated. D physical implementation remains open. plan/updated; remaining status sync/validation at next checkpoint; no Canon/119/E promotion.
+
+
+### 2026-09-30T06:54:30.375366+00:00 — D M9 component and owner-requested model handoff
+
+New external m9-live-frame-controls-v1 contains M9 restricted live owner delta and actual source/M9 controls. Full parent exact delta precedes restriction; live and canonical floor use strong authority-facts equality; all three actual child observation maps are retained; incident old strict relation and nonincident generation-only relation are checked. No live runtime/backend/floor install, control credential or process execution follows. RED26058exit101 has2new-use failures+1prelaunch positive; GREEN76891exit0 has3pass; expanded23620exit0 has7pass. Full25633 default451pass0fail0ignored0filtered, then normal i3-private-quic check fails E0599 at sys5_i3_private_quic.rs2245 (callee cfg only i3-process-test-seams). Clean baseline44602 reproduces same E0599; this existing build closure is not a M9 regression, remains unfixed and explicitly handed off. Every overlay restored exact baseline Rust; no production adoption. New local frame general proof standalone passes, controls-v1 type inference failure retained/controls-v2 pass;199ownership audit underway.
+
+Owner asks to pause at suitable model switch: Astra xhigh for D boundary/design/integration, GPT-6.1-sol xhigh for bounded implementation and E tests, Astra xhigh for A-E residual union/acceptance. Official exact model pages fetched; both support xhigh; task-specific recommendation is parent judgment, not measured speed/quality. docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md fixes next bounded control/M9 package, exact inputs/invariants/positive-negatives and remaining source/I3/result/resource gates; no whole-D design completion claim. Owner also asks remaining phases: workstreams.json targets W7 finite verified-alpha candidate, W8 horizon-only. Parent provisional active-hour estimates D20-40/E16-40/W5 40-100/W6 40-100/W7 24-60, sum140-340; not new Canon roadmap or accepted alpha profile, wide uncertainty and earlier2026-09-10 estimates retained as history.
+
+Weekly quota82%06:48:14UTC (18%used), next>=07:48:14UTC. Stop requested for model switch after this checkpoint; no subagents/external notification/publication or new semantic work. plan/updated; status/docs/checkpoint validation still due.
+
+
+### 2026-09-30T06:56:10.599628+00:00 — D exact local frame model audit
+
+Audit22837exit0:199modules/20455owned/177qualifiedfalse/187commands,9compiled over190 source/object-pinned C modules. RESULT d4267a444b01fb1bceed94e03d413a18f0b7389d56b8227fe1765da3a7a0aa11. Source/control/audit, independent D199 manifest,21new+156prior false-control recipe and ledger integrated. Recipe source preserved/syntax-checked, not a fresh199 run; earlier197/v5 all-source receipt retains its original20278 scope. Model derives exact observations/retained-state and local prior/floor conditions, with explicit physical stage/restriction/FD/backend premises. It does not classify the pure M9 constructor as completed physical preparation. No Canon/THM/OBL/119 or E activation.
+
+
+2026-09-30T06:59:30.332118+00:00: D external M9 normal default non-test cargo check21121exit0; exact2source restoration verified. Private-QUIC normal check remains failed on both reference and baseline. Current199 manifest/recipe and model-switch handoff pending final docs/pin/diff/Git checkpoint; no extra semantic implementation after owner stop request.
+
+
+2026-09-30T07:05:57.963112+00:00: Model-switch handoff is fixed; current proof/M9 component evidence and explicit remaining D gates are synchronized. Initial final make docs failed on omitted tasks.md section headings; restoring the existing required task-map structure, with separate research/owner gates, precedes full revalidation. No new roadmap or runtime/Canon adoption.
+
+
+2026-09-30T07:17:54.581459+00:00: Full make docs64984exit0 after correcting the task-map headings; prior60104exit2 and15923exit2 are retained, not counted as success. Source/recipe/audit/receipt pins, 6758-ledger/6745-prefix and unchanged production/Canon checks accompany this checkpoint. This final result/status metadata sync follows the full docs run and receives focused JSON/heading/diff checks. Final commit/push/parity are recorded only after execution in d-source-process/GIT-HANDOFF-v1.json. Owner model-switch pause, D incomplete, E/W5+ inactive; no active commands/Oracle/subagents or external notifications.

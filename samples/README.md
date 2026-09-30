@@ -382,4 +382,4 @@ workflow remains under integration; no saved expected result is a source input.
 See `scripts/README.md` and the W4 host manifest for preparation and evidence limits.
 
 
-W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに4proof/controlと所有宣言auditを追加します。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。
+W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに6proof/controlと所有宣言auditを保存します。現在199source/177対照のrecipeで、9module差分監査が通過、全199fresh再構築は未実行です。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。

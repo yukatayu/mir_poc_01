@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "at": "2026-09-30T06:12:57.202024+00:00",
-  "scope": "D prerequisite models only; not physical M9/control/source-process or runtime acceptance. C190 unchanged;3existing publication+4new modules; separate from frozen B/C manifests.",
-  "source_count": 197,
+  "at": "2026-09-30T06:56:10.599628+00:00",
+  "scope": "D conditional prerequisite models, derived prepared records and exact local authority/observation/retained-state frame; current199 source pins,9compiled over190 pinned C objects. No fresh199 build/physical FD/M9 backend/source-process acceptance.",
+  "source_count": 199,
   "rows": [
     {
       "module": "MirroreaProofFirstAbortFlow",
@@ -15,6 +15,18 @@
       "path": "samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean",
       "sha256": "48be33304d0aba0f79eb0fff03d7655e2e6adec70d53185998ba291663269642",
       "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean"
+    },
+    {
+      "module": "MirroreaProofFirstAuthorityLocalFrame",
+      "path": "samples/lean/foundations/MirroreaProofFirstAuthorityLocalFrame.lean",
+      "sha256": "25f75ac5a4c9f8a2cdbb95dbaacfb4c121058b82a5844be91215f06f2c8e8baa",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/authority-local-frame-v1/MirroreaProofFirstAuthorityLocalFrame.lean"
+    },
+    {
+      "module": "MirroreaProofFirstAuthorityLocalFrameControls",
+      "path": "samples/lean/foundations/MirroreaProofFirstAuthorityLocalFrameControls.lean",
+      "sha256": "b86c9e5d69b632527178733127c380fc786bd3fc6d0ba8ca0beea50aea664108",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/authority-local-frame-controls-v2/MirroreaProofFirstAuthorityLocalFrameControls.lean"
     },
     {
       "module": "MirroreaProofFirstCatalogHistory",
@@ -43,8 +55,8 @@
     {
       "module": "MirroreaProofFirstCoordinatorUse",
       "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
-      "sha256": "f2af706bd7e49690f8638ca6d687cc8464fd4098b552fa239f8a408bd7f55833",
-      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v5/MirroreaProofFirstCoordinatorUse.lean"
+      "sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v6/MirroreaProofFirstCoordinatorUse.lean"
     },
     {
       "module": "MirroreaProofFirstCoordinatorUseControls",
@@ -1189,12 +1201,12 @@
   ],
   "audit": {
     "path": "samples/lean/foundations/DPrerequisiteIntegratedAudit.lean",
-    "sha256": "62ebcf2259246305534e06cfe045abd77d47bd471e973d1d889f60765e5d6342"
+    "sha256": "b3fe3aedc7c2e1f50038eae3997b94b953b1fc937a6ad2e63a0a976c982430ac"
   },
   "c_negative_recipe": {
     "path": "samples/lean/foundations/OwnerStatementAdmission.md",
     "sha256": "8e643f4ef23389f7a9b7cce05ffeaee128acddfc546defca70bb3e7f6244f242"
   },
-  "audit_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-prerequisites-v1/RESULT.json",
-  "audit_result_sha256": "021310126b2de52b09385d76d68d04eec0f9faf53c3b78cfdb0b362b9800bdeb"
+  "audit_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-local-frame-v1/RESULT.json",
+  "audit_result_sha256": "d4267a444b01fb1bceed94e03d413a18f0b7389d56b8227fe1765da3a7a0aa11"
 }

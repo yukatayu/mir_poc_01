@@ -276,3 +276,66 @@ theorem old_finish_after_new_acquire [DecidableEq Value] (old : grant.serial < s
 #print axioms reached_serial
 #print axioms old_finish_after_new_acquire
 end MirroreaProofFirst.CoordinatorUse
+
+namespace MirroreaProofFirst.CoordinatorUse
+-- A recorded endpoint preparation denotes the pending staged payload, or the
+-- very payload just published. This is derived from transitions; it is not
+-- accepted as a caller-provided certificate or a premise of Allowed.
+def PreparedCorrect (s : State n Value Command) : Prop :=
+ ∀ i pair, s.prepared i = some pair →
+ pair.1 = s.useState.base.barrier.announced ∧
+ ((s.useState.base.prepared.map Prod.fst = some pair.2) ∨
+   (pair.1 = s.useState.base.barrier.published ∧ pair.2 = s.useState.base.current))
+
+theorem apply_prepared (valid : PreparedCorrect s) (allowed : Allowed evaluate s action) :
+ PreparedCorrect (apply evaluate s action) := by
+ cases action with
+ | close => exact valid
+ | stage command => intro i pair impossible; cases impossible
+ | freeze i r => exact valid
+ | activate i r => exact valid
+ | reopen => exact valid
+ | acquire i kind => exact valid
+ | finish grant => exact valid
+ | preparedAck endpoint r value =>
+   intro i pair found
+   by_cases same : i = endpoint
+   · subst i
+     have equal : (r,value) = pair := by
+       simpa only [apply,projected,PublicationPayload.put,ite_true,Option.some.injEq] using found
+     subst pair
+     obtain ⟨_,_,revision,_,_,command,pending⟩ := allowed.2
+     exact ⟨revision,Or.inl (by simpa [apply,projected,PublicationUse.apply,PublicationPayload.apply,pending])⟩
+   · exact valid i pair (by simpa [apply,projected,PublicationPayload.put,same] using found)
+ | publish =>
+   intro i pair found
+   have prior := valid i pair found
+   refine ⟨prior.1,Or.inr ⟨prior.1,?_⟩⟩
+   rcases prior.2 with staged | published
+   · change pair.2 = (s.useState.base.prepared.map Prod.fst).getD s.useState.base.current
+     rw [staged]
+     rfl
+   · have newer : s.useState.base.barrier.published < s.useState.base.barrier.announced := allowed.1.1.1.1
+     have same := prior.1
+     have old := published.1
+     omega
+
+theorem reached_prepared (path : Reached evaluate n revision value s) : PreparedCorrect s := by
+ induction path with
+ | initial => intro i pair impossible; cases impossible
+ | step _ step ih => cases step with | action allowed => exact apply_prepared ih allowed
+
+theorem prepared_value_at_publication (path : Reached evaluate n revision value s)
+ (allowed : Allowed evaluate s .publish) (found : s.prepared i = some pair) :
+ pair.1 = (apply evaluate s .publish).useState.base.barrier.published ∧
+ pair.2 = (apply evaluate s .publish).useState.base.current := by
+ have valid := apply_prepared (reached_prepared path) allowed
+ have after := valid i pair found
+ rcases after.2 with pending | published
+ · simp [apply,projected,PublicationUse.apply,PublicationPayload.apply] at pending
+ · exact published
+
+#print axioms apply_prepared
+#print axioms reached_prepared
+#print axioms prepared_value_at_publication
+end MirroreaProofFirst.CoordinatorUse

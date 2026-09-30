@@ -33,19 +33,39 @@ modules, for176 commands. This is not a fresh197 rebuild. Standalone held proof
 passed. Earlier missing-import/type-inference/namespace failures are retained in
 the external workdir and were not counted as successes. The new source/audit is
 preserved by `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json`; B and C
-manifests remain unchanged. The fresh-copy recipe below subsequently passed as tool5304: all197 modules
+manifests remain unchanged. The former197-source recipe passed as tool5304: all197 modules
 rebuilt from source,20278 owned declarations,168 qualified false guards,366
 commands. Exact source/log hashes and repository pins were independently checked.
 W4_CHECK d_prerequisite_fresh_20260930 and Report2614 retain the receipt.
+
+The subsequent prepared-record invariant is derived for every reached coordinator
+state, including the exact value at publication. Audit34608 rebuilt the seven
+publication/model modules and rechecked all197 owned modules (20283 declarations)
+and168 false controls in176 commands. The earlier fresh197 run covers v5/20278;
+this v6 delta has a distinct result and does not rewrite that receipt.
+
+`MirroreaProofFirstAuthorityLocalFrame` separately checks the actual local prior
+and canonical authority floor, derives exact retention of the three child-owned
+observation maps and arbitrary retained runtime, and composes the candidate
+value with the coordinator publication theorem. The genuine M9 stage, fixed
+source-derived restriction, registered FD and actual backend/floor installation
+remain physical premises; the pure Rust M9 constructor only produces a candidate.
+No parent observation map or caller-supplied invariant is accepted as a certificate.
+
+Current audit22837 checks199 modules/20455 owned declarations and177
+qualified false controls in187 commands, with9 modules rebuilt over190 pinned
+unchanged C objects. This is not a fresh199 rebuild. The earlier197/v5 fresh run
+remains separate. Two new frame modules and nine false guards are in the recipe.
 
 ## Reproduction
 
 Run from the repository root with Lean4.29.1. Set `MIR_PROOF_WORK_ROOT` to an
 existing external evidence directory after checking free disk/RAM. This creates
-a unique directory, compiles all197 source modules with an empty local import
-cache, audits every owned declaration, and checks168 deliberately false guards.
-Successful false controls exit1 solely because the guard evaluates false. No
-expected output or successful proof is injected into the executable transition.
+a unique directory, compiles all199 source modules with an empty local import
+cache, audits every owned declaration, and checks177 deliberately false guards.
+The current199 recipe is source-preserved and syntax-checked; it has not been
+executed as a fresh199 build at this checkpoint. Actual delta audit is above.
+Successful false controls exit1 solely because the guard evaluates false.
 
 ```python
 from pathlib import Path
@@ -132,7 +152,48 @@ new_negative_sources = {'FalseDActivateBeforePublish.lean': 'import MirroreaProo
                                   'open MirroreaProofFirst.CoordinatorUse '
                                   'MirroreaProofFirst.CoordinatorUseControls\n'
                                   '#guard (preparing.bind fun s => execute evaluate s '
-                                  '(.preparedAck 0 41 (105,7))).isSome\n'}
+                                  '(.preparedAck 0 41 (105,7))).isSome\n',
+ 'FalseDFrameAllRefuse.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                              'open MirroreaProofFirst.AuthorityLocalFrame '
+                              'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                              '#guard (prepared 0).isNone\n',
+ 'FalseDFrameChangesRuntime.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                                   'open MirroreaProofFirst.AuthorityLocalFrame '
+                                   'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                                   '#guard (prepared 0).map (fun s => s.retained) != some '
+                                   '[901,902,903]\n',
+ 'FalseDFrameDropsConsumer.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                                  'open MirroreaProofFirst.AuthorityLocalFrame '
+                                  'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                                  '#guard (prepared 0).map (fun s => s.observations.consumer) != '
+                                  'some [2,5]\n',
+ 'FalseDFrameDropsOwner.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                               'open MirroreaProofFirst.AuthorityLocalFrame '
+                               'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                               '#guard (prepared 0).map (fun s => s.observations.owner) != some '
+                               '7\n',
+ 'FalseDFrameDropsRelease.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                                 'open MirroreaProofFirst.AuthorityLocalFrame '
+                                 'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                                 '#guard (prepared 0).map (fun s => s.observations.release) != '
+                                 'some [19,23]\n',
+ 'FalseDFrameImportsForeign.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                                   'open MirroreaProofFirst.AuthorityLocalFrame '
+                                   'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                                   '#guard (prepared 2).map (fun s => s.facts.selectedAllowed) == '
+                                   'some false\n',
+ 'FalseDFrameReplay.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                           'open MirroreaProofFirst.AuthorityLocalFrame '
+                           'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                           '#guard ((prepared 0).bind (fun s => delta.bind (prepare s))).isSome\n',
+ 'FalseDFrameStaleFloor.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                               'open MirroreaProofFirst.AuthorityLocalFrame '
+                               'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                               '#guard (delta.bind (prepare staleFloor)).isSome\n',
+ 'FalseDFrameWrongPrior.lean': 'import MirroreaProofFirstAuthorityLocalFrameControls\n'
+                               'open MirroreaProofFirst.AuthorityLocalFrame '
+                               'MirroreaProofFirst.AuthorityLocalFrameControls\n'
+                               '#guard (delta.bind (prepare wrongPrior)).isSome\n'}
 assert not negative_sources.keys() & new_negative_sources.keys()
 negative_sources.update(new_negative_sources)
 for filename, content in negative_sources.items():
@@ -151,7 +212,7 @@ def visit(name):
     visiting.remove(name)
     order.append(name)
 for name in sorted(sources): visit(name)
-assert len(order) == 197
+assert len(order) == 199
 def limits():
     resource.setrlimit(resource.RLIMIT_AS,(6*1024**3,6*1024**3))
     resource.setrlimit(resource.RLIMIT_CORE,(0,0))
@@ -171,8 +232,8 @@ for name in order+["DPrerequisiteIntegratedAudit"]+[Path(n).stem for n in sorted
     else:
         assert process.returncode == 0 and not errors and "sorryAx" not in text,(name,text)
 counts = re.findall(r"AXIOM_AUDIT_OK (\S+) (\d+)",(work/"DPrerequisiteIntegratedAudit.log").read_text())
-assert len(counts) == 197 and len(negative_sources) == 168 and len(runs) == 366
-result = dict(at=datetime.datetime.now(datetime.timezone.utc).isoformat(),workdir=str(work),modules=197,owned=sum(int(count) for _,count in counts),qualified_false=168,commands=len(runs),runs=runs)
+assert len(counts) == 199 and len(negative_sources) == 177 and len(runs) == 377
+result = dict(at=datetime.datetime.now(datetime.timezone.utc).isoformat(),workdir=str(work),modules=199,owned=sum(int(count) for _,count in counts),qualified_false=177,commands=len(runs),runs=runs)
 (work/"RESULT.json").write_text(json.dumps(result,indent=2)+"\n")
 print(work,sha(work/"RESULT.json"),result["owned"])
 ```

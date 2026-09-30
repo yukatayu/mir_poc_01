@@ -1,94 +1,107 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 15:15 JST
+最終更新: 2026-09-30 16:05 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
-grants no roadmap/phase/theorem or implementation authority.
+creates no Canon/THM/OBL/SCN/Gate/Phase decision or new roadmap.
 
 ## document role
 
-Plan250 remains separately owner-paused after accepted I3-3 under ADR-0043.
-I3-4 requires explicit resume; I3-5/I3-6/NEXT-0 remain inactive. Plan247/249 are
-closed history. W5+/alpha are outside this W4 request. Private QUIC streams
-remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
+Plan250 remains the sole Canon-authorized roadmap, independently owner-paused
+after I3-3 under ADR-0043. No active Canon semantic milestone; I3-4 needs explicit
+owner resume. Plans247/249 are closed baselines. Task-local W4 is separate.
 
 ## current promoted package
 
-W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。A→B→C→D→Eは同じW4の作業区切りで、新しいsemantic milestoneではありません。
+Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
+LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
+W4-A/B and C are closed only in their recorded bounded LAB scopes. C integrated
+78756ad5, default806/feature818,190modules/19502owned/156false; its15 Rust files
+remain external/test-only/unadopted. W4-D remains incomplete. The owner requested
+a pause when a concrete implementation package can move to GPT-6.1-sol xhigh.
+That package and preserved remaining gates are in
+`docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`. Sole main/no subagents;
+no automatic model switch. After owner resume, stop again after D before E.
 
-最新の外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
-
-CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの局所実験です。既存の採用cut e5450e38と通常libraryの動作を置き換えていません。Dでは既存source→checked Core→生成edge→実private QUIC→同じ実行の観測へ接続します。唯一のrequester custodyと他processの非実行descriptor、元source/Core/引数/activation/ordinalと実request/result、M9とTLSの分離、新しい資源poolと未公開識別子の非escapeを使用前に確認します。単に局所Arcを渡す、操作IDを外部loopで順に呼ぶ、手書きreceiptを返す方法では完了にしません。
-
-観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
-
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの選定機構の証明と実M9接続条件を確認中です。
-
-Dでは、信頼済み親coordinatorが一つの局所利用区間だけを許可するBを選択しました。待機request全体はlockせず、全端点を停止・準備した後、実M9 publisherの確定を経て利用可能にします。追加の一般証明は、保持中の正当な権限更新による元の状態・結果の保持と、coordinatorから既存PublicationUseへの対応です。197module・20278所有宣言・168偽命題対照を176commandで検査しました（Cの190moduleはhash固定の既存object、7moduleを構築）。別途、空のimport cacheから全197sourceを再構築し、同じ20278所有宣言と168対照を366commandで検査しました。実M9発行と子ごとの検証記録保持、認証済み制御経路、唯一のsource進行、全入口・資源量との物理対応は使用前のgateです。実M9境界の17入力reviewを回収・照合し、子の実検証記録をM9内で厳密に保持する新しい接続方法を選定しました。既存の起動前更新APIは保持します。準備済み記録の追加不変条件・実FD由来の制御・結果保持までの利用区間を実装前に対応付けます。DのRust実装・新network実行はまだありません。
-
-Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
-`plan/proof-first-foundation-correspondence.md`. Exact receipts/current cursor:
-`docs/proof-first/RESUME.md`, `CURRENT_GOAL.md`, `W4_CHECK.json`, Report2614.
+DのB機構（親coordinatorによる一つの局所利用区間）とM9の局所検証記録保持を選定し、199module・20455所有宣言・177偽命題対照を187commandで監査しました。9moduleを構築、C190はsource/object hash固定で再利用した結果で、先行する全197source再構築とは別です。外部M9参照の7対照とdefault全451検査が通過しました。通常private-QUICビルドは既存のfeature条件不一致で失敗し、元コードでも同じE0599を再現しています。実FD/control、backend/floor更新、単一sourceとI3 admission、実network接続は未完了です。owner指定により、確定した実装packageをGPT-6.1-sol xhighへ渡す区切りで一時停止します。D全体の完了・全境界設計完了とは扱いません。設計変更と統合判断はAstra xhighで再確認します。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
 
 ## ordered self-driven packages
 
-| Package / macro position | Required result / first consumer | Startability / rough estimate |
+| Package / macro position | Direct consumer and required result | Readiness |
 |---|---|---|
-| W4-A / Macro1/2/5 | Preserved limited models/process evidence for B/C | Bounded evidence complete; retain exact receipts |
-| W4-B / Macro2/5 | Repo-integrated proof/dependencies and observed whole runners for C/D | Bounded integrated candidate complete |
-| W4-C / Macro1/5 | Relative admission, all entries, current authority, custody/resource conditions and application route for D | Closed in selected local profile;78756ad5 pushed/parity verified |
-| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Current: selected B coordinator/held-authority model passes; fresh197 reproduction passed and actual restricted-M9/observation review verified. Close source/physical/caller/resource gates before dependent internal code, then finite actual-process validation |
-| W4-E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign,119 and A–D residual union | Inactive; owner resume after D stop required |
-| Mandatory reading / Macro0 | Exact source/authority/process/observer cone before decisions | READ_LEDGER distinguishes full/hash-equivalent/delta/partial reads; historical612 is not a current unread cursor |
-| W5/W6/W7 | Persistence/recovery, broader secret observation, alpha | Outside this request |
-
-Dの境界設計はAstra high、確定した実装はSol highを推奨した既存計画を保持します。自動model切替やsub-agentは導入しません。D完了まで20〜40実作業時間という既報見積もりは低確度の過去目安で、経過時間だけで残りを差し引きません。Dの実装差分・検査経路を確定した時点で再評価します。
+| D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: known E0599 reproduced on original baseline and D reference; Sol xhigh |
+| D control/M9 preparation / Macro3/6 early | Actual registered FD provenance, exact grants, disabled in-place prepare/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D source/I3/result/network / Macro3/6 | One original source cursor, full Core/args/activation/ordinal, existing I3 permit, retained actual result and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
+| E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
+| W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
 
 ## self-driven macro phase reading
 
-Macro0 is evidence/corpus maintenance; Macro1/5 are the selected theory and
-proof boundaries. Macro2/3 provide reference and implementation evidence;
-Macro6 is the actual transport correspondence. D begins at its protocol/custody
-gate, not at claimed network completion. No whole-project phase recut occurs.
+Macro0 retains evidence and reproducibility; Macro1/5 establish semantic and
+proof boundaries. Macro2/3 supply reference and normal-build implementation;
+Macro6 connects actual process/transport state. D remains within this existing
+sequence, with no whole-project phase recut. Current local proof evidence is
+FM-5/6 within its declared model scope; the new process integration has not
+reached an executable validation path. Resume only after the model-switch pause.
 
 ## user decision gates
 
-No new owner answer is required for the authorized reversible research and
-conditional internal implementation. L0/L1, authority/privacy weakening,
-public API/ABI/wire, production, billing/publication and owner keys remain
-reserved. Q18/H/H2/C/C2, U/D and adoption/demonstration stay distinct.
-Oracle cannot supply an absent owner-authenticated trust anchor or resume Plan250.
+No new design answer is needed for the bounded implementation after explicit
+resume. L0/L1, authority/privacy weakening, public API/ABI/wire, production,
+billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain
+owner-reserved. Research may resolve ordinary implementation choices within the
+selected contract. Oracle is advisory and cannot supply an owner trust anchor.
 
 ## research discovery items
 
-| Question | Effect / current candidate versus smallest alternative / reopen trigger |
+| Item | Effect / alternatives / current position / reopen trigger |
 |---|---|
-| Source custody across processes | A: one requester cursor, inert checked descriptors at owners; B: external operation-ID loop is inadequate. New restore/transfer must prove no duplicate cursor before use. |
-| Process current M9 use | B selected: one exact scoped coordinator grant, disabled preparation, actual parent M9 publication, effective activation. General model maps to PublicationUse. Actual restricted successor/local observation review verified; physical correspondence remains before use. Old prelaunch API stays strict. A remains historical comparison. |
-| Remote original/current-use/result binding | Full source/Core/arguments/activation/ordinal plus actual request and result; semantic M9 remains distinct from TLS peer. A hash or old committed result alone cannot authorize current acknowledgment. |
-| Changed resource/caller graph | Recompute new pool aliases, costs, pending/tombstone limits and actual producers; no unpublished qualified identity may escape a rollback. Any new entry/restore/pruning reopens its C condition. |
-| Faithful observation | Existing private-I3 redacted references/counts from same actual events; generic Public M8 label is not source classification. New released fields or confidentiality claims reopen label/control/capture premises first. |
-| Unknown communication | Keep actual pending/result custody and truthful unknown; no retry-as-new-body, refund or process-death recovery without its protocol. E owns broad campaign, not D prerequisites. |
+| Current authority | Selected coordinator B; owner-only/sharing a local Arc does not establish process currentness. Prepare is disabled until actual parent publish and all activation. Reopen on a bypass or mismatched actual floor. |
+| Source custody + I3 admission | Retain original requester and inert owner descriptors; operation-ID loop or local source branch replacing I3 handoff is inadequate. Before body, establish the combined origin/one-use/failure/resource relation. |
+| Result and resources | Keep actual committed/incomplete outcome across fallible reporting, whole-activation result capacity and all physical producers. Reopen on new aliases, counters, entry paths, restore or pruning. |
+| Observation | Existing redacted I3 references/counts only; same actual events required. Broader secret timing/resource or active debug claims need their own W6 gates before dependent use. |
+
+No user answer is needed for the bounded implementation after resume; this stop
+is the requested model-switch checkpoint, not an unresolved owner design choice.
+Do not infer approval of119 proposals, signed acceptance or an alpha profile.
+
+## provisional remaining effort, requested2026-09-30
+
+| Work unit | Active hours / main uncertainty |
+|---|---|
+| D remainder |20–40; actual source/control/result/resource correspondence |
+| E |16–40; discovered counterexamples and whole A–E residual union |
+| W5 |40–100; full journal/restart, unknown effects, current head/non-resurrection |
+| W6 |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
+| W7 |24–60; coherent reusable finite alpha system and final review |
+
+Total140–340 active hours is a low-confidence planning estimate, not calendar
+commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
+need re-estimation after their guarantee profiles are made concrete. The earlier
+2026-09-10 estimates remain historical in the LAB plan. W7 means a verified
+finite alpha candidate; public service/long-term World-Web remains W8.
 
 ## maintenance tasks
 
-One Report2614 accumulates all packages. Update plan/status/tasks/samples dashboard
-at package close; preserve closed history and exact failed attempts. Use the
-persistent external workroot in RESUME; do not overwrite one-shot outputs.
-Heavy Rust/Lean runs stay serial with measured limits. Only known untracked
-reproducible build artifacts may be cleaned; preserve source/proof/evidence and
-Chrome. No external notifications/publication or host-share workspace.
+One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain source,
+commands, failures and review scope. No used premise moves to E merely because
+E performs broad regression. Current D199 recipe is preserved/syntax-checked;
+actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
+Full make docs passed after restoring the required section structure. Final
+pins/diff and actual Git result are retained in the external handoff receipts.
+Heavy commands serial, measured resources; no external notification/publication
+or host-share workspace; preserve all source/evidence/browser state.
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
+週間残量は06:48:14 UTCの確認で82%（使用18%）でした。次の確認は07:48:14 UTC以降、約50%で区切りの停止というowner条件を保持します。今回の停止理由はmodel切替であり残量不足ではありません。resetはownerのみ。再開後もD完了時にEの前で停止し、E・W5+・Plan250/I3-4を自動開始しません。
 
 ## non-promoted references
 
-C's fifteen Rust files remain external and unadopted; normal non-test build is a
-D entry obligation. General kernel results and finite Rust tests remain distinct.
-A–C closure grants no Canon/THM/OBL/phase/public/production/alpha acceptance.
-R01–R12 and119 rows keep their original owners; no used premise is left to E.
-The existing paused goaltool has no main resume API; explicit owner continuation
-governs without a duplicate goal. Continue after this C checkpoint, stop after D.
+C's fifteen Rust files and D's two-file M9 component remain external/unadopted.
+Conditional general proofs, finite Rust tests and physical process evidence are
+distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
+status. R01–R12 and119 rows retain their original ownership and adoption status.
+No used prerequisite is deferred to E. The same W4 goal is paused by the owner;
+there is no duplicate goal, automatic model switch or automatic Plan250 resume.

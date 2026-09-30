@@ -209,4 +209,4 @@ companion内の外部fresh-copyコマンドで再構築できます。既存W4-B
 
 W4-Cの通常代入列は [OwnerStatementAdmission](foundations/OwnerStatementAdmission.md) に現在の190module/156反例recipeと段階別証拠を保持します。元sourceの全handler・引数・文順序、現在のM9、実結果と一度だけの受理、局所全入口・資源条件について選定した局所範囲を閉じ、78756ad5で統合しました。外部15Rust参照のdefault806/feature818はtest-onlyの検証で、production採用ではありません。
 
-W4-Dの使用前モデルは [DPrerequisites](foundations/MirroreaProofFirstDPrerequisites.md) と独立manifestに保存します。保持中の権限更新と、有限cohortの中央利用区間からPublicationUseへの対応を検査します。197所有module監査と168反例が通り、7moduleを構築、C190は固定再利用です。別途全197fresh-copyも20278所有宣言/168対照/366commandで通過しました。実M9発行・認証済みFD・source custody・下位入口・物理資源との対応と実private QUIC接続は未完了です。既存B/Cの凍結manifest、sample root、host runner契約は変更しません。
+W4-Dの使用前モデルは [DPrerequisites](foundations/MirroreaProofFirstDPrerequisites.md) と独立199source manifestに保存します。中央利用区間・保持中権限更新・正確な子の検証記録frameを監査し、199module/20455所有宣言/177偽命題対照が通過しました。9module再構築、C190は固定再利用です。旧197/v5のfresh-copy366commandは別receiptです。実M9/backend/FD/source/資源と実networkの接続は未完了で、model切替の引継ぎでowner pauseします。

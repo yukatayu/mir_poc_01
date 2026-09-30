@@ -633,4 +633,4 @@ W4_CHECKの `c_statement_source_consumer_20260929` とreview後続recordを参�
 Rust参照版は実2文・S→T→S・同じworldでの継続を検査済みですが、全下位入口、
 書込み前資源と下位結果保持は未閉鎖で、production採用・α完成ではありません。
 
-W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに4proof/controlと所有宣言auditを追加します。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。
+W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに6proof/controlと所有宣言auditを保存します。現在199source/177対照のrecipeで、9module差分監査が通過、全199fresh再構築は未実行です。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。

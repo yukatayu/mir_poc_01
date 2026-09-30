@@ -50736,5 +50736,96 @@
     "status": "partial-reconsult",
     "role": "D exact M9/restricted process seam ranges 825-975; not a new full read",
     "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
+    "sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
+    "status": "full-read",
+    "role": "derived prepared-record invariant; sole-main authored/read v6, ownership audit34608 all197/20283/168 pass",
+    "at": "2026-09-30T06:37:19.588559+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m9_auth_verification.rs",
+    "sha256": "77eab8343f6304317ea5f90f8d373122bdb8107fef0f974a64d7002c319469b0",
+    "status": "partial-reconsult",
+    "role": "D local frame/control/normal build ranges 1090-1165;1195-1255;2180-2325;2400-2595;7520-7885;7885-8335;8385-8525;9000-9110;9320-9480;tail module wiring; not a new whole-file read",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs",
+    "sha256": "0e294fe2c24c6eab396ef7561052ff57fc3a4f6aca1d1164284d9d69529c129f",
+    "status": "partial-reconsult",
+    "role": "D local frame/control/normal build ranges 1-240 and original test/source fixture sites; external new test delta full authored/read; not a new whole-file read",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "partial-reconsult",
+    "role": "D local frame/control/normal build ranges 1560-1645;2440-2507;2670-2740; not a new whole-file read",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "status": "partial-reconsult",
+    "role": "D local frame/control/normal build ranges 1310-1385;5680-5805;7780-7920; not a new whole-file read",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "status": "partial-reconsult",
+    "role": "D local frame/control/normal build ranges 2078-2096;2205-2260, exact non-test E0599 caller/callee cfg mismatch; not a new whole-file read",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/workstreams.json",
+    "sha256": "419c088a35650cd95f3bf5cc1fce256b555dea488f9cd4f3c8ca32338a328286",
+    "status": "full-reconsult",
+    "role": "owner remaining-phase question; W units versus Canon lifecycle and finite alpha boundary",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "mirrorea_canon/README.md",
+    "sha256": "231dad414dc752e230030af3676f5ffa8626dcb5af1f187f6bbd705ff93b418c",
+    "status": "full-reconsult",
+    "role": "owner remaining-phase question; W units versus Canon lifecycle and finite alpha boundary",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "mirrorea_canon/MAP.md",
+    "sha256": "f7d3b53eac593862ee361af775cf8e97c380ab3fb9e8ecd679415b86f08b5322",
+    "status": "full-reconsult",
+    "role": "owner remaining-phase question; W units versus Canon lifecycle and finite alpha boundary",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "mirrorea_canon/adr/ADR-0043.md",
+    "sha256": "fb37c365260ba43174a4a486de3bcdf84572f3625fc904d5583d4074a11f4af8",
+    "status": "full-reconsult",
+    "role": "owner remaining-phase question; W units versus Canon lifecycle and finite alpha boundary",
+    "at": "2026-09-30T06:54:30.375366+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAuthorityLocalFrame.lean",
+    "sha256": "25f75ac5a4c9f8a2cdbb95dbaacfb4c121058b82a5844be91215f06f2c8e8baa",
+    "status": "full-read",
+    "role": "sole-main authored/read exact199 local-frame audit source; no physical premise inferred",
+    "at": "2026-09-30T06:56:10.599628+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAuthorityLocalFrameControls.lean",
+    "sha256": "b86c9e5d69b632527178733127c380fc786bd3fc6d0ba8ca0beea50aea664108",
+    "status": "full-read",
+    "role": "sole-main authored/read exact199 local-frame audit source; no physical premise inferred",
+    "at": "2026-09-30T06:56:10.599628+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/DPrerequisiteIntegratedAudit.lean",
+    "sha256": "b3fe3aedc7c2e1f50038eae3997b94b953b1fc937a6ad2e63a0a976c982430ac",
+    "status": "full-read",
+    "role": "sole-main authored/read exact199 local-frame audit source; no physical premise inferred",
+    "at": "2026-09-30T06:56:10.599628+00:00"
   }
 ]

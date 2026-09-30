@@ -2,11 +2,11 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: active W4; W4-A/B bounded evidence integrated, W4-C bounded conditions/integration closed, D selected-B prerequisite proof and M9 seam active, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
+- Current state: owner-requested model-switch pause in W4-D; A/B/C bounded scopes closed, D proof/M9 component checkpoint and implementation handoff preserved, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
 
 ## Objective
 
-Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. The full objective remains W4; the latest owner instruction for this run is to stop after W4-D, before W4-E. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
+Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. The full objective remains W4; the latest owner instruction adds a pause at the Astra→GPT-6.1-sol implementation handoff; after resume stop after W4-D, before W4-E. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
 
 ## Scope and assumptions
 
@@ -38,7 +38,7 @@ W3 fresh-copy source/checker/proof baseline ran998f38 and exited0 at2026-09-13T2
 
 ## Files changed
 
-Current D checkpoint:4 new Lean proof/control files, DPrerequisiteIntegratedAudit, independent197-source manifest/reproduction companion, READ_LEDGER/W4_CHECK, one report/plan and current status/sample mirrors. C/B frozen manifests and baseline Rust remain unchanged. C fifteen Rust reference files remain external/unadopted. Earlier file lists below are history.
+Current D checkpoint:6 new Lean proof/control files, audit, independent199-source manifest/reproduction companion, concrete model-switch handoff, READ_LEDGER/W4_CHECK, report/plan and status/sample mirrors. C/B manifests and production Rust unchanged; D two-file M9 reference remains external/unadopted.
 
 Forward checkpoint:45 reviewed Lean/support sources in samples/lean/foundations, existing source-check runner --with-owner-boundary, publication explanation, samples/script READMEs and current status/evidence mirrors. No new sample root. Exact45file list/hashes in W4_CHECK external mirror manifest.
 
@@ -61,7 +61,7 @@ Read-only git/resource/hash/Canon/code inventory commands as recorded above. pyt
 
 ## Evidence / outputs / test results
 
-Current D: full197-source fresh build5304exit0,20278owned declarations/168qualifiedfalse/366commands, exact source/log/manifest bindings verified. RESULTadf5e75537de5927c1754cb27aaad07058a3400c81f79f0acf0ad58aa73a54df. Prior incremental7-over190 audit24745 remains separate. make docs15844exit0 at06:26:26UTC; final result/status sync later is focused-diff checked. No D Rust/network run. External v6 prepared invariant38414passes standalone, not yet integrated/audited197.
+Current D:199/20455owned/177false/187command audit22837exit0,9compiled over190pinned C. Prior fresh197/v5/20278/168/366 is separate. New M9 component7focused and451full default pass, normal private-QUIC check E0599 fails on both reference and clean baseline; no fix/feature success claimed. Standalone frame/controls-v2 pass after retained controls-v1 type inference failure. No actual D process/FD/backend installation; docs/final handoff validation recorded below.
 
 Current C evidence (2026-09-30T05:14:31.087971+00:00): foreign-fault-retention-green-v1 default806/feature818 all pass0fail0ignored0filtered;8selectedpass,15Rust restored. General190/19502/156/167audit unchanged. Last Oracle N01 reproduced/repaired by main; complete14dispositions retained. C close is bounded to the selected local profile and integrated78756ad5 with push81795exit0/parity0/0. D implementation/network evidence remains due. Earlier evidence below retains its original cut.
 
@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-No new prompt is needed. Continue the authorized C→D work, stop after D before E, or at a reasonable checkpoint near50% weekly remaining. Check quota at least one hour apart; reset is owner-only. Current remaining84% was checked05:47:58UTC, next>=06:47:58UTC.
+After changing to GPT-6.1-sol xhigh: read docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md and RESUME.md, verify HEAD/dirty state and resume the same W4-D bounded implementation package. No subagents. Fix the reproduced normal-QUIC cfg mismatch, then registered control/M9 preparation within the fixed contract; keep source/I3/result/resource gates explicit. Stop after D before E; Astra xhigh handles material contract changes and integrated acceptance. Weekly82%06:48:14UTC, next>=07:48:14UTC; owner resets only.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Documentation.md updated: W4 active/current evidence and distinct W3 closure; no runtime capability promotion.
+Documentation.md updated: W4-D model-switch pause, current199 audit/M9 component evidence and remaining integration gates; no runtime capability promotion.
 
 ## docs/project-status.md update status
 
-更新済み: W4 current position now records the active proof/model gate while preserving accepted Canon/Plan250 state and W3 history. No new runtime capability is claimed.
+更新済み: W4-D current evidence and owner-requested model-switch pause are recorded, preserving accepted Canon/Plan250 state and W3 history. No new runtime capability is claimed.
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-samples_progress.md updated: W4 active external model evidence and existing baseline distinguished from runnable network workflow. No new sample status or taxonomy promotion.
+samples_progress.md updated: D model/component evidence and pause are distinguished from runnable network workflow; current199 reproduction status is explicit. Existing sample roots remain unchanged.
 
 ## Reviewer findings and follow-up
 
-Current D: boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Main added3 general prepared-record invariant theorems; standalone38414passes but final audit/integration due. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current D: boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,11 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-D's new actual source-cursor/process/private-QUIC integration is not implemented or validated yet; its prerequisite C acceptance is pending. E's full network/fault/regression/119-row completion campaign is outside the current stop-after-D run. The local Rust default/feature and Lean audits above were run; no new fresh190 audit or whole-language/network/privacy/recovery proof is claimed. Broad corpus reading has no blanket completion claim; exact reads/reconsults remain in READ_LEDGER. Historical skipped checks below remain tied to their original dated checkpoints.
+Current model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current proof/docs checkpointd526b866 committed with --no-gpg-sign, normal push91741exit0 and HEAD/origin parity0/0 verified. Later application-procedure/current-record synchronization is own dirty work. Productionbaselinee5450e38 is unchanged.
+Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
+
+Historical proof/docs checkpointd526b866 committed with --no-gpg-sign, normal push91741exit0 and HEAD/origin parity0/0 verified. Later application-procedure/current-record synchronization is own dirty work. Productionbaselinee5450e38 is unchanged.
 
 Forward 2026-09-14T18:43:52.368794+00:00: reviewed45file owner proof mirror and runner/status61paths committed96746e206b9e52504c80548e9dc9fe6f4b3eff54 (cc3574), normal push522bb8, remote exact36ad93. Later source-credit/work-interval/coordinator remains external and W4 active.
 
@@ -4477,3 +4479,38 @@ Selected B from completed boundary Oracle: one authentic scoped local-action gra
 
 
 2026-09-30T06:28:58.396092+00:00: D narrow Oracle full answer recovered/verified/dispositioned16; authority seam selected with no canonical cross-child observation merge, strict local map framing and stronger authority comparator. Exact sources reconsulted: restricted_for_execution clears source-release map; matches_for_restore is weaker than full authority equality; occurrence IDs use generation/request/locus. Actual FD custody cannot be replaced by decoded TrustedControl data. Grant finish must follow coherent local completion. External coordinator-v6 adds derived prepared-record/staged-or-published correspondence, standalone38414exit0; integration/audit next, current197 corpus remains v5. make docs15844passed before final status/common section synchronization; git diff check next. No D runtime/Canon change and no final stop.
+
+
+### 2026-09-30T06:37:19.588559+00:00 — D derived prepared-record invariant
+
+Checkpoint13e7b893 contains prior197/v5 proof/recipe/status, push77385exit0/parity0/0. Successor v6 adds PreparedCorrect plus apply/reached/prepared-at-publication derivations; no Allowed premise added. Audit34608exit0 rechecks197module/20283owned/168false/176command, seven compiled over190 pinned unchanged C objects. RESULT 42d28becd670469bed36d41214ed2bda0b8d8467238698acfab53c5fe2ee0fb7. Source+independentDmanifest+recipe description+ledger updated; prior fresh197/20278/366 receipt remains v5, not upgraded by wording. New AuthorityLocalFrame standalone passed; generic exact map/runtime preservation is conditional on authentic M9 stage/projection/FD custody and not yet integrated. D physical implementation remains open. plan/updated; remaining status sync/validation at next checkpoint; no Canon/119/E promotion.
+
+
+### 2026-09-30T06:54:30.375366+00:00 — D M9 component and owner-requested model handoff
+
+New external m9-live-frame-controls-v1 contains M9 restricted live owner delta and actual source/M9 controls. Full parent exact delta precedes restriction; live and canonical floor use strong authority-facts equality; all three actual child observation maps are retained; incident old strict relation and nonincident generation-only relation are checked. No live runtime/backend/floor install, control credential or process execution follows. RED26058exit101 has2new-use failures+1prelaunch positive; GREEN76891exit0 has3pass; expanded23620exit0 has7pass. Full25633 default451pass0fail0ignored0filtered, then normal i3-private-quic check fails E0599 at sys5_i3_private_quic.rs2245 (callee cfg only i3-process-test-seams). Clean baseline44602 reproduces same E0599; this existing build closure is not a M9 regression, remains unfixed and explicitly handed off. Every overlay restored exact baseline Rust; no production adoption. New local frame general proof standalone passes, controls-v1 type inference failure retained/controls-v2 pass;199ownership audit underway.
+
+Owner asks to pause at suitable model switch: Astra xhigh for D boundary/design/integration, GPT-6.1-sol xhigh for bounded implementation and E tests, Astra xhigh for A-E residual union/acceptance. Official exact model pages fetched; both support xhigh; task-specific recommendation is parent judgment, not measured speed/quality. docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md fixes next bounded control/M9 package, exact inputs/invariants/positive-negatives and remaining source/I3/result/resource gates; no whole-D design completion claim. Owner also asks remaining phases: workstreams.json targets W7 finite verified-alpha candidate, W8 horizon-only. Parent provisional active-hour estimates D20-40/E16-40/W5 40-100/W6 40-100/W7 24-60, sum140-340; not new Canon roadmap or accepted alpha profile, wide uncertainty and earlier2026-09-10 estimates retained as history.
+
+Weekly quota82%06:48:14UTC (18%used), next>=07:48:14UTC. Stop requested for model switch after this checkpoint; no subagents/external notification/publication or new semantic work. plan/updated; status/docs/checkpoint validation still due.
+
+
+### 2026-09-30T06:56:10.599628+00:00 — D exact local frame model audit
+
+Audit22837exit0:199modules/20455owned/177qualifiedfalse/187commands,9compiled over190 source/object-pinned C modules. RESULT d4267a444b01fb1bceed94e03d413a18f0b7389d56b8227fe1765da3a7a0aa11. Source/control/audit, independent D199 manifest,21new+156prior false-control recipe and ledger integrated. Recipe source preserved/syntax-checked, not a fresh199 run; earlier197/v5 all-source receipt retains its original20278 scope. Model derives exact observations/retained-state and local prior/floor conditions, with explicit physical stage/restriction/FD/backend premises. It does not classify the pure M9 constructor as completed physical preparation. No Canon/THM/OBL/119 or E activation.
+
+
+2026-09-30T06:59:30.332118+00:00: D external M9 normal default non-test cargo check21121exit0; exact2source restoration verified. Private-QUIC normal check remains failed on both reference and baseline. Current199 manifest/recipe and model-switch handoff pending final docs/pin/diff/Git checkpoint; no extra semantic implementation after owner stop request.
+
+
+### 2026-09-30T07:05:57.963112+00:00 — Handoff documentation validation correction
+
+make docs60104exit2: agent config, Canon index and source hierarchy passed; validate_docs rejected tasks.md because its rewritten snapshot omitted the eight required section headings. Corrected the snapshot to the existing TASKS_REQUIRED_HEADINGS order and separated owner decisions from research. No validator weakening or semantic change. The failed log/receipt docs-handoff-v1 is retained. Final full docs rerun follows; earlier pin check99417 passed199 source/audit/recipe pins,6758ledger entries with6745 unchanged prefix, receipt hashes and557 unchanged production/Canon paths. No source implementation is started after this model-switch checkpoint.
+
+
+2026-09-30T07:11:56.297735+00:00: make docs15923exit2 reached the final snapshot-source gate and found missing concrete Canon/plan paths in rewritten tasks.md. Restored ADR-0043 and the existing LAB correspondence file; no validator change. The v2 failure/receipt remains retained. Exact task-map headings/order and all snapshot-source references are checked before full v3 rerun.
+
+The focused reference check initially still failed because the references were under document role; the validator requires them in current promoted package. Moving those existing references into that exact section makes the original focused gate pass. No additional full-run success is claimed before v3.
+
+
+2026-09-30T07:17:54.581459+00:00: Full make docs64984exit0 after correcting the task-map headings; prior60104exit2 and15923exit2 are retained, not counted as success. Source/recipe/audit/receipt pins, 6758-ledger/6745-prefix and unchanged production/Canon checks accompany this checkpoint. This final result/status metadata sync follows the full docs run and receives focused JSON/heading/diff checks. Final commit/push/parity are recorded only after execution in d-source-process/GIT-HANDOFF-v1.json. Owner model-switch pause, D incomplete, E/W5+ inactive; no active commands/Oracle/subagents or external notifications.

@@ -53759,5 +53759,153 @@
     "source_sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
     "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v6/FIRST.json",
     "scope": "Three derived prepared-record/staged-or-current/publication equality theorems, standard axioms. External standalone passed; integrated197 audit still v5. Audit/integration due before physical use."
+  },
+  "d_prepared_invariant_20260930": {
+    "at": "2026-09-30T06:37:19.588559+00:00",
+    "tool": 34608,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-prerequisites-v2/RESULT.json",
+    "sha256": "42d28becd670469bed36d41214ed2bda0b8d8467238698acfab53c5fe2ee0fb7",
+    "modules": 197,
+    "owned": 20283,
+    "qualified_false": 168,
+    "commands": 176,
+    "scope": "D pre-use prerequisite models only: broader held-authority framing/refinement and coordinator scoped grants mapped to PublicationUse for arbitrary finite cohort; prepared versus effective installation; exact endpoint/kind/serial finish. PreparedCorrect, apply_prepared, reached_prepared and prepared_value_at_publication are derived from actual model transitions. Four new modules and three existing publication modules compiled;190 imported C source/object identities pinned and unchanged. Existing156 and new12 qualified false controls. No fresh197 rebuild; no physical authentication/M9 issuer/backend correspondence/runtime resource closure or D real-process acceptance.",
+    "prior_fresh197": "20278 owned on v5; not silently upgraded to v6",
+    "commit_prior": "13e7b893 pushed77385exit0, remote parity0/0"
+  },
+  "d_m9_live_frame_component_20260930": {
+    "at": "2026-09-30T06:54:30.375366+00:00",
+    "scope": "external unadopted M9 pure restricted candidate constructor, no live backend/floor install or FD/network/source execution",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-controls-v1",
+    "pins_sha256": "b51c873b4b53488562de158729e46e7eb2f8c7045cedcb32f24c598c8f410d4c",
+    "evidence": {
+      "m9-live-frame-red-v1-check": {
+        "tool": 26058,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-red-v1-check/RESULT.json",
+        "sha256": "afdbe5ddbcee867eb68b615f13a75a96ea01eaccf6fb4841826bf983dc76b4b8",
+        "exit": 101,
+        "runs": null,
+        "restoration_sha256": "92dcd5b4e8771bbc59710087327c8b611d78ae0d45b4716c178a626cd189dbc3"
+      },
+      "m9-live-frame-green-v1-check": {
+        "tool": 76891,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-green-v1-check/RESULT.json",
+        "sha256": "38be16e2857f0159c6bd6b9281046800040ac1d22a3cb0a7ccf594b034dbde66",
+        "exit": 0,
+        "runs": null,
+        "restoration_sha256": "667180c4c8d07b3e6887ae3edaa3c75bb65b6ea6ca1471c03b4002d19e639c73"
+      },
+      "m9-live-frame-controls-v1-check": {
+        "tool": 23620,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-controls-v1-check/RESULT.json",
+        "sha256": "5fc8411f93c8afdc257c1354fdf26476300a7e6c4cd5928ee3805209f8dd0d69",
+        "exit": 0,
+        "runs": null,
+        "restoration_sha256": "f1d336a6879080846076ba8b44b3ae7f6c1362bd95cdce70296b5784fab53a0a"
+      },
+      "m9-live-frame-full-v1": {
+        "tool": 25633,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-full-v1/RESULT.json",
+        "sha256": "43257b778fe8272cab51e0a5f536a0863df69c5bbb783a294e4c18fee8b969a6",
+        "exit": null,
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "da5fd861295e082733d909c231ba9fd87cebb1e80c232c10d1ccd073d0d2432b"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 101,
+            "log_sha256": "d5327a54edec9eb34c41fcb6ec1875e5ed43027c5548cc498e5f68370bf956b5"
+          }
+        ],
+        "restoration_sha256": "8dfae917467a1fd32db0426df7d7c247113fd5f0e24b628854b394c1fccfdbe9"
+      },
+      "normal-quic-baseline-check-v1": {
+        "tool": 44602,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/normal-quic-baseline-check-v1/RESULT.json",
+        "sha256": "89a47822e89a62157a81290c6d2cc5d8780b769c047f432b9e39ac8491fbff59",
+        "exit": 101,
+        "runs": null
+      }
+    },
+    "results": "RED2fail+1positive; GREEN3pass; expanded7pass; fulldefault451pass0fail0skip. Normal private-QUIC cargo check FAILED E0599; same failure reproduced on baseline13e7b893. No fix or feature success claimed.",
+    "correspondence": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M9-FRAME-CORRESPONDENCE-v1.md",
+    "correspondence_sha256": "49fb744148aea243b3ba3e3be1d8450341adf023607511710a7514e7f4ed4b8d"
+  },
+  "owner_model_switch_20260930": {
+    "at": "2026-09-30T06:54:30.375366+00:00",
+    "instruction": "Stop at a suitable implementation handoff for manual model switch. Astra xhigh design/integration; GPT-6.1-sol xhigh implementation/test execution. No automatic model change or subagents. D then stop before E persists.",
+    "handoff": "docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "status": "Owner-paused at bounded implementation handoff; D incomplete. Git result in external GIT-HANDOFF-v1.json.",
+    "quota": "82% remaining06:48:14UTC; next>=07:48:14UTC; near50% stop still applies"
+  },
+  "d_local_frame_proof_20260930": {
+    "at": "2026-09-30T06:56:10.599628+00:00",
+    "tool": 22837,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-local-frame-v1/RESULT.json",
+    "sha256": "d4267a444b01fb1bceed94e03d413a18f0b7389d56b8227fe1765da3a7a0aa11",
+    "modules": 199,
+    "owned": 20455,
+    "qualified_false": 177,
+    "commands": 187,
+    "scope": "D conditional prerequisite models, derived prepared records and exact local authority/observation/retained-state frame; current199 source pins,9compiled over190 pinned C objects. No fresh199 build/physical FD/M9 backend/source-process acceptance.",
+    "source_manifest_sha256": "b6a8f6e4208de395d2dd5a2743a90abb889bb51e3f0bc0fc56e0d8ee26e13c4a",
+    "recipe_sha256": "a4bdf9a48fed8ae08e38576d3841f12c5feb75bf7122003b38364ac88e7a6746",
+    "recipe_status": "preserved/syntax-checked; no fresh199 run",
+    "standalone": "framev1 PASS, controls-v1 type inference failure retained, controls-v2 PASS"
+  },
+  "d_m9_normal_default_20260930": {
+    "at": "2026-09-30T06:59:30.332118+00:00",
+    "tool": 21121,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m9-live-frame-normal-default-v1/RESULT.json",
+    "sha256": "7748522c019c4546221bffdcb9b2d0b138c3995b984a4d25c7fe252d64e41411",
+    "status": "non-test normal default cargo check PASS; private-QUIC E0599 baseline remains unfixed"
+  },
+  "d_handoff_docs_20260930": {
+    "attempt_v1": {
+      "tool": 60104,
+      "exit": 2,
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-handoff-v1.json",
+      "cause": "tasks.md omitted eight required headings; restored existing sections/order, no validator change"
+    },
+    "status": "PASS after preserved failed v1/v2; final metadata checked separately",
+    "attempt_v2": {
+      "tool": 15923,
+      "exit": 2,
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-handoff-v2.json",
+      "sha256": "dbd7f5a42f8b779c24491ff06dc65047112dadb2d516d17c9a9ed4f6f9cde7d1",
+      "cause": "tasks.md omitted existing Canon and plan file references; restored ADR-0043 and current LAB correspondence paths"
+    },
+    "attempt_v3": {
+      "tool": 64984,
+      "exit": 0,
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-handoff-v3.json",
+      "sha256": "0c687aca5a89b6ac71849a4062301c9f4e79005ddd65807bd952c482b8b651e7",
+      "scope": "Full make docs after task-map heading/order correction; this final result/status metadata sync follows, with focused validation."
+    }
   }
 }

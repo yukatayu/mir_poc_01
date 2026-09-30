@@ -1,18 +1,60 @@
-# RESUME — D prerequisite proof and actual M9 seam
-Updated 2026-09-30T06:15:37.325954+00:00. SOLE MAIN/NO SUBAGENTS. Owner: C→D→STOPbeforeE; explicit continuation governs paused goaltool, no duplicate goal. C bounded closed/integrated78756ad5. D incomplete, no D Rust implementation/network evidence. HEAD8e864304 pushed62080exit0/parity0/0; own D proof/docs dirty, baseline Rust unchanged.
+# RESUME — owner-requested model-switch pause within W4-D
 
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration;D=I/d-source-process;P=I/c-source-effect;CD=P/statement-current-development.
+Read W4_D_IMPLEMENTATION_HANDOFF.md first for exact contract, inputs, remaining
+gates and next bounded package. Same W4 goal; sole main/no subagents. Owner now
+requests pause when moving Astra xhigh design to GPT-6.1-sol xhigh implementation.
+Do not automatically resume or switch. After owner resume, stop again after D
+before E. D incomplete, E/W5+/Plan250-I3-4 inactive. Canon unchanged.
 
-Fresh197 tool5304 EXIT0 all197/20278owned/168false/366commands; D/mir-w4-d-prerequisites-mv8fbwqj RESULTadf5e75537de5927c1754cb27aaad07058a3400c81f79f0acf0ad58aa73a54df. Source/log hashes, all197pins, priorledger prefix and15Rust unchanged verified. No Lean/Rust active. No active Oracle. mir-w4-d-authority-r1 tool92088exit0 completed06:23:57UTC,17files/prompt/actual6Pro-max/finalDOM verified. ANSWER25d0318df87fbd230d5367ffb0d15ef6f2dff29b2367eda12b51cd4cdb5ce29c;16dispositions. New exact M9 live observation frame selected, no global merge/old API weakening. D/coordinator-use-v6 standalone38414exit0 adds3 prepared-record invariant theorems, external only; needs audit/pins/integration before physical use. No Rust/Lean active. make docs15844exit0 completed06:26:26UTC; final metadata/common report sync afterward with focused diff required.
+HEAD before this checkpoint13e7b893, pushed/parity0/0. This successor contains owned proof/status/handoff
+changes; production Rust restored. No Rust/Lean/Oracle/docs jobs remain.
+Final Git outcome is external d-source-process/GIT-HANDOFF-v1.json; read it
+and inspect actual HEAD/dirty state. Do not infer commit/push success from a path.
 
-Selected B from completed boundary Oracle11397: ANSWER5dc9ccf2c7d1a536cf8a82b873b78e927bd05a4af755bb69a58a0e94cd3a642b,26inputs/prompt/6Pro-max/finalDOM verified,20dispositions. One actual parent M9 publisher; unique scoped local-action grant BEFORE delivery; exact endpoint/kind/serial finish after coherent local action. No interval across QUIC wait or whole held-request ban; no timeout/death/destructor release. Close/drain→authentic stage→disabled backend prepare/exact ACKs→actual publisher commit/revision binding→effective activate all→reopen.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
+D=I/d-source-process. C reference=I/c-source-effect/statement-current-development/
+foreign-fault-retention-green-v1 (15flatfiles/PATHS, unadopted/test-only).
 
-Models: D/kernel-prerequisites-v1 RESULT021310126b2de52b09385d76d68d04eec0f9faf53c3b78cfdb0b362b9800bdeb tool24745exit0;197modules20278owned168qualifiedfalse176commands,7compiled/190source+objectpins unchanged. New4proof/control+audit+separateDmanifest/recipe integrated uncommitted. HeldAuthority standalone95852exit0 frames actual retained owner/waiting/history/cursor/collection across monotone authority head and composes admitted/refinement/current-ack; old idle-only Path unchanged. CoordinatorUse standalone29931exit0 simulates PublicationUse for arbitrary finite cohort; exact grant/current view/prepared vs enabled; controls3endpoints passed. Failed versions retained. First integration script failed only wrong glob count16 vs15 after copying5files+manifest; successor resumed remaining writes without overwrite; no evidence lost. Fresh197 successor5304 also passes366commands; old incremental197 result remains separately accurate.
+D prepared invariant v6 audit34608exit0:197/20283owned/168false/176commands,
+RESULT42d28becd670469bed36d41214ed2bda0b8d8467238698acfab53c5fe2ee0fb7.
+New authority local frame audit22837exit0:199/20455owned/177false/187commands,
+9rebuilt over190pinned C; RESULTd4267a444b01fb1bceed94e03d413a18f0b7389d56b8227fe1765da3a7a0aa11.
+New2frame/control modules+audit and D199manifest/recipe integrated. Current199
+recipe source/syntax checked, not fresh199 executed. Prior fresh197/v5/20278/
+168/366 tool5304 receipt unchanged. Frame proof standalone passed; controls-v1
+inference error retained, controls-v2 passed. Ordinary logical axioms only.
 
-AUTHORITY-SEAM-v1 candidate: genuine full parent delta first, restrict each endpoint (including unaffected owner), authenticated registered control record, M9 compares live to expected prior ignoring ONLY M9-owned observation maps and preserves those maps exactly in successor. Parent operation-free; no global audit-map merge claim. Existing prelaunch strict delta stays unchanged. Actual M9 source/observation/provenance issue review completed; actual constructor/FD/retained-state correspondence remains before dependent use. C shared Arc does not cross processes. One requester original source cursor/fullCore/fullargs/globalactivation+ordinal; inert owner descriptor not second evaluator; protect generic boot/emitter/ingress/cut/lifecycle routes. Same actual request/body/reply/receive causality and physical producer budgets remain gates.
+D M9 external reference m9-live-frame-controls-v1 two files/PATHS. Genuine full
+M9 stage before restriction, exact live/floor authority facts, exact3child maps,
+incident old strict relation or nonincident generation-only change. Purecandidate,
+no actual floor/backend install or FD credential. RED26058 2failure+1positive;
+green76891 3pass; expanded23620 7pass; full25633 default451allpass/0skip. Same
+runner then private-QUIC normal checkFAILED E0599 line2245 missing cfg-only
+write_blob_length_prefix_only. Cleanbaseline44602 samefailure confirmed. No fix.
+Normal default non-testcheck21121PASS. All Rustoverlays restored. No networkrun.
 
-C frozen CD/foreign-fault-retention-green-v1,15flatfiles/PATHS restored; default91316all806/feature68820all818/focused17099all8pass. Cproof190/19502/156, inventoryv4 20pins205lexicalcalls. These are bounded local/test-only unadopted reference, not normal non-test process implementation. Last C review recovered14dispositions; last small fault-retention fix locally reviewed. Productionbaselinee5450e38/Canon/THM/OBL/119/Plan250/I3-4 unchanged. E/W5+/alpha notactive.
+BoundaryOracle11397 verified20dispositions; M9Oracle92088 completed/verified
+17inputs16dispositions at06:23:57. No activejob/noresend. New M9Rust+localframe
+proofs are post-review main-checked/tested, not claimed Oracle-reviewed source.
+See M9-FRAME-CORRESPONDENCE-v1 external and handoff for conditional model vsactual
+preparation; existingM9prelaunch API unchanged. All actual FD/solecursor/I3permit/
+resultretention/resource/entry closure gates remain before dependent use.
 
-Weekly84%05:47:58UTC next>=06:47:58UTC; stopnear50%reasonablecheckpoint, ownerresetonly. Resources06:02root5.2GiB/RAM3.3available/swap9.9; serialRust8GiB-j1/Lean6GiBtrust0-j1. No externalnotify/publication/hostshare/subagents. Preserve source/proof/logs/browser.
+Weekly82%06:48:14UTC next>=07:48:14UTC; near50%checkpoint, ownerresetonly. This
+pause is model switch, not quota exhaustion. No externalnotify/hostshare/subagents.
+Rust8GiB-j1/testthreads1, Lean6GiBtrust0-j1 serial;root~5GiBavailable before runs.
+Existinggoaltoolwaspaused before continuation; keep samegoalpaused onownerstop.
 
-NEXT focused review/own checkpoint commit--no-gpg-sign/push/parity, then v6 audit/integration and actual M9 source/observation relation plus registered control/combined source-I3 lower-entry proof before dependent runtime code. Continue D after checkpoint, no final stop. Full reviewer disposition then actual normal source-process implementation after pre-use obligations. OneReport2614. Status/source documentation synchronized for selectedB and model gates; no semantic milestone close.
+Owner phase question answered: D20-40/E16-40/W5 40-100/W6 40-100/W7 24-60 active
+hours, total140-340 provisional lowconfidence; W7 finite verified-alpha candidate,
+W8 long-term outside. No alpha scope adoption/new roadmap. Exact model official
+pages fetched: Astra/6.1-sol supportxhigh; task allocation recommendation judgment,
+no measured project comparison. Resume first normalQUICcfgfix/controlM9package,
+returnAstra for material source/I3/result/resource contract change and acceptance.
+
+Final handoff validation 2026-09-30T07:17:54.581459+00:00: make docs64984exit0 after retained60104exit2
+for missing task-map headings and15923exit2 for current-section references; corrected to the unchanged validator contract.
+Source/audit/recipe and receipt pins, ledger prefix, production/Canon restoration
+and final diff are checked in FOCUSED-HANDOFF-v1.json. This final metadata sync
+follows the full docs run. No new semantic implementation or fresh199/network run.
+Same W4 goal remains owner-paused; await manual model switch and resume.

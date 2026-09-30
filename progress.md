@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-30 15:15 JST
+最終更新: 2026-09-30 15:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,11 +56,11 @@ public/production layers remain later.
 ## current milestone position
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
-sole task-local goal, resumed by the owner on2026-09-26,
+sole task-local goal, resumed on2026-09-26 and paused at the owner-requested model-switch checkpoint on2026-09-30,
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
+週間残量は06:48:14 UTCの確認で82%（使用18%）でした。次の確認は07:48:14 UTC以降、約50%で区切りの停止というowner条件を保持します。今回の停止理由はmodel切替であり残量不足ではありません。resetはownerのみ。再開後もD完了時にEの前で停止し、E・W5+・Plan250/I3-4を自動開始しません。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -70,15 +70,15 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの選定機構の証明と実M9接続条件を確認中で、Dの実装・実network証拠はまだありません。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回はowner指定のmodel切替で一時停止し、再開後もW4-Dの検証・記録・統合後、Eの前で止めます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの証明とM9候補構築の限定参照検査まで進み、model切替のため一時停止します。Dの実process/network接続は未完了です。
 
-Dでは、信頼済み親coordinatorが一つの局所利用区間だけを許可するBを選択しました。待機request全体はlockせず、全端点を停止・準備した後、実M9 publisherの確定を経て利用可能にします。追加の一般証明は、保持中の正当な権限更新による元の状態・結果の保持と、coordinatorから既存PublicationUseへの対応です。197module・20278所有宣言・168偽命題対照を176commandで検査しました（Cの190moduleはhash固定の既存object、7moduleを構築）。別途、空のimport cacheから全197sourceを再構築し、同じ20278所有宣言と168対照を366commandで検査しました。実M9発行と子ごとの検証記録保持、認証済み制御経路、唯一のsource進行、全入口・資源量との物理対応は使用前のgateです。実M9境界の17入力reviewを回収・照合し、子の実検証記録をM9内で厳密に保持する新しい接続方法を選定しました。既存の起動前更新APIは保持します。準備済み記録の追加不変条件・実FD由来の制御・結果保持までの利用区間を実装前に対応付けます。DのRust実装・新network実行はまだありません。
+DのB機構（親coordinatorによる一つの局所利用区間）とM9の局所検証記録保持を選定し、199module・20455所有宣言・177偽命題対照を187commandで監査しました。9moduleを構築、C190はsource/object hash固定で再利用した結果で、先行する全197source再構築とは別です。外部M9参照の7対照とdefault全451検査が通過しました。通常private-QUICビルドは既存のfeature条件不一致で失敗し、元コードでも同じE0599を再現しています。実FD/control、backend/floor更新、単一sourceとI3 admission、実network接続は未完了です。owner指定により、確定した実装packageをGPT-6.1-sol xhighへ渡す区切りで一時停止します。D全体の完了・全境界設計完了とは扱いません。設計変更と統合判断はAstra xhighで再確認します。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | External test-only C reference806/818 passes; existing production and I3 baseline retained | 着手可能: non-test private runtime reification and actual process/QUIC checks; E campaign remains inactive |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; normal private-QUIC E0599 baseline failure retained | 再開後着手可能: bounded Sol implementation handoff; normal QUIC cfg fix/control/preparation first, then source/process gates; E inactive |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -601,3 +601,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 15:15 JST: DのB機構を選定し、保持中の権限更新とscoped grantの一般証明・197所有module監査・168偽命題対照を検査。7module再構築/176commandでC190は固定再利用。全197fresh検査と実M9境界reviewを継続し、D実装前の物理条件を確認中。
 
 - 2026-09-30 15:22 JST: Dの全197sourceを空cacheから再構築し、20278所有宣言・168偽命題対照・366commandを確認。実装前の物理対応は継続。
+
+- 2026-09-30 15:58 JST: D199/20455/177監査とM9全451検査を確認。通常QUICビルドの既存E0599を再現し、具体的な修正・control/M9接続packageを保存。ownerのmodel切替停止へ記録を同期。
