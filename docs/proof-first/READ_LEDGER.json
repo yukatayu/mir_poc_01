@@ -50673,5 +50673,68 @@
     "status": "full-reconsult",
     "role": "D exact finite current-use protocol reconsult; prior full retained, no new corpus count",
     "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementHeldAuthority.lean",
+    "sha256": "dc9efa20210ce5b5d62f9fd5af9e44b6961854d59c472a24d2d06f783b414133",
+    "status": "full-read",
+    "role": "sole-main authored/read D prerequisite proof/control/audit; exact audited source",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementHeldAuthorityControls.lean",
+    "sha256": "d02f69ec40de55d0670f0b212a96188b3d25443e9f5740d7dcf4ab259ddae028",
+    "status": "full-read",
+    "role": "sole-main authored/read D prerequisite proof/control/audit; exact audited source",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
+    "sha256": "f2af706bd7e49690f8638ca6d687cc8464fd4098b552fa239f8a408bd7f55833",
+    "status": "full-read",
+    "role": "sole-main authored/read D prerequisite proof/control/audit; exact audited source",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUseControls.lean",
+    "sha256": "4a58cfc35338d4326b5213e3f7c818b449ba434dc3fa6551121b498faad68ace",
+    "status": "full-read",
+    "role": "sole-main authored/read D prerequisite proof/control/audit; exact audited source",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/DPrerequisiteIntegratedAudit.lean",
+    "sha256": "62ebcf2259246305534e06cfe045abd77d47bd471e973d1d889f60765e5d6342",
+    "status": "full-read",
+    "role": "sole-main authored/read D prerequisite proof/control/audit; exact audited source",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m9_auth_verification.rs",
+    "sha256": "77eab8343f6304317ea5f90f8d373122bdb8107fef0f974a64d7002c319469b0",
+    "status": "partial-reconsult",
+    "role": "D exact M9/restricted process seam ranges 7687-7808;7890-8040;8390-8520;9320-9385; not a new full read",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "partial-reconsult",
+    "role": "D exact M9/restricted process seam ranges 2440-2508;2600-2740;2780-2885;14530-14660; not a new full read",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "status": "partial-reconsult",
+    "role": "D exact M9/restricted process seam ranges 1480-1605;9240-9445; not a new full read",
+    "at": "2026-09-30T06:13:08.333531+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+    "status": "partial-reconsult",
+    "role": "D exact M9/restricted process seam ranges 825-975; not a new full read",
+    "at": "2026-09-30T06:13:08.333531+00:00"
   }
 ]

@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 14:36 JST
+最終更新: 2026-09-30 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -25,7 +25,9 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。次はDのprocess境界設計と前提検証で、Dの実装・実network証拠はまだありません。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの選定機構の証明と実M9接続条件を確認中です。
+
+Dでは、信頼済み親coordinatorが一つの局所利用区間だけを許可するBを選択しました。待機request全体はlockせず、全端点を停止・準備した後、実M9 publisherの確定を経て利用可能にします。追加の一般証明は、保持中の正当な権限更新による元の状態・結果の保持と、coordinatorから既存PublicationUseへの対応です。197module・20278所有宣言・168偽命題対照を176commandで検査しました（Cの190moduleはhash固定の既存object、7moduleを構築）。別途、空のimport cacheから全197sourceを再構築し、同じ20278所有宣言と168対照を366commandで検査しました。実M9発行と子ごとの検証記録保持、認証済み制御経路、唯一のsource進行、全入口・資源量との物理対応は使用前のgateです。実M9境界の17入力reviewを回収・照合し、子の実検証記録をM9内で厳密に保持する新しい接続方法を選定しました。既存の起動前更新APIは保持します。準備済み記録の追加不変条件・実FD由来の制御・結果保持までの利用区間を実装前に対応付けます。DのRust実装・新network実行はまだありません。
 
 Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
 `plan/proof-first-foundation-correspondence.md`. Exact receipts/current cursor:
@@ -38,7 +40,7 @@ Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
 | W4-A / Macro1/2/5 | Preserved limited models/process evidence for B/C | Bounded evidence complete; retain exact receipts |
 | W4-B / Macro2/5 | Repo-integrated proof/dependencies and observed whole runners for C/D | Bounded integrated candidate complete |
 | W4-C / Macro1/5 | Relative admission, all entries, current authority, custody/resource conditions and application route for D | Closed in selected local profile;78756ad5 pushed/parity verified |
-| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Current: exact unique requester/inert descriptor and cross-process current-M9 mechanism review; no code depends on unproved new physical premises. Then minimal internal implementation and finite actual-process validation |
+| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Current: selected B coordinator/held-authority model passes; fresh197 reproduction passed and actual restricted-M9/observation review verified. Close source/physical/caller/resource gates before dependent internal code, then finite actual-process validation |
 | W4-E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign,119 and A–D residual union | Inactive; owner resume after D stop required |
 | Mandatory reading / Macro0 | Exact source/authority/process/observer cone before decisions | READ_LEDGER distinguishes full/hash-equivalent/delta/partial reads; historical612 is not a current unread cursor |
 | W5/W6/W7 | Persistence/recovery, broader secret observation, alpha | Outside this request |
@@ -65,7 +67,7 @@ Oracle cannot supply an absent owner-authenticated trust anchor or resume Plan25
 | Question | Effect / current candidate versus smallest alternative / reopen trigger |
 |---|---|
 | Source custody across processes | A: one requester cursor, inert checked descriptors at owners; B: external operation-ID loop is inadequate. New restore/transfer must prove no duplicate cursor before use. |
-| Process current M9 use | A finite freeze/ACK/publish/install + local use intervals; B trusted coordinator scoped intervals. Unselected, Oracle review running. Existing owner-only lifecycle and shared local Arc do not discharge new global-currentness premise. |
+| Process current M9 use | B selected: one exact scoped coordinator grant, disabled preparation, actual parent M9 publication, effective activation. General model maps to PublicationUse. Actual restricted successor/local observation review verified; physical correspondence remains before use. Old prelaunch API stays strict. A remains historical comparison. |
 | Remote original/current-use/result binding | Full source/Core/arguments/activation/ordinal plus actual request and result; semantic M9 remains distinct from TLS peer. A hash or old committed result alone cannot authorize current acknowledgment. |
 | Changed resource/caller graph | Recompute new pool aliases, costs, pending/tombstone limits and actual producers; no unpublished qualified identity may escape a rollback. Any new entry/restore/pruning reopens its C condition. |
 | Faithful observation | Existing private-I3 redacted references/counts from same actual events; generic Public M8 label is not source classification. New released fields or confidentiality claims reopen label/control/capture premises first. |
@@ -80,7 +82,7 @@ Heavy Rust/Lean runs stay serial with measured limits. Only known untracked
 reproducible build artifacts may be cleaned; preserve source/proof/evidence and
 Chrome. No external notifications/publication or host-share workspace.
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
 
 ## non-promoted references
 

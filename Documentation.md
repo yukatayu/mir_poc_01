@@ -33,14 +33,16 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。次はDのprocess境界設計と前提検証で、Dの実装・実network証拠はまだありません。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの選定機構の証明と実M9接続条件を確認中で、Dの実装・実network証拠はまだありません。
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+Dでは、信頼済み親coordinatorが一つの局所利用区間だけを許可するBを選択しました。待機request全体はlockせず、全端点を停止・準備した後、実M9 publisherの確定を経て利用可能にします。追加の一般証明は、保持中の正当な権限更新による元の状態・結果の保持と、coordinatorから既存PublicationUseへの対応です。197module・20278所有宣言・168偽命題対照を176commandで検査しました（Cの190moduleはhash固定の既存object、7moduleを構築）。別途、空のimport cacheから全197sourceを再構築し、同じ20278所有宣言と168対照を366commandで検査しました。実M9発行と子ごとの検証記録保持、認証済み制御経路、唯一のsource進行、全入口・資源量との物理対応は使用前のgateです。実M9境界の17入力reviewを回収・照合し、子の実検証記録をM9内で厳密に保持する新しい接続方法を選定しました。既存の起動前更新APIは保持します。準備済み記録の追加不変条件・実FD由来の制御・結果保持までの利用区間を実装前に対応付けます。DのRust実装・新network実行はまだありません。
+
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
-受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。失敗時の後続処理・別名解決・実source対応は別cutのreview未完了（過去jobはChromeエラー）で、復元・権限境界への接続も未達です。
+受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。W1補助cutのreview未完了（過去jobはChromeエラー）は履歴として保持し、後のW3と選定したW4-Cの限定closeとは区別します。広いsource・復元・権限境界への接続は残ります。
 sub-agentは使わず、Oracleは主担当が操作するread-only助言者です。
 I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains retained、
 program完了やblockedとは区別します。

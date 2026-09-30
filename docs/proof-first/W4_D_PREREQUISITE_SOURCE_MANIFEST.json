@@ -1,0 +1,1200 @@
+{
+  "schema": 1,
+  "at": "2026-09-30T06:12:57.202024+00:00",
+  "scope": "D prerequisite models only; not physical M9/control/source-process or runtime acceptance. C190 unchanged;3existing publication+4new modules; separate from frozen B/C manifests.",
+  "source_count": 197,
+  "rows": [
+    {
+      "module": "MirroreaProofFirstAbortFlow",
+      "path": "samples/lean/foundations/MirroreaProofFirstAbortFlow.lean",
+      "sha256": "f26013320c80f6f16e49dfeb384474ec0b900f92ddff80dc54b33c02ed98f7ff",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstAbortFlow.lean"
+    },
+    {
+      "module": "MirroreaProofFirstAdmissionPhases",
+      "path": "samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean",
+      "sha256": "48be33304d0aba0f79eb0fff03d7655e2e6adec70d53185998ba291663269642",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCatalogHistory",
+      "path": "samples/lean/foundations/MirroreaProofFirstCatalogHistory.lean",
+      "sha256": "e996b6769e3b21d0c1efd24d7ba30b2958c3fb5195caf4e7ace2d5334aebc92e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCatalogHistory.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCompositionCore",
+      "path": "samples/lean/foundations/MirroreaProofFirstCompositionCore.lean",
+      "sha256": "e5b20c98450d2edd5361e25d0f64b665e645537286d5a70bdb07f120367bb467",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCompositionCore.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCompositionMachine",
+      "path": "samples/lean/foundations/MirroreaProofFirstCompositionMachine.lean",
+      "sha256": "e911bbef03ef701b0427607a8828ecdeef736c556536a67eabd1885da90dd7f3",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCompositionMachine.lean"
+    },
+    {
+      "module": "MirroreaProofFirstContractExport",
+      "path": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+      "sha256": "ec8ca4f801e30a00670fc51efe1ea448750cbc57dffdca29d9aa8ceb2ccb8d98",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstContractExport.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCoordinatorUse",
+      "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
+      "sha256": "f2af706bd7e49690f8638ca6d687cc8464fd4098b552fa239f8a408bd7f55833",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v5/MirroreaProofFirstCoordinatorUse.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCoordinatorUseControls",
+      "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUseControls.lean",
+      "sha256": "4a58cfc35338d4326b5213e3f7c818b449ba434dc3fa6551121b498faad68ace",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-controls-v1/MirroreaProofFirstCoordinatorUseControls.lean"
+    },
+    {
+      "module": "MirroreaProofFirstCurrentUse",
+      "path": "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean",
+      "sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCurrentUse.lean"
+    },
+    {
+      "module": "MirroreaProofFirstDynamicGraphs",
+      "path": "samples/lean/foundations/MirroreaProofFirstDynamicGraphs.lean",
+      "sha256": "fe38909c5f98a37f0ebb45879044c662552330c96694a09a0549da6a8187e0ce",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstDynamicGraphs.lean"
+    },
+    {
+      "module": "MirroreaProofFirstDynamicIdentity",
+      "path": "samples/lean/foundations/MirroreaProofFirstDynamicIdentity.lean",
+      "sha256": "f215bb61570fb35f7ee5ab8d1e518f5a27d5222316af72ad2734638b2bba656a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstDynamicIdentity.lean"
+    },
+    {
+      "module": "MirroreaProofFirstDynamicSupport",
+      "path": "samples/lean/foundations/MirroreaProofFirstDynamicSupport.lean",
+      "sha256": "ae88eb5b48bfe2667c3f1b68d18d0ef52685e929e6e008ca74cf29ded213912a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstDynamicSupport.lean"
+    },
+    {
+      "module": "MirroreaProofFirstFallbackStatic",
+      "path": "samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean",
+      "sha256": "4d62d99e7047efedc18d0aee028bb247ecbe1d365524a57782539058c3f9dffb",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean"
+    },
+    {
+      "module": "MirroreaProofFirstFallibleFlow",
+      "path": "samples/lean/foundations/MirroreaProofFirstFallibleFlow.lean",
+      "sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstFallibleFlow.lean"
+    },
+    {
+      "module": "MirroreaProofFirstFunctionContractBridge",
+      "path": "samples/lean/foundations/MirroreaProofFirstFunctionContractBridge.lean",
+      "sha256": "30d0fdebd061fda9b8ba58f837e196d2dc68d99811b6108507dc62c175bb4fa4",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstFunctionContractBridge.lean"
+    },
+    {
+      "module": "MirroreaProofFirstGraphValidation",
+      "path": "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean",
+      "sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstGraphValidation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstInstancePrograms",
+      "path": "samples/lean/foundations/MirroreaProofFirstInstancePrograms.lean",
+      "sha256": "853d3d2f2773394ae5ee1f8b319fee4b0370ce6fd2ea6c3b37742ddfa98f0e98",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstInstancePrograms.lean"
+    },
+    {
+      "module": "MirroreaProofFirstInstanceState",
+      "path": "samples/lean/foundations/MirroreaProofFirstInstanceState.lean",
+      "sha256": "e5eadb4d88c8c68634523f4fca801dcc83c278e8739adef37487b21de39a23d6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstInstanceState.lean"
+    },
+    {
+      "module": "MirroreaProofFirstInvocationBoundary",
+      "path": "samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean",
+      "sha256": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean"
+    },
+    {
+      "module": "MirroreaProofFirstInvocationContract",
+      "path": "samples/lean/foundations/MirroreaProofFirstInvocationContract.lean",
+      "sha256": "4de3790ec80c12b7ba507edc00ad5360e6fae322603f7b8fbd198876e047d82a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstInvocationContract.lean"
+    },
+    {
+      "module": "MirroreaProofFirstLocalContract",
+      "path": "samples/lean/foundations/MirroreaProofFirstLocalContract.lean",
+      "sha256": "fee77a064074b3687d05a5a890b2ddd031a429dc2290829eaf27c516269a8980",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstLocalContract.lean"
+    },
+    {
+      "module": "MirroreaProofFirstManagementEntry",
+      "path": "samples/lean/foundations/MirroreaProofFirstManagementEntry.lean",
+      "sha256": "094771815b4e52b3c6f91e5f8eed6acd930d078c299d486b43689a2de062f1e9",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstManagementEntry.lean"
+    },
+    {
+      "module": "MirroreaProofFirstModuleContractBoundary",
+      "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+      "sha256": "ed45f5d36a540f3dfdf30cec12f9bcbe71bd2035aa8b679d63558da011e42f85",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerAssignment",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean",
+      "sha256": "93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerCheckedArithmetic",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerCheckedArithmetic.lean",
+      "sha256": "87334c25a05362d1c6cba8aca925a71dbb94e6a1ce982e0ff5f0fce528a9ea9a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerCheckedArithmetic.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerEffectService",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerEffectService.lean",
+      "sha256": "89a134f098515bc60ed077870b7ae54323951c1da5c4cc05c8e15c7d5aee59a2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerEffectService.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerPartial",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerPartial.lean",
+      "sha256": "ceef600b377457c4e2d44a7033a29486705b9595c00e2048606a9a1872b94ad0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerPartial.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerReadCoverage",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerReadCoverage.lean",
+      "sha256": "ebb3f66342e00abe6f0abaf840ac2b088ffb06d10a054afc43f34763e86c3b5e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerReadCoverage.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerReadReport",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean",
+      "sha256": "de7e8b63119473a78752028cba4a35bc67d2bfc3f058cd81da5d0ee3335549c5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerRecordedArithmetic",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerRecordedArithmetic.lean",
+      "sha256": "c89b7275f23a885c1e67278f6bead2f6ac267ce550942f7450957cd235c5b89c",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerRecordedArithmetic.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerSourceContext",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerSourceContext.lean",
+      "sha256": "265484af30dfbf6a20512ea7ddcace23c61c285a11132de7ca8e3930da767180",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerSourceContext.lean"
+    },
+    {
+      "module": "MirroreaProofFirstOwnerStructuredKeys",
+      "path": "samples/lean/foundations/MirroreaProofFirstOwnerStructuredKeys.lean",
+      "sha256": "6c403218bbdb3c2b0fcb928cd566629cf8a13708db52352abc0a8759d77b445e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerStructuredKeys.lean"
+    },
+    {
+      "module": "MirroreaProofFirstPassive",
+      "path": "samples/lean/foundations/MirroreaProofFirstPassive.lean",
+      "sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstPassive.lean"
+    },
+    {
+      "module": "MirroreaProofFirstProducerFlow",
+      "path": "samples/lean/foundations/MirroreaProofFirstProducerFlow.lean",
+      "sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstProducerFlow.lean"
+    },
+    {
+      "module": "MirroreaProofFirstPublication",
+      "path": "samples/lean/foundations/MirroreaProofFirstPublication.lean",
+      "sha256": "a03f12a4cb9d6a4935d6c8bc86d0e19e27e738766dffdf7c87d1d6492257aef6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstPublication.lean"
+    },
+    {
+      "module": "MirroreaProofFirstPublicationPayload",
+      "path": "samples/lean/foundations/MirroreaProofFirstPublicationPayload.lean",
+      "sha256": "b882204fafde4b9cc4ef09cb1c8800cd95f4d842eb3cb56cfd542abc35d8d9ed",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstPublicationPayload.lean"
+    },
+    {
+      "module": "MirroreaProofFirstPublicationUse",
+      "path": "samples/lean/foundations/MirroreaProofFirstPublicationUse.lean",
+      "sha256": "f3c4b61f13b03f1d7765ba64de2be92284f0297055c7174f89cdd6fa8594dacb",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstPublicationUse.lean"
+    },
+    {
+      "module": "MirroreaProofFirstPureFunctions",
+      "path": "samples/lean/foundations/MirroreaProofFirstPureFunctions.lean",
+      "sha256": "d222377d63006235ab1a97aca8073757d716a55f37f19e2b4d41d59aaf370d86",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstPureFunctions.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAccess",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceAccess.lean",
+      "sha256": "f57b200ec44a1c22655be438d81033357798799afe0fad3840c8e1a5b4f8f5f1",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAccess.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAccessHistory",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceAccessHistory.lean",
+      "sha256": "1c332751466a9a8527e6505c97565de245d75bb44b3722563bd9d64ab97e57c7",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAccessHistory.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAllocation",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceAllocation.lean",
+      "sha256": "7df4b536119c8e69d5c993d7a785d67b0b7369bd4d7ddce45d7d3a98df30ba75",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAllocation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAuthority",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+      "sha256": "24eba9de0f7ace2ffcb2ae2a56a8ba75d1e9bb74e5cae0cda4b8ba5e54a94f39",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCancellation",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceCancellation.lean",
+      "sha256": "f9bd0888b1a7a9748d99076fe18d6dd1d409f856b84eff73b35251db0c934dcd",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCancellation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCancellationBoundary",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceCancellationBoundary.lean",
+      "sha256": "748a5ea45f14fcc32169e3898f6133de7f37efff730e34b9e8104941fcd54363",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCancellationBoundary.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCoherence",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceCoherence.lean",
+      "sha256": "e6aba9e1ced8573780f12ce555d888cb3fb3335f1e51e7417924397636964b17",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCoherence.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceExecution",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+      "sha256": "2a0fd53eb81388c8dbb861cc26db6037872cc9dffc80bc4ec60dd862ded38d5d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceHolding",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceHolding.lean",
+      "sha256": "a21f8930a9c76a0d3326dd373d5317b2def0805d7a7d25910aabb949a20dedc5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceHolding.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceMutation",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceMutation.lean",
+      "sha256": "ae75608f5d716a8bbecdbb24108a8fcfdcfcddcdca6989498185b491575ab2d9",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceMutation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceOwner",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceOwner.lean",
+      "sha256": "2387fefe317a3a8750fdf82fd12ee3cb97f7ec5cc776cd7d152d683c3b7c2bcf",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceOwner.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceResult",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceResult.lean",
+      "sha256": "c816ec5319afa014918743ca76d0d17946cf60ae2ee32b61d87f661928db7567",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceResult.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSelection",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSelection.lean",
+      "sha256": "a7b2728e754e92170b70168ab243b5cba944b7725f664ccf794209f7bc271fe5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSelection.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSource",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSource.lean",
+      "sha256": "973ab39e829a28aae6663d7ad922d719c345372319ce83bdcaf1e769cc2c9fd2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSource.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceData",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceData.lean",
+      "sha256": "ab8493abcf8a5f1201d2b379daf60ef7e25f1dea953b17822b343c7e3151f5a0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSourceData.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceElaboration",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceElaboration.lean",
+      "sha256": "c8117c1df83294eedffc776bc884610e102f3d587792a8ecf01d1bbef7410074",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSourceElaboration.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceTrace",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceTrace.lean",
+      "sha256": "041bb10f7c7a28816d6337c809f53009a0508eef5411c0496a9fc616da079c47",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSourceTrace.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceTyping",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceTyping.lean",
+      "sha256": "5e9a8177a97c059e4d4480337deca1f646ac0e3e7633f6ee40088168a558aaed",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSourceTyping.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceStore",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceStore.lean",
+      "sha256": "69e68e2839fa14cd4d46f92de24df5a2e4ea43884d441f6e100181c3c3896cea",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceStore.lean"
+    },
+    {
+      "module": "MirroreaProofFirstReferenceTrace",
+      "path": "samples/lean/foundations/MirroreaProofFirstReferenceTrace.lean",
+      "sha256": "631349e1c4c40b21cc44f4a98150c42d69136aac7ab1849db282d924109900a7",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceTrace.lean"
+    },
+    {
+      "module": "MirroreaProofFirstResourceBoundary",
+      "path": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
+      "sha256": "2ac91ef290548c13d33ca8122b7a14655a15e922c0be1c5b1ab9648882bb95f9",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceAllocation",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceAllocation.lean",
+      "sha256": "50a584703795d278043e46672434887351baaef5ae37627012d9a8b1729974d5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceAllocation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceAuthoring",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceAuthoring.lean",
+      "sha256": "9fe76ea886f177d2ea7124b95a3f8b9761153900ee3556d3628b9a5393380980",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceAuthoring.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceCompletion",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceCompletion.lean",
+      "sha256": "e4267e201eba03df55c4389d0a5ac3e9e250aeef62164850e1af6175923b92db",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceCompletion.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceExecution",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceExecution.lean",
+      "sha256": "ccb4595c79239832599938e4545637cd2df50557fee498992d45129ac1461057",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceExecution.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceFrame",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceFrame.lean",
+      "sha256": "0913d0d99a9346be23744a15fd091a2f07246500c2a7ea78b51fcd1de8e048af",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceFrame.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourcePreservation",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourcePreservation.lean",
+      "sha256": "8c72278489b2a33ef71c6d2bc3fe75c6479c460300ef6ae2b87b578537db803e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourcePreservation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceTypes",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceTypes.lean",
+      "sha256": "ed73209f64663c07443b25b3de0cd8d498c01b5fee0e3dae14acca5237eed38d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceTypes.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSourceTyping",
+      "path": "samples/lean/foundations/MirroreaProofFirstSourceTyping.lean",
+      "sha256": "f40992f5f5f5425bb9ee01c480b6e270d76c72f962e137cae173d54d19669ec8",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSourceTyping.lean"
+    },
+    {
+      "module": "MirroreaProofFirstSupport",
+      "path": "samples/lean/foundations/MirroreaProofFirstSupport.lean",
+      "sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstSupport.lean"
+    },
+    {
+      "module": "MirroreaProofFirstTrackedValidation",
+      "path": "samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean",
+      "sha256": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean"
+    },
+    {
+      "module": "MirroreaProofFirstWorldProjection",
+      "path": "samples/lean/foundations/MirroreaProofFirstWorldProjection.lean",
+      "sha256": "ddaa69751cbab498274f7a32c14050e1cd68f04930c133b46762bfc50036f6ac",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstWorldProjection.lean"
+    },
+    {
+      "module": "MixedCancelControls",
+      "path": "samples/lean/foundations/MixedCancelControls.lean",
+      "sha256": "42de9e45ac53893a713e9cd5e7ef9c9ccf6f649feefb7186b5ec931b8ab914a1",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCancelControls.lean"
+    },
+    {
+      "module": "MixedCancelEmbedding",
+      "path": "samples/lean/foundations/MixedCancelEmbedding.lean",
+      "sha256": "f96f3b5018649f22f91a0e53831eabb6ed783a0f9fa9d400ae13ea278c605930",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCancelEmbedding.lean"
+    },
+    {
+      "module": "MixedCancelEntry",
+      "path": "samples/lean/foundations/MixedCancelEntry.lean",
+      "sha256": "efc40e327c378044827de09db69da283e58199145b38a0a6fadb403ecdc8d27a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCancelEntry.lean"
+    },
+    {
+      "module": "MixedCancellation",
+      "path": "samples/lean/foundations/MixedCancellation.lean",
+      "sha256": "4e312a9f9a7943850d83f9bf505b2a96452ded70994075e6e01d750a9759e000",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCancellation.lean"
+    },
+    {
+      "module": "MixedCatalogControls",
+      "path": "samples/lean/foundations/MixedCatalogControls.lean",
+      "sha256": "60a79cb3a6e9df2bbf5b08f572178659917d0381ea4c2bea11c8f87cf05143a0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogControls.lean"
+    },
+    {
+      "module": "MixedCatalogEmbedding",
+      "path": "samples/lean/foundations/MixedCatalogEmbedding.lean",
+      "sha256": "0f3af5c03f7d612400db1b9409fcff9475ffa1038515eebd031cbbd83d8cc889",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogEmbedding.lean"
+    },
+    {
+      "module": "MixedCatalogHistory",
+      "path": "samples/lean/foundations/MixedCatalogHistory.lean",
+      "sha256": "4d8586fe6c3a0112eec7d8d4eaef4b39a32905737d9361b6d2d97cd323909fdb",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogHistory.lean"
+    },
+    {
+      "module": "MixedCatalogService",
+      "path": "samples/lean/foundations/MixedCatalogService.lean",
+      "sha256": "dfecb812c4d545b05ea46fa18650cadeb9f2d38cebb9fb9e92f898a8dfa1393a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogService.lean"
+    },
+    {
+      "module": "MixedCatalogSuccessorControls",
+      "path": "samples/lean/foundations/MixedCatalogSuccessorControls.lean",
+      "sha256": "3f2d74d23b5aa6c9808d8b62df3bba24b0569230789209f2e9e03f9423bced60",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogSuccessorControls.lean"
+    },
+    {
+      "module": "MixedCatalogTransitions",
+      "path": "samples/lean/foundations/MixedCatalogTransitions.lean",
+      "sha256": "07d5dbad99a37eee9592aee0e6b0d895b876f9d12512a57c5abe017da1901d0d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogTransitions.lean"
+    },
+    {
+      "module": "MixedCatalogUse",
+      "path": "samples/lean/foundations/MixedCatalogUse.lean",
+      "sha256": "1ec63d2fc31183e18cccee7317087580611c8024ab50da8c3e220be00613060f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCatalogUse.lean"
+    },
+    {
+      "module": "MixedCompositionCore",
+      "path": "samples/lean/foundations/MixedCompositionCore.lean",
+      "sha256": "ee976901247e1c351d7793878074dbc557119f11863e0044713ef6a391cb1661",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCompositionCore.lean"
+    },
+    {
+      "module": "MixedCoreEmbedding",
+      "path": "samples/lean/foundations/MixedCoreEmbedding.lean",
+      "sha256": "6ce2088e6035b453196031635588fc90fa1d341b120146acfcf44e6abfc25683",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedCoreEmbedding.lean"
+    },
+    {
+      "module": "MixedExecutionControls",
+      "path": "samples/lean/foundations/MixedExecutionControls.lean",
+      "sha256": "a290472f58b4ffc1675e4c16448e7c4dba68a297f88650487a418100470b2d8a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedExecutionControls.lean"
+    },
+    {
+      "module": "MixedFallbackStatic",
+      "path": "samples/lean/foundations/MixedFallbackStatic.lean",
+      "sha256": "bc4a99ee374c584ec9c02c98b06c29f4047436e19a67b748c362d0b74c9ce590",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedFallbackStatic.lean"
+    },
+    {
+      "module": "MixedInstanceState",
+      "path": "samples/lean/foundations/MixedInstanceState.lean",
+      "sha256": "5bfcd00f0594695a8eb415a2eff45ec3c2ffea2c2ddba064ff3d7e119085246a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedInstanceState.lean"
+    },
+    {
+      "module": "MixedManagementControls",
+      "path": "samples/lean/foundations/MixedManagementControls.lean",
+      "sha256": "e0230364c823868ad9102679e6b23d4d8f67e54aa8c3f884700ce08cb50ff290",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedManagementControls.lean"
+    },
+    {
+      "module": "MixedManagementEmbedding",
+      "path": "samples/lean/foundations/MixedManagementEmbedding.lean",
+      "sha256": "3f5814280001b951d6467b7dd2262b422110468fe4031d4803ab830df2d89951",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedManagementEmbedding.lean"
+    },
+    {
+      "module": "MixedManagementEntry",
+      "path": "samples/lean/foundations/MixedManagementEntry.lean",
+      "sha256": "da9da19b8a1f25e28f05f6e60ae682c9f865c06845d51fda2b338d051a634d7a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedManagementEntry.lean"
+    },
+    {
+      "module": "MixedNamedOwnerSource",
+      "path": "samples/lean/foundations/MixedNamedOwnerSource.lean",
+      "sha256": "a935a597a36a0e24cb0ca51935a1127a528f45551862755579d1a2cb94a46c7a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedNamedOwnerSource.lean"
+    },
+    {
+      "module": "MixedNamedOwnerSourceEvidence",
+      "path": "samples/lean/foundations/MixedNamedOwnerSourceEvidence.lean",
+      "sha256": "ccf5c579b16dd726443ccee894188f86ddc31271db2eaa630f4f4d0f629bf6d9",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedNamedOwnerSourceEvidence.lean"
+    },
+    {
+      "module": "MixedOperationDefinitions",
+      "path": "samples/lean/foundations/MixedOperationDefinitions.lean",
+      "sha256": "fc65b803017ece6548f3b330c04dfd6ce7e3006e19296ee55787e019bb548e64",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOperationDefinitions.lean"
+    },
+    {
+      "module": "MixedOwnerAttemptQueue",
+      "path": "samples/lean/foundations/MixedOwnerAttemptQueue.lean",
+      "sha256": "0752aafc884b4e85743810e7471d3de6f6c0dc21b921ba4ac7db9c7771dc18e6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerAttemptQueue.lean"
+    },
+    {
+      "module": "MixedOwnerCompletionControls",
+      "path": "samples/lean/foundations/MixedOwnerCompletionControls.lean",
+      "sha256": "7a709e45472cffc53b57bd3c294b7251148ea945f650f733bab67c7ed48b0d86",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerCompletionControls.lean"
+    },
+    {
+      "module": "MixedOwnerContinuation",
+      "path": "samples/lean/foundations/MixedOwnerContinuation.lean",
+      "sha256": "b7a36c194024d7e0cca8600c2d7d5003a49403c49dd42dd932ff79c5821375ba",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerContinuation.lean"
+    },
+    {
+      "module": "MixedOwnerContinuationControls",
+      "path": "samples/lean/foundations/MixedOwnerContinuationControls.lean",
+      "sha256": "2be1770c9692b922786c9dea56b81f6010a7815e9fb88aa7bf974ec64651959f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerContinuationControls.lean"
+    },
+    {
+      "module": "MixedOwnerMaterialization",
+      "path": "samples/lean/foundations/MixedOwnerMaterialization.lean",
+      "sha256": "e214b8e94e4fe5c2bdd5f69080f0d2a218c033a7b71019bae753d450dd2b6638",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerMaterialization.lean"
+    },
+    {
+      "module": "MixedOwnerMaterializationControls",
+      "path": "samples/lean/foundations/MixedOwnerMaterializationControls.lean",
+      "sha256": "31746ca95001e5199400a047f4140db7dcc39bc31e8e188cdbe993b86d945be8",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerMaterializationControls.lean"
+    },
+    {
+      "module": "MixedOwnerProgram",
+      "path": "samples/lean/foundations/MixedOwnerProgram.lean",
+      "sha256": "2706b96eb30ebe1f1ddab661b06cedb40ecabf24cab52063259dfbdd9e32bd55",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerProgram.lean"
+    },
+    {
+      "module": "MixedOwnerSourceCode",
+      "path": "samples/lean/foundations/MixedOwnerSourceCode.lean",
+      "sha256": "30e9ff07aa97a176d5d062a547aac0f3782d56e706810eb7a7c0709d70a496bc",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceCode.lean"
+    },
+    {
+      "module": "MixedOwnerSourceDeclaration",
+      "path": "samples/lean/foundations/MixedOwnerSourceDeclaration.lean",
+      "sha256": "3cac376abfb3348bc5a5f8533c2a2e8f3ea4b4ca2c669f9a61bc84edc16936cd",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceDeclaration.lean"
+    },
+    {
+      "module": "MixedOwnerSourceDeclarationControls",
+      "path": "samples/lean/foundations/MixedOwnerSourceDeclarationControls.lean",
+      "sha256": "62ac3a18f8d303399fdcd1d307c854bc7cd017adb88cdf3a9d45d673b15f3959",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceDeclarationControls.lean"
+    },
+    {
+      "module": "MixedOwnerSourceFootprint",
+      "path": "samples/lean/foundations/MixedOwnerSourceFootprint.lean",
+      "sha256": "e4ad9a716fd50694ad3b7f0040f5c34cabd2dfdf4b30afa6f3af605ea0302e9a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceFootprint.lean"
+    },
+    {
+      "module": "MixedOwnerSourceInvariant",
+      "path": "samples/lean/foundations/MixedOwnerSourceInvariant.lean",
+      "sha256": "a47d8c612a0015a07a9b385fc2ca9c268a772125710cc6dc4f0fcef6ce4eabdf",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceInvariant.lean"
+    },
+    {
+      "module": "MixedOwnerSourceIssue",
+      "path": "samples/lean/foundations/MixedOwnerSourceIssue.lean",
+      "sha256": "eca50d0f594b3f154e1fcbdf4ad359ce8f95b1ee3fba4c3bef6fc07d9d1de08b",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceIssue.lean"
+    },
+    {
+      "module": "MixedOwnerSourceIssueControls",
+      "path": "samples/lean/foundations/MixedOwnerSourceIssueControls.lean",
+      "sha256": "830256ffbd8651272368000a68e98f007c117f535db89c99e41ae6602b947dda",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceIssueControls.lean"
+    },
+    {
+      "module": "MixedOwnerSourceTrace",
+      "path": "samples/lean/foundations/MixedOwnerSourceTrace.lean",
+      "sha256": "67b2851f15ebf673c1719ca1836667ec841f68d13fb4e84250107226ddb43cd2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceTrace.lean"
+    },
+    {
+      "module": "MixedOwnerSourceTraceControls",
+      "path": "samples/lean/foundations/MixedOwnerSourceTraceControls.lean",
+      "sha256": "d410711f328eea25e502356bdd5c1d453687fba2dbaf9c79fdeca6d478aa447a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedOwnerSourceTraceControls.lean"
+    },
+    {
+      "module": "MixedPendingProjection",
+      "path": "samples/lean/foundations/MixedPendingProjection.lean",
+      "sha256": "2f7874a018fe2dd3ca66b366d23c25caffb9107ab06f71bb371081e1af623750",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedPendingProjection.lean"
+    },
+    {
+      "module": "MixedPureInvocation",
+      "path": "samples/lean/foundations/MixedPureInvocation.lean",
+      "sha256": "43d2555ecfd9a32c9a62026d8b89b77cba61d98f2d7864f908c432d50617fa1a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedPureInvocation.lean"
+    },
+    {
+      "module": "MixedReferenceAccess",
+      "path": "samples/lean/foundations/MixedReferenceAccess.lean",
+      "sha256": "ae2788261d36f8f19810553b937af367faeb3196770ef126d2337a1d3d88d6be",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceAccess.lean"
+    },
+    {
+      "module": "MixedReferenceAllocation",
+      "path": "samples/lean/foundations/MixedReferenceAllocation.lean",
+      "sha256": "d3a518a91d29ef858c80014172a5832d2daae0c66d85b650f733d29160de5599",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceAllocation.lean"
+    },
+    {
+      "module": "MixedReferenceAuthority",
+      "path": "samples/lean/foundations/MixedReferenceAuthority.lean",
+      "sha256": "750c0892d0fda5798bb36585a13aa147d4d5421947a83ae6876f411fb5acca70",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceAuthority.lean"
+    },
+    {
+      "module": "MixedReferenceCancellation",
+      "path": "samples/lean/foundations/MixedReferenceCancellation.lean",
+      "sha256": "c69127baca2ff2ddb177c34068d3ad1005fe4f83e13834f720b3caa5dac0a5b6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceCancellation.lean"
+    },
+    {
+      "module": "MixedReferenceChronology",
+      "path": "samples/lean/foundations/MixedReferenceChronology.lean",
+      "sha256": "e9418c180e55dccc06836f6ef92f6915bdfa27242b41773b70aa9e06b517ff9b",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceChronology.lean"
+    },
+    {
+      "module": "MixedReferenceCoherence",
+      "path": "samples/lean/foundations/MixedReferenceCoherence.lean",
+      "sha256": "8a7959f6c2ca877987c107553b143fbad3b6282e7454dfce69a312b492811b49",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceCoherence.lean"
+    },
+    {
+      "module": "MixedReferenceControls",
+      "path": "samples/lean/foundations/MixedReferenceControls.lean",
+      "sha256": "38f95f66bcfb65d93997a875420ac74a8173e226901a248f3838d718f0b1970a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceControls.lean"
+    },
+    {
+      "module": "MixedReferenceEmbedding",
+      "path": "samples/lean/foundations/MixedReferenceEmbedding.lean",
+      "sha256": "b9210348e826d71d478c07e33a86f049bd9e2f7e705ed7ce453e80e5d1dfd651",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceEmbedding.lean"
+    },
+    {
+      "module": "MixedReferenceExecution",
+      "path": "samples/lean/foundations/MixedReferenceExecution.lean",
+      "sha256": "22a2ce6716d425b376a340d642e814f8812e41efc39784e17b156e55ac827e50",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceExecution.lean"
+    },
+    {
+      "module": "MixedReferenceHistory",
+      "path": "samples/lean/foundations/MixedReferenceHistory.lean",
+      "sha256": "9702ab83815190f7bbef920aa8191403f798a152e828dff79dada178e895bd01",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceHistory.lean"
+    },
+    {
+      "module": "MixedReferenceHolding",
+      "path": "samples/lean/foundations/MixedReferenceHolding.lean",
+      "sha256": "389f8d674d31613dce1457bf5a764807ece47b706c1df79fa57c911bba129455",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceHolding.lean"
+    },
+    {
+      "module": "MixedReferenceMutation",
+      "path": "samples/lean/foundations/MixedReferenceMutation.lean",
+      "sha256": "d650fde4ff4e05454f2206d5cdad2774d66ae691419851d9d5fa73c1eaee7c37",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceMutation.lean"
+    },
+    {
+      "module": "MixedReferenceOrigins",
+      "path": "samples/lean/foundations/MixedReferenceOrigins.lean",
+      "sha256": "17fd0c4454dba37feb36512c6c22d65132c2829393014de06cce77db96205f1d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceOrigins.lean"
+    },
+    {
+      "module": "MixedReferenceOwner",
+      "path": "samples/lean/foundations/MixedReferenceOwner.lean",
+      "sha256": "fe41191a277be9d23e6083eda64e6f26a400098573d8ae71869036527b3495b3",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceOwner.lean"
+    },
+    {
+      "module": "MixedReferenceResult",
+      "path": "samples/lean/foundations/MixedReferenceResult.lean",
+      "sha256": "c4a497b2437a471cfaccebfa83d8d103ad2fe972a44d48a014fe55da5eb0452e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceResult.lean"
+    },
+    {
+      "module": "MixedReferenceSelection",
+      "path": "samples/lean/foundations/MixedReferenceSelection.lean",
+      "sha256": "134021e6f8af8429fb70ebb1fba2280c11524def834defe7d11510e7a6edd872",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSelection.lean"
+    },
+    {
+      "module": "MixedReferenceSource",
+      "path": "samples/lean/foundations/MixedReferenceSource.lean",
+      "sha256": "6fae29602995ee9ccd42f1544bfbca11d23ac8df99657833cb96e4cad6310ec3",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSource.lean"
+    },
+    {
+      "module": "MixedReferenceSourceData",
+      "path": "samples/lean/foundations/MixedReferenceSourceData.lean",
+      "sha256": "ab70f1e2e13e3a73449839465eaf81c592e100f6e448085c5f8bba7877058b69",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSourceData.lean"
+    },
+    {
+      "module": "MixedReferenceSourceElaboration",
+      "path": "samples/lean/foundations/MixedReferenceSourceElaboration.lean",
+      "sha256": "b90b97ef561beda2745ad233e750526aad9f42d1b61df8ece1a9cf3d87ef921f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSourceElaboration.lean"
+    },
+    {
+      "module": "MixedReferenceSourceTrace",
+      "path": "samples/lean/foundations/MixedReferenceSourceTrace.lean",
+      "sha256": "731e1865fef07bb26d33717040fac572faf34921a51f786887906daf22dbc4fc",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSourceTrace.lean"
+    },
+    {
+      "module": "MixedReferenceSourceTyping",
+      "path": "samples/lean/foundations/MixedReferenceSourceTyping.lean",
+      "sha256": "01d17dc7631646f3ac3acd00bc0af4534bd9388b418e71c981b85da8b5a572ea",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceSourceTyping.lean"
+    },
+    {
+      "module": "MixedReferenceStore",
+      "path": "samples/lean/foundations/MixedReferenceStore.lean",
+      "sha256": "c952b0f2bbcda0360e959256037f78c7d2352512ca064df52529f3f445e0c4b0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceStore.lean"
+    },
+    {
+      "module": "MixedReferenceTrace",
+      "path": "samples/lean/foundations/MixedReferenceTrace.lean",
+      "sha256": "708f579fa8af42b9023c56b1d63ba13ff2377e1642a267615ead84be9ef81743",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedReferenceTrace.lean"
+    },
+    {
+      "module": "MixedRequestAllocation",
+      "path": "samples/lean/foundations/MixedRequestAllocation.lean",
+      "sha256": "836be425e535e350c4a7c246fe3b96f2372847bf85084c6f8f37f06a22936142",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedRequestAllocation.lean"
+    },
+    {
+      "module": "MixedRequestControls",
+      "path": "samples/lean/foundations/MixedRequestControls.lean",
+      "sha256": "0bc9d3c66f07dd4f3391fe54d0e7fdfa6d63cd8ee477ce6c66837596361f8f9c",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedRequestControls.lean"
+    },
+    {
+      "module": "MixedRequestCore",
+      "path": "samples/lean/foundations/MixedRequestCore.lean",
+      "sha256": "d7e75b6a8b0d1f70a12df3298ffa8be9e39e282041a76eb6942a5fbbb88a5080",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedRequestCore.lean"
+    },
+    {
+      "module": "MixedRequestEmbedding",
+      "path": "samples/lean/foundations/MixedRequestEmbedding.lean",
+      "sha256": "d342458f1494d908e9ff26c10079297c88bcbe9bf17552c436a0e5ff274b1724",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedRequestEmbedding.lean"
+    },
+    {
+      "module": "MixedSourceCursor",
+      "path": "samples/lean/foundations/MixedSourceCursor.lean",
+      "sha256": "234927252db02ac6c1619c166f7489d576d518dadf4a3e9d53d08e4b15285dd2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedSourceCursor.lean"
+    },
+    {
+      "module": "MixedStoreControls",
+      "path": "samples/lean/foundations/MixedStoreControls.lean",
+      "sha256": "aa9b5ba43025b2c26067285f15b583a06939728c22a07cb31a2c1a85c9b20c40",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MixedStoreControls.lean"
+    },
+    {
+      "module": "OwnerEffectReceipt",
+      "path": "samples/lean/foundations/OwnerEffectReceipt.lean",
+      "sha256": "dffbcf70c95a70cc2f2c5582048a551523eb77f277d0967b7c5497b2ce25ea3a",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerEffectReceipt.lean"
+    },
+    {
+      "module": "OwnerFlowComposition",
+      "path": "samples/lean/foundations/OwnerFlowComposition.lean",
+      "sha256": "a4b69b00e2e82d61c1c42024cffccf8940b05024951900ffda9194a2eddefec6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerFlowComposition.lean"
+    },
+    {
+      "module": "OwnerMetadataManagement",
+      "path": "samples/lean/foundations/OwnerMetadataManagement.lean",
+      "sha256": "3981aa35ca09bc8366bb4903435cff364a58b726ef82f81fb16b6a117d78d2f2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataManagement.lean"
+    },
+    {
+      "module": "OwnerMetadataManagementControls",
+      "path": "samples/lean/foundations/OwnerMetadataManagementControls.lean",
+      "sha256": "d671e5f135cf9693852b852a5b5538c646fafacf3ed0da6a4e54e1a88c1b22a5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataManagementControls.lean"
+    },
+    {
+      "module": "OwnerMetadataPending",
+      "path": "samples/lean/foundations/OwnerMetadataPending.lean",
+      "sha256": "830819478021ce2c51e6c929c938ce1c2b4369159445afb902cb26a374c97b75",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataPending.lean"
+    },
+    {
+      "module": "OwnerMetadataRegistry",
+      "path": "samples/lean/foundations/OwnerMetadataRegistry.lean",
+      "sha256": "7174dc9b3ef6bcccad6fa7ffc2deb00bd18bff87306fa1474f2720b689da77cc",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataRegistry.lean"
+    },
+    {
+      "module": "OwnerMetadataSession",
+      "path": "samples/lean/foundations/OwnerMetadataSession.lean",
+      "sha256": "ae71fe751351f7ea532dd99046866d49a1c8b829e1bf580a33ca97d1904828c7",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataSession.lean"
+    },
+    {
+      "module": "OwnerMetadataSessionControls",
+      "path": "samples/lean/foundations/OwnerMetadataSessionControls.lean",
+      "sha256": "9604165bd8da77a7bfd8bdf9fb9c98f0e9dbb3a5831d9122f058b7fdac3ef964",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataSessionControls.lean"
+    },
+    {
+      "module": "OwnerMetadataSessionInvariant",
+      "path": "samples/lean/foundations/OwnerMetadataSessionInvariant.lean",
+      "sha256": "8d18d336fe0dc4c4751dc8a314d9043f2e22ff3617befb23a72875739dd159c2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataSessionInvariant.lean"
+    },
+    {
+      "module": "OwnerMetadataSource",
+      "path": "samples/lean/foundations/OwnerMetadataSource.lean",
+      "sha256": "48ddc1b9d77ef739c9217492a8a35f88679bea242caef591461691376df73e73",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataSource.lean"
+    },
+    {
+      "module": "OwnerMetadataSourceControls",
+      "path": "samples/lean/foundations/OwnerMetadataSourceControls.lean",
+      "sha256": "10b0635c879a1582cacee609ea65c56e8b8fc04bf6672978c4ec0d6bd9355e32",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataSourceControls.lean"
+    },
+    {
+      "module": "OwnerMetadataStore",
+      "path": "samples/lean/foundations/OwnerMetadataStore.lean",
+      "sha256": "a3377628fee35e243d285a64ba44281696d5f2672c0aedeaa8a086a6e34896d0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataStore.lean"
+    },
+    {
+      "module": "OwnerMetadataStoreControls",
+      "path": "samples/lean/foundations/OwnerMetadataStoreControls.lean",
+      "sha256": "0c132cb29749e9d0e1766357cc452561ead7fde799e5be1628d302d8e4084211",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataStoreControls.lean"
+    },
+    {
+      "module": "OwnerNumericBoundary",
+      "path": "samples/lean/foundations/OwnerNumericBoundary.lean",
+      "sha256": "c5128c519bc33cb1b75420091a0d72b35f164391e4a9559e423890ba7eebc4cb",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerNumericBoundary.lean"
+    },
+    {
+      "module": "OwnerPartialAbort",
+      "path": "samples/lean/foundations/OwnerPartialAbort.lean",
+      "sha256": "259cf871c2acb9ea66c40835d2183417844700825f29f485238fea513cefe973",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerPartialAbort.lean"
+    },
+    {
+      "module": "OwnerSavedPending",
+      "path": "samples/lean/foundations/OwnerSavedPending.lean",
+      "sha256": "9df88e102bd0bdc617fd9a0762368a4e272a86e83182d6fe3bffecae7e530d8d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerSavedPending.lean"
+    },
+    {
+      "module": "OwnerSourceFlow",
+      "path": "samples/lean/foundations/OwnerSourceFlow.lean",
+      "sha256": "63c7f2f3b22b4d60ad2b7e0331eff54fb9c92c4dd7d51920d8c02afc9ec71111",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerSourceFlow.lean"
+    },
+    {
+      "module": "OwnerStatementAcceptance",
+      "path": "samples/lean/foundations/OwnerStatementAcceptance.lean",
+      "sha256": "e0eeb61d17ebb4693872750f8ff327bcdd89b0c03180390cb531e517f2c2b732",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAcceptance.lean"
+    },
+    {
+      "module": "OwnerStatementAcknowledgment",
+      "path": "samples/lean/foundations/OwnerStatementAcknowledgment.lean",
+      "sha256": "8b2307b17f48da397a8eaddf3014ea9bc9a36f1affff8497655bbe75fa507966",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAcknowledgment.lean"
+    },
+    {
+      "module": "OwnerStatementAcknowledgmentControls",
+      "path": "samples/lean/foundations/OwnerStatementAcknowledgmentControls.lean",
+      "sha256": "287562e0ea08bec84011441a51cd3c40552cdd92667f5d4a5c724aac9451c1cc",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAcknowledgmentControls.lean"
+    },
+    {
+      "module": "OwnerStatementAdmission",
+      "path": "samples/lean/foundations/OwnerStatementAdmission.lean",
+      "sha256": "ecf3fe52e768e931e12832136b0c28ba2bad9dfd03ef971b465b302abf149620",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAdmission.lean"
+    },
+    {
+      "module": "OwnerStatementBinding",
+      "path": "samples/lean/foundations/OwnerStatementBinding.lean",
+      "sha256": "6028bcc8a87460e81cd8ee4553b3564aae6f0df19ccd813d96a45edb3b84ad75",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementBinding.lean"
+    },
+    {
+      "module": "OwnerStatementBoundaryControls",
+      "path": "samples/lean/foundations/OwnerStatementBoundaryControls.lean",
+      "sha256": "be8fb5730cba4bbc8f3f3cec0a49fd4ef67c659f489d49ceccf6aa12a8096460",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementBoundaryControls.lean"
+    },
+    {
+      "module": "OwnerStatementCompletion",
+      "path": "samples/lean/foundations/OwnerStatementCompletion.lean",
+      "sha256": "63dbb179f8bba487e95ab8ec23085a2f9b148dfb5dffeab1d008d57e40de44b0",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementCompletion.lean"
+    },
+    {
+      "module": "OwnerStatementControls",
+      "path": "samples/lean/foundations/OwnerStatementControls.lean",
+      "sha256": "7a09334969f2c1cc5c9da5c3fa50bd56f13493545801b55b89223457282845a5",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementControls.lean"
+    },
+    {
+      "module": "OwnerStatementCounterBudget",
+      "path": "samples/lean/foundations/OwnerStatementCounterBudget.lean",
+      "sha256": "296bd1e218dfdc7e0da79ae18c3310dc3464b3746ef6d2ae4c81ee387ff57248",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementCounterBudget.lean"
+    },
+    {
+      "module": "OwnerStatementCursor",
+      "path": "samples/lean/foundations/OwnerStatementCursor.lean",
+      "sha256": "fee0cafb5e05a653737b8242b4661030f7ddeebb0a8e3427ba3db4b2d7fe1cf2",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementCursor.lean"
+    },
+    {
+      "module": "OwnerStatementEntryGate",
+      "path": "samples/lean/foundations/OwnerStatementEntryGate.lean",
+      "sha256": "6a9e4aa061d0b1198ba36e4f54db6400f26e9a588442844222503ee7bd753eaa",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementEntryGate.lean"
+    },
+    {
+      "module": "OwnerStatementExecutionControls",
+      "path": "samples/lean/foundations/OwnerStatementExecutionControls.lean",
+      "sha256": "c92c6e8efd2ffeff473465bf7739a138089576a0ca7a437f11cf84ee2ac81012",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementExecutionControls.lean"
+    },
+    {
+      "module": "OwnerStatementHeldAuthority",
+      "path": "samples/lean/foundations/OwnerStatementHeldAuthority.lean",
+      "sha256": "dc9efa20210ce5b5d62f9fd5af9e44b6961854d59c472a24d2d06f783b414133",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/held-authority-v3/OwnerStatementHeldAuthority.lean"
+    },
+    {
+      "module": "OwnerStatementHeldAuthorityControls",
+      "path": "samples/lean/foundations/OwnerStatementHeldAuthorityControls.lean",
+      "sha256": "d02f69ec40de55d0670f0b212a96188b3d25443e9f5740d7dcf4ab259ddae028",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/held-authority-controls-v2/OwnerStatementHeldAuthorityControls.lean"
+    },
+    {
+      "module": "OwnerStatementHistory",
+      "path": "samples/lean/foundations/OwnerStatementHistory.lean",
+      "sha256": "0f746e88a3ba9af6bc76777eaa81650273b6cd09367a9fea09c3051e98d75871",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementHistory.lean"
+    },
+    {
+      "module": "OwnerStatementHistoryOrigin",
+      "path": "samples/lean/foundations/OwnerStatementHistoryOrigin.lean",
+      "sha256": "53b1774a9e7e9dceb36c4eb1cab767efc4955c03676ecfcaecfc1512c9047f38",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementHistoryOrigin.lean"
+    },
+    {
+      "module": "OwnerStatementIdentity",
+      "path": "samples/lean/foundations/OwnerStatementIdentity.lean",
+      "sha256": "583697ae52e744db107c1076cb83b3a9d6ca923795dc5a882db6adb9abae4047",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementIdentity.lean"
+    },
+    {
+      "module": "OwnerStatementLiveCustodian",
+      "path": "samples/lean/foundations/OwnerStatementLiveCustodian.lean",
+      "sha256": "581b5bbd6de630663386a27173f7f03156c54d4b6e2469aaf4a26cf8e521fe10",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementLiveCustodian.lean"
+    },
+    {
+      "module": "OwnerStatementMetadataBinding",
+      "path": "samples/lean/foundations/OwnerStatementMetadataBinding.lean",
+      "sha256": "b6bf601aac2a9dcbd86fc77fe7a0bd47159ab093b0ce7bbedea0d82bf2377a01",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementMetadataBinding.lean"
+    },
+    {
+      "module": "OwnerStatementMetadataCursor",
+      "path": "samples/lean/foundations/OwnerStatementMetadataCursor.lean",
+      "sha256": "543414c4c8c0e19023e54c55ad3135d14f0fda8f87ae775828f828ebe2ad399f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementMetadataCursor.lean"
+    },
+    {
+      "module": "OwnerStatementMetadataHistory",
+      "path": "samples/lean/foundations/OwnerStatementMetadataHistory.lean",
+      "sha256": "c320e31fb16a16a3ecdfec62de5a963b05d18b4d4fbf2a8b8a8fcd7c25fbcf1f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementMetadataHistory.lean"
+    },
+    {
+      "module": "OwnerStatementOriginalEntry",
+      "path": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
+      "sha256": "48a07071fe404416774bf4d7f765c7bff20306bd7774f8c22f6e101d5a468a19",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementOriginalEntry.lean"
+    },
+    {
+      "module": "OwnerStatementOriginalEntryControls",
+      "path": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
+      "sha256": "a085f8ad5ec7419bc54083021ae3d623a26beff6e36f658979520503ab0a8f9b",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementOriginalEntryControls.lean"
+    },
+    {
+      "module": "OwnerStatementPosition",
+      "path": "samples/lean/foundations/OwnerStatementPosition.lean",
+      "sha256": "54ca3160345c81628f6b4442b845ff8514c9d958041b298fa4984c3c08ec04c6",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementPosition.lean"
+    },
+    {
+      "module": "OwnerStatementProgram",
+      "path": "samples/lean/foundations/OwnerStatementProgram.lean",
+      "sha256": "1510d754d3386b34a9ac5b8fcdb05930fecfc7d3640d072056e412a91e729128",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementProgram.lean"
+    },
+    {
+      "module": "OwnerStatementRegistryControls",
+      "path": "samples/lean/foundations/OwnerStatementRegistryControls.lean",
+      "sha256": "ce29e73beb03540bb28e7260f4466c30da216825b946aa66c3fe9480ba774078",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRegistryControls.lean"
+    },
+    {
+      "module": "OwnerStatementRegistryInvariant",
+      "path": "samples/lean/foundations/OwnerStatementRegistryInvariant.lean",
+      "sha256": "4c89b3c758d9428a08b0cc51cee42cc1caee288cd8efdbc56de2acdc0b271b88",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRegistryInvariant.lean"
+    },
+    {
+      "module": "OwnerStatementRegistryReviewControls",
+      "path": "samples/lean/foundations/OwnerStatementRegistryReviewControls.lean",
+      "sha256": "48c010175d5203bfcaaa09dabac92424ce78e2b704e8a2dadb4ffeeadce52380",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRegistryReviewControls.lean"
+    },
+    {
+      "module": "OwnerStatementRegistrySelection",
+      "path": "samples/lean/foundations/OwnerStatementRegistrySelection.lean",
+      "sha256": "0765a8ba5b1c4416f20ac0d4c11a8bf479d1187f3f4d5abf92eb4d7ea32e4511",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRegistrySelection.lean"
+    },
+    {
+      "module": "OwnerStatementResultCollection",
+      "path": "samples/lean/foundations/OwnerStatementResultCollection.lean",
+      "sha256": "516cd22381d0ccaccb9d30dcff90a1e9a278d55817cbd598cf00501c0052643f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultCollection.lean"
+    },
+    {
+      "module": "OwnerStatementResultCollectionControls",
+      "path": "samples/lean/foundations/OwnerStatementResultCollectionControls.lean",
+      "sha256": "a6392e0da77292b2f6f73cf4110ae368370bd74b3ae3ff7c557dcdef97e14348",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultCollectionControls.lean"
+    },
+    {
+      "module": "OwnerStatementResultLifecycle",
+      "path": "samples/lean/foundations/OwnerStatementResultLifecycle.lean",
+      "sha256": "8964f648acd07ca565af035a69c444fd48ee1b7dd1e1f9807a5e1536d06b6f33",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultLifecycle.lean"
+    },
+    {
+      "module": "OwnerStatementResultLifecycleControls",
+      "path": "samples/lean/foundations/OwnerStatementResultLifecycleControls.lean",
+      "sha256": "50312efe79597450a825beba5ee1c42edcdffaabe30be7b930da1eeaec9a3651",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultLifecycleControls.lean"
+    },
+    {
+      "module": "OwnerStatementResultOrigin",
+      "path": "samples/lean/foundations/OwnerStatementResultOrigin.lean",
+      "sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultOrigin.lean"
+    },
+    {
+      "module": "OwnerStatementResultOriginControls",
+      "path": "samples/lean/foundations/OwnerStatementResultOriginControls.lean",
+      "sha256": "54083eba83f34b43525bfbf67542336945a1f4c66bfd99ef490fe07065a65cca",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultOriginControls.lean"
+    },
+    {
+      "module": "OwnerStatementRetainedControls",
+      "path": "samples/lean/foundations/OwnerStatementRetainedControls.lean",
+      "sha256": "3016135f5f7c8f2b1ea1316bb790d77a0a5b291dcd6e3fc71d0f4dada9660a77",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRetainedControls.lean"
+    },
+    {
+      "module": "OwnerStatementRetainedHistory",
+      "path": "samples/lean/foundations/OwnerStatementRetainedHistory.lean",
+      "sha256": "0ddf0d5dab2945f27c54df3f14df96cc1c840871f125ee75700f7f6f0a27598e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementRetainedHistory.lean"
+    },
+    {
+      "module": "OwnerStatementSession",
+      "path": "samples/lean/foundations/OwnerStatementSession.lean",
+      "sha256": "830d51f19bb8ecc35af03c3c68b4684b96e454843e9c4af9b5ec2388af2b006d",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementSession.lean"
+    },
+    {
+      "module": "OwnerStatementSourceCustodian",
+      "path": "samples/lean/foundations/OwnerStatementSourceCustodian.lean",
+      "sha256": "b9830f6fff6fb66c22f47e5347f44d9d74ba13f32356c1f669c1c3b8ba5ef273",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementSourceCustodian.lean"
+    },
+    {
+      "module": "OwnerStatementSourceCustodianControls",
+      "path": "samples/lean/foundations/OwnerStatementSourceCustodianControls.lean",
+      "sha256": "fa4b771dff40d255c463879be814bc55103ed16fd13a837b5f9d049662f41577",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementSourceCustodianControls.lean"
+    },
+    {
+      "module": "SourceFrontier",
+      "path": "samples/lean/foundations/SourceFrontier.lean",
+      "sha256": "24316838f908af1978c2e79dc0a200669ed47830773a66c8947a75076cce695e",
+      "origin": "/home/codex/dev/mir_poc_01/samples/lean/foundations/SourceFrontier.lean"
+    }
+  ],
+  "audit": {
+    "path": "samples/lean/foundations/DPrerequisiteIntegratedAudit.lean",
+    "sha256": "62ebcf2259246305534e06cfe045abd77d47bd471e973d1d889f60765e5d6342"
+  },
+  "c_negative_recipe": {
+    "path": "samples/lean/foundations/OwnerStatementAdmission.md",
+    "sha256": "8e643f4ef23389f7a9b7cce05ffeaee128acddfc546defca70bb3e7f6244f242"
+  },
+  "audit_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-prerequisites-v1/RESULT.json",
+  "audit_result_sha256": "021310126b2de52b09385d76d68d04eec0f9faf53c3b78cfdb0b362b9800bdeb"
+}

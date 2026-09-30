@@ -380,3 +380,6 @@ Native entry/input-generator sources and an extracted test header live under
 `lean/host-reference/`, within the existing active Lean root. Their physical
 workflow remains under integration; no saved expected result is a source input.
 See `scripts/README.md` and the W4 host manifest for preparation and evidence limits.
+
+
+W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに4proof/controlと所有宣言auditを追加します。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。

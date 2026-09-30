@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-30 09:03 JST
+Last updated: 2026-09-30 15:15 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -14,25 +14,26 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner resumed W4 only on2026-09-26; W4-B is closed as a bounded LAB integrated candidate; W4-C is active.
+Owner resumed W4 only on2026-09-26; W4-B and W4-C are closed within their bounded LAB scopes; W4-D prerequisites are active.
 Previously integrated publication/owner/registration proofs remain under the
 existing reference checker and Lean sample root. The preserved host-store/full-field/lease/fault proof cone is now mirrored;
 its existing-runner integration has passed the B criterion. Repository prepare/
 physical runners now stage the preserved sources into fresh external workdirs. Prior I3 process/QUIC46case results remain
 regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（選定した局所条件・完了）→W4-D（Rust/Core/private QUIC接続・現在地）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Cの局所条件を閉じてDのprocess前提を検証中です。Eは今回の停止点の後です。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
 
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-| W4-C evidence | Reproduction | Remaining boundary |
+| W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
+| D held authority / coordinator use | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK → `d_prerequisite_models_20260930` | 197modules/20278owned/168false/176commands:7compiled over190pinned C; four new proof/control modules. Exact finite-cohort grant/currentness and held-state framing; Fresh197 source rebuild also passed20278owned/168false/366commands. Actual M9/FD/source/entry/resource correspondence open, no D runtime/network acceptance. |
 | Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D process custody design active, actual network implementation pending. No production/public adoption. |
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
 | Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |
@@ -148,7 +149,7 @@ actual captures, normalizers, source/object imports and complete process exits.
 These retained receipts are not repo sample commands: their one-shot launchers
 create fresh evidence and must not overwrite existing runs. The proof/reference cone is now mirrored and verified through existing repo
 runners; prior external receipts remain historical evidence. No new sample root, taxonomy, public observer or workflow-ready
-status has been adopted. W4-C is active; B integration is closed within its bounded LAB scope; source/Core/privateQUIC,
+status has been adopted. W4-C is closed within its selected local scope; D prerequisites are active; source/Core/privateQUIC,
 authenticated ingress and physical namespace remain direct consumers.
 
 ## Legend

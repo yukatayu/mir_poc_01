@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-30 14:36 JST
+最終更新: 2026-09-30 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,7 +60,7 @@ sole task-local goal, resumed by the owner on2026-09-26,
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。05:47:58 UTCの確認では週間使用16%・残り84%でした。次の確認は06:47:58 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -70,7 +70,9 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。次はDのprocess境界設計と前提検証で、Dの実装・実network証拠はまだありません。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回の停止点はW4-Dの検証・記録・統合後、Eの前です。主担当一人で続行し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの選定機構の証明と実M9接続条件を確認中で、Dの実装・実network証拠はまだありません。
+
+Dでは、信頼済み親coordinatorが一つの局所利用区間だけを許可するBを選択しました。待機request全体はlockせず、全端点を停止・準備した後、実M9 publisherの確定を経て利用可能にします。追加の一般証明は、保持中の正当な権限更新による元の状態・結果の保持と、coordinatorから既存PublicationUseへの対応です。197module・20278所有宣言・168偽命題対照を176commandで検査しました（Cの190moduleはhash固定の既存object、7moduleを構築）。別途、空のimport cacheから全197sourceを再構築し、同じ20278所有宣言と168対照を366commandで検査しました。実M9発行と子ごとの検証記録保持、認証済み制御経路、唯一のsource進行、全入口・資源量との物理対応は使用前のgateです。実M9境界の17入力reviewを回収・照合し、子の実検証記録をM9内で厳密に保持する新しい接続方法を選定しました。既存の起動前更新APIは保持します。準備済み記録の追加不変条件・実FD由来の制御・結果保持までの利用区間を実装前に対応付けます。DのRust実装・新network実行はまだありません。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -595,3 +597,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 14:21 JST — W4-Cを78756ad5で統合・push、remote一致確認。D境界設計へ続行。E前停止を維持。
 
 - 2026-09-30 14:36 JST: C統合78756ad5後のD設計で、実行planのprocess制限と共有M9 floorの非移送を確認。単一requester／非実行descriptorと現在性機構A/Bの凍結設計Oracleを起動。D実装・実network成功はまだなく、使用前のC前提再検証を継続。
+
+- 2026-09-30 15:15 JST: DのB機構を選定し、保持中の権限更新とscoped grantの一般証明・197所有module監査・168偽命題対照を検査。7module再構築/176commandでC190は固定再利用。全197fresh検査と実M9境界reviewを継続し、D実装前の物理条件を確認中。
+
+- 2026-09-30 15:22 JST: Dの全197sourceを空cacheから再構築し、20278所有宣言・168偽命題対照・366commandを確認。実装前の物理対応は継続。

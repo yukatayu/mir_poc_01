@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: active W4; W4-A/B bounded evidence integrated, W4-C bounded conditions/integration closed, D boundary design active, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
+- Current state: active W4; W4-A/B bounded evidence integrated, W4-C bounded conditions/integration closed, D selected-B prerequisite proof and M9 seam active, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
 
 ## Objective
 
@@ -10,11 +10,11 @@ Complete owner-requested W4 physical refinement: concrete/abstract correspondenc
 
 ## Scope and assumptions
 
-One active semantic goal: W4, PL1/PL2/PL0, S4/S6, theory/refinement before bounded implementation. Sole main; no subagents. Task-specific owner authorization permits this reversible LAB research and evidence-dependent limited internal changes. It does not adopt unpresented auth policy, 119 detailed proposals, Canon THM/OBL/lifecycle, public wire/API, production or signed acceptance.
+One owner-authorized task-local goal: W4, PL1/PL2/PL0, S4/S6, theory/refinement before bounded implementation. Sole main; no subagents. Task-specific owner authorization permits this reversible LAB research and evidence-dependent limited internal changes. It does not adopt unpresented auth policy, 119 detailed proposals, Canon THM/OBL/lifecycle, public wire/API, production or signed acceptance.
 
 Historical starting scope (2026-09-14; current C/D boundary and later revisions are recorded below): first dependency was publication of a complete configuration/authority payload at a distinct protocol revision to a finite admitted group, preserving current-use checks across receiver queues and late results. REQ DS-01/02/03/04/08, AU-01/04/05/08, VF-04/05; PT-03/11/14; SC-04/07; U ordinary source, correct distribution, distinct authority and no stale resurrection. Exact U IDs will be retained from the requirement registry, not invented. Q18 and W3 H/H2/C/C2 policies remain distinct and conditional.
 
-Candidate A: freeze all protected uses of the explicitly participating finite group, collect exact acknowledgements, publish the checked successor, then install/reopen under matching monotone fences. Compare B: owner-only update/ack while caller may keep a stale head. No whole-world coordinator, ordinary-read snapshot or multi-owner transaction is implied. Missing acknowledgement may remain closed, not success. Full payload/realm/auth provenance, locks/queues, bounded resources and actual Session refinement remain unestablished.
+Historical initial comparison (2026-09-14, distinct from the selected 2026-09-30 D coordinator B): candidate A froze all protected uses of the explicitly participating finite group, collect exact acknowledgements, publish the checked successor, then install/reopen under matching monotone fences. Compare B: owner-only update/ack while caller may keep a stale head. No whole-world coordinator, ordinary-read snapshot or multi-owner transaction is implied. Missing acknowledgement may remain closed, not success. Full payload/realm/auth provenance, locks/queues, bounded resources and actual Session refinement remain unestablished.
 
 Acceptance requires actual definitions/checker correspondence, general kernel proofs, non-vacuous controls, targeted Oracle review and real-layer refinement. A small isolated theorem is not W4 completion.
 
@@ -38,7 +38,7 @@ W3 fresh-copy source/checker/proof baseline ran998f38 and exited0 at2026-09-13T2
 
 ## Files changed
 
-Current C checkpoint: two OwnerStatementOriginalEntry proof/control sources, the existing admission companion and source-pin manifest, producer inventory, READ_LEDGER/W4_CHECK, the one report/plan and current status mirrors. The fifteen Rust reference files remain external and unadopted; all temporary overlays are restored. Earlier integrated file sets below are history.
+Current D checkpoint:4 new Lean proof/control files, DPrerequisiteIntegratedAudit, independent197-source manifest/reproduction companion, READ_LEDGER/W4_CHECK, one report/plan and current status/sample mirrors. C/B frozen manifests and baseline Rust remain unchanged. C fifteen Rust reference files remain external/unadopted. Earlier file lists below are history.
 
 Forward checkpoint:45 reviewed Lean/support sources in samples/lean/foundations, existing source-check runner --with-owner-boundary, publication explanation, samples/script READMEs and current status/evidence mirrors. No new sample root. Exact45file list/hashes in W4_CHECK external mirror manifest.
 
@@ -60,6 +60,8 @@ Full docs validation248bca passed after fixing the stale progress header and rec
 Read-only git/resource/hash/Canon/code inventory commands as recorded above. python3 sub-agent-pro/mirrorea-proof-first-handoff-v1/tools/verify_bundle.py. python3 scripts/proof_first_reference_source_check.py --work-root /tmp/mirrorea-w4-20260914-a3e0bpks. lean --trust=0 MirroreaProofFirstPublication.lean in external workdir, 4GiB child address-space limit. Oracle browser-only dry-run659ff0 and structured once-only COMMAND.json invocation1dd16e; no paid/API fallback.
 
 ## Evidence / outputs / test results
+
+Current D: full197-source fresh build5304exit0,20278owned declarations/168qualifiedfalse/366commands, exact source/log/manifest bindings verified. RESULTadf5e75537de5927c1754cb27aaad07058a3400c81f79f0acf0ad58aa73a54df. Prior incremental7-over190 audit24745 remains separate. make docs15844exit0 at06:26:26UTC; final result/status sync later is focused-diff checked. No D Rust/network run. External v6 prepared invariant38414passes standalone, not yet integrated/audited197.
 
 Current C evidence (2026-09-30T05:14:31.087971+00:00): foreign-fault-retention-green-v1 default806/feature818 all pass0fail0ignored0filtered;8selectedpass,15Rust restored. General190/19502/156/167audit unchanged. Last Oracle N01 reproduced/repaired by main; complete14dispositions retained. C close is bounded to the selected local profile and integrated78756ad5 with push81795exit0/parity0/0. D implementation/network evidence remains due. Earlier evidence below retains its original cut.
 
@@ -229,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-No new prompt is needed. Continue the authorized C→D work, stop after D before E, or at a reasonable checkpoint near50% weekly remaining. Check quota at least one hour apart; reset is owner-only. Current remaining87% was checked04:47:14UTC, next>=05:47:14UTC.
+No new prompt is needed. Continue the authorized C→D work, stop after D before E, or at a reasonable checkpoint near50% weekly remaining. Check quota at least one hour apart; reset is owner-only. Current remaining84% was checked05:47:58UTC, next>=06:47:58UTC.
 
 ## Plan update status
 
@@ -257,7 +259,7 @@ samples_progress.md updated: W4 active external model evidence and existing base
 
 ## Reviewer findings and follow-up
 
-Current: mir-w4-inbox-r2 completed87886exit0 at04:59:59UTC; full answer and14dispositions match23frozenfiles/QUESTION/actual6Pro-max/finalDOM. It closes prior inbox/reason findings and identifies actual foreign fault loss. Parent reproduced4fail/4positive and repaired deferred consumption;8selected/default806/feature818 pass. Parent reviewed this final tiny delta; no independent re-review or Oracle execution of the fix is claimed. C technical close is conditional on stated local scope/TCB and final docs/Git checks. No active Oracle or subagent.
+Current D: boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Main added3 general prepared-record invariant theorems; standalone38414passes but final audit/integration due. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -4453,3 +4455,25 @@ Dのprocess境界では、単一requesterの元source cursorとowner側の非実
 - This is design research only. No new kernel/runtime/network checks run or claimed. Current C806/818/156results remain at their frozen cuts. plan/updated; CURRENT_GOAL/RESUME/tasks/progress synchronized for current gate; Documentation/project-status and samples_progress retain post-C current snapshots (no command/sample/blocker promotion); no new report. Review pending; commits pending; no push in this record, sub-agent/external notification/publication none.
 
 2026-09-30T05:45:35.481149+00:00: D設計checkpointのmake docs9504全体exit0（05:42:51UTC、log SHA2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd）。190proof pins、既読6729entry prefix、15Rust復元、producer inventoryv4完全一致、git diff --checkを確認。proof/runtime/新networkの再実行ではない。Oracle設計reviewは継続中。own12docsをcheckpoint commit/pushし、その後Dを続行する。
+
+
+2026-09-30T05:54:52.670625+00:00 — D boundary review disposition
+
+Oracle mir-w4-d-boundary-r1 completed05:48:51UTC,11397exit0;26inputs/prompt/6Pro-max/finalDOM verified. ANSWER5dc9ccf2c7d1a536cf8a82b873b78e927bd05a4af755bb69a58a0e94cd3a642b;20dispositions. Select B: actual parent M9 issuer, one exact scoped local-action grant, registered exact finish; no whole-request lock. Order close/drain -> M9 synchronize/stage -> disabled backend prepare/refresh ACKs -> actual publisher commit/revision association -> effective activation. Source/physical/all-entry/resource proofs still pre-use gates. Old idle-only ResultLifecycle.Path unchanged; new held-authority extension external in progress. v1 missing LEAN_PATH import, v2 two simp failures; no success claimed. v3 tool95852 active. No D Rust implementation. Weekly84%05:47:58UTC next>=06:47:58UTC. HEAD8e864304d01da387cc493351a646c27b7488ea88 pushed62080exit0/parity0/0.
+
+
+### 2026-09-30T06:13:08.333531+00:00 — D prerequisites: held authority and coordinator model
+
+Selected B from completed boundary Oracle: one authentic scoped local-action grant, exact registered finish, close/drain → authentic M9 stage → disabled backend preparation/exact ACKs → actual publisher commit → effective activation. Held request alone does not block authority changes. Audit24745exit0:197modules/20278owned/168qualifiedfalse/176commands, seven compiled over190pinned C inputs; RESULT 021310126b2de52b09385d76d68d04eec0f9faf53c3b78cfdb0b362b9800bdeb. New4 model/control files+audit+separate manifest/recipe preserved; old C190/156 and B206 manifests unchanged. Standalone held95852/coordinator29931 and positive controls passed. Prior failed source versions/logs retained. This is conditional model evidence; actual M9/control/source/physical/caller/resource binding open, D implementation unstarted. New17file2002842byte narrow M9 review mir-w4-d-authority-r1 tool92088 launched06:10:27UTC; full final answer/model binding due. Parent retains integration; no subagents. Source new M9 seam AUTHORITY-SEAM-v1 separates authenticated authority delta from exact local validation observations; never weaken old prelaunch contract or copy full global authority into children. Fresh197 recipe preserved, not yet executed. plan/updated; status synchronization/validation/commit due; no Canon/THM/OBL/119/Plan250/E change.
+
+
+2026-09-30T06:15:37.325954+00:00: D checkpoint status sync: Documentation/project-status/progress/tasks whole snapshot/samples_progress updated selectedB/current197 model evidence and actual-M9 review. Fixed touched sample docs stale C-active/old175/180 current wording, preserving historical cuts in companion/report. samples/README/scriptsREADME updated for Lean-only additions/no newCLI or active root. Fresh1975304running, docschecknotyetclaimed. Oracle92088status06:13:27actual6Pro-max/identitytrue/Stoptrue. Quota84%05:47:58 next>=06:47:58. No Canon/Rust mutations/commit/push at this record.
+
+
+2026-09-30T06:20:34.320883+00:00: D selected application map DESIGN-v2 and59-method Sys5 entry inventory recorded. Reconsulted existing source/owner gate and Sys5 post-body finalizer; lower source path vs I3 permit combination is explicit before dependent use. No real D body or new runtime claim; new M9 rebase design remains underreview. plan/updated; snapshot change unnecessary beyond existing selectedB/pre-use status.
+
+
+2026-09-30T06:22:02.976662+00:00: Exact D fresh197 recipe tool5304exit0:197source modules/20278owned/168qualifiedfalse/366commands. RESULT adf5e75537de5927c1754cb27aaad07058a3400c81f79f0acf0ad58aa73a54df, workdir /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/mir-w4-d-prerequisites-mv8fbwqj. All366source/log hashes and197repo pins/audit/negative recipe verified; prior READ_LEDGER prefix6736 unchanged;15Rust baseline restored/unchanged. This independently reproduces the candidate proof recipe; no physical M9/source/control authentication or D runtime acceptance. Earlier7-over190 audit retained. docs/sample dashboards/tasks whole snapshot updated actual run status; make docs/Git checkpoint still due. Oracle92088ongoing, no rerun/no final stop.
+
+
+2026-09-30T06:28:58.396092+00:00: D narrow Oracle full answer recovered/verified/dispositioned16; authority seam selected with no canonical cross-child observation merge, strict local map framing and stronger authority comparator. Exact sources reconsulted: restricted_for_execution clears source-release map; matches_for_restore is weaker than full authority equality; occurrence IDs use generation/request/locus. Actual FD custody cannot be replaced by decoded TrustedControl data. Grant finish must follow coherent local completion. External coordinator-v6 adds derived prepared-record/staged-or-published correspondence, standalone38414exit0; integration/audit next, current197 corpus remains v5. make docs15844passed before final status/common section synchronization; git diff check next. No D runtime/Canon change and no final stop.

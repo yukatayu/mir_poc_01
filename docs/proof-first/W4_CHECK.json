@@ -53645,7 +53645,7 @@
   },
   "d_boundary_design_20260930": {
     "at": "2026-09-30T05:36:45.539184+00:00",
-    "status": "UNSELECTED design, changed C physical premises reopened before dependent use; no D implementation",
+    "status": "B selected bounded candidate; proof/source/all-entry/currentness/resource gates open before dependent implementation",
     "head": "78756ad5dc3718b1f9dfc7c2cf7b67a421b9c1d3",
     "design": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/DESIGN-v1.md",
     "design_sha256": "9e37d4dc42f5077a6f2e6fe3fa0e85a16e2a7353131a0c61bffe5e0d23aff1eb",
@@ -53658,7 +53658,8 @@
       "file_count": 26,
       "bytes": 2386962,
       "launch_at": "2026-09-30T05:33:28.540119+00:00",
-      "status": "RUNNING; answer not yet inspected"
+      "status": "COMPLETED11397exit0; FINAL_RECOVERY/DISPOSITION verified; candidate B selected, dependent implementation gated",
+      "answer_sha256": "5dc9ccf2c7d1a536cf8a82b873b78e927bd05a4af755bb69a58a0e94cd3a642b"
     },
     "premises": [
       "unique requester full source cursor; inert remote original manifest descriptor; restricted executable plans remain restricted",
@@ -53687,5 +53688,76 @@
     "producer_inventory_v4_exact": true,
     "no_new_proof_or_runtime_execution": true,
     "git": "own12docs checkpoint pending; continue D after commit"
+  },
+  "quota_20260930T054758Z": {
+    "remaining_percent": 84,
+    "next_check_after": "2026-09-30T06:47:58.755648+00:00",
+    "owner_stop": "near50%at reasonable checkpoint",
+    "reset": "owner only"
+  },
+  "d_prerequisite_models_20260930": {
+    "at": "2026-09-30T06:13:08.333531+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/kernel-prerequisites-v1/RESULT.json",
+    "sha256": "021310126b2de52b09385d76d68d04eec0f9faf53c3b78cfdb0b362b9800bdeb",
+    "tool": 24745,
+    "modules": 197,
+    "owned": 20278,
+    "qualified_false": 168,
+    "commands": 176,
+    "scope": "D pre-use prerequisite models only: broader held-authority framing/refinement and coordinator scoped grants mapped to PublicationUse for arbitrary finite cohort; prepared versus effective installation; exact endpoint/kind/serial finish. Four new modules and three existing publication modules compiled;190 imported C source/object identities pinned and unchanged. Existing156 and new12 qualified false controls. No fresh197 rebuild; no physical authentication/M9 issuer/backend correspondence/runtime resource closure or D real-process acceptance.",
+    "standalone_held": 95852,
+    "standalone_coordinator": 29931,
+    "fresh197_recipe": "Executed successor below: full197/20278/168/366, tool5304 exit0",
+    "status": "model proof evidence; physical prerequisites open, D incomplete"
+  },
+  "d_authority_seam_review_20260930": {
+    "at": "2026-09-30T06:13:08.333531+00:00",
+    "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-d-authority-v1",
+    "session": "mir-w4-d-authority-r1",
+    "tool": 92088,
+    "pid": 3281401,
+    "launch": "2026-09-30T06:10:27.038637+00:00",
+    "manifest_sha256": "1933d1d85cb8dd9ac7255292d569adf8317e97d1b15efea41c4739d3e76b1d98",
+    "question_sha256": "997935f273a315d555776eb87b9b23961acb4065006fe745b37a796902b9ca70",
+    "files": 17,
+    "bytes": 2002842,
+    "status": "COMPLETED and fully verified;16 dispositions",
+    "seam": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/AUTHORITY-SEAM-v1.md",
+    "scope": "New authenticated restricted M9 successor + local observation preservation; old prelaunch exact API unchanged. No Rust implementation.",
+    "completed": "2026-09-30T06:23:57.435Z",
+    "answer_sha256": "25d0318df87fbd230d5367ffb0d15ef6f2dff29b2367eda12b51cd4cdb5ce29c",
+    "recovery_sha256": "ef8d59061f427df5cbd8d03b7e4893d087f1d1baecd8df7175f97e2474c086f1",
+    "disposition_sha256": "412d4c9801b4260a579329730ecb3add4d760f85a782f7d1d3fe54e8f9ce0a9d",
+    "decision": "New M9-owned authenticated restricted successor plus exact live local observation maps, no global merge and no weakening old prelaunch API. Registered FD provenance and coherent completion required. Model prepared-record invariant addition before use."
+  },
+  "d_prerequisite_fresh_20260930": {
+    "at": "2026-09-30T06:22:02.976662+00:00",
+    "tool": 5304,
+    "exit": 0,
+    "workdir": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/mir-w4-d-prerequisites-mv8fbwqj",
+    "result_sha256": "adf5e75537de5927c1754cb27aaad07058a3400c81f79f0acf0ad58aa73a54df",
+    "modules": 197,
+    "owned": 20278,
+    "qualified_false": 168,
+    "commands": 366,
+    "scope": "Fresh exact repository recipe rebuilt all197 source modules with own empty import cache, trust0-j1, all-owned standard-axiom audit, all168 deliberately false guard failures qualified. Actual source/log hashes and all manifest pins verified. Model evidence only, no D runtime/physical acceptance.",
+    "ledger_prefix": 6736,
+    "unchanged_Rust": 15
+  },
+  "d_prerequisite_docs_20260930": {
+    "at": "2026-09-30T06:28:58.396092+00:00",
+    "tool": 15844,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-prerequisites-v1.json",
+    "sha256": "263dd37b3d0b365be38e042a5f32c10299dff9aee0e807261b51bebbe61e2b42",
+    "exit": 0,
+    "scope": "make docs passed before this final result/status sync; focused diff follows. No D runtime acceptance."
+  },
+  "d_prepared_invariant_standalone_20260930": {
+    "at": "2026-09-30T06:28:58.396092+00:00",
+    "tool": 38414,
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v6/MirroreaProofFirstCoordinatorUse.lean",
+    "source_sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/coordinator-use-v6/FIRST.json",
+    "scope": "Three derived prepared-record/staged-or-current/publication equality theorems, standard axioms. External standalone passed; integrated197 audit still v5. Audit/integration due before physical use."
   }
 }

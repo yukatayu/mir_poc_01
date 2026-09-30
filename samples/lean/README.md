@@ -207,14 +207,6 @@ companion内の外部fresh-copyコマンドで再構築できます。既存W4-B
 上の小規模手動loopには追加しません。namespace全体の一意性・typedなsourceへの
 結合・現在の認可・private imageの真正性は別の境界です。
 
-W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](foundations/OwnerStatementAdmission.md) に記録します。
-169依存moduleのsource-only再構築と追加差分による175module全所有宣言auditを用い、到達履歴・元の文位置・
-実応答受理・確定履歴を分け、所有者ごとの現在の登録情報を選びます。登録差分はreview待ちです。
-初期schema・物理custody・総資源量、Rustの文順序・局所dispatch・全entry接続は未完了です。
-既存W4-B manifest、sample root、host runnerの契約は変更しません。
+W4-Cの通常代入列は [OwnerStatementAdmission](foundations/OwnerStatementAdmission.md) に現在の190module/156反例recipeと段階別証拠を保持します。元sourceの全handler・引数・文順序、現在のM9、実結果と一度だけの受理、局所全入口・資源条件について選定した局所範囲を閉じ、78756ad5で統合しました。外部15Rust参照のdefault806/feature818はtest-onlyの検証で、production採用ではありません。
 
-W4-Cのsource受理接続は `OwnerStatementAdmission.md` の180module/61反例recipe、
-W4_CHECKの `c_statement_source_consumer_20260929` とreview後続recordを参照。
-実tick/transfer/service/typed consumeの一般命題と受理済み2文経路を検査しています。
-Rust参照版は実2文・S→T→S・同じworldでの継続を検査済みですが、全下位入口、
-書込み前資源と下位結果保持は未閉鎖で、production採用・α完成ではありません。
+W4-Dの使用前モデルは [DPrerequisites](foundations/MirroreaProofFirstDPrerequisites.md) と独立manifestに保存します。保持中の権限更新と、有限cohortの中央利用区間からPublicationUseへの対応を検査します。197所有module監査と168反例が通り、7moduleを構築、C190は固定再利用です。別途全197fresh-copyも20278所有宣言/168対照/366commandで通過しました。実M9発行・認証済みFD・source custody・下位入口・物理資源との対応と実private QUIC接続は未完了です。既存B/Cの凍結manifest、sample root、host runner契約は変更しません。
