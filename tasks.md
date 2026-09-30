@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 10:07 JST
+最終更新: 2026-09-30 10:30 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と132反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と139反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限と依存を保つ未採用参照で、実更新値の読出し・因果参照、元返信・FIFO、結果枠、対象生存状態・拒否記録を検査しました。修正版のdefault全674件が成功し、skipはありません。後続2検査では正当な無関係拒否記録の追加と、書込み後に失われた同じ報告の回収から読出しを再開する経路が成功しました（後続全676件は未実行）。一般証明は190module・19375宣言・132偽命題対照を監査済みです。Oracle最新22項目を照合し、共有資源の予約・全caller対応・実M9後継を継続中です。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、別の読出し・評価・消費が元の報告用容量を使い切る実反例を修正しました。修正版default全681件が成功し、skipはありません。後続3検査では実記録を追加する候補の容量制限と、認可済みrelation変更後の例外復帰で変更を保持する経路が成功しました（後続feature全696件も成功、default全684件は未実行）。一般証明は190module・19433宣言・139偽命題対照を監査済みです。生成・復元経路と共有資源の残件をOracle差分review中です。初期資源確保・全caller対応・実M9後継を継続し、C未完了・D未着手、D完了後に停止します。
 
 現在の直接consumerは、元要求の未実行キューと実失敗を保持する継続、搬送・返信の各確定点、全entry/資源の閉鎖です。成功後の同一要求回収とobserver索引に依存しない受理は参照検査済みですが、本番採用前にcurrent Bank.tick受理・M8直接entry・SYS4/FIFO/局所経路・private image/restore・patchの条件をそろえます。一般Lean結果の回収規則は物理故障対応そのものの証明ではありません。
 

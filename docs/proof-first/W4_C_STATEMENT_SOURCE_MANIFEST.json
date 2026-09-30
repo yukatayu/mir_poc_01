@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-read-origin-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "45caee2e89b43ef3e5d8c80c9c117ede5a830b7264fa68abceece937c205b348",
+      "sha256": "632900ddde5df9ad5f3b35ec6b9e93d5d4c7b5efdc465233b16547390dad0ddf",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "45caee2e89b43ef3e5d8c80c9c117ede5a830b7264fa68abceece937c205b348",
-      "transformation": "identity; append exact-key newest actual write selection, declarative Latest equivalence, replay value, qualified explicit origin projection and controls. Actual producer/namespace/projection and field coherence separate."
+      "staged_sha256": "632900ddde5df9ad5f3b35ec6b9e93d5d4c7b5efdc465233b16547390dad0ddf",
+      "transformation": "identity; append reporting budget independent availability/admission equivalence, acquisition/discharge/release conservation and controls. Actual debt/cost/producer closure remains a physical duty."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-read-origin-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "43150f6fe1e200324fbff051dc62e75c972570f6605284cbfd0f178351ee067c",
+      "sha256": "101a003e95c72996ee045c072f2ba5d25f3eede47e23415feb07835461305b25",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "43150f6fe1e200324fbff051dc62e75c972570f6605284cbfd0f178351ee067c",
-      "transformation": "identity; append exact-key newest actual write selection, declarative Latest equivalence, replay value, qualified explicit origin projection and controls. Actual producer/namespace/projection and field coherence separate."
+      "staged_sha256": "101a003e95c72996ee045c072f2ba5d25f3eede47e23415feb07835461305b25",
+      "transformation": "identity; append reporting budget independent availability/admission equivalence, acquisition/discharge/release conservation and controls. Actual debt/cost/producer closure remains a physical duty."
     }
   ],
   "audit": {
@@ -2376,6 +2376,26 @@
     "owned": 19375,
     "qualified_false": 132,
     "commands": 143,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "report_reservation_successor": {
+    "at": "2026-09-30T01:30:47.924062+00:00",
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/RESULT.json",
+    "sha256": "8e23422eb3b0e49e9cb011b927b6ce11e8a96ff32f6f38b776e090234d5e7d23",
+    "owned": 19433,
+    "qualified_false": 139,
+    "commands": 150,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",

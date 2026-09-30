@@ -52498,5 +52498,140 @@
     "tool": 42476,
     "passed": 2,
     "scope": "Actual unrelated cache-fault terminal append remains publishable; original two bodies finish91. ST lower postcommit report loss leaves actual90, missing local writer projection refuses read, same report recovery allows actual read/evaluate/consume91 before original ack, no body retry. Successor676 full not run; predecessor mixed default674 passed."
+  },
+  "c_report_reservation_theory_20260930": {
+    "at": "2026-09-30T01:30:47.924062+00:00",
+    "tool": 16754,
+    "exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/RESULT.json",
+    "sha256": "8e23422eb3b0e49e9cb011b927b6ce11e8a96ff32f6f38b776e090234d5e7d23",
+    "modules": 190,
+    "owned": 19433,
+    "qualified_false": 139,
+    "commands": 150,
+    "scope": "General pending reporting budget acquisition, exact foreign admission against independent spare capacity, discharge conservation and terminal unused-budget release. Capacity obligations do not invent events; authenticity/costs/admission before effects remain physical duties. Earlier actual read origin proofs retained. Counted increments/result slots/carrier frame proofs retained. Decoded origin/general original-entry proofs retained. All actual caller/producer/profile/allocator costs/M9 successor and distributed refinement remain separate. Changed dependency cone rebuilt over pinned earlier fresh190;139 qualified false controls, not a new full fresh190 rebuild."
+  },
+  "c_report_reservation_reference_20260930": {
+    "at": "2026-09-30T01:30:47.924062+00:00",
+    "runs": [
+      {
+        "version": "report-reserve-red-v1",
+        "suffix": "-check",
+        "tool": 24838,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/report-reserve-red-v1-check/RESULT.json",
+        "sha256": "357a3b60dc935f7e60cc75136aa5494664fcadc3b9c0e005b8d7f8bed9152634",
+        "log_sha256": "9e72e288da454fcd9d9d597572ee0a3b46d840817de21b1c14830f3988406632"
+      },
+      {
+        "version": "report-reserve-red-v2",
+        "suffix": "-check",
+        "tool": 74037,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/report-reserve-red-v2-check/RESULT.json",
+        "sha256": "06b5e9fdfc26ae251d372f7fa5c764ff9d29d46247a762e59dbf0ec6458dc8f1",
+        "log_sha256": "f922aa9989c8fb9be394a26605c0829a8b2443234bf3561f20ff29ae65654123"
+      },
+      {
+        "version": "report-reserve-green-v1",
+        "suffix": "-check",
+        "tool": 3102,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/report-reserve-green-v1-check/RESULT.json",
+        "sha256": "1d9959b26927a5ec594f82b02a8feac1f630de83f6073380e634018879fa07eb",
+        "log_sha256": "fe23a0d61221c8e1a263ca2967d8ae1e5299c7f4f4dd65acdf89d64ed6c73c2e"
+      },
+      {
+        "version": "report-reserve-green-v2",
+        "suffix": "-check",
+        "tool": 65701,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/report-reserve-green-v2-check/RESULT.json",
+        "sha256": "540a09fb2da3035c2bfd05fe388a2beb0b0a72b0f88c15b67c3e42b2f07cc3e7",
+        "log_sha256": "e6968a93c50c54cdc030469ef1610d27b63386d7d9465d84f002df83abf2e7cd"
+      },
+      {
+        "version": "shared-ow1-reserve-red-v1",
+        "suffix": "-check",
+        "tool": 64082,
+        "exit": 101,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/shared-ow1-reserve-red-v1-check/RESULT.json",
+        "sha256": "6729608aaf3f4ec56a09b7f41cd797007da71b6ce680963e54c7e1c3dbe71059",
+        "log_sha256": "f8e0967711572c9e8692a7efe4818fc3a15e32740a63233249caca54d6d76a42"
+      },
+      {
+        "version": "shared-ow1-reserve-green-v1",
+        "suffix": "-check",
+        "tool": 66987,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/shared-ow1-reserve-green-v1-check/RESULT.json",
+        "sha256": "8c7543d032b4979403b7fa640e1029cb48e6c8e9dd25ae494f7065ab34116512",
+        "log_sha256": "56fcc5cd9fdada974db89bb27ebd274f73b88d62fdd04c3e3efef84e54bbe06f"
+      },
+      {
+        "version": "shared-ow1-reserve-green-v1",
+        "suffix": "-full-check",
+        "tool": 36026,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/shared-ow1-reserve-green-v1-full-check/RESULT.json",
+        "sha256": "11d8b2efc3c2b19d736e81f35d9e7ee58e3ed01a76a68b0ce78d93998f1bd784",
+        "log_sha256": "05731e53a6bf821a9151c96869ef023d6d7bc45fe2e3d3f924462f5d4871fcf8"
+      },
+      {
+        "version": "reserve-positive-v1",
+        "suffix": "-check",
+        "tool": 12463,
+        "exit": 0,
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/reserve-positive-v1-check/RESULT.json",
+        "sha256": "a8f1e803ebabf050d5b927090a0a0f52d3bc99e9ac961cf059832127446acee2",
+        "log_sha256": "e54bc7ee65e5c26a0317933ef0907d7b4bb946dbf7fd0c6be684cf733cfa6142"
+      }
+    ],
+    "default_full": {
+      "passed": 681,
+      "failed": 0,
+      "ignored": 0,
+      "seconds": 125.85
+    },
+    "scope": "ST actualread consumes owed lower projection room; OW1 actualeval/consume strand queued original. Corrected5pass then full681. New3positive controls candidate genuine save and authorizedrelationmutation-unwind pass, full684default not run. Firstgreen compile failure3privatefield accesses fixed by placing method within owning module; not counted as runtime result. Source actualdebt authenticity/allwriters/initialreservation/SYS4resources still open. All15Rust restored per completed runner; later tests may temporarily overlay.",
+    "oracle_submission": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-resources/SUBMISSION.json",
+      "sha256": "7fe40cb1d709cadb989700a4eded7ffade0236fa122c894ebb5d5a705229c421",
+      "question_sha256": "7dace2a281b32b7480cd0016e74d8ef832e2f5c4237965098361eea7b5ab8e71",
+      "manifest_sha256": "18300090f58cf59b121d283cdf9f8be7be664384ff4733eb1d7764368e96ecae",
+      "tool": 47375,
+      "status": "running at integration; single frozen681+139 submission; PIN attached"
+    }
+  },
+  "c_resource_feature_checkpoint_20260930": {
+    "at": "2026-09-30T01:37:06.722285+00:00",
+    "tool": 27844,
+    "exit": 0,
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/reserve-positive-v1-feature-full-check/RESULT.json",
+    "sha256": "f5bbe3488bbac2fdd2b5840e0e1fee13f357737bf537cc7a929853fdfaab4916",
+    "passed": 696,
+    "failed": 0,
+    "ignored": 0,
+    "seconds": 130.65,
+    "scope": "reserve-positive-v1 featurefull; distinct prior default681 cut. Later endpoint acknowledgment fix4selectedpass38070; later enqueue projection controls pending. All15restored.",
+    "oracle_pre_submit_failure": {
+      "session": "mir-w4-resource-r1",
+      "exit": 1,
+      "reason": "targetaboutblank was not a ChatGPT URL; no prompt/model/runtime submission; exacttarget navigated then samepacket retry",
+      "log_sha256": "a39ce5d23d07b6bdbf323a049b905f4b9417239e01d25b6543ba64ffb292e283"
+    },
+    "oracle_retry": {
+      "session": "mir-w4-resource-r2",
+      "tool": 78670,
+      "submission": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-resources-retry/SUBMISSION.json",
+      "sha256": "fc3fd19809618df5ebf95030cec92961ca5ac74fc153ebbaa978f22c36626419",
+      "status": "running01:36:15UTC",
+      "next_status_after": "2026-09-30T01:39:15.318364+00:00",
+      "model_ui": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-resources-retry/MODEL_UI.json",
+        "sha256": "6067b2ed3a1e4d91b3a7c0f25511537f1e95838843a2e9a8df7904d0f6d3fe43",
+        "state": "6/Pro slider4max4 in visible originaltarget"
+      }
+    }
   }
 }

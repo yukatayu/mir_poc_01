@@ -960,7 +960,42 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
  'FalseReadOriginWrongKey.lean': 'import OwnerStatementOriginalEntryControls\n'
                                  'open MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin '
                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin\n'
-                                 '#guard bindRead 1 history 20 = some 3\n'}
+                                 '#guard bindRead 1 history 20 = some 3\n',
+ 'FalseReportReservationAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                         'open '
+                                         'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                         'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                         '#guard foreign 10 1 held = none\n',
+ 'FalseReportReservationCursorJump.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                          'open '
+                                          'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                          'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                          '#guard discharge 3 held = some ⟨10,0⟩\n',
+ 'FalseReportReservationDebtIgnored.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                           'open '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                           '#guard foreign 9 1 held = some ⟨7,3⟩\n',
+ 'FalseReportReservationLostDebt.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                        'open '
+                                        'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                        'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                        '#guard foreign 10 1 held = some ⟨7,0⟩\n',
+ 'FalseReportReservationOverAcquire.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                           'open '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                           '#guard (acquire 10 2 held).isSome\n',
+ 'FalseReportReservationOverDischarge.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                             'open '
+                                             'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                             '#guard (discharge 4 held).isSome\n',
+ 'FalseReportReservationOverRelease.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                           'open '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation '
+                                           'MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation\n'
+                                           '#guard (release 4 held).isSome\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1700,3 +1735,48 @@ The mismatch is recorded in read-origin-theory-v1/EVIDENCE_WRITER_FAILURE.json.
 That old backup is not relied on as pinned evidence. The corrected runner checks
 all output paths before writing and the new143-command audit is independently
 hashed. This is a forward evidence correction, not a rewritten past success.
+
+## Pending reporting capacity (forward LAB)
+
+`ReportReservation` treats future reporting slots as obligations, never as
+already-executed trace events. Independent `Available` describes sufficient
+spare capacity. Executable foreign admission is equivalent to that condition
+and preserves the original debt; acquisition, actual discharge and release of
+truly unused terminal budget preserve `Fits`. Ten general theorems were checked
+with standard `propext`/`Quot.sound`; seven additional false controls reject
+ignored/lost debt, blanket refusal, over-acquisition/discharge/release and a
+cursor advance not accounted for by actual discharge.
+
+Audit16754:190modules19433owned139qualified false controls150commands, ten changed
+or dependent modules rebuilt over pinned earlier fresh190 artifacts. This is
+not a new full fresh190 rebuild or a proof of physical allocation costs.
+
+Actual ST counterexample: source commits90; three lower rows are unprojected.
+A genuine unrelated seed-value read spends one of the last three local slots,
+then original-report collection fails. One extra slot permits both. Actual OW1
+counterexamples: original is queued with four rows owed; its shared evaluator
+and consumer spend that capacity, causing original failure (one insufficient
+case also overflows the worker trace counter). With eleven slots both real
+designated work and the original service succeed. Corrected five selected
+checks pass; full same-cut default681passed/0failed/0ignored125.85s (36026).
+This extends the earlier default674 cut and remains unadopted reference.
+
+The current local guard derives owed rows from original lower history,
+projection correspondence and retained terminal outcome/phase; an inert clone
+does not waive debt. Read/evaluate/import/consume costs are checked before their
+effects. Resource unavailability remains distinct from an observed rejection;
+no M8 row is invented. Candidate publication also preserves sufficient local
+report space. Additional two controls accept a genuine candidate save with spare
+capacity and reject it when it spends the last original-report slots. A third
+control really performs an authorized relation invalidation before unwinding;
+the current changed relation and owner190 survive, then original source reaches17.
+These three selected controls pass12463. The newer full684default was not run.
+
+Open physical duties: initial whole-invocation trace reservation, exact costs and
+all producer routes, SYS4 endpoint/request/report reserves, direct legacy local
+mutators, actual M9 fact-changing successor, and whole-source caller closure.
+Returning the current snapshot on unwind does not by itself recover missing
+relation reporting or OOM/abort/process death. Designated execution reads the
+shared semantic snapshot; the test does not invent an unauthorized designated
+owner-state mutation. Oracle resource-r1 reviews the frozen681cut and139proof,
+not these later three controls. No current-layer/production/Canon acceptance.

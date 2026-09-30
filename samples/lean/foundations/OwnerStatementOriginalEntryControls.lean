@@ -181,3 +181,17 @@ def history : List (Write Nat Nat) := [other,latest,prior]
 #guard project (fun n => n == 3) (fun n => n == 2) [2,3] = [2,3]
 #guard project (fun _ => false) (fun n => n == 2) [3] = []
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReadOrigin
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation
+open OwnerStatementOriginalEntry.ReportReservation
+def held : State := ⟨6,3⟩
+#guard foreign 9 1 held = none
+#guard foreign 10 1 held = some ⟨7,3⟩
+#guard discharge 3 held = some ⟨9,0⟩
+#guard discharge 4 held = none
+#guard acquire 10 2 held = none
+#guard acquire 10 1 held = some ⟨6,4⟩
+#guard release 1 held = some ⟨6,2⟩
+#guard release 4 held = none
+#guard foreign 9 0 held = some held
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.ReportReservation

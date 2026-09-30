@@ -1117,3 +1117,131 @@ theorem unrelated_lane_refused (sameLane readFrom : Nat → Bool) (raw : List Na
 #print axioms actual_origin_retained
 #print axioms unrelated_lane_refused
 end MirroreaProofFirst.OwnerStatementOriginalEntry.ReadOrigin
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation
+-- Resource accounting only: owed includes actual unprojected rows and a
+-- bound for a queued original service. It does not assert future trace events.
+-- Authentic debt derivation, every writer's cost and admission before effects
+-- are separate physical obligations. No OOM/abort recovery follows here.
+structure State where
+ used : Nat
+ owed : Nat
+ deriving DecidableEq, Repr
+
+def Fits (limit : Nat) (s : State) : Prop :=
+ ∃ spare, s.used + s.owed + spare = limit
+
+def Available (limit cost : Nat) (s : State) : Prop :=
+ ∃ spare, s.used + s.owed + spare = limit ∧ cost ≤ spare
+
+theorem fits_exact (limit : Nat) (s : State) :
+ Fits limit s ↔ s.used + s.owed ≤ limit := by
+ constructor
+ · rintro ⟨spare,balance⟩;omega
+ · intro bound;exact ⟨limit-(s.used+s.owed),by omega⟩
+
+theorem available_exact (limit cost : Nat) (s : State) :
+ Available limit cost s ↔ s.used + cost + s.owed ≤ limit := by
+ constructor
+ · rintro ⟨spare,balance,enough⟩;omega
+ · intro bound;exact ⟨limit-(s.used+s.owed),by omega,by omega⟩
+
+def foreign (limit cost : Nat) (s : State) : Option State :=
+ if s.used + cost + s.owed ≤ limit then some ⟨s.used+cost,s.owed⟩ else none
+
+theorem foreign_exact (limit cost : Nat) (s next : State) :
+ foreign limit cost s = some next ↔
+ Available limit cost s ∧ next=⟨s.used+cost,s.owed⟩ := by
+ unfold foreign
+ split
+ · rename_i enough
+   have ready := (available_exact limit cost s).mpr enough
+   simp [ready,eq_comm]
+ · rename_i insufficient
+   have bad : ¬ Available limit cost s := by
+    intro h;exact insufficient ((available_exact limit cost s).mp h)
+   simp [bad]
+
+theorem foreign_preserves (limit cost : Nat) (s next : State)
+ (run : foreign limit cost s = some next) :
+ Fits limit next ∧ next.owed=s.owed ∧ next.used=s.used+cost := by
+ obtain ⟨ready,rfl⟩ := (foreign_exact limit cost s next).mp run
+ exact ⟨(fits_exact limit _).mpr ((available_exact limit cost s).mp ready),rfl,rfl⟩
+
+def acquire (limit amount : Nat) (s : State) : Option State :=
+ if s.used + s.owed + amount ≤ limit then some ⟨s.used,s.owed+amount⟩ else none
+
+theorem acquire_exact (limit amount : Nat) (s next : State) :
+ acquire limit amount s = some next ↔
+ Available limit amount s ∧ next=⟨s.used,s.owed+amount⟩ := by
+ unfold acquire
+ split
+ · rename_i enough
+   have ready := (available_exact limit amount s).mpr (by omega)
+   simp [ready,eq_comm]
+ · rename_i insufficient
+   have bad : ¬ Available limit amount s := by
+    intro h;have enough := (available_exact limit amount s).mp h;omega
+   simp [bad]
+
+theorem acquired_fits (limit amount : Nat) (s next : State)
+ (run : acquire limit amount s = some next) : Fits limit next := by
+ obtain ⟨ready,rfl⟩ := (acquire_exact limit amount s next).mp run
+ apply (fits_exact limit _).mpr
+ have enough := (available_exact limit amount s).mp ready
+ simp only
+ omega
+
+-- Discharge is accounting for actual original rows. A physical implementation
+-- must separately show that those rows really occurred and were projected.
+def discharge (amount : Nat) (s : State) : Option State :=
+ if amount ≤ s.owed then some ⟨s.used+amount,s.owed-amount⟩ else none
+
+theorem discharge_preserves (limit amount : Nat) (s next : State)
+ (valid : Fits limit s) (run : discharge amount s = some next) :
+ Fits limit next ∧ next.used+next.owed=s.used+s.owed := by
+ unfold discharge at run
+ split at run
+ · rename_i within
+   cases Option.some.inj run
+   have bound := (fits_exact limit s).mp valid
+   constructor
+   · apply (fits_exact limit _).mpr;simp only;omega
+   · simp only;omega
+ · simp at run
+
+theorem all_original_rows_fit (limit : Nat) (s : State) (valid : Fits limit s) :
+ s.used+s.owed ≤ limit ∧ discharge s.owed s = some ⟨s.used+s.owed,0⟩ := by
+ exact ⟨(fits_exact limit s).mp valid,by simp [discharge]⟩
+
+-- Only actual terminal outcome evidence may justify releasing unused budget.
+-- Existing actual rows are discharged, not released as unused.
+def release (unused : Nat) (s : State) : Option State :=
+ if unused ≤ s.owed then some ⟨s.used,s.owed-unused⟩ else none
+
+theorem release_preserves (limit unused : Nat) (s next : State)
+ (valid : Fits limit s) (run : release unused s = some next) :
+ Fits limit next ∧ next.used=s.used := by
+ unfold release at run
+ split at run
+ · cases Option.some.inj run
+   have bound := (fits_exact limit s).mp valid
+   refine ⟨(fits_exact limit _).mpr ?_,rfl⟩
+   simp only;omega
+ · simp at run
+
+theorem foreign_refuses_owed_capacity (limit cost : Nat) (s : State)
+ (insufficient : limit < s.used+cost+s.owed) : foreign limit cost s = none := by
+ simp [foreign,show ¬s.used+cost+s.owed≤limit by omega]
+
+#print axioms fits_exact
+#print axioms available_exact
+#print axioms foreign_exact
+#print axioms foreign_preserves
+#print axioms acquire_exact
+#print axioms acquired_fits
+#print axioms discharge_preserves
+#print axioms all_original_rows_fit
+#print axioms release_preserves
+#print axioms foreign_refuses_owed_capacity
+end MirroreaProofFirst.OwnerStatementOriginalEntry.ReportReservation

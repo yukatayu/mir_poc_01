@@ -50357,5 +50357,19 @@
     "status": "full-read",
     "role": "sole-main authored/read full appended ReadOrigin proof/control module and audited final source",
     "at": "2026-09-30T00:49:42.164362+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "632900ddde5df9ad5f3b35ec6b9e93d5d4c7b5efdc465233b16547390dad0ddf",
+    "status": "full-read",
+    "role": "sole-main authored/read full appended ReportReservation proof/control module and audited final source",
+    "at": "2026-09-30T01:30:47.924062+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-report-reservation-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "101a003e95c72996ee045c072f2ba5d25f3eede47e23415feb07835461305b25",
+    "status": "full-read",
+    "role": "sole-main authored/read full appended ReportReservation proof/control module and audited final source",
+    "at": "2026-09-30T01:30:47.924062+00:00"
   }
 ]
