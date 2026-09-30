@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-30T05:14:31.087971+00:00",
+  "timestamp": "2026-09-30T05:21:58.192490+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "C technical gate closed bounded LAB; final docs/Git close verification pending; D next; W4 incomplete",
+  "status": "C closed bounded LAB local profile and integrated; D boundary design active; W4 incomplete, stop before E",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -53624,5 +53624,68 @@
     "main_physical_delta_review_sha256": "8f805227b302f9927a7cfefc3c025ae47fb1e9ce51da15f55dd3d09674b10735",
     "independent_review_of_last_small_fix": false,
     "status": "all technical/current docs checks pass; own checkpoint commit/push next, continue D afterward"
+  },
+  "c_integration_close_20260930": {
+    "at": "2026-09-30T05:21:58.192490+00:00",
+    "commit": "78756ad5dc3718b1f9dfc7c2cf7b67a421b9c1d3",
+    "push_tool": 81795,
+    "push_exit": 0,
+    "remote_parity": "0/0",
+    "dirty_after_push": "clean",
+    "C": "closed bounded local source/owner technical conditions;15Rust external/unadopted",
+    "D": "active boundary design, implementation not started",
+    "E": "inactive; stop before E",
+    "current_consumer_gates": [
+      "unique requester cursor and inert owner descriptors through independent expected image/control",
+      "exact checked source/Core/arguments/activation/ordinal/request/result and current M9 association",
+      "changed physical producer costs/aliases/pending ledgers and no unpublished qualification identity escape",
+      "same-event existing private-I3 redaction; no generic Public M8 grant or whole-session NI",
+      "normal non-test build and real child process/QUIC validation after reifying the test-only local reference"
+    ]
+  },
+  "d_boundary_design_20260930": {
+    "at": "2026-09-30T05:36:45.539184+00:00",
+    "status": "UNSELECTED design, changed C physical premises reopened before dependent use; no D implementation",
+    "head": "78756ad5dc3718b1f9dfc7c2cf7b67a421b9c1d3",
+    "design": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/DESIGN-v1.md",
+    "design_sha256": "9e37d4dc42f5077a6f2e6fe3fa0e85a16e2a7353131a0c61bffe5e0d23aff1eb",
+    "oracle": {
+      "session": "mir-w4-d-boundary-r1",
+      "tool_session": 11397,
+      "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-d-boundary-v1",
+      "manifest_sha256": "b2c3583392b31bfe550622f0e924d25184704257c9e53baa0fbc29d733fd6c9a",
+      "question_sha256": "dd512800cd43e1e3695ac1ad642774548ce76e29818402176713194e16585063",
+      "file_count": 26,
+      "bytes": 2386962,
+      "launch_at": "2026-09-30T05:33:28.540119+00:00",
+      "status": "RUNNING; answer not yet inspected"
+    },
+    "premises": [
+      "unique requester full source cursor; inert remote original manifest descriptor; restricted executable plans remain restricted",
+      "separate canonical current M9 mechanism across processes before owner use/source acknowledgment",
+      "finite publication protocol A versus centralized exact-use interval B; neither yet selected",
+      "actual full args/Core/source activation/global ordinal and request/result binding",
+      "all entry/physical pools/numeric debt/ID nonescape/same-event redaction before dependent code"
+    ],
+    "sources": [
+      "Publication/PublicationPayload/PublicationUse exact existing proof premises",
+      "Sys5 start/control/issuer/lifecycle/owner request and current result admission",
+      "C cfg(test) SourceActivation and Invocation; real isolated M8 subset perprocess"
+    ],
+    "non_effects": "C local evidence/integration closure retained; no production/Canon/THM/OBL/119/Plan250 or E activation"
+  },
+  "d_design_checkpoint_validation_20260930": {
+    "at": "2026-09-30T05:45:35.481149+00:00",
+    "command": "make docs",
+    "tool": 9504,
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-design-v1.json",
+    "exit": 0,
+    "proof_source_pins": 190,
+    "unchanged_false_controls": 156,
+    "ledger_prefix_preserved": 6729,
+    "rust_source_restored": 15,
+    "producer_inventory_v4_exact": true,
+    "no_new_proof_or_runtime_execution": true,
+    "git": "own12docs checkpoint pending; continue D after commit"
   }
 }

@@ -1,7 +1,7 @@
-# W4 — close C integration, then D; stop before E
-Updated 2026-09-30T05:14:31.087971+00:00. SOLE MAIN, NO SUBAGENTS. A/B bounded closed; C technical conditions closed in selected local profile, final docs/Git close verification pending. D boundary design next, no D implementation yet. Same owner goal, no duplicate goaltool; explicit continuation governs paused tool state. PL1/PL2/PL0 S4/S6; Q18 unchanged.
+# W4-D — source/process boundary design; stop before E
+Updated 2026-09-30T05:36:45.539184+00:00. SOLE MAIN, NO SUBAGENTS. A/B/C bounded closed; C integrated78756ad5/push81795exit0/parity0/0. D boundary design active; no D implementation yet. Same owner goal, no duplicate goaltool; explicit continuation governs paused tool state. PL1/PL2/PL0 S4/S6; Q18 unchanged.
 
-W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。現在は文書・Gitのclose検証中で、その完了後にW4-Dへ進みます。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
+W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
 最新の外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
 
@@ -15,6 +15,10 @@ Exact latest reference: /home/codex/.local/state/mirrorea-proof-first/w4-2026092
 
 Oracle mir-w4-inbox-r2 exit0/final04:59:59UTC,23files/actual6Pro-max/prompt/finalDOM verified,ANSWERf39bf441…14dispositions. N01 red-v2 4fail4positive, green8/default806/feature818. Fault consumed only upon successful move or existing terminal Retarget. Lasttinyfix locally reviewed; not claimed Oracle rerun. All historical faults/logs retained.
 
-make docs41353exit0,190pins/156recipe/6720oldledgerprefix/15restored/inventoryv4 verified. Next: focusedfinaldiff and own docs commit/push/parity, concise C checkpoint report and continue D. Reify unique requester/inert owner descriptor and remote source/Core/args/activation/ordinal/result/current-M9 binding BEFORE dependent execution. Changed producer graph/physical aliases/ID escape/redaction require checking first; no prerequisites deferred E.
+make docs41353exit0,190pins/156recipe/6720oldledgerprefix/15restored/inventoryv4 verified. C closecommit78756ad5/push81795exit0/parity0/0 complete. Next: D boundary design and exact process/source correspondence. Reify unique requester/inert owner descriptor and remote source/Core/args/activation/ordinal/result/current-M9 binding BEFORE dependent execution. Changed producer graph/physical aliases/ID escape/redaction require checking first; no prerequisites deferred E.
 
 Weekly last04:47:14UTC87%remaining, next>=05:47:14UTC; stopnear50%reasonablecheckpoint, ownerresetonly. Lastmeasuredresourcesroot5.7GiB/RAM3.7available/swap9.9. SerialheavyRust8GiB-j1/Lean6GiBtrust0-j1; no hostshare/externalnotification/publication. Preserve evidence/source/browser. Productionbaselinee5450e38/Canon/THM/OBL/119/Plan250/I3-4 unchanged.
+
+Dのprocess境界では、単一requesterの元source cursorとowner側の非実行descriptorを候補とします。既存process imageは担当locusの実行planだけを保持するため、元handler全体の順序情報を実行権限として複製しません。Cの共有M9 floorは別processへ自動では継承されず、現在性の物理前提を使用前に再検証します。候補Aは既存の有限freeze/ACK/publish/installと局所use区間、最小代替Bは信頼済みcoordinatorによる同じ限定use区間の直列化です。いずれも未選択で、待機request全体を理由にM9更新を止めません。元G1の実結果と現在のsource受理を分けます。凍結26入力・2386962bytesのOracle設計review mir-w4-d-boundary-r1を05:33:28 UTCに起動しました。D実装・新process証拠はまだなく、Eへ前提を先送りしません。
+
+Design: I/d-source-process/DESIGN-v1.md; Oracle I/oracle-d-boundary-v1 (tool11397). No duplicate submit; check-due.py enforces>=180s. Actual answer and final model/submission bindings due.

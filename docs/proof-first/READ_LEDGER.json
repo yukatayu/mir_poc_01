@@ -50624,5 +50624,54 @@
     "status": "full-read",
     "role": "full-read current producer/custody map",
     "at": "2026-09-30T05:14:31.087971+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "status": "partial-reconsult",
+    "role": "D physical boundary design exact ranges 1480-1585;9290-9510;10170-10380;11455-11645;4660-4888;5170-5305; not new full-read",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "bc929baa7b515f607c6a0020925d8460f60262608d94b17d6cb395f78855749b",
+    "status": "partial-reconsult",
+    "role": "D physical boundary design exact ranges 1690-1768; not new full-read",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "partial-reconsult",
+    "role": "D physical boundary design exact ranges 2385-2655; not new full-read",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "status": "partial-reconsult",
+    "role": "D physical boundary design exact ranges 1-180; not new full-read",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "crates/mirrorea-i3-probe/src/i3_process_localnet.rs",
+    "sha256": "21ac43d30ebdc0d9a42ae2bfd88e4cd6d4bea75815ad40754d94ac5383d5aa0f",
+    "status": "partial-reconsult",
+    "role": "D physical boundary design exact ranges 115-147;9760-9885;11990-12095; not new full-read",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublication.lean",
+    "sha256": "a03f12a4cb9d6a4935d6c8bc86d0e19e27e738766dffdf7c87d1d6492257aef6",
+    "status": "full-reconsult",
+    "role": "D exact finite current-use protocol reconsult; prior full retained, no new corpus count",
+    "at": "2026-09-30T05:36:45.539184+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationUse.lean",
+    "sha256": "f3c4b61f13b03f1d7765ba64de2be92284f0297055c7174f89cdd6fa8594dacb",
+    "status": "full-reconsult",
+    "role": "D exact finite current-use protocol reconsult; prior full retained, no new corpus count",
+    "at": "2026-09-30T05:36:45.539184+00:00"
   }
 ]

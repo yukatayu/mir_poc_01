@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: active W4; W4-A/B bounded evidence integrated, W4-C technical gate closed pending docs/Git checks, D next, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
+- Current state: active W4; W4-A/B bounded evidence integrated, W4-C bounded conditions/integration closed, D boundary design active, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
 
 ## Objective
 
@@ -61,7 +61,7 @@ Read-only git/resource/hash/Canon/code inventory commands as recorded above. pyt
 
 ## Evidence / outputs / test results
 
-Current C evidence (2026-09-30T05:14:31.087971+00:00): foreign-fault-retention-green-v1 default806/feature818 all pass0fail0ignored0filtered;8selectedpass,15Rust restored. General190/19502/156/167audit unchanged. Last Oracle N01 reproduced/repaired by main; complete14dispositions retained. Technical C close is bounded to the selected local profile; final docs/Git check pending. D implementation/network evidence remains due. Earlier evidence below retains its original cut.
+Current C evidence (2026-09-30T05:14:31.087971+00:00): foreign-fault-retention-green-v1 default806/feature818 all pass0fail0ignored0filtered;8selectedpass,15Rust restored. General190/19502/156/167audit unchanged. Last Oracle N01 reproduced/repaired by main; complete14dispositions retained. C close is bounded to the selected local profile and integrated78756ad5 with push81795exit0/parity0/0. D implementation/network evidence remains due. Earlier evidence below retains its original cut.
 
 Bundle:669manifest/614original expanded files,119requirements/30decisions/24scenarios, passed byte integrity only. New W3 baseline mir-w3-reference-ztqpxt8e: passed72foundation+4consumer modules,9055owned declarations,32source cases,13integrity controls,5proof mutants; same manifestbd7af23035a560f1f41f8ec30ef7c5af3589bb8102b2c8e708670613ac40b189. No stale historical result renamed as a rerun.
 
@@ -225,7 +225,7 @@ accepted-I3 arithmetic defect is claimed from this read-only inventory.
 
 ## Open questions
 
-C technical conditions are closed in the selected local profile after the reviewed findings and actual fault-retention repair. Final docs/Git close checks remain. D must establish new source-cursor/process custody, source/Core/arguments/activation/ordinal request/result binding, changed resource aliases and unpublished-ID non-escape before dependent use. Wider source/callee/public-label consumers reopen their own prerequisite at first use. E and W5+ remain outside this run's stopping point.
+C technical conditions are closed in the selected local profile after the reviewed findings and actual fault-retention repair. Close commit78756ad5 is pushed with remote0/0; D boundary design is current. D must establish new source-cursor/process custody, source/Core/arguments/activation/ordinal request/result binding, changed resource aliases and unpublished-ID non-escape before dependent use. Wider source/callee/public-label consumers reopen their own prerequisite at first use. E and W5+ remain outside this run's stopping point.
 
 ## Suggested next prompt
 
@@ -4437,3 +4437,19 @@ then actual process/private QUIC validation and integration; stop before E.
 Current update status: plan/、Documentation.md、docs/project-status.md、progress.md、tasks.md（全体snapshot）、samples_progress.mdを同期。新sample root/taxonomyなし。Lean再実行はproof差分なしのため省略し既存hash監査を保持。新D non-test/process/network検査は未実装、E campaignは停止点外。最後の小fixは主担当diff reviewと全検査、追加Oracle再実行なし。Commit/pushはこのclose検証後。sub-agent未使用、外部通知なし。
 
 2026-09-30T05:20:34.527397+00:00: C close make docs41353exit0（218Canon/800hierarchy/1764reports）、190pins/156recipe/6720旧ledgerprefix/15Rust復元/inventoryv4完全一致を確認。全15比較の差分はSYS4とtestのみ、最後のfault修正は主担当review8f805227…で範囲確認。技術条件の限定close記録をcommit/pushし、そのままDの新process境界検証へ進む。
+
+2026-09-30T05:21:58.192490+00:00: W4-C限定LAB closeを78756ad5でcommit/push（81795exit0、remote0/0、clean）まで完了。W4-Dの最初のconsumer境界設計へ続行する。Cの15Rust参照は未採用。新source cursor/owner descriptor・実request/result/currentM9・資源/識別子/観測の変更前提を先に確認し、E前で停止する。
+
+
+### 2026-09-30T05:36:45.539184+00:00 — D process/source boundary design before implementation
+
+Dのprocess境界では、単一requesterの元source cursorとowner側の非実行descriptorを候補とします。既存process imageは担当locusの実行planだけを保持するため、元handler全体の順序情報を実行権限として複製しません。Cの共有M9 floorは別processへ自動では継承されず、現在性の物理前提を使用前に再検証します。候補Aは既存の有限freeze/ACK/publish/installと局所use区間、最小代替Bは信頼済みcoordinatorによる同じ限定use区間の直列化です。いずれも未選択で、待機request全体を理由にM9更新を止めません。元G1の実結果と現在のsource受理を分けます。凍結26入力・2386962bytesのOracle設計review mir-w4-d-boundary-r1を05:33:28 UTCに起動しました。D実装・新process証拠はまだなく、Eへ前提を先送りしません。
+
+- Pinned HEAD78756ad5; only own status docs dirty. No Rust/Lean overlay or source mutation. Resources root5.6GiB free/RAM2.6GiB available/swap9.4GiB used; no new heavy build.
+- Existing PublicationUse proves protected local payload current and no publication while an interval is held. Its model images store is not a physical receiver oracle; revision is not M9 generation. Reconsulted actual Sys5 start/emission/current receipt/lifecycle publisher and M8 restricted_to_loci. Full baseline reads remain ledger-pinned; new excerpts are partial reconsults, not full-read count inflation.
+- Oracle command: python3 I/oracle-d-boundary-v1/launch.py (tool11397/PID3149617).26frozenfiles/2386962bytes; manifestb2c3583392b31bfe550622f0e924d25184704257c9e53baa0fbc29d733fd6c9a/questiondd512800cd43e1e3695ac1ad642774548ce76e29818402176713194e16585063. Actual answer/model finality due; no result or independent execution claimed.
+- Source interface concerns: operation-ID/default-args emitter is not a handler runner; C source modules are test-only; copy/export of Arc or all owner executable plans would not establish process custody. Parent one-shot control/role and image marker must cover ordinary/generic startup as well as private adapter admission; owner descriptor has no live source cursor.
+- Existing parent actual M9 issuer/registered child ACK path is a useful source, but its owner-only update and child-before-parent-publication order require refinement before a global-current use consumer. New proposal may not disable genuine held-request revocation or grant authority from peer identity.
+- This is design research only. No new kernel/runtime/network checks run or claimed. Current C806/818/156results remain at their frozen cuts. plan/updated; CURRENT_GOAL/RESUME/tasks/progress synchronized for current gate; Documentation/project-status and samples_progress retain post-C current snapshots (no command/sample/blocker promotion); no new report. Review pending; commits pending; no push in this record, sub-agent/external notification/publication none.
+
+2026-09-30T05:45:35.481149+00:00: D設計checkpointのmake docs9504全体exit0（05:42:51UTC、log SHA2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd）。190proof pins、既読6729entry prefix、15Rust復元、producer inventoryv4完全一致、git diff --checkを確認。proof/runtime/新networkの再実行ではない。Oracle設計reviewは継続中。own12docsをcheckpoint commit/pushし、その後Dを続行する。

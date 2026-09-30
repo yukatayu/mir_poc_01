@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-30 14:14 JST
+最終更新: 2026-09-30 14:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,7 +62,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回04:47:14 UTCのセッションtelemetryは週間使用13%・残り87%でした。次の確認は05:47:14 UTC以降です。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
-W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。現在は文書・Gitのclose検証中で、その完了後にW4-Dへ進みます。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
+W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
 最新の外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
 
@@ -76,7 +76,7 @@ W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存s
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | External test-only C reference806/818 passes; existing production and I3 baseline retained | 着手可能 after close integration: non-test private runtime reification and actual process/QUIC checks; E campaign remains inactive |
+| Implementation / operation | External test-only C reference806/818 passes; existing production and I3 baseline retained | 着手可能: non-test private runtime reification and actual process/QUIC checks; E campaign remains inactive |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -591,3 +591,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 13:46 JST — W4-Cの別受信箱停止と拒否理由を修正しdefault798全件・対照10件成功。同一箱FIFOと一般heads4命題を190/19502/156監査。最終2指摘を継続review、C受理前。
 
 - 2026-09-30 14:14 JST — W4-C最後のfault保持反例を修正しdefault806/feature818全件成功。限定基礎条件の技術closeを記録、文書/Git検証後Dのprocess境界へ。
+
+- 2026-09-30 14:21 JST — W4-Cを78756ad5で統合・push、remote一致確認。D境界設計へ続行。E前停止を維持。
+
+- 2026-09-30 14:36 JST: C統合78756ad5後のD設計で、実行planのprocess制限と共有M9 floorの非移送を確認。単一requester／非実行descriptorと現在性機構A/Bの凍結設計Oracleを起動。D実装・実network成功はまだなく、使用前のC前提再検証を継続。

@@ -1989,8 +1989,8 @@ remain separate from source custody and semantic authority.
 The dated successor sections above preserve their original then-pending review
 states. Current C technical judgment is in W4_CHECK.c_technical_close_20260930
 and Report2614: the selected local assignment/owner profile is closed after
-review disposition and actual counterexample repair, with final docs/Git close
-checks pending. The general kernel cut remains190/19502/156/167, unchanged by
+review disposition and actual counterexample repair; docs checks passed and
+close commit78756ad5 is pushed with verified remote parity. The general kernel cut remains190/19502/156/167, unchanged by
 the last concrete foreign-fault retention repair. The external test-only reference
 passes default806 and process-test feature818; all15Rust files are restored.
 The reference has not been adopted into the ordinary non-test library. D must

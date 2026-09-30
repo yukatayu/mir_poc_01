@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C technical gate closed pending docs/Git close checks; W4-D next**; W4-E inactive. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C bounded technical/integration close complete; W4-D boundary design active**; W4-E inactive. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The latest owner instruction is C→D→stop before E, with an additional pause near50% weekly remaining at a reasonable checkpoint and checks at least one hour apart; only the owner resets the account. Older waiver entries below are history.
 
 ## Authority and retained history
 
@@ -2383,3 +2383,12 @@ close verification, implement only after its changed correspondence is establish
 then actual process/private QUIC validation and integration; stop before E.
 
 2026-09-30T05:20:34.527397+00:00: C close make docs41353exit0（218Canon/800hierarchy/1764reports）、190pins/156recipe/6720旧ledgerprefix/15Rust復元/inventoryv4完全一致を確認。全15比較の差分はSYS4とtestのみ、最後のfault修正は主担当review8f805227…で範囲確認。技術条件の限定close記録をcommit/pushし、そのままDの新process境界検証へ進む。
+
+2026-09-30T05:21:58.192490+00:00: W4-C限定LAB closeを78756ad5でcommit/push（81795exit0、remote0/0、clean）まで完了。W4-Dの最初のconsumer境界設計へ続行する。Cの15Rust参照は未採用。新source cursor/owner descriptor・実request/result/currentM9・資源/識別子/観測の変更前提を先に確認し、E前で停止する。
+
+
+### 2026-09-30T05:36:45.539184+00:00 — D source/process design gate (LAB, unselected)
+
+Dのprocess境界では、単一requesterの元source cursorとowner側の非実行descriptorを候補とします。既存process imageは担当locusの実行planだけを保持するため、元handler全体の順序情報を実行権限として複製しません。Cの共有M9 floorは別processへ自動では継承されず、現在性の物理前提を使用前に再検証します。候補Aは既存の有限freeze/ACK/publish/installと局所use区間、最小代替Bは信頼済みcoordinatorによる同じ限定use区間の直列化です。いずれも未選択で、待機request全体を理由にM9更新を止めません。元G1の実結果と現在のsource受理を分けます。凍結26入力・2386962bytesのOracle設計review mir-w4-d-boundary-r1を05:33:28 UTCに起動しました。D実装・新process証拠はまだなく、Eへ前提を先送りしません。
+
+Exact candidate/evidence: W4_CHECK d_boundary_design_20260930. A/B compare mechanisms for this private finite same-host cohort only; authenticated administrative control cannot replace actual generated operation traffic over private QUIC. Parent M9 issuer remains unique; source ordinal, protocol revision, M9 generation and TLS identity remain distinct. Existing owner-only lifecycle is not claimed broken: it does not supply this new global-currentness consumer. C R03/R04/R05/R06/R11 reopen only for changed physical premises, before code relies on them; bounded local C close remains78756ad5. Stop after D integration, before E.

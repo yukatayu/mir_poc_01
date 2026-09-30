@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 14:14 JST
+最終更新: 2026-09-30 14:36 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -17,7 +17,7 @@ remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
 
 W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。A→B→C→D→Eは同じW4の作業区切りで、新しいsemantic milestoneではありません。
 
-W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。現在は文書・Gitのclose検証中で、その完了後にW4-Dへ進みます。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
+W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
 最新の外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
 
@@ -37,8 +37,8 @@ Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
 |---|---|---|
 | W4-A / Macro1/2/5 | Preserved limited models/process evidence for B/C | Bounded evidence complete; retain exact receipts |
 | W4-B / Macro2/5 | Repo-integrated proof/dependencies and observed whole runners for C/D | Bounded integrated candidate complete |
-| W4-C / Macro1/5 | Relative admission, all entries, current authority, custody/resource conditions and application route for D | Technical gate closed in selected local profile; docs/Git close verification pending |
-| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Next: derive/check unique requester handoff, inert owner descriptor and remote binding before code relies on C; then minimal internal implementation and finite actual-process validation |
+| W4-C / Macro1/5 | Relative admission, all entries, current authority, custody/resource conditions and application route for D | Closed in selected local profile;78756ad5 pushed/parity verified |
+| W4-D / Macro3/6 early | One source cursor through checked Core/generated requests, real private QUIC, actual results and redacted observation | Current: exact unique requester/inert descriptor and cross-process current-M9 mechanism review; no code depends on unproved new physical premises. Then minimal internal implementation and finite actual-process validation |
 | W4-E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign,119 and A–D residual union | Inactive; owner resume after D stop required |
 | Mandatory reading / Macro0 | Exact source/authority/process/observer cone before decisions | READ_LEDGER distinguishes full/hash-equivalent/delta/partial reads; historical612 is not a current unread cursor |
 | W5/W6/W7 | Persistence/recovery, broader secret observation, alpha | Outside this request |
@@ -65,6 +65,7 @@ Oracle cannot supply an absent owner-authenticated trust anchor or resume Plan25
 | Question | Effect / current candidate versus smallest alternative / reopen trigger |
 |---|---|
 | Source custody across processes | A: one requester cursor, inert checked descriptors at owners; B: external operation-ID loop is inadequate. New restore/transfer must prove no duplicate cursor before use. |
+| Process current M9 use | A finite freeze/ACK/publish/install + local use intervals; B trusted coordinator scoped intervals. Unselected, Oracle review running. Existing owner-only lifecycle and shared local Arc do not discharge new global-currentness premise. |
 | Remote original/current-use/result binding | Full source/Core/arguments/activation/ordinal plus actual request and result; semantic M9 remains distinct from TLS peer. A hash or old committed result alone cannot authorize current acknowledgment. |
 | Changed resource/caller graph | Recompute new pool aliases, costs, pending/tombstone limits and actual producers; no unpublished qualified identity may escape a rollback. Any new entry/restore/pruning reopens its C condition. |
 | Faithful observation | Existing private-I3 redacted references/counts from same actual events; generic Public M8 label is not source classification. New released fields or confidentiality claims reopen label/control/capture premises first. |
