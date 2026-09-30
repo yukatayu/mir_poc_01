@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-30 15:58 JST
+Last updated: 2026-09-30 19:07 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -14,14 +14,14 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner resumed W4 only on2026-09-26; W4-B and W4-C are closed within their bounded LAB scopes; W4-D is incomplete and owner-paused at its model-switch checkpoint.
+Owner resumed W4 only on2026-09-26; W4-B and W4-C are closed within their bounded LAB scopes; W4-D is incomplete and owner-resumed in its Sol implementation package.
 Previously integrated publication/owner/registration proofs remain under the
 existing reference checker and Lean sample root. The preserved host-store/full-field/lease/fault proof cone is now mirrored;
 its existing-runner integration has passed the B criterion. Repository prepare/
 physical runners now stage the preserved sources into fresh external workdirs. Prior I3 process/QUIC46case results remain
 regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（選定した局所条件・完了）→W4-D（Rust/Core/private QUIC接続・現在地）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Cの局所条件を閉じ、Dのprocess前提を検証した区切りでmodel切替のため一時停止しています。Eは今回の停止点の後です。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（選定した局所条件・完了）→W4-D（Rust/Core/private QUIC接続・現在地）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Cの局所条件を閉じ、model切替後にDの確定実装を再開しています。Eは今回の停止点の後です。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 2026-09-28のowner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
@@ -35,8 +35,8 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
-| D authority/coordinator/local frame | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK `d_local_frame_proof_20260930` | 199modules/20455owned/177false/187commands;9rebuilt over190pinned C. Prior fresh197/v5 receipt separate. External M9 component7focused/default451pass; normal private-QUIC E0599 reproduced on baseline. No D process/network acceptance; owner model-switch pause. |
-| Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D process custody remains incomplete and owner-paused for model switch; actual network implementation pending. No production/public adoption. |
+| D authority/coordinator/local frame | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK `d_local_frame_proof_20260930` | 199modules/20455owned/177false/187commands;9rebuilt over190pinned C. Prior fresh197/v5 receipt separate. External M9 component7focused/default451pass; historical pre-fix normal private-QUIC E0599 reproduced on baseline; fixed in current external reference. D facts-only DTO reference15controls/full487feature tests and normal QUIC build pass; prior472 receipt separate. Registered Unix control/actual FD3 component26/full513 passed; fixed-three global grant component33 passed; actual publisher/backend/source/network connection incomplete. |
+| Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D process custody remains incomplete in owner-resumed Sol implementation; actual network implementation pending. No production/public adoption. |
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
 | Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |
 | Existing owner identity lookup | `samples/lean/foundations/MirroreaProofFirstOperationIdentity.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_duplicate_owner_identity -- --test-threads=1` | General positional selection/algorithm equivalence checked; actual ordinary/provider/local refusal and singleton controls pass. Distinct-owner fragment collisions, source order and source-free restore remain open. |
@@ -500,3 +500,9 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 |---|---|---|
 | Shared local authority use | `samples/lean/foundations/MirroreaProofFirstSharedAuthorityUse.lean`; manual external fresh copy in Lean README | 14 general lemmas,128 owned declarations audited; whole-C/source/network correspondence open |
 | Actual local owner refusal/use | `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_shared_authority_floor -- --test-threads=1` | 11 focused tests pass, actual ST/OW1 early-release mutant refused; actual worker panic before/after write distinguished; no real-network claim |
+
+2026-09-30 17:18 JST: owner resumed Sol implementation; exact3file external normal-quic-fixed-v1 passes normal/combined build and472 feature tests. No source/real-network workflow promotion.
+
+2026-09-30 17:53 JST: external D facts-codec-controls-v1 passes15controls/full487feature lib tests and normal QUIC build;3source files restored. No new sample/root or process workflow promotion.
+
+2026-09-30 18:51 JST: external inherited-bootstrap-frozen-green-v1 control/FD3 component26/full513 and normal QUIC build pass;6overlay paths restored. No new active sample/root or source network workflow promotion.

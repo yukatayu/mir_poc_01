@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-30 15:58 JST
+最終更新: 2026-09-30 19:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,11 +56,11 @@ public/production layers remain later.
 ## current milestone position
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
-sole task-local goal, resumed on2026-09-26 and paused at the owner-requested model-switch checkpoint on2026-09-30,
+sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-週間残量は06:48:14 UTCの確認で82%（使用18%）でした。次の確認は07:48:14 UTC以降、約50%で区切りの停止というowner条件を保持します。今回の停止理由はmodel切替であり残量不足ではありません。resetはownerのみ。再開後もD完了時にEの前で停止し、E・W5+・Plan250/I3-4を自動開始しません。
+週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -70,15 +70,15 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回はowner指定のmodel切替で一時停止し、再開後もW4-Dの検証・記録・統合後、Eの前で止めます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの証明とM9候補構築の限定参照検査まで進み、model切替のため一時停止します。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-DのB機構（親coordinatorによる一つの局所利用区間）とM9の局所検証記録保持を選定し、199module・20455所有宣言・177偽命題対照を187commandで監査しました。9moduleを構築、C190はsource/object hash固定で再利用した結果で、先行する全197source再構築とは別です。外部M9参照の7対照とdefault全451検査が通過しました。通常private-QUICビルドは既存のfeature条件不一致で失敗し、元コードでも同じE0599を再現しています。実FD/control、backend/floor更新、単一sourceとI3 admission、実network接続は未完了です。owner指定により、確定した実装packageをGPT-6.1-sol xhighへ渡す区切りで一時停止します。D全体の完了・全境界設計完了とは扱いません。設計変更と統合判断はAstra xhighで再確認します。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+W4-DはSolで実装を継続中です。外部未採用6path参照finite-cohort-grant-green-v1は、登録済み制御stream/実FD3に加え、3endpoint全体で一つの使用中grantと通し番号を保持し、33件の部品検査を通過しました。6pathは元へ復元しています。通常QUIC build・全513feature検査は直前のFD3/26件cutの別receiptです。次は実権限発行者の全endpoint準備/公開/有効化と、停止中の実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; normal private-QUIC E0599 baseline failure retained | 再開後着手可能: bounded Sol implementation handoff; normal QUIC cfg fix/control/preparation first, then source/process gates; E inactive |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; cohort control33 pass; prior FD3 cut normal QUIC build/26 controls/full513 feature lib tests pass in D reference; baseline restoration verified | 着手可能: DTO/control/FD3 + fixed-three global grant component passed; actual publisher/preparation within handoff; source/process gates before use; Astra reviews D acceptance before E |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -603,3 +603,11 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 15:22 JST: Dの全197sourceを空cacheから再構築し、20278所有宣言・168偽命題対照・366commandを確認。実装前の物理対応は継続。
 
 - 2026-09-30 15:58 JST: D199/20455/177監査とM9全451検査を確認。通常QUICビルドの既存E0599を再現し、具体的な修正・control/M9接続packageを保存。ownerのmodel切替停止へ記録を同期。
+
+- 2026-09-30 17:18 JST: Sol実装packageを再開。通常QUICのfeature不整合を再現・外部参照で修正し、通常/検査feature buildと全472検査が通過。実control/M9準備への接続を継続。
+
+- 2026-09-30 17:53 JST: D権限facts-only DTOは15対照・通常QUIC build・全487feature検査を通過。3Rust復元を確認し、登録済みstream/control tokenの実装へ継続。Dの実process統合は未完了。
+
+- 2026-09-30 18:51 JST: D登録済みgrant/FD3部品26・通常QUIC build・全513feature検査を通過、6path復元。Cargo package成果物15.0GiB整理で空き約20GiB、証明/失敗記録保持。cohort/backend/source実接続へ継続。
+
+- 2026-09-30 19:07 JST: D固定3endpoint全体のgrant排他/通し番号/送信失敗/所属検査33件通過、6path復元。全体公開/有効化と実backendへの接続は継続中。

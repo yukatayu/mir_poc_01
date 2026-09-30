@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-30 15:58 JST
+最終更新: 2026-09-30 19:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -57,11 +57,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。今回はowner指定のmodel切替で一時停止し、再開後もW4-Dの検証・記録・統合後、Eの前で止めます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの証明とM9候補構築の限定参照検査まで進み、model切替のため一時停止します。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-DのB機構（親coordinatorによる一つの局所利用区間）とM9の局所検証記録保持を選定し、199module・20455所有宣言・177偽命題対照を187commandで監査しました。9moduleを構築、C190はsource/object hash固定で再利用した結果で、先行する全197source再構築とは別です。外部M9参照の7対照とdefault全451検査が通過しました。通常private-QUICビルドは既存のfeature条件不一致で失敗し、元コードでも同じE0599を再現しています。実FD/control、backend/floor更新、単一sourceとI3 admission、実network接続は未完了です。owner指定により、確定した実装packageをGPT-6.1-sol xhighへ渡す区切りで一時停止します。D全体の完了・全境界設計完了とは扱いません。設計変更と統合判断はAstra xhighで再確認します。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+W4-DはSolで実装を継続中です。外部未採用6path参照finite-cohort-grant-green-v1は、登録済み制御stream/実FD3に加え、3endpoint全体で一つの使用中grantと通し番号を保持し、33件の部品検査を通過しました。6pathは元へ復元しています。通常QUIC build・全513feature検査は直前のFD3/26件cutの別receiptです。次は実権限発行者の全endpoint準備/公開/有効化と、停止中の実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
-週間残量は06:48:14 UTCの確認で82%（使用18%）でした。次の確認は07:48:14 UTC以降、約50%で区切りの停止というowner条件を保持します。今回の停止理由はmodel切替であり残量不足ではありません。resetはownerのみ。再開後もD完了時にEの前で停止し、E・W5+・Plan250/I3-4を自動開始しません。
+週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

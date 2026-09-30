@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 16:05 JST
+最終更新: 2026-09-30 19:07 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -17,22 +17,20 @@ owner resume. Plans247/249 are closed baselines. Task-local W4 is separate.
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
 LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-A/B and C are closed only in their recorded bounded LAB scopes. C integrated
-78756ad5, default806/feature818,190modules/19502owned/156false; its15 Rust files
-remain external/test-only/unadopted. W4-D remains incomplete. The owner requested
-a pause when a concrete implementation package can move to GPT-6.1-sol xhigh.
-That package and preserved remaining gates are in
-`docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`. Sole main/no subagents;
-no automatic model switch. After owner resume, stop again after D before E.
+W4-A/B/C remain closed only in their bounded LAB scopes; production Rust remains
+unchanged. Owner resumed the same W4-D after switching to GPT-6.1-sol xhigh.
+Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
+for material boundary changes or D integrated acceptance. E tests can use Sol
+following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-DのB機構（親coordinatorによる一つの局所利用区間）とM9の局所検証記録保持を選定し、199module・20455所有宣言・177偽命題対照を187commandで監査しました。9moduleを構築、C190はsource/object hash固定で再利用した結果で、先行する全197source再構築とは別です。外部M9参照の7対照とdefault全451検査が通過しました。通常private-QUICビルドは既存のfeature条件不一致で失敗し、元コードでも同じE0599を再現しています。実FD/control、backend/floor更新、単一sourceとI3 admission、実network接続は未完了です。owner指定により、確定した実装packageをGPT-6.1-sol xhighへ渡す区切りで一時停止します。D全体の完了・全境界設計完了とは扱いません。設計変更と統合判断はAstra xhighで再確認します。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+W4-DはSolで実装を継続中です。外部未採用6path参照finite-cohort-grant-green-v1は、登録済み制御stream/実FD3に加え、3endpoint全体で一つの使用中grantと通し番号を保持し、33件の部品検査を通過しました。6pathは元へ復元しています。通常QUIC build・全513feature検査は直前のFD3/26件cutの別receiptです。次は実権限発行者の全endpoint準備/公開/有効化と、停止中の実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 ## ordered self-driven packages
 
 | Package / macro position | Direct consumer and required result | Readiness |
 |---|---|---|
-| D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: known E0599 reproduced on original baseline and D reference; Sol xhigh |
-| D control/M9 preparation / Macro3/6 early | Actual registered FD provenance, exact grants, disabled in-place prepare/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
+| D control/M9 preparation / Macro3/6 early | Facts-only DTO15 + registered control/FD3 component26/full513 complete reference; fixed-three global grant33 reference; actual publisher/disabled prepare/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
 | D source/I3/result/network / Macro3/6 | One original source cursor, full Core/args/activation/ordinal, existing I3 permit, retained actual result and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
@@ -45,12 +43,11 @@ proof boundaries. Macro2/3 supply reference and normal-build implementation;
 Macro6 connects actual process/transport state. D remains within this existing
 sequence, with no whole-project phase recut. Current local proof evidence is
 FM-5/6 within its declared model scope; the new process integration has not
-reached an executable validation path. Resume only after the model-switch pause.
+reached an executable validation path. Sol implementation resumed; model/physical evidence remain distinct.
 
 ## user decision gates
 
-No new design answer is needed for the bounded implementation after explicit
-resume. L0/L1, authority/privacy weakening, public API/ABI/wire, production,
+No new design answer is needed for the bounded implementation within the owner-resumed scope. L0/L1, authority/privacy weakening, public API/ABI/wire, production,
 billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain
 owner-reserved. Research may resolve ordinary implementation choices within the
 selected contract. Oracle is advisory and cannot supply an owner trust anchor.
@@ -64,8 +61,8 @@ selected contract. Oracle is advisory and cannot supply an owner trust anchor.
 | Result and resources | Keep actual committed/incomplete outcome across fallible reporting, whole-activation result capacity and all physical producers. Reopen on new aliases, counters, entry paths, restore or pruning. |
 | Observation | Existing redacted I3 references/counts only; same actual events required. Broader secret timing/resource or active debug claims need their own W6 gates before dependent use. |
 
-No user answer is needed for the bounded implementation after resume; this stop
-is the requested model-switch checkpoint, not an unresolved owner design choice.
+No user answer is needed for the bounded implementation after resume; the next stop
+is an Astra review checkpoint or material contract falsifier.
 Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, requested2026-09-30
@@ -90,18 +87,19 @@ One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain sourc
 commands, failures and review scope. No used premise moves to E merely because
 E performs broad regression. Current D199 recipe is preserved/syntax-checked;
 actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
-Full make docs passed after restoring the required section structure. Final
+Current component make docs v2 passed after retained stale-header failure; final metadata is focused checked. Final
 pins/diff and actual Git result are retained in the external handoff receipts.
+ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
 Heavy commands serial, measured resources; no external notification/publication
 or host-share workspace; preserve all source/evidence/browser state.
 
-週間残量は06:48:14 UTCの確認で82%（使用18%）でした。次の確認は07:48:14 UTC以降、約50%で区切りの停止というowner条件を保持します。今回の停止理由はmodel切替であり残量不足ではありません。resetはownerのみ。再開後もD完了時にEの前で停止し、E・W5+・Plan250/I3-4を自動開始しません。
+週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 ## non-promoted references
 
-C's fifteen Rust files and D's two-file M9 component remain external/unadopted.
+C's fifteen Rust files and D's current six-path DTO/control/FD3 component remain external/unadopted.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
-No used prerequisite is deferred to E. The same W4 goal is paused by the owner;
+No used prerequisite is deferred to E. The same W4 goal is resumed by the owner;
 there is no duplicate goal, automatic model switch or automatic Plan250 resume.

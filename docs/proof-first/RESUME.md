@@ -1,3 +1,57 @@
+# RESUME — W4-D Sol implementation active
+
+Owner switched to GPT-6.1-sol xhigh and resumed at2026-09-30 07:57UTC.
+Same W4/no subagents/no new goal. Execute fixed implementation until an actual
+material boundary change or Astra D-acceptance review is needed. E tests can
+use Sol after D acceptance; A–E union/integrated acceptance belongs to Astra.
+Plan250/I3-4 remains separately owner-paused. No automatic model switching.
+
+HEAD7a085f98 pushed/remote parity0/0 at prior checkpoint. New own status records
+dirty; production Rust restored after each overlay. No active job currently.
+Next: DTO/registered control/real FD3 component passed; fixed-three global grant33 passed; implement authentic parent publisher/all-endpoint
+prepare/publish/activate and actual disabled M9/floor/backend.
+
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
+D=I/d-source-process. New external reference D/d-control-development/normal-quic-fixed-v1
+has3files (prior M9 two unchanged + QUIC one cfg attribute). PATHS/SOURCE_PINS exact.
+REDnormal-quic-red-v2 tool21170 genuineE0599; GREENnormal-quic-green-v2 tool23253
+normal i3-private-quic checkPASS, combined process-test-seams checkPASS, full lib
+472pass0fail0skip, all3Rust restored. No actual D network run or adoption.
+Storage-sol-resume-v1 records authorized untracked incremental cleanup only:
+root free3.0GiB ->7.3GiB;4620189696bytes reclaimed. No source/evidence deletion.
+週間残量は10:04:13 UTCの確認で77%（使用23%）でした。次の確認は11:04:13 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+
+Current DTO successor D/d-control-development/facts-codec-controls-v1 has same3 paths:
+M9 authority source/test changed, QUIC cfg guard unchanged. Exact pins/receipts in
+W4_CHECK d_facts_codec_20260930. ShapeRED2fail+1positive; retained green-v1 derive
+compilation failure and green-v2 program-identity metadata failure; green-v3 pass.
+DecodeRED5fail+5positive; final15focused/normalQUIC/full487feature pass,0fail0skip.
+Actual baseline Rust restored. No installed authority/control token or network run.
+1MiB private candidate cap; measured incident3845/nonincident4287bytes in fixture.
+Codec is untrusted data; registered stream/replay/mode/physical prepare still open.
+
+Current registered-control successor D/d-control-development/inherited-bootstrap-frozen-green-v1
+has6PATHS/source pins. Full receipts/failures/restoration in W4_CHECK
+ d_registered_control_20260930. Parent/child20 controls, real child FD3 25,
+freeze RED25pass/1fail then26pass; normal QUIC check and full513feature pass.
+Retained outcome remains a component-only test producer; no normal result,
+backend/source/cohort activation or QUIC E2E. New source private normal-build
+module has Linux FD3 one-shot/shared provider gate + role/socket checks, starts
+frozen; no token from generic JSON. No active job after completed receipt.
+
+ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
+
+Current source successor D/d-control-development/finite-cohort-grant-green-v1
+same6PATHS/pins: exact-one global active tuple/checked serial with sticky failure,
+fixed3 unique members one requester/two owners, S/T actual restricted fixture
+facts. RED28pass5fail, GREEN33pass;6paths restored. No actual publisher/backend,
+source/result producer or new QUIC E2E yet. Prior normal/513 belongs to FD3 cut.
+Currentdocs v1failed only stale snapshot dateheaders, corrected; v2PASS10:11:44UTC.
+Later metadata focused checked; actual checkpoint Git result GIT-SOL-CONTROL-v1.json.
+
+The prior handoff details below are historical starting evidence; above supersedes
+its pause/next-job wording. Preserve all frozen source and failure receipts.
+
 # RESUME — owner-requested model-switch pause within W4-D
 
 Read W4_D_IMPLEMENTATION_HANDOFF.md first for exact contract, inputs, remaining

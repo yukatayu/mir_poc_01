@@ -53907,5 +53907,475 @@
       "sha256": "0c687aca5a89b6ac71849a4062301c9f4e79005ddd65807bd952c482b8b651e7",
       "scope": "Full make docs after task-map heading/order correction; this final result/status metadata sync follows, with focused validation."
     }
+  },
+  "owner_sol_resume_20260930": {
+    "at": "2026-09-30T08:18:21.776061+00:00",
+    "instruction": "Owner switched to GPT-6.1-sol xhigh; self-drive until appropriate Astra checkpoint. Same W4/no subagents. D acceptance first planned Astra review; E tests Sol after acceptance.",
+    "head": "7a085f98c7ab2b04a91abcc2c1ebe84241d16989",
+    "scope": "fixed bounded implementation; no Plan250/I3-4 or W5 resume"
+  },
+  "d_normal_quic_fix_20260930": {
+    "at": "2026-09-30T08:18:21.776061+00:00",
+    "red_tool": 21170,
+    "red_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/normal-quic-red-v2/RESULT.json",
+    "red_sha256": "73d989ee50e98f9cfc7177059daea2e4320148df4edd4d2d636e58ce99106e3e",
+    "green_tool": 23253,
+    "green_result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/normal-quic-green-v2/RESULT.json",
+    "green_sha256": "9e93e1ce4aaf94b8e6ccea5bcc28dae8c973384bcae3c9a80d72b4624eda8a3f",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/normal-quic-fixed-v1",
+    "source_pins_sha256": "591e8c600a2ffaeb388222f24fd880801a2dcd46528466694c481127d7720ac5",
+    "result": "normal/combined feature checksPASS;472 full feature lib testsPASS0fail0skip; productionRustrestored",
+    "scope": "one cfg guard + unchanged M9 component, no new network run"
+  },
+  "d_facts_codec_20260930": {
+    "at": "2026-09-30T08:53:47.779200+00:00",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/facts-codec-controls-v1",
+    "source_pins_sha256": "b342956b8af4fad09b136c1b96404e9735b5ca713a43546994f7dcc404d9b3d2",
+    "files": {
+      "crates/mir-runtime/src/m9_auth_verification.rs": "5273da6366d59dd81d80634bc5d6761dc94ed5c093eed81319c6fd05924d0aab",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82"
+    },
+    "receipts": [
+      {
+        "version": "facts-codec-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-red-v1/RESULT.json",
+        "sha256": "7ebae5927a44a27a7b4b2b2f83c2bbe384f58695e18ee65c76203da54aaf6b7a",
+        "exits": [
+          101
+        ]
+      },
+      {
+        "version": "facts-codec-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-green-v1/RESULT.json",
+        "sha256": "fe42adbc928b49f874599b97227ec3eb5b85f17fbac0e3dde5d538a15ae69def",
+        "exits": [
+          101
+        ]
+      },
+      {
+        "version": "facts-codec-green-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-green-v2/RESULT.json",
+        "sha256": "9e6307510ba2cd8a868b935eac6c6c8bc48badae76e4deae91ad334c0b7ef5d1",
+        "exits": [
+          101
+        ]
+      },
+      {
+        "version": "facts-codec-green-v3",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-green-v3/RESULT.json",
+        "sha256": "6fd5b1dd36f70e9698d31dff9344c8e4bd7f9a233ef15ca77431762dc3d3bba3",
+        "exits": [
+          0
+        ]
+      },
+      {
+        "version": "facts-codec-decode-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-decode-red-v1/RESULT.json",
+        "sha256": "2ceede2433d62a99b8044dca895dea1b7928f94fa9d723a430afb7aee34fa4c9",
+        "exits": [
+          101
+        ]
+      },
+      {
+        "version": "facts-codec-decode-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-decode-green-v1/RESULT.json",
+        "sha256": "afa9375b386b7029107587532be102491e032038ac2191dd9b25f8726da232c1",
+        "exits": [
+          0
+        ]
+      },
+      {
+        "version": "facts-codec-controls-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/facts-codec-controls-v1/RESULT.json",
+        "sha256": "4acc2f8543337cd0d2011bc6d3135491cc665014ca5622e4b6f8edd70dcd01aa",
+        "exits": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "result": "15 focused controls and full487 feature lib tests PASS; normal private QUIC check PASS; three baseline Rust files restored",
+    "scope": "facts-only untrusted DTO; no registered-control token, backend/floor installation, new process/network acceptance or production adoption",
+    "limits": "1MiB private prototype cap; ordinary allocator failure not injected, no OOM/process recovery claim",
+    "findings": "program stable key contained global operation metadata; wire now uses established opaque program ref checked against actual retained local generation. Observation maps absent, exact integrity restored with local full identity; nonincident target omitted. Initial green-v1 failed compilation after misplaced derives; green-v2 caught global identity metadata; all retained."
+  },
+  "d_registered_control_20260930": {
+    "at": "2026-09-30T09:51:03.465757+00:00",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/inherited-bootstrap-frozen-green-v1",
+    "source_pins_sha256": "c5ee1e28dfb259227c8e932c64de46a550da9ec34fec7e09bbae1576b79643ef",
+    "files": {
+      "crates/mir-runtime/src/m9_auth_verification.rs": "5273da6366d59dd81d80634bc5d6761dc94ed5c093eed81319c6fd05924d0aab",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "ac6332fb62ba78dd96f5b7fa7c795e08edff85f95ff92f815673fae2b89ba130",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "2bff812eae483783e99518a40c015351e497b8e2e151c0aa0aa842fe9db95acd",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "463d4d3916f4343bc9eace83a36325e3ab976540676dc311f952bc47e3fc8b07"
+    },
+    "receipts": [
+      {
+        "version": "registered-grant-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-grant-red-v1/RESULT.json",
+        "sha256": "358d40f89b07f6b1898508686a6d6d71b05378a4cd555ec1f2dc570a29a1a69d",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "summary": [
+              "test result: FAILED. 2 passed; 9 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.06s"
+            ],
+            "log_sha256": "5385ce9ae9fb57bf0304b77951dc7b59e3de65f87978cc4fffd934bdb680945a"
+          }
+        ]
+      },
+      {
+        "version": "registered-grant-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-grant-green-v1/RESULT.json",
+        "sha256": "890d2d32cef86475c4aeac71db2636f5895e5b0d88238b3f6997594874a2f939",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "summary": [
+              "test result: FAILED. 0 passed; 11 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.06s"
+            ],
+            "log_sha256": "690c6fec602435acf5081b3ab0512794707a188d3da55df17d32d5c042f0dc74"
+          }
+        ]
+      },
+      {
+        "version": "registered-grant-green-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-grant-green-v2/RESULT.json",
+        "sha256": "49a6e9c4a3dcd4bfd21748689320a8993756c9ca717f505c9606489bc421cc6e",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "summary": [
+              "test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.17s"
+            ],
+            "log_sha256": "aac3aa023d7cf39dd784bfa004b2a9f50c483d500fecedb8e24b9542225ff195"
+          }
+        ]
+      },
+      {
+        "version": "registered-child-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-child-red-v1/RESULT.json",
+        "sha256": "f4edd685e846f1251f2ea458310d44a9f42c1924126dc99c96cf7756d1db2315",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "summary": [
+              "test result: FAILED. 13 passed; 7 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.22s"
+            ],
+            "log_sha256": "f1b8d5907662ae58f7ca4ebf9fb60f49e7f129b2e5a757c5998dd68554d282ff"
+          }
+        ]
+      },
+      {
+        "version": "registered-child-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/registered-child-green-v1/RESULT.json",
+        "sha256": "6dd3d09712302b03c092bc612e071663327b999ee26f0f4065d6a1c42084b5c9",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "summary": [
+              "test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.28s"
+            ],
+            "log_sha256": "461ab1e1f9f7f94866ae8449240485a39f72972819cdc3cc4a547e98e45797cc"
+          }
+        ]
+      },
+      {
+        "version": "inherited-bootstrap-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/inherited-bootstrap-red-v1/RESULT.json",
+        "sha256": "f04a976022066f4c106c1aae7b3b047d6a08b5881ea92c5f6de87db3c7ac8f2b",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "summary": [
+              "test result: FAILED. 22 passed; 3 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.32s"
+            ],
+            "log_sha256": "97f3c27aa768a0688dffb244520b216abec1b498c1db8f6ab3ecd96a569f69fe"
+          }
+        ]
+      },
+      {
+        "version": "inherited-bootstrap-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/inherited-bootstrap-green-v1/RESULT.json",
+        "sha256": "6de266ba5ded3e445a4001a2202ec012df69049077e99bf025daec2822d046e6",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "summary": [
+              "test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.35s"
+            ],
+            "log_sha256": "80cdc10fb1f613b7d6aa67c8f6fc8509bd705aa3ea5a7d5f3644fb693540fe9d"
+          }
+        ]
+      },
+      {
+        "version": "inherited-bootstrap-frozen-red-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/inherited-bootstrap-frozen-red-v1/RESULT.json",
+        "sha256": "6d236e6faa9079521127738c7e8fc39e354c8f16750b65b1c98f06ce6efad7d2",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "summary": [
+              "test result: FAILED. 25 passed; 1 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.36s"
+            ],
+            "log_sha256": "cce0505af2a057f903ee598355ef066ab54cc2a9949eb6c006948d79fc7bfe39"
+          }
+        ]
+      },
+      {
+        "version": "inherited-bootstrap-frozen-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/inherited-bootstrap-frozen-green-v1/RESULT.json",
+        "sha256": "1256fd1a568c650608d1b851ca6e0eaa53e228d5e56f439975b0725fda0da992",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "proof_first_d_control_",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "summary": [
+              "test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.34s"
+            ],
+            "log_sha256": "6ebb1783981cf537f3cf86bd4d62a1e150b97cabdd69bd8309a99fa2f0250766"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "summary": [],
+            "log_sha256": "b253562f6a31c0ec75a3c274b0b082f37e76816e56130027d92f9205db182ef4"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "summary": [
+              "test result: ok. 513 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 115.01s"
+            ],
+            "log_sha256": "4f9e39e1d2293a17634eb05e6fbab225a80ac4d7faf264913095bf9edf63b8ce"
+          }
+        ]
+      }
+    ],
+    "scope": "External unadopted registered Unix-stream grant/finish and real Linux FD3 child bootstrap component. No source cursor, actual result producer, backend preparation, whole-cohort single issuance, publisher activation or QUIC source E2E",
+    "result": "26 focused harness tests (including a child entry driver) and full513 feature tests PASS, normal non-test private QUIC check PASS, six overlay paths restored",
+    "findings": "Reserve active identity/capacity before bytes; exact registered completion only; replay/role/actual authority/endpoint checked; missing result marker or delivery loss remains unavailable/active. Actual FD3 ownership is one-shot through shared provider gate, socket type/family checked before UnixStream conversion, compiled role binding required; initially boot enabled grant before prepare: actual subprocess RED caught it and successor starts frozen. Test retained marker is not a normal actual-result producer.",
+    "storage_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/storage-owner-clean-v1/RESULT.json",
+    "storage_sha256": "c357f15d3580a6624c54c6cd2bcab41ec08a11d9eb115effaade94eca2d55d69",
+    "storage_result": "Cargo-owned mir-runtime outputs15.0GiB removed, root free5.8 to20GiB, all6403tracked source files unchanged; proof-first17GiB source/evidence retained. Removed Cargo binaries/libraries must be regenerated before use",
+    "operational_instruction": "Owner requests disk review at natural checkpoints roughly every few hours and before heavy growth; keep useful caches to avoid repeated rebuilds; clean only known obsolete reproducible artifacts after no active users, retain sources/failure/audit evidence",
+    "remaining": "Fixed finite-cohort global one-grant supervisor; exact staged/prepare/publish/activate provenance and all-endpoint ACK; actual disabled M9/floor/backend update, all-entry mode closure, source/I3/coherent retention/resource/network correspondence before use. No used premise deferred to E.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-control-component-v1.json",
+        "sha256": "de877d13827eb9aefc5687e7faa4e7e8738e587f28997374cee4c041943b24f0",
+        "exit": 2,
+        "reason": "stale progress and sample snapshot headers corrected; validator unchanged"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-control-component-v2.json",
+        "sha256": "cb22fbfec51433fb316e67318b73047feb0214403cd59d6782d73c807900e029",
+        "exit": 0,
+        "scope": "full make docs after dated snapshot correction; later verification metadata is focused checked"
+      }
+    ]
+  },
+  "d_cohort_grant_20260930": {
+    "at": "2026-09-30T10:07:44.817907+00:00",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/finite-cohort-grant-green-v1",
+    "files": {
+      "crates/mir-runtime/src/m9_auth_verification.rs": "5273da6366d59dd81d80634bc5d6761dc94ed5c093eed81319c6fd05924d0aab",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "ac6332fb62ba78dd96f5b7fa7c795e08edff85f95ff92f815673fae2b89ba130",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "912b7e146d5b156d7842613422478f7e440feebcc6b91047f7a0ac03fa967167",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "25b8fe2e9040d5ed74c6e0777a693e3dfdd34d2baa98beb6c97fa314ad9110b4"
+    },
+    "source_pins_sha256": "01ae39493f4d9a827db3bdec07326bfb40eddcfe721b0dcfd1d777f0db40c7df",
+    "receipts": [
+      {
+        "version": "finite-cohort-grant-red-v2",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/finite-cohort-grant-red-v2/RESULT.json",
+        "sha256": "a6435d833499d79e4d19efec9949ad7bc6063ee15b8e395b691310e1ce07ac3a",
+        "exits": [
+          101
+        ],
+        "summaries": [
+          "test result: FAILED. 28 passed; 5 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.98s"
+        ]
+      },
+      {
+        "version": "finite-cohort-grant-green-v1",
+        "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/finite-cohort-grant-green-v1/RESULT.json",
+        "sha256": "4841de5ea21966695b87d8ad6b21d3d4e600fcd353025fd06d3da074148f0da0",
+        "exits": [
+          0
+        ],
+        "summaries": [
+          "test result: ok. 33 passed; 0 failed; 0 ignored; 0 measured; 487 filtered out; finished in 0.51s"
+        ]
+      }
+    ],
+    "result": "RED28pass5fail over independent per-endpoint composition; GREEN33 focused pass0fail/ignored,6paths restored",
+    "scope": "One global active action/serial and sticky failure over fixed actual three Unix-stream pairs with genuine S/T restricted M9 fixture facts; no actual publisher stage/backend/source/result producer/QUIC connection",
+    "findings": "Fixed one requester/two owners with unique endpoint instance and same run/cohort/program/source context/current revision/gen; actual child facts remain endpoint-specific. Global active retained before member sends. No next endpoint on delivery loss, exact active channel only can complete. Close drains exact global interval before prepare. Normal bootstrap/sourceactivation supplier still a direct consumer.",
+    "unrun": "Current-cohort-cut normal build/full lib not yet rerun; prior26/513 normal-build/full receipt remains at its older exact source. No updated claim from prior receipt; next authority integration before new broad run. Draftred-v1 function name corrected in preserved red-v2 before first test; red-v1 never executed."
   }
 }

@@ -50827,5 +50827,89 @@
     "status": "full-read",
     "role": "sole-main authored/read exact199 local-frame audit source; no physical premise inferred",
     "at": "2026-09-30T06:56:10.599628+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
+    "sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
+    "status": "reconsult",
+    "role": "full-reconsult: model selected B grant/prepare/publish/activate/refinement and prepared invariant",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "reconsult",
+    "role": "partial-reconsult: 1700-1745,2365-2465,2670-2692,2690-2840; actual publisher custody/restriction; source-control integration remains open",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "status": "reconsult",
+    "role": "partial-reconsult: 1-105,1320-1395,2105-2175,7835-7905; actual owned ACK/provider FD3/one-shot cohort",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/checked_program_reference.rs",
+    "sha256": "58d405d51687c93a2cb846c8251241fa47f2be6d94cb0b349b23e94201932fd5",
+    "status": "reconsult",
+    "role": "full-reconsult: established opaque checked-program ref and structural recognizer",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/facts-codec-controls-v1/m9_auth_verification.rs",
+    "sha256": "5273da6366d59dd81d80634bc5d6761dc94ed5c093eed81319c6fd05924d0aab",
+    "status": "authored-main-reviewed",
+    "role": "exact frozen facts-codec-controls-v1: DTO source and genuine positive/negative controls; no normal process integration",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/facts-codec-controls-v1/m9_auth_verification_i3_tests.rs",
+    "sha256": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+    "status": "authored-main-reviewed",
+    "role": "exact frozen facts-codec-controls-v1: DTO source and genuine positive/negative controls; no normal process integration",
+    "at": "2026-09-30T08:53:47.779200+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/inherited-bootstrap-frozen-green-v1/sys5_i3_source_control.rs",
+    "sha256": "2bff812eae483783e99518a40c015351e497b8e2e151c0aa0aa842fe9db95acd",
+    "status": "authored-main-reviewed",
+    "role": "exact frozen registered local-action/actual-child FD3 component; normal actual result/backend/source consumer absent",
+    "at": "2026-09-30T09:51:03.465757+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/inherited-bootstrap-frozen-green-v1/sys5_i3_source_control_tests.rs",
+    "sha256": "463d4d3916f4343bc9eace83a36325e3ab976540676dc311f952bc47e3fc8b07",
+    "status": "authored-main-reviewed",
+    "role": "exact frozen registered local-action/actual-child FD3 component; normal actual result/backend/source consumer absent",
+    "at": "2026-09-30T09:51:03.465757+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "ed2382880592d642820237d526da7cff2bb9d94399c035420598324b68b7dc9b",
+    "status": "reconsult",
+    "role": "partial-reconsult: 1400-1745,2640-2850,9400-9505,10600-10685,14540-14695; actual publisher/floor/backend in-place preparation direct consumer",
+    "at": "2026-09-30T09:51:03.465757+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "5de9a3b5927459cc78d2c47de1a6fd5ee617cd6ed7c4fa86fd74220b82553a5e",
+    "status": "reconsult",
+    "role": "partial-reconsult: 7820-7915,9320-9500; shared provider FD gate and ordinary bootstrap/installation entry",
+    "at": "2026-09-30T09:51:03.465757+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/finite-cohort-grant-green-v1/sys5_i3_source_control.rs",
+    "sha256": "912b7e146d5b156d7842613422478f7e440feebcc6b91047f7a0ac03fa967167",
+    "status": "authored-main-reviewed",
+    "role": "exact finite-cohort-grant-green-v1 global interval/serial/control tests; actual source/backend/publisher consumer absent",
+    "at": "2026-09-30T10:07:44.817907+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/finite-cohort-grant-green-v1/sys5_i3_source_control_tests.rs",
+    "sha256": "25b8fe2e9040d5ed74c6e0777a693e3dfdd34d2baa98beb6c97fa314ad9110b4",
+    "status": "authored-main-reviewed",
+    "role": "exact finite-cohort-grant-green-v1 global interval/serial/control tests; actual source/backend/publisher consumer absent",
+    "at": "2026-09-30T10:07:44.817907+00:00"
   }
 ]

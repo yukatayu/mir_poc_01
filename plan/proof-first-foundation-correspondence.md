@@ -2441,3 +2441,31 @@ Audit22837exit0:199modules/20455owned/177qualifiedfalse/187commands,9compiled ov
 
 
 2026-09-30T07:17:54.581459+00:00: Full make docs64984exit0 after correcting the task-map headings; prior60104exit2 and15923exit2 are retained, not counted as success. Source/recipe/audit/receipt pins, 6758-ledger/6745-prefix and unchanged production/Canon checks accompany this checkpoint. This final result/status metadata sync follows the full docs run and receives focused JSON/heading/diff checks. Final commit/push/parity are recorded only after execution in d-source-process/GIT-HANDOFF-v1.json. Owner model-switch pause, D incomplete, E/W5+ inactive; no active commands/Oracle/subagents or external notifications.
+
+
+### 2026-09-30T08:18:21.776061+00:00 — Sol implementation resume / normal QUIC closure
+
+Owner resumed the same W4 after manual model switch. Normal QUIC RED21170exit101 reproduces E0599 at private fault helper; one matching test-feature cfg on its caller closes it in external3file normal-quic-fixed-v1. GREEN23253 normal/combined checks pass and full feature lib472pass0fail0skip;3Rust restored. RESULT 9e93e1ce4aaf94b8e6ccea5bcc28dae8c973384bcae3c9a80d72b4624eda8a3f. Initial candidate-copy script assumed PATHS mapping, failed before writes, then resumed its empty directory against actual list; no success fabricated. Resource/cleanup receipt storage-sol-resume-v1 retains df/free/lsblk/findmnt/du results: external mount absent, root free3GiB, known untracked Cargo incremental4.4GiB reclaimed with explicit --confirm under prior owner authorization; source/proof/evidence preserved. Continue facts-only DTO/owned registered FD/control/preparation, with source/I3/result/resource premises before use. No D acceptance/new network/Canon promotion. plan/status/tasks/samples updated; full docs/final review/Git pending later concrete checkpoint.
+
+
+### 2026-09-30T08:53:47.779200+00:00 — D facts-only control DTO reference
+
+W4-Dはownerが選択したGPT-6.1-Sol xhighで確定実装を進めています。外部未採用3file参照facts-codec-controls-v1は、検査helperのfeature不整合修正と権限factsのみの非信頼DTOを保持し、通常private QUIC build・15対照・全487feature検査が失敗/skipなく通過しました。全操作を含むprogram identityは既存の不透明参照で送り、実際のローカルidentityとの照合を保ちます。子の3検証mapと非対象操作metadataは送りません。overlay後は元Rustを復元しています。次は登録した実制御stream由来の不透明tokenと停止中のM9/floor/backend準備です。199module/20455所有宣言/177対照の既存監査は別receiptとして保持し、Dのsource/I3/result/resource/process/network接続・統合判定は未完了です。重要な境界変更を要する反例、またはDの統合判定でAstraへ戻すため停止します。Eの検査はD受理後にSol、A–E統合判定はAstraが担当します。
+
+Decision within selected B: use existing checked-program opaque ref on wire, reconstruct strict snapshot integrity against actual locally retained full identity. No parent/child observation merge; nonincident target omitted. Codec cannot authenticate, install, mint source cursor or reset replay. 1MiB prototype body cap, structural/canonical/duplicate/integrity/exactdelta checks; preflighted bounded writer. Exact receipts/source pins in W4_CHECK d_facts_codec_20260930. Remaining direct consumer: owned registered stream preparation token, then actual disabled SYS4 M9/floor/backend. No C/Canon/THM/OBL/119/E or source grammar promotion.
+
+
+### 2026-09-30T09:51:03.465757+00:00 — D registered local-action/FD3 reference and storage maintenance
+
+W4-DはSolで部品実装を継続中です。外部未採用6file参照inherited-bootstrap-frozen-green-v1で、権限facts-only DTO、登録済みUnix streamのgrant/完了制御、実子プロセスの一回限りのFD3取得を検査しました。26件の部品harness・通常private QUIC build・全513feature検査が通過し、6Rust pathは元へ復元しました。起動だけではgrantを受け付けず凍結を保ちます。次は有限cohort全体の単一grant管理と準備/公開/有効化、実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・通信の対応とD統合判定は未完了です。199module/20455所有宣言/177対照の監査は既存の別receiptであり、今回のprocess部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
+
+Current findings: exact scope/replay and private owned-stream tokens, preflighted IDs/finish bytes, sticky failure retain active and local outcome marker; actual Linux FD3 role/class/one-shot provenance supplies an owned capsule that remains frozen. Whole-cohort single issuance, actual authentic prepare/publish/activate, normal actual-result producer and all semantic entry/resource/source/I3 closure remain direct consumers. Existing model/current199 evidence conditional, unchanged; no proof or Canon/public promotion. No normative delta.
+
+
+### 2026-09-30T10:07:44.817907+00:00 — Fixed finite three-endpoint local-action supervisor
+
+W4-DはSolで実装を継続中です。外部未採用6path参照finite-cohort-grant-green-v1は、登録済み制御stream/実FD3に加え、3endpoint全体で一つの使用中grantと通し番号を保持し、33件の部品検査を通過しました。6pathは元へ復元しています。通常QUIC build・全513feature検査は直前のFD3/26件cutの別receiptです。次は実権限発行者の全endpoint準備/公開/有効化と、停止中の実M9/floor/backend接続です。元source cursor・I3 admission・実結果保持・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査を保持し、部品検査で保証範囲を広げません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+Selected B implementation component only: exact global active interval before member bytes, fresh checked global serial, same run/cohort/program/source/current revision with unique instances and one requester/two owners, endpoint-specific M9 authority facts; close retains active until exact registered finish, lost send disables whole run. Unauthenticated fixed membership/image suppliers and real publisher/backend/source/result closure are not inferred from33controls. No new design alternatives or public/Canon contract.
