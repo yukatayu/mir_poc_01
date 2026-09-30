@@ -54746,5 +54746,234 @@
         "scope": "full make docs over restored Rust/current evidence/status; later verification metadata focused checked"
       }
     ]
+  },
+  "d_owned_original_source_bootstrap_20261001": {
+    "at": "2026-09-30T23:38:22.136423+00:00",
+    "head": "d2cd766553f29a945f9912c07675fd2240d0f012",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "8b88057037c627179ee938fb4bed7b91d1efe993b4b67d517e5c6800f0b4e82b",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "374353872e3cac326706e7f3eb59acd2c745e8028374e6b79551501ec0baec20",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "b04354c64ae2cd1140f98f3167c14418482172bd44b2783d943c3ec2f50bc815",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "c3799aa37c0c15f3ff08cbafdd8a90c83b11f36fae8266651a7731a2ca089932",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "a8173856e687cb4842f16fd347aa97d0697f6f17602b5523d32c2880a3fea987",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "1d76ac8723aa321f40946138ecf793ebe011be94e3874d5ae8c7f0e4a7fec89a",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "4a07e26be0c296433fc37fdf11a0dd08823a78df323850b093d9a0bbd1622eb6",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "c9113f8dea7a772d6f89236fae48dd83e6f580d04fca478fe1fa170c4b74072a",
+      "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "c29c5c36fb46dcd8a9bb3ff5af2629ba99d19334a1603348becdf212546d054d",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "7f7982a43c207d6a606d7c695055c6da14db0a73769c55e29e64e60912aae013",
+      "crates/mir-runtime/src/sys4_i3_original_source.rs": "4ab4432b892e821dfd33e78a44000dbeeac702d7d76be9fee4a1c188704ff8b5",
+      "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "9318e1bbbae3879441c3a4acdaba11570d7a71c0261c834908df277b019549ef",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "357952a33723da711ffbd7c0387ee68045f712fe600d9aac6fbdd48a06d5a646",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "ff6124878eefefcb17b52693a36104649d5f84b0f598ac23e85147fed1e6182a",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "58034ee199716475ece0021eacba3a7b567f1e6954f31db12b2fe7b97f7ad062",
+      "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "b2d8dfb1f0d37fb3d5d02ed272168abfa6ad4e5352c38fe035844cb300871ef9",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "24006c9d661d5ebab8475c589bf8b7d3015afa775392f5701f7013ea2a30b627",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "e69bf947117a1d0a77d6290451594fbc04cb1a09d4b58bfd17d2e8b105a16e1c",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "399abfcf72a33e7dee4cc6c21d09d318ab953fdd3408135934d1e35c2b46611c",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59"
+    },
+    "source_pins_sha256": "59de81d1313e4f850322ce1079defa57ebab9b075b6d394b07991fdf7d432c06",
+    "receipts": [
+      {
+        "name": "original-source-data-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-data-red-check-v1/RESULT.json",
+        "sha256": "c7dbffd0ca69e4155168a951f3fdde1bafa385cac01bb4afe2c5a293b5aa5c9d",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          null
+        ]
+      },
+      {
+        "name": "original-source-data-red-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-data-red-check-v2/RESULT.json",
+        "sha256": "04d0192893b92980414919f8c170668ba9f3d6854160ee961fcd644ff729be59",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 3 passed; 5 failed; 0 ignored; 0 measured; 906 filtered out; finished in 0.42s"
+        ]
+      },
+      {
+        "name": "original-source-data-red-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-data-red-check-v3/RESULT.json",
+        "sha256": "6cda8b9d2ebe945ce6192fae24d15cd0426834a987b2212d92eb9cfae600a580",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 4 passed; 6 failed; 0 ignored; 0 measured; 906 filtered out; finished in 0.54s"
+        ]
+      },
+      {
+        "name": "original-source-data-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-data-green-check-v1/RESULT.json",
+        "sha256": "57dfaa7cd45309194b9f13f5cc455aec8347c4aa1e3abc59d7b581457f421223",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 906 filtered out; finished in 0.60s"
+        ]
+      },
+      {
+        "name": "original-source-data-green-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-data-green-check-v2/RESULT.json",
+        "sha256": "cea615339d802fc5bf64fc8e6477484f21701ac179e24db157d7031039853dc0",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 906 filtered out; finished in 0.78s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-red-check-v1/RESULT.json",
+        "sha256": "355d6ad147a1fee6f15424b7ec4b625ea18ad44cead490098cb0999173221b72",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          null
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-red-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-red-check-v2/RESULT.json",
+        "sha256": "f71d98c5241240420bf075c2c4e0e73ac4a41ea7d05e551485edebe4716b91d7",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 17 failed; 0 ignored; 0 measured; 916 filtered out; finished in 0.05s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-red-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-red-check-v3/RESULT.json",
+        "sha256": "d1fa8594cdba6fa5a45c31d59fe0e32b0676e2bf539b32306e33bbe38f2cd8fe",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 13 passed; 6 failed; 0 ignored; 0 measured; 916 filtered out; finished in 14.84s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-fixture-diagnostic-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-fixture-diagnostic-check-v1/RESULT.json",
+        "sha256": "0c79fb8f0daac2b9b0e81a4ee3418fb00de47ad7a1c06d1714d752b6f3711709",
+        "exits": [
+          0
+        ],
+        "root_summaries": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 934 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-green-check-v1/RESULT.json",
+        "sha256": "3e8acbd3aaf0f674c5fd0801dc97e12e9f7b3f16421b5d95670210b3e43ffeae",
+        "exits": [
+          0,
+          0,
+          101
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: FAILED. 3 passed; 16 failed; 0 ignored; 0 measured; 916 filtered out; finished in 13.72s"
+        ]
+      },
+      {
+        "name": "owned-source-initial-grant-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-initial-grant-red-check-v1/RESULT.json",
+        "sha256": "d7f3e58ab164f84c803cf59b6192333e4157ea7bf4c0eb23e9b2289dafdc0de3",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 935 filtered out; finished in 0.50s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-green-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-green-check-v2/RESULT.json",
+        "sha256": "509e5fcf154aca9a4b1774ec1f0db636069d232bd21bb3325206d93b743a4d5a",
+        "exits": [
+          0,
+          0,
+          101
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: FAILED. 18 passed; 2 failed; 0 ignored; 0 measured; 916 filtered out; finished in 21.06s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-green-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-green-check-v3/RESULT.json",
+        "sha256": "5c533572b933fb1fd3e91dd4d292a86aa0e1a872e8ec1b6f3f30b668f04e4c79",
+        "exits": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 916 filtered out; finished in 17.71s",
+          "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 927 filtered out; finished in 0.82s"
+        ]
+      },
+      {
+        "name": "owned-source-bootstrap-full-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owned-source-bootstrap-full-check-v1/RESULT.json",
+        "sha256": "ac159575deff52b5cf0837235925b01cd9db185be935c2b41d01445d5197622c",
+        "exits": [
+          0
+        ],
+        "root_summaries": [
+          "test result: ok. 937 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 152.06s"
+        ]
+      }
+    ],
+    "result": "Exact28path external reference: normal default/privateQUIC checks pass, original inert data10 and actual FD3 startup21 pass, full combined-feature937 pass0fail/ignored/filtered. Every overlay restored. Child helper subprocess summaries are not extra root tests.",
+    "source": "Full original owner-handler request/Core pairs retained in global S/T/S order, exact full signatures/arguments including unused values, parent projection/program and complete inert fragment snapshot. Strict nested data decoding and exact restricted M8/M9 correspondence; foreign executable plans/global authority never copied. Singleton retains None ordinal.",
+    "parent": "Shared genuine normal cohort preparation callback derives source data before full parent values leave scope; exactly one full admission/authority generation. Actual coordinator/three child restrictions registered. Parent retains publisher, independent expected-image records, encoded images and inert data; no requester cursor/global executor. Source activation/cohort IDs use checked atomic allocation.",
+    "startup": "Owning once-taken inherited FD3/SAME provider gate supplies bounded hashed installation buffers and independent genuine expected-image record. Full expected M8 origin/static role/program/cohort/restriction/activation/source-context/authority joins precede actual Runtime ownership. Requester progress starts0/pendingNone with whole-activation result slots reserved; remote owners hold inert original data. Whole nonClone Runtime/control/source owned with no semantic/mutable-runtime/seed escape exposed.",
+    "initial_gate": "Actual parent grant supervisor closed before first bootstrap byte. All headers encoded before first delivery; real sender error closes all channels and remains unavailable, serial0/no active grant. Compiled owner role refuses requester factory; second FD startup refuses. Successful startup remains frozen and produces neither body nor prepared ACK.",
+    "failures": "DataRED-v1 wrong fragment variant compile failure retained; v2 3positive5proper failures; v3 4positive6proper failures, adding excess restricted M9 facts. DataGREEN-v1 8 and v2 10 pass. StartupRED-v1 wrong codec method compile failure; v2 weak stub1pass17fail; v3 actual-FD13positive6proper failures. GREEN-v1 3pass16fail exposed actual opaque-cohort mismatch and child-refusal harness; real fixture diagnostic preserved. GREEN-v2 18pass2fail: undrained funded-send timeout and expected owner-role refusal causing sender I/O. Initial-grantRED0pass1proper fail retained. GREEN-v7 corrects actual cohort, freezes initial grants, drains all children and separates owner-role refusal from real normal-sender loss; full937 pass. Every predecessor stays immutable.",
+    "scope": "Normal-build private frozen startup component in external/unadopted source. No executable original-source continuation, source-use/I3 combined gate, full retained prepared-state digest/ACK, parent publication/all activation, real QUIC body/result chain or D integrated acceptance yet. Pure/Lean199 and earlier compiler refusal receipts unchanged; no fresh199/whole-workspace/privacy/recovery/alpha/119 adoption or Canon change.",
+    "next": "Connect registered authority preparation to the SAME whole frozen Runtime/control/original-source/pending/results state, authentic full prepared-state ACK, parent publication and all activation before source/I3/results/resource/QUIC use. No partial authority receipt or debug/observer digest substitutes for full retained-state binding.",
+    "resources": "Measured23:28UTC root14GiB free/RAM8.9GiB available/swap15GiB used; serial8GiB Rust address-space cap/-j1/testthreads1. No cleanup necessary for this cached run; useful cache/source/proof/failure evidence retained.",
+    "review": "Sole main source/factory/static-auth/initial-grant/loss/retention-scope review. No new independent agent/Oracle review under owner sole-main instruction. No new normative/public contract or guarantee.",
+    "estimates": "Owner asked status/step estimates2026-10-01; low-confidence active hours: D remainder20–40; full prepare/ACK/publish/activate4–8; source/I3/results6–12; QUIC/events/refusals4–8; Astra acceptance2–4. E16–40/W540–100/W640–100/W724–60 remain provisional/inactive.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-owned-source-bootstrap-v1.json",
+        "sha256": "b787cd0233bb6b3b4acf9d29ed412e9d2de1a82d147e18e8150d76cb1b214715",
+        "exit": 0,
+        "scope": "full make docs over restored Rust/current source-startup evidence and snapshots; final metadata focused checked afterward"
+      }
+    ]
   }
 }

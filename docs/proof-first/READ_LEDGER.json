@@ -51093,5 +51093,61 @@
     "status": "main-authored-reviewed-scoped",
     "role": "partial exact M8 origin helper and shared FD merge plus actual retained fields/start/codec/projection/context for next normal owner; no whole file read; external source-control-union-v5 unadopted",
     "at": "2026-09-30T12:32:23.807763+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys3_i3_private_snapshot.rs",
+    "sha256": "c29c5c36fb46dcd8a9bb3ff5af2629ba99d19334a1603348becdf212546d054d",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new inert exact owner fragment snapshot append, strict data-only codec; partial existing file; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys4_i3_original_source.rs",
+    "sha256": "4ab4432b892e821dfd33e78a44000dbeeac702d7d76be9fee4a1c188704ff8b5",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new full declaration/context/strict local M8 and all M9 facts/source ordinal/argument correspondence reviewed; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys4_i3_original_source_tests.rs",
+    "sha256": "9318e1bbbae3879441c3a4acdaba11570d7a71c0261c834908df277b019549ef",
+    "status": "main-authored-reviewed-scoped",
+    "role": "authored ten original-data positive/falsifier tests; source fixture and counterexample assertions reviewed; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys5_i3_original_source_process.rs",
+    "sha256": "58034ee199716475ece0021eacba3a7b567f1e6954f31db12b2fe7b97f7ad062",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new full genuine preparation/capsules/expected image join and frozen whole-runtime owner reviewed; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys5_i3_original_source_process_tests.rs",
+    "sha256": "b2d8dfb1f0d37fb3d5d02ed272168abfa6ad4e5352c38fe035844cb300871ef9",
+    "status": "main-authored-reviewed-scoped",
+    "role": "authored actual3child FD3 tests; focused role/refusal/runtime clocks/progress/preallocation/drain and startup-loss review; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys5_i3_source_control.rs",
+    "sha256": "e69bf947117a1d0a77d6290451594fbc04cb1a09d4b58bfd17d2e8b105a16e1c",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial real bootstrap installation reader/authenticated capsule/static binding/registered sender/initial grant/loss and test-only falsifiers; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/sys5_i3_process_runtime.rs",
+    "sha256": "24006c9d661d5ebab8475c589bf8b7d3015afa775392f5701f7013ea2a30b627",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial shared single genuine preparation callback, checked source identities vs preserved ordinary route; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owned-source-bootstrap-green-v7/m9_auth_verification.rs",
+    "sha256": "a8173856e687cb4842f16fd347aa97d0697f6f17602b5523d32c2880a3fea987",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial private actual authority-facts binding method/canonical restriction comparison; observations remain prepared-state scope; external unadopted owned-source-bootstrap-green-v7",
+    "at": "2026-09-30T23:38:22.136423+00:00"
   }
 ]
