@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-30 01:11 JST
+最終更新: 2026-09-30 09:03 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,9 +29,9 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cの先行限定実装は、共有authority floor、観測ラベル、実読取り記録、必要schema、明示添字型、完全な引数定義と現在の認可後の引数検査です。最新の採用cut e5450e38はcommit/push済みで、runtime444件・M8/M10・既存I3通信の記録を保持します。
 
-W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と107反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
+W4-Cの通常代入列は、単一source進行を実SYS4→ST/OW1→M8へ接続した未採用参照版です。元要求を保持した実行・結果回収・一度だけの完了を検査しています。独立した完了条件と元Bank.tickの同値性はadmitted Factsの下でLean検査済みです。元の全checked planに基づく通常入口の健全性・相対完全性と、保護された操作の迂回拒否も検査しました。190moduleの公理監査と115反例が通過しています。物理的な元データの保持・全caller対応は別の未完了義務です。
 
-元ソースの実行権限を一度だけ移す候補確定と、因果・観測の依存を保つ限定参照を検証中です。実際の関係更新、既存の限定checked patch、返信待ちを跨いで元の代入200→190→191を各1回実行する正例を含め、対象196検査と最新runtime全638検査が成功しました。観測失敗で確定エラーが失われる反例と、候補側の因果辺・trace・識別子余裕の3反例を修正しました。一般証明の公理監査は190 module・19020宣言、107件の偽命題対照を含みます。Oracleの24指摘は照合済みで、修正差分の再レビューが次です。復号入口の出自、全依存・mutator・資源・復旧は未解決で、本番未採用です。C未完了・D未着手、D完了後に停止します。
+元ソースの実行権限と依存を保つ未採用参照で、同じ構成への2回のchecked patch後に実S→E→C計算・消費11→12→13、元代入の2回の起動200→190→191→181→182を検査しました。最新runtime library全653検査が成功し、skipはありません。通常の復号値を実行可能値から型で分離し、独立した期待値に対する全image・準備済み更新の位置／有無・全admissionを昇格直前にも照合します。provider内部復元も完全な期待componentと実nonceを要求する候補を検査しました。処理順序の改変1件と、検証後の更新削除／識別情報／接続先改変3件の実反例を拒否し、正規復元を保持しています。一般証明は190 module・19178宣言・115偽命題対照を監査済みです。最新Oracle23項目を照合中で、進行中返信の保持、存在しないsource因果参照、根拠のないallocator前進、起動全体の容量と全経路対応が残ります。C未完了・D未着手、D完了後に停止します。
 
 現在の直接consumerは、元要求の未実行キューと実失敗を保持する継続、搬送・返信の各確定点、全entry/資源の閉鎖です。成功後の同一要求回収とobserver索引に依存しない受理は参照検査済みですが、本番採用前にcurrent Bank.tick受理・M8直接entry・SYS4/FIFO/局所経路・private image/restore・patchの条件をそろえます。一般Lean結果の回収規則は物理故障対応そのものの証明ではありません。
 
@@ -82,11 +82,11 @@ cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
 
 ## maintenance tasks
 
-Use the persistent external workroot in RESUME. Never rerun one-shot evidence launchers over existing output. No unchanged one-shot evidence replay merely for a label or context change; B's actual import/runner change requires scoped fresh verification. Heavy Lean remains serial --trust=0 -j1 with measured resource limits. No cleanup, Chrome changes or external notifications.
+Use the persistent external workroot in RESUME. Never rerun one-shot evidence launchers over existing output. No unchanged one-shot evidence replay merely for a label or context change; B's actual import/runner change requires scoped fresh verification. Heavy Lean remains serial --trust=0 -j1 with measured resource limits. Owner-authorized cleanup is limited to known untracked reproducible artifacts; preserve evidence/source/cache inputs and Chrome. No external notifications.
 
 W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。最新指示ではD完了時にgoalをpauseして止め、Eへは進みません。最新owner指示に従って同じW4作業を継続します。goal tool表示はpausedのままですが、主担当toolからresumeはできないため重複goalを作りません。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
 
-2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
+最新owner指示により、週間Codex残量が約50%になったら区切りで一時停止します。確認間隔は1時間以上です。今回23:45 UTCのセッションtelemetryは週間使用0%・残り100%でした。リセット操作は行いません。D完了後の停止、E・W5+・Plan250/I3-4未着手も保持します。過去の残量指示・停止記録はReport2614に保持します。
 
 ## non-promoted references
 

@@ -88,3 +88,33 @@ def ownerOperation (shared parked : Nat) := (shared+1,parked+1,shared)
 #guard visible (ownerStep ownerOperation ⟨200,0,7⟩) = visible (ownerStep ownerOperation ⟨200,999,7⟩)
 #guard visible (ownerStep ownerOperation ⟨200,0,7⟩) ≠ visible (ownerStep ownerOperation ⟨999,0,7⟩)
 end MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin
+open OwnerStatementOriginalEntry.DecodedOrigin
+-- Numeric tags stand only for full typed payloads in these finite controls.
+def original : Image (List (Nat × Option Nat)) := ⟨[(1,some 0),(2,none)],[[(3,some 1)]]⟩
+def erased : Decoded (List (Nat × Option Nat)) := ⟨⟨[(1,none),(2,none)],original.nested⟩⟩
+def nestedErased : Decoded (List (Nat × Option Nat)) := ⟨⟨original.primary,[[(3,none)]]⟩⟩
+#guard promote original ⟨original⟩ = some ⟨original⟩
+#guard promote original erased = none
+#guard promote original nestedErased = none
+#guard OwnerStatementOriginalEntry.check Prod.snd original.primary false (2,none)
+#guard !(OwnerStatementOriginalEntry.check Prod.snd original.primary false (1,none))
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator
+open OwnerStatementOriginalEntry.TraceAllocator
+
+def original : Trace Nat := ⟨[(0,10),(1,20)],2⟩
+def rewind : Trace Nat := ⟨original.rows,0⟩
+def duplicate : Trace Nat := ⟨original.rows ++ [(1,99)],3⟩
+def future : Trace Nat := ⟨original.rows ++ [(3,99)],3⟩
+#guard validCheck original
+#guard !(extensionCheck original rewind)
+#guard !(extensionCheck original duplicate)
+#guard !(extensionCheck original future)
+#guard extensionCheck original (append original 30)
+#guard push 2 original 30 = none
+#guard push 3 original 30 = some (append original 30)
+#guard (append original 30).rows.find? (fun row => row.1 == 0) = some (0,10)
+end MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator

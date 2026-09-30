@@ -50266,5 +50266,68 @@
     "status": "full-read",
     "role": "sole-main authored/read dependency frame and parked/shared generalproof; kernelchecked",
     "at": "2026-09-29T16:02:23.672108+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-patch/ANSWER_RECOVERED.txt",
+    "sha256": "ac700af0abf874041b82277ee50b66b32abb046445a5ebfd69502408b786b916",
+    "status": "full-read",
+    "role": "sole-main staticreview checkedagainstlocalcaller/graph source; no executedreviewcredit",
+    "at": "2026-09-29T16:36:17.991175+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-patch/DISPOSITION.json",
+    "sha256": "623aac3a43dfa3cf33c41f2111a65d33bcb85bbc35335057931870131c74e056",
+    "status": "full-read",
+    "role": "sole-main staticreview checkedagainstlocalcaller/graph source; no executedreviewcredit",
+    "at": "2026-09-29T16:36:17.991175+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-decoded-origin-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "82d5e2475166d38bc4f0ea4501f484b6d457ddedb780d84b10b892f10867ebee",
+    "status": "full-read",
+    "role": "sole-main authored/read whole original/nested promotion and protected-entry proof; kernelchecked",
+    "at": "2026-09-29T16:40:48.743578+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-decoded-origin-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "f6234af7364e942de0d5a44391903bf19b42fc3ae16356ecd477b24e2819a6e3",
+    "status": "full-read",
+    "role": "sole-main authored/read whole original/nested promotion and protected-entry proof; kernelchecked",
+    "at": "2026-09-29T16:40:48.743578+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-trace-allocator-v1/OwnerStatementOriginalEntry.lean",
+    "sha256": "19ee1880db41ba5abe63c14fa56b1fbad6ccb3a0945d42952b4be700fa1c3b67",
+    "status": "full-read",
+    "role": "sole-main authored/read whole appended allocator definitions/proofs/controls; kernelchecked",
+    "at": "2026-09-29T17:05:24.298492+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-trace-allocator-v1/OwnerStatementOriginalEntryControls.lean",
+    "sha256": "f53d76fed43635174fadb0f4ed3ec6fc8362d349e82bc5c2d282382dc5578f03",
+    "status": "full-read",
+    "role": "sole-main authored/read whole appended allocator definitions/proofs/controls; kernelchecked",
+    "at": "2026-09-29T17:05:24.298492+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-continuity/ANSWER.md",
+    "sha256": "fe361da3f26e3338d6bf3ca999efb1bc619a538491363004d3a8d4a4e0b7f02f",
+    "status": "full-read",
+    "role": "full static oracle answer read in portions,23dispositions",
+    "at": "2026-09-29T23:56:31.277725+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/provider-origin-green-v1/ORIGIN_CONTRACT.md",
+    "sha256": "3cb382e21f7b76c64ac798f593373d56dccb385fef123b49e1430a0692f7abfa",
+    "status": "full-read",
+    "role": "authored/read bounded providerorigin alternatives",
+    "at": "2026-09-29T23:56:31.277725+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-current-development/origin-position-green-v1/ORIGIN_POSITION_CONTRACT.md",
+    "sha256": "3882dbea8f769e3242c20d069ce06e61a10f322703cab85d5885b0dcf081667f",
+    "status": "full-read",
+    "role": "authored/read wholeimage composition contract",
+    "at": "2026-09-29T23:56:31.277725+00:00"
   }
 ]

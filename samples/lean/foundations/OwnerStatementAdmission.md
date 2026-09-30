@@ -841,7 +841,44 @@ negative_sources = {'FalseConsumedRefusalCommits.lean': 'import OwnerStatementBo
                                       'MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame '
                                       'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DependencyFrame\n'
                                       '#guard visible (ownerStep ownerOperation ⟨200,0,7⟩) = '
-                                      'visible (ownerStep ownerOperation ⟨999,0,7⟩)\n'}
+                                      'visible (ownerStep ownerOperation ⟨999,0,7⟩)\n',
+ 'FalseOriginErased.lean': 'import OwnerStatementOriginalEntryControls\n'
+                           'open MirroreaProofFirst '
+                           'MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin '
+                           'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin\n'
+                           '#guard (promote original erased).isSome\n',
+ 'FalseOriginNested.lean': 'import OwnerStatementOriginalEntryControls\n'
+                           'open MirroreaProofFirst '
+                           'MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin '
+                           'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin\n'
+                           '#guard (promote original nestedErased).isSome\n',
+ 'FalseOriginAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                              'open MirroreaProofFirst '
+                              'MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin '
+                              'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin\n'
+                              '#guard (promote original ⟨original⟩).isNone\n',
+ 'FalseOriginPlainRejected.lean': 'import OwnerStatementOriginalEntryControls\n'
+                                  'open MirroreaProofFirst '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin '
+                                  'MirroreaProofFirst.OwnerStatementOriginalEntryControls.DecodedOrigin\n'
+                                  '#guard !(OwnerStatementOriginalEntry.check Prod.snd '
+                                  'original.primary false (2,none))\n',
+ 'FalseTraceRewind.lean': 'import OwnerStatementOriginalEntryControls\n'
+                          'open MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
+                          'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator\n'
+                          '#guard extensionCheck original rewind\n',
+ 'FalseTraceDuplicate.lean': 'import OwnerStatementOriginalEntryControls\n'
+                             'open MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
+                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator\n'
+                             '#guard extensionCheck original duplicate\n',
+ 'FalseTraceFuture.lean': 'import OwnerStatementOriginalEntryControls\n'
+                          'open MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
+                          'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator\n'
+                          '#guard extensionCheck original future\n',
+ 'FalseTraceAllRefuse.lean': 'import OwnerStatementOriginalEntryControls\n'
+                             'open MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator '
+                             'MirroreaProofFirst.OwnerStatementOriginalEntryControls.TraceAllocator\n'
+                             '#guard !(extensionCheck original (append original 30))\n'}
 for filename, content in negative_sources.items():
     (work / filename).write_text(content)
     result = subprocess.run(['lean', '--trust=0', '-j1', filename], cwd=work,
@@ -1405,3 +1442,86 @@ corrected compile and complete audit contain no authored holes or extra axioms.
 New dependency lemmas use standard propext/Quot.sound, the parked-step lemma no
 axioms. Unchanged dependencies are pinned earlier fresh190 objects, not a new
 full190 rebuild. C remains incomplete and D unstarted.
+
+## Decoded ordinary image origin (forward LAB; not production closure)
+
+`DecodedOrigin.check_exact` compares full primary payload and the ordered nested
+payload list against independently held originals. Its declarative rule is
+primary agreement and equality at every nested position, including absent ones.
+`promote_exact` and `promote_complete` prove soundness and relative completeness;
+`promoted_payload_original` retains the whole payload. `original_accepted` rules
+out all refusal. `promoted_protected_rejected` connects to the existing original
+owner-entry rule: a protected same-operation plan cannot become ordinary by
+altering the decoded ordinal, given the independently original unique inventory.
+
+The concrete issuer and expected-control custody are explicit obligations, not
+premises that decoding itself satisfies. A pure `Promoted` value grants neither
+M9 permission nor live source custody. Canonical codec fidelity and collision
+resistance when equality is represented by commitments remain physical TCB.
+The reference therefore separates decoded ordinary data from executable M8;
+clone/restriction retain that distinction. A checked parent can retain an opaque
+original M8 expectation, and the existing independently bound I3 image boundary
+can promote exact primary and both pre-staged successor data. Decoder inventory
+self-consistency does not issue a promotion permit. The private Debug commitment
+remains the same data representation, independent of the ephemeral wrapper.
+
+A lower test changed the surrounding M9/summary after validation while retaining
+identical M8 data. The first leaf-only permit accepted it. The candidate now
+binds the complete actual admission commitment as well as its M8 snapshot.
+This is additional correspondence checking, not issuance of new authority.
+The corrected reference passed243 selected tests, including actual independent
+I3 codec startup, original source continuation and two changed decoded source
+controls. Four qualified Rust type mismatches reject raw decoded values at
+owner/local/designated/relation constructors. Provider, complete caller closure,
+new full regression and publication/reporting findings remain open.
+
+The changed ten-module cone, complete190 owned-module audit (19104 declarations)
+and111 qualified false controls passed122 commands on pinned earlier fresh190
+objects. This is not another full190 rebuild. Initial two elaboration failures
+were excluded, corrected two-module run passed. No authored holes or Mir axioms;
+new lemmas use standard propext/Quot.sound. These statements do not close the
+physical decoder/caller/hash/authorization obligations or W4-C.
+
+## Raw trace allocator extension (forward LAB; not full physical closure)
+
+`TraceAllocator.validCheck_exact` checks unique numeric row identifiers and a
+cursor strictly greater than every retained identifier against the separately
+stated validity relation. `extensionCheck_exact` additionally checks the entire
+old row prefix and a nondecreasing allocator. `push_exact` specifies the actual
+bounded append operation, including refusal at exhaustion. `append_valid` and
+`push_preserves` derive validity after actual append; `next_fresh` establishes
+that the allocated ID was absent, and `old_lookup_preserved` keeps old lookups.
+`steps_valid` composes checked publication and actual bounded appends. This is
+not a theorem that an arbitrary append is safe merely because it keeps a prefix.
+
+The reference compares complete typed program/projection/routes and each local
+admitted inventory at the generic relation/lifecycle publisher. Program changes
+still use the existing independent checked-patch route. Raw local trace validity
+uses the actual numeric ID formatter, uniqueness, bounds and prefix; observation
+aggregates remain separate. The retained event-dependency graph rejects cycles,
+future SYS4 allocator IDs and new source-consume events from an inert candidate.
+This is not the union of patch, relation, lifetime and support graphs, nor proof
+that an arbitrary new acyclic occurrence actually happened. Actual producer and
+caller closure, complete resources and machine string/finite-counter refinement
+remain required. Existing GraphValidation finite reachability/acyclicity proofs
+remain the semantic graph baseline; this new trace theorem does not prove Rust
+DFS or whole graph provenance.
+
+Four actual candidate mutants were accepted before correction: program-only
+replacement, new self-cycle, future source-consumption identifier and raw trace
+cursor rewind. The corrected reference passed251 selected runtime tests while
+retaining existing real relation and checked-patch continuation positives.
+A stronger positive then exposed blanket rejection of designated actions in an
+active source world. Restricting source cursor arming/reporting/predecessors to
+the actual OwnerOperation action kind allowed the existing generated S→E→C
+path to compute/consume11 before patch and12 after patch at four source phases.
+The designated route still requires its own checked fragments and M9 admission.
+Repeated update/new activation and full regressions are tracked separately in
+the current evidence ledger; this section grants no production adoption.
+
+Audit44391 rebuilt10 changed/dependent modules against pinned earlier fresh190
+objects, audited all190 owned modules/19178 declarations, and rejected115
+qualified false controls in126 commands. The first two proof errors54881 were
+excluded; corrected module91409 and the full audit passed. No authored holes or
+Mir axioms; the new lemmas use standard propext/Quot.sound. This is not another
+fresh full190 rebuild, nor C completion.

@@ -429,3 +429,233 @@ theorem parked_refresh_keeps_owner_step (operation : σ → π → σ × π × �
 #print axioms original_observation_preserved
 #print axioms parked_refresh_keeps_owner_step
 end MirroreaProofFirst.OwnerStatementOriginalEntry.DependencyFrame
+
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin
+universe u v
+variable {α : Type u} {κ : Type v}
+-- α is the full typed payload, including program/Core/source/owner/budget and
+-- scope. The complete ordered nested inventory includes pre-staged successors.
+-- expected is independently held admitted data. Constructing a mathematical
+-- value here does not authenticate it: that origin is an explicit refinement
+-- obligation of the sole physical issuer/expected-control boundary.
+structure Image (α : Type u) where
+ primary : α
+ nested : List α
+ deriving DecidableEq
+structure Decoded (α : Type u) where
+ image : Image α
+ deriving DecidableEq
+structure Promoted (α : Type u) where
+ image : Image α
+ deriving DecidableEq
+
+def Corresponds (expected : Image α) (candidate : Decoded α) : Prop :=
+ candidate.image.primary = expected.primary ∧
+ ∀ i : Nat, candidate.image.nested[i]? = expected.nested[i]?
+
+def check [DecidableEq α] (expected : Image α) (candidate : Decoded α) : Bool :=
+ decide (candidate.image.primary = expected.primary) &&
+ decide (candidate.image.nested = expected.nested)
+
+theorem check_exact [DecidableEq α] (expected : Image α) (candidate : Decoded α) :
+ check expected candidate = true ↔ Corresponds expected candidate := by
+ simp only [check,Bool.and_eq_true,decide_eq_true_eq,Corresponds]
+ constructor
+ · rintro ⟨primary,nested⟩
+   exact ⟨primary,fun i => congrArg (fun xs : List α => xs[i]?) nested⟩
+ · rintro ⟨primary,nested⟩
+   exact ⟨primary,List.ext_getElem? nested⟩
+
+def promote [DecidableEq α] (expected : Image α) (candidate : Decoded α) : Option (Promoted α) :=
+ if check expected candidate then some ⟨candidate.image⟩ else none
+
+def Promotes (expected : Image α) (candidate : Decoded α) (result : Promoted α) : Prop :=
+ Corresponds expected candidate ∧ result.image = candidate.image
+
+theorem promote_exact [DecidableEq α] (expected : Image α)
+ (candidate : Decoded α) (result : Promoted α) :
+ promote expected candidate = some result ↔ Promotes expected candidate result := by
+ simp only [promote,Promotes]
+ split
+ · rename_i valid
+   have corr := (check_exact expected candidate).mp valid
+   cases result with
+   | mk image =>
+     simp only [Option.some.injEq,Promoted.mk.injEq]
+     constructor
+     · intro same; exact ⟨corr,same.symm⟩
+     · rintro ⟨_,same⟩; exact same.symm
+ · rename_i invalid
+   have bad : ¬ Corresponds expected candidate := by
+     intro corr; exact invalid ((check_exact expected candidate).mpr corr)
+   simp [bad]
+
+theorem promote_complete [DecidableEq α] (expected : Image α) (candidate : Decoded α) :
+ (∃ result, promote expected candidate = some result) ↔ Corresponds expected candidate := by
+ constructor
+ · rintro ⟨result,run⟩; exact ((promote_exact expected candidate result).mp run).1
+ · intro corr; exact ⟨⟨candidate.image⟩,(promote_exact expected candidate _).mpr ⟨corr,rfl⟩⟩
+
+theorem promoted_payload_original [DecidableEq α] (expected : Image α)
+ (candidate : Decoded α) (result : Promoted α)
+ (run : promote expected candidate = some result) : result.image = expected := by
+ obtain ⟨⟨primary,nested⟩,out⟩ := (promote_exact expected candidate result).mp run
+ rw [out]
+ have exactNested := List.ext_getElem? nested
+ cases expected
+ cases candidate with
+ | mk image => cases image; simp_all
+
+theorem original_accepted [DecidableEq α] (expected : Image α) :
+ promote expected ⟨expected⟩ = some ⟨expected⟩ := by simp [promote,check]
+
+theorem mismatch_refused [DecidableEq α] (expected : Image α) (candidate : Decoded α)
+ (different : candidate.image ≠ expected) : promote expected candidate = none := by
+ cases run : promote expected candidate with
+ | none => rfl
+ | some result =>
+   have out := ((promote_exact expected candidate result).mp run).2
+   exact False.elim (different (out.symm.trans (promoted_payload_original expected candidate result run)))
+
+-- Link exact payload promotion to the existing ORIGINAL owner-entry checker.
+-- No assumption says this entry already rejects the protected operation.
+theorem promoted_protected_rejected [DecidableEq α] [DecidableEq κ]
+ (expected : Image (List α)) (candidate : Decoded (List α))
+ (result : Promoted (List α)) (run : promote expected candidate = some result)
+ (operation : α → κ) (ordinal : α → Option Nat) (bound : Bool)
+ (prior plan : α) (unique : Unambiguous operation expected.primary)
+ (stored : prior ∈ expected.primary) (guarded : ordinal prior ≠ none)
+ (sameOperation : operation plan = operation prior) :
+ OwnerStatementOriginalEntry.check ordinal result.image.primary bound plan = false := by
+ rw [promoted_payload_original expected candidate result run]
+ exact protected_rejected unique stored guarded sameOperation
+
+-- The private physical decoder must have no conversion from Decoded to an
+-- executable M8 instance except this independently bound promotion. Rust
+-- privacy/constructor/caller closure, faithful codec, trusted control origin,
+-- collision resistance if exact data equality is replaced by commitments,
+-- M9 current authorization, exclusive runtime ownership and resource bounds
+-- are not proved by these lemmas and are not additional axioms.
+#print axioms check_exact
+#print axioms promote_exact
+#print axioms promote_complete
+#print axioms promoted_payload_original
+#print axioms original_accepted
+#print axioms mismatch_refused
+#print axioms promoted_protected_rejected
+end MirroreaProofFirst.OwnerStatementOriginalEntry.DecodedOrigin
+
+namespace MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator
+variable {α : Type}
+-- Raw owner-local IDs. The physical formatter must be injective and the
+-- counter bounded; this model grants no occurrence authenticity or authority.
+structure Trace (α : Type) where
+ rows : List (Nat × α)
+ next : Nat
+ deriving DecidableEq
+
+def Valid (t : Trace α) : Prop :=
+ (t.rows.map Prod.fst).Nodup ∧ ∀ row ∈ t.rows, row.1 < t.next
+
+def validCheck (t : Trace α) : Bool :=
+ decide (t.rows.map Prod.fst).Nodup && t.rows.all (fun row => decide (row.1 < t.next))
+
+theorem validCheck_exact (t : Trace α) : validCheck t = true ↔ Valid t := by
+ simp [validCheck,Valid,List.all_eq_true]
+
+def Extension (before after : Trace α) : Prop :=
+ (∃ extra, after.rows = before.rows ++ extra) ∧ before.next ≤ after.next ∧ Valid after
+
+def extensionCheck [DecidableEq α] (before after : Trace α) : Bool :=
+ DependencyFrame.traceCheck before.rows after.rows && decide (before.next ≤ after.next) && validCheck after
+
+theorem extensionCheck_exact [DecidableEq α] (before after : Trace α) :
+ extensionCheck before after = true ↔ Extension before after := by
+ simp only [extensionCheck,Bool.and_eq_true,decide_eq_true_eq,validCheck_exact,
+   DependencyFrame.traceCheck_exact,Extension]
+ exact and_assoc
+
+theorem next_fresh (t : Trace α) (valid : Valid t) : t.next ∉ t.rows.map Prod.fst := by
+ intro member
+ obtain ⟨row,present,same⟩ := List.mem_map.mp member
+ have bound := valid.2 row present
+ omega
+
+def append (t : Trace α) (payload : α) : Trace α :=
+ ⟨t.rows ++ [(t.next,payload)],t.next+1⟩
+
+theorem append_valid (t : Trace α) (payload : α) (valid : Valid t) : Valid (append t payload) := by
+ constructor
+ · simp only [append,List.map_append,List.map_cons,List.map_nil]
+   exact List.nodup_append.mpr ⟨valid.1,by simp,by
+     intro key member other same
+     simp only [List.mem_cons,List.not_mem_nil,or_false] at same
+     subst other
+     exact fun equal => next_fresh t valid (equal ▸ member)⟩
+ · intro row member
+   rcases List.mem_append.mp member with old | added
+   · have bound := valid.2 row old
+     change row.1 < t.next+1
+     omega
+   · simp only [List.mem_cons,List.not_mem_nil,or_false] at added
+     subst row
+     simp [append]
+
+theorem append_extension (t : Trace α) (payload : α) (valid : Valid t) :
+ Extension t (append t payload) := by
+ exact ⟨⟨[(t.next,payload)],rfl⟩,Nat.le_add_right _ _,append_valid t payload valid⟩
+
+def push (limit : Nat) (t : Trace α) (payload : α) : Option (Trace α) :=
+ if t.next < limit then some (append t payload) else none
+
+def Appended (limit : Nat) (before after : Trace α) (payload : α) : Prop :=
+ before.next < limit ∧ after.rows = before.rows ++ [(before.next,payload)] ∧ after.next = before.next+1
+
+theorem push_exact (limit : Nat) (t next : Trace α) (payload : α) :
+ push limit t payload = some next ↔ Appended limit t next payload := by
+ cases next with
+ | mk rows cursor =>
+   simp only [push,Appended,append]
+   split <;> simp_all [Trace.mk.injEq,eq_comm] <;> omega
+
+theorem push_preserves (limit : Nat) (t next : Trace α) (payload : α)
+ (valid : Valid t) (run : push limit t payload = some next) :
+ Valid next ∧ next.next ≤ limit := by
+ obtain ⟨capacity,rows,cursor⟩ := (push_exact limit t next payload).mp run
+ have same : next = append t payload := by cases next; simp_all [append]
+ rw [same]
+ exact ⟨append_valid t payload valid,by simp only [append];omega⟩
+
+theorem old_lookup_preserved (t : Trace α) (payload : α) (key : Nat)
+ (valid : Valid t) (old : key ∈ t.rows.map Prod.fst) :
+ (append t payload).rows.find? (fun row => row.1 == key) = t.rows.find? (fun row => row.1 == key) := by
+ have different : t.next ≠ key := by intro same;subst key;exact next_fresh t valid old
+ simp only [append,List.find?_append]
+ cases found : t.rows.find? (fun row => row.1 == key) with
+ | some row => simp
+ | none => simp [different]
+
+-- A publication step rechecks independently defined validity, rather than
+-- assuming every arbitrary appended row is safe. Ordinary append preserves it.
+inductive Steps : Trace α → Trace α → Prop where
+ | refl : Steps t t
+ | append : Steps initial t → (run : push limit t payload = some next) → Steps initial next
+ | publish : Steps initial t → Extension t next → Steps initial next
+
+theorem steps_valid (valid : Valid initial) (path : Steps initial current) : Valid current := by
+ induction path with
+ | refl => exact valid
+ | append _ run ih => exact (push_preserves _ _ _ _ ih run).1
+ | publish _ extension _ => exact extension.2.2
+
+#print axioms validCheck_exact
+#print axioms extensionCheck_exact
+#print axioms next_fresh
+#print axioms append_valid
+#print axioms append_extension
+#print axioms push_exact
+#print axioms push_preserves
+#print axioms old_lookup_preserved
+#print axioms steps_valid
+end MirroreaProofFirst.OwnerStatementOriginalEntry.TraceAllocator

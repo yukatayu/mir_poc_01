@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "at": "2026-09-29T16:02:23.672108+00:00",
+  "at": "2026-09-29T17:05:24.298492+00:00",
   "head_before": "5cd6e3be2b4c2a44ed721d339544c1a98dc3772b",
   "scope": "W4-C LAB source-driver candidate; prior effect/bank/custody/source-consumer reviews dispositioned. New proof and Rust successor difference review owed; no production/full-entry/full-resource/C/D closure.",
   "source_count": 190,
@@ -2094,25 +2094,25 @@
     },
     {
       "module": "OwnerStatementOriginalEntry",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntry.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-trace-allocator-v1/OwnerStatementOriginalEntry.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntry.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "e31be33272d700d8a93c51eb2252dbec2dae5908a742cd486510278ef74640b4",
+      "sha256": "19ee1880db41ba5abe63c14fa56b1fbad6ccb3a0945d42952b4be700fa1c3b67",
       "canonical_module": "OwnerStatementOriginalEntry",
-      "staged_sha256": "e31be33272d700d8a93c51eb2252dbec2dae5908a742cd486510278ef74640b4",
-      "transformation": "identity; forward exact dependency-query/trace-prefix preservation and parked/shared snapshot separation. Physical completefootprint/allentry obligations separate."
+      "staged_sha256": "19ee1880db41ba5abe63c14fa56b1fbad6ccb3a0945d42952b4be700fa1c3b67",
+      "transformation": "identity; append independent raw trace allocator validity/extension checker, actual bounded append, unique freshness/lookup preservation and inductive reachable validity. Physical formatter/finitecapacity/producers/callers remain separate."
     },
     {
       "module": "OwnerStatementOriginalEntryControls",
-      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-dependency-frame-v1/OwnerStatementOriginalEntryControls.lean",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-trace-allocator-v1/OwnerStatementOriginalEntryControls.lean",
       "destination": "samples/lean/foundations/OwnerStatementOriginalEntryControls.lean",
       "exists": false,
       "renamed": false,
-      "sha256": "85542c270f8a8fb4bfb47494fa2195869513eee1d3dc98ba7724a2dad9aa6161",
+      "sha256": "f53d76fed43635174fadb0f4ed3ec6fc8362d349e82bc5c2d282382dc5578f03",
       "canonical_module": "OwnerStatementOriginalEntryControls",
-      "staged_sha256": "85542c270f8a8fb4bfb47494fa2195869513eee1d3dc98ba7724a2dad9aa6161",
-      "transformation": "identity; forward exact dependency-query/trace-prefix preservation and parked/shared snapshot separation. Physical completefootprint/allentry obligations separate."
+      "staged_sha256": "f53d76fed43635174fadb0f4ed3ec6fc8362d349e82bc5c2d282382dc5578f03",
+      "transformation": "identity; append independent raw trace allocator validity/extension checker, actual bounded append, unique freshness/lookup preservation and inductive reachable validity. Physical formatter/finitecapacity/producers/callers remain separate."
     }
   ],
   "audit": {
@@ -2299,6 +2299,44 @@
     "fresh_commands": 118,
     "qualified_false": 107,
     "owned": 19020,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "source_decoded_origin_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-decoded-origin-v1/RESULT.json",
+    "sha256": "89a600c0fa57f6f5c7d15b304950bdaf693731495fea80d1bd7d17ab6d5b2ab7",
+    "owned": 19104,
+    "qualified_false": 111,
+    "commands": 122,
+    "rebuilt_cone": [
+      "OwnerStatementResultCollection",
+      "OwnerStatementResultOrigin",
+      "OwnerStatementResultLifecycle",
+      "OwnerStatementAcknowledgment",
+      "OwnerStatementResultCollectionControls",
+      "OwnerStatementResultLifecycleControls",
+      "OwnerStatementAcknowledgmentControls",
+      "OwnerStatementOriginalEntry",
+      "OwnerStatementOriginalEntryControls",
+      "OwnerStatementResultOriginControls"
+    ]
+  },
+  "source_trace_allocator_successor": {
+    "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-trace-allocator-v1/RESULT.json",
+    "sha256": "25e366169b38b90122a31cbd1e28e1515d220bf17265cab7ca36094c1df05dec",
+    "owned": 19178,
+    "qualified_false": 115,
+    "commands": 126,
     "rebuilt_cone": [
       "OwnerStatementResultCollection",
       "OwnerStatementResultOrigin",
