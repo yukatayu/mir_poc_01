@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Mint full prepared receipt only from actual same-runtime prepared capsule, coherently retain actual preparation/body/reserved ACK before first byte, require exact registered endpoint ACKs, actual parent publisher commit and all endpoint activations before grants. Later observations may change state binding; never use immutable full hash as ongoing grant prerequisite. Then combined original source/I3/actual result/resource/QUIC producers. Same Sol D; Astra only material contract counterexample or D integrated acceptance; stop before E.
+Connect fixed all-endpoint registered ACK custody to actual genuine parent M9 staged publisher commit; retain all actual records and exact protocol revision/publication. Activate exact retained preparation at all three actual owning modes and require all activation ACKs before reopening grants. Reject old/wrong/missing ACK/activation, partial failure frozen/unavailable/no rollback/refund. Then original source/I3/actual result/resources/QUIC. Same Sol D; Astra only material contract counterexample or D integrated acceptance; stop before E.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Updated38path registered control/whole same Runtime/source in-place preparation/full1037; complete ACK/retention/publish/all activation remains incomplete.
+Updated38path full owning prepared ACK/retention/full1043; actual parent publish/all activation remains incomplete.
 
 ## docs/project-status.md update status
 
-更新済み: 実control/同Runtime/source in-place準備38path/full1037と完全ACK/親公開/全有効化の未接続を明示。Canon/Plan250 pause保持。
+更新済み: 実control/同Runtime/source完全ACK/保持38path/full1043と親公開/全有効化の未接続を明示。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-Updated38path actual control/whole owning Runtime/in-place preparation/full1037 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. No distributed source workflow completion.
+Updated38path actual owning full prepared ACK/retention/full1043 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. No distributed source workflow completion.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: exact38path normal builds/full1037 complete actual control/bootstrap/source/process/fabric binding and borrowed SAME Runtime/source in-place preparation. Actual FD3 wrong facts/refusal/no ACK/partial control retained. Full ACK/retention/publish/activate/source-I3/QUIC consumers incomplete. Main scoped producer/alias/failure/resource review; no new independent agent/Oracle or contract. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: exact38path normal builds/full1043 actual whole owning Prepared ACK/retention. Actual FD3 failed ACK/missing unaffected third/registered fields/fresh-sequence replay retained. Parent publish/all activation/source-I3/QUIC consumers incomplete. Main scoped producer/alias/failure/resource review; no new independent agent/Oracle or contract. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: exact38path normal builds/full1037 pass; overlays restored. Full ACK/retention/publish/all activation/source-I3/results/resources/QUIC/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current control/owning Runtime full make docs v1 passed; final metadata focused checked; main scoped review only, earlier Oracle does not review this cut.
+Current Sol checkpoint: exact38path normal builds/full1043 pass; overlays restored. Parent publish/all activation/source-I3/results/resources/QUIC/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current full ACK full make docs v1 passed; final metadata focused checked; main scoped review only, earlier Oracle does not review this cut.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessorfe8bc399 pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,38 paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-OWNING-CONTROL-PREPARE-v1.json.
+Current predecessor3b131480 pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,38 paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-FULL-PREPARED-ACK-v1.json.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4711,3 +4711,24 @@ W4-DはSolで実装を継続中です。外部未採用38path参照owning-source
 - plan/current docs/progress/whole tasks/sample dashboard/ledger updated; full make docs/Git pending. Same D continues, no external completion notice.
 
 - 2026-10-01T03:00:36.975637+00:00: full make docs owning-control-prepare v1 exit0 (2026-10-01T02:55:15.366045+00:00–2026-10-01T03:00:17.066436+00:00); restored baseline Rust. Final38source/9runs/15struct inventory/1 prep failure/ledger prefix/snapshots/diff checked separately. Authorized actual Git receipt GIT-OWNING-CONTROL-PREPARE-v1.json; same D continues.
+
+
+### 2026-10-01T03:27:51.910159+00:00 — Actual whole owning prepared ACK/retention
+
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-full-prepared-ack-green-v4で、同じ実Runtime/source/実登録control/実準備capsuleから完全なPrepared ACKを発行し、実body・予約済みframe・状態bindingを送信前に保存します。実3子FD3でACK、実送信先のshutdown後の保持、影響を受けない3子目の欠落、登録情報/番号/replayの拒否を検証しました。新しい受信番号による同stage再受理を対照で再現し、親の保持記録で修正しました。通常default/private-QUIC buildと同cut全1043件が通過し、38pathは復元済みです。子はACK後も停止状態で、親の実公開・全子activation・grant再開は未接続です。元source続行/I3 admission/実結果/資源/QUIC対応とD統合判定も残ります。hashは実pre-ACK状態のbindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Start3b131480 clean; same Report2614. Exact38source/6run families/1 preparation failure/20 current struct inventory: W4_CHECK d_actual_full_prepared_ack_20261001.
+- Exact38path external/unadopted reference normal default/privateQUIC/full1043 pass0fail/ignored/filtered171.49s; all38 baseline paths restored. Earlier1042 whole ACK cut separate immutable receipt. Original-data10/FD3-startup21/in-place preparation2 and preceding worker/fabric/physical controls inside full1043, not fresh standalone campaigns.
+- Child control now retains exact preparation/body/reserved filled ACK/actual full state binding/ack-sent disposition. Parent retains exact accepted stage/state hash; reservations never refunded. Parent registered reader checks actual stream/endpoint/codec/sequence/expected complete preparation/hash and fails unavailable. A fresh receive sequence cannot replay an accepted stage. Returned record is control-origin evidence, not independent OS attestation of hash contents.
+- WholeOriginalSourcePreparedReceipt is minted only by actual PhysicallyPreparedOriginalSourceProcess.complete_and_ack from exact same borrowed Runtime/fabric/original-source + actual registered bootstrap/preparation/body/reserved zero-slot ACK + actual physical receipt. No Clone/serde/Debug/generic hash/Bool/raw full-receipt factory. Nested capture failure marks actual owning session unavailable. Full-state digest binds the immutable pre-ACK cut; subsequent ACK/activation/valid observations are explicit changes, never a perpetual grant hash prerequisite.
+- RegisteredOriginalSourcePreparation.retain_and_ack consumes the opaque whole receipt and matches actual registered pre-ACK binding. Reserved slot fill allocates no new bytes; ACTUAL binding/body/encoded ACK/state digest move into owning session BEFORE first send byte. Success records ack_sent and stays frozen with pending stage/current old protocol authority; failure retains all actual buffers/state, marks unavailable and does not roll back installed M9/floor/backend or refund identities.
+- Actual3child FD3 full ACK positive and real parent-read shutdown for child0: genuine preparations, same actual source/Runtime, whole pre-ACK digest/full retained body/frame; successful nodes remain frozen and failed send retains actual state/body/frame with ack_sent=false/unavailable. Missing unaffected third ACK freezes/unavailables entire parent supervisor and all channels without parent publication. Real parent registered readers receive exact child ACKs. Test-only parser DTO controls are explicitly component-only, not physical receipt producers. No owner/source body executes.
+- ACK no-producer REDv1 proper2fail but old harness asserted parent Io before child output collection; successor REDv2 drains/reaps all actual children before parent assertion and captures proper missing-retention/send failures. GREEN normalQUIC+2FD3 pass. Extra-case partialGREENv2 generator assertion and mistaken dependent runner failed BEFORE overlay/Cargo; successorGREENv3 full1042 includes missing third + parser controls. New fresh-sequence same-stage replay RED2positive1properfail ->parent retained-stage fixGREENv4 full1043. Ordinary selected-contract omission, not new boundary/Astra-stop. No active original-source child process observed after first RED; no kill or cleanup.
+- Normal-build full prepared ACK producer/retention and actual3child FD3 controls in external unadopted source. Actual parent publish/all activation/grant reopening, original source semantic continuation/combined I3 one-use/actual results/resources/QUIC same-event D correspondence and D acceptance remain unconnected/unrun. No production adoption, Canon/alpha/public/OS/concurrent snapshot or fresh proof199 claim.
+- Connect fixed all-endpoint registered ACK custody to actual genuine parent M9 staged publisher commit; retain all actual records and exact protocol revision/publication. Activate exact retained preparation at all three actual owning modes and require all activation ACKs before reopening grants. Reject old/wrong/missing ACK/activation, partial failure frozen/unavailable/no rollback/refund. Then original source/I3/actual result/resources/QUIC. Same Sol D; Astra only material contract counterexample or D integrated acceptance; stop before E.
+- Sole main current normal producers/typed constructors/private alias/no pre-publication entry/pre-ACK versus derived state/failure/identity/receiver replay review. Real stream shutdown and unaffected third refusal collected. No independent subagent/planner/Oracle under sole-main instruction; snapshots only, no normative decision/roadmap recut.
+- Same Report2614/existing plan/current snapshots/whole tasks/sample dashboard. Roots/scripts/taxonomy unchanged; samples/README.md/scripts/README.md updates unnecessary. plan/00-index accurate. Explicit xhigh after authorized Pro cap preserved; no new Oracle/automatic fallback.
+- Prior resources receipt reused honestly; no new measurement/cleanup. Actual quota02:35:52UTC72%, next03:35:52UTC.
+- plan/current docs/progress/whole tasks/sample dashboard/ledger updated; full make docs/Git pending. Same D continues, no external completion notice.
+
+- 2026-10-01T03:34:10.349083+00:00: full make docs full-prepared-ack v1 exit0 (2026-10-01T03:28:35.156487+00:00–2026-10-01T03:33:06.269286+00:00); restored baseline Rust. Final38source/6runs/20struct inventory/1 prep failure/ledger prefix/snapshots/diff checked separately. Authorized actual Git receipt GIT-FULL-PREPARED-ACK-v1.json; same D continues.

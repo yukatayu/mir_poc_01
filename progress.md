@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-01 12:00 JST
+最終更新: 2026-10-01 12:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -72,13 +72,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-in-place-preparation-green-v2で、実登録control/owned bootstrapと同じ停止Runtime・LocalFabric・元sourceの全状態bindingを接続しました。実3子FD3で省略対照、同じRuntimeを借用したM9/実floor/実backendのin-place準備、元source cursor/resultsとprocess ledgerの保存を検証しました。準備capsuleは実token/body/予約済みACKを借用中保持し、失敗・再使用は実sessionをunavailableにします。通常default/private-QUIC buildと同cut全1037件が通過し、38pathは復元済みです。これは非実行の準備componentで、prepared ACKを発行しません。完全ACKの実保存・親の公開・全子有効化、元source続行/I3 admission/実結果/資源/QUIC対応とD統合判定が残ります。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。OS/kernel全状態や並行更新下の原子的snapshotは主張しません。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-full-prepared-ack-green-v4で、同じ実Runtime/source/実登録control/実準備capsuleから完全なPrepared ACKを発行し、実body・予約済みframe・状態bindingを送信前に保存します。実3子FD3でACK、実送信先のshutdown後の保持、影響を受けない3子目の欠落、登録情報/番号/replayの拒否を検証しました。新しい受信番号による同stage再受理を対照で再現し、親の保持記録で修正しました。通常default/private-QUIC buildと同cut全1043件が通過し、38pathは復元済みです。子はACK後も停止状態で、親の実公開・全子activation・grant再開は未接続です。元source続行/I3 admission/実結果/資源/QUIC対応とD統合判定も残ります。hashは実pre-ACK状態のbindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current38path registered control/owned bootstrap + complete same Runtime/source binding and in-place preparation normal default+QUIC/full1037 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; same actual Runtime/control preparation connected; full authentic ACK/publish/all activation within handoff; source/process gates before use; Astra reviews D acceptance before E |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current38path complete actual owning prepared ACK/retention + same Runtime/source/control binding normal default+QUIC/full1043 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; same actual Runtime/control/full prepared ACK connected; actual parent publish/all activation before grants within handoff; source/process gates before use; Astra reviews D acceptance before E |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -627,3 +627,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-01 11:17 JST: actual OW1 worker/installed child-fabric全fieldとST実allocationの省略対照、通常2build/全1024件を検証、38path復元。control/同runtime完全ACKは未接続のままD継続。
 
 - 2026-10-01 11:54 JST: 実登録control/owned bootstrapと同Runtime/source全binding・実3子FD3 in-place準備の対照、通常2build/全1037件を検証、38path復元。完全ACK/親公開/全有効化は未接続のままD継続。
+
+- 2026-10-01 12:27 JST: 同実Runtime/source/preparationの完全ACK・送信失敗時の実body/frame保持・第三ACK欠落/replay対照、通常2build/全1043件を検証、38path復元。親公開/全有効化は未接続のままD継続。

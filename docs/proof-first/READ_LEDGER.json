@@ -51450,5 +51450,54 @@
     "status": "full-read-reconsulted",
     "role": "same task source authority/in-place preparation/source-I3 constraint reconsult, unchanged",
     "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys5_i3_source_control.rs",
+    "sha256": "2eee1b31c76ebe02463912d28f9d68292027d38e4762e21d58672e86ab0859fb",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial actual whole receipt consumer/body/ACK retention + registered parent ACK reader/stage retention/fresh-sequence replay + current child visitor fields/test-only sender; no whole copied-file reread; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys5_i3_source_control_tests.rs",
+    "sha256": "319d35ca40772419b1eb8405ada85afd90b7227592b93a61670d970312255c58",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial3 parent registered reader exact fields/sequence/replay controls, explicitly DTO components and not actual physical receipt producers; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys5_i3_original_source_process.rs",
+    "sha256": "6f2e0c56a11e63154004a472e9a4f90535cf69af2b4e0bac77a82f8c17d71566",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial sole whole prepared receipt constructor from actual owning capsule/registered binding, pre-ACK state cut and failure marking; no raw factory; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys5_i3_original_source_process_tests.rs",
+    "sha256": "d97d1534ee88eba2910b18347f7035d8a19ff17aa232600788a227e000d81ffd",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial actual3child FD3 full ACK/real read-shutdown/lost third/complete body-frame retention; harness now drains/reaps all children before parent assertion; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys4_i3_source_authority.rs",
+    "sha256": "702b9cc10e412a33cb0c5cdcb37cd6f00d1018781b7f1a95a43d1dbeb9b2a4d6",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial test-only immutable publisher revision probe for actual no-publication assertion; owning physical unchanged; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/m9_auth_verification.rs",
+    "sha256": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+    "status": "partial-read-reconsulted",
+    "role": "partial M9 genuine prestage/owned staged publisher methods consulted for next parent publication consumer; not whole file",
+    "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4/sys4_dispatch.rs",
+    "sha256": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+    "status": "partial-read-reconsulted",
+    "role": "partial legacy publish_prestaged_owner_capability_revocation comparison; old prelaunch weak restore route remains unchanged, new strong selected parent route planned",
+    "at": "2026-10-01T03:27:51.910159+00:00"
   }
 ]

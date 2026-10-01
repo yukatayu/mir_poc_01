@@ -55971,5 +55971,179 @@
         "scope": "Full make docs on restored baseline Rust; final metadata focused separately"
       }
     ]
+  },
+  "d_actual_full_prepared_ack_20261001": {
+    "at": "2026-10-01T03:27:51.910159+00:00",
+    "head": "3b131480adbcfd272a4541dae37098dd5b1bdba9",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-full-prepared-ack-green-v4",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+      "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+      "crates/mir-runtime/src/sys4_i3_original_source.rs": "0a8d140f0e493c18738a2447fb63c19800bcd3e73a922658a04414fd0f34c9dd",
+      "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "702b9cc10e412a33cb0c5cdcb37cd6f00d1018781b7f1a95a43d1dbeb9b2a4d6",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "6f2e0c56a11e63154004a472e9a4f90535cf69af2b4e0bac77a82f8c17d71566",
+      "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "d97d1534ee88eba2910b18347f7035d8a19ff17aa232600788a227e000d81ffd",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "49d54c537ef5a36caed7673b605dd6d2bcdd5affe8b4d6066cfdc56be553f4b0",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "2eee1b31c76ebe02463912d28f9d68292027d38e4762e21d58672e86ab0859fb",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "319d35ca40772419b1eb8405ada85afd90b7227592b93a61670d970312255c58",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+      "crates/mir-runtime/src/i3_private_prepared_binding.rs": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+      "crates/mir-runtime/src/m8_owner_admission_gate.rs": "033e3bc86fdb6e300d463c275721ae07ffe736402fb45bc3eca482ecac54f8b8",
+      "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+      "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+      "crates/mir-runtime/src/m8_runtime_relation_projection.rs": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+      "crates/mir-runtime/src/m8_private_prepared_relation_binding.rs": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+      "crates/mir-runtime/src/m8_runtime_designated_value.rs": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+      "crates/mir-runtime/src/m8_private_prepared_designated_binding.rs": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+      "crates/mir-runtime/src/m8_private_prepared_local_binding.rs": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+      "crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs": "ffad42c551aa393465ca9cf3ea13e2b42032b9c0c93a97f33946719319a13660"
+    },
+    "source_pins_sha256": "69ebbc17b4e89c5bd1ab4d769c9d6ecc94acef8b977ded9941a8bfe315929c3e",
+    "paths_sha256": "a721ec99cf9d1ec464a9b433978eef133fd1844da502d36a7d3d3cb199988651",
+    "field_inventory_sha256": "19bd81fd93c61b220857f42be298f640c709358809e92e99f19ea30d32a62c71",
+    "receipts": [
+      {
+        "name": "owning-source-full-prepared-ack-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-red-check-v1/RESULT.json",
+        "sha256": "a41bb15547e172a03c737e03fd3a16da33cdfd7385516ded3d860ed9955f6494",
+        "runs_sha256": "5c8bb079bf93d654da248e63704b1b5981f9d480a7479078e0fc728340536348",
+        "restored_sha256": "c15c781e3164573dbcc0e2db208e81c21dc7449d9cf67a9fdcc1511dda8ce2f7",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 1037 filtered out; finished in 2.45s"
+        ]
+      },
+      {
+        "name": "owning-source-full-prepared-ack-red-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-red-check-v2/RESULT.json",
+        "sha256": "fac85ba2d11a3985c8b1f86a6cb5fb8b40e70d23f89174570fd9ce4b259bd299",
+        "runs_sha256": "761935410542162140a64cb028ef801d77ebeffc692694e59771c512cad0ced0",
+        "restored_sha256": "b1e1f5dca09095d289fd3e317a6daa99cfa415d65cf4e7d5c39eff34e4e5358e",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 1037 filtered out; finished in 2.21s"
+        ]
+      },
+      {
+        "name": "owning-source-full-prepared-ack-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-green-check-v1/RESULT.json",
+        "sha256": "fbfdce47652b0d30ea1591c758ffa306e461640a6cd626e3fe8fae7f22c117ec",
+        "runs_sha256": "1290886789bb3b088de328abfd8bfb7304f3e20e334e9a26dbafdd17cc062d05",
+        "restored_sha256": "c6d87d8e8aa4c2794b354c34cbe6613e8383cccfe3ace016067f8094dd4d2022",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1037 filtered out; finished in 2.66s"
+        ]
+      },
+      {
+        "name": "owning-source-full-prepared-ack-combined-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-combined-check-v2/RESULT.json",
+        "sha256": "3e4a74e044a34147c60731218732d1d0aaaf3cb00c97c8c4c8a1fac5bf7b5005",
+        "runs_sha256": "e072998dc6eace83bedfa759e7d5623d8e2cbeeda244dd45d3eceb716392804e",
+        "restored_sha256": "8552ee9fa5c69c433d07fec51dc2bd5ff3f91ff0e775472dfb2fb153e4eca7e7",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 1042 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 165.50s"
+        ]
+      },
+      {
+        "name": "owning-source-full-prepared-ack-replay-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-replay-red-check-v1/RESULT.json",
+        "sha256": "0ca65c5dae31150e1c0c82197562454024019a6c144a9872ee086f6fbbb1b332",
+        "runs_sha256": "abfdf0d3f4521b8116e62d18b673658857de7c70cfab7ffb0a06974c8e58d5d9",
+        "restored_sha256": "85540aada0cd2682513f939dcb5e0da17c679f76224e3d439735416ca800abab",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 1040 filtered out; finished in 0.14s"
+        ]
+      },
+      {
+        "name": "owning-source-full-prepared-ack-combined-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-full-prepared-ack-combined-check-v3/RESULT.json",
+        "sha256": "940f95f4e34e2f30739163bdc7d57d01b3a63924401471e43937ab1238e28d7d",
+        "runs_sha256": "fcc1c987cb12e2832be485580e0a42998fe0550c7c936d5d7427c38ec584074d",
+        "restored_sha256": "95ce4c6ad1be3406c00c329265add68876ba8f06a2a88a149d37356507616ab7",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 1043 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 171.49s"
+        ]
+      }
+    ],
+    "result": "Exact38path external/unadopted reference normal default/privateQUIC/full1043 pass0fail/ignored/filtered171.49s; all38 baseline paths restored. Earlier1042 whole ACK cut separate immutable receipt. Original-data10/FD3-startup21/in-place preparation2 and preceding worker/fabric/physical controls inside full1043, not fresh standalone campaigns.",
+    "control": "Child control now retains exact preparation/body/reserved filled ACK/actual full state binding/ack-sent disposition. Parent retains exact accepted stage/state hash; reservations never refunded. Parent registered reader checks actual stream/endpoint/codec/sequence/expected complete preparation/hash and fails unavailable. A fresh receive sequence cannot replay an accepted stage. Returned record is control-origin evidence, not independent OS attestation of hash contents.",
+    "whole_mode": "WholeOriginalSourcePreparedReceipt is minted only by actual PhysicallyPreparedOriginalSourceProcess.complete_and_ack from exact same borrowed Runtime/fabric/original-source + actual registered bootstrap/preparation/body/reserved zero-slot ACK + actual physical receipt. No Clone/serde/Debug/generic hash/Bool/raw full-receipt factory. Nested capture failure marks actual owning session unavailable. Full-state digest binds the immutable pre-ACK cut; subsequent ACK/activation/valid observations are explicit changes, never a perpetual grant hash prerequisite.",
+    "physical": "RegisteredOriginalSourcePreparation.retain_and_ack consumes the opaque whole receipt and matches actual registered pre-ACK binding. Reserved slot fill allocates no new bytes; ACTUAL binding/body/encoded ACK/state digest move into owning session BEFORE first send byte. Success records ack_sent and stays frozen with pending stage/current old protocol authority; failure retains all actual buffers/state, marks unavailable and does not roll back installed M9/floor/backend or refund identities.",
+    "actual_fd": "Actual3child FD3 full ACK positive and real parent-read shutdown for child0: genuine preparations, same actual source/Runtime, whole pre-ACK digest/full retained body/frame; successful nodes remain frozen and failed send retains actual state/body/frame with ack_sent=false/unavailable. Missing unaffected third ACK freezes/unavailables entire parent supervisor and all channels without parent publication. Real parent registered readers receive exact child ACKs. Test-only parser DTO controls are explicitly component-only, not physical receipt producers. No owner/source body executes.",
+    "falsifiers": "ACK no-producer REDv1 proper2fail but old harness asserted parent Io before child output collection; successor REDv2 drains/reaps all actual children before parent assertion and captures proper missing-retention/send failures. GREEN normalQUIC+2FD3 pass. Extra-case partialGREENv2 generator assertion and mistaken dependent runner failed BEFORE overlay/Cargo; successorGREENv3 full1042 includes missing third + parser controls. New fresh-sequence same-stage replay RED2positive1properfail ->parent retained-stage fixGREENv4 full1043. Ordinary selected-contract omission, not new boundary/Astra-stop. No active original-source child process observed after first RED; no kill or cleanup.",
+    "preparation_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/FULL-ACK-PREPARATION-FAILURE-v1.json",
+        "sha256": "938f703bdce071ddbb07fef22c4dfa833e7a7462305c8f571978625bfdff3ef1",
+        "scope": "PartialGREENv2 lacks PATHS/SOURCE_PINS; erroneous dependent combined-check-v1 directory empty, no overlay/Cargo; root clean verified."
+      }
+    ],
+    "scope": "Normal-build full prepared ACK producer/retention and actual3child FD3 controls in external unadopted source. Actual parent publish/all activation/grant reopening, original source semantic continuation/combined I3 one-use/actual results/resources/QUIC same-event D correspondence and D acceptance remain unconnected/unrun. No production adoption, Canon/alpha/public/OS/concurrent snapshot or fresh proof199 claim.",
+    "next": "Connect fixed all-endpoint registered ACK custody to actual genuine parent M9 staged publisher commit; retain all actual records and exact protocol revision/publication. Activate exact retained preparation at all three actual owning modes and require all activation ACKs before reopening grants. Reject old/wrong/missing ACK/activation, partial failure frozen/unavailable/no rollback/refund. Then original source/I3/actual result/resources/QUIC. Same Sol D; Astra only material contract counterexample or D integrated acceptance; stop before E.",
+    "review": "Sole main current normal producers/typed constructors/private alias/no pre-publication entry/pre-ACK versus derived state/failure/identity/receiver replay review. Real stream shutdown and unaffected third refusal collected. No independent subagent/planner/Oracle under sole-main instruction; snapshots only, no normative decision/roadmap recut.",
+    "resources_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/RESOURCES-20261001T020930Z-record.json",
+      "sha256": "c625040f5a8ac7a137b105e1d26bdc3b00b40352b70c09fe20ef8cdfea090c34",
+      "scope": "Earlier df/free outputs, not a fresh measurement. Serial8GiB AS/-j1/testthreads1/core0; no cleanup. Owner few-hour/natural growth check retained."
+    },
+    "quota_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261001T023552Z.json",
+      "sha256": "09f371d734e09054fadc77c1f18d89de0b46e5ef37b95b46a2d14d86f8e97c4a",
+      "weekly_remaining_percent": 72,
+      "next_read_not_before": "2026-10-01T03:35:52.124556+00:00"
+    },
+    "docs_scope": "Same Report2614/existing plan/current snapshots/whole tasks/sample dashboard. Roots/scripts/taxonomy unchanged; samples/README.md/scripts/README.md updates unnecessary. plan/00-index accurate. Explicit xhigh after authorized Pro cap preserved; no new Oracle/automatic fallback.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-full-prepared-ack-v1.json",
+        "sha256": "7dee0f51922d9c1cdfe346affa49eb1e06a7acc20078c9544051192a2e21dc47",
+        "exit": 0,
+        "scope": "Full make docs on restored baseline Rust; final metadata focused separately"
+      }
+    ]
   }
 }
