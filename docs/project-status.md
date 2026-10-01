@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-01 10:10 JST
+最終更新: 2026-10-01 10:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,9 +59,9 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用32path参照retained-m8-source-custody-binding-green-v1で、実source進行・保持結果・process pending/clock/予約・M8 owner queue/result/trace・M9全観測とauthority mapキーの読取binding部品を検査しました。通常default/private-QUIC buildと同cutの全973件が通過し、32pathは復元済みです。元source情報10件と実3子FD3起動21件はこの全体回帰に含まれます。各部品の省略対照を保存し、初期fixture不備は有効な反例と区別しました。これらは実状態の等値照合用で、認証やprepared ACKを発行しません。LocalFabric/M8 local・relation・designated/backend/control全体のbindingと、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-local-binding-green-v3に、relation・designated・M8Local実状態の読取bindingを追加しました。各部品の省略対照と通常default/private-QUIC build、同cutの全1004件が通過し、37pathは復元済みです。元source情報10件・実3子FD3起動21件と前段source/process/M8 owner/M9 bindingは全体回帰に含まれます。実designated評価・消費とlocal body後の保持状態を対照に使いました。これらは等値照合用で、認証やprepared ACKを発行しません。test専用rendezvousを持つ状態は照合を拒否します。準備script不備とimport不足による失敗を有効な省略反例と区別して保存しました。LocalFabric/backend/control全体、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
-週間残量は2026-10-01 00:29:54 UTCの確認で73%（使用27%）でした。次の確認は2026-10-01 01:29:54 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 01:35:08 UTCの確認で72%（使用28%）でした。次の確認は2026-10-01 02:35:08 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

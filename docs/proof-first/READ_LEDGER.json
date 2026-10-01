@@ -51247,5 +51247,75 @@
     "status": "main-authored-reviewed-scoped",
     "role": "partial feature-aware existing dead-code expectation only; no normal execution change; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
     "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_private_prepared_relation_binding.rs",
+    "sha256": "c21d384d22346b1aa21b9eb3cb80c748df10775b8cc1bfb1e11fad006634ff77",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new readonly relation/lease/trace/shadow visitors and actual omission tests; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_private_prepared_designated_binding.rs",
+    "sha256": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new readonly designated/receipt/publication/trace visitors and actual evaluator/consumer omission tests; selected reused existing test helper regions only; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_private_prepared_local_binding.rs",
+    "sha256": "894edfd00d94d6b3c5b9e0e01a979013a2dc2e2078dfd990066837831b42b14d",
+    "status": "main-authored-reviewed-scoped",
+    "role": "new readonly whole M8Local visitors, closed enum tags, sticky failure/borrow refusal and actual body omission tests; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_runtime_admission.rs",
+    "sha256": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+    "status": "main-authored-reviewed-scoped",
+    "role": "appended full relation/designated plan DTO writers and label/redaction field guards; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_private_prepared_owner_binding.rs",
+    "sha256": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+    "status": "main-authored-reviewed-scoped",
+    "role": "appended full M8StateKey writer; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/i3_private_prepared_binding.rs",
+    "sha256": "c49ce9816b641c06f695f4e53b434c0b13309d163ca12e5342b079a3b6929ca0",
+    "status": "main-authored-reviewed-scoped",
+    "role": "added sticky supplier refusal and ignored-refusal test; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_runtime_relation_projection.rs",
+    "sha256": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+    "status": "main-authored-reviewed-scoped",
+    "role": "private component module registration only; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_runtime_designated_value.rs",
+    "sha256": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+    "status": "main-authored-reviewed-scoped",
+    "role": "private component module registration only; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/m8_runtime_local_cut.rs",
+    "sha256": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+    "status": "main-authored-reviewed-scoped",
+    "role": "private component module registration only; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-local-binding-green-v3/proof_first_owner_schema_tests.rs",
+    "sha256": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+    "status": "main-authored-reviewed-scoped",
+    "role": "two existing cfgtest fixture helpers exposed crate-locally; no normal factory; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
+    "at": "2026-10-01T01:39:12.853359+00:00"
   }
 ]

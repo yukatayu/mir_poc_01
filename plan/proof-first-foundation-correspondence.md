@@ -2544,3 +2544,29 @@ Complete actual LocalFabric/M8 local/relation/designated/backend/control supplie
 Sole main focused changed-source/field inventory/actual omission tests/read-only side effects/baseline restoration review. No new independent planner/reviewer/Oracle under owner sole-main constraint. Snapshot maintenance only; no roadmap/phase/authority contract change.
 
 Same Report2614, current snapshots and existing LAB memory. Correct stale C-current/D-dependency wording in plan/00-index.md to actual D implementation. Sample roots/scripts/taxonomy unchanged: samples/README.md/scripts/README.md updates unnecessary. Existing22 report sections retained.
+
+
+### 2026-10-01T01:19:22.868976+00:00 — Owner Oracle effort preference (operational, no consult)
+
+Owner requests explicit xhigh when Pro reaches a temporary usage limit; never silently lower to medium. Saved prior D Oracle argv selected browser model strategy select, wrapper verified6Pro, MODEL_UI slider4/max4 with Pro5/5. Account limit at that submission is UNRESOLVED; no current browser submit or new consultation. Evidence: d-source-process/ORACLE-EFFORT-PREFERENCE-20261001-v1.json. Preference mirrored to CURRENT_GOAL/RESUME; no wrapper/global setting or Canon change. Same Sol W4-D continues.
+
+
+### 2026-10-01T01:39:12.853359+00:00 — Actual relation/designated/M8Local readonly binding (LAB)
+
+W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-local-binding-green-v3に、relation・designated・M8Local実状態の読取bindingを追加しました。各部品の省略対照と通常default/private-QUIC build、同cutの全1004件が通過し、37pathは復元済みです。元source情報10件・実3子FD3起動21件と前段source/process/M8 owner/M9 bindingは全体回帰に含まれます。実designated評価・消費とlocal body後の保持状態を対照に使いました。これらは等値照合用で、認証やprepared ACKを発行しません。test専用rendezvousを持つ状態は照合を拒否します。準備script不備とimport不足による失敗を有効な省略反例と区別して保存しました。LocalFabric/backend/control全体、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+Readonly actual nine-field relation runtime: complete checked plan data, all actual fallback chain keys/options, all three presentation-policy maps, full semantic snapshot, trace, exact lease backing keys/records/None-vs-empty, publication sequences and full observed shadows. Direct field probes are omissions, not ordinary publication producers.
+
+Readonly actual twelve-field designated runtime: checked plans/full snapshot, full keyed input receipts, actual result-store backing keys and full19field publications, version floors, one-use consumption, presentation tuple keys, read/communication counters, full trace and both allocators. Existing checked evaluator actually publishes11 and consumer consumes11; retained field changes distinguish equal stores. No Debug/observer digest or public state export.
+
+Readonly actual whole M8Local facade captures full admitted instance, shared/owner/relation/designated state, separate actual leases, source report/queued work/custody, patch/external-control/read-key state, trace and current fault fields. Exhaustive field guards/closed enum matches; try_borrow failure and nested supplier failure are sticky, so partial writer cannot finish. Test-only rendezvous owner_use_probe Some explicitly refuses; no channel consumption or omission, no new normal authority/cursor constructor. This M8Local visitor is not a complete LocalFabric/backend/control visitor.
+
+Relation semantic-only RED1positive9properfail ->10GREEN; designated semantic-only RED1positive9properfail ->10GREEN; M8Local shared-store-only RED1positive8properfail ->10GREEN plus primitive ignored-supplier-refusal control in full1004. Relation GREENv1 and local GREENv2 failed in preparation before overlay/compile (missing PATHS metadata after staging assertion); local GREENv1 actual normal compile101 on missing M8DeclaredFailure import, no test assertions. Corrected immutable successors retained alongside all failed cuts; guards unrelaxed.
+
+Private normal-build readonly equality components, external/unadopted. Whole LocalFabric, actual OW1/backend/control and SAME frozen runtime preparation/full authentic ACK/parent publication/all activation remain incomplete. Source-I3 one-use/actual result/resources/QUIC D chain and D integrated acceptance unrun. Prior199/20455/177 proofs retain old scope; no fresh proof/Canon/alpha/public guarantee.
+
+Complete actual whole LocalFabric including live ST/OW1 backend and control/source candidates, then bind SAME frozen runtime/source/pending/results through registered preparation to full authentic prepared ACK and genuine parent publish/all activation before grants. No seed rebuild, Clone of source custody, save_local_cut, partial authority receipt or Debug/public observer digest. Continue same Sol D; Astra for material boundary or integrated acceptance, stop before E.
+
+Sole main focused new field visitors, nested failure behavior, actual-body omission controls and baseline restoration. No new subagent/planner/Oracle under owner sole-main constraint. Old proof and production semantics unchanged; no new roadmap. Source reviews scoped; copied pre-existing test helper regions are not new whole-file reviews.
+
+plan/current docs/tasks whole snapshot/sample dashboard updated. plan/00-index.md current D statement already accurate; no taxonomy/root/script change. No Canon/THM/OBL decision.
