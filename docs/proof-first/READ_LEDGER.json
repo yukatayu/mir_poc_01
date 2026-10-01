@@ -51394,5 +51394,61 @@
     "status": "main-authored-reviewed-scoped",
     "role": "partial current field/type inventory used for static guards plus private module registration; not whole20000line read; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
     "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-in-place-preparation-green-v2/sys5_i3_source_control.rs",
+    "sha256": "e0b03968444d6306fef2ca4da1ce942bfebb78128a42a8370765dc353c01103f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial full actual control/bootstrap/owned preparation field visitors, exact owning reader immutable borrows and test-only genuine sender; copied regions not reread wholesale; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-in-place-preparation-green-v2/sys5_i3_source_control_tests.rs",
+    "sha256": "90d90e1d88fbceb9b257ab9acb208c0e71487c2fa6690d3a531abf15991d2cc2",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial9 new actual registered control readonly/state/resource omission tests; existing actual preparation/finish fixtures consulted; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-in-place-preparation-green-v2/sys5_i3_original_source_process.rs",
+    "sha256": "7694f1caa6ba70f36319c2b63e85ccfea7c7c9d2e391ced86fc89bf54bca30df",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial complete owning-mode composition and same Runtime/source borrowed prepared capsule; actual original installation/envelope/source sections consulted; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-in-place-preparation-green-v2/sys5_i3_original_source_process_tests.rs",
+    "sha256": "ddbeefb252fe0251910003d2ce77f10c07864de2b40914a8cea61061654ff0b8",
+    "status": "main-authored-reviewed-scoped",
+    "role": "full current existing actual3child FD3 startup/test harness plus new whole binding/preparation/refusal/no-ACK audits; original data/envelope controls consulted; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-in-place-preparation-green-v2/sys4_i3_source_authority.rs",
+    "sha256": "a040e3565aafd0bcddc45068dbd99617d9f2923fa7ee75afb3e9a74059fbc908",
+    "status": "main-authored-reviewed-scoped",
+    "role": "full current actual publisher/disabled wrapper and shared in-place physical preparation/receipt; strict M9/floor/real backend and no ACK reviewed; external unadopted reference; no proof or final D acceptance",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "sha256": "ec497d66e937857e437f8f88b66030507304cd43c4246b502a7f7864d408347d",
+    "status": "full-read-reconsulted",
+    "role": "same task source authority/in-place preparation/source-I3 constraint reconsult, unchanged",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "mirrorea_canon/spec/16-i3-owner-admission-budget.md",
+    "sha256": "0edd249af3c2a48df3fbb00c4f968149748b3f87ba86781892874827a84eda13",
+    "status": "full-read-reconsulted",
+    "role": "same task source authority/in-place preparation/source-I3 constraint reconsult, unchanged",
+    "at": "2026-10-01T02:54:57.741150+00:00"
+  },
+  {
+    "path": "mirrorea_canon/architecture/10-i3-multi-process-runtime.md",
+    "sha256": "6cb4612137ea5027b4637f52e72178cee0f32d7ddf921ea6c7a806c9f5225dad",
+    "status": "full-read-reconsulted",
+    "role": "same task source authority/in-place preparation/source-I3 constraint reconsult, unchanged",
+    "at": "2026-10-01T02:54:57.741150+00:00"
   }
 ]

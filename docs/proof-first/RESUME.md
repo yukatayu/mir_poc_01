@@ -11,36 +11,37 @@ No new Oracle invocation during this Sol implementation continuation.
 
 
 
-Predecessor HEAD7a79f60c pushed/parity0/0; owned docs successor only. All38
-Rust paths restored, no active job at checkpoint. Git receipt:
-d-source-process/GIT-WORKER-FABRIC-BINDING-v1.json.
+
+Predecessor HEADfe8bc399 pushed/parity0/0; owned docs successor only. All38
+Rust paths restored; no active job at checkpoint. Actual Git receipt:
+d-source-process/GIT-OWNING-CONTROL-PREPARE-v1.json.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process. Current external/unadopted reference:
-D/d-control-development/retained-local-fabric-binding-green-v4,38PATHS/SOURCE_PINS
-+GENERATED_FIELD_INVENTORY.json. W4_CHECK d_retained_worker_local_fabric_binding_20261001 pins9 run families.
-Normal default/privateQUIC builds/full1024 pass; original data10/actual FD3
-startup21 included, not fresh standalone campaigns.
+D/d-control-development/owning-source-in-place-preparation-green-v2,38PATHS/SOURCE_PINS
++OWNING_CONTROL_FIELD_INVENTORY.json linked to inherited actual worker/fabric inventory.
+W4_CHECK d_registered_control_whole_runtime_in_place_20261001 pins9 run families +1 preparation failure.
+Normal default/privateQUIC/full1037 pass; prior1035 separate; original-data10/FD3-startup21
++old physical11 included, not fresh standalone campaigns.
 
-One private zero-capacity OW1 command visits the actual worker runtime and retained worker FIFO/fault state during that worker turn, returning only the moved private hash accumulator. No runtime Clone/source-custody clone, save_local_cut or Debug/observer digest in capture. All previous worker mutable locals moved without ordering changes into one exhaustive field-guarded control struct. Actual handle owner/token/join presence included; channel loss refuses.
+Readonly exact-field guarded control captures actual owned descriptor (no kernel queue/descriptor-reuse proof), complete endpoint/authority/grant/preparation, receive/send counters, last grant, frozen/unavailable, retained local association, pending finish/preparation. Actual byte Vec contents/len/capacity and reserved ACK offset captured. Closed SourceRole/ActionKind matches. Pure visitors read/write no protocol bytes and mint no authority.
 
-Readonly installed source-child LocalFabric visitor guards every current root field,59 recursively selected SYS4 types plus explicit program/route/floor/backend/lifecycle guards. All actual map keys and tuple keys, typed carrier/result/cache/mailbox/causality/traces/faults/candidates/loci are visited. Actual M8 owner/relation/designated/local and M9 complete suppliers reused; full M9 validation/failure/admission and inert source-stage state added. Canonical floor captures actual Arc allocation and locked complete generation. Static checked projection/Core/carrier/source data use full private typed DTO suppliers, not observer projections.
+Actual FD3 owning mode borrows same Runtime process envelope + installed LocalFabric + original source state + actual owned bootstrap, installation metadata/image/independent expected/source buffers and activation. All current structs destructured exactly. Freeze/no concurrent mutable entry remains owning caller premise; nested refusal sticky. No runtime/image reconstruction, source activation clone or observer/save digest.
 
-Actual ST map key and each retained Box<M8LocalRuntime> allocation participate. Equal-state clone replacement was a proper falsifier on the otherwise green full-state visitor, then corrected before ACK use. OW1 reads actual worker state and retains exact handle token. Hash is local equality evidence, not authentication or a runtime factory.
+New RegisteredOriginalSourcePreparation is minted only by actual OwnedOriginalSourceBootstrap session reader, retaining immutable installation views and actual RegisteredPreparation body/reserved ACK with a mutable session borrow. PhysicallyPreparedOriginalSourceProcess borrows same actual Runtime/source and retains that token plus opaque physical receipt. In-place M9/floor/backend helper is shared with prior disabled wrapper, derives actual checked restriction and requires real opaque token/strong M9/floor facts; refreshes SAME ST allocations or real OW1 worker before floor/adoption. Failure marks actual owning session unavailable; drop/reuse cannot refund IDs. No mutable runtime/control/seed getter or normal raw-token factory.
 
-Installed source-child profile has no M9 publisher: genuine publisher Some refuses rather than omits. Real poisoned canonical-floor read, nested supplier refusal and failed moved-writer transfer cannot finish partially. Test rendezvous remains explicit refusal inherited from M8Local. No kernel queue/socket/OS serialization or formal atomic snapshot claim; frozen/no-concurrent-entry premise still belongs to the owning normal caller.
+New actual three-child FD3 whole-mode readonly/omission tests and genuine in-place preparation/wrong-header facts tests use authentic existing parent image installation and genuine parent M9 prestage. Third endpoint receives independently restricted nonincident delta. Same Runtime address, complete process envelope and original cursor/results preserved. Full prepared capsule binding is readonly. Failed/repeated preparation sets unavailable. Parent test-only socket audits after natural child exit verify no ACK/grant byte escaped. Test-only field probes/cursor changes are not semantic source producers.
 
-Worker handle-only RED1positive5properfail ->6GREEN/full1010; fabric M9-only RED1positive9properfail ->10GREEN. FabricGREENv1 normal compile101:12 missing trait implementations, no assertion evidence; completed v2 typed suppliers10GREEN. v3 normal checks/full1023 includes genuine publisher and poisoned-floor refusal. AllocationRED12positive1properfail shows equal cloned ST substitution previously aliases; v4 includes actual allocation identity and full1024. Unrun fabricREDv1 draft corrected module/fixture references before REDv2, not a command failure. All cuts/failures retained.
+Control authority-only RED1positive8properfail ->9GREEN. Actual FD3 envelope-only RED1positive1properfail ->whole-binding GREEN/full1035. WholeGREENv1 default compile101 missing feature guard; v2 normal2build pass but test compile101 private method after module split; v3 smallest parent-private visibility fix full1035. In-place receipt-only RED0positive2properfail on actual3children (no physical update and false header accepted) ->2GREEN, then added real no-ACK/actual unavailable checks/full1037. All failures retained; no contract change or Astra-stop inferred.
 
-Readonly normal-build private components in external source, not production adoption. Full registered control/OwnedOriginalSourceBootstrap binding and SAME owning frozen runtime/source/preparation/full authentic ACK remain unconnected; parent publish/all activation, original-source/I3 actual results/resources/QUIC D correspondence and D integrated acceptance remain unrun. Prior199/20455/177 proof scope unchanged; no new Canon/alpha/public claim.
+Normal-build private readonly/disabled owning preparation components in external source; no production adoption. Full authentic Prepared ACK/retention, parent all-ACK publish/all activation before grants remain unconnected. Original source semantic continuation, existing I3 combined one-use handoff, actual results/resources/QUIC same-event D correspondence and D integrated acceptance unrun. Prior199/20455/177 proof scope unchanged; no Canon/alpha/public/OS/concurrent snapshot claim.
 
-Bind actual registered ChildGrantSession/owned bootstrap/preparation/control fields; compose complete SAME owned Runtime process envelope+LocalFabric+original source+control before authentic Prepared ACK. Connect actual in-place M9/floor/backend refresh without moving/rebuilding that Runtime, then all endpoint ACKs, genuine parent publish and all activation before grants. Preserve current-source one-use/actual-result/resource/QUIC gates. Continue same Sol D; Astra for material contract falsifier or D integrated acceptance; stop before E.
+Mint full prepared receipt only from actual same-runtime prepared capsule, coherently retain actual preparation/body/reserved ACK before first byte, require exact registered endpoint ACKs, actual parent publisher commit and all endpoint activations before grants. Later observations may change state binding; never use immutable full hash as ongoing grant prerequisite. Then combined original source/I3/actual result/resource/QUIC producers. Same Sol D; Astra only material contract counterexample or D integrated acceptance; stop before E.
 
-Sole main changed-source/static field inventory/exhaustive enum/private DTO/actual producer/alias/partial-failure review and root restoration. No new subagent/planner/Oracle under owner sole-main instruction. Snapshot maintenance only; no roadmap or contract rewrite.
+Sole main scoped actual field/producer/frozen alias/resource/partial failure review and focused diff. Two ordinary feature/visibility closure failures corrected without source contract changes. No subagent/planner/Oracle under owner sole-main instruction; snapshot maintenance only, no phase recut/roadmap/Canon edit.
 
-週間残量は2026-10-01 01:35:08 UTCの確認で72%（使用28%）でした。次の確認は2026-10-01 02:35:08 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 02:35:52 UTCの確認で72%（使用28%）でした。次の確認は2026-10-01 03:35:52 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
-Resources before combinedv1: root15GiB/RAM10Gi available/swap3.8Gi used;
-recorded later in RESOURCES-20261001T020930Z-record.json. Serial8GiB AS/-j1/
-testthreads1/core0, no cleanup. Current worker/fabric full make docs v1 passed;
-final metadata focused checked. Same D continues, no completion notice.
+Prior df/free outputs preserved in RESOURCES-20261001T020930Z-record.json.
+Serial8GiB AS/-j1/testthreads1/core0, no cleanup. Current control/owning Runtime
+full make docs v1 passed; final metadata focused checked. Same D continues.
