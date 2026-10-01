@@ -1,47 +1,38 @@
 # RESUME — W4-D Sol implementation active
 
 Same owner-resumed W4; sole main/no subagents/no Oracle/new goal. Continue until
-material boundary change or Astra D integrated acceptance; STOP before E.
+material contract counterexample or Astra D integrated acceptance; STOP before E.
 Plan250/I3-4 separately owner-paused; no automatic model/roadmap switch.
 
-Owner2026-10-01: a Pro usage limit does not authorize medium; use explicit
-xhigh and verify actual browser model/effort for any authorized consult.
-Latest saved Oracle D authority record selected6Pro and maximum5/5 Pro.
-No new Oracle invocation during this Sol implementation continuation.
+Owner2026-10-01: authorized Pro consult hitting temporary limit uses explicit xhigh,
+verify actual model/effort, never silently medium; no new Oracle in Sol work.
 
-
-
-
-
-
-Predecessor HEAD3c46df40 pushed/parity0/0; owned docs successor only. All38
-Rust paths restored; no active job at checkpoint. Actual Git receipt:
-d-source-process/GIT-PARENT-PUBLICATION-ACTIVATION-v1.json.
+Predecessor HEAD03fc4f96 pushed/parity0/0; owned docs successor only. All38
+Rust paths restored, no active job at checkpoint. Actual authorized Git receipt:
+d-source-process/GIT-SOURCE-ISSUE-v1.json.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process. Current external/unadopted reference:
-D/d-control-development/owning-source-all-activation-green-v5,38PATHS/SOURCE_PINS
-+PARENT_PUBLICATION_ACTIVATION_FIELD_INVENTORY.json16structs linked to prior child/fabric inventory.
-W4_CHECK d_actual_parent_publication_all_activation_20261001 pins13 run families, failures and both guard false controls.
-Normal default/privateQUIC/full1054 pass; original-data10/FD3-startup21/full ACK
-+old physical/I3 controls included, not fresh standalone campaigns.
+D/d-control-development/owning-source-issue-green-v5,38PATHS/SOURCE_PINS
++SOURCE_ISSUE_FIELD_INVENTORY.json8structs linked prior parent/child/fabric inventory.
+W4_CHECK d_actual_original_source_issue_20261001 pins10 run families, both REDs/actual bugs/test assumptions/2guard mutants.
+Normal default/privateQUIC/full1065 pass; focused11 actual3child source Issue controls.
+Original data/startup/ACK/publication/all activation/old I3 included, no new standalone campaign.
 
-RegisteredPreparedCohort is noncloneable and minted only after all3 actual owning parent readers, borrowing actual still closed/non-active fixed supervisor and matching each retained endpoint/preparation/state association. SourceAuthorityPublisher independently checks genuine pending stage/revision, strong actual prior/publisher and exact observation snapshots, actual program/restrictions and exact restricted prior/next/body length/hash before consuming actual M9 staged publisher. No old weak matches_for_restore path, child publisher, raw generation/Bool/hash receipt factory or observation-map merge. Protocol revision and M9 generation remain independent.
+Only owned installed FD3 requester reader after actual all activation mints RegisteredOriginalSourceIssue. Same actual owned source picks original exact global ordinal/Core/full arguments including unused argument, checks actual full result Vec len/capacity/pending and source activation. Actual SYS5 common source/carrier/pending producer checks real current live/floor strong authority. No operation-ID loop, cloned executable seed, mutable Runtime/source/fabric alias or raw token factory.
 
-All3 exact activation frames and checked counter capacities are preflighted/retained before parent M9 publication. Only retained opaque actual publication can send them; all send IDs reserved before first byte. Actual child owned bootstrap reader checks exact retained preparation/pre-ACK association/version/endpoint/sequence, reserves both IDs and retains encoded ACK before mutation. Same owning Runtime checks actual live M9 plus strong canonical floor through readonly private SYS4 seam, and alone mints opaque ActualOriginalSourceActivationReceipt. Control authority updates before ACK; successful ACK leaves child awaiting a separate registered grant. Parent owning Activated readers retain exact records and update channel authority while closed; only all3 permit reopening grant state. No semantic grant/body executes in these tests.
+Actual SYS5 pending and original source pending message retained before borrowed private codec; exact encoded outgoing data retained before sole opaque actual issue receipt and preallocated Finish. Actual Finish send failure retains active control/frame/source request, marks unavailable and does not clear cursor/pending or permit reissue. Original actual source issue failure retains actual Sys5I3ProcessRuntimeError and already-published SYS4 outgoing carrier; no fabricated completion. Full capture includes actual pending/message/frame len/capacity and lower error kind.
 
-Third prepared ACK missing prevents publication; third activation ACK missing freezes/unavailables parent after actual publication. Real parent-read shutdown causes child ACK write loss with advanced protocol authority and retained actual prepared body/ACK/activation frame, no rollback/refund. Other actual children can also lose ACK when parent exits; tests require their true retained outcome rather than assume peer survival. Wrong actual floor/raw activation frames/repeated publication/activation fail unavailable. Parent retains publication, exact stage/bodies/all activation frames and partial channel records. Pre-ACK state hash is historical receipt association, never an immutable later grant condition or independent OS attestation.
+Missing normal producer RED1 funded fail + frozen companion1pass; initial normal compile errors/default1pass; corrected normal2build but test candidate-field compile failure; extra v1 eight pass/one false test assumption WrongRole vs Closed for owners; v2 normal2build/10pass; extraction failure RED10pass/1proper failure on discarded actual error; GREEN normal2build/11pass. Pending-guard mutant10pass/1proper failed repeat; activation-guard mutant10pass/1proper failed source-activation case (ordinal loop not reached on mutant; both tested green). Every new harness drains/reaps all children before parent assertions; no mutant adopted.
 
-Parent missing-producer RED1pass2properfail. GREENv1 default compile missing feature guard; v2 normal2build0/0 then test1pass2fail because test incorrectly assumed M9 generation=protocol revision+1; successor uses actual stage generation. Earlier parent assertion did not drain children on panic; successor harness catch_unwind drains/reaps before rethrow. GREENv3 normal2build +4tests including8 publisher-input faults pass. All activation missing-consumer RED1pass1properfail with all3 child errors collected. GREENv1 default missing guarded writer; v2 default pass then normal QUIC private-alias/private SYS4 field compile failures. GREENv3 correct qualified writer/readonly private field seam,2build+2tests pass. ExtraGREENv4 4pass3fail: test-only false assumption other peers must keep surviving after parent failure; wrong-frame loop reached version only there. GREENv5 7pass includes all8 frame cases, preserves actual partial ACK dispositions. Independent publisher guard false control3pass1properfail on first wrong-stage case; remaining7 fault variants exercised by green only. Actual floor guard false control6pass1properfail. All failures immutable and38 restored; ordinary selected-contract/test/visibility issues, not a new authority/custody contract or Astra-stop.
+Private normal-build source-issue component, first original request only; actual cursor remains0, no actual owner/body/reply/source consumption or QUIC events. Original budgeted-singleton actual pending retains checked budget; source failure-name padding does not introduce one. Existing I3 budget/clock/one-use remains distinct and unconsumed. No broad proofs or OS/auth attestation from hashes or tests. Original source handoff/field supplier/body resource correspondence remains before dependent body use.
 
-Normal private compiled parent publication/all child activation components plus actual3child FD3 evidence in external unadopted reference. Single initial update only; subsequent update re-freeze/bounded record archival remains unconnected. No normal semantic source execution methods/actual source-body-I3/result/network continuation yet. No production/Canon/alpha/public/OS/concurrent snapshot/fresh199 proof claim. D integrated acceptance remains pending Astra.
+Continue same W4-D: bind actual registered source issue/request provenance to original owner descriptor at real I3 lower admission, preserve existing budget/clock/one-use, retain actual lower outcomes/resources before reporting, actual private QUIC and same-event redacted causality; subsequent whole-mode re-freeze/retention. Check producer/alias/all entry/resource/refinement before body. Stop only on material contract counterexample or Astra D acceptance; E/W5+/Plan250-I3-4 stay inactive.
 
-Connect one actual original requester cursor/full checked handler/complete arguments/Core/activation/global ordinal under registered global grants; owners remain inert. Join genuine source provenance to existing I3 admission budget/clock/one-use at its actual owned lower entry; preserve source-declared supported budget profile, never bypass via C enqueue_source_reference. Before any body use discharge exact producer/caller/alias/resource and proof correspondence, preflight IDs/capacity/allocation/results and retain actual lower outcome through fallible report/reply. Re-freeze/bounded update custody and actual private QUIC same-event correspondence remain D. Astra only material contract counterexample or D integrated acceptance; stop before E.
+Sole main focused field/caller/alias/failure/resource/diff review of this component,8struct inventory linked prior16 and actual child/fabric inventories. No subagent or Oracle/current independent acceptance; older reviews do not review this source. General199/20455/177 proof receipt unchanged, no fresh audit.
 
-Sole main scoped normal constructors/actual publisher commit/restriction projection/private field seam/all-ACK custody/alias/failure/identity/preflight/full visitor review. New16struct field inventory links prior20struct child/fabric inventory; new activation all4fields including actual bytes/resources captured. Parent fields are inventory, not a complete parent snapshot claim. No new subagent/planner/Oracle under sole-main owner instruction; current snapshots only, no roadmap or normative recut.
+週間残量は2026-10-01 04:38:17 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 05:38:17 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
-週間残量は2026-10-01 03:37:20 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 04:37:20 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
-
-Actual resources035359UTC root7.7GiB free, authorized mir-runtime package cleanup
-4.7GiB→root12GiB free. Serial8GiB AS/-j1/testthreads1/core0.
-Current publication/activation full make docs v1 passed; final metadata focused checked. Same D continues.
+Actual resources045240UTC root12GiB free, RAM10GiB available, swap9.8GiB free.
+Serial8GiB AS/-j1/testthreads1/core0. Current source-issue full make docs v1 passed; final metadata focused checked;
+final metadata and actual Git checked separately. Same D continues.

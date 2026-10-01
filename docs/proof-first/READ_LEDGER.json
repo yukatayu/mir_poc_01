@@ -51555,5 +51555,61 @@
     "status": "partial-read-reconsulted",
     "role": "Partial owner_admission_budget_diagnostics: existing source budget requires exactly one lowerable assignment; next continuation must preserve supported source profile. No new multi-statement budget semantics decided.",
     "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys4_i3_original_source.rs",
+    "sha256": "3787d4c89c22f19a51d633305d0dba00a4c9e274f37276ca863ea1b50a526e33",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped original full checked fragments/args/global ordinal data selection on the actual requester fabric, no cursor/admission minted from inert data; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys4_i3_source_authority.rs",
+    "sha256": "e6a8b98ef2d598a0894d529349a8a66c2f421dc6aff7c4a516d007042f687a52",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped real registered source Issue strong actual live/floor predicate and test-only outgoing carrier retention probe; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys5_i3_source_control.rs",
+    "sha256": "73fed3a72fe4ae491b9e5c4bf2c68db7fab2c667b0779321742f0ec2b39bd3d3",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped owning FD3 role/install/all activation Issue reader/opaque token/preallocated finish/actual receipt consumer/complete capture; no raw factory, fake test marker never normal result; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys5_i3_process_runtime.rs",
+    "sha256": "99ba3e4a45e2bea84ebfef6bcb1611ca424bcc4db4ac7afe1740a36c90cae1b2",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped existing common real generated source/carrier/pending producer factored for exact original arguments, strong authority at actual source entry, private borrowed codec preserving legacy public behavior; old I3 budget/clock/oneuse/finalizer/generic origin constructors partially reconsulted, not whole file reread; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys5_i3_original_source_process.rs",
+    "sha256": "6a99c2ef054a47562c82a49e86b1930e0fab5a08251c3ced303f15fe22c86d79",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped same actual owning Runtime/original source first request/actual pending/message/encoded frame/lower typed error/complete visitor/result capacity and no body or source acceptance; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-issue-green-v5/sys5_i3_original_source_process_tests.rs",
+    "sha256": "9a50226f04a13014461fd894dd294b153cfb57a39dd3a061e5396a44be48dee6",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Main authored/reviewed all source-Issue FD3 positives/faults/role/all arguments/budget retention/capacity/repeat/actual error capture; catch harness drains/reaps all children on failures; external unadopted normal-build component, no full D acceptance",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementSourceCustodian.lean",
+    "sha256": "b9830f6fff6fb66c22f47e5347f44d9d74ba13f32356c1f669c1c3b8ba5ef273",
+    "status": "read-reconsulted",
+    "role": "Full reconsult of existing model original progress/transfer/consume/continuation and model-specific idle authority rule; do not use old idle-only model as D held-network coordinator authority",
+    "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementResultOrigin.lean",
+    "sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+    "status": "read-reconsulted",
+    "role": "Full reconsult of existing conditional actual result/history/lower queue origin proof, not a proof of the new Rust source component or fresh kernel execution",
+    "at": "2026-10-01T05:00:45.928760+00:00"
   }
 ]
