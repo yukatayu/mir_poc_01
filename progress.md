@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-01 14:46 JST
+最終更新: 2026-10-01 16:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,10 +57,13 @@ public/production layers remain later.
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
-PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
+now owner-paused2026-10-01 for requested cleanup/other work.
+PL1/PL2/PL0 S4/S6, with one main and no subagents. After owner resume stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-週間残量は2026-10-01 05:39:31 UTCの確認で70%（使用30%）でした。次の確認は2026-10-01 06:39:31 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+W4-Dはownerの2026-10-01の依頼で一時停止しました。全1076件が通過した実source→実QUICデータ→owner保持の地点を保存し、次の意味的owner/I3/body/結果/資源/source受領の実装には進んでいません。再開にはownerの指示が必要です。D完了・週間上限到達による停止ではなく、Plan250/I3-4の別個のpauseも保持します。
+
+週間残量は2026-10-01 07:44:01 UTCの確認で69%（使用31%）でした。次の確認は2026-10-01 08:44:01 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -70,15 +73,15 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01の一時停止依頼で現在は停止しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点で停止しています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-origin-green-v4で、実全3子の準備・親M9公開・全activation後、元sourceのactivation/global ordinal/全Core・引数の対応を実Issue grantに結び、唯一のrequesterが保持した実要求IDと送信データのhashを発行前に確保した完了通知枠へ記録します。親は同じ登録streamの実完了を独立した元sourceと照合し、全activation分を事前確保した枠へ保持してからactive grantを閉じます。実3子FD3で対応欠落・誤activation/ordinal/descriptor、親の保存枠不足、汎用finishの保護抜けを検査し、3種の意図的guard/digest省略対照も失敗を確認しました。通常default/private-QUIC buildと同cut全1071件が通過し、38pathは復元済みです。source cursorと親の期待位置は0のまま、bodyとsource受領は未実行です。owner/I3/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。hashは実保持データの対応で、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-Dはowner依頼で一時停止中です。外部未採用38path参照owning-source-frame-capacity-green-v1で、実3子FD3の元source要求と親の発行記録保持に、実QUICでの同一データ送信・受信・owner内保持を接続しました。送信用データは実Issue完了前に準備し一度だけ移し、元要求・全引数・cursor0を保持します。通信futureはRuntimeを借りず、受信後の検証失敗でも実受信データを先に保持します。実unused引数で既存64KiBコーデックの容量超過を再現し、発行済み実要求と実codecエラーを保持して完了通知を拒否します。通常default/private-QUIC buildと同cut全1076件が通過し、38pathは復元済みです。最初のA→Sデータ保持までで、ownerの意味的受付・I3/body/result/資源/source受領、S→T→Sと次activation・後続update再freeze/保持・D統合判定は残ります。TLS/hashはsource custodyやM9実行権限ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。再開後は、重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current38path actual original source Issue/retained real Finish/request association/full preallocated parent origin retention after genuine publication/all3 activation normal default+QUIC/full1071 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; actual parent publication/all3 activation before grant-state reopening connected; subsequent re-freeze and source/I3/result/resource/QUIC within handoff; actual first source Issue and registered parent origin retention passed; owner/body/source acknowledgment/resource/network gates before use; Astra reviews D acceptance before E |
+| Implementation / operation | C806/818 and prior D components retained; current external38path actual source/parent origin/QUIC same-data send+receive/owning owner ingress/codecOversized holding, normal default+privateQUIC/full1076 pass; sourcecursor/parentexpected0/body0;38paths restored | owner-paused2026-10-01 after passed component/cleanup; resume before semantic owner/I3/body/result/resource/source acceptance/full-source/subsequent re-freeze; Astra at material contract falsifier or D acceptance |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -635,3 +638,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-01 14:00 JST: W4-Dの実FD3 requesterから元sourceの最初の要求を発行・保持し、実失敗のエラー消失反例を修正。通常build/全1065件とguard省略対照を確認、owner/body/QUIC/source受領は未接続で続行。Report2614。
 
 - 2026-10-01 14:40 JST: W4-Dの実要求ID/送信データと元sourceの対応を登録Issue/Finishへ結び、親で実完了を保持後にgrantを閉じるcomponentを検証。通常build/全1071件と3省略対照を確認、owner/I3/body/QUIC/source受領へ続行。Report2614。
+
+- 2026-10-01 16:44 JST: W4-Dの元source実要求から実QUIC同一データ送受信・owner内の先行保持を接続。後続検証失敗とcodec容量超過の実エラー保持・7省略対照を確認、通常build/全1076件成功。意味的owner/I3/body/資源/結果/source受領へ続行。Report2614。
+
+- 2026-10-01 16:49 JST: owner依頼でW4-Dを全1076件通過の実network/owner保持地点でpause。target等のCargo専用6箇所を整理し約7.6GiB回収、研究133841/追跡6403ファイルのhash一致を確認。実験・証明・ログ保持、owner再開待ち。Report2614。

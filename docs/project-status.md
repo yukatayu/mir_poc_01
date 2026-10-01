@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-01 14:46 JST
+最終更新: 2026-10-01 16:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -57,11 +57,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01の一時停止依頼で現在は停止しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点で停止しています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-origin-green-v4で、実全3子の準備・親M9公開・全activation後、元sourceのactivation/global ordinal/全Core・引数の対応を実Issue grantに結び、唯一のrequesterが保持した実要求IDと送信データのhashを発行前に確保した完了通知枠へ記録します。親は同じ登録streamの実完了を独立した元sourceと照合し、全activation分を事前確保した枠へ保持してからactive grantを閉じます。実3子FD3で対応欠落・誤activation/ordinal/descriptor、親の保存枠不足、汎用finishの保護抜けを検査し、3種の意図的guard/digest省略対照も失敗を確認しました。通常default/private-QUIC buildと同cut全1071件が通過し、38pathは復元済みです。source cursorと親の期待位置は0のまま、bodyとsource受領は未実行です。owner/I3/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。hashは実保持データの対応で、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-Dはowner依頼で一時停止中です。外部未採用38path参照owning-source-frame-capacity-green-v1で、実3子FD3の元source要求と親の発行記録保持に、実QUICでの同一データ送信・受信・owner内保持を接続しました。送信用データは実Issue完了前に準備し一度だけ移し、元要求・全引数・cursor0を保持します。通信futureはRuntimeを借りず、受信後の検証失敗でも実受信データを先に保持します。実unused引数で既存64KiBコーデックの容量超過を再現し、発行済み実要求と実codecエラーを保持して完了通知を拒否します。通常default/private-QUIC buildと同cut全1076件が通過し、38pathは復元済みです。最初のA→Sデータ保持までで、ownerの意味的受付・I3/body/result/資源/source受領、S→T→Sと次activation・後続update再freeze/保持・D統合判定は残ります。TLS/hashはsource custodyやM9実行権限ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。再開後は、重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
-週間残量は2026-10-01 05:39:31 UTCの確認で70%（使用30%）でした。次の確認は2026-10-01 06:39:31 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+W4-Dはownerの2026-10-01の依頼で一時停止しました。全1076件が通過した実source→実QUICデータ→owner保持の地点を保存し、次の意味的owner/I3/body/結果/資源/source受領の実装には進んでいません。再開にはownerの指示が必要です。D完了・週間上限到達による停止ではなく、Plan250/I3-4の別個のpauseも保持します。
+
+週間残量は2026-10-01 07:44:01 UTCの確認で69%（使用31%）でした。次の確認は2026-10-01 08:44:01 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

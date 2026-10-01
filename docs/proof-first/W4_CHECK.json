@@ -56758,5 +56758,236 @@
         "scope": "Full make docs on restored baseline Rust; final metadata focused separately"
       }
     ]
+  },
+  "d_actual_source_network_owner_retention_20261001": {
+    "at": "2026-10-01T07:44:18.087791+00:00",
+    "predecessor_head": "6c7f98731823c64bc7cb51df629daba384a47d3f",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1",
+    "paths_sha256": "a721ec99cf9d1ec464a9b433978eef133fd1844da502d36a7d3d3cb199988651",
+    "source_pins_sha256": "4e940538aeb4e71160d4e3725a384dd516f5f71b889077002d68d907901ce56b",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+      "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+      "crates/mir-runtime/src/sys4_i3_original_source.rs": "5c2070e977a31ed924e797637373783c759b923e5529f2e079bf93c978dfb513",
+      "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "e6a8b98ef2d598a0894d529349a8a66c2f421dc6aff7c4a516d007042f687a52",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "d12b241f0723d3d73c0f1708146b08658cef4cd71d6a14027385fe99dad9206d",
+      "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "0699d4fff51c13788dc2718384893b1248929696d3fc23fea25cd611c8d3b3b9",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "3372aa2d54f88ca7d75c8bb61c7ec9bf00dbb605b1475e6fb6d32f4b530769f7",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "5e64c4da97e2b2970dac014c258cce063d2a51e882b6038d9327f2190b2cd503",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "62d1757d335cacda9cc6477e95155cb9843cefb3a386e0bb22c05a24842b9e2b",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "e14c0c84f1e4f90fb85a05b044b6ae4436336941921abe347286b0ab67b18bf9",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+      "crates/mir-runtime/src/i3_private_prepared_binding.rs": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+      "crates/mir-runtime/src/m8_owner_admission_gate.rs": "033e3bc86fdb6e300d463c275721ae07ffe736402fb45bc3eca482ecac54f8b8",
+      "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+      "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+      "crates/mir-runtime/src/m8_runtime_relation_projection.rs": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+      "crates/mir-runtime/src/m8_private_prepared_relation_binding.rs": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+      "crates/mir-runtime/src/m8_runtime_designated_value.rs": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+      "crates/mir-runtime/src/m8_private_prepared_designated_binding.rs": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+      "crates/mir-runtime/src/m8_private_prepared_local_binding.rs": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+      "crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs": "ffad42c551aa393465ca9cf3ea13e2b42032b9c0c93a97f33946719319a13660"
+    },
+    "network_component_record": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-NETWORK-RECORD-v1.json",
+      "sha256": "ed87f35637cd13fa36af1338919ba87d945c8ba0a91d8241c2658a4dd7378ea4"
+    },
+    "receipts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-retention-red-check-v2/RESULT.json",
+        "sha256": "fb24c3255b7c85e0db4467165db24290a1a14c07dd813a566bb943b336481f86",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "f6231640f93f73220a0e9d8fbceb47c5b19b5d02aaa10a898ff8a1baa500200d",
+        "restored_sha256": "6c06fa2c9173da2497913e7bfc165384ca4bb50d8a0f1840379c2004863086f8"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-retention-green-check-v1/RESULT.json",
+        "sha256": "cdba7fb8c5069baeeb60f27e089fb17b20b3a7c3a4e19e333bc96c2113087848",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "runs_sha256": "97a789af4a12139f2dfd91be650cfa2558c087c04556463ed9b4da5bac7238a3",
+        "restored_sha256": "c0dad5202e1721504686067987e3811d0b322ed11c98880ed40d6b3053070aed"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-retention-controls-check-v1/RESULT.json",
+        "sha256": "37111e961872de66d11d64742424862fb01ce47937ee5d53f1fea445716ccd6b",
+        "exits": [
+          0,
+          0
+        ],
+        "runs_sha256": "3f36e101e8bdd7baba35a393cf18fd667f50afc0d4cf346dc10c16fe27fee772",
+        "restored_sha256": "87e676558ef6fc7b3210cca13a988961c56cc60a180ce0cf9757bbed8e76400d"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-candidate-binding-false-check-v1/RESULT.json",
+        "sha256": "4fd13e60fefa86e5db085726e5b5639e45f19bf3de7d82dd41ac2a769639b4f7",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "74b845d8fef5a5baf47559759d47ccce2825a9af462b7d4a54143e0eff61c358",
+        "restored_sha256": "adca96e98ddf30d7b9c022511e941d9835c92c1b6d92ab2b977a6c8b0f34b43b"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-retention-before-validation-false-check-v1/RESULT.json",
+        "sha256": "26699fbfd7b937c27525c57ee09dd9968758f4144956e34a725da202deda66a4",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "eaebf32891e63e38ce0d1c0b3f165ddee24c59752d4db40ff391ce76c1488f58",
+        "restored_sha256": "e796fb38189252cd8709df9430ed398d9c6ea70677f3a150c41ddd025fe1d620"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-driver-check-v1/RESULT.json",
+        "sha256": "2969269dfb7dabf045ec8255e411602c760e750f5692e29d45aef223ac6280a6",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "3167730a4c3b658da5c42f2a3d15fc5ec63f80421f28bac53a3bddb18ee54002",
+        "restored_sha256": "2a37e7cf96dc665f1967142431f77b729fe1f0ccb984e22d3fee85a62be3a64c"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-ingress-driver-check-v2/RESULT.json",
+        "sha256": "e5cce9d34a60bdaaaca8df0f178c1ead788d31f0b1a91715557573807090e065",
+        "exits": [
+          0
+        ],
+        "runs_sha256": "3944cb96db1f13cbff3d146c478fd43b8da171b400350e744b28b922754bff16",
+        "restored_sha256": "861ef67ccce2dbf399da31144553fcc91666b4d2cc5f87028df09602d61791d8"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-frame-capacity-red-check-v1/RESULT.json",
+        "sha256": "a5d2123cf74d0e69ce1b317c8a3f8114926af5d2ca7d5b56f4e99b48d17f7cb7",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "df594d47111adc7ad62eab405e10fef871099a0f74e40d6ccfad9c82e10f623a",
+        "restored_sha256": "52cc0e761b13af190955dc265ac7ffd1643272b1cf11c9a0a9262e70d3a2d9fd"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-frame-capacity-red-check-v2/RESULT.json",
+        "sha256": "a63c724a4883ba660fd3ac6f8015e1c653979e77c66ad0505b8bd7b64acd2418",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "d89f42727000a177d5ecca8326582b637cfbc87ea2a0d971a9db1cd8940a61d7",
+        "restored_sha256": "1e1cfc960ecc77d984b79f1ab410c65e75f6f865b1a49e723e5279ad3ef1c5f9"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-frame-capacity-green-check-v1/RESULT.json",
+        "sha256": "667b9dc9f2a097711c3e2d55497c537a626941ca47af2eee89515f34d0dbac0a",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "runs_sha256": "7f1b24274656d51172460b93173faf81a55c82248016e12e350b40f74d788bdd",
+        "restored_sha256": "ceb9cff03ccb206c6c1ee38cca2b0b8bdd770e015dda01682eef7d64018c206a"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-codec-failure-retention-false-check-v1/RESULT.json",
+        "sha256": "5f0ef2aa56674ae87a8200cc3349e5fd7588bd4f00edf8473a991fb4166131ff",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "e4a8595811e651e1dab1fa327715fb44fd3b9dea3ce727d68b205d96b55acd01",
+        "restored_sha256": "6618a9fda42e991dcaa0dfcd7ec6d5c3cbc7fd6b763c81b4a3b0aa3c63a04123"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-source-codec-failure-binding-false-check-v1/RESULT.json",
+        "sha256": "e22d9edfaffdf0177695205ac30c4fca5cb75c07a22a5ccf7743ba24a0f3ae1a",
+        "exits": [
+          101
+        ],
+        "runs_sha256": "5b5632e3c62ab9b7c3d50818a7745b6acf9c846bb7279ce76de9ca8b67cb1f87",
+        "restored_sha256": "28ac31de038804633294ba2eb6bc30fa700b28f753c81aa1f13208547e4c5f73"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-owner-network-retention-combined-check-v1/RESULT.json",
+        "sha256": "3b9d04f8cbc7e50097ca3893293778eac48d5d25d0282c65744470788ba674ec",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "runs_sha256": "f25379a0a4a400bac2206b6aa78af412ed01bbb6ad682f408daba076444a899e",
+        "restored_sha256": "c38fd1febc6f3b3f0eebe220d820a7d029018da03af79848d64277edc4b4125d"
+      }
+    ],
+    "field_inventory_sha256": "9b7c087babb6d471df975e13804b563a4881e36a457b28ae1aaf03c2b31911f1",
+    "prior_network_inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-network-wire-green-v3/SOURCE_NETWORK_FIELD_INVENTORY.json",
+      "sha256": "b1a20a9dade34794c77352a717ff2345b2c55dbecbc54c030974b12e7a153ebb"
+    },
+    "next_integration_notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-JOIN-NOTES-v2.json",
+      "sha256": "ed421b76e8a5116fe9f21c32e2713ce49ae78eff1feb175af00620f52a207cf8"
+    },
+    "result": "Normal2build/final full1076 PASS with38paths restored; current5 network/source/owner-holding focused pass. Prior normal2build/full1074 transport data component retained separately. Earlier whole-mode binding2 focused pass included in1076; no zero-match test evidence.",
+    "producer": "Same genuine finite3parent ExpectedStart records configure ordinary source-A/owner-S static TLS pair inside bounded expected FD3 record before installation. Installed normal mode takes actual bound configuration once and joins complete own start/run/purpose/slot/program/cohort, static transport identity independent of updated M9. Real source Issue retains actual request/message/encoded frame and separate pre-Finish outgoing data; one-use transfer changes no source cursor/result/pending request. Normal QUIC opaque packet send requires inspected SPKI/reciprocal preface/initial session, reserves checked actual occurrence before write; no Runtime borrow through await.",
+    "owner_retention": "Existing normal complete receive reserves before await and returns actual opaque nonclone6field capsule. New owner holding moves it into its own Option BEFORE later role/static configuration validation. Failed later validation leaves real bytes/candidate/control/session/references retained, unavailable, no owner grant. Full disabled-mode/physically-prepared/source/control visitors capture actual new slots and packet/frame realbytes/len/capacity, decoded candidate and control references; each of6actual ingress fields separately varied on real received capsule. No repeated acquisition/decoder/rawhash/Boolean permission factory, no mutable Runtime alias. Original cursor and parent expected0, resultsNone, body0.",
+    "codec": "Unused full original argument calibrated through2 actual funded first Issues in distinct authentic activations;3rd enlarged request reproduces actual codecOversized after actual SYS5/source issue. Existing frame_body already includes4prefix in64KiB: hypothesized outer4byte gap falsified, not adopted as fact. Repair preserves ACTUAL codec error with actual issued message/request, mapsOversized toTooLarge, encoded/packetNone/Finishunsent/grant held, no rollback/reissue. Readonly re-encoding actual message confirms original codec failure. Exact original args retained; no body/clock padding or OOM/recovery claim.",
+    "falsifiers": "Actual funded owner-ingress RED missing normal-mode retention fails;1 pre-overlay attempt while prior full run active refused before input mutation/Cargo, recorded separately (not semantic RED). Owner green normal2build/3focusedpass; expanded4network/2wholemode pass; driver refactor first E0308compile only then fixed4pass. Actual decoded-candidate omission fails real field1 binding; conditional retention after validation fails real received capsule presence. Frame first E0502compile only; fixed funded capacity test actualMalformed vsTooLarge exposes lost codec classification, not codec bound violation. Actual codec-error retention omission fails None vsOversized; visitor omission fails invisible actual error removal. Network prior3 false controls/pktRED/actualQUICRED plus2compile failures/full1074 separately pinned. All actual children drained/reaped and mutants unadopted.",
+    "continuation": "Only after explicit owner resume: Continue same W4-D: parent registered owner-ready origin association + actual own full original Core/args/global ordinal/activation/real received request, genuine combined source/I3 budget/clock/oneuse at actual lower entry; actual result retained before SYS5 finalizer/report/reply and real numeric/allocation resources before body. Existing no-budget ordinary I3 admission immediately executes body, so do not call it from an unguarded Admit interval or invent another handler budget. Preserve old reconnect2 consumer. Entire finite S→T→S transport/IDs/another activation and actual subsequent all3 held-state re-freeze remain. Astra at material contract counterexample or D integrated acceptance; STOP before E.",
+    "scope": "First original statement source data → genuine real private QUIC → actual owning owner unadmitted data retention. Owner semantic admission/I3 consumption/body/result/reply/source acknowledgment, whole distributed causality, subsequent update/multi-statement activation not realized. Data hashes/static TLS are not custody/body permission/OS authentication; no fresh full proof-audit/workspace/privacy/recovery/alpha campaign.",
+    "review": "Sole main6struct current field/supplier/caller/alias/resource review linked prior5network11origin8sourceIssue/parent/child/fabric inventories. No subagent/Oracle independent acceptance, prior199 proof receipt retains original scope. Numeric/actual owner body allocations and source/I3/lower outcome relation remain before dependent use.",
+    "docs_scope": "Same Report2614/currentLAB plan/documentation/status/task/sample dashboard/ledger update; production Rust/Lean/Canon unchanged. No roadmap adoption/publicwire/source or sample roots/taxonomy change. Current network owner-retention/pause full make docs v1 passed; final metadata/actual authorized Git checked separately. User-requested temporary owner pause/cleanup at this passed component; no new implementation.",
+    "quota_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261001T074401Z.json",
+      "sha256": "5971348055f23f55ba19ee32de981d0c91c8ff5557e744d2f0005672833bdf38",
+      "remaining_percent": 69.0,
+      "next_read_not_before": "2026-10-01T08:44:01.601986+00:00"
+    },
+    "resource_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/RESOURCES-SOURCE-NETWORK-FULL-20261001-v1.json",
+      "sha256": "cdafb42fe2b2e410ab468092449e004f9ef3e1183ae1dc9e03d9a21e85886856"
+    },
+    "owner_pause": {
+      "at": "2026-10-01T07:49:59.574496+00:00",
+      "reason": "User explicitly requests a temporary stop at a sensible checkpoint to do other work, plus cleanup without losing experiment/research data. Not quota exhaustion or D completion.",
+      "status": "owner-paused in W4-D; no active implementation/build job; resume only on owner instruction",
+      "current_reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1",
+      "current_evidence": "normal default/private-QUIC builds plus full1076 and actual first A→S network data/owner retention; semantic owner/I3/body/results/resources/source acknowledgment and full-source/subsequent update remain before use",
+      "cleanup_receipt": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261001-v1/RESULT.json",
+        "sha256": "c5c1e7d689286ea91709609076ee701aa38a036ba917a3220c93956a7f55a5ec",
+        "preserved_manifest": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261001-v1/PRESERVED.json",
+        "preserved_manifest_sha256": "5a7e383cad4c91b8d9598eaa31a70dba0c91fcb81d015a05d54fe215d98428aa",
+        "preserved_research_files": 133841,
+        "all_preserved_hashes_match": true,
+        "freed_bytes": 8153698304,
+        "after_free_bytes": 13325164544
+      },
+      "resume": "Same sole-main Sol xhigh W4-D. Rebuild deleted Cargo outputs, verify source/receipt pins, then continue SOURCE-OWNER-JOIN-NOTES-v2 bounded semantic owner-ready/source-I3/resource/lower-outcome gate. No new goal, Oracle, E, W5+ or Plan250/I3-4 activation."
+    },
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-network-owner-v1.json",
+        "sha256": "7190f4ae1b10b9a5f0092290e4e2fc74753768744d9277d0f69952c4ff5916ba",
+        "exit": 0,
+        "scope": "Full make docs on restored baseline Rust/owner pause/cleanup; final metadata focused separately"
+      }
+    ]
   }
 }

@@ -2,11 +2,11 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: owner-resumed Sol implementation in W4-D; A/B/C bounded scopes closed, D proof/M9 component checkpoint and implementation handoff preserved, E inactive. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
+- Current state: owner-paused2026-10-01 at passed W4-D actual source/QUIC data/owner retention/full1076 checkpoint for other work/cleanup; A/B/C bounded scopes closed, D incomplete, E inactive. All experiment/research data retained. Earlier dated states below are historical.
 
 ## Objective
 
-Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. The full objective remains W4; the latest owner instruction adds a pause at the Astra→GPT-6.1-sol implementation handoff; after resume stop after W4-D, before W4-E. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
+Complete owner-requested W4 physical refinement: concrete/abstract correspondence, existing Rust/QUIC/queue/memory boundaries, actual source-to-runtime observation, real-process positives/falsifiers, prior I3-3 regression and alternate-entry closure. The full objective remains W4; the latest2026-10-01 owner instruction pauses at a sensible passed checkpoint for other work and authorizes disposable target cleanup preserving research data. This supersedes earlier implementation-resume instructions. After explicit owner resume stop after W4-D, before W4-E. W5/W6/W7 and old Plan250/I3-4 are not automatically resumed.
 
 ## Scope and assumptions
 
@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Continue same W4-D: genuine retained parent issue association to registered owner-local action and actual received request/full original descriptor, then combine at actual existing I3 lower admission with clock/budget/oneuse; retain real lower outcomes and actual numeric/allocation resources before post-body finalizer/report/reply, genuine QUIC/same-event redacted causality/source current acknowledgment, subsequent held-state re-freeze/retention and another activation. Stop on material contract counterexample or Astra D integrated acceptance, before E. E/W5+/Plan250-I3-4 inactive.
+Wait for explicit owner resume. Same sole-main Sol xhigh W4-D. Rebuild deleted Cargo outputs, verify source/receipt pins, then continue SOURCE-OWNER-JOIN-NOTES-v2 bounded semantic owner-ready/source-I3/resource/lower-outcome gate. No new goal, Oracle, E, W5+ or Plan250/I3-4 activation.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Updated38path actual source Issue/Finish/parent origin retention/full1071 and remaining owner/I3/body/result/resource/QUIC/source acknowledgment/subsequent update gates.
+Updated38path actual source/QUIC/owning owner ingress/full1076 and remaining semantic owner/I3/body/results/resources/source acceptance/full-S→T→S/subsequent update gates.
 
 ## docs/project-status.md update status
 
-更新済み: 実first source Issue/元source対応/実Finish/親origin保持38path/full1071とowner/I3/body/結果/資源/QUIC/source受領・後続updateの未接続を明示。Canon/Plan250 pause保持。
+更新済み: 実source→実QUICデータ→owner保持、実codec失敗保持38path/full1076と意味的owner/I3/body/結果/資源/source受領・全source/後続更新の未接続を明示。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-Updated38path registered actual source Issue/parent origin/full1071 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. No distributed source workflow completion.
+Updated38path actual source/QUIC/owner holding/full1076 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. No distributed source workflow completion.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: exact38path normal builds/full1071 actual original source Issue/full manifest/reserved Finish real request digest+encoded-data hash/real parent registered completion retention. Actual source cursor and parent expected position0, body0. Main11struct supplier/alias/failure/resource review linked prior8; 3 intentional guard/digest omissions properly fail. No current independent agent/Oracle acceptance. Owner/I3/body/result/resource/QUIC/source acknowledgment/subsequent update incomplete. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Before source/body use, exact final registered FD producer/caller/alias/resource correspondence, incident/nonincident observation preservation and coherent-result grant lifetime remain obligations; the actual preparation/publication/activation component evidence above is narrower. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: exact38path normal2build/full1076 actual source/parent origin/QUIC data/owning owner ingress/real codecOversized failure holding. Sourcecursor/parentexpected0/body0. Main6struct current review linked prior5network11origin8sourceIssue and prior parent/child/fabric;7 false retention/binding/oneuse controls fail. No current independent acceptance. Actual semantic owner/I3/body/result/resource/source acceptance/full-source/subsequent update remain. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Before source/body use, exact final registered FD producer/caller/alias/resource correspondence, incident/nonincident observation preservation and coherent-result grant lifetime remain obligations; the actual preparation/publication/activation component evidence above is narrower. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: exact38path normal builds/full1071 pass; overlays restored. Owner-I3/body/results/resources/QUIC/source acknowledgment/subsequent update/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current source-origin full make docs v1 passed; final metadata focused checked; main scoped review only, earlier Oracle does not review this cut.
+Current Sol checkpoint: exact38path normal2build/full1076 pass; overlays restored. Semantic owner-I3/body/results/resources/source acceptance/full-source/subsequent update/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current network owner-retention/pause full make docs v1 passed; main scoped review only.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessor8685b4d8 pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,38 paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-SOURCE-ORIGIN-v1.json.
+Current predecessor6c7f9873 pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,38 paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-NETWORK-OWNER-v1.json.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4792,3 +4792,38 @@ W4-DはSolで実装を継続中です。外部未採用38path参照owning-source
 - plan/current docs/progress/whole tasks/sample dashboard/ledger updated; full make docs v1 passed; final metadata and actual Git checked separately. Same D continues.
 
 - 2026-10-01T05:46:57.213244+00:00: full make docs source-origin v1 exit0 (2026-10-01T05:40:51.327982+00:00–2026-10-01T05:45:18.199018+00:00); restored baseline Rust. Final38source/9runs/11struct inventory/ledger prefix/snapshots/diff checked separately. Authorized actual Git receipt GIT-SOURCE-ORIGIN-v1.json; same D continues.
+
+
+### 2026-10-01T07:44:18.087791+00:00 — Actual original-source network data / same owning owner retention
+
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-frame-capacity-green-v1で、実3子FD3の元source要求と親の発行記録保持に、実QUICでの同一データ送信・受信・owner内保持を接続しました。送信用データは実Issue完了前に準備し一度だけ移し、元要求・全引数・cursor0を保持します。通信futureはRuntimeを借りず、受信後の検証失敗でも実受信データを先に保持します。実unused引数で既存64KiBコーデックの容量超過を再現し、発行済み実要求と実codecエラーを保持して完了通知を拒否します。通常default/private-QUIC buildと同cut全1076件が通過し、38pathは復元済みです。最初のA→Sデータ保持までで、ownerの意味的受付・I3/body/result/資源/source受領、S→T→Sと次activation・後続update再freeze/保持・D統合判定は残ります。TLS/hashはsource custodyやM9実行権限ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Start6c7f9873 clean; same Report2614;38source/current13runs + prior11network/6currentstruct + prior5network inventory: W4_CHECK d_actual_source_network_owner_retention_20261001.
+- Normal2build/final full1076 PASS with38paths restored; current5 network/source/owner-holding focused pass. Prior normal2build/full1074 transport data component retained separately. Earlier whole-mode binding2 focused pass included in1076; no zero-match test evidence.
+- Same genuine finite3parent ExpectedStart records configure ordinary source-A/owner-S static TLS pair inside bounded expected FD3 record before installation. Installed normal mode takes actual bound configuration once and joins complete own start/run/purpose/slot/program/cohort, static transport identity independent of updated M9. Real source Issue retains actual request/message/encoded frame and separate pre-Finish outgoing data; one-use transfer changes no source cursor/result/pending request. Normal QUIC opaque packet send requires inspected SPKI/reciprocal preface/initial session, reserves checked actual occurrence before write; no Runtime borrow through await.
+- Existing normal complete receive reserves before await and returns actual opaque nonclone6field capsule. New owner holding moves it into its own Option BEFORE later role/static configuration validation. Failed later validation leaves real bytes/candidate/control/session/references retained, unavailable, no owner grant. Full disabled-mode/physically-prepared/source/control visitors capture actual new slots and packet/frame realbytes/len/capacity, decoded candidate and control references; each of6actual ingress fields separately varied on real received capsule. No repeated acquisition/decoder/rawhash/Boolean permission factory, no mutable Runtime alias. Original cursor and parent expected0, resultsNone, body0.
+- Unused full original argument calibrated through2 actual funded first Issues in distinct authentic activations;3rd enlarged request reproduces actual codecOversized after actual SYS5/source issue. Existing frame_body already includes4prefix in64KiB: hypothesized outer4byte gap falsified, not adopted as fact. Repair preserves ACTUAL codec error with actual issued message/request, mapsOversized toTooLarge, encoded/packetNone/Finishunsent/grant held, no rollback/reissue. Readonly re-encoding actual message confirms original codec failure. Exact original args retained; no body/clock padding or OOM/recovery claim.
+- Actual funded owner-ingress RED missing normal-mode retention fails;1 pre-overlay attempt while prior full run active refused before input mutation/Cargo, recorded separately (not semantic RED). Owner green normal2build/3focusedpass; expanded4network/2wholemode pass; driver refactor first E0308compile only then fixed4pass. Actual decoded-candidate omission fails real field1 binding; conditional retention after validation fails real received capsule presence. Frame first E0502compile only; fixed funded capacity test actualMalformed vsTooLarge exposes lost codec classification, not codec bound violation. Actual codec-error retention omission fails None vsOversized; visitor omission fails invisible actual error removal. Network prior3 false controls/pktRED/actualQUICRED plus2compile failures/full1074 separately pinned. All actual children drained/reaped and mutants unadopted.
+- Continue same W4-D: parent registered owner-ready origin association + actual own full original Core/args/global ordinal/activation/real received request, genuine combined source/I3 budget/clock/oneuse at actual lower entry; actual result retained before SYS5 finalizer/report/reply and real numeric/allocation resources before body. Existing no-budget ordinary I3 admission immediately executes body, so do not call it from an unguarded Admit interval or invent another handler budget. Preserve old reconnect2 consumer. Entire finite S→T→S transport/IDs/another activation and actual subsequent all3 held-state re-freeze remain. Astra at material contract counterexample or D integrated acceptance; STOP before E.
+- First original statement source data → genuine real private QUIC → actual owning owner unadmitted data retention. Owner semantic admission/I3 consumption/body/result/reply/source acknowledgment, whole distributed causality, subsequent update/multi-statement activation not realized. Data hashes/static TLS are not custody/body permission/OS authentication; no fresh full proof-audit/workspace/privacy/recovery/alpha campaign.
+- Sole main6struct current field/supplier/caller/alias/resource review linked prior5network11origin8sourceIssue/parent/child/fabric inventories. No subagent/Oracle independent acceptance, prior199 proof receipt retains original scope. Numeric/actual owner body allocations and source/I3/lower outcome relation remain before dependent use.
+- Same Report2614/currentLAB plan/documentation/status/task/sample dashboard/ledger update; production Rust/Lean/Canon unchanged. No roadmap adoption/publicwire/source or sample roots/taxonomy change. Current full make docs and final metadata/actual authorized Git follow separately.
+- df/free064553UTC root11GiB/RAM10GiBavailable/swap9.3GiBfree; quota063947UTC70% next073947UTC. No extra cleanup/external notification.
+- plan/current docs/progress/whole tasks/sample dashboard/ledger updated; full docs/Git follow separately; same D continues.
+
+
+### 2026-10-01T07:49:59.574496+00:00 — Owner requested temporary stop / safe Cargo cleanup
+
+W4-Dはownerの2026-10-01の依頼で一時停止しました。全1076件が通過した実source→実QUICデータ→owner保持の地点を保存し、次の意味的owner/I3/body/結果/資源/source受領の実装には進んでいません。再開にはownerの指示が必要です。D完了・週間上限到達による停止ではなく、Plan250/I3-4の別個のpauseも保持します。
+
+ディスクはownerの2026-10-01の依頼で整理済みです。直前の空き約4.8GiBから約12.4GiBへ、約7.6GiBを回収しました。repo targetと5か所のCargo専用buildだけを削除し、研究保存先133841ファイルとrepo追跡6403ファイルの削除前後のhash一致を確認しました。実験source・証明・検証ログ・receipt・browser状態は保持しています。Cargo build成果物は再開時に再生成します。詳細は外部storage-owner-pause-20261001-v1/RESULT.json。
+
+- Before: /dev/sda2 root188G/174Gused/4.9Gavailable; RAM15Gi/10Giavailable, swap15Gi/8.4Giavailable. lsblk/findmnt: rootext4, no external /mnt/mirrorea-work mount. du repo7.4G,target7.1G,.git226M,.cargo/.lake absent; integration9.0G.
+- Commands: exact6 cargo clean --locked --offline --manifest-path repoCargo.toml --target-dir pinned path; --confirm guard and no active Cargo/Rust compiler. Only root target and five Cargo-cache-tag/rustc-info verified standalone build directories, no general temp/generated/log cleanup helper. Raw commands/log hashes/manifests in /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261001-v1/RESULT.json.
+- After: 13325164544 free bytes; reclaimed 8153698304 bytes. All 133841 preexisting research files/8601078951 bytes and 6403 tracked files hash-identical; symlinks retained. Actual38path source receipts remain linked in W4_CHECK, no deletion of experiment sources/proof/failed-run logs/original receipts/browser state.
+- Current source38/full1076 already passed before cleanup, not re-tested after deleting binaries. Current network owner-retention/pause full make docs v1 passed; final metadata/Git separately. D remaining gate unrun because owner paused/incomplete consumers; no completion claim. No subagents/Oracle/external notification, no new report/roadmap/Canon or sample taxonomy.
+- plan/documentation/status/progress/tasks/sample dashboard/RESUME updated to paused and preserved exact restart point; READ_LEDGER6883. Same Report2614. Existing normal commit/push authorization retained; actual Git result recorded separately.
+
+- 2026-10-01T07:54:32.785070+00:00: full make docs network owner-retention/pause v1 exit0 (2026-10-01T07:49:59.757083+00:00–2026-10-01T07:54:19.872795+00:00); production Rust restored, Cargo target absent after cleanup. Final38source/13current run families/prior11network/6struct inventory/ledger prefix/snapshots/cleanup preservation/diff checked separately. Authorized actual Git receipt GIT-NETWORK-OWNER-v1.json; W4-D remains owner-paused, no implementation resumed.
+
+- 2026-10-01T07:55:54.352523+00:00: first final-focused script stopped on earlier11 receipt schema missing runs_sha256 (PythonKeyError, not Rust failure/semanticRED). No focused success receipt produced; source38/cleanup unaffected. Corrected verification checks their pinned RESULT/RESTORED, actual RUNS equality and log hashes, while new13 retains explicit RUNS hash; actual result in FOCUSED-NETWORK-OWNER-v1.json follows.

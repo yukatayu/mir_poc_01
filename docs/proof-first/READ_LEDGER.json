@@ -51653,5 +51653,54 @@
     "status": "read-reconsulted-scoped",
     "role": "Read-only scoped reconsult actual I3 decoded-owner reservation/stage/clock/resolve/one-use handoff/finalizer and generic image/start/promotion fields, before new owner/body consumer; unchanged since prior source-issue reference and not whole-file reread; external unadopted D component, no full D acceptance",
     "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys5_i3_original_source_process.rs",
+    "sha256": "d12b241f0723d3d73c0f1708146b08658cef4cd71d6a14027385fe99dad9206d",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Main authored/reviewed current normal source packet/pre-Finish/oneuse/static-ownFDtransport/own owner ingress retention before fallible validation/new full captured fields/actual codec error holding; full body unenabled; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys5_i3_source_control.rs",
+    "sha256": "62d1757d335cacda9cc6477e95155cb9843cefb3a386e0bb22c05a24842b9e2b",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped new original transport-run match and unavailable network-retention hook; actual FD3 sourceIssue codec-failure test parent interval; prior genuine parent origin/control suppliers unchanged; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys5_i3_private_quic.rs",
+    "sha256": "3372aa2d54f88ca7d75c8bb61c7ec9bf00dbb605b1475e6fb6d32f4b530769f7",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped existing normal inspected SPKI/reciprocal preface/one-bidi/default ordinary receive-before-admit/initial acquisition/actual occurrence/frame bounds and new opaque original-packet normal sender/own pending6field capture; old reconnect2 unchanged; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys5_i3_process_runtime.rs",
+    "sha256": "5e64c4da97e2b2970dac014c258cce063d2a51e882b6038d9327f2190b2cd503",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped new full actual untrusted candidate1field capture; read reconsult real Request identity/current authority/tombstone/conditional budget stage and immediate no-budget lower body/finalizer before next normal source-owner/I3 gate; not entire12500line reread; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys5_i3_original_source_process_tests.rs",
+    "sha256": "0699d4fff51c13788dc2718384893b1248929696d3fc23fea25cd611c8d3b3b9",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Main actual3FD3+real TLS/privateQUIC same-frame/cursor-runtime invariant/own data holding/refusal/actual6field mutations/calibrated unused argument codec failure/pre-Finish/7 falsifier controls; separate compile errors/zero-match/non-overlay abort honestly retained; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-frame-capacity-green-v1/sys4_i3_original_source.rs",
+    "sha256": "5c2070e977a31ed924e797637373783c759b923e5529f2e079bf93c978dfb513",
+    "status": "read-reconsulted-scoped",
+    "role": "Read-only reconsult full inert Original declaration/complete args/global fragment pair/owner Core/global ordinal/pure descriptor before next actual lower source-owner join, no new body helper; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mirrorea-i3-probe/src/i3_process_localnet.rs",
+    "sha256": "21ac43d30ebdc0d9a42ae2bfd88e4cd6d4bea75815ad40754d94ac5383d5aa0f",
+    "status": "read-reconsulted-scoped",
+    "role": "Scoped actual ordinary TLS server/client config/quinn one-bidi/no datagrams and live session/preface patterns10680/11160/13555–13680, before isolated generated test-only TLS fixtures; not whole probe reread or fresh probe regression",
+    "at": "2026-10-01T07:44:18.087791+00:00"
   }
 ]
