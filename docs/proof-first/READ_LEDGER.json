@@ -51499,5 +51499,61 @@
     "status": "partial-read-reconsulted",
     "role": "partial legacy publish_prestaged_owner_capability_revocation comparison; old prelaunch weak restore route remains unchanged, new strong selected parent route planned",
     "at": "2026-10-01T03:27:51.910159+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys4_i3_source_authority.rs",
+    "sha256": "9a014251b9a91c9c767d6ba16cc17c87efe220aaf5ad8ce19f34d4e8a2c6dd5f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped actual genuine M9 publication/prior and exact observations/restriction-body checks/opaque publication and readonly actual activation floor seam; parent guard/floor false controls; external unadopted reference, no whole old copied-file reread/proof/final acceptance",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys5_i3_source_control.rs",
+    "sha256": "c10c17daf31babf7e99b3b75df8a84ccd1f383b0475df95b52453ffafefda765",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped owning stage/send/all3 genuine ACK cohort/publication/preflight activation frames/all3 Activated readers, child token/actual ACK retention/full visitor/private aliases/counters; test-only metadata/frame tampering distinguished; external unadopted reference, no whole old copied-file reread/proof/final acceptance",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys5_i3_original_source_process.rs",
+    "sha256": "2ae7c9d95d05c46f61210a9dc30ed4ebb437d51a725c2ee38cc7080659b7ce77",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped same actual owning Runtime activation predicate/sole opaque actual activation receipt constructor; no normal semantic method exposed; external unadopted reference, no whole old copied-file reread/proof/final acceptance",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys5_i3_original_source_process_tests.rs",
+    "sha256": "05ddc2390bb52bc955bcd72f0427a0fbe2b25bf2fd1c36ef0d1b74a8b46eccc4",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped actual3child FD3 parent/all activation/failed sender/third/floor/replay/frame controls and catch_unwind/drain/reap before parent assertions; external unadopted reference, no whole old copied-file reread/proof/final acceptance",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/m9_auth_verification.rs",
+    "sha256": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+    "status": "partial-read-reconsulted",
+    "role": "Partial actual M9 prior/successor/into_successor_publisher and strong authority/snapshot methods reconsulted; not whole file",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys5_i3_process_runtime.rs",
+    "sha256": "49d54c537ef5a36caed7673b605dd6d2bcdd5affe8b4d6066cfdc56be553f4b0",
+    "status": "partial-read-reconsulted",
+    "role": "Partial existing generated owner request/retained pending and I3 budget/clock/one-use entry points consulted for next source consumer; no implementation or acceptance inferred",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-all-activation-green-v5/sys4_i3_original_source.rs",
+    "sha256": "0a8d140f0e493c18738a2447fb63c19800bcd3e73a922658a04414fd0f34c9dd",
+    "status": "partial-read-reconsulted",
+    "role": "Partial full original checked handler/args/global statement declaration and restricted-image match consulted for next source consumer; no executable cursor producer inferred",
+    "at": "2026-10-01T04:12:28.617512+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-semantics/src/surface_v0_classification.rs",
+    "sha256": "60c45bd6b173982d66603791c426352c64d5e9f5e80ae6db60651c05315f853c",
+    "status": "partial-read-reconsulted",
+    "role": "Partial owner_admission_budget_diagnostics: existing source budget requires exactly one lowerable assignment; next continuation must preserve supported source profile. No new multi-statement budget semantics decided.",
+    "at": "2026-10-01T04:12:28.617512+00:00"
   }
 ]

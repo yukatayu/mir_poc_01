@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-01 12:34 JST
+最終更新: 2026-10-01 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -23,7 +23,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-full-prepared-ack-green-v4で、同じ実Runtime/source/実登録control/実準備capsuleから完全なPrepared ACKを発行し、実body・予約済みframe・状態bindingを送信前に保存します。実3子FD3でACK、実送信先のshutdown後の保持、影響を受けない3子目の欠落、登録情報/番号/replayの拒否を検証しました。新しい受信番号による同stage再受理を対照で再現し、親の保持記録で修正しました。通常default/private-QUIC buildと同cut全1043件が通過し、38pathは復元済みです。子はACK後も停止状態で、親の実公開・全子activation・grant再開は未接続です。元source続行/I3 admission/実結果/資源/QUIC対応とD統合判定も残ります。hashは実pre-ACK状態のbindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-all-activation-green-v5で、固定3子の実登録Prepared ACKから親の本物のM9 staged publisherを公開し、同じ実Runtime/floorで全子activation後だけgrant発行状態を再開するcomponentを接続しました。実3子FD3で第三ACK/activation欠落、ACK送信失敗時の実authority/body/frame保持、stage/facts/不正frame/再使用の拒否を検証し、親照合と実floorのguard省略対照も失敗しました。通常default/private-QUIC buildと同cut全1054件が通過し、38pathは復元済みです。元source続行/I3 admission/実結果/資源/QUIC対応、後続updateの再freeze/保持とD統合判定は残ります。semantic grantやbodyはまだ実行しません。hashは実pre-ACK状態の記録bindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 ## ordered self-driven packages
 
@@ -31,7 +31,7 @@ W4-DはSolで実装を継続中です。外部未採用38path参照owning-source
 |---|---|---|
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED reference evidence; original source continuation remains disabled |
-| D whole-state preparation / Macro3/6 middle | Complete actual source/process/fabric/control/owned preparation + full ACK/retention38path/full1043 passed; actual3child FD3 failed ACK/missing third/replay controls. Parent actual publish/all activation before grants | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. Subsequent re-freeze and source/I3/result/resource/QUIC | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
 | D source/I3/result/network / Macro3/6 | One original source cursor, full Core/args/activation/ordinal, existing I3 permit, retained actual result and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
@@ -80,7 +80,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 | W6 |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 |24–60; coherent reusable finite alpha system and final review |
 
-D subrows are contained in D remainder, not extra hours. Startup/ownership and current full prepared ACK/retention full1043 passed. Current full ACK full make docs v1 passed; final metadata focused checked; actual publish/all activation remain incomplete.
+D subrows are contained in D remainder, not extra hours. Startup/ownership and current parent publication/all activation full1054 passed. Current publication/activation full make docs v1 passed; final metadata focused checked; subsequent updates and actual source/I3/results/resources/QUIC remain incomplete.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -94,17 +94,17 @@ One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain sourc
 commands, failures and review scope. No used premise moves to E merely because
 E performs broad regression. Current D199 recipe is preserved/syntax-checked;
 actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
-Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; prior37path component full docs passed; prior38path worker/fabric full docs passed; prior38path control/owning Runtime full docs passed; current38path full ACK full make docs v1 passed; final metadata focused checked. Final
+Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; prior37path component full docs passed; prior38path worker/fabric full docs passed; prior38path control/owning Runtime full docs passed; prior38path full ACK full docs passed; current38path parent publication/all activation full make docs v1 passed; final metadata focused checked. Final
 pins/diff and actual Git result are retained in the external handoff receipts.
 ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
 Heavy commands serial, measured resources; no external notification/publication
 or host-share workspace; preserve all source/evidence/browser state.
 
-週間残量は2026-10-01 02:35:52 UTCの確認で72%（使用28%）でした。次の確認は2026-10-01 03:35:52 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 03:37:20 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 04:37:20 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 ## non-promoted references
 
-The current38path external/unadopted reference retains actual FD3 same owning Runtime/source/control/preparation binding and full Prepared ACK/body/frame retention. Parent actual publication/all activation remain before grants, as does combined source/I3/result/resource/network continuation.
+The current38path external/unadopted reference retains actual FD3 all3 owning preparation/ACK→genuine parent M9 publication→all3 activation before reopening grant state. Source/I3/result/resource/network continuation and subsequent update re-freeze/bounded retention remain before semantic body use.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
