@@ -7,32 +7,32 @@ Plan250/I3-4 separately owner-paused; no automatic model/roadmap switch.
 Owner2026-10-01: authorized Pro consult hitting temporary limit uses explicit xhigh,
 verify actual model/effort, never silently medium; no new Oracle in Sol work.
 
-Predecessor HEAD03fc4f96 pushed/parity0/0; owned docs successor only. All38
-Rust paths restored, no active job at checkpoint. Actual authorized Git receipt:
-d-source-process/GIT-SOURCE-ISSUE-v1.json.
+Predecessor HEAD8685b4d8 pushed/parity0/0; successor docs only. All38 Rust paths
+restored, no active job at checkpoint. Actual authorized Git receipt follows:
+d-source-process/GIT-SOURCE-ORIGIN-v1.json.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process. Current external/unadopted reference:
-D/d-control-development/owning-source-issue-green-v5,38PATHS/SOURCE_PINS
-+SOURCE_ISSUE_FIELD_INVENTORY.json8structs linked prior parent/child/fabric inventory.
-W4_CHECK d_actual_original_source_issue_20261001 pins10 run families, both REDs/actual bugs/test assumptions/2guard mutants.
-Normal default/privateQUIC/full1065 pass; focused11 actual3child source Issue controls.
-Original data/startup/ACK/publication/all activation/old I3 included, no new standalone campaign.
+D/d-control-development/owning-source-origin-green-v4,38PATHS/SOURCE_PINS
++SOURCE_ORIGIN_FIELD_INVENTORY.json11structs linked prior8/parent/child/fabric inventory.
+W4_CHECK d_actual_original_source_parent_origin_20261001 pins9 run families, funded RED/normal feature closure failure/3mutants.
+Normal default/privateQUIC/full1071 pass; focused6origin/11source-Issue/40control pass.
+Prior actual startup/ACK/publication/all activation/old I3/C included, not fresh independent campaigns.
 
-Only owned installed FD3 requester reader after actual all activation mints RegisteredOriginalSourceIssue. Same actual owned source picks original exact global ordinal/Core/full arguments including unused argument, checks actual full result Vec len/capacity/pending and source activation. Actual SYS5 common source/carrier/pending producer checks real current live/floor strong authority. No operation-ID loop, cloned executable seed, mutable Runtime/source/fabric alias or raw token factory.
+Actual prepared parent retains complete inert original declaration; parent source_ordinal is expected metadata only, no executable cursor or Issue advancement. Normal parent Issue grant after actual all3 activation contains independently derived original activation/global ordinal/full descriptor/context/arguments binding. Same actual installed FD3 requester/opaque registered grant reader independently joins its owning original before real SYS5/source request entry. No caller-picked operation loop, raw source-use factory or owner cursor.
 
-Actual SYS5 pending and original source pending message retained before borrowed private codec; exact encoded outgoing data retained before sole opaque actual issue receipt and preallocated Finish. Actual Finish send failure retains active control/frame/source request, marks unavailable and does not clear cursor/pending or permit reissue. Original actual source issue failure retains actual Sys5I3ProcessRuntimeError and already-published SYS4 outgoing carrier; no fabricated completion. Full capture includes actual pending/message/frame len/capacity and lower error kind.
+Only same normal owning requester after actual SYS5/source pending and encoded-data retention constructs opaque ActualOriginalSourceIssueReceipt with actual semantic request digest and exact encoded request hash. Reserved Finish allocates both fixed64byte placeholders before action; fill changes neither address/len/capacity and performs no post-action format/allocation. Real Finish failure retains source request/encoded frame/active grant. Owning parent reads exact registered completion, retains it in pending_source_completion before later validation can fail, independently validates original statement and stores actual nonclone completion in whole-activation preallocated slot before clearing channel/global interval. Reading or generic finishing is not source acceptance.
 
-Missing normal producer RED1 funded fail + frozen companion1pass; initial normal compile errors/default1pass; corrected normal2build but test candidate-field compile failure; extra v1 eight pass/one false test assumption WrongRole vs Closed for owners; v2 normal2build/10pass; extraction failure RED10pass/1proper failure on discarded actual error; GREEN normal2build/11pass. Pending-guard mutant10pass/1proper failed repeat; activation-guard mutant10pass/1proper failed source-activation case (ordinal loop not reached on mutant; both tested green). Every new harness drains/reaps all children before parent assertions; no mutant adopted.
+Funded actual3child RED1 fails discarded parent origin, all children drained/reaped. Greenv1 default compile fails2 feature-closure references; gated successor normal2build/actual parent positive1/actual source Issue11 PASS. Expanded6 origin/11 issue/40 control PASS; final6 origin PASS. Actual FD3 missing/wrong activation/ordinal/descriptor refuses; parent len/capacity missing refuses before any Issue/serial, same funded parent positive; generic Finish refuses protected source-bound grant. Manifest guard omission5pass/1proper failed test (missing passes, wrong activation fails; later ordinal/descriptor not reached on mutant); generic Finish guard omission5pass/1proper fail exposes actual Ok interval closure; semantic request digest fill omission4pass/2proper failures in reserved bytes/actual parent request. No mutant adoption.
 
-Private normal-build source-issue component, first original request only; actual cursor remains0, no actual owner/body/reply/source consumption or QUIC events. Original budgeted-singleton actual pending retains checked budget; source failure-name padding does not introduce one. Existing I3 budget/clock/one-use remains distinct and unconsumed. No broad proofs or OS/auth attestation from hashes or tests. Original source handoff/field supplier/body resource correspondence remains before dependent body use.
+Registered original source issue→actual retained Finish data→actual registered parent origin retention component only. Original requester cursor and parent expected ordinal remain0 pending; results unaccepted and actual body probe0. No owner admission, I3 budget/clock/one-use consumption, lower body/result, private QUIC request/reply events, source acknowledgment or later activation realized. Raw DTO/hash/TLS identity is not custody or OS authentication. Full source/I3 consumption, alias, resource and lower actual-result correspondence remain before any dependent body use.
 
-Continue same W4-D: bind actual registered source issue/request provenance to original owner descriptor at real I3 lower admission, preserve existing budget/clock/one-use, retain actual lower outcomes/resources before reporting, actual private QUIC and same-event redacted causality; subsequent whole-mode re-freeze/retention. Check producer/alias/all entry/resource/refinement before body. Stop only on material contract counterexample or Astra D acceptance; E/W5+/Plan250-I3-4 stay inactive.
+Continue same W4-D: genuine retained parent issue association to registered owner-local action and actual received request/full original descriptor, then combine at actual existing I3 lower admission with clock/budget/oneuse; retain real lower outcomes and actual numeric/allocation resources before post-body finalizer/report/reply, genuine QUIC/same-event redacted causality/source current acknowledgment, subsequent held-state re-freeze/retention and another activation. Stop on material contract counterexample or Astra D integrated acceptance, before E. E/W5+/Plan250-I3-4 inactive.
 
-Sole main focused field/caller/alias/failure/resource/diff review of this component,8struct inventory linked prior16 and actual child/fabric inventories. No subagent or Oracle/current independent acceptance; older reviews do not review this source. General199/20455/177 proof receipt unchanged, no fresh audit.
+Sole main11struct exact field/producer/caller/resource review linked prior8 and parent/child/fabric inventory. No subagent or Oracle; older reviews advisory, not this-cut independent acceptance. No fresh full proof-audit/workspace/privacy/recovery/alpha campaign.
 
-週間残量は2026-10-01 04:38:17 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 05:38:17 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 05:39:31 UTCの確認で70%（使用30%）でした。次の確認は2026-10-01 06:39:31 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
-Actual resources045240UTC root12GiB free, RAM10GiB available, swap9.8GiB free.
-Serial8GiB AS/-j1/testthreads1/core0. Current source-issue full make docs v1 passed; final metadata focused checked;
-final metadata and actual Git checked separately. Same D continues.
+Resources053151UTC root9.5GiBfree/RAM10GiBavailable/swap9.4GiBfree.
+Serial8GiB AS/-j1/testthreads1/core0; no extra cleanup.
+Current source-origin full make docs v1 passed; final metadata focused checked; final metadata and actual Git separately.

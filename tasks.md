@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-01 14:06 JST
+最終更新: 2026-10-01 14:46 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -23,7 +23,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-issue-green-v5で、実登録全3子の準備・親M9公開・全activation後、唯一のrequesterが元sourceの全Core/引数と実cursorから最初の要求を発行し、実SYS5 pendingと送信用データを保持してから実Issue grantを完了するcomponentを接続しました。実3子FD3で通知送信失敗時の要求/制御frame保持、未完了要求の再発行、誤activation/ordinal/floor/kind、全activation結果枠不足とownerのcursor取得を検査しました。要求生成後の実SYS5失敗で元の型付きエラーと実carrierを保持する反例修正、pending/activation照合guardの省略対照も検証済みです。通常default/private-QUIC buildと同cut全1065件が通過し、38pathは復元済みです。実owner admission/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。source cursorは0で保留中、bodyは実行しません。hashは実保持状態の記録bindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-origin-green-v4で、実全3子の準備・親M9公開・全activation後、元sourceのactivation/global ordinal/全Core・引数の対応を実Issue grantに結び、唯一のrequesterが保持した実要求IDと送信データのhashを発行前に確保した完了通知枠へ記録します。親は同じ登録streamの実完了を独立した元sourceと照合し、全activation分を事前確保した枠へ保持してからactive grantを閉じます。実3子FD3で対応欠落・誤activation/ordinal/descriptor、親の保存枠不足、汎用finishの保護抜けを検査し、3種の意図的guard/digest省略対照も失敗を確認しました。通常default/private-QUIC buildと同cut全1071件が通過し、38pathは復元済みです。source cursorと親の期待位置は0のまま、bodyとsource受領は未実行です。owner/I3/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。hashは実保持データの対応で、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 ## ordered self-driven packages
 
@@ -31,8 +31,8 @@ W4-DはSolで実装を継続中です。外部未採用38path参照owning-source
 |---|---|---|
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
-| D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/pending/encoded data/actual error retention38path/full1065 passed; subsequent re-freeze and I3/body/result/resource/QUIC | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original first source request retained; owner join with full Core/args/activation/ordinal, existing I3 permit, retained lower result/resources and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/actual Finish data/parent origin retention38path/full1071 passed; subsequent re-freeze and I3/body/result/resource/QUIC | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D source/I3/result/network / Macro3/6 | Actual first source request and same registered parent origin retained; owner join with full Core/args/activation/ordinal, existing I3 permit, retained lower result/resources and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -80,7 +80,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 | W6 |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 |24–60; coherent reusable finite alpha system and final review |
 
-D subrows are contained in D remainder, not extra hours. Startup/ownership/publication/all activation and current first source issue/full1065 passed. Current publication/activation full make docs v1 passed; final metadata focused checked; subsequent updates and actual owner/I3/body/results/resources/QUIC/source acknowledgment remain incomplete.
+D subrows are contained in D remainder, not extra hours. Startup/ownership/publication/all activation and current first source issue/parent origin/full1071 passed. Prior publication/activation/source-Issue full docs passed; current source-origin full make docs v1 passed; final metadata focused checked; subsequent updates and actual owner/I3/body/results/resources/QUIC/source acknowledgment remain incomplete.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -94,17 +94,17 @@ One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain sourc
 commands, failures and review scope. No used premise moves to E merely because
 E performs broad regression. Current D199 recipe is preserved/syntax-checked;
 actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
-Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; prior37path component full docs passed; prior38path worker/fabric full docs passed; prior38path control/owning Runtime full docs passed; prior38path full ACK full docs passed; prior38path parent publication/all activation full make docs v1 passed; final metadata focused checked; current source-issue full make docs v1 passed; final metadata focused checked. Final
+Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; prior37path component full docs passed; prior38path worker/fabric full docs passed; prior38path control/owning Runtime full docs passed; prior38path full ACK full docs passed; prior38path parent publication/all activation full make docs v1 passed; final metadata focused checked; prior source-issue full make docs v1 passed; final metadata focused checked; current source-origin full make docs v1 passed; final metadata focused checked. Final
 pins/diff and actual Git result are retained in the external handoff receipts.
 ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
 Heavy commands serial, measured resources; no external notification/publication
 or host-share workspace; preserve all source/evidence/browser state.
 
-週間残量は2026-10-01 04:38:17 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 05:38:17 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 05:39:31 UTCの確認で70%（使用30%）でした。次の確認は2026-10-01 06:39:31 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 ## non-promoted references
 
-The current38path external/unadopted reference adds actual first original source Issue/pending/full arguments/encoded data/actual lower failure retention after genuine parent publication/all3 activation. Original cursor stays0 pending. I3 owner/body/result/resource/network/source-ack and subsequent re-freeze/retention remain before semantic body use.
+The current38path external/unadopted reference adds actual registered source Issue/Finish/full original correspondence and real parent origin retention after genuine publication/all3 activation. Original cursor and parent expected position stay0 pending. I3 owner/body/result/resource/network/source-ack and subsequent re-freeze/retention remain before semantic body use.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.

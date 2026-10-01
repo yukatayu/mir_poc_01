@@ -35,9 +35,9 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-issue-green-v5で、実登録全3子の準備・親M9公開・全activation後、唯一のrequesterが元sourceの全Core/引数と実cursorから最初の要求を発行し、実SYS5 pendingと送信用データを保持してから実Issue grantを完了するcomponentを接続しました。実3子FD3で通知送信失敗時の要求/制御frame保持、未完了要求の再発行、誤activation/ordinal/floor/kind、全activation結果枠不足とownerのcursor取得を検査しました。要求生成後の実SYS5失敗で元の型付きエラーと実carrierを保持する反例修正、pending/activation照合guardの省略対照も検証済みです。通常default/private-QUIC buildと同cut全1065件が通過し、38pathは復元済みです。実owner admission/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。source cursorは0で保留中、bodyは実行しません。hashは実保持状態の記録bindingで、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照owning-source-origin-green-v4で、実全3子の準備・親M9公開・全activation後、元sourceのactivation/global ordinal/全Core・引数の対応を実Issue grantに結び、唯一のrequesterが保持した実要求IDと送信データのhashを発行前に確保した完了通知枠へ記録します。親は同じ登録streamの実完了を独立した元sourceと照合し、全activation分を事前確保した枠へ保持してからactive grantを閉じます。実3子FD3で対応欠落・誤activation/ordinal/descriptor、親の保存枠不足、汎用finishの保護抜けを検査し、3種の意図的guard/digest省略対照も失敗を確認しました。通常default/private-QUIC buildと同cut全1071件が通過し、38pathは復元済みです。source cursorと親の期待位置は0のまま、bodyとsource受領は未実行です。owner/I3/body/result/資源/QUIC/source受領、後続updateの再freeze/保持とD統合判定は残ります。hashは実保持データの対応で、OS認証や後続grantの不変条件ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
-週間残量は2026-10-01 04:38:17 UTCの確認で71%（使用29%）でした。次の確認は2026-10-01 05:38:17 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 05:39:31 UTCの確認で70%（使用30%）でした。次の確認は2026-10-01 06:39:31 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

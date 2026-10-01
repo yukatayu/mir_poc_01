@@ -51611,5 +51611,47 @@
     "status": "read-reconsulted",
     "role": "Full reconsult of existing conditional actual result/history/lower queue origin proof, not a proof of the new Rust source component or fresh kernel execution",
     "at": "2026-10-01T05:00:45.928760+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys4_i3_original_source.rs",
+    "sha256": "5c2070e977a31ed924e797637373783c759b923e5529f2e079bf93c978dfb513",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped full original context/descriptor/global ordinal data binding helper; no executable cursor or authority from digest; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys5_i3_source_control.rs",
+    "sha256": "3d5b77553bef82d23087d840cd2957c516d162378e6608cf1e06840fa900a486",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Main authored/reviewed scoped normal source-statement Grant data/registered reader/fixed64byte preflighted Finish/actual digests/real parent source declaration and preallocated slots/actual registered completion retention/generic finish refusal/counters/3 false controls, no owner body; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys5_i3_original_source_process.rs",
+    "sha256": "57032d3dec1863965ad0cded32f12969152b82bf24027fe9b072266de1673e6d",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped prepared parent retains inert original; actual owning source checks registered original activation/ordinal/full descriptor before lower issue and sole opaque receipt binds actual pending identity/encoded bytes; existing runtime and result slots preserved, body/source ack disabled; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys5_i3_source_control_tests.rs",
+    "sha256": "e14c0c84f1e4f90fb85a05b044b6ae4436336941921abe347286b0ab67b18bf9",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Scoped new missing/malformed issued-request completion control and same reserved buffer pointer/len/capacity fixed digest fill positive/fault cases, test-only data markers not normal source origin; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys5_i3_original_source_process_tests.rs",
+    "sha256": "73d0b340a59e0622f74fbc79fd6c3efa78116cee356e314b022178508e37f614",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Main authored/reviewed source-origin actual3FD3 parent retention/manifest negatives/parent allocation slots/generic finish protection/same actual child request-ID/encoded bytes association and funded companions; all child processes drained/reaped on guard mutation failures; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-source-origin-green-v4/sys5_i3_process_runtime.rs",
+    "sha256": "99ba3e4a45e2bea84ebfef6bcb1611ca424bcc4db4ac7afe1740a36c90cae1b2",
+    "status": "read-reconsulted-scoped",
+    "role": "Read-only scoped reconsult actual I3 decoded-owner reservation/stage/clock/resolve/one-use handoff/finalizer and generic image/start/promotion fields, before new owner/body consumer; unchanged since prior source-issue reference and not whole-file reread; external unadopted D component, no full D acceptance",
+    "at": "2026-10-01T05:40:07.441624+00:00"
   }
 ]
