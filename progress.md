@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-01 08:46 JST
+最終更新: 2026-10-01 10:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,7 +60,7 @@ sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owne
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-週間残量は2026-09-30 23:29:16 UTCの確認で74%（使用26%）でした。次の確認は2026-10-01 00:29:16 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-01 00:29:54 UTCの確認で73%（使用27%）でした。次の確認は2026-10-01 01:29:54 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -72,13 +72,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用28path参照owned-source-bootstrap-green-v7で、元handler全体・Core・全引数・global文順序の保持10件、実3子FD3起動21件、通常default/private-QUIC buildと同cutの全937feature検査が通過しました。単一の実parent準備から独立expected imageと制限付きimageを生成し、FD3認証・実M8出自・role/cohort/restriction/activation/source/authority照合後、同じprocess runtime全体を所有します。requesterだけが元source進行状態と全activation分の結果枠を持ち、remote ownerはinert情報を持ちます。全子は停止状態、親のgrantも閉じたままで、実sender喪失時は全channelを利用不可にします。28pathは復元済みです。次は全runtime/source/pending/resultsを保持した実準備・完全なprepared-state ACK・親の公開・全子有効化です。元source続行とI3 admission・実結果・資源・QUIC対応、D統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用32path参照retained-m8-source-custody-binding-green-v1で、実source進行・保持結果・process pending/clock/予約・M8 owner queue/result/trace・M9全観測とauthority mapキーの読取binding部品を検査しました。通常default/private-QUIC buildと同cutの全973件が通過し、32pathは復元済みです。元source情報10件と実3子FD3起動21件はこの全体回帰に含まれます。各部品の省略対照を保存し、初期fixture不備は有効な反例と区別しました。これらは実状態の等値照合用で、認証やprepared ACKを発行しません。LocalFabric/M8 local・relation・designated/backend/control全体のbindingと、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + exact original-data10/FD3-startup21 + current28path normal default+QUIC/full937 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; full retained prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current32path readonly state-binding normal default+QUIC/full973 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; LocalFabric/local/relation/designated/backend/control suppliers and full retained prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -619,3 +619,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-30 21:32 JST: C/Dの23path統合cutで通常build・全906件通過、通常activation/故障注入入口の不在をcompiler対照2件で確認、23path復元。実process所有/bootstrap/source接続へ継続。
 
 - 2026-10-01 08:38 JST: 元handler全断片/引数/文順序10件、実FD3起動21件と全937件通過。全runtimeの停止所有と親の初期grant閉鎖/喪失時全channel凍結を検証、28path復元。全状態準備ACK/公開/有効化へ継続。
+
+- 2026-10-01 10:04 JST: 実source/process/M8 owner/M9読取bindingの省略対照と同cut通常2build/全973件を検証、32path復元。完全なLocalFabric/prepared ACKは未接続のまま同じDを継続。

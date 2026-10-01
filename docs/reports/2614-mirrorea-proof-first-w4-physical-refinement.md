@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Connect registered authority preparation to the SAME whole frozen Runtime/control/original-source/pending/results state, authentic full prepared-state ACK, parent publication and all activation before source/I3/results/resource/QUIC use. No partial authority receipt or debug/observer digest substitutes for full retained-state binding. Continue same Sol D; Astra for material semantic boundary or integrated acceptance, stop before E. Sole main/no subagents.
+Complete actual LocalFabric/M8 local/relation/designated/backend/control suppliers; bind SAME frozen Runtime/source/pending/results and actual registered preparation before full authentic prepared ACK, genuine parent commit/all activation. Then combine original source with actual I3 one-use admission/results/resources and QUIC same-event observations. Partial receipts, launch seed, Debug/public observer or nonce-only hashes cannot substitute. Continue same Sol D; Astra for material semantic boundary or integrated acceptance, stop before E. Sole main/no subagents.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Updated current28path original-source/FD3 startup10/21/full937, frozen whole-runtime ownership and remaining full preparation/ACK/publication/activation/source-I3/network gates.
+Updated current32path readonly source/process/M8 owner/M9 binding/full973, distinct startup evidence, full LocalFabric/backend/control and prepare/ACK/publication/activation gates.
 
 ## docs/project-status.md update status
 
-更新済み: 元handler情報と実FD3起動10/21/全937を記録。停止中の全runtime所有まで、全状態準備ACK/公開/有効化とsource/I3/QUICは未接続。Canon/Plan250 pause保持。
+更新済み: 実状態binding部品と全973件を記録。完全なLocalFabric/backend/control、prepared ACK/公開/有効化とsource/I3/QUIC未接続。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-Updated original-source10/FD3-startup21/current28path normal builds/full937 and remaining gates. Sample roots/taxonomy unchanged; this is private component evidence, not source/network workflow completion.
+Updated current32path actual readonly binding/full973 and remaining gates. Sample roots/scripts/taxonomy unchanged: samples/README.md/scripts/README.md更新不要。Private component evidence; not source/network workflow completion.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: exact28path original-data/authentic FD3 frozen whole-Runtime startup; source10/startup21/full937 and normal builds. Main source/factory/static-auth/initial-grant/loss review; no new independent agent/Oracle. No semantic continuation or complete prepared-state ACK consumer introduced. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: exact32path normal builds/full973 readonly source/process-envelope/M8 owner/M9 binding; full LocalFabric/backend/control supplier and actual prepare/ACK consumer incomplete. Main changed-source/field/falsifier review; no new independent agent/Oracle. Snapshot maintenance, no new authority contract. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: exact28path normal builds/original-data10/actual FD3 startup21/full937 pass; every overlay restored. Full retained prepared-state ACK/publication/all activation, combined source/I3/results and actual D QUIC chain remain unrun because consumers are incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign; earlier receipts remain scoped. Current full make docs original-source/FD3 startup v1 passed; final metadata focused checked. Main review only; prior Oracle does not review this new source cut.
+Current Sol checkpoint: exact32path normal builds/full973 pass; all overlays restored. Full LocalFabric/local/relation/designated/backend/control binding, complete prepared-state ACK/publication/all activation, source/I3/results and D QUIC chain remain unrun because consumers are incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign; earlier receipts scoped. Current state-binding full make docs v1 passed; final metadata focused checked. Main review only; earlier Oracle does not review this cut.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessord2cd7665 committed/pushed with0/0 parity. Successor only eleven owned evidence/status docs; production Rust/Lean/Canon unchanged and28 overlay paths restored. Reference external/unadopted. Actual authorized --no-gpg-sign commit/normal push/parity follows in GIT-OWNED-SOURCE-BOOTSTRAP-v1.json.
+Current predecessord5847ee9 committed/pushed with0/0 parity. Successor only twelve evidence/status/memory docs; production Rust/Lean/Canon unchanged and32 overlay paths restored. Reference external/unadopted. Actual authorized --no-gpg-sign commit/normal push/parity follows in GIT-RETAINED-STATE-BINDING-v1.json.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4622,3 +4622,26 @@ W4-DはSolで実装を継続中です。外部未採用28path参照owned-source-
 - plan/current docs/whole tasks snapshot/sample dashboard/ledger updated. No new report/normative statement/sample taxonomy. Full make docs/Git pending; same W4 continues, no external completion notification.
 
 - 2026-09-30T23:46:21.969276+00:00: full make docs original-source/FD3 startup v1 exit0 (2026-09-30T23:38:50.828043+00:00–2026-09-30T23:43:07.643183+00:00); baseline Rust restored. Final focused14receipt/source28pin/ledger-prefix/current snapshots/diff checks precede eleven-doc save; actual Git result GIT-OWNED-SOURCE-BOOTSTRAP-v1.json. Same W4 continues.
+
+
+### 2026-10-01T01:04:28.274793+00:00 — Readonly actual retained-state binding components
+
+W4-DはSolで実装を継続中です。外部未採用32path参照retained-m8-source-custody-binding-green-v1で、実source進行・保持結果・process pending/clock/予約・M8 owner queue/result/trace・M9全観測とauthority mapキーの読取binding部品を検査しました。通常default/private-QUIC buildと同cutの全973件が通過し、32pathは復元済みです。元source情報10件と実3子FD3起動21件はこの全体回帰に含まれます。各部品の省略対照を保存し、初期fixture不備は有効な反例と区別しました。これらは実状態の等値照合用で、認証やprepared ACKを発行しません。LocalFabric/M8 local・relation・designated/backend/control全体のbindingと、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Startd5847ee9 clean. Same Report2614; exact32path source and21 command/log/result/restoration families: W4_CHECK d_retained_state_binding_20261001.
+- Private framed field-name/length/data SHA256 writer uses checked lengths and streamed immutable typed DTOs; ignored serialization refusal cannot finish. Not authentication, state export, source/admission grant or a prepared ACK.
+- Original source capture visits full inert data plus actual backing fragments/Core/global order/full arguments/program/requester. Role capture covers actual requester cursor/pending/activation/result slots and actual retained SYS5 messages including full carrier and failure identity; owners retain inert declaration only. Field probes use genuine existing SYS5/I3/M8 handoff, not a new normal D cursor.
+- Readonly actual process-envelope capture exhaustively guards every SYS5 Runtime field and visits pending/exact carriers/attempts/tombstones/live nonClone issuance/resolution/terminal consumption/clocks/lifecycle/counters/fault fields. Nested LocalFabric is explicitly excluded here and remains a separate required supplier. A process-only hash is not complete prepared-state evidence.
+- Readonly actual M8 owner capture covers real queue/primary result/trace/counters/full plans/Core/source root/store/entity provenance/relations/authority inventory and source bindings/keys/use. Source control binding includes actual Arc allocation identity and all locked logical manifest/arguments/cursor/activation/predecessor/pending phase/failures; inert clones and distinct equal-logical allocations remain distinct. No raw control export, new live cursor, credential Clone or admission constructor.
+- Complete typed M9 generation capture includes all three actual observation maps, actual nested M8 authority keys+records and fresh-relation backing keys. It directly shares full data capture with a fixed empty integrity field, never calls the old Debug-derived checksum for prepared equality. Existing image/restore checksum and trust contract preserved. Data equality grants no installation authority.
+- Framing RED1positive2properfail ->4GREEN. Facts-only M9 body-observation RED1positive1properfail; original DTO-only actual arguments/order RED3positive2properfail ->5GREEN. ProgressRED-v1 and diagnostic v1/v2/v3 failed before intended assertions (private projection compile error and MissingRequiredMembership); not valid omission falsifiers. Fixture corrected by a real declared T operation, preserving exact membership validation; progressRED-v2 three proper failures ->8GREEN. Process store-only RED1positive5properfail ->6GREEN; M8 epoch-only RED1positive5properfail ->6GREEN; authority values-only RED1positive3properfail ->10GREEN; M9 DTO backing keys RED1positive2properfail ->3GREEN; source allocation-only RED3positive2properfail ->five GREEN within full973. All predecessors retained.
+- Exact32path external reference: normal default/privateQUIC checks pass; full combined-feature973 pass0fail/ignored/filtered,152.25s. All32 baseline paths restored. Original-data10/actual FD3 startup21 remain inside this full regression, not new standalone campaigns. Source-custody five GREEN tests passed inside973; no separate focused GREEN run.
+- Normal-build private readonly retained-state component in external/unadopted source. Whole LocalFabric/M8 local-relation-designated/backend/control capture and SAME frozen Runtime preparation/full prepared-state ACK/parent publication/all activation remain incomplete. No original-source continuation/source-I3 combined use/result/resource/QUIC D chain or D integrated acceptance. No fresh199/full-workspace/privacy/recovery/alpha/119 adoption/Canon guarantee.
+- Complete actual LocalFabric/M8 local/relation/designated/backend/control suppliers; bind SAME frozen Runtime/source/pending/results and actual registered preparation before full authentic prepared ACK, genuine parent commit/all activation. Then combine original source with actual I3 one-use admission/results/resources and QUIC same-event observations. Partial receipts, launch seed, Debug/public observer or nonce-only hashes cannot substitute.
+- Measured2026-10-01T01:01:07Z: root188G/166G used/14G available; RAM15Gi/6.6Gi available; swap15Gi/13Gi used. Serial8GiB address-space/-j1/testthreads1 preserved; no cleanup required, source/proof/failure evidence and useful cache retained.
+- Actual own telemetry2026-10-01T00:29:33.837Z, receipt quota-20261001T002954Z.json captured00:29:54.620334UTC: weekly used27%, remaining73%. Next read no earlier than01:29:54UTC; owner-only reset, near50% sensible checkpoint stop.
+- Sole main focused changed-source/field inventory/actual omission tests/read-only side effects/baseline restoration review. No new independent planner/reviewer/Oracle under owner sole-main constraint. Snapshot maintenance only; no roadmap/phase/authority contract change.
+- Same Report2614, current snapshots and existing LAB memory. Correct stale C-current/D-dependency wording in plan/00-index.md to actual D implementation. Sample roots/scripts/taxonomy unchanged: samples/README.md/scripts/README.md updates unnecessary. Existing22 report sections retained.
+- plan/current docs/whole tasks snapshot/sample dashboard/ledger updated. Full make docs/Git pending; same W4-D continues, no external completion notification.
+
+- 2026-10-01T01:10:46.186795+00:00: full make docs retained-state binding v1 exit0 (2026-10-01T01:04:49.183889+00:00–2026-10-01T01:09:21.935748+00:00); baseline Rust restored. Final source32/21receipt/ledger-prefix/current snapshot/diff checks precede twelve-doc save; actual Git result GIT-RETAINED-STATE-BINDING-v1.json. Same W4-D continues.

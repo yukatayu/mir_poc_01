@@ -51149,5 +51149,103 @@
     "status": "main-authored-reviewed-scoped",
     "role": "partial private actual authority-facts binding method/canonical restriction comparison; observations remain prepared-state scope; external unadopted owned-source-bootstrap-green-v7",
     "at": "2026-09-30T23:38:22.136423+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/i3_private_prepared_binding.rs",
+    "sha256": "1436ebf11c7d2c1494ed038245cbf0bfa9cd9622c71ffa71279940a7fd59720f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "full new57line framed streaming writer and four tests; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m8_private_prepared_owner_binding.rs",
+    "sha256": "1d540dc069d9dbf662720de5404d5e19a751bce39d30590911f30793f6caffad",
+    "status": "main-authored-reviewed-scoped",
+    "role": "full new76line actual M8 owner capture; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m8_owner_admission_gate.rs",
+    "sha256": "033e3bc86fdb6e300d463c275721ae07ffe736402fb45bc3eca482ecac54f8b8",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial appended readonly binding/issuance/gate exhaustive field guards; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m8_runtime_authority.rs",
+    "sha256": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial appended actual backing keys/records capture and four omission controls; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m8_runtime_owner_queue.rs",
+    "sha256": "3db412e96ae183da52bb92241f109a8b4cc2db256e876481669a9e825d985041",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial source Arc+locked actual State capture, owner/source custody tests and test-only factory boundaries; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m8_runtime_admission.rs",
+    "sha256": "925c86c40758380d49c359814124e1e51beb85f2301123cac1aebf0841d7031e",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial full current owner plan DTO/exhaustive guard; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m9_auth_verification.rs",
+    "sha256": "7077ede12c7970c45ab6502a54c1597c08e212c1ba67c10eb51cbd80f87cc5aa",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial shared complete typed capture/no old checksum invocation for prepared equality; backing keys/exhaustive guards; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/m9_auth_verification_i3_tests.rs",
+    "sha256": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial three typed backing-key tests; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys4_i3_original_source.rs",
+    "sha256": "0a8d140f0e493c18738a2447fb63c19800bcd3e73a922658a04414fd0f34c9dd",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial actual declaration/pending request full field capture; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys4_i3_original_source_tests.rs",
+    "sha256": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial three backing argument/global-order/readonly controls; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys4_i3_source_authority_tests.rs",
+    "sha256": "de71ac9363c95ce77cdfb717dc8145a2d3d6c6914f51ef6a67a3f4a81e4cc395",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial genuine M9 body observation/readonly companion; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys5_i3_original_source_process.rs",
+    "sha256": "6dc05dd8e8b939a52bbc6b53063d4a14dbeef9835bd737dc9264f147c770d765",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial added actual role/progress/message/process-envelope capture; nested fabric explicitly excluded; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys5_i3_original_source_process_tests.rs",
+    "sha256": "b4265f48cd7b5af2e3fb8a2a18a3138d4e586db2d8a59fab2b90b8b79341477a",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial new actual SYS5/I3/M8 progress/process positive and omission controls with corrected membership fixture; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1/sys5_i3_process_runtime.rs",
+    "sha256": "49d54c537ef5a36caed7673b605dd6d2bcdd5affe8b4d6066cfdc56be553f4b0",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial feature-aware existing dead-code expectation only; no normal execution change; external unadopted retained-m8-source-custody-binding-green-v1; unlisted existing sections not new whole-file reads",
+    "at": "2026-10-01T01:04:28.274793+00:00"
   }
 ]

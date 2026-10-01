@@ -2519,3 +2519,28 @@ Normal-build private frozen startup component in external/unadopted source. No e
 Connect registered authority preparation to the SAME whole frozen Runtime/control/original-source/pending/results state, authentic full prepared-state ACK, parent publication and all activation before source/I3/results/resource/QUIC use. No partial authority receipt or debug/observer digest substitutes for full retained-state binding.
 
 Owner asked status/step estimates2026-10-01; low-confidence active hours: D remainder20–40; full prepare/ACK/publish/activate4–8; source/I3/results6–12; QUIC/events/refusals4–8; Astra acceptance2–4. E16–40/W540–100/W640–100/W724–60 remain provisional/inactive.
+
+
+### 2026-10-01T01:04:28.274793+00:00 — Readonly actual retained-state binding components (LAB evidence)
+
+W4-DはSolで実装を継続中です。外部未採用32path参照retained-m8-source-custody-binding-green-v1で、実source進行・保持結果・process pending/clock/予約・M8 owner queue/result/trace・M9全観測とauthority mapキーの読取binding部品を検査しました。通常default/private-QUIC buildと同cutの全973件が通過し、32pathは復元済みです。元source情報10件と実3子FD3起動21件はこの全体回帰に含まれます。各部品の省略対照を保存し、初期fixture不備は有効な反例と区別しました。これらは実状態の等値照合用で、認証やprepared ACKを発行しません。LocalFabric/M8 local・relation・designated/backend/control全体のbindingと、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+Private framed field-name/length/data SHA256 writer uses checked lengths and streamed immutable typed DTOs; ignored serialization refusal cannot finish. Not authentication, state export, source/admission grant or a prepared ACK.
+
+Original source capture visits full inert data plus actual backing fragments/Core/global order/full arguments/program/requester. Role capture covers actual requester cursor/pending/activation/result slots and actual retained SYS5 messages including full carrier and failure identity; owners retain inert declaration only. Field probes use genuine existing SYS5/I3/M8 handoff, not a new normal D cursor.
+
+Readonly actual process-envelope capture exhaustively guards every SYS5 Runtime field and visits pending/exact carriers/attempts/tombstones/live nonClone issuance/resolution/terminal consumption/clocks/lifecycle/counters/fault fields. Nested LocalFabric is explicitly excluded here and remains a separate required supplier. A process-only hash is not complete prepared-state evidence.
+
+Readonly actual M8 owner capture covers real queue/primary result/trace/counters/full plans/Core/source root/store/entity provenance/relations/authority inventory and source bindings/keys/use. Source control binding includes actual Arc allocation identity and all locked logical manifest/arguments/cursor/activation/predecessor/pending phase/failures; inert clones and distinct equal-logical allocations remain distinct. No raw control export, new live cursor, credential Clone or admission constructor.
+
+Complete typed M9 generation capture includes all three actual observation maps, actual nested M8 authority keys+records and fresh-relation backing keys. It directly shares full data capture with a fixed empty integrity field, never calls the old Debug-derived checksum for prepared equality. Existing image/restore checksum and trust contract preserved. Data equality grants no installation authority.
+
+Framing RED1positive2properfail ->4GREEN. Facts-only M9 body-observation RED1positive1properfail; original DTO-only actual arguments/order RED3positive2properfail ->5GREEN. ProgressRED-v1 and diagnostic v1/v2/v3 failed before intended assertions (private projection compile error and MissingRequiredMembership); not valid omission falsifiers. Fixture corrected by a real declared T operation, preserving exact membership validation; progressRED-v2 three proper failures ->8GREEN. Process store-only RED1positive5properfail ->6GREEN; M8 epoch-only RED1positive5properfail ->6GREEN; authority values-only RED1positive3properfail ->10GREEN; M9 DTO backing keys RED1positive2properfail ->3GREEN; source allocation-only RED3positive2properfail ->five GREEN within full973. All predecessors retained.
+
+Normal-build private readonly retained-state component in external/unadopted source. Whole LocalFabric/M8 local-relation-designated/backend/control capture and SAME frozen Runtime preparation/full prepared-state ACK/parent publication/all activation remain incomplete. No original-source continuation/source-I3 combined use/result/resource/QUIC D chain or D integrated acceptance. No fresh199/full-workspace/privacy/recovery/alpha/119 adoption/Canon guarantee.
+
+Complete actual LocalFabric/M8 local/relation/designated/backend/control suppliers; bind SAME frozen Runtime/source/pending/results and actual registered preparation before full authentic prepared ACK, genuine parent commit/all activation. Then combine original source with actual I3 one-use admission/results/resources and QUIC same-event observations. Partial receipts, launch seed, Debug/public observer or nonce-only hashes cannot substitute.
+
+Sole main focused changed-source/field inventory/actual omission tests/read-only side effects/baseline restoration review. No new independent planner/reviewer/Oracle under owner sole-main constraint. Snapshot maintenance only; no roadmap/phase/authority contract change.
+
+Same Report2614, current snapshots and existing LAB memory. Correct stale C-current/D-dependency wording in plan/00-index.md to actual D implementation. Sample roots/scripts/taxonomy unchanged: samples/README.md/scripts/README.md updates unnecessary. Existing22 report sections retained.

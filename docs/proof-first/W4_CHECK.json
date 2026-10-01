@@ -54975,5 +54975,360 @@
         "scope": "full make docs over restored Rust/current source-startup evidence and snapshots; final metadata focused checked afterward"
       }
     ]
+  },
+  "d_retained_state_binding_20261001": {
+    "at": "2026-10-01T01:04:28.274793+00:00",
+    "head": "d5847ee96a57dce13abf71c36a4024b9f17e2382",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-m8-source-custody-binding-green-v1",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "925c86c40758380d49c359814124e1e51beb85f2301123cac1aebf0841d7031e",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "b04354c64ae2cd1140f98f3167c14418482172bd44b2783d943c3ec2f50bc815",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "3db412e96ae183da52bb92241f109a8b4cc2db256e876481669a9e825d985041",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "7077ede12c7970c45ab6502a54c1597c08e212c1ba67c10eb51cbd80f87cc5aa",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "afe6c3806ded358c42447af1c3359c7e9cca1426096a57957d53908806fe7f74",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "c9113f8dea7a772d6f89236fae48dd83e6f580d04fca478fe1fa170c4b74072a",
+      "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "c29c5c36fb46dcd8a9bb3ff5af2629ba99d19334a1603348becdf212546d054d",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "7f7982a43c207d6a606d7c695055c6da14db0a73769c55e29e64e60912aae013",
+      "crates/mir-runtime/src/sys4_i3_original_source.rs": "0a8d140f0e493c18738a2447fb63c19800bcd3e73a922658a04414fd0f34c9dd",
+      "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "357952a33723da711ffbd7c0387ee68045f712fe600d9aac6fbdd48a06d5a646",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "de71ac9363c95ce77cdfb717dc8145a2d3d6c6914f51ef6a67a3f4a81e4cc395",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "6dc05dd8e8b939a52bbc6b53063d4a14dbeef9835bd737dc9264f147c770d765",
+      "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "b4265f48cd7b5af2e3fb8a2a18a3138d4e586db2d8a59fab2b90b8b79341477a",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "49d54c537ef5a36caed7673b605dd6d2bcdd5affe8b4d6066cfdc56be553f4b0",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "e69bf947117a1d0a77d6290451594fbc04cb1a09d4b58bfd17d2e8b105a16e1c",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "399abfcf72a33e7dee4cc6c21d09d318ab953fdd3408135934d1e35c2b46611c",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+      "crates/mir-runtime/src/i3_private_prepared_binding.rs": "1436ebf11c7d2c1494ed038245cbf0bfa9cd9622c71ffa71279940a7fd59720f",
+      "crates/mir-runtime/src/m8_owner_admission_gate.rs": "033e3bc86fdb6e300d463c275721ae07ffe736402fb45bc3eca482ecac54f8b8",
+      "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "1d540dc069d9dbf662720de5404d5e19a751bce39d30590911f30793f6caffad",
+      "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f"
+    },
+    "source_pins_sha256": "6298ac9597432a1c1cb874cf15d121a3ed3c3fedca94f7383bcabffe3d33e73f",
+    "paths_sha256": "1de08433330d36a3ec9db914e4e9c6c9764029385c118cbca23002b8f414cd7c",
+    "receipts": [
+      {
+        "name": "whole-prepared-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-binding-red-check-v1/RESULT.json",
+        "sha256": "26af77122c1d9d82d166709498b09598fa26a623b76818b160ee07ce38a8068e",
+        "runs_sha256": "ffe6966f54079f2af079f64cbcbece54c03b5963b87014168875d514975a400c",
+        "restored_sha256": "e802003e2e442c294ed96bf50e03d413fd9588a1a41cb6d45c441854a7cc96e0",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 937 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "whole-prepared-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-binding-green-check-v1/RESULT.json",
+        "sha256": "f3d13624fc56c37b9efb8075a19ed577edee68cd3ca848831642cb84e6220f53",
+        "runs_sha256": "67ba569655385d3aaf040bb750de6a606a61a0c591bcaac572ca3ca47fa7b535",
+        "restored_sha256": "d76f16d45c978bc218c90b23678739119f274ae4d2a7ba72365492c5d14ad326",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 937 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "whole-prepared-m9-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-m9-binding-red-check-v1/RESULT.json",
+        "sha256": "54656346d6487c17d23ea9a9810ab89f2cada4d85bce225f6e33f9aba7be8e94",
+        "runs_sha256": "6742bead183735db44b33202e327321a2d5abf16616ea3bc505fb3c739b85102",
+        "restored_sha256": "f9eff8c8f4953a8e53e768e0fab4c2954ce713fe12886769082024476bc2becc",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 941 filtered out; finished in 0.02s"
+        ]
+      },
+      {
+        "name": "whole-prepared-source-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-source-binding-red-check-v1/RESULT.json",
+        "sha256": "868897c389be8a0da93f290e54ca36f36dc457f0de5ffef04f5e19903b41a022",
+        "runs_sha256": "827736491942630a8066b2fa6622909362f7f546036a9c082e746b5a0f34a152",
+        "restored_sha256": "81083f43c01163a9de921a1866dad55583114b4b4c2bcf3825477c1be7bb748f",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 3 passed; 2 failed; 0 ignored; 0 measured; 941 filtered out; finished in 0.36s"
+        ]
+      },
+      {
+        "name": "whole-prepared-source-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-source-binding-green-check-v1/RESULT.json",
+        "sha256": "2a5b0a4e6f8e7a7a313f4530f4389d649774b9f46f0b0accf919db8883d49c84",
+        "runs_sha256": "ee3e1fe2cac1423ece06c0f95b77b831df1643de1a618a487840ee5ae5a5b127",
+        "restored_sha256": "05223d11e462b996ba1e93ef6271d7521f209365b0d07fffce792115e972e997",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 941 filtered out; finished in 0.46s"
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-binding-red-check-v1/RESULT.json",
+        "sha256": "2a3680ca919790c0a8dadee3fd63cb49b051444a75cd3ad34638b70e109231a7",
+        "runs_sha256": "5d453ebe1adb94ad9bd4425d0238f6f3bfb47d7afeece6d427b7741fbc2f0cc8",
+        "restored_sha256": "2b806b9f4eda51e4d25f67c2ef769d73ef33690f824431cbc7aeef1a180b683b",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 946 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-fixture-diagnostic-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-fixture-diagnostic-check-v1/RESULT.json",
+        "sha256": "54c9b5a6dc22ba43c4ec8ae2a74cf9d2c5f6aeecbd69b9bb1c68beedc2c13fa2",
+        "runs_sha256": "ed4447b5c3a89a71009a89c261ab0644298a1f770c28ffb53be4b62778932aef",
+        "restored_sha256": "2eae85964c453fff6f80e1b245cf477f3ff0f343b78aa3a6056caa0a671c04ec",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          null
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-fixture-diagnostic-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-fixture-diagnostic-check-v2/RESULT.json",
+        "sha256": "1f0caa3e0ab028cb44f48d798d17b4a95caa798aaeb33dd7558d5187dc009403",
+        "runs_sha256": "578a2ee240a0024176535f6b7c70c7b0b409484498246aff6efa7bf00187307f",
+        "restored_sha256": "a217528092e0002fdd3f8094c78ab846dfc4dc9c858bb7462a34e092ed330336",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 948 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-fixture-diagnostic-check-v3",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-fixture-diagnostic-check-v3/RESULT.json",
+        "sha256": "c6a29b693b5c65b62e6f9863fd2e30fffb4d512cac757a5c76f43e7f73815664",
+        "runs_sha256": "476bc3487af246d53d72365b47e34da250129844cb911e7371bc50872ad8f995",
+        "restored_sha256": "079f2431264366432b605a6d2479dd70c1593ccea7048dc9bf4954d0c4c8dcd3",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 948 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-binding-red-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-binding-red-check-v2/RESULT.json",
+        "sha256": "d83d274ff9c5547846c7bf84ab6a0bcd6c73aaeb125c5e82350f1a6cc5891cdc",
+        "runs_sha256": "bdc745c39a8a1ed2f7da5b5985e455d50f604f382b37de7662b25cc3ed1c6d49",
+        "restored_sha256": "db210d5828bdc88d133dfc3301bde8844ddae32ec7b801511946f7023c7dd087",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 946 filtered out; finished in 0.28s"
+        ]
+      },
+      {
+        "name": "whole-prepared-progress-binding-green-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/whole-prepared-progress-binding-green-check-v2/RESULT.json",
+        "sha256": "a78766318e35b93e593eb2de070e8ed0c96d91aa4c601d4656e315f8a1e31363",
+        "runs_sha256": "445fec1044f9b5c31d26a9d4a9f51c0f390f5f278c6f96f5e065bac0d7060b5c",
+        "restored_sha256": "af619ff9528cc06d10b5c1bd6c503db23a03d0de88e986dbf27c62f76a96a421",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 941 filtered out; finished in 0.74s"
+        ]
+      },
+      {
+        "name": "retained-process-envelope-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-process-envelope-binding-red-check-v1/RESULT.json",
+        "sha256": "787b6b0414abb92be09f655886f9da0fe772e9726aae36022b41cd9e21498e44",
+        "runs_sha256": "3a42257628a3758bf76477aec98fb246f2abbb9be636f73d293b4f7b3f733fd8",
+        "restored_sha256": "a2cd08576488cbbfcaad5824b4c4e01752998275e2bbd63472f3283fb70b1e56",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 5 failed; 0 ignored; 0 measured; 949 filtered out; finished in 0.33s"
+        ]
+      },
+      {
+        "name": "retained-process-envelope-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-process-envelope-binding-green-check-v1/RESULT.json",
+        "sha256": "5c9b1ac17c0874c80aeb1fdd3a1f8c5c11420e2808e1a2c70f55956eb032c0f0",
+        "runs_sha256": "52497225629832f8bc3d520a62f08385a274db81f8c8e5aae349a26ffae173f5",
+        "restored_sha256": "c80718dd360619ebf01b069ce4ebdcdb593c2323680cd3d115c166ee50f0fbd6",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 949 filtered out; finished in 0.32s"
+        ]
+      },
+      {
+        "name": "retained-m8-owner-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m8-owner-binding-red-check-v1/RESULT.json",
+        "sha256": "797090a9c282d1f45497a8b878b9fd5790c9c965f7ea696c6cba04847a41efa1",
+        "runs_sha256": "253a4d57abf59f7e85f04a67308d6f9c6c3f1f84fedeef44b02d01117ca5b68b",
+        "restored_sha256": "1fcfbf2ec1c8fe28e444b56d38f353b19abaf50f8189914c8e50b1c816f800a1",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 5 failed; 0 ignored; 0 measured; 955 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "name": "retained-m8-owner-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m8-owner-binding-green-check-v1/RESULT.json",
+        "sha256": "ed89a0fc6b0095a3cbbdda6d62c575734c0386723a324b04736d94e4493cc224",
+        "runs_sha256": "bd280b838bd73a0b1f61f8785a800aeb68dcc96f3f87ed92fcca41dbcadb702b",
+        "restored_sha256": "2dc5c888db527b3e3c9f4f4ab8ba473d17ee16aab15d71cefad072d24515b7c0",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 955 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "name": "retained-m8-authority-map-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m8-authority-map-binding-red-check-v1/RESULT.json",
+        "sha256": "63c292767444e9dd3b3371fdc284a2ed3ab1aa1fe1ca6eec57262d6936afe901",
+        "runs_sha256": "07be198af6ccac9fdfcb5ecccb469b977f908fec2942d80829ea56b9b9a9bbdf",
+        "restored_sha256": "24bb6d02f5bd20cc935f7c43bca0720aa8ff2ff62fbafe49cecab6784afd7008",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 3 failed; 0 ignored; 0 measured; 961 filtered out; finished in 0.00s"
+        ]
+      },
+      {
+        "name": "retained-m8-authority-map-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m8-authority-map-binding-green-check-v1/RESULT.json",
+        "sha256": "22429920b00e9319a8563a29d5c1ea062d7cb26c4cd60b4ab0b39b2724ae26d3",
+        "runs_sha256": "b492372cc2f6b549893b4c01c06ee47018f97df7c2619d47d3d7023bf334a6ec",
+        "restored_sha256": "c8cd941c861d2cc3eea7d73ead1b3973834f3bb571f8e7e44fba911d636b5a51",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 955 filtered out; finished in 0.02s"
+        ]
+      },
+      {
+        "name": "retained-m9-typed-map-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m9-typed-map-binding-red-check-v1/RESULT.json",
+        "sha256": "e84e03f41d5bd3c282bdbb963ee7ca15db02ce4ae4f72ba1fb5d4bcd3d3bbedc",
+        "runs_sha256": "f2aa862409743702ea7ca6a9c21cddd80030774a7f5a6cb9710e986c4267a785",
+        "restored_sha256": "f34dae4edddcb0c40cf5e9eea26908f1586c1be1d3ae13932b56d7ceee6689d1",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 965 filtered out; finished in 0.09s"
+        ]
+      },
+      {
+        "name": "retained-m9-typed-map-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m9-typed-map-binding-green-check-v1/RESULT.json",
+        "sha256": "af856804ea79531effaefff354dd22f6504f47d1f16bc8f58b42ddcce63d5935",
+        "runs_sha256": "c4fcd0e683cd37102c1d927273ffb41a34b61cf0736a261273efa78b454d161e",
+        "restored_sha256": "e8bbb44e46f1992177c5e0d235be2a2708b71c28650b63ea45bcc1792d42faae",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 965 filtered out; finished in 0.09s"
+        ]
+      },
+      {
+        "name": "retained-m8-source-custody-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-m8-source-custody-binding-red-check-v1/RESULT.json",
+        "sha256": "bcb0951a82f34e259366a8fc327e5b3dec021cc4628ee49cf1558728b863dfa0",
+        "runs_sha256": "723800aa1b5fa4727fcd700174aa2d8f9fbc544dbbfa076a4c0610892b04a01f",
+        "restored_sha256": "61ec36c24dcbcf85dfc51c1ae527a77f180b0693981706e6bfc96293a6f853df",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 3 passed; 2 failed; 0 ignored; 0 measured; 968 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "name": "retained-state-binding-combined-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-state-binding-combined-check-v1/RESULT.json",
+        "sha256": "8d673904cacbb5036a0de5243a511a838eb2f2a54cf145d60bdac6df9a4185f0",
+        "runs_sha256": "3a7647cc51f323c8c79831fec130698718ef92268ace818086a51de7d28167fa",
+        "restored_sha256": "c428134b82036636fca7a8b099bf8e7f4baea8bb642136163517f082da5dfaca",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 973 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 152.25s"
+        ]
+      }
+    ],
+    "result": "Exact32path external reference: normal default/privateQUIC checks pass; full combined-feature973 pass0fail/ignored/filtered,152.25s. All32 baseline paths restored. Original-data10/actual FD3 startup21 remain inside this full regression, not new standalone campaigns. Source-custody five GREEN tests passed inside973; no separate focused GREEN run.",
+    "primitive": "Private framed field-name/length/data SHA256 writer uses checked lengths and streamed immutable typed DTOs; ignored serialization refusal cannot finish. Not authentication, state export, source/admission grant or a prepared ACK.",
+    "source": "Original source capture visits full inert data plus actual backing fragments/Core/global order/full arguments/program/requester. Role capture covers actual requester cursor/pending/activation/result slots and actual retained SYS5 messages including full carrier and failure identity; owners retain inert declaration only. Field probes use genuine existing SYS5/I3/M8 handoff, not a new normal D cursor.",
+    "process": "Readonly actual process-envelope capture exhaustively guards every SYS5 Runtime field and visits pending/exact carriers/attempts/tombstones/live nonClone issuance/resolution/terminal consumption/clocks/lifecycle/counters/fault fields. Nested LocalFabric is explicitly excluded here and remains a separate required supplier. A process-only hash is not complete prepared-state evidence.",
+    "owner": "Readonly actual M8 owner capture covers real queue/primary result/trace/counters/full plans/Core/source root/store/entity provenance/relations/authority inventory and source bindings/keys/use. Source control binding includes actual Arc allocation identity and all locked logical manifest/arguments/cursor/activation/predecessor/pending phase/failures; inert clones and distinct equal-logical allocations remain distinct. No raw control export, new live cursor, credential Clone or admission constructor.",
+    "m9": "Complete typed M9 generation capture includes all three actual observation maps, actual nested M8 authority keys+records and fresh-relation backing keys. It directly shares full data capture with a fixed empty integrity field, never calls the old Debug-derived checksum for prepared equality. Existing image/restore checksum and trust contract preserved. Data equality grants no installation authority.",
+    "falsifiers": "Framing RED1positive2properfail ->4GREEN. Facts-only M9 body-observation RED1positive1properfail; original DTO-only actual arguments/order RED3positive2properfail ->5GREEN. ProgressRED-v1 and diagnostic v1/v2/v3 failed before intended assertions (private projection compile error and MissingRequiredMembership); not valid omission falsifiers. Fixture corrected by a real declared T operation, preserving exact membership validation; progressRED-v2 three proper failures ->8GREEN. Process store-only RED1positive5properfail ->6GREEN; M8 epoch-only RED1positive5properfail ->6GREEN; authority values-only RED1positive3properfail ->10GREEN; M9 DTO backing keys RED1positive2properfail ->3GREEN; source allocation-only RED3positive2properfail ->five GREEN within full973. All predecessors retained.",
+    "scope": "Normal-build private readonly retained-state component in external/unadopted source. Whole LocalFabric/M8 local-relation-designated/backend/control capture and SAME frozen Runtime preparation/full prepared-state ACK/parent publication/all activation remain incomplete. No original-source continuation/source-I3 combined use/result/resource/QUIC D chain or D integrated acceptance. No fresh199/full-workspace/privacy/recovery/alpha/119 adoption/Canon guarantee.",
+    "next": "Complete actual LocalFabric/M8 local/relation/designated/backend/control suppliers; bind SAME frozen Runtime/source/pending/results and actual registered preparation before full authentic prepared ACK, genuine parent commit/all activation. Then combine original source with actual I3 one-use admission/results/resources and QUIC same-event observations. Partial receipts, launch seed, Debug/public observer or nonce-only hashes cannot substitute.",
+    "resources": "Measured2026-10-01T01:01:07Z: root188G/166G used/14G available; RAM15Gi/6.6Gi available; swap15Gi/13Gi used. Serial8GiB address-space/-j1/testthreads1 preserved; no cleanup required, source/proof/failure evidence and useful cache retained.",
+    "review": "Sole main focused changed-source/field inventory/actual omission tests/read-only side effects/baseline restoration review. No new independent planner/reviewer/Oracle under owner sole-main constraint. Snapshot maintenance only; no roadmap/phase/authority contract change.",
+    "docs_scope": "Same Report2614, current snapshots and existing LAB memory. Correct stale C-current/D-dependency wording in plan/00-index.md to actual D implementation. Sample roots/scripts/taxonomy unchanged: samples/README.md/scripts/README.md updates unnecessary. Existing22 report sections retained.",
+    "quota": "Actual own telemetry2026-10-01T00:29:33.837Z, receipt quota-20261001T002954Z.json captured00:29:54.620334UTC: weekly used27%, remaining73%. Next read no earlier than01:29:54UTC; owner-only reset, near50% sensible checkpoint stop.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-retained-state-binding-v1.json",
+        "sha256": "18aa19da1e2af2d4e8122d1781bd1469946e5bbc481891bdd60c585d8526fd6c",
+        "exit": 0,
+        "scope": "full make docs over baseline restored Rust/state-binding evidence and snapshots; final verification metadata focused checked afterward"
+      }
+    ]
   }
 }
