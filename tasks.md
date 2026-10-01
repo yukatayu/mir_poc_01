@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-01 10:44 JST
+最終更新: 2026-10-01 11:23 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -23,7 +23,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-local-binding-green-v3に、relation・designated・M8Local実状態の読取bindingを追加しました。各部品の省略対照と通常default/private-QUIC build、同cutの全1004件が通過し、37pathは復元済みです。元source情報10件・実3子FD3起動21件と前段source/process/M8 owner/M9 bindingは全体回帰に含まれます。実designated評価・消費とlocal body後の保持状態を対照に使いました。これらは等値照合用で、認証やprepared ACKを発行しません。test専用rendezvousを持つ状態は照合を拒否します。準備script不備とimport不足による失敗を有効な省略反例と区別して保存しました。LocalFabric/backend/control全体、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照retained-local-fabric-binding-green-v4で、実OW1 workerとinstalled source-child LocalFabricの読取bindingを追加しました。実worker FIFO・故障設定とfabric mailbox/result/cache/trace/causality/floor等を捕捉し、全mapキーとST runtime実allocationを照合します。同内容の別runtimeへの置換、省略、実floor読取失敗と子publisher混入の対照を保存しました。通常default/private-QUIC buildと同cutの全1024件が通過し、38pathは復元済みです。元source情報10件・実3子FD3起動21件と前段bindingは全体回帰に含まれます。これは実状態の等値照合用で、認証やprepared ACKを発行しません。OS/kernel全状態のsnapshotや並行更新下の原子性は主張しません。実登録control/owned bootstrapを含む同じ停止runtime/sourceの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 ## ordered self-driven packages
 
@@ -31,7 +31,7 @@ W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-l
 |---|---|---|
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED reference evidence; original source continuation remains disabled |
-| D whole-state preparation / Macro3/6 middle | Readonly source/process/M8 owner/relation/designated/local/M9 binding37path/full1004 passed; actual parent M9 stage6/control40 + physical11 retained. Complete LocalFabric/backend/control binding, same whole Runtime/source/pending/results preparation/ACK/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
+| D whole-state preparation / Macro3/6 middle | Readonly source/process/M8/M9/actual worker/installed child-fabric binding38path/full1024 passed; actual parent M9 stage6/control40 + physical11 retained. Complete registered control/owned bootstrap binding, same whole Runtime/source/pending/results preparation/ACK/publish/activate | 着手可能 within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
 | D source/I3/result/network / Macro3/6 | One original source cursor, full Core/args/activation/ordinal, existing I3 permit, retained actual result and same-event observation | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
@@ -80,7 +80,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 | W6 |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 |24–60; coherent reusable finite alpha system and final review |
 
-D subrows are contained in D remainder, not extra hours. Startup/ownership and current readonly binding/full1004 passed. Current M8 relation/designated/local full make docs v1 passed; final metadata focused checked. Full LocalFabric and prepare/ACK consumer remain incomplete.
+D subrows are contained in D remainder, not extra hours. Startup/ownership and current readonly binding/full1024 passed. Current worker/fabric full make docs v1 passed; final metadata focused checked. Registered control/owned bootstrap and composed full prepare/ACK consumer remain incomplete.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -94,7 +94,7 @@ One Report2614; `W4_CHECK.json`, `READ_LEDGER.json` and `RESUME.md` retain sourc
 commands, failures and review scope. No used premise moves to E merely because
 E performs broad regression. Current D199 recipe is preserved/syntax-checked;
 actual audit rebuilt9 over190 pinned C modules. Earlier fresh197 is separate.
-Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; current37path component full make docs v1 passed; final metadata focused checked. Final
+Prior physical authority full make docs v1 passed. Prior C+D union docs passed. Prior original-source/FD3 startup full docs passed. Prior32path retained-state binding full docs passed; prior37path component full docs passed; current38path worker/fabric full make docs v1 passed; final metadata focused checked. Final
 pins/diff and actual Git result are retained in the external handoff receipts.
 ディスクはowner指示により数時間ごとの自然な区切りと重い増加前に確認します。2026-09-30のCargo package cleanupで再生成可能なmir-runtime成果物15.0GiBを整理し、空き約20GiBを確保しました。元source・証明・失敗記録は保持し、有用なcacheは効率を見て残します。
 Heavy commands serial, measured resources; no external notification/publication
@@ -104,7 +104,7 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 ## non-promoted references
 
-The current37path external/unadopted reference retains authentic FD3/source/image frozen startup and readonly source/process/M8 owner/relation/designated/local/M9 binding components. Full LocalFabric/backend/control capture and prepare/ACK/publication/activation remain before use, as does combined source/I3/result/resource/network continuation.
+The current38path external/unadopted reference retains authentic FD3/source/image frozen startup and readonly source/process/M8/M9/actual worker/installed child-fabric binding components. Full registered control/owned bootstrap capture and prepare/ACK/publication/activation remain before use, as does combined source/I3/result/resource/network continuation.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.

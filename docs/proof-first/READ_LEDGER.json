@@ -51317,5 +51317,82 @@
     "status": "main-authored-reviewed-scoped",
     "role": "two existing cfgtest fixture helpers exposed crate-locally; no normal factory; external unadopted retained-m8-local-binding-green-v3; no new whole-file read of copied sections",
     "at": "2026-10-01T01:39:12.853359+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys4_private_prepared_fabric_binding.rs",
+    "sha256": "ffad42c551aa393465ca9cf3ea13e2b42032b9c0c93a97f33946719319a13660",
+    "status": "main-authored-reviewed-scoped",
+    "role": "full new static59-type visitors plus manual root/route/floor/backend/failure suppliers and actual producer/clone/refusal tests; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys2_execution_backend.rs",
+    "sha256": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial actual worker command, preserved execution ordering/retained-control refactor and actual FIFO/fault/body omission tests; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/i3_private_prepared_binding.rs",
+    "sha256": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial owned transfer with sticky failure and real failed-transfer test; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/m8_runtime_owner_queue.rs",
+    "sha256": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial factor same full logical source state into readonly common State/FrozenSourceBinding visitors; original allocation capture retained; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/m8_private_prepared_local_binding.rs",
+    "sha256": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial inert SourceLocalStage actual runtime and full frozen logical source binding; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/m8_private_prepared_relation_binding.rs",
+    "sha256": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial full9field relation publication carrier capture; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/m9_auth_verification.rs",
+    "sha256": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial complete sealed generation/cache/release/publication/failure typed visitors and closed error kind match; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys3_i3_private_snapshot.rs",
+    "sha256": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial readonly full edge/carrier DTO suppliers/current exhaustive field guards; existing typed snapshot conversion regions scoped; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys4_i3_source_authority_tests.rs",
+    "sha256": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial three test-only genuine restricted ST/OW1/actual body fixtures reused; no new normal factory; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys4_i3_source_authority.rs",
+    "sha256": "1f46ba2c86881b596837d6008dc56dd1c229e4d2f4cc58d276cc9d52e91563b1",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial test-only reexports of those three fixtures; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4/sys4_dispatch.rs",
+    "sha256": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+    "status": "main-authored-reviewed-scoped",
+    "role": "partial current field/type inventory used for static guards plus private module registration; not whole20000line read; external unadopted retained-local-fabric-binding-green-v4; no new whole-file review of copied regions",
+    "at": "2026-10-01T02:17:27.865715+00:00"
   }
 ]

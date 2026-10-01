@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-01 10:44 JST
+最終更新: 2026-10-01 11:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -72,13 +72,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えたため、確定したD実装を再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。現在はDの確定実装packageを進めています。Dの実process/network接続は未完了です。
 
-W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-local-binding-green-v3に、relation・designated・M8Local実状態の読取bindingを追加しました。各部品の省略対照と通常default/private-QUIC build、同cutの全1004件が通過し、37pathは復元済みです。元source情報10件・実3子FD3起動21件と前段source/process/M8 owner/M9 bindingは全体回帰に含まれます。実designated評価・消費とlocal body後の保持状態を対照に使いました。これらは等値照合用で、認証やprepared ACKを発行しません。test専用rendezvousを持つ状態は照合を拒否します。準備script不備とimport不足による失敗を有効な省略反例と区別して保存しました。LocalFabric/backend/control全体、同じ停止runtimeの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-DはSolで実装を継続中です。外部未採用38path参照retained-local-fabric-binding-green-v4で、実OW1 workerとinstalled source-child LocalFabricの読取bindingを追加しました。実worker FIFO・故障設定とfabric mailbox/result/cache/trace/causality/floor等を捕捉し、全mapキーとST runtime実allocationを照合します。同内容の別runtimeへの置換、省略、実floor読取失敗と子publisher混入の対照を保存しました。通常default/private-QUIC buildと同cutの全1024件が通過し、38pathは復元済みです。元source情報10件・実3子FD3起動21件と前段bindingは全体回帰に含まれます。これは実状態の等値照合用で、認証やprepared ACKを発行しません。OS/kernel全状態のsnapshotや並行更新下の原子性は主張しません。実登録control/owned bootstrapを含む同じ停止runtime/sourceの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current37path readonly source/process/M8 owner/relation/designated/local/M9 binding normal default+QUIC/full1004 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; LocalFabric/backend/control suppliers and full retained prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
+| Implementation / operation | C reference806/818 and D M9 component451 pass; parent M9 stage6/control40/physical prepare11 + retained original-data10/FD3-startup21 + current38path readonly source/process/M8/M9 + actual worker/installed child-fabric binding normal default+QUIC/full1024 pass in current external reference; baseline restoration verified | 着手可能: DTO/control/FD3 + global grant + genuine parent stage + real M9/floor/backend component passed; whole-process frozen ownership passed; registered control/owned bootstrap + composed full retained prepared-state/ACK/publication within handoff; source/process gates before use; Astra reviews D acceptance before E |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -623,3 +623,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-01 10:04 JST: 実source/process/M8 owner/M9読取bindingの省略対照と同cut通常2build/全973件を検証、32path復元。完全なLocalFabric/prepared ACKは未接続のまま同じDを継続。
 
 - 2026-10-01 10:39 JST: relation/designated/M8Local読取bindingの省略対照、通常2build/全1004件を検証し37path復元。LocalFabric/実backend/controlと完全ACKは未接続、同じDを継続。
+
+- 2026-10-01 11:17 JST: actual OW1 worker/installed child-fabric全fieldとST実allocationの省略対照、通常2build/全1024件を検証、38path復元。control/同runtime完全ACKは未接続のままD継続。

@@ -231,7 +231,7 @@ C technical conditions are closed in the selected local profile after the review
 
 ## Suggested next prompt
 
-Complete actual whole LocalFabric including live ST/OW1 backend and control/source candidates, then bind SAME frozen runtime/source/pending/results through registered preparation to full authentic prepared ACK and genuine parent publish/all activation before grants. No seed rebuild, Clone of source custody, save_local_cut, partial authority receipt or Debug/public observer digest. Continue same Sol D; Astra for material boundary or integrated acceptance, stop before E.
+Bind actual registered ChildGrantSession/owned bootstrap/preparation/control fields; compose complete SAME owned Runtime process envelope+LocalFabric+original source+control before authentic Prepared ACK. Connect actual in-place M9/floor/backend refresh without moving/rebuilding that Runtime, then all endpoint ACKs, genuine parent publish and all activation before grants. Preserve current-source one-use/actual-result/resource/QUIC gates. Continue same Sol D; Astra for material contract falsifier or D integrated acceptance; stop before E.
 
 ## Plan update status
 
@@ -239,11 +239,11 @@ plan/ updated: current W4 authority/scope plus forward proof checkpoint in the s
 
 ## Documentation.md update status
 
-Updated current37path relation/designated/M8Local readonly binding/full1004; full LocalFabric/backend/control/ACK still incomplete.
+Updated38path actual worker/installed child-fabric/full1024; registered control/owned bootstrap/full prepared ACK still incomplete.
 
 ## docs/project-status.md update status
 
-更新済み: 読取binding37path/full1004とLocalFabric/backend/control/実準備/完全ACKの未接続を明示。Canon/Plan250 pause保持。
+更新済み: worker/fabric実状態binding38path/full1024と同runtime/control/完全ACKの未接続を明示。Canon/Plan250 pause保持。
 
 ## progress.md update status
 
@@ -255,11 +255,11 @@ tasks.md rewritten as current W4 snapshot with dependency stages, provisional es
 
 ## samples_progress.md update status
 
-Updated current37path actual readonly components/full1004 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. Not distributed workflow completion.
+Updated38path actual worker/fabric/full1024 and remaining gates. samples/README.md/scripts/README.md更新不要: roots/scripts/taxonomy unchanged. No distributed workflow completion.
 
 ## Reviewer findings and follow-up
 
-Current post-review implementation: exact37path normal builds/full1004 relation/designated/M8Local readonly components; full LocalFabric/backend/control and actual prepare/ACK consumer incomplete. Main scoped field/failure/falsifier review only; no new independent agent/Oracle or authority contract. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
+Current post-review implementation: exact38path normal builds/full1024 actual worker/installed child-fabric readonly capture, real clone substitution falsifier corrected. Full registered control/bootstrap and owning Runtime prepare/ACK consumer incomplete. Main focused source/producer/alias/failure review; no new independent agent/Oracle or authority contract. Existing boundary review11397 fully verified26inputs/20dispositions selects B; narrow M9 review92088exit0 completed06:23:57UTC,17inputs/prompt/actual6Pro-max/finalDOM verified,16dispositions. Exact live child observations remain local; new M9-owned restricted successor seam selected, old prelaunch API stays strict. Actual registered FD token provenance, in-place refresh/frame, incident/nonincident postconditions and coherent-result grant lifetime remain pre-use obligations. Prepared invariant and local frame are audited/integrated at199/20455/177; actual M9 component is locally reviewed/tested after the Oracle cut, not represented as an Oracle-reviewed Rust implementation. Review static, not execution/signature. No active Oracle/subagent. C close78756ad5 remains bounded and integrated.
 
 Historical review records follow. Their then-pending jobs, provisional findings and early validation failures are retained as history; current status is the paragraph above and the timestamped forward entries.
 
@@ -308,13 +308,13 @@ Oracle20 c8710b/91b2a7 is fully recovered; wrapper72824e exit0. Local lemmas hav
 
 ## Skipped validations and reasons
 
-Current Sol checkpoint: exact37path normal builds/full1004 pass, all overlays restored. LocalFabric/backend/control, full ACK/publication/activation/source-I3/QUIC/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current M8 relation/designated/local full make docs v1 passed; final metadata focused checked; main review only, earlier Oracle does not review this cut.
+Current Sol checkpoint: exact38path normal builds/full1024 pass; baseline overlays restored. Full registered control/bootstrap/owning Runtime ACK/publication/activation/source-I3/QUIC/D acceptance unrun because consumers incomplete. No fresh199/broad workspace/privacy/recovery/alpha campaign. Current worker/fabric full make docs v1 passed; final metadata focused checked; main scoped review only, earlier Oracle does not review this cut.
 
 Historical model-switch checkpoint: C's bounded acceptance is closed. D's registered control/source-cursor/process/private-QUIC integration and live backend/floor update remain unimplemented and unvalidated. The current199-source fresh recipe was syntax/pin checked, not executed; the actual199 audit rebuilt9 modules over190 pinned C objects. Default451 tests and the normal default non-test check passed; normal private-QUIC check failed on both candidate and baseline. No feature-build success, new network/whole-workspace campaign, physical proof or whole-language/privacy/recovery claim is made. E is inactive. New M9 source/local-frame proofs postdate the last frozen Oracle review and were main-reviewed/tested only. Broad corpus reading remains scoped by READ_LEDGER. Historical skipped checks retain their dated scopes.
 
 ## Commit / push status
 
-Current predecessorf434f825 pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,37 overlay paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-M8-LOCAL-COMPONENTS-v1.json.
+Current predecessor7a79f60c pushed/parity0/0. Successor owned docs only; production Rust/Lean/Canon unchanged,38 paths restored. Actual authorized --no-gpg-sign commit/push/parity follows in GIT-WORKER-FABRIC-BINDING-v1.json.
 
 Historical model-switch record: Current predecessor13e7b893 is committed/pushed with verified0/0 parity. This successor contains only owned proof/docs/handoff changes; production Rust and Canon are byte-identical to HEAD. Final Git outcome will be recorded in the external d-source-process/GIT-HANDOFF-v1.json receipt after the commit; no success is inferred from this planned receipt path. Use --no-gpg-sign and normal push only.
 
@@ -4669,3 +4669,24 @@ W4-DはSolで実装を継続中です。外部未採用37path参照retained-m8-l
 - plan/Documentation.md/project-status/progress/whole tasks/sample dashboard/ledger updated; plan index current D already accurate. Roots/scripts/taxonomy unchanged. Full make docs/Git pending; same D continues without completion notice.
 
 - 2026-10-01T01:44:11.160844+00:00: full make docs M8-local-components v1 exit0 (2026-10-01T01:39:13.130445+00:00–2026-10-01T01:43:28.350935+00:00); baseline restored Rust. Final source37/9runs/2preparation failures/ledger prefix/snapshots/diff checked separately. Actual authorized Git result GIT-M8-LOCAL-COMPONENTS-v1.json; same D continues.
+
+
+### 2026-10-01T02:17:27.865715+00:00 — Actual worker/installed child-fabric binding
+
+W4-DはSolで実装を継続中です。外部未採用38path参照retained-local-fabric-binding-green-v4で、実OW1 workerとinstalled source-child LocalFabricの読取bindingを追加しました。実worker FIFO・故障設定とfabric mailbox/result/cache/trace/causality/floor等を捕捉し、全mapキーとST runtime実allocationを照合します。同内容の別runtimeへの置換、省略、実floor読取失敗と子publisher混入の対照を保存しました。通常default/private-QUIC buildと同cutの全1024件が通過し、38pathは復元済みです。元source情報10件・実3子FD3起動21件と前段bindingは全体回帰に含まれます。これは実状態の等値照合用で、認証やprepared ACKを発行しません。OS/kernel全状態のsnapshotや並行更新下の原子性は主張しません。実登録control/owned bootstrapを含む同じ停止runtime/sourceの実準備・完全ACK・親の公開・全子有効化が残ります。元source続行・I3 admission・実結果・資源・QUIC対応とD統合判定は未完了です。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+
+- Start7a79f60c clean; same Report2614. Exact38source/9run families/field inventory W4_CHECK d_retained_worker_local_fabric_binding_20261001.
+- Exact38path external/unadopted reference normal default/privateQUIC checks and full combined1024 pass0fail/ignored/filtered; all38 baseline paths restored. Full1010 worker and earlier1023 fabric cut separate immutable receipts. Original-data10/actual3child FD3 startup21 remain inside full1024, not new standalone campaigns.
+- One private zero-capacity OW1 command visits the actual worker runtime and retained worker FIFO/fault state during that worker turn, returning only the moved private hash accumulator. No runtime Clone/source-custody clone, save_local_cut or Debug/observer digest in capture. All previous worker mutable locals moved without ordering changes into one exhaustive field-guarded control struct. Actual handle owner/token/join presence included; channel loss refuses.
+- Readonly installed source-child LocalFabric visitor guards every current root field,59 recursively selected SYS4 types plus explicit program/route/floor/backend/lifecycle guards. All actual map keys and tuple keys, typed carrier/result/cache/mailbox/causality/traces/faults/candidates/loci are visited. Actual M8 owner/relation/designated/local and M9 complete suppliers reused; full M9 validation/failure/admission and inert source-stage state added. Canonical floor captures actual Arc allocation and locked complete generation. Static checked projection/Core/carrier/source data use full private typed DTO suppliers, not observer projections.
+- Actual ST map key and each retained Box<M8LocalRuntime> allocation participate. Equal-state clone replacement was a proper falsifier on the otherwise green full-state visitor, then corrected before ACK use. OW1 reads actual worker state and retains exact handle token. Hash is local equality evidence, not authentication or a runtime factory.
+- Installed source-child profile has no M9 publisher: genuine publisher Some refuses rather than omits. Real poisoned canonical-floor read, nested supplier refusal and failed moved-writer transfer cannot finish partially. Test rendezvous remains explicit refusal inherited from M8Local. No kernel queue/socket/OS serialization or formal atomic snapshot claim; frozen/no-concurrent-entry premise still belongs to the owning normal caller.
+- Worker handle-only RED1positive5properfail ->6GREEN/full1010; fabric M9-only RED1positive9properfail ->10GREEN. FabricGREENv1 normal compile101:12 missing trait implementations, no assertion evidence; completed v2 typed suppliers10GREEN. v3 normal checks/full1023 includes genuine publisher and poisoned-floor refusal. AllocationRED12positive1properfail shows equal cloned ST substitution previously aliases; v4 includes actual allocation identity and full1024. Unrun fabricREDv1 draft corrected module/fixture references before REDv2, not a command failure. All cuts/failures retained.
+- Readonly normal-build private components in external source, not production adoption. Full registered control/OwnedOriginalSourceBootstrap binding and SAME owning frozen runtime/source/preparation/full authentic ACK remain unconnected; parent publish/all activation, original-source/I3 actual results/resources/QUIC D correspondence and D integrated acceptance remain unrun. Prior199/20455/177 proof scope unchanged; no new Canon/alpha/public claim.
+- Bind actual registered ChildGrantSession/owned bootstrap/preparation/control fields; compose complete SAME owned Runtime process envelope+LocalFabric+original source+control before authentic Prepared ACK. Connect actual in-place M9/floor/backend refresh without moving/rebuilding that Runtime, then all endpoint ACKs, genuine parent publish and all activation before grants. Preserve current-source one-use/actual-result/resource/QUIC gates. Continue same Sol D; Astra for material contract falsifier or D integrated acceptance; stop before E.
+- Sole main changed-source/static field inventory/exhaustive enum/private DTO/actual producer/alias/partial-failure review and root restoration. No new subagent/planner/Oracle under owner sole-main instruction. Snapshot maintenance only; no roadmap or contract rewrite.
+- Same Report2614, existing plan memory/current snapshots/whole tasks/sample dashboard. Root/script/taxonomy unchanged; samples/README.md/scripts/README.md updates unnecessary. Current plan/00-index already accurate. Owner Pro-limit xhigh preference retained; no new consultation or automatic fallback implementation.
+- Resource receipt RESOURCES-20261001T020930Z-record.json retains actual preceding df/free outputs; no cleanup. Quota unchanged since01:35UTC72%, next02:35UTC.
+- plan/current docs/progress/whole tasks/sample dashboard/ledger updated; full make docs/Git pending. Same D continues; no external completion notice.
+
+- 2026-10-01T02:23:13.921623+00:00: full make docs worker-fabric-binding v1 exit0 (2026-10-01T02:17:28.162202+00:00–2026-10-01T02:21:54.233658+00:00); baseline restored Rust. Final source38/9runs/field inventory/ledger prefix/snapshots/diff checked separately. Actual authorized Git result GIT-WORKER-FABRIC-BINDING-v1.json; same D continues.

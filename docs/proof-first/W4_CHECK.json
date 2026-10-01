@@ -55545,5 +55545,212 @@
         "scope": "full make docs on baseline restored Rust and component snapshots; final metadata focused checked afterward"
       }
     ]
+  },
+  "d_retained_worker_local_fabric_binding_20261001": {
+    "at": "2026-10-01T02:17:27.865715+00:00",
+    "head": "7a79f60c85d0138e9709c7133306449d7efff3f1",
+    "reference": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/retained-local-fabric-binding-green-v4",
+    "files": {
+      "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+      "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+      "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+      "crates/mir-runtime/src/m8_runtime_admission.rs": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+      "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+      "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+      "crates/mir-runtime/src/m9_auth_verification.rs": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+      "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+      "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+      "crates/mir-runtime/src/sys2_execution_backend.rs": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+      "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+      "crates/mir-runtime/src/sys4_dispatch.rs": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+      "crates/mir-runtime/src/sys4_i3_original_source.rs": "0a8d140f0e493c18738a2447fb63c19800bcd3e73a922658a04414fd0f34c9dd",
+      "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+      "crates/mir-runtime/src/sys4_i3_source_authority.rs": "1f46ba2c86881b596837d6008dc56dd1c229e4d2f4cc58d276cc9d52e91563b1",
+      "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+      "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+      "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "6dc05dd8e8b939a52bbc6b53063d4a14dbeef9835bd737dc9264f147c770d765",
+      "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "b4265f48cd7b5af2e3fb8a2a18a3138d4e586db2d8a59fab2b90b8b79341477a",
+      "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+      "crates/mir-runtime/src/sys5_i3_private_quic.rs": "df2214389f157cc5e8f5daf42c844c82689d9fecd38db2670253daed0a9d1f82",
+      "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "49d54c537ef5a36caed7673b605dd6d2bcdd5affe8b4d6066cfdc56be553f4b0",
+      "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+      "crates/mir-runtime/src/sys5_i3_source_control.rs": "e69bf947117a1d0a77d6290451594fbc04cb1a09d4b58bfd17d2e8b105a16e1c",
+      "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "399abfcf72a33e7dee4cc6c21d09d318ab953fdd3408135934d1e35c2b46611c",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+      "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+      "crates/mir-runtime/src/i3_private_prepared_binding.rs": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+      "crates/mir-runtime/src/m8_owner_admission_gate.rs": "033e3bc86fdb6e300d463c275721ae07ffe736402fb45bc3eca482ecac54f8b8",
+      "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+      "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+      "crates/mir-runtime/src/m8_runtime_relation_projection.rs": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+      "crates/mir-runtime/src/m8_private_prepared_relation_binding.rs": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+      "crates/mir-runtime/src/m8_runtime_designated_value.rs": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+      "crates/mir-runtime/src/m8_private_prepared_designated_binding.rs": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+      "crates/mir-runtime/src/m8_private_prepared_local_binding.rs": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+      "crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs": "ffad42c551aa393465ca9cf3ea13e2b42032b9c0c93a97f33946719319a13660"
+    },
+    "source_pins_sha256": "624f8259f3cd226d3298189629a25a3f0e6b3d0d5c3cdd363435246646e5da1b",
+    "paths_sha256": "a721ec99cf9d1ec464a9b433978eef133fd1844da502d36a7d3d3cb199988651",
+    "field_inventory_sha256": "b24e92d4f07195e6668fdc18f23315d9f0034ed3faf5cf292e979b01a247bffc",
+    "receipts": [
+      {
+        "name": "retained-ow1-worker-binding-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-ow1-worker-binding-red-check-v1/RESULT.json",
+        "sha256": "94c1a8869bf98030ec8e6091e531c53d55a42c2bb9c73c4514ea91628ebb08a0",
+        "runs_sha256": "99ff1dcc41b6cbdeec4098e85c7343f756928bccfb9552587c7e8b60cd89cdaa",
+        "restored_sha256": "b00dc28bd7ad9660372418e716cfccbd04462c23f32e805d7a83f7b113104c5c",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 5 failed; 0 ignored; 0 measured; 1004 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "name": "retained-ow1-worker-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-ow1-worker-binding-green-check-v1/RESULT.json",
+        "sha256": "304fcd3707ef20f40e5f8529ab1aebeaa6d5967c05d8a9b77768521f9a5f1374",
+        "runs_sha256": "c93e960b70e8c4bb5da195abd55f4a63965bf219288d916777f3d06893dce11b",
+        "restored_sha256": "4c410baf44118d1c1d8bab702141ff1d4e385ce546471f9a035e3f6702e9aeb0",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 1004 filtered out; finished in 0.07s"
+        ]
+      },
+      {
+        "name": "retained-ow1-worker-binding-combined-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-ow1-worker-binding-combined-check-v1/RESULT.json",
+        "sha256": "1a6ba67673cae46de5b7ae292c012092ca1df9b850dc7383d23eae4b5ad4ed01",
+        "runs_sha256": "0d9fc1f2b2ab2d65295896f9e7cd61737df84e35ac9c1a16279738df0ada59bd",
+        "restored_sha256": "5468cf4660f4502ba518226860b32692024099d8f05d8f37bcecd1a0c2c79de9",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 1010 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 151.23s"
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-red-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-red-check-v2/RESULT.json",
+        "sha256": "dd688aa1c2392cb8dc97c09712c405cdacb0dfd753c6cbb5622d88d19fd16b9e",
+        "runs_sha256": "4e833686f8b0611a4f4fff6e427f2d5c0b9fbb484b54fd8859b462818c4eb006",
+        "restored_sha256": "691d97bc503582f05b187d81cb08455c7d92573b4bddbe94a582da82152c6f9e",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 1 passed; 9 failed; 0 ignored; 0 measured; 1010 filtered out; finished in 0.08s"
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-green-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-green-check-v1/RESULT.json",
+        "sha256": "92935145bf1ad1723d4d9b1a6df67298e1be34373683ddc08a38802b370017cc",
+        "runs_sha256": "51a9a92976963c68338b5e4ef5f27abcc7a151b3f4d5e1f992ab1a85af1d5c89",
+        "restored_sha256": "94e1c5f90014ad5fd662bf08152c4629cf32b19b1edea8650b2cd4d01e635277",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          null
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-green-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-green-check-v2/RESULT.json",
+        "sha256": "8feeaac92a3cd508e941c1cfaafc703c6da124f20419063b814669ca0581ce31",
+        "runs_sha256": "9d3836f94390fa61654e0e860c70f3d45eeec7a3f15ec629125ae0269193a25f",
+        "restored_sha256": "02316a23e9e1eaf200925e220f07d793e9c430c37f9a4282ffe674dd796f01fa",
+        "exits": [
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          "test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 1011 filtered out; finished in 0.78s"
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-combined-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-combined-check-v1/RESULT.json",
+        "sha256": "428ca91fd97a8a8c935df362a1ca37e83287ad8934e0100338099c31182f5f0d",
+        "runs_sha256": "81ae57d2acdf75811915229842007c023fce9d9f94e2a6b26cc07415f436af2f",
+        "restored_sha256": "16e1ea6c52c480652158de64642f825a3da590c0763cec8a504a1baae665a46a",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 1023 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 157.47s"
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-allocation-red-check-v1",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-allocation-red-check-v1/RESULT.json",
+        "sha256": "18c0eea8b4765a20de80ad18a25046bd40434d15d66b828842b1159e63e37847",
+        "runs_sha256": "62a7338fc2bdae01c8dcf750b6993f8357002555f95a095bb30181bb14680a03",
+        "restored_sha256": "8d34837a964bc0251d39f90ae7e2916e13f4105c6fb4ae37d1691b646415c979",
+        "exits": [
+          101
+        ],
+        "root_summaries": [
+          "test result: FAILED. 12 passed; 1 failed; 0 ignored; 0 measured; 1011 filtered out; finished in 0.91s"
+        ]
+      },
+      {
+        "name": "retained-local-fabric-binding-combined-check-v2",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/retained-local-fabric-binding-combined-check-v2/RESULT.json",
+        "sha256": "7d80ca59fc1ff1d451997dc929ba5c1dc3cb026b40d2d754b8275e4e047fcb39",
+        "runs_sha256": "36a2825967fa86176d8faa390e58dd700eb806290c8666401442c09417a1fddc",
+        "restored_sha256": "81b8a6fa9fb6ff0f94c88290383eebe3885d185c632fc205fddd0d5783e3acb5",
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "root_summaries": [
+          null,
+          null,
+          "test result: ok. 1024 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 162.77s"
+        ]
+      }
+    ],
+    "result": "Exact38path external/unadopted reference normal default/privateQUIC checks and full combined1024 pass0fail/ignored/filtered; all38 baseline paths restored. Full1010 worker and earlier1023 fabric cut separate immutable receipts. Original-data10/actual3child FD3 startup21 remain inside full1024, not new standalone campaigns.",
+    "worker": "One private zero-capacity OW1 command visits the actual worker runtime and retained worker FIFO/fault state during that worker turn, returning only the moved private hash accumulator. No runtime Clone/source-custody clone, save_local_cut or Debug/observer digest in capture. All previous worker mutable locals moved without ordering changes into one exhaustive field-guarded control struct. Actual handle owner/token/join presence included; channel loss refuses.",
+    "fabric": "Readonly installed source-child LocalFabric visitor guards every current root field,59 recursively selected SYS4 types plus explicit program/route/floor/backend/lifecycle guards. All actual map keys and tuple keys, typed carrier/result/cache/mailbox/causality/traces/faults/candidates/loci are visited. Actual M8 owner/relation/designated/local and M9 complete suppliers reused; full M9 validation/failure/admission and inert source-stage state added. Canonical floor captures actual Arc allocation and locked complete generation. Static checked projection/Core/carrier/source data use full private typed DTO suppliers, not observer projections.",
+    "identity": "Actual ST map key and each retained Box<M8LocalRuntime> allocation participate. Equal-state clone replacement was a proper falsifier on the otherwise green full-state visitor, then corrected before ACK use. OW1 reads actual worker state and retains exact handle token. Hash is local equality evidence, not authentication or a runtime factory.",
+    "refusal": "Installed source-child profile has no M9 publisher: genuine publisher Some refuses rather than omits. Real poisoned canonical-floor read, nested supplier refusal and failed moved-writer transfer cannot finish partially. Test rendezvous remains explicit refusal inherited from M8Local. No kernel queue/socket/OS serialization or formal atomic snapshot claim; frozen/no-concurrent-entry premise still belongs to the owning normal caller.",
+    "falsifiers": "Worker handle-only RED1positive5properfail ->6GREEN/full1010; fabric M9-only RED1positive9properfail ->10GREEN. FabricGREENv1 normal compile101:12 missing trait implementations, no assertion evidence; completed v2 typed suppliers10GREEN. v3 normal checks/full1023 includes genuine publisher and poisoned-floor refusal. AllocationRED12positive1properfail shows equal cloned ST substitution previously aliases; v4 includes actual allocation identity and full1024. Unrun fabricREDv1 draft corrected module/fixture references before REDv2, not a command failure. All cuts/failures retained.",
+    "scope": "Readonly normal-build private components in external source, not production adoption. Full registered control/OwnedOriginalSourceBootstrap binding and SAME owning frozen runtime/source/preparation/full authentic ACK remain unconnected; parent publish/all activation, original-source/I3 actual results/resources/QUIC D correspondence and D integrated acceptance remain unrun. Prior199/20455/177 proof scope unchanged; no new Canon/alpha/public claim.",
+    "next": "Bind actual registered ChildGrantSession/owned bootstrap/preparation/control fields; compose complete SAME owned Runtime process envelope+LocalFabric+original source+control before authentic Prepared ACK. Connect actual in-place M9/floor/backend refresh without moving/rebuilding that Runtime, then all endpoint ACKs, genuine parent publish and all activation before grants. Preserve current-source one-use/actual-result/resource/QUIC gates. Continue same Sol D; Astra for material contract falsifier or D integrated acceptance; stop before E.",
+    "review": "Sole main changed-source/static field inventory/exhaustive enum/private DTO/actual producer/alias/partial-failure review and root restoration. No new subagent/planner/Oracle under owner sole-main instruction. Snapshot maintenance only; no roadmap or contract rewrite.",
+    "resources_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/RESOURCES-20261001T020930Z-record.json",
+      "sha256": "c625040f5a8ac7a137b105e1d26bdc3b00b40352b70c09fe20ef8cdfea090c34"
+    },
+    "quota_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261001T013508Z.json",
+      "sha256": "0a424a2aa5a98e2e1408c820ae07ca85104af7472dc8510605264e50cebd01ac"
+    },
+    "docs_scope": "Same Report2614, existing plan memory/current snapshots/whole tasks/sample dashboard. Root/script/taxonomy unchanged; samples/README.md/scripts/README.md updates unnecessary. Current plan/00-index already accurate. Owner Pro-limit xhigh preference retained; no new consultation or automatic fallback implementation.",
+    "docs_attempts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/docs-worker-fabric-binding-v1.json",
+        "sha256": "da08f2420345b77c1123329405defbde7484209481124da1f5b973f0ddecc728",
+        "exit": 0,
+        "scope": "full make docs on baseline restored Rust and component snapshots; final metadata focused checked afterward"
+      }
+    ]
   }
 }
