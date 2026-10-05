@@ -52563,5 +52563,131 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T14:14:11.735609+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-red-check-v1/RESULT.json",
+    "sha256": "24a7381c452b5fd7ba3c83d2d5fd0b715e31b1285c2b76634f27e5de407380dc",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-green-check-v1/RESULT.json",
+    "sha256": "5d424647f277a8d5fa1ca6dee82a2605eca603d2bbac3488bfae462b3b5a4874",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-controls-check-v1/RESULT.json",
+    "sha256": "382e1de5f228cb88dceaa4c798b009bbee2191a1fa5634d4950fba5bf88d1e0f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-controls-check-v2/RESULT.json",
+    "sha256": "beba772da643cf03522895948942a388fbc2b5b1afee07533f7ec791c957c488",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-late-mutant-check-v1/RESULT.json",
+    "sha256": "c388f7ff3e3762e207daf510b6eeac18b9f7a0d48af0493f9cfe610136be8424",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-numeric-mutant-check-v1/RESULT.json",
+    "sha256": "89cbd7776916f56dbd9b2099ce284bf8056f93b747873cdccb14e055313b14a6",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-reserve-mutant-check-v1/RESULT.json",
+    "sha256": "624430c060ef75294b3302b30a7e2dbb268050452dda9b9e560020c65cc5c6e7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-traceclone-mutant-check-v1/RESULT.json",
+    "sha256": "e1f2dc1120272f8860f9badcea3a581976d6674638dff1501686b5be9d9413e9",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-keyclone-mutant-check-v1/RESULT.json",
+    "sha256": "aba78fac859b883720f701229312c13798b7b1bf4899eab6a8d826fb0e7b165f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-outcomeclone-mutant-check-v1/RESULT.json",
+    "sha256": "3bbbf08f63f08da3e8ec4ce0bd30ca9af02922a89a77c78e26d4928af7a95a70",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-boxclone-mutant-check-v1/RESULT.json",
+    "sha256": "be89af50e730556979b9707ed70f097be0c244f63d4f4c3ebab8fdae61fc6800",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-contextclone-mutant-check-v1/RESULT.json",
+    "sha256": "6204111a1bc6b514203a30163db4be61ea8328b080688fe4cada58fa9d914097",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-raw-mutant-check-v1/RESULT.json",
+    "sha256": "e9f848c269a05a3f087caeeeed19a6039a2172419a41b1fa3f00329334c78805",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-combined-check-v1/RESULT.json",
+    "sha256": "8fb8c029b94a606665c3276d4c70fcc58bc398ff5dcaaf660c5ff0615cdc423d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 facade preBody actual used backing; genuine semanticRED/test-only compile failure preserved separately,13controls/9compiled omissions/default13/no-seams13/full1164/all38restored; no sourceBody/upper/generalproof claim",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-facade-backing-controls-v2/ACTUAL_M8_FACADE_PREBODY_BACKING_FIELD_INVENTORY.json",
+    "sha256": "db356063c480503b28652831da089d65ac2ac73d1155fb8bc6b9deed83288cec",
+    "status": "read-reviewed-full",
+    "role": "Private ephemeral7field native facade backing, actual used Vec/readkey/result/context/Box and callback/custody/existing binding correspondence",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M8-FACADE-BACKING-COMPONENT-PLAN-v1.json",
+    "sha256": "06b7d84e844381146345a54ecfb10930c598068ab20c4461107b8a2a149d0fa6",
+    "status": "read-reviewed-full",
+    "role": "Selected native facade used actual beforeBody backing/smallest alternative/falsifiers/non-effects",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v9.json",
+    "sha256": "b65ed1f43d3123cf1baf6280dd0cf4323a694de5d0506a6dda5b429293c69e73",
+    "status": "read-reviewed-full",
+    "role": "Current actual facade resources and next nativeI3/SYS4/SYS5/codec/allactivation/genuine source+I3 Body prerequisites",
+    "at": "2026-10-05T14:39:49.868659+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-facade-backing-docs-v1/RESULT.json",
+    "sha256": "67b620ae8cf09563aa16cdeb36ddefb98df6d61145253f709cca7ad43aea187b",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T14:44:37.181444+00:00"
   }
 ]
