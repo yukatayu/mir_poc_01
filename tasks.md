@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-05 20:31 JST
+最終更新: 2026-10-05 21:19 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。元sourceの実要求・QUIC・Ready・保護されたAdmit/Resolveまでの接続に加え、外部未採用38path参照m8-actual-lower-return-controls-v1で、実M8の要求・コンテキスト・キュー発生と実際のenqueue/serve戻り値を、観測結果の生成より先に保持する下位経路を検証しました。実成功、型付き拒否、未コミット、観測失敗後の実結果を区別します。コミット後に下位処理が戻らない場合は、未返却の戻り値とコアが保持した実結果を分け、成功を捏造しません。標準ビルドの実正例、通常default/private-QUIC build、11検査・4検査省略/再実行対照、同cut全1111件を検証し、38pathを復元しました。これはM8下位部品の証拠で、元sourceの本体はまだ0です。実I3許可を使う保持経路のSYS4/SYS5接続、本体区間での元要求と実許可の一度限りの消費、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。未使用のI3保持用経路を検証済みとは扱いません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-owner-lower-caller-controls-v3で、実I3予約・現在の権限確認・SYS4を通してM8を実行し、実際のM8戻り値、SYS4戻り値、複製できないSYS5返信又はエラーを観測・返信処理より先に保持する経路を検証しました。正常系、投入拒否、コミット前の拒否、実行後の返信カウンタ上限、下位処理が戻る前又は戻った後の停止を区別します。新しい保持用経路は完了を返し、実返信は保持記録が一つだけ所有します。既存の返信を返すAPIは維持します。9検査・5省略/再利用対照、標準buildで8件・追加テスト機能なしで9件、通常2build・同cut全1120件を検証し、38pathを復元しました。これは実I3/M8/SYS4/SYS5下位部品の証拠です。元sourceの本体はまだ0で、予算なしの通常経路の戻り値保持、元要求とI3許可の同じ本体区間での一度限りの消費、実行前の数値・割当資源、返信・source受領、S→T→S・次activation・後続updateでの再freezeが残ります。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。元sourceの実要求・QUIC・Ready・保
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 rawproducer/11controls/full1111 passed; remaining actual I3/SYS4/SYS5 raw-return caller/original Body oneuse/resources and same-event reply/source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; remaining no-budget ordinary raw caller/original Body oneuse/resources and same-event reply/source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -81,7 +81,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 | W6 |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 |24–60; coherent reusable finite alpha system and final review |
 
-D subrows are contained in D remainder, not extra hours. Startup/ownership/publication/all activation and current original source/QUIC/Ready/protected budgeted Admit/I3 Awaiting/Resolve/actual native return held/full1100 passed. Prior publication/activation/source-Issue full docs passed; prior source-origin full make docs v1 passed; prior Ready full make docs v1 passed; prior protected Admit full make docs v2 passed; prior protected Resolve full make docs v1 passed; nativeM8 rawproducer default/private builds/11controls/full1111 passed; current M8 lower full make docs v1 passed; final metadata focused separately; actual I3/SYS4/SYS5 caller/originalBody/resources/reply/source acknowledgment/subsequent updates remain incomplete.
+D subrows are contained in D remainder, not extra hours. Startup/ownership/publication/all activation and current original source/QUIC/Ready/protected budgeted Admit/I3 Awaiting/Resolve/actual native return held/full1100 passed. Prior publication/activation/source-Issue full docs passed; prior source-origin full make docs v1 passed; prior Ready full make docs v1 passed; prior protected Admit full make docs v2 passed; prior protected Resolve full make docs v1 passed; nativeM8 rawproducer default/private builds/11controls/full1111 passed; current M8 lower full make docs v1 passed; final metadata focused separately; actual I3/SYS4/SYS5 caller9controls/5omissions/full1120 passed; current native lower caller full make docs v1 passed; final metadata focused separately; no-budget ordinary raw caller/originalBody/resources/reply/source acknowledgment/subsequent updates remain incomplete.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -103,11 +103,11 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-05 11:13:45 UTCの確認で59%（使用41%）でした。次の確認は2026-10-05 12:13:45 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-05 12:17:52 UTCの確認で59%（使用41%）でした。次の確認は2026-10-05 13:17:52 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 ## non-promoted references
 
-The current38path external/unadopted reference adds actual original source/QUIC/Ready join and protected budgeted Admit→real I3 Awaiting→Resolve/real Reserved or native expiry reply/raw typed return held after genuine publication/all3 activation. Original cursor and parent expected position stay0/body0. NativeM8 raw lower component now passed (full1111, not sourceE2E); Source/I3 Body oneuse, actual SYS4/SYS5 raw-return integration/resources, reply/source-ack/full-source and subsequent re-freeze remain before dependent use. This is a full current snapshot rewrite within the selected handoff, no source decision or phase/roadmap recut; provisional2026-10-01 hours remain low confidence, not recalculated from this component.
+The current38path external/unadopted reference adds actual original source/QUIC/Ready join and protected budgeted Admit→real I3 Awaiting→Resolve/real Reserved or native expiry reply/raw typed return held after genuine publication/all3 activation. Original cursor and parent expected position stay0/body0. NativeM8 raw lower component now passed (full1111, not sourceE2E); Actual I3/SYS4/SYS5 raw-return component9tests/full1120 passed; no-budget raw caller, Source/I3 Body oneuse/resources, reply/source-ack/full-source and subsequent re-freeze remain before dependent use. This is a full current snapshot rewrite within the selected handoff, no source decision or phase/roadmap recut; provisional2026-10-01 hours remain low confidence, not recalculated from this component.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.

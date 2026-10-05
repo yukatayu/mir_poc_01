@@ -52080,5 +52080,117 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T11:37:20.081151+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-red-check-v1/RESULT.json",
+    "sha256": "5362d694d33eef0e5ce56d92dd512ecd2592e2d27fe7957f308e1b5d0ee7bf47",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-green-check-v1/RESULT.json",
+    "sha256": "b22cea9874a2691af52026e368ad12d278b11b21d86d09f39ea58ea63062034e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-green-check-v2/RESULT.json",
+    "sha256": "f061fd77b4cc0fdb5373f42ec1312488dc6e0849f7cc727767b2ce22703c74cb",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-controls-check-v1/RESULT.json",
+    "sha256": "bb589845f1a685e19412ef0ac7a1def411dc136d14f0b2a343e4a8d13cc539cb",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-controls-check-v2/RESULT.json",
+    "sha256": "e5fa6bef2b3de7cf20025f6e76883dd61ee7c1b2b35a51705612a0a6b905f4a3",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-controls-check-v3/RESULT.json",
+    "sha256": "4c0c19b409f0e040c5b12bded72233ff50b225c18a7b45e7dcf34e2c4105831b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-m8-mutant-check-v1/RESULT.json",
+    "sha256": "f28a4b1e051ce60c7dafab9e49ccb92d3e4e59aacc5fb677e9e2bec8a5bfd127",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-sys4-mutant-check-v1/RESULT.json",
+    "sha256": "538007b16ee95a9e1bd806af4c21bc987f2ec4b75b3926985d409ed60dc86e20",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-finalizer-mutant-check-v1/RESULT.json",
+    "sha256": "7039008c83466d2fd995a50ebae32c7114e2b0068dae760f34411ecf3a93b441",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-oneuse-mutant-check-v1/RESULT.json",
+    "sha256": "c4d2e0a450652b007dbe1df67c30335d618d31fcf9650c8d46bf85c34283a204",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-capture-mutant-check-v1/RESULT.json",
+    "sha256": "5a26ea2532e7b7c0b828e4600fdc8bbc2a2579c0968ca926413ee5728672f84d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-combined-check-v1/RESULT.json",
+    "sha256": "3e08eff6737ca57c46eb56b073a21db7ea5bd9774c0065d786f3168b06284e14",
+    "status": "verified-scoped-result-and-log",
+    "role": "Authentic native I3/SYS4/SYS5 lower caller actual commands/logSHA/restored38; compile-only custody/counter fixture errors and wrong native enqueue fixture distinguished, not original sourceBody/general proof",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-owner-lower-caller-controls-v3/ACTUAL_NATIVE_CALLER_FIELD_INVENTORY.json",
+    "sha256": "afa7fc001c7d7076f8168cc2604e679ea6266fc3689e17f4cc389a63d116f10f",
+    "status": "read-reviewed-full",
+    "role": "Full1newstruct4fields/private dataenum2variants and reused full M8/SYS4/message visitors/custody/resource review",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-OWNER-LOWER-CALLER-COMPONENT-PLAN-v1.json",
+    "sha256": "41a19de24fd5440eab7fcf4aeb1d2cc59f661f3976f4ce300d94682bc5584a6a",
+    "status": "read-reviewed-full",
+    "role": "Full fixed nativeI3 lower caller prereg/alternative/falsifiers/non-effects no originalBody",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v5.json",
+    "sha256": "e84a3e6825243c4804bb47d284d42a6bdb10acdeee7478045dc818d4b9c27afe",
+    "status": "read-reviewed-full",
+    "role": "Full scoped nativeI3 actual raw caller/custody/results and remaining no-budget/sourceRoot/I3/allallocation premises",
+    "at": "2026-10-05T12:19:39.656771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-lower-caller-docs-v1/RESULT.json",
+    "sha256": "6606e77bd83c1982576c69538270c4d9e6283ef5a64ea928ac459f01c4559836",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T12:25:18.335275+00:00"
   }
 ]
