@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-05 17:58 JST
+最終更新: 2026-10-05 19:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-05 08:10:57 UTCの確認で66%（使用34%）でした。次の確認は2026-10-05 09:10:57 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-05 10:13:11 UTCの確認で59%（使用41%）でした。次の確認は2026-10-05 11:13:11 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,13 +75,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照owning-owner-ready-controls-v1で、実3子FD3の準備・M9公開・全員の有効化、元sourceの実要求発行、実QUIC受信に、所有側の受信通知と親の発行記録の照合・保持を接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データを照合します。親は実通知を後続の照合より先に保持し、子は通知と送信番号を送信より先に保持します。9種類の不正条件、2種類の検査省略対照、通常default/private-QUIC build、同cut全1081件を検証し、38pathを復元しました。処理本体の実行回数とsource・親の進行位置は0のままです。既存I3の許可・時計・一度だけの利用、実下位結果の保持、実行前の資源確保、source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。TLS・hash・受信通知は実行許可ではありません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照owning-original-owner-admit-controls-v2で、実3子FD3の準備・M9公開・全員の有効化、元sourceの実要求発行、実QUIC受信・Ready照合に、所有側の元要求に対応する保護された受付と実I3の待機状態を接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データと現権限を照合し、既存のowner_ticks 4を使います。予算のない要求は本体実行前に拒否します。実際の下位戻り値を記録・通知より先に保持し、通知失敗時も実要求・待機状態・未送信通知・受付区間を残します。15種類の不正条件・一度だけの利用、3種類の検査省略対照、通常default/private-QUIC build・test-seamなしの実正例と同cut全1091件を検証し、38pathを復元しました。処理本体とsource・親の進行位置は0のままです。既存I3の解決・一度だけの本体許可、実M8下位結果の保持、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。TLS・hash・受信通知・受付完了は本体実行許可ではありません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C806/818 and prior D components retained; current external38path actual source/parent origin/QUIC same-data send+receive/owning owner ingress/codecOversized/data-only registered Ready/source Issue join, normal default+privateQUIC/full1081 pass; sourcecursor/parentexpected0/body0;38paths restored | owner-resumed2026-10-05 after passed component/cleanup; establish semantic owner/I3/body/result/resource/source acceptance/full-source/subsequent re-freeze; Astra at material contract falsifier or D acceptance |
+| Implementation / operation | C806/818 and prior D components retained; current external38path actual source/parent origin/QUIC/owning ingress/Ready/source join/protected budgeted owner Admit/real I3 Awaiting and typed return retention, normal default+privateQUIC/no-seams positive/full1091 pass; sourcecursor/parentexpected0/body0;38paths restored | owner-resumed2026-10-05 after passed component/cleanup; establish semantic owner/I3/body/result/resource/source acceptance/full-source/subsequent re-freeze; Astra at material contract falsifier or D acceptance |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -646,3 +646,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-05 17:19 JST: owner指示で同じW4-Dをresume。37090bb5/実38source/前回1076検証と復元のhashを照合、週間66%/停止閾値30%を記録。実owner出自/I3/資源/結果保持へ継続、E・Plan250 pause保持。Report2614。
 
 - 2026-10-05 17:58 JST: W4-Dの実QUIC受信通知と親の実source発行記録を照合・保持。9不正条件/2省略対照と通常build/全1081件通過、38path復元。body0、実I3/下位結果/資源へ継続。Report2614。
+
+- 2026-10-05 19:03 JST: W4-Dの元sourceに対応する保護された所有側Admit→実I3待機/実戻り値保持を検証。15不正条件・一度だけの利用/3省略対照、通常build/test-seamなし正例/全1091件通過、38path復元。増分cacheのみ整理、body0のままResolve/Body/実M8結果・資源へ継続。Report2614。
