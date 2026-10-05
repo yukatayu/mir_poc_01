@@ -60245,5 +60245,540 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_m8_prebody_backing_20261005": {
+    "at": "2026-10-05T14:06:21.082100+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M8-PREBODY-BACKING-CHECKPOINT-20261005-v1.json",
+    "receipt_sha256": "50c64d6a46e8d25f8efbff58b10fddaa9090aa8395d4536740590005b5f92093",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-prebody-backing-controls-v3",
+    "source_pins_sha256": "c44302ad5bf556f0753d2d323bd3d2d0218ec8a43324f900dcf5eaf7c2ccf455",
+    "field_inventory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-prebody-backing-controls-v3/ACTUAL_M8_PREBODY_BACKING_FIELD_INVENTORY.json",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v8.json",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v1",
+        "result_sha256": "ab324bf2029b365654f09bf52a7b38820e48febae30577d133c2fbe8bfc4299a",
+        "restored_sha256": "1e5786eef3c8a2cb652390bd214ef86ac45ab8860342ad29f970d7227f3a719c",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_missing_actual_storage_refuses_before_rhs",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "24bd79539795425d9ef0014b6162cc28a1c533d05b569b74ec135d5433cf258a"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v2",
+        "result_sha256": "e8f8b86759e04df0bb09aaa625977147a7764f5354de7fef769cda6e5d30cfc2",
+        "restored_sha256": "fcb0a7a9c07d0e9f86b4c5d180ece23630dc85bbcb600ecf9d0658c439bf87bc",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_missing_actual_storage_refuses_before_rhs",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "9d08204b1e4ee2a6ea7730d87d9d135d2b5688722d44e8a49db43dcaaea72a29"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v3",
+        "result_sha256": "43368e1a8bb6d80b1974b0a50cb88374d1be55d6a673f6ab3b2c0becfecd5bd4",
+        "restored_sha256": "5247ee95f39a3796e3299ceefe1d7f0a0712941579c2144c173ac95013fc3073",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_missing_actual_storage_refuses_before_rhs",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "8b314f7b1cff8dca169f837edefe52d8d2779cdc04285e0648acdc9d6150e33f"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-green-check-v1",
+        "result_sha256": "ace99e4fb5d1fee2ed1905ae790cf05c1051c30459cc7c4d7f7fb351513496db",
+        "restored_sha256": "886aff776f40a038aa0952a7d3a31443222059f7988efc394d2cca7da53328ae",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "35759c6c0450a304c9f6acf037db90b2ce4a8d53c40315d62060d38047853a51"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "93c4a50b2efbb31866a58e36d5bc7edc8602f070fa3fde84d550ec700fbc9315"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "89ce2b463f06f128546a0990b32ec42596a298402dcafd2c280fad483ccf5259"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-green-check-v2",
+        "result_sha256": "52c580ec48755009c01ac5590b11fa9b2c6673871e8a815a99b0b7dab9e47453",
+        "restored_sha256": "ce68edce8256fc4d190f1da5ab5d27c5121286419bc27d75fed3641c52538217",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "2c90622a9bbd95839a549523135d587038dbf0a24678037b574fcdd3e31e3d7d"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v1",
+        "result_sha256": "dc1249e0268b6241d4aa72cafd04f59872f21e56e3561320ba9f0833f67d39bb",
+        "restored_sha256": "5b2e6cd205bb9a79a12ceb47787896ccc3bbaab84c2cf28a6917d8ddf2596eef",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "9fe3f97311b8661b8cbdfc9e3c529fdcdc683b3642aefc1e47f0edf9df2e4c57"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v2",
+        "result_sha256": "975a83bdf8cb5270ef7d90adfa0128a85e6fe019e403da5755e992df65c3b071",
+        "restored_sha256": "ba29f915711dd5ef1be6713e44b423079b715879fadbe0d155b9be05fb9925cf",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "a653e298f71bae9b0ac49d81ee69331e478dff352cbc38c036cd3ad3582f7cf3"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v3",
+        "result_sha256": "290b59741ee78aced294b31704187fcd81c50b984b4c1870d2858cb050f29a75",
+        "restored_sha256": "0a9e50ef4cfff73f61d800b3b31d6dd3e1a51f1162b98dab1d25541bc917f228",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "054b102da52ef1f4e4ac386505240ec7ef8e83c4693f5c436b6c52b558f000ee"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-late-mutant-check-v1",
+        "result_sha256": "93322650fe7c2e1bdab9099a7ff911020f8ea3443e3cee7d70ef562c9e6c6abd",
+        "restored_sha256": "b9d2e43369778dbb5a03e4f8dad5f42de72f3541a252479bc1ca500c47054355",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_missing_actual_storage_refuses_before_rhs",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "58b35ad94ec1cccfeded04646290fc488eceec256a8f9f98bb636b51df5b29f6"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-numeric-mutant-check-v1",
+        "result_sha256": "62f3ef960d145d7d01317c2847d5a38d4d1fca1d4dd82bb3b114911c4eaa6f9c",
+        "restored_sha256": "98a268d0a2fbc951ea31b38380b81d74168d1183652127dcaf4ac92af5125626",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_actual_numeric_trace_limit_preserves_escaped_queue_and_identity",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b8b4cd1dbc2d8b0dfea2663779c97b0838203336c1b10485c485e73715e8204c"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-root-mutant-check-v1",
+        "result_sha256": "42f371c9379ade4b11e84925895086188d7f94c7de3be6fa0b8c2fb26f9ce5f9",
+        "restored_sha256": "b2c4df71e145487e2b8dd9741829b637cdc0eb71b766925a4debe010301394d8",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_missing_original_root_cannot_enable_existing_queued_body",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "3db3582c5ee06b44d4f433f7338e1f1ac919306ee951260b2298812359277575"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-store-mutant-check-v1",
+        "result_sha256": "0f6bb9e932b49489e5f26f091a4fe45e4976904619a8b4bfbb49a76430f7749a",
+        "restored_sha256": "d7dfe210ef429d351901e0d4bacb5a88f681d8a7eb60f4815531617e4f05c422",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_literal_uses_actual_new_store_slot_without_prepublication_write",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "20a945f26936415cd342f556a5043780f02a7c34bdec803a1ecce6b5d0bfd667"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-successclone-mutant-check-v1",
+        "result_sha256": "91e469633ba70f126c81dc97319825ba3ba4ab5ecd73bbc9c4615b4375544bad",
+        "restored_sha256": "11fb21f86a5e8be04d6fa6ea0b4ea35c601ee09df88b63af867dc19b06773671",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_funded_actual_native_outcome_store_and_trace_match_legacy",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "7783fa0c6ca990643d78c9d652762ea03a554d0fafae5c15a88dd53b14ac3668"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-storeclone-mutant-check-v1",
+        "result_sha256": "8e7001138b0b3c830dbb706aa69040af0665fe43536e5bb9c3358f2928156f12",
+        "restored_sha256": "10d6381fad722d53a966e03ccabd58f06999faea7678905220c77c5de57bca29",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_funded_actual_native_outcome_store_and_trace_match_legacy",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "c415561c29149159351fab20f7d6fd8102193af62b18eea59c0444ec88c2f653"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-failureclone-mutant-check-v1",
+        "result_sha256": "adfb5a79b101dbbfb64a525423e58429bf7fd72cf7f764e47682db5dbe3ec426",
+        "restored_sha256": "fb0e1ce2a905c80e424734406e4bc942a955d9da8f214159d3d4d9adfe1d7db4",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_real_arithmetic_failure_matches_native_without_commit",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "cd6789475a1135d1e1b3b6b377b10b49b48b36724ce23bf67a334cbf26309f1c"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-primary-mutant-check-v1",
+        "result_sha256": "d7bed51c47da19d982dc19d7da949fb781da83b000a1087a3254c492b2c68e49",
+        "restored_sha256": "7140774c8abf103e434cef515197e0ff6ee17d1d78bd95f83f3e10c1b304b542",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing_actual_postcommit_before_return_panic_retains_native_primary",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "4f97bb4ca186f92853c5332267365c0bea757c710e39d9a12af015faf8812d66"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-combined-check-v1",
+        "result_sha256": "079c9bcb7a094cc456e928334cb2a3f9ad154f9d49e3572e42b69250beeac05d",
+        "restored_sha256": "fc7233bd7590d0b0252e294e91745862a520d6dc6482db8a329803ebc1b66bdb",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "72c4929ce06138b5042b3011b17dd5f26029012a9b4a9e62b264d486e8f83f52"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "b285491293d01e8ca7f81669e5d3a2ed3f7eb00aa6ce16b252b9dcbd9785012d"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "c190c2ca0bec6eda6b70b07da3eae39e85de167f815becdf8f9596f7d45259e6"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic",
+              "actual_m8_prebody_backing",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "253f875b90e871e911c2557a4d7a20f34a8920654cf2ea1731d1fa09153704d9"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "3f8b66e6199dd0b2e77b63b26b43e3182c2546335d2216c2479e4745a5b96786"
+          }
+        ]
+      }
+    ],
+    "focused": 15,
+    "omissions": 8,
+    "full": 1151,
+    "normal_builds": 2,
+    "default": 15,
+    "without_test_seams": 15,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual native M8 kernel private resource-prepared service only; NOT protected original Body, native facade/context/SYS4/SYS5/codec preBody backing or integrated Source/I3 use",
+    "docs": "pending exact11/full docs then metadata/Git",
+    "goal": "same active W4-D"
+  },
+  "d_actual_m8_prebody_backing_docs_20261005": {
+    "at": "2026-10-05T14:14:11.735609+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-docs-v1/RESULT.json",
+    "receipt_sha256": "4425ab3a7bcc44fdfb16182b9d10951e25345432fe2ccb261fb302cd6088463d",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }

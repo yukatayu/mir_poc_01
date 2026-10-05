@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-05 22:25 JST
+最終更新: 2026-10-05 23:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,7 +59,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照original-expiry-reply-controls-v1で、元sourceのResolveが生成した実際の期限切れ応答を、Finish前に符号化・保持するよう修正しました。実応答は複製せず借用し、実際の符号化エラーも保持します。Finish送信失敗でも応答と送信データが残り、Finish前の取り出しと再処理を拒否します。追加3fieldを含む実9field保持とバイト列・割当容量を全体状態へ反映し、13検査・7省略対照、通常2build・追加テスト機能なし13件・同cut全1136件を検証、38pathを復元しました。通常及び予算付きの下位戻り値保持も同cut回帰で確認しています。元sourceの本体はまだ0です。元要求と実I3許可の一度限りのBody消費、実行前の数値・実割当、実返信送受信・現在権限でのsource受領、S→T→S・次activation・後続update再freezeが残ります。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照m8-prebody-backing-controls-v3で、M8下位層に実行前の資源準備経路を追加しました。実際に使うキー・読み書き・結果・トレースをRHS前に用意し、本体では値の更新と所有権の移動で処理します。実Vecの容量不足と数値上限ではRHS・キュー取り出し前に拒否し、要求と使用済みIDを保持します。資源がある場合は既存の結果・状態・トレースに一致し、失敗・panic・一度限りの実行も検査しました。15検査・8省略対照、標準15件・追加テスト機能なし15件・通常2build・同cut全1151件、38path復元を確認しています。これは下位層の前提部品で、元sourceの本体はまだ0です。上位M8/SYS4/SYS5の記録・返信・全activation領域と数値上限、元要求と実I3許可のBody一度限り消費が残ります。期限切れ実返信のFinish前保持も同cutで回帰確認済みです。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeは未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 

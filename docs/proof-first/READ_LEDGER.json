@@ -52416,5 +52416,152 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T13:29:36.228208+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v1/RESULT.json",
+    "sha256": "ab324bf2029b365654f09bf52a7b38820e48febae30577d133c2fbe8bfc4299a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v2/RESULT.json",
+    "sha256": "e8f8b86759e04df0bb09aaa625977147a7764f5354de7fef769cda6e5d30cfc2",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-red-check-v3/RESULT.json",
+    "sha256": "43368e1a8bb6d80b1974b0a50cb88374d1be55d6a673f6ab3b2c0becfecd5bd4",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-green-check-v1/RESULT.json",
+    "sha256": "ace99e4fb5d1fee2ed1905ae790cf05c1051c30459cc7c4d7f7fb351513496db",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-green-check-v2/RESULT.json",
+    "sha256": "52c580ec48755009c01ac5590b11fa9b2c6673871e8a815a99b0b7dab9e47453",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v1/RESULT.json",
+    "sha256": "dc1249e0268b6241d4aa72cafd04f59872f21e56e3561320ba9f0833f67d39bb",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v2/RESULT.json",
+    "sha256": "975a83bdf8cb5270ef7d90adfa0128a85e6fe019e403da5755e992df65c3b071",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-controls-check-v3/RESULT.json",
+    "sha256": "290b59741ee78aced294b31704187fcd81c50b984b4c1870d2858cb050f29a75",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-late-mutant-check-v1/RESULT.json",
+    "sha256": "93322650fe7c2e1bdab9099a7ff911020f8ea3443e3cee7d70ef562c9e6c6abd",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-numeric-mutant-check-v1/RESULT.json",
+    "sha256": "62f3ef960d145d7d01317c2847d5a38d4d1fca1d4dd82bb3b114911c4eaa6f9c",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-root-mutant-check-v1/RESULT.json",
+    "sha256": "42f371c9379ade4b11e84925895086188d7f94c7de3be6fa0b8c2fb26f9ce5f9",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-store-mutant-check-v1/RESULT.json",
+    "sha256": "0f6bb9e932b49489e5f26f091a4fe45e4976904619a8b4bfbb49a76430f7749a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-successclone-mutant-check-v1/RESULT.json",
+    "sha256": "91e469633ba70f126c81dc97319825ba3ba4ab5ecd73bbc9c4615b4375544bad",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-storeclone-mutant-check-v1/RESULT.json",
+    "sha256": "8e7001138b0b3c830dbb706aa69040af0665fe43536e5bb9c3358f2928156f12",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-failureclone-mutant-check-v1/RESULT.json",
+    "sha256": "adfb5a79b101dbbfb64a525423e58429bf7fd72cf7f764e47682db5dbe3ec426",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-primary-mutant-check-v1/RESULT.json",
+    "sha256": "d7bed51c47da19d982dc19d7da949fb781da83b000a1087a3254c492b2c68e49",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-combined-check-v1/RESULT.json",
+    "sha256": "079c9bcb7a094cc456e928334cb2a3f9ad154f9d49e3572e42b69250beeac05d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Native M8 preBody actual used kernel backing; compile-only/semanticRED/probe fixtureSIGABRT preserved separately,15controls/8compiled omissions/default15/no-seams15/full1151 all38restored; no sourceBody/upper/globalproof claim",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-prebody-backing-controls-v3/ACTUAL_M8_PREBODY_BACKING_FIELD_INVENTORY.json",
+    "sha256": "e7202a2e6a6a62dd3680215604fd67baac2bbc877ceca605b65580726925bae9",
+    "status": "read-reviewed-full",
+    "role": "Native ephemeral12field backing/5expression variants, used Vec/map allocations and actual current root/typed expression/caller review",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M8-PREBODY-BACKING-COMPONENT-PLAN-v1.json",
+    "sha256": "76d2236bb307475da1f26e482c10731705c5e7e46164a80af2a3ec5ec6110429",
+    "status": "read-reviewed-full",
+    "role": "Native kernel used real beforeBody backing selected/smallest alternative/falsifiers/non-effects",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v8.json",
+    "sha256": "02e93738b09c44ca0507cb2cff79a392cea86efcacf77b1d605114468c13028d",
+    "status": "read-reviewed-full",
+    "role": "Actual kernel resources and next upper/native+SYS4+SYS5+codec+original source/I3 Body prerequisites",
+    "at": "2026-10-05T14:06:21.082100+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-prebody-backing-docs-v1/RESULT.json",
+    "sha256": "4425ab3a7bcc44fdfb16182b9d10951e25345432fe2ccb261fb302cd6088463d",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T14:14:11.735609+00:00"
   }
 ]
