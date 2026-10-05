@@ -33,13 +33,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01の一時停止依頼で現在は停止しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点で停止しています。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dはowner依頼で一時停止中です。外部未採用38path参照owning-source-frame-capacity-green-v1で、実3子FD3の元source要求と親の発行記録保持に、実QUICでの同一データ送信・受信・owner内保持を接続しました。送信用データは実Issue完了前に準備し一度だけ移し、元要求・全引数・cursor0を保持します。通信futureはRuntimeを借りず、受信後の検証失敗でも実受信データを先に保持します。実unused引数で既存64KiBコーデックの容量超過を再現し、発行済み実要求と実codecエラーを保持して完了通知を拒否します。通常default/private-QUIC buildと同cut全1076件が通過し、38pathは復元済みです。最初のA→Sデータ保持までで、ownerの意味的受付・I3/body/result/資源/source受領、S→T→Sと次activation・後続update再freeze/保持・D統合判定は残ります。TLS/hashはsource custodyやM9実行権限ではありません。既存199module/20455所有宣言/177対照の条件付き監査は別receiptです。再開後は、重要な境界変更の反例、またはD統合判定でAstraへ戻すため停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照owning-owner-ready-controls-v1で、実3子FD3の準備・M9公開・全員の有効化、元sourceの実要求発行、実QUIC受信に、所有側の受信通知と親の発行記録の照合・保持を接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データを照合します。親は実通知を後続の照合より先に保持し、子は通知と送信番号を送信より先に保持します。9種類の不正条件、2種類の検査省略対照、通常default/private-QUIC build、同cut全1081件を検証し、38pathを復元しました。処理本体の実行回数とsource・親の進行位置は0のままです。既存I3の許可・時計・一度だけの利用、実下位結果の保持、実行前の資源確保、source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。TLS・hash・受信通知は実行許可ではありません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
 
-W4-Dはownerの2026-10-01の依頼で一時停止しました。全1076件が通過した実source→実QUICデータ→owner保持の地点を保存し、次の意味的owner/I3/body/結果/資源/source受領の実装には進んでいません。再開にはownerの指示が必要です。D完了・週間上限到達による停止ではなく、Plan250/I3-4の別個のpauseも保持します。
+W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-01 07:44:01 UTCの確認で69%（使用31%）でした。次の確認は2026-10-01 08:44:01 UTC以降、約50%で区切りの停止というowner条件を保持します。resetはownerのみ。Plan250/I3-4は別個のowner pauseです。
+週間残量は2026-10-05 08:10:57 UTCの確認で66%（使用34%）でした。次の確認は2026-10-05 09:10:57 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

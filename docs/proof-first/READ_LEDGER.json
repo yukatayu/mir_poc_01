@@ -51702,5 +51702,131 @@
     "status": "read-reconsulted-scoped",
     "role": "Scoped actual ordinary TLS server/client config/quinn one-bidi/no datagrams and live session/preface patterns10680/11160/13555–13680, before isolated generated test-only TLS fixtures; not whole probe reread or fresh probe regression",
     "at": "2026-10-01T07:44:18.087791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys4_i3_original_source.rs",
+    "sha256": "0511f2e913146e6c1e175de42408b9ba3d7a8970615281023c02c1572df20c27",
+    "status": "main-authored-reviewed-scoped",
+    "role": "New immutable original full Core/all args/requester/global ordinal data-only match/locus selector; existing declaration reconsult scoped, not whole-file reread",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys5_i3_process_runtime.rs",
+    "sha256": "75af9a931129d0ce9777f8a6d6ae72eae2be38a283f1f8515842e7a51ca737dc",
+    "status": "main-authored-reviewed-scoped",
+    "role": "New pure candidate/semantic identity inspector plus10630–10750/11328–11388/11445–11560 lower Request/I3 handoff/finalizer reads; no whole12500line reread",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys5_i3_private_quic.rs",
+    "sha256": "70ba6447e1f38e4a3755d409a19b2e9060fd72103b82cdd15c81ff8c751a77d7",
+    "status": "main-authored-reviewed-scoped",
+    "role": "New readonly actual candidate/frame accessor; old six-field held ingress/normal transport producer and test mutation reconsult scoped; old reconnect2 unchanged",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys5_i3_original_source_process.rs",
+    "sha256": "13aa301dd079b27234e82cf356673ffaef276e29f62a30a73fd146b611249d81",
+    "status": "main-authored-reviewed-scoped",
+    "role": "New sole opaque eight-field data-ready receipt and actual owner producer/full own state capture; no Body grant/cursor/clock",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys5_i3_original_source_process_tests.rs",
+    "sha256": "e2bfbcfadaffe7c2640f6596b673f2ba985bf924cd809bf89a0be96ec8a1177f",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Actual3FD3/QUIC Ready positive/9funded faults/5tests and8Notice live-field mutations, noBody/runtime-source unchanged; initial RED/compiler failures/2mutants scoped",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys5_i3_source_control.rs",
+    "sha256": "bcbe5441a6f7e5bba13987cccba047d09ccc6217c7c1ac175431ecf2d29e2bf6",
+    "status": "main-authored-reviewed-scoped",
+    "role": "Normal actual owned child Notice retention-before-send, strict registered sole opaque reader, whole-source preallocated parent slot/retention-before-postread join, oneuse/counter/sendloss actual faults; not entire file reread",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/sys4_dispatch.rs",
+    "sha256": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+    "status": "read-reconsulted-scoped",
+    "role": "Exact scoped18field LocusStep6782–6823/backend8914–9038/I3permit12630–12762/normalreceiver13044–13148/body15976–16323/report20364–20554/wrapper20756–20830; not entire21000line reread",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/m8_runtime_local_cut.rs",
+    "sha256": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+    "status": "read-reconsulted-scoped",
+    "role": "Actual ordinary/I3/source1810–1980 contextual enqueue/next service boundary only; finish service consumer remains next read, not whole-file audit",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/m8_runtime_owner_queue.rs",
+    "sha256": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+    "status": "read-reconsulted-scoped",
+    "role": "1340–1433 source-specific vsordinary actual service and pre-body checks only; no entirefile/audit claim",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "sha256": "ec497d66e937857e437f8f88b66030507304cd43c4246b502a7f7864d408347d",
+    "status": "read-reconsulted-full",
+    "role": "Immutable full handoff reread this continuation, normal implementation contract and explicit owner stop30 override",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-JOIN-NOTES-v2.json",
+    "sha256": "ed421b76e8a5116fe9f21c32e2713ce49ae78eff1feb175af00620f52a207cf8",
+    "status": "read-reconsulted-full",
+    "role": "Actual prior full ordinary/I3 next-gate notes reread; original scope not upgraded",
+    "at": "2026-10-05T08:58:30.191602+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/README.md",
+    "sha256": "231dad414dc752e230030af3676f5ffa8626dcb5af1f187f6bbd705ff93b418c",
+    "status": "read-reconsulted-scoped",
+    "role": "Canon-first source hierarchy entrypoint reconsult in same owner resume; scoped read, no new normative decision",
+    "at": "2026-10-05T09:00:33.428178+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/MAP.md",
+    "sha256": "f7d3b53eac593862ee361af775cf8e97c380ab3fb9e8ecd679415b86f08b5322",
+    "status": "read-reconsulted-scoped",
+    "role": "Canon-first current ADR/architecture/I3 source references reconsult; tool output portions were truncated, no full MAP reread claim",
+    "at": "2026-10-05T09:00:33.428623+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/spec/16-i3-owner-admission-budget.md",
+    "sha256": "0edd249af3c2a48df3fbb00c4f968149748b3f87ba86781892874827a84eda13",
+    "status": "read-reconsulted-full",
+    "role": "Actual I3 budget/clock/one-use normative contract reconsult before new owner Ready data-only consumer; full read received in earlier portion of this same continuation",
+    "at": "2026-10-05T09:00:33.429066+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/architecture/10-i3-multi-process-runtime.md",
+    "sha256": "6cb4612137ea5027b4637f52e72178cee0f32d7ddf921ea6c7a806c9f5225dad",
+    "status": "read-reconsulted-scoped",
+    "role": "Normative current private process/runtime boundary reconsult within same continuation, no current Canon adoption",
+    "at": "2026-10-05T09:00:33.429634+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/adr/ADR-0043.md",
+    "sha256": "fb37c365260ba43174a4a486de3bcdf84572f3625fc904d5583d4074a11f4af8",
+    "status": "read-reconsulted-scoped",
+    "role": "Immutable I3-3 acceptance/Plan250 independent owner pause source; same continuation reconsult, no resume authority inferred",
+    "at": "2026-10-05T09:00:33.430009+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/m8_runtime_local_cut.rs",
+    "sha256": "d288c192fcae6351b2f9b30f6bfd43d9a3b5c4af8e323fc74e3c10875739cba8",
+    "status": "read-reconsulted-scoped",
+    "role": "3594–3650 actual normal/source finish_owner_context_service after real lower serve, no full-file audit; next source/I3 exact lower association still required before body, not a contract counterexample",
+    "at": "2026-10-05T09:06:02.219845+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-owner-ready-controls-v1/m8_runtime_owner_queue.rs",
+    "sha256": "a10344d5eb456d29d7a494dc4444e19687b369554ff0a5ba488faa86d93ccfcd",
+    "status": "read-reconsulted-scoped",
+    "role": "1460–1528 actual genuine M8 result/trace/store publication and existing retained owner_result;1130–1168 normal/I3 enqueue vssource guard and1216–1238 real occurrence supplier scoped, no fullfile audit; next source/I3 exact lower association still required before body, not a contract counterexample",
+    "at": "2026-10-05T09:06:02.219845+00:00"
   }
 ]
