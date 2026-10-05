@@ -52311,5 +52311,110 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T12:55:56.480198+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-red-check-v1/RESULT.json",
+    "sha256": "b356bbf49c4c39520b50bd19c3f2ed6bcffbb18cc36db17a9bb0903f9bd1c55d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-green-check-v1/RESULT.json",
+    "sha256": "53450b42ed3c2f31cf6d19ee582d3edbe4b0e6c558d9ba47697541c172fed31a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-controls-check-v1/RESULT.json",
+    "sha256": "8c40802a19aa7185825b97fe7aa2537b65eabaa42e70b14aba9fedf78f78942b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-prepare-mutant-check-v1/RESULT.json",
+    "sha256": "f21d2e6a535c542e0ca063d92d39ec6d68c10aeb27f8f29c0e7f6bd76a3a02e6",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-late-mutant-check-v1/RESULT.json",
+    "sha256": "3cafbdd45afc6b8a0022b68817fbf3af8f9e80f6104dda73b6113fc79bc02b20",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-finishguard-mutant-check-v1/RESULT.json",
+    "sha256": "3da43cae313fb1c3cccda1bf8f8e09d1a0b2daec73039a1917664838a0f8df11",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-encodedcapture-mutant-check-v1/RESULT.json",
+    "sha256": "4e99c77ceebb6fcbeb3c4b86602d9e5f9cf79a4bb2272835e08f16d79cf2e613",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-packetcapture-mutant-check-v1/RESULT.json",
+    "sha256": "72a6228e47784994129416637dad04bc712c78e1dec3d05ff0a25b6173cc382d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-errorhold-mutant-check-v1/RESULT.json",
+    "sha256": "8714fbd33a7c0417c7acb259c05354a7f7971d3fe687b9ee55f4df2227c10cd0",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-errorcapture-mutant-check-v1/RESULT.json",
+    "sha256": "35e0fea7d3d53f04068658edef81104b5ae40d0a2d2878439daf0a5a72451b76",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-combined-check-v1/RESULT.json",
+    "sha256": "e4f75fac86bbe520644e1f6ae3dd9eebe5e7a2db93e1a51523bbeaf7af6370c4",
+    "status": "verified-scoped-result-and-log",
+    "role": "Original Resolve expiry reply actuallocalpreFinish/13controls/7compiled omissions/normal2/no-testseams13/full1136 all38restored; scoped not Body/networkreply/generalproof",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-expiry-reply-controls-v1/ACTUAL_ORIGINAL_RESOLUTION_REPLY_FIELD_INVENTORY.json",
+    "sha256": "f10937f310e736255b94395f4b5c918c42446c9341b25bcc3a1e9c1ba349a50f",
+    "status": "read-reviewed-full",
+    "role": "Actual9field resolution+existingpacket/new3datafields supplier/capture/wholemode review",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-EXPIRY-REPLY-COMPONENT-PLAN-v1.json",
+    "sha256": "6f63d1aa7c93fda19d656256588347fc4bdd94045c3ccb5fa41e2ed955397fcd",
+    "status": "read-reviewed-full",
+    "role": "Original expiry realreply before actualFinish selected smallest repair/alternative/falsifiers/non-effects",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v7.json",
+    "sha256": "0b1d0546fddfc1f801b70b9d136eaba258edf0252a2dad873d90ccaaf9220aa9",
+    "status": "read-reviewed-full",
+    "role": "Current ownedexpiry actualcodec/packet/nativereply+remaining originalBody/I3/resources/sourceAck/subsequentfreeze",
+    "at": "2026-10-05T13:25:05.231184+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-docs-v1/RESULT.json",
+    "sha256": "daf75c01bbafa26f12f114e953c41e17649d5011de50269c198a77af8bf89b3c",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T13:29:36.228208+00:00"
   }
 ]

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-05 21:50 JST
+最終更新: 2026-10-05 22:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -75,7 +75,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-ordinary-lower-caller-controls-v2で、予算指定のない実際の通常要求にもM8・SYS4・SYS5の戻り値保持を接続しました。既存のcohort・要求・現在の権限・重複の検証を共有し、実デコード要求も同じ処理へ進みます。保持用の即時経路に予算付き要求を渡すと予約や待機を作る前に拒否し、先に届いた別要求がある場合も下位実行前に拒否します。実返信は既存の保持記録が一つだけ所有し、既存APIの返信返却を維持します。12検査・6省略対照、標準buildで11件・追加テスト機能なしで12件、通常2build・同cut全1132件を検証し、38pathを復元しました。実I3予約を使う先行部品も同cut回帰で確認しています。これは通常の下位部品の証拠で、元sourceの本体はまだ0です。元要求と実I3許可の一度限りの消費、実行前の数値・割当資源、返信・source受領、S→T→S・次activation・後続updateでの再freezeが残ります。199module監査は別cutの条件付き証拠です。重要な契約変更の反例又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照original-expiry-reply-controls-v1で、元sourceのResolveが生成した実際の期限切れ応答を、Finish前に符号化・保持するよう修正しました。実応答は複製せず借用し、実際の符号化エラーも保持します。Finish送信失敗でも応答と送信データが残り、Finish前の取り出しと再処理を拒否します。追加3fieldを含む実9field保持とバイト列・割当容量を全体状態へ反映し、13検査・7省略対照、通常2build・追加テスト機能なし13件・同cut全1136件を検証、38pathを復元しました。通常及び予算付きの下位戻り値保持も同cut回帰で確認しています。元sourceの本体はまだ0です。元要求と実I3許可の一度限りのBody消費、実行前の数値・実割当、実返信送受信・現在権限でのsource受領、S→T→S・次activation・後続update再freezeが残ります。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -656,3 +656,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-05 21:19 JST: W4-D実I3→M8/SYS4/SYS5下位戻り値保持を9検査/5省略・再利用対照/標準8件/通常2build/全1120件で検証、38path復元。実返信は複製せず単独保持。元source本体0、予算なし経路/実資源/本体消費へ継続。Report2614。
 
 - 2026-10-05 21:50 JST: W4-D予算なし通常/実デコード要求の下位戻り値保持を12検査/6省略対照/標準11件/通常2build/全1132件で検証、38path復元。予算付きの誤待機・別受信要求の実行・再実行を拒否。元source本体0、元要求/I3消費と実資源へ継続。Report2614。
+
+- 2026-10-05 22:25 JST — 元sourceの実期限切れ応答をResolve Finish前に符号化・保持。13検査/7省略対照/通常2build/追加テスト機能なし13件/全1136件、38path復元。Finish失敗でも応答保持・再処理なしを確認。元Body0、実Body権限/資源/返信送受信/source受領へ継続。Report2614。

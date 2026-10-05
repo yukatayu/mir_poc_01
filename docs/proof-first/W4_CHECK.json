@@ -59852,5 +59852,398 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_original_expiry_reply_20261005": {
+    "at": "2026-10-05T13:25:05.231184+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-EXPIRY-REPLY-CHECKPOINT-20261005-v1.json",
+    "receipt_sha256": "5bf3f0e1e54652373d91a572e1380e0d3274643956a06851dfcc74a30e6bcffa",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-expiry-reply-controls-v1",
+    "source_pins_sha256": "f1853393816212ccf863866075a79a04c508d9de97c0f20dde3804db8cf40f4c",
+    "field_inventory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-expiry-reply-controls-v1/ACTUAL_ORIGINAL_RESOLUTION_REPLY_FIELD_INVENTORY.json",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v7.json",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-red-check-v1",
+        "result_sha256": "b356bbf49c4c39520b50bd19c3f2ed6bcffbb18cc36db17a9bb0903f9bd1c55d",
+        "restored_sha256": "adffeb2b27e87656c7b551ba4cb105ab57d3544af6e720950d37d0c6c373ed3a",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_before_finish",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "0af2a87af773fdb7facac81116d710fe9cffa624f20b15262160227a4cf4aa45"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-green-check-v1",
+        "result_sha256": "53450b42ed3c2f31cf6d19ee582d3edbe4b0e6c558d9ba47697541c172fed31a",
+        "restored_sha256": "c436a498bb5eff735d2891dbdcd4c0d864bd885ead8a0e4dc25d3f116ec85b15",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "a62bd777853fdde60f3d1af709da75fbd1a9afdbc6212cb831ed14d44f1edb26"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "34eff833bfebae3c11d17aecba0121237f169627924714c55409efee90753f52"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_before_finish",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "ace8e49a596502f8b2bdfed2d522cba10e095d770257f36bec01cb7756edebde"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-controls-check-v1",
+        "result_sha256": "8c40802a19aa7185825b97fe7aa2537b65eabaa42e70b14aba9fedf78f78942b",
+        "restored_sha256": "016bdc7de4d80bdd24851be4b4acb976e97c975344b193639fb3cf2401e5bf84",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "bd90cc28badd6f8e0d1d9a0c9ae316bddb6acbdb71f1655ed818834dca137c7f"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-prepare-mutant-check-v1",
+        "result_sha256": "f21d2e6a535c542e0ca063d92d39ec6d68c10aeb27f8f29c0e7f6bd76a3a02e6",
+        "restored_sha256": "929f2e066f300cbe7b67bddade087fd4dc258c017e66e9f8bd0c30a10a09514e",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_before_finish",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "9afe06537c4c9d94004261f83c88e404aa4356ddaef9f9528865ccb552c81911"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-late-mutant-check-v1",
+        "result_sha256": "3cafbdd45afc6b8a0022b68817fbf3af8f9e80f6104dda73b6113fc79bc02b20",
+        "restored_sha256": "e931e81bc45d5df8f74a0fcf903e22a9e7f9aaffce65cf6f4725a32cd18b7dd9",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_finish_loss_keeps_prepared_packet",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "2dd71d57ff2eb6e8d3bd039bcdcd07e84b8bfc6bc86c08f1095c8f2cfa504812"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-finishguard-mutant-check-v1",
+        "result_sha256": "3da43cae313fb1c3cccda1bf8f8e09d1a0b2daec73039a1917664838a0f8df11",
+        "restored_sha256": "9065e88f71bd5e7c592344550caf6413eb52c56c007d10f02a99a8b0b098fe0f",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_finish_loss_keeps_prepared_packet",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "faf07885fd6c5f69e3688069d1aa23e0cd9ee0569fb2ed991689195db6bd03db"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-encodedcapture-mutant-check-v1",
+        "result_sha256": "4e99c77ceebb6fcbeb3c4b86602d9e5f9cf79a4bb2272835e08f16d79cf2e613",
+        "restored_sha256": "e405b30ee2965d123eb7c1a75c586067de2e6a0e1d174600bc0bd725dda7ed71",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_before_finish",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "54d43217a22a41c0c311ee23ff676c7bfdfa0492130815b3caba1d283c2b7b05"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-packetcapture-mutant-check-v1",
+        "result_sha256": "72a6228e47784994129416637dad04bc712c78e1dec3d05ff0a25b6173cc382d",
+        "restored_sha256": "ac38a9753a8e2e97eb7e96b9807d91a8de5042c98b92b2c6db6297bad6991492",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_before_finish",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "bba22fba0df6b19b7c71f755ed7b57cdcf63c88192f9bfcb5e0d792c6a7b8a24"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-errorhold-mutant-check-v1",
+        "result_sha256": "8714fbd33a7c0417c7acb259c05354a7f7971d3fe687b9ee55f4df2227c10cd0",
+        "restored_sha256": "48d2331e5f19c8797fd264b5715a29d4377fb4b648b9984c424ad7a232a457c2",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_codec_refusals_keep_real_error_and_reply",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b75f3d8867f785ea1295ad407bab833c275285d3d9484f62c6651c97681b65c2"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-errorcapture-mutant-check-v1",
+        "result_sha256": "35e0fea7d3d53f04068658edef81104b5ae40d0a2d2878439daf0a5a72451b76",
+        "restored_sha256": "5756ad7122c3eef798b1399fd3c4c3d6c4bd26c619dabb033b02585668ccd951",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "owning_original_owner_resolve_expiry_reply_actual_codec_refusals_keep_real_error_and_reply",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "4f99e2cb434547f80142be658158fa70932f99a6cf10dbefa9b2f60a6bb33a7d"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-combined-check-v1",
+        "result_sha256": "e4f75fac86bbe520644e1f6ae3dd9eebe5e7a2db93e1a51523bbeaf7af6370c4",
+        "restored_sha256": "50fa1a1e5812fb9c06448367b9dec5e3227efe3431ca850fb473fd8b6c42426d",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "0e06a78b3e5823b23dadbe8c3ec04b87f862f409ca88f7351a20a52af36ef27f"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "daa92fc195617f0d73027ddde492c41225c21c44b47d760278059f0b1767eb02"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic",
+              "owning_original_owner_resolve",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "05e421e88183f10295345aadfaadde9410870b7e6b4d00180a48df89e7d3816e"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "2b5676201712dbd87fae743d36c1bf3dc2070671a38eb4b1ea2c8c0478756ec6"
+          }
+        ]
+      }
+    ],
+    "focused": 13,
+    "omissions": 7,
+    "full": 1136,
+    "normal_builds": 2,
+    "without_test_seams": 13,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual original registered Resolve expiry reply locally prepared/retained before Finish; sourceBody remains0/no full reply network/source acknowledgment",
+    "docs": "pending exact owned11/full make docs then final metadata/Git",
+    "goal": "same active W4-D"
+  },
+  "d_actual_original_expiry_reply_docs_20261005": {
+    "at": "2026-10-05T13:29:36.228208+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-expiry-reply-docs-v1/RESULT.json",
+    "receipt_sha256": "daf75c01bbafa26f12f114e953c41e17649d5011de50269c198a77af8bf89b3c",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }
