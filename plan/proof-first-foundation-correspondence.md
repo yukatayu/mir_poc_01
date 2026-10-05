@@ -2757,3 +2757,14 @@ Normal actual registered source statement/Ready/source-Issue join supplies owner
 2026-10-05に実行終了後のCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約11GBから約14GBへ戻しました。追跡6403ファイル・外部現source38ファイル・3manifestの計6444hash一致を確認。研究source・証明・実験・ログ・receipt・browser状態は削除していません。詳細はINCREMENTAL-CLEANUP-20261005-v1.json。後続buildの再生成で空きは変動します。
 
 Same Report2614/current status and whole task snapshot/sample evidence row synchronized; current full docs/final metadata/authorized Git follow separately. No new roadmap/Canon/WRK/report/sample family.
+
+
+### 2026-10-05T10:56:26.817964+00:00 — Actual original protected budgeted Resolve / retained native result (LAB)
+
+W4-Dは同じgoalで継続中です。外部未採用38path参照owning-original-owner-resolve-controls-v2で、元sourceの実要求発行・実QUIC受信・Ready・保護された受付に、既存I3のResolveを接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データ、現権限と実際の受付済み要求を照合し、既存の実clockで次の待機要求が同じ要求か確認してから解決します。実際の一度限りの本体許可、期限切れ返信、拒否を、記録・通知より先に保持します。通知失敗時は実許可・未送信通知・受付区間を、親の照合失敗時は読み取った実完了を残します。正常系1・異常条件と一度だけの利用14、3種類の検査省略対照、通常default/private-QUIC build・test-seamなしの実正例と同cut全1100件を検証し、38pathを復元しました。本体とsource・親の進行位置は0のままです。本体での実許可消費、予算なし要求の本体区間、実M8下位戻り値の保持、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。データ照合やResolve完了を本体の実行許可にはしません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
+
+Selected normal owned Resolve token joins actual original/Core/args/ordinal/activation and real Issue/Ready/completedAdmit. Native liveAwaiting and actual admitted trustedclock select same request before native issuance consumption; no invented budget/clock or C source branch. Actual Reserved7/Permit2 or native expiry reply/raw typed error moved before capture/Finish. Parent actual Completion held before later original association join. Alternative generic host driver resolves and executesBody without held interval, rejected; remains unchanged.
+
+8capturestruct51fields (6newchanged42 plus native Reserved7/Permit2) and linked full Binding15. Fifteenactual cases positive1+14fault/oneuse, native tick4 expiry, actual G0floor afterG1, heldframe, priorAdmit/storage/manifest/current association, postread joins, Finishloss/genericfinish/repeat. Controls-v1 8pass1fail had earlierAdmit broad testdriver predicates intercept Resolve namespace; three manifest passes not Resolve evidence, postread noResolvegrant. v2 narrows oldtestdriver, no production change;9pass. Three compiled omission mutants fail actual return/capture/postread association. No peerEOF workaround; all children reaped/all38restored. Normal default/privateQUIC/no-seams positive and full1100 exactcut pass. Body/M8 raw occurrence/outcome/noCommit retention and numeric/allocation resources remain before dependentBodyuse; no general OOM/recovery or final proof/public claim.
+
+Same Report2614/current snapshots/sample evidence row synchronized. Full docs/final metadata/authorized Git separately; samegoal remains active, no Canon/WRK/report/sample/roadmap change.

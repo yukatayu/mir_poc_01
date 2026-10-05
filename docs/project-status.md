@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-05 19:03 JST
+最終更新: 2026-10-05 19:56 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,7 +59,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照owning-original-owner-admit-controls-v2で、実3子FD3の準備・M9公開・全員の有効化、元sourceの実要求発行、実QUIC受信・Ready照合に、所有側の元要求に対応する保護された受付と実I3の待機状態を接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データと現権限を照合し、既存のowner_ticks 4を使います。予算のない要求は本体実行前に拒否します。実際の下位戻り値を記録・通知より先に保持し、通知失敗時も実要求・待機状態・未送信通知・受付区間を残します。15種類の不正条件・一度だけの利用、3種類の検査省略対照、通常default/private-QUIC build・test-seamなしの実正例と同cut全1091件を検証し、38pathを復元しました。処理本体とsource・親の進行位置は0のままです。既存I3の解決・一度だけの本体許可、実M8下位結果の保持、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。TLS・hash・受信通知・受付完了は本体実行許可ではありません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照owning-original-owner-resolve-controls-v2で、元sourceの実要求発行・実QUIC受信・Ready・保護された受付に、既存I3のResolveを接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データ、現権限と実際の受付済み要求を照合し、既存の実clockで次の待機要求が同じ要求か確認してから解決します。実際の一度限りの本体許可、期限切れ返信、拒否を、記録・通知より先に保持します。通知失敗時は実許可・未送信通知・受付区間を、親の照合失敗時は読み取った実完了を残します。正常系1・異常条件と一度だけの利用14、3種類の検査省略対照、通常default/private-QUIC build・test-seamなしの実正例と同cut全1100件を検証し、38pathを復元しました。本体とsource・親の進行位置は0のままです。本体での実許可消費、予算なし要求の本体区間、実M8下位戻り値の保持、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。データ照合やResolve完了を本体の実行許可にはしません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 

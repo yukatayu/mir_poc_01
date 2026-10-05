@@ -51905,5 +51905,89 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful input11 baseline restored; final metadata suffix separately checked. Notes-v2 exactSHA recovery before validation; no full proof/source-audit claim",
     "at": "2026-10-05T10:12:02.787383+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-red-check-v1/RESULT.json",
+    "sha256": "3abac8238ae6839c297033ad69c176b0e4044c3ca0153321c5afc9fc429d363f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-green-check-v1/RESULT.json",
+    "sha256": "33d743efd35efa6ff21602543dc50421cafacd179f8be0e681fa2d2187ff0bd0",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-controls-check-v1/RESULT.json",
+    "sha256": "1c6d878a539b27f1df6c404dbb797393c737e6468f7ea068880543273f9848a5",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-controls-check-v2/RESULT.json",
+    "sha256": "c824a2b817b247e9a369e9881a3c439ac4c9a691b4f0383ebc4b1828b50a1130",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-return-mutant-check-v1/RESULT.json",
+    "sha256": "2da316f6f9ba2cd990e3be95b80608289bc8f810c39ddb2e5e3b888d955061ef",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-permit-binding-mutant-check-v1/RESULT.json",
+    "sha256": "b45b089655ae94e6da44e8e44b1fbbcf83ede0166528e8514e39e4026f47d30a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-parent-join-mutant-check-v1/RESULT.json",
+    "sha256": "db8252c9f1471a94cbd169ae89dc82b66b53446493e52e6ea33e74bd1495875f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-combined-check-v1/RESULT.json",
+    "sha256": "1683ba6dc702de7eaf1f97b3953d5466fa2e3bedbdef512d6099e6ffbcefad37",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual original protected budgeted Resolve component: exact commands/log SHA/restored38, failed controls-v1 scope restricted; no general proof claim",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/owning-original-owner-resolve-controls-v2/ORIGINAL_OWNER_RESOLVE_FIELD_INVENTORY.json",
+    "sha256": "f9ffe954e74df19cba72c77aa0313f653e9155362f1c90c971c743e8978641fb",
+    "status": "read-reviewed-full",
+    "role": "Full bounded8capturestruct51fields, actual producer/caller/alias/resource and15case scope; current field review, not wholeproof audit",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-OWNER-RESOLVE-COMPONENT-PLAN-v1.json",
+    "sha256": "8ddd1e8abd443ed6ead91ef4150e2743b6a8ed4272a73ad918cf28456cb47b7b",
+    "status": "read-reviewed-full",
+    "role": "Full fixed noBody preregistration and genuine actual consumer/alternative/falsifiers",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v3.json",
+    "sha256": "1990c1267b045030a7e0572c36d916bda365b774dd6c16916aa99a68beb03fa3",
+    "status": "read-reviewed-full",
+    "role": "Full scoped actual native Resolve/Permit and deeper M8 contextual/SYS4/SYS5 producer notes",
+    "at": "2026-10-05T10:56:26.817964+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owning-original-owner-resolve-docs-v1/RESULT.json",
+    "sha256": "9a67e99a94ca5b67dc4e5960765c2b09843e8f99af0cd77750ef91f30cd76bf9",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T11:01:20.485876+00:00"
   }
 ]
