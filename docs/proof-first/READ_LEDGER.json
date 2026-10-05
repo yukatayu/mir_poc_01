@@ -52192,5 +52192,124 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T12:25:18.335275+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-red-check-v1/RESULT.json",
+    "sha256": "8c7bbb7a766aadca90e83bbc1ac487f1672729ee81217ffe62a1be305347fe62",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-green-check-v1/RESULT.json",
+    "sha256": "89aa19c76b59cc084eb9de6df01ec53c409d5bccf614af201e264f2a77bd19ea",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-decoded-red-check-v1/RESULT.json",
+    "sha256": "f8ed9912317b6f6180be491dd866ffa72e5b7baa08350361c092a1b2db597b1a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-controls-check-v1/RESULT.json",
+    "sha256": "51b370b5009d8ef59d31185f409eeacce7b4c2a929783bfdfc75304f8bda45c4",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-controls-check-v2/RESULT.json",
+    "sha256": "c937d489eb40ea04d46874dd02956f51a7153c7c06c167ef093cf35ad5c8a905",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-budget-mutant-check-v1/RESULT.json",
+    "sha256": "266ca7431398343dc4f419e592265ad635033d7545142c4886f41f14a6689bbf",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-inbox-mutant-check-v1/RESULT.json",
+    "sha256": "40af54c6787fdcc0b3dc54292cf3248d6f5ee7c8f536d15699b1314d3f5f1582",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-oneuse-mutant-check-v1/RESULT.json",
+    "sha256": "4e7e080e519e583576dc92db0f4546cd9f988d749df2c6df58ebb1f01dd4dcfc",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-sys4-mutant-check-v1/RESULT.json",
+    "sha256": "47776aff15c5b1f2c61df0d9ef1b32b935fc2502412ab350694b538e17aa4d2e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-finalizer-mutant-check-v1/RESULT.json",
+    "sha256": "efef95b6a362b8f55e21ea2dbbf1db336c119df348b85e20ec91da7dd0afb3f7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-decoded-mutant-check-v1/RESULT.json",
+    "sha256": "d76245c4f32d05e52436d96df934e79c967b1846c473eee4a5f57e9b9e602fea",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-combined-check-v1/RESULT.json",
+    "sha256": "59cf2a3a38c6fb0b91f73cedbad3defa4adb87409f46e9c060b3d57afb8435e1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Ordinary native typed/decoded no-budget actual lowercaller commands/logSHA/restored38; two actual semantic REDs/6semantic omissions distinguished, not original sourceBody/generalproof",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-ordinary-lower-caller-controls-v2/ACTUAL_NATIVE_ORDINARY_CALLER_FIELD_INVENTORY.json",
+    "sha256": "fe1641696c14710372e576e018fce92a18af1ed303197ee94054bd827ee9bde4",
+    "status": "read-reviewed-full",
+    "role": "No newfields/structs; same4actual fields/M8/SYS4/message suppliers/current3source full focused diff",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-ORDINARY-LOWER-CALLER-COMPONENT-PLAN-v1.json",
+    "sha256": "bb1f0fd29ac58192385fed4814a8110a52ceecb7b538af1a4ac11ae99cef05c5",
+    "status": "read-reviewed-full",
+    "role": "Full native ordinary no-budget lowercaller selected/alternative/falsifiers/resources/non-effects",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-ORDINARY-LOWER-CALLER-DECODED-SUPPLIER-PLAN-v1.json",
+    "sha256": "1f31fece463005dbc0106d22b8a3c509d747d5e27873a52ff43d91a5719177fc",
+    "status": "read-reviewed-full",
+    "role": "Full actual existing decoded materializer/current coho/incident edge supplier prerequisite",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v6.json",
+    "sha256": "3247cd4e6703dc4f0749d2f26239b8963147b3c62efaa55f546bce74e05e7c6d",
+    "status": "read-reviewed-full",
+    "role": "Full nativeordinary actualraw caller and remaining combined originalSource/I3/use/allresource premises",
+    "at": "2026-10-05T12:50:51.825230+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-docs-v1/RESULT.json",
+    "sha256": "df5c2e7ef9422283b82dd089f1118a97612fb0c0b3e823b2382ebc72f022f45c",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T12:55:56.480198+00:00"
   }
 ]

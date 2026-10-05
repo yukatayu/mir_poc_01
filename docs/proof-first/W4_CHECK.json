@@ -59288,5 +59288,569 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_native_ordinary_lower_caller_20261005": {
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-ORDINARY-LOWER-CALLER-CHECKPOINT-20261005-v1.json",
+    "receipt_sha256": "e2abdb2c517fca1780869d15f0b82d7e3953a395f04a6449a00a6ebd8a24256c",
+    "record": {
+      "at": "2026-10-05T12:50:51.825230+00:00",
+      "head": "acd44c14a952f909a3671aa8d29826ba5fd2a79e",
+      "goal": "SAME active W4-D sole-main, no acceptance/pause/newgoal",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-ordinary-lower-caller-controls-v2",
+      "files": {
+        "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+        "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+        "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+        "crates/mir-runtime/src/m8_runtime_admission.rs": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+        "crates/mir-runtime/src/m8_runtime_local_cut.rs": "08896d9034470807ad73521880313ed9764193b003ea8b099c8b9850798e74c3",
+        "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "2d11d1b3a9ac941570a81efefe075535767c05add206c890e71903a6ada977a6",
+        "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+        "crates/mir-runtime/src/m9_auth_verification.rs": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+        "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+        "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+        "crates/mir-runtime/src/sys2_execution_backend.rs": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+        "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+        "crates/mir-runtime/src/sys4_dispatch.rs": "a0346f00371f9155b88edc4e2268e840fca099344def499488741f0a38545120",
+        "crates/mir-runtime/src/sys4_i3_original_source.rs": "0511f2e913146e6c1e175de42408b9ba3d7a8970615281023c02c1572df20c27",
+        "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+        "crates/mir-runtime/src/sys4_i3_source_authority.rs": "e850e68976f7d3938d830f58f2b7627e34f12d73bd3198b17673d91b4d46805c",
+        "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+        "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+        "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "29e05607cf84b604bef94431f8bd1e4258fd46b4ff9e944c0de488ad724f0978",
+        "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "0d452b79fdc6e1c6670d30e451f14c6de4630caa202e8548ce8c582a89242e7c",
+        "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "fc975873be7bd4c9f8411e724265608b5abc2361471604c2d297d931d9702e53",
+        "crates/mir-runtime/src/sys5_i3_private_quic.rs": "70ba6447e1f38e4a3755d409a19b2e9060fd72103b82cdd15c81ff8c751a77d7",
+        "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "b59d8158f81355a4585bd66ec19225c6ff97d08047ece72cbb203aac6bfb8a1d",
+        "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+        "crates/mir-runtime/src/sys5_i3_source_control.rs": "49d7e38d72189e7ec06ce66964bd7b3654b592f78be0f3396d31539294c3d288",
+        "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "e14c0c84f1e4f90fb85a05b044b6ae4436336941921abe347286b0ab67b18bf9",
+        "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+        "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+        "crates/mir-runtime/src/i3_private_prepared_binding.rs": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+        "crates/mir-runtime/src/m8_owner_admission_gate.rs": "fb3e5a5f008e6e85d9f32c1f754a6ea1e4e52b62d9e735d114bb6ce77952e33f",
+        "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+        "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+        "crates/mir-runtime/src/m8_runtime_relation_projection.rs": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+        "crates/mir-runtime/src/m8_private_prepared_relation_binding.rs": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+        "crates/mir-runtime/src/m8_runtime_designated_value.rs": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+        "crates/mir-runtime/src/m8_private_prepared_designated_binding.rs": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+        "crates/mir-runtime/src/m8_private_prepared_local_binding.rs": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+        "crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs": "95760133fce7a2aeb07f77956bdabe7200646923a49c67a0865c8e697c2d1777"
+      },
+      "source_pins_sha256": "f6db13ad018086b1e01141f8cd7a67890270d0b81e80e71a339df41178e3b02e",
+      "inventory": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-ordinary-lower-caller-controls-v2/ACTUAL_NATIVE_ORDINARY_CALLER_FIELD_INVENTORY.json",
+        "sha256": "fe1641696c14710372e576e018fce92a18af1ed303197ee94054bd827ee9bde4",
+        "new_structs": 0,
+        "new_fields": 0,
+        "reused_fields": 4,
+        "changed_source_paths": [
+          "crates/mir-runtime/src/sys4_dispatch.rs",
+          "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+          "crates/mir-runtime/src/sys5_i3_process_runtime.rs"
+        ]
+      },
+      "runs": [
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-red-check-v1",
+          "result_sha256": "8c7bbb7a766aadca90e83bbc1ac487f1672729ee81217ffe62a1be305347fe62",
+          "restored_sha256": "bd0df37f7678d4fd84624b269c08b23a6c1cc9844130e14ecab3fde23e462525",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "actual_native_ordinary_lower_caller_genuine",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "20b2c51948023b899e8a88e74b5f3e3e4d7b0ee8e64922af9e5ebe824b0cd075"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-green-check-v1",
+          "result_sha256": "89aa19c76b59cc084eb9de6df01ec53c409d5bccf614af201e264f2a77bd19ea",
+          "restored_sha256": "f5447f42e4cde04d33b05d9556ddbd0a5092d52d48a22adc679a4d7110fdbe5d",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 0,
+              "log_sha256": "5e4a0eeaf9527084e04e78d07771a34344469f56170a01b8020703c137a406f5"
+            },
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic"
+              ],
+              "exit": 0,
+              "log_sha256": "8d8fe8b9ce109bacd53f704b83420d1c16b477ccc897fa28fd32c131212ced7d"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "actual_native_ordinary_lower_caller_genuine",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "48545e457760eca8028efe98401efdfb37945d4d555f4bc0907d2661e7cb3e6b"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-decoded-red-check-v1",
+          "result_sha256": "f8ed9912317b6f6180be491dd866ffa72e5b7baa08350361c092a1b2db597b1a",
+          "restored_sha256": "262a058564c8f58e5be81d7846a52a9a4f60e98614f69d7f1479e4c318785054",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "actual_native_ordinary_lower_caller_real_decoded_request",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "f7765c9afdf508f239103a3044830a4f2bac4ee28f4763e7b4de61bfd4f34635"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-controls-check-v1",
+          "result_sha256": "51b370b5009d8ef59d31185f409eeacce7b4c2a929783bfdfc75304f8bda45c4",
+          "restored_sha256": "3617ca430ed95aaf1462dd66209ef0109492c5a5bb0efe65d1a27ebcab337201",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 0,
+              "log_sha256": "2c96861ff239e67688001cf3caf0141686a407141f724b4f58e09382b7469594"
+            },
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic"
+              ],
+              "exit": 0,
+              "log_sha256": "9c962b5262896cdf4ce5ae2413f525b2c1cb60d08da16d55e2e3957d1a617f9a"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "606590722555eda79028441d202eb4f9d03f628da6d6f20745d2b3b1249965c9"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-controls-check-v2",
+          "result_sha256": "c937d489eb40ea04d46874dd02956f51a7153c7c06c167ef093cf35ad5c8a905",
+          "restored_sha256": "a2de462e16e14d0d1558140d60953f4bb6117f095ed636133f2a501b5ad87773",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "cfc8bd6afc5fc99f718dc76be1811422a09de54e134d3b5ff995cb98ed041ccb"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-budget-mutant-check-v1",
+          "result_sha256": "266ca7431398343dc4f419e592265ad635033d7545142c4886f41f14a6689bbf",
+          "restored_sha256": "6cb7f467f0fb998508e57aa46d2abf294f537c9b19045002c80c100ca7e3c7f9",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_checked_budget",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "982d9fd7a793e5cf4ee5066403b15cc702a294cd03e472cee831b0c4ac670f7a"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-inbox-mutant-check-v1",
+          "result_sha256": "40af54c6787fdcc0b3dc54292cf3248d6f5ee7c8f536d15699b1314d3f5f1582",
+          "restored_sha256": "97853ffe4e33bfe5e8431cbd1f03a8fe41df64e4525894abbe15f2d7f8317a00",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_unrelated_real_inbox",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "1740526231473d94a3ba19857ec46b7c982f7bce99910b1dbd9501677a0b511e"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-oneuse-mutant-check-v1",
+          "result_sha256": "4e7e080e519e583576dc92db0f4546cd9f988d749df2c6df58ebb1f01dd4dcfc",
+          "restored_sha256": "7b7e36f959d141d1c65106a966582973c369578b8f891192003aacdc4b9a1411",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_real_decoded_duplicate",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "7b95f07bb9e4bf3e84f6e22e80f1c765e53f9ebc6b698f4aa5520728da79cb5f"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-sys4-mutant-check-v1",
+          "result_sha256": "47776aff15c5b1f2c61df0d9ef1b32b935fc2502412ab350694b538e17aa4d2e",
+          "restored_sha256": "ab5777b50d04b7fac68a82ea19e21e8e4dec3c2622a1ad9f69692755a22f81cb",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_real_finalizer_overflow",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "c6b2418301f0e0c21d3e9bfa15f725f57d927e4d3280a829c3e6ddba7f3cb42a"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-finalizer-mutant-check-v1",
+          "result_sha256": "efef95b6a362b8f55e21ea2dbbf1db336c119df348b85e20ec91da7dd0afb3f7",
+          "restored_sha256": "38f80fca7da85f82156b91be217042f5e511ac5d1110ed607b6ec9468d9189ec",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_genuine",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "91f379a1857249e750923ff3e7aaaf95fa11392fa7ff0b83b4cdd24204d6eeab"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-decoded-mutant-check-v1",
+          "result_sha256": "d76245c4f32d05e52436d96df934e79c967b1846c473eee4a5f57e9b9e602fea",
+          "restored_sha256": "50e160d8d8c53b53f4972bf2e75005e75bfae730b5bd49ff1dfd4e8f22acd9d8",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_native_ordinary_lower_caller_real_decoded_request",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "749abcac039e8ed5bf964abbd851f101bccd3c559dfbb7bc5be3395586fd8b2b"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-combined-check-v1",
+          "result_sha256": "59cf2a3a38c6fb0b91f73cedbad3defa4adb87409f46e9c060b3d57afb8435e1",
+          "restored_sha256": "bbbe49ffc61ea85717605a7b542b7f2b2d40af3538fcff274fba8758251c6de7",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 0,
+              "log_sha256": "3d6a318ae5f89d208048e704ce3624ede5f705736512f03333514c3c5bcb49a0"
+            },
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic"
+              ],
+              "exit": 0,
+              "log_sha256": "606d8fe190c291a68329bc042d604a660ddedf9816acb4e345b1fc29aac94e5e"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "actual_native_ordinary_lower_caller",
+                "--",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "be888acaabd0635b1d25fdeca9d145e19d83531256a13315a0e0d2876059b3f2"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic",
+                "actual_native_ordinary_lower_caller",
+                "--",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "bef3cfadcc323a2ace429efe1acee1743f3750cac749d84e4beb6f6029e7c2b3"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "--",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "f819f77933820e6395dcb837f9b0ace0c35a2d5bc893608aef60b4fd612e95c6"
+            }
+          ]
+        }
+      ],
+      "focused": {
+        "passed": 12,
+        "default_without_private_features": 11,
+        "private_without_process_test_seams": 12
+      },
+      "normal_builds": [
+        0,
+        0
+      ],
+      "full_tests": {
+        "passed": 1132,
+        "failed": 0,
+        "ignored": 0,
+        "filtered": 0,
+        "seconds": 435.2
+      },
+      "intentional_omissions": {
+        "count": 6,
+        "budget": "checked budget incorrectly creates native tombstone/Awaiting on immediate path",
+        "inbox": "unrelated older actual carrier served, expected refusal fails",
+        "oneuse": "new genuine request overwrites old slot/runs body",
+        "sys4": "actual finalizer failure afterbody but real SYS4 return omitted",
+        "finalizer": "actual real reply discarded, raw finalizer absent",
+        "decoded": "actual decoded native request body succeeds but lower raw record absent"
+      },
+      "RED": "Two real native no-budget source requests/type and genuine codec decoded data, actual body1/write1 but rawNone; compiled semantic failure, immutable failed sources/logs retained. No compile failures claimed as RED.",
+      "retention": "Exact shared old native Request branch/current/cohort/duplicate checks and native decoded binder used; old None semantics preserved. Actual ordinary immediate rawpath owns real M8/SYS4/finalizer return before projection, no Clone/reconstruction of actual reply. Native budgeted caller still uses real opaque permit/live verifier and has9 tests in samecut full regression.",
+      "scope": "Native library-mode ordinary typed/decoded real source→SYS4/ST/M8/finalizer component only, not original3FD3 SourceBody/QUIC distributed E2E/generalproof/capacity/transport authentication. Adopted Rust/Lean/Canon unchanged.",
+      "resources": "Before entry owner requestID/holder then native preenqueue actual request/context; real returned values moved before copies/projection. Native serve preparation refusal bodyattempt1/noCommit and actual finalizer overflow body1 captured honestly. All original Body numeric/actualallocation/wholeactivation/report/reply/caller premises remain beforedependentuse; no OOM/recovery claim.",
+      "notes": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v6.json",
+        "sha256": "3247cd4e6703dc4f0749d2f26239b8963147b3c62efaa55f546bce74e05e7c6d"
+      },
+      "next": "Genuine original source Body/caller oneuse and actual used numeric+allocation backing, keeping body disabled until complete; then local outgoing reply/sourceAck/whole original and subsequentrefreeze. No-budget source Admit must inspect/retain data without calling immediate native Body.",
+      "quota": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261005T121752Z.json",
+        "sha256": "f2f8acbda30bf32907ad1ff1db519def3f733c7e8fe98b1b46ce83657ffa964f",
+        "record": {
+          "captured": "2026-10-05T12:17:52.594314+00:00",
+          "telemetry_timestamp": "2026-10-05T12:17:22.549Z",
+          "weekly_used_percent": 41.0,
+          "weekly_remaining_percent": 59.0,
+          "next_check_no_earlier_than": "2026-10-05T13:17:52.594314+00:00",
+          "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+          "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+        }
+      },
+      "documentation_validation": "Full make docs pending; final metadata/authorized normal Git separately",
+      "non_effects": "Same W4-D active sole main, no Canon/roadmap/WRK/newgoal/acceptance/sourceBody/transport authentication/publicAPI changes; no subagents/Oracle/notifications/hostshare/E/W5+/Plan250."
+    }
+  },
+  "d_actual_native_ordinary_lower_caller_docs_20261005": {
+    "at": "2026-10-05T12:55:56.480198+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-ordinary-lower-caller-docs-v1/RESULT.json",
+    "receipt_sha256": "df5c2e7ef9422283b82dd089f1118a97612fb0c0b3e823b2382ebc72f022f45c",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }
