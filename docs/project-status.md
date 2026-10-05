@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-05 23:39 JST
+最終更新: 2026-10-06 00:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,11 +59,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照m8-facade-backing-controls-v2で、M8の上位記録にも実行前の資源準備経路を追加しました。同じ実M8下位が準備したトレースと結果から、実際に使う上位トレース・文脈・読み取りキー・戻り値・失敗BoxをRHS前に用意します。本体後は実下位戻り値を先に保持し、準備済みの値を更新して領域を移します。数値上限と実Vec容量不足で本体前に拒否し、成功・失敗時は既存状態と記録に一致します。13検査・9省略対照、標準13件・追加テスト機能なし13件・通常2build・同cut全1164件、38path復元を確認しました。これは上位M8の前提部品で、既存呼出しや元source本体は未接続です。SYS4/SYS5の記録・返信・全activation領域、本来のsourceと実I3許可を消費するBodyが残ります。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-prebody-caller-controls-v3で、準備済みM8の実領域を、SYS4/SYS5の通常・実デコード要求と本物のI3予約経路へ接続しました。既存の要求・現権限・予約・許可・一度限りの実行を同じ検証処理で確認し、その先で実際のM8実行前準備を使います。資源・数値不足でRHS前に拒否し、成功時は実M8/SYS4/返信結果を保持します。17検査・8省略対照、標準17件・追加テスト機能なし17件・通常2build・同cut全1181件、38path復元を確認しました。準備したのはM8下位領域で、SYS4の集約・記録とSYS5の返信・全activation領域は残っています。SYS5カウンタ不足が本体後に判明する現状も実検査で確認し、元source本体を有効にする前の残件としました。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-05 14:18:56 UTCの確認で58%（使用42%）でした。次の確認は2026-10-05 15:18:56 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-05 15:24:34 UTCの確認で58%（使用42%）でした。次の確認は2026-10-05 16:24:34 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

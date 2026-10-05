@@ -52689,5 +52689,131 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T14:44:37.181444+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-red-check-v1/RESULT.json",
+    "sha256": "3d2d606c4382cd32ccc25709f7cdf98021015425f5131562295af8d10517eba8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-green-check-v1/RESULT.json",
+    "sha256": "5f193e2dea06cf911a43eadaadf7e4c022832fade55f501d84d16fde2f90a0be",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-controls-check-v1/RESULT.json",
+    "sha256": "dbfbd3f6103296a8f29fe0245ffb08eaa55fbb9768c7d3be5d540ff9676d5f3e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-controls-check-v2/RESULT.json",
+    "sha256": "5c3f74dacd724cbb4db4bad893e239042db8edc625026f48930bc203d926eeed",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-controls-check-v3/RESULT.json",
+    "sha256": "f2e5cfccb687b15676b17fdb601674193355a7220a042af053be4ef722cceeed",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-ordinary-mutant-check-v1/RESULT.json",
+    "sha256": "2721ccfaf6b4de6bcfbbdfc48026c65f21b3a9c7c4b02f655a3eb48f12573d1d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-budget-mutant-check-v1/RESULT.json",
+    "sha256": "f8ca2e55a909e073bb48ef288b2190c338fc0ab4093f716987f5c6596809b466",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-decoded-mutant-check-v1/RESULT.json",
+    "sha256": "904bc7cefce3b2a73992c08055323282ca1b39b828eb3b43f89f2033469c4bd4",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-i3handoff-mutant-check-v1/RESULT.json",
+    "sha256": "1c405c9f0d58236d8f8525d834c6aa7600f6ef5f0273f549588f5ed38a9b2ce1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-sys4return-mutant-check-v1/RESULT.json",
+    "sha256": "9e21889f3a950608a58f9ad784182099b7c7d32aa4ed18bef397867e53a0dd01",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-finalizer-mutant-check-v1/RESULT.json",
+    "sha256": "6c01808ea73c5c36a54c8f2a9a3f5e0f6efa135bfc8d01194d3a2b4c2fe29aa6",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-nobudget-mutant-check-v1/RESULT.json",
+    "sha256": "64624f4d87b84d882d5e43b53fa13258f7d695ec6eebfa0f43fecc6f3ba83096",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-backend-mutant-check-v1/RESULT.json",
+    "sha256": "1c937e670d8d44f29777bb4a95eaa4134d6f77be9eb5934a9d178fd9e241a3de",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-combined-check-v1/RESULT.json",
+    "sha256": "62f2d7d68e6b430621fc849044a4b63a4d4c48ad66f33149321ad61fbc3bb440",
+    "status": "verified-scoped-result-and-log",
+    "role": "Real native ordinary/decoded/genuineI3 consumes actual prepared M8 lower backing; semanticRED/test-only getter/Received expectation failures preserved,17controls/8compiled omissions/default17/no-seams17/full1181/all38restored; upper/sourceBody/generalproof remain",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-prebody-caller-controls-v3/ACTUAL_NATIVE_PREBODY_CALLER_FIELD_INVENTORY.json",
+    "sha256": "560601708ed0608ae1f6d420df43218cdc25c077c4464523867b794537893a2c",
+    "status": "read-reviewed-full",
+    "role": "Private local2variant DATA route/shared native guards/genuineI3 handoff, unchanged actual raw7+4/backing12+7 field/caller/capture correspondence",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-PREBODY-CALLER-COMPONENT-PLAN-v1.json",
+    "sha256": "d3fadf3b17a3bf5cbf9072c31a821555cb8c6a1e2696709167febb18dcd56903",
+    "status": "read-reviewed-full",
+    "role": "Selected real native consumer closure/smallest alternative/falsifiers/non-effects",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v10.json",
+    "sha256": "2971083e575d1efd98618d4d58ded89390ffeec1fd0029c8ffcd884cdcb3d164",
+    "status": "read-reviewed-full",
+    "role": "Current actual native caller closure and remaining upper SYS4/SYS5/codec/allactivation/genuine source+I3 Body prerequisites",
+    "at": "2026-10-05T15:26:34.405499+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-prebody-caller-docs-v1/RESULT.json",
+    "sha256": "1630ec92bd6863e72aebd753746b3b2cb4b602bbbf8b40c95ed5b0f5210cea6d",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T15:31:42.197942+00:00"
   }
 ]
