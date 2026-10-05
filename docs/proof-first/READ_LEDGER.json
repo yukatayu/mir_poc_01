@@ -51989,5 +51989,96 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-05T11:01:20.485876+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-red-check-v1/RESULT.json",
+    "sha256": "8c62ff1a0a388fffeaaf58c206a5bb85c80ee6bfbae13f5b92639d49cdc92329",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-green-check-v1/RESULT.json",
+    "sha256": "6726386755396bc1db5be525cb8231261bfae4953dd9feb2c9d4c53d6174294f",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-green-check-v2/RESULT.json",
+    "sha256": "2be94a37dee3ad993e2aeea84e0617c1373f791070a637b89adcefce4c06f4f0",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-controls-check-v1/RESULT.json",
+    "sha256": "7b90e0257e8175a42ef6ffe0821f36d1d966d678dec9f4418d546c02c4bfea03",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-enqueue-mutant-check-v1/RESULT.json",
+    "sha256": "d983bf8fb818486c9bfff7798ba7a19e8eadc6156c0b26572ae969481d508c52",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-serve-mutant-check-v1/RESULT.json",
+    "sha256": "29bfbdb88f2781e2447c10b4d4966ef02a23e61029505516c74e1e7bf4ef313b",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-oneuse-mutant-check-v1/RESULT.json",
+    "sha256": "3c01f9810b1ec68e78924e51fcceb807bdd1b2d5a0dff83bc3216b800d071549",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-capture-mutant-check-v1/RESULT.json",
+    "sha256": "b93935627f6b70ed35d921aafc97d0874bf9736ef7c0bf423f1a08f62c65eb9a",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-combined-check-v1/RESULT.json",
+    "sha256": "e49a353edf082438f3bb50ec7d799e0aa7e90cf15df05f0b194551113fde1659",
+    "status": "verified-scoped-result-and-log",
+    "role": "NativeM8 lower component actual commands/logSHA/restored38; failed default featureclosure compile-only, no distributed sourceBody/generalproof claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-actual-lower-return-controls-v1/M8_ACTUAL_LOWER_RETURN_FIELD_INVENTORY.json",
+    "sha256": "bd4bf5fe7ed5ce8259f331bba71a33a9efa30b02313d5be07412ca6cd5b9435d",
+    "status": "read-reviewed-full",
+    "role": "Full1newstruct7fields/actualtyped supplier/producer/caller/resource review; new I3 retained caller not yet exercised",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M8-ACTUAL-LOWER-RETURN-COMPONENT-PLAN-v1.json",
+    "sha256": "93ecd77e9d7f59e7f7089982f1126b00708bb5cb506b0fcca011e85b7cf54f96",
+    "status": "read-reviewed-full",
+    "role": "Full fixed nativeM8 prerequisite/noBody preregistration/selected rawreturn vscontext-only alternative/falsifiers",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v4.json",
+    "sha256": "989ab6a1b1c7d87b89439344d36aa3affc96131caef583dc3ac67449d608cf3a",
+    "status": "read-reviewed-full",
+    "role": "Full scoped nativeI3/SYS4/SYS5 real lower-return callers and combined sourceRoot/statementOrdinal custody premise; read-derived, no actual multiBody or authority claim",
+    "at": "2026-10-05T11:31:35.604912+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-docs-v1/RESULT.json",
+    "sha256": "c345baf625e669a5a1aa47a056eaa3110f8dd714f2f98d506a2de927ecc0ea9f",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-05T11:37:20.081151+00:00"
   }
 ]

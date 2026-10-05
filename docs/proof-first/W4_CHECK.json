@@ -58279,5 +58279,455 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_m8_lower_return_20261005": {
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/M8-ACTUAL-LOWER-RETURN-CHECKPOINT-20261005-v1.json",
+    "receipt_sha256": "86dfef9f84abc13108c7bff0b817e525e566822a8937f1ef2f5a44a684ab3505",
+    "record": {
+      "at": "2026-10-05T11:31:35.604912+00:00",
+      "head": "87a6971bd06d3a8cc6d2c7068342eb1392b26719",
+      "goal": "SAME active W4-D, sole main; no acceptance/pause/new goal",
+      "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-actual-lower-return-controls-v1",
+      "files": {
+        "crates/mir-runtime/src/lib.rs": "ba3ce7913560c9f7765e7f8d1bd59cf508ff2b61fc837871e4399bed348ef896",
+        "crates/mir-runtime/src/m10_reference_system.rs": "e8e3900fff9ca21aa4a31baa15b5ade02a49d05ef983ae46ee5cdbadfc717896",
+        "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs": "af1b98b59f0605a003e20c3b03efaa136d7af645b6779952c812ecd39b4aefd9",
+        "crates/mir-runtime/src/m8_runtime_admission.rs": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+        "crates/mir-runtime/src/m8_runtime_local_cut.rs": "0c10b92d10dfc14d4fc94994c46868cfb831891864ed6e72da295f21c1c80313",
+        "crates/mir-runtime/src/m8_runtime_owner_queue.rs": "2d11d1b3a9ac941570a81efefe075535767c05add206c890e71903a6ada977a6",
+        "crates/mir-runtime/src/m8_runtime_patch.rs": "afd30af93cc793cd5eba89a6a55e5265c632d7084f9a8549bf8063a552480a65",
+        "crates/mir-runtime/src/m9_auth_verification.rs": "d553354201f4ab8f43b4e1adaefeb36f5bb09ab6742cb7bd764397a2474c88b5",
+        "crates/mir-runtime/src/m9_auth_verification_i3_tests.rs": "83b210408ebce27f7979e286f7d777acab0abc05d3f51593a2be853b40921192",
+        "crates/mir-runtime/src/proof_first_owner_schema_tests.rs": "feb4266b8a0c8c7c334730c9e6f67d308831be6206506575b533194753297c5c",
+        "crates/mir-runtime/src/sys2_execution_backend.rs": "8f57ffd7031f3e5f7fe933818b43ba2db55cda2eb453ec56d174ddc8adce5b7f",
+        "crates/mir-runtime/src/sys3_i3_private_snapshot.rs": "cfe45a209e06f8973d4242a3d042bf162dc52365f92e66ea953a201e5a06a58a",
+        "crates/mir-runtime/src/sys4_dispatch.rs": "b39351fa1e4bbab00e4efec1f99299c0c6eef6a77c48541be1b558cfee6c1355",
+        "crates/mir-runtime/src/sys4_i3_original_source.rs": "0511f2e913146e6c1e175de42408b9ba3d7a8970615281023c02c1572df20c27",
+        "crates/mir-runtime/src/sys4_i3_original_source_tests.rs": "8645209a0bd0dec697ed1ab7719e82e7262bf334cb87cc2c0f1ed3ca273ac124",
+        "crates/mir-runtime/src/sys4_i3_source_authority.rs": "e850e68976f7d3938d830f58f2b7627e34f12d73bd3198b17673d91b4d46805c",
+        "crates/mir-runtime/src/sys4_i3_source_authority_tests.rs": "da73f817f6158d3960f2178e0f99850a7bf404e224f87a0334efbb166eb50745",
+        "crates/mir-runtime/src/sys4_invocation_tests.rs": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+        "crates/mir-runtime/src/sys5_i3_original_source_process.rs": "34e1ec7641377fe11bad138314c50609a7b408d9d7194a44b4a271f7140dfb35",
+        "crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs": "0d452b79fdc6e1c6670d30e451f14c6de4630caa202e8548ce8c582a89242e7c",
+        "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "38a3cb63372a1d3cc520e104cdb3bc044d7be3eba8af0831a30ae39f575055af",
+        "crates/mir-runtime/src/sys5_i3_private_quic.rs": "70ba6447e1f38e4a3755d409a19b2e9060fd72103b82cdd15c81ff8c751a77d7",
+        "crates/mir-runtime/src/sys5_i3_process_runtime.rs": "f41c0f76ded6689ad65b8dbf018f24fa6c6a81487ea13f763e98ad9b74b3ccb9",
+        "crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs": "0643becffbff623f0d27fbcd79a6560661169efa62729241e1f67b3d13b14cbe",
+        "crates/mir-runtime/src/sys5_i3_source_control.rs": "49d7e38d72189e7ec06ce66964bd7b3654b592f78be0f3396d31539294c3d288",
+        "crates/mir-runtime/src/sys5_i3_source_control_tests.rs": "e14c0c84f1e4f90fb85a05b044b6ae4436336941921abe347286b0ab67b18bf9",
+        "crates/mir-semantics/src/surface_v0_pipeline.rs": "b12cc3e4c12057710e92198cd4bacd5cbb96986d42845dd4af213e9daa1f7889",
+        "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+        "crates/mir-runtime/src/i3_private_prepared_binding.rs": "965f00452817da394c8d22f902a4e497210b39047face86d66421584d0e2e1dc",
+        "crates/mir-runtime/src/m8_owner_admission_gate.rs": "fb3e5a5f008e6e85d9f32c1f754a6ea1e4e52b62d9e735d114bb6ce77952e33f",
+        "crates/mir-runtime/src/m8_private_prepared_owner_binding.rs": "2c61048e5b11e67584492d6dd87ee6ac7f581668b6c69950da78db04fd17b503",
+        "crates/mir-runtime/src/m8_runtime_authority.rs": "6755e4a3b6d5faa1724b67b4682fce5a033002e93575381748dcfbee1bb0805f",
+        "crates/mir-runtime/src/m8_runtime_relation_projection.rs": "df45777f9a8cde46cf261bd5350d7c8fb8ac25501458c2b4929dd5b3f7ce0dbb",
+        "crates/mir-runtime/src/m8_private_prepared_relation_binding.rs": "273474a89b7421330f9ff5dfadea12357911c83b0637660a5e736dbe60fd6104",
+        "crates/mir-runtime/src/m8_runtime_designated_value.rs": "e1174dd22746a5ab1715ed69e0cf774f94713fe66380655e8530d17e826a6750",
+        "crates/mir-runtime/src/m8_private_prepared_designated_binding.rs": "3a953c8ef84c1a96b2b823d151ea09a2279b12f1788eef9b8a9d21b67326e426",
+        "crates/mir-runtime/src/m8_private_prepared_local_binding.rs": "5381f4c6d2cafaaa087715273b5b5b705e3223d81189d050f6deb342249232db",
+        "crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs": "ffad42c551aa393465ca9cf3ea13e2b42032b9c0c93a97f33946719319a13660"
+      },
+      "source_pins_sha256": "6e345f109aa3766a5a5b32edad0d2fd21d7883ba828cb70c563ef7c832533a82",
+      "inventory": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/m8-actual-lower-return-controls-v1/M8_ACTUAL_LOWER_RETURN_FIELD_INVENTORY.json",
+        "sha256": "bd4bf5fe7ed5ce8259f331bba71a33a9efa30b02313d5be07412ca6cd5b9435d",
+        "structs": 1,
+        "fields": 7
+      },
+      "runs": [
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-red-check-v1",
+          "result_sha256": "8c62ff1a0a388fffeaaf58c206a5bb85c80ee6bfbae13f5b92639d49cdc92329",
+          "restored_sha256": "df5867e015fbfd238ea5a7a54c853f43600e06a86c2e14b7c5f40c16e73a012a",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower_success",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "c6c83a8579833fcce6d756eaeb45b7c93b8c7daf94881dcc420cb8d01d8a0d8e"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-green-check-v1",
+          "result_sha256": "6726386755396bc1db5be525cb8231261bfae4953dd9feb2c9d4c53d6174294f",
+          "restored_sha256": "60259557f26eb5061e68c82bc8d366952f26e55facd82d240b00c5ddbdcdd43d",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 101,
+              "log_sha256": "2fbf827e7eec246da492ef5ea293d1189ee04e0499005ea6b82458cfa4258b1a"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-green-check-v2",
+          "result_sha256": "2be94a37dee3ad993e2aeea84e0617c1373f791070a637b89adcefce4c06f4f0",
+          "restored_sha256": "4d18b544e3a0aef24e5f2247d0862a386dbda6b72ee0577530153b3c0141b4d0",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 0,
+              "log_sha256": "24c89e8727b1e3c0f59144b22e2fbd01a0f976633d3325609c68b03642c4ea28"
+            },
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic"
+              ],
+              "exit": 0,
+              "log_sha256": "40d0bbf3c4aafa4e7199486d04c4cf1c4baffff5295e3f93ca83f2d727b89f31"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "9cb58e50601473ef9b14bd94b67675612bb31f44c2ff4248174d618089d8f8b6"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-controls-check-v1",
+          "result_sha256": "7b90e0257e8175a42ef6ffe0821f36d1d966d678dec9f4418d546c02c4bfea03",
+          "restored_sha256": "486cbeec47523c3c46325b02cf6c253391bbcc4d55bdd28b40e51fce0c7ee06b",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "actual_m8_owner_lower_default_producer",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "34313eda27b7315d273652f7cf157a81d63d5584b3fe07a12096109fdfce6c4f"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "2a4223a0687bec6fc5a05ec023eaa6de48db1b6eca970987f90da8ee230b61cb"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-enqueue-mutant-check-v1",
+          "result_sha256": "d983bf8fb818486c9bfff7798ba7a19e8eadc6156c0b26572ae969481d508c52",
+          "restored_sha256": "a0fba99ed5db44d931d1921c4c85d0f5f68d92fc50bb3cefde137bf85a062f5c",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower_success",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "735ea4909bb81c277cc1d0ed0a2fd2e5377dbe698a10d9be8618c85a0d08a0de"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-serve-mutant-check-v1",
+          "result_sha256": "29bfbdb88f2781e2447c10b4d4966ef02a23e61029505516c74e1e7bf4ef313b",
+          "restored_sha256": "378b56ce1cc90352fbbb5378f3f3dd1539463c28d95d87dc37c8d9b5f689bd06",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower_success",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "cdb175c180535a35cd963de3a8f39cdc6f1eae751d7329d1b7c2599cec621683"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-oneuse-mutant-check-v1",
+          "result_sha256": "3c01f9810b1ec68e78924e51fcceb807bdd1b2d5a0dff83bc3216b800d071549",
+          "restored_sha256": "71d29f3592888d198f55750a26917abcbdd3f4c1bc1f36b4396a56dd3314773d",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower_postserve",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "86b0364926b817c3cbe48683d6d0af871ce4b95c64b067f7b3163405f5d93ac2"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-capture-mutant-check-v1",
+          "result_sha256": "b93935627f6b70ed35d921aafc97d0874bf9736ef7c0bf423f1a08f62c65eb9a",
+          "restored_sha256": "80cd6510a1df5919427c7adab2d155f1d59d8e175451540bfa802a2129d73932",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "actual_m8_owner_lower_return_binding",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 101,
+              "log_sha256": "fbe21ffae6d5a14194cd54a1885b40b9a20b5d091f72e95feeb9beadaee0e590"
+            }
+          ]
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-combined-check-v1",
+          "result_sha256": "e49a353edf082438f3bb50ec7d799e0aa7e90cf15df05f0b194551113fde1659",
+          "restored_sha256": "ad8eaaa89ef19e0bb6f5af73b757ba56c5037b16decef94b77e82889c38d8443",
+          "runs": [
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib"
+              ],
+              "exit": 0,
+              "log_sha256": "0135c2580497c489240a2aa8d2c896b28ad40bf33f443de1696f47aa63e9a57a"
+            },
+            {
+              "command": [
+                "cargo",
+                "check",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic"
+              ],
+              "exit": 0,
+              "log_sha256": "3110f5b29cff601edece2b15ec1de9ac9c211def5a8c6d1c460b7df70ae63b3c"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic",
+                "actual_m8_owner_lower_success",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "10eedf69e016a59219e71dffa0dbfc28ecd105fef6ee92c16206e56401876bf7"
+            },
+            {
+              "command": [
+                "cargo",
+                "test",
+                "--locked",
+                "--offline",
+                "-j1",
+                "-p",
+                "mir-runtime",
+                "--lib",
+                "--features",
+                "i3-private-quic,i3-process-test-seams",
+                "--",
+                "--nocapture",
+                "--test-threads=1"
+              ],
+              "exit": 0,
+              "log_sha256": "80a7143826a66183daabb4098c9e5d1b7de2356021bf31107a31af1622259dde"
+            }
+          ]
+        }
+      ],
+      "focused": {
+        "tests": 11,
+        "passed": 11,
+        "default_without_private_features_positive": 1,
+        "private_quic_without_process_test_seams_positive": 1
+      },
+      "normal_builds": [
+        0,
+        0
+      ],
+      "full_tests": {
+        "passed": 1111,
+        "failed": 0,
+        "ignored": 0,
+        "filtered": 0,
+        "seconds": 436.3
+      },
+      "intentional_omissions": {
+        "count": 4,
+        "enqueue": "Genuine native success but raw enqueue None",
+        "serve": "Genuine native success but raw serve None",
+        "oneuse": "Actual postserve-held record overwritten and body rerun, Ok vs ReportingUnavailable",
+        "capture": "Actual contextual envelope change invisible to binding; equality assertion fails"
+      },
+      "prior_failures": "Actual real M8 success/body1 but rawNone RED cargo101. Green-v1 defaultcheck E0433/E0599 because private writer/suppliers configured out; only first check ran, no focused tests claimed. v2 gates writer/tests with existing private suppliers, native producer still default compiled; default/private checks and10focused pass. controls adds real default producer1 and focused11; immutable failed runs retained.",
+      "scope": "Native M8 lower component only: caller-owned Option slot initialized by genuine producer with actual owner/request/context and native enqueue/serve start; real returned Result MOVED BEFORE clone/contextual projection. Existing normal APIs passNone and retain semantics. Not actual original registered Body, SYS4/SYS5/source consumer integration or distributed E2E.",
+      "retention": "Actual success, enqueue diagnostics, serve diagnostics and true noCommit held across projection loss. Panic after commit but BEFORE serve return leaves rawserveNone; readonly genuine core primary actual occurrence/outcome matches actual enqueue, no fabricated successful returned value/live store inference. Same retained lower entry rejects prior slot or unrelated queue before native use; generic APIs unchanged and full source caller/alias closure still required.",
+      "resources": "Actual holder slot exists before call; actual owner/request/context copies before enqueue, raw returned value moves without allocation before later copies/projections. Native existing core precommit store/trace/result preparation preserved; simulated native reserve refusal keeps actual typed noCommit/bodyattempt1/store unchanged. Not a claim all allocations occur before body, nor OOM/recovery guarantee. Full original Body numeric/allocation/report/reply/caller premises remain BEFORE dependent use, no Body gate enabled.",
+      "next_consumer_notes": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v4.json",
+        "sha256": "989ab6a1b1c7d87b89439344d36aa3affc96131caef583dc3ac67449d608cf3a"
+      },
+      "unverified": "New raw-retaining genuine I3 handoff method normal compiled but not yet exercised through actual native SYS4 caller. Prior native I3 full regressions test their existing None path. Must connect/test actual opaque live handoff and all original Body gates/capacities before dependent use, not defer toE.",
+      "next": "Thread actual own rawslot through normal native SYS4/SYS5 I3 and ordinary lower callers; retain actual SYS4 return before mapping and genuine SYS5 finalizer return before later projection. Then full original source-owned Body oneuse/current original+I3 gate and actual numeric/allocation capacities, outgoing reply preparation, same-event sourceAck/S→T→S/newactivation/all3 subsequent refreeze.",
+      "quota": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261005T111345Z.json",
+        "sha256": "90ef60c547b24c3faed9b2f82a331d0310513100827ae566c40fbb4641dea91a",
+        "record": {
+          "captured": "2026-10-05T11:13:45.759080+00:00",
+          "telemetry_timestamp": "2026-10-05T11:13:08.188Z",
+          "weekly_used_percent": 41.0,
+          "weekly_remaining_percent": 59.0,
+          "next_check_no_earlier_than": "2026-10-05T12:13:45.759080+00:00",
+          "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+          "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+        }
+      },
+      "non_effects": "External unadopted38source (only2M8files changed from Resolve) only; adopted Rust/Lean/Canon/publicAPI/wire/recovery/privacy/sample roots unchanged. Actual original-source3FD3 tests remain Body0. Old199proof/general audit and1100Resolve exactcut historical. No subagents/Oracle/notifications/hostshare/E/W5+/Plan250.",
+      "documentation_validation": "Full make docs pending; final metadata/authorized normal Git separately"
+    }
+  },
+  "d_actual_m8_lower_return_docs_20261005": {
+    "at": "2026-10-05T11:37:20.081151+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/m8-actual-lower-return-docs-v1/RESULT.json",
+    "receipt_sha256": "c345baf625e669a5a1aa47a056eaa3110f8dd714f2f98d506a2de927ecc0ea9f",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }

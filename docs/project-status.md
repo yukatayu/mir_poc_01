@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-05 19:56 JST
+最終更新: 2026-10-05 20:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,11 +59,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照owning-original-owner-resolve-controls-v2で、元sourceの実要求発行・実QUIC受信・Ready・保護された受付に、既存I3のResolveを接続しました。元の全Core・全引数・activation・global ordinal・実要求ID・符号化データ、現権限と実際の受付済み要求を照合し、既存の実clockで次の待機要求が同じ要求か確認してから解決します。実際の一度限りの本体許可、期限切れ返信、拒否を、記録・通知より先に保持します。通知失敗時は実許可・未送信通知・受付区間を、親の照合失敗時は読み取った実完了を残します。正常系1・異常条件と一度だけの利用14、3種類の検査省略対照、通常default/private-QUIC build・test-seamなしの実正例と同cut全1100件を検証し、38pathを復元しました。本体とsource・親の進行位置は0のままです。本体での実許可消費、予算なし要求の本体区間、実M8下位戻り値の保持、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。データ照合やResolve完了を本体の実行許可にはしません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
+W4-Dは同じgoalで継続中です。元sourceの実要求・QUIC・Ready・保護されたAdmit/Resolveまでの接続に加え、外部未採用38path参照m8-actual-lower-return-controls-v1で、実M8の要求・コンテキスト・キュー発生と実際のenqueue/serve戻り値を、観測結果の生成より先に保持する下位経路を検証しました。実成功、型付き拒否、未コミット、観測失敗後の実結果を区別します。コミット後に下位処理が戻らない場合は、未返却の戻り値とコアが保持した実結果を分け、成功を捏造しません。標準ビルドの実正例、通常default/private-QUIC build、11検査・4検査省略/再実行対照、同cut全1111件を検証し、38pathを復元しました。これはM8下位部品の証拠で、元sourceの本体はまだ0です。実I3許可を使う保持経路のSYS4/SYS5接続、本体区間での元要求と実許可の一度限りの消費、実行前の数値・割当資源、返信・source受領、S→T→Sと次activation、後続updateでの再freezeは残ります。未使用のI3保持用経路を検証済みとは扱いません。既存199module監査は別cutの条件付き証拠です。重要な契約変更の反例またはD統合判定ではAstraへ、週間残量30%未満では検証済みの区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-05 10:13:11 UTCの確認で59%（使用41%）でした。次の確認は2026-10-05 11:13:11 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-05 11:13:45 UTCの確認で59%（使用41%）でした。次の確認は2026-10-05 12:13:45 UTC以降。最新owner条件は残量30%未満の後の区切り、またはAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
