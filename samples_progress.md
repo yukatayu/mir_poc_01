@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-06 18:23 JST
+Last updated: 2026-10-06 18:52 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -31,11 +31,11 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T08:38:37.583596+00:00の実セッション記録で40%（使用60%）でした。次の確認は2026-10-06T09:38:37.583596+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T09:38:49.250923+00:00の実セッション記録で40%（使用60%）でした。次の確認は2026-10-06T10:38:49.250923+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-retained-carrier-binding-green-v1で、実結果と保持中のruntimeを記録する2箇所のcarrierコピーを借用に置き換えました。同じ実messageの旧記録と全項目のバイト列が一致し、実RHS後のコピーがなくなることを3実経路で確認しました。新規4件・既存変換14件・接続17件、5変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規4件・同cut全1265件、38path復元を確認しました。最初のテスト用privateアクセスでcompile-only失敗1回があり、記録を保持しています。新しい本番項目や権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-pending-budget-binding-green-v1で、実I3の保持中の予算条件を記録するコピーを借用に置き換えました。同じ実pendingの旧記録と全項目のバイト列が一致し、実本体の実行後にコピーがなくなることを確認しました。実I3・期限切れ・予算指定なしの新規3件、既存carrier記録4件・変換14件・接続17件、7変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規3件・同cut全1268件、38path復元を確認しました。最初の旧実装では実行後のコピー2回を検出して1件が失敗し、記録を保持しています。新しい所有DATA項目、I3時計や許可、権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|

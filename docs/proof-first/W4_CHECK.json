@@ -63683,5 +63683,47 @@
     },
     "scope": "Full make docs exact11 inputs after restored38; narrow finalmetadata suffix focused separately, no whole-source/generalproof/alpha acceptance",
     "goal": "Same owner-resumed W4-D, no Dacceptance/E/pause"
+  },
+  "d_actual_native_pending_budget_binding_20261006": {
+    "at": "2026-10-06T09:52:26.051380+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-PENDING-BUDGET-BINDING-CHECKPOINT-20261006-v1.json",
+    "receipt_sha256": "a90c35f47964177ee8f3ebc72a1cf8f79022d4fc269bc5b59eac24095066229f",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-pending-budget-binding-green-v1",
+    "source_pins_sha256": "6f2edfbe3cad6d345738417af632e24828f128500a70a0e779e5356a00ad4be8",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v21.json",
+    "focused": 3,
+    "existing_carrier_binding": 4,
+    "existing_codec": 14,
+    "existing_caller": 17,
+    "omissions": 7,
+    "compile_only": 0,
+    "normal": 2,
+    "default_existing_codec": 13,
+    "without_test_seams": 3,
+    "full": 1268,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "remaining": "Wholeactivation upper result/control used capacity, full original/Core/allargs/ordinal/activation/request/frame/currentM9 with genuine sourceRoot+nativeI3 jointoneuse before protected originalBody; actual reply/currentSourceAck/fullS-T-S/newactivation/all3subsequentrefreeze. Original sourceBody0. Other full original/program/semantic snapshot suppliers still have separate DATA resource obligations; not globally allocationfree. No fresh general199module/fullsource/generalRust/OS/recovery/publicalpha/E2E acceptance.",
+    "docs": "pending full make docs; finalmetadata/Git separately",
+    "goal": "Same active W4-D"
+  },
+  "d_actual_native_pending_budget_binding_docs_20261006": {
+    "at": "2026-10-06T09:59:32.250992+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-pending-budget-binding-docs-v1/RESULT.json",
+    "receipt_sha256": "06928a1cb45d2de15037d7bf3c25a02342b83df91795cff2399efc4fa02396ba",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T093849Z.json",
+    "quota_sha256": "c43a8a3a1f73569d469eb3d9b7a8f3eb7676204aa43e7de45053d7c76d68cd22",
+    "quota": {
+      "captured": "2026-10-06T09:38:49.250923+00:00",
+      "telemetry_timestamp": "2026-10-06T09:38:46.768Z",
+      "weekly_used_percent": 60.0,
+      "weekly_remaining_percent": 40.0,
+      "next_check_no_earlier_than": "2026-10-06T10:38:49.250923+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "scope": "Full make docs exact11 inputs after restored38; narrow finalmetadata suffix focused separately, no whole-source/generalproof/alpha acceptance",
+    "goal": "Same owner-resumed W4-D, no Dacceptance/E/pause"
   }
 }
