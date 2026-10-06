@@ -55783,5 +55783,201 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T14:22:27.285580+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-red-check-v1/RESULT.json",
+    "sha256": "c4c574414f47146fbd78a7fd91b3522752c119f6ee140f1e362571ad851a8bd2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-green-check-v1/RESULT.json",
+    "sha256": "f5fb468f779da1d5cb437b592da156f012bfa6ef1ac5f61ea0f028a36d95b0d3",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-late-owned-check-v1/RESULT.json",
+    "sha256": "3ad8d6fec2adaee386d1c23cc31987e3ccf3dc66e89380a494067aa94410fe47",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-late-owned-check-v1/RESULT.json",
+    "sha256": "92c32c961d29b1485af690e619ff54d8dfd04cb530b6b98c396b5f3739dbe263",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-principal-check-v1/RESULT.json",
+    "sha256": "b5c7f68554a276b5088d708f42ae69a99e06ad8ab18aa8ae887b9bfa16d8e565",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-membership_ref-check-v1/RESULT.json",
+    "sha256": "351967c52bb2394d58694273831b46886a9676b88c3f06f814a74f26baa76f5b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-capability_ref-check-v1/RESULT.json",
+    "sha256": "51b566869bf1b658df992bc12438ae59018d6251c65369ef997f04c764d8d436",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-witness_ref-check-v1/RESULT.json",
+    "sha256": "9ee673bab7a5d493e705addeb1319563829c2465a762a36c79d3bb3097b47f1c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-principal-check-v1/RESULT.json",
+    "sha256": "62f7e81c04aa080375444b6a7783d468edd5779ca6a5b000441531528b8d5f38",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-membership_ref-check-v1/RESULT.json",
+    "sha256": "1e3c6bbc5b076ddfa1ca32fde65993f3f4671c4dfe5f5d65b704b6cf51eed634",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-capability_ref-check-v1/RESULT.json",
+    "sha256": "b28746e82a00a3561f3dfec6bce686ebb0401e9a0e37843b0b4c22e66043f1a8",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-witness_ref-check-v1/RESULT.json",
+    "sha256": "3c1f0986e57754f22280c1f808c815d715d631e9779ba2818889c1a3e80cca32",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-kind-check-v1/RESULT.json",
+    "sha256": "d9f1777dead760662a430f64c2e687b792f774ed4d95100b74866f06660fe34d",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-locus-check-v1/RESULT.json",
+    "sha256": "f4a5ba1dc078a614c299eb23d2a4d159ea4bd7519f73d8f0ea15943b9bf5ef7a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-owner-stale-principal-check-v1/RESULT.json",
+    "sha256": "d0fe34bac8b2e33227c1355682ea84d56a6917494ade1ab97dbcd494ef618085",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-mutant-designated-stale-principal-check-v1/RESULT.json",
+    "sha256": "818636de119b7e26fab7fee9875d8f3d82493de0e1245469bb1f7da406ab96f0",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-alias-refusal-check-v1/RESULT.json",
+    "sha256": "2c776004d72d01206ec534e4250f5f0384d057284b592ebda700063ffe3fe2b4",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-combined-check-v1/RESULT.json",
+    "sha256": "2a699253acef00c69950cbc7edd59b59d0ceb7e1486e736cb91f50f8549e810e",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual issued-reference DATA: compiled RED/green/14controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-AUTHORITY-USE-COMPONENT-PLAN-v1.json",
+    "sha256": "1f04717fa3cb938b5f9f433193dcb94a9ba42600a2c3180678be930392cb0f07",
+    "status": "read-reviewed-full",
+    "role": "Before-use three actual issued-reference DATA consumers",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-AUTHORITY-USE-MUTANTS-v1.json",
+    "sha256": "0f2d1ac4e9fbfe22a3a9a1be4d40802e1efc0229d0cb3fbeb81724c8df6c6f76",
+    "status": "read-reviewed-full",
+    "role": "Fourteen actual compiled/caught issued-reference field/late/previous-value controls",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-AUTHORITY-USE-ALIAS-REFUSAL-v1.json",
+    "sha256": "aeef50fea5f8a47b47ffa0926b3961d002aa00cc44224464c00bce144b87e389",
+    "status": "read-reviewed-full",
+    "role": "Expected E0506 exactly2; borrowed suppliers exclude original mutable alias",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-AUTHORITY-USE-RESOURCES-v1.json",
+    "sha256": "9accfcd877d563dc3110a78da5954eb2a061040599d078af04356d2ed35455ed",
+    "status": "read-reviewed-full",
+    "role": "Actual post-full resource audit",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v29.json",
+    "sha256": "c6de0b2bd9e5775de51cf8f0896a141b73f392aa3bb84d0c748726b435461ef2",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted source and remaining original Body/joint gates",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-AUTHORITY-USE-CHECKPOINT-20261006-v1.json",
+    "sha256": "79737f313d3e0c727a09bf796a55d7b835ea5bbe147d2c8448c7d274f396c4d8",
+    "status": "read-reviewed-full",
+    "role": "Actual18 runfamilies/new5/full1309/restored38 checkpoint",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/actual-authority-use-green-v1/SOURCE_PINS.json",
+    "sha256": "8d306bdc37debf3efce31b61e7a01e97f8a755e6e4ecf49311be103a2c1b2f3f",
+    "status": "read-reviewed-full",
+    "role": "Exact external38 source pins; no production adoption",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v32.json",
+    "sha256": "c6e1586061f912a413c202e9bda0ded51fb3feac65a9c39f790603912e710570",
+    "status": "read-reviewed-full",
+    "role": "Canonical incremental cleanup/6444 hashes/all experiments preserved",
+    "at": "2026-10-06T14:52:30.906612+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-authority-use-docs-v1/RESULT.json",
+    "sha256": "303f883baa792b13d21dfee4ef8a1442119aea0a1d245663a2f436c86e42ecfd",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T14:57:43.040791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T144027Z.json",
+    "sha256": "e128681142a7fcd2601f0e47d60aff89411118e20b9a67dd6c82659eb66ecd5e",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T14:57:43.040791+00:00"
   }
 ]
