@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-06 00:26 JST
+最終更新: 2026-10-06 09:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-05 15:24:34 UTCの確認で58%（使用42%）でした。次の確認は2026-10-05 16:24:34 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-06 00:56:10 UTCの確認で54%（使用46%）でした。次の確認は2026-10-06 01:56:10 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,7 +75,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-prebody-caller-controls-v3で、準備済みM8の実領域を、SYS4/SYS5の通常・実デコード要求と本物のI3予約経路へ接続しました。既存の要求・現権限・予約・許可・一度限りの実行を同じ検証処理で確認し、その先で実際のM8実行前準備を使います。資源・数値不足でRHS前に拒否し、成功時は実M8/SYS4/返信結果を保持します。17検査・8省略対照、標準17件・追加テスト機能なし17件・通常2build・同cut全1181件、38path復元を確認しました。準備したのはM8下位領域で、SYS4の集約・記録とSYS5の返信・全activation領域は残っています。SYS5カウンタ不足が本体後に判明する現状も実検査で確認し、元source本体を有効にする前の残件としました。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-finalizer-counts-green-v1で、準備済みM8へ接続した通常・実デコード要求と本物のI3予約に、実SYS5カウンタの事前確認を追加しました。処理件数・書込件数のどちらかが上限なら、実SYS4/M8とRHSを呼ぶ前に拒否します。件数は実結果を受け取った既存finalizerだけが更新し、拒否後の要求ID・予約は再利用しません。上限手前の最後の1件は正常に実行できます。新規7検査・既存接続17検査・6省略対照、標準7件・追加テスト機能なし7件・通常2build・同cut全1188件、38path復元を確認しました。実SYS4の集約・記録・数値上限と、SYS5の返信・codec・全activation領域の実行前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -664,3 +664,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-05 23:39 JST — 実M8上位のトレース/文脈/読み取りキー/戻り値/失敗BoxをRHS前に準備、13検査/9省略・遅延複製対照/標準13件/通常2build/全1164件、38path復元。実領域の使用とpanic時の実結果保持を確認。元sourceBody0、SYS4/SYS5/codec/全activation資源と本来のBodyへ継続。Report2614。
 
 - 2026-10-06 00:26 JST — 準備済み実M8を通常/実デコード要求・本物のI3予約のSYS4/SYS5呼出しへ接続、17検査/8省略対照/標準17件/通常2build/全1181件、38path復元。上位SYS5の数値不足はまだ本体後に判明することも確認し残件を保持。元sourceBody0、上位領域/本来のBodyへ継続。Report2614。
+
+- 2026-10-06 09:57 JST — 通常/実デコード/本物のI3予約の実SYS5処理・書込カウンタを本体前に確認し、上限でRHS0・最後の1件で実結果と件数を保持。新規7/既存17検査・6省略対照・通常2build・同cut全1188件、38path復元。上位実領域と元sourceBodyは残件。Report2614。

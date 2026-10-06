@@ -61724,5 +61724,366 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_native_finalizer_counts_20261006": {
+    "at": "2026-10-06T00:57:20.716699+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-FINALIZER-COUNTS-CHECKPOINT-20261006-v1.json",
+    "receipt_sha256": "b95a7d2b98d8ab8ec8ea3d1cc0b3fef4d46f16413f1e0694909f6a8204e4e67d",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-finalizer-counts-green-v1",
+    "source_pins_sha256": "e56086047215c5d43714190922e679adeeaf2b471ff6caa3080ca64252571e1a",
+    "field_inventory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-finalizer-counts-green-v1/ACTUAL_NATIVE_FINALIZER_COUNTS_FIELD_INVENTORY.json",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v11.json",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-red-check-v1",
+        "result_sha256": "8511435e8962d4bbf9c6767c178496a685392d22427083dce5cdebb68db83ffc",
+        "restored_sha256": "ca97fff49dbf34b1e6bc7464aa7bbb75b16edb42a1b74dde124f874da456545a",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "limit_before_body",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "cf50ca88f4e948493d41d4b5c70324d4e9956154ce24558f37373c802da03a0a"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-green-check-v1",
+        "result_sha256": "17f85617851ee486fcf188d368c71cc2ae6d73f30ef7f400d233a8e8eef07e4d",
+        "restored_sha256": "b01671efda7cf4cab7f3589cbfc67405a5de3705155e388728c91aa67fc52117",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "1be53c55e5f75ecf148c17049499e63c2e5fe9949147951ae9150ddc47a29ddd"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "ee6f0668629a419a802c890b71800c8d8b2e11d1b3c7b49224722da3f4eb886f"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "ff5317b386d3151381ad66dd4f6a747164c3a092764205799592feacea24ce10"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_prebody_lower_caller",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "9e5cce6b9e7accdb32bba391814a46c52d2788ee392961bd620bb61203dd06fa"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-i3-mutant-check-v1",
+        "result_sha256": "0efc2dde03a19d84362877b5be451cdc631a44c6f5e015cbd06d67b886499056",
+        "restored_sha256": "6575d8cf18eede401c3238f511b257fd60bd7f04f61f4ca729a1c35e82643161",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b975e9849616db82ab4cba3f270e9aa27aa542b8ee952d99f262cf5c0342968e"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-ordinary-mutant-check-v1",
+        "result_sha256": "de21a12f2879d111738dbe014b9c19d25f8c4aea1bf1be220be89a6975686678",
+        "restored_sha256": "6a856a3737aa7d09e5515e4334946f513f9df1245a985fa33502b0408ff9811f",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "43430b3694b39da070419b1cdc3a4470b391127d843a13b34ee968176cb0692e"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-served-mutant-check-v1",
+        "result_sha256": "24ac816558c05e1c997fc7b64b14cdbf13b86eafcd39eeee32ce21af5942788d",
+        "restored_sha256": "f7b8b13fdc8dc65e8c9654a3b42939da486c752b0034d82369487f18ccec614d",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "1d2377dd4472a66f0995236f18c7b52f86b782be5f5676a657e581b65e381463"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-write-mutant-check-v1",
+        "result_sha256": "18db44152d27ef3ae0bf96dc13450ecce97285646c4847362f7c942cb006710a",
+        "restored_sha256": "81b41b8d65233d0e1e8ba89d7db7ffc61339b2ce4fa49ac9cad4ccbbae620568",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "ac7fa9c548f39756baa1e341cbfbda7c9dbbb417fe0a66c92e00b9918c7e4653"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-strict-mutant-check-v1",
+        "result_sha256": "922abff2301fb97022cf2d4e7d510d0eee78d316169faa2cb35e568f52277dd1",
+        "restored_sha256": "c9e489ff78e4098d11c99e3752d81aa252dce9236653fcf9c0f957f0095ed01a",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "ac12f37455c437456839b57e5fa97aaf55deb9c55c33b08300f1edc9501c3b35"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-late-mutant-check-v1",
+        "result_sha256": "e612bee947dc4473f6950a3337a72aa761a770f3d1ceafe88151aece8dc35c87",
+        "restored_sha256": "ed85325a7af256adef981929586b045c66487823df4af830e0a98b9cc633bba9",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b3906ded92507aeb61ee5ea81b688f01bdc8ae0b7ced58d07cfb8e1e64346dbb"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-combined-check-v1",
+        "result_sha256": "0a811ab7a88a9f0e1904dd2a81decde8f7b129fd9d692949ffd57c74e9d48b94",
+        "restored_sha256": "9f1d23cc1caa2b4c0039f344e8fc00e06ac64973f278c53b8efe8732805414b6",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "d6526477bcd0546ed019dab072b362c27989d8e71c26f111fa10c4fb8ba28efd"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "89993c0c686f6985ae0a8e623d16328cbd919f07b8e79ebaaf46828de64ea247"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "59ab7dd8cb8071cac40af38109d4fc409af20f74995667549df5603dfa9126e8"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "fe70a40af35c21de50a14818fd770dcc587b16acb07ff326031e72048052d3e8"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "16d8f0fa4a232b39050b424b095a0f3029eabf5549ab96c8c6ec591e1d41812f"
+          }
+        ]
+      }
+    ],
+    "focused": 7,
+    "existing_caller_controls": 17,
+    "omissions": 6,
+    "normal_builds": 2,
+    "default": 7,
+    "without_test_seams": 7,
+    "full": 1188,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Existing actual SYS5 native prepared lower consumers now preflight two genuine finalizer counters before dependent body. Numeric prerequisite only, no allocation/sourceBody/distributed acceptance.",
+    "docs": "pending full11 docs/metadata/actual Git separately",
+    "goal": "same active W4-D"
+  },
+  "d_actual_native_finalizer_counts_docs_20261006": {
+    "at": "2026-10-06T01:02:19.850758+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-finalizer-counts-docs-v1/RESULT.json",
+    "receipt_sha256": "b35f882bd15619d6af00114f98c7f0be0f1b2bf3c785751ff5c3ad94224652a7",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }
