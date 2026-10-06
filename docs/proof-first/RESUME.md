@@ -2,14 +2,14 @@
 
 Same owner-resumed W4; sole main/no subagents/no Oracle/new goal. Owner explicitly resumed2026-10-05 after the passed component/authorized cleanup. Continue same W4-D until material contract counterexample, Astra D integrated acceptance, or remaining weekly capacity below30% followed by a sensible verified checkpoint; STOP before E. Plan250/I3-4 separately owner-paused. OwnerProtemporarycap preference explicit xhigh, actual model/effort verify, never silently medium; no current Oracle.
 
-Predecessor HEAD0e34d2f0 pushed/parity0/0/clean; GIT-NATIVE-PENDING-BUDGET-BINDING-v1.json verified. Current scoped-original binding docs after all38 restored; GIT-SCOPED-ORIGINAL-BINDING-v1.json records actual authorized commit/push/parity after success.
+Predecessor HEAD2384f758 pushed/parity0/0/clean; GIT-SCOPED-ORIGINAL-BINDING-v1.json verified. Current discarded candidate disposition docs after restored38; GIT-OWNER-RESOLUTION-SLOTS-DISPOSITION-v1.json records actual authorized Git after success.
 
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Current external/unadopted38path D/d-control-development/scoped-original-binding-green-v2;5source delta/2transient DATA fields/0permanent runtime or authority fields/no wire or API change. Notes-v22/checkpoint pin12completed runfamilies/new5/sourcefields16/Admit10/Resolve13/nativepending3/7compiled controls/0compile-only/normal2/default oldcodec13/no-seams5/full1273/logSHA/restored38. Protected originalBody0; other mutable runtime/program and wholeactivation/source-I3 remain.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Accepted external/unadopted38path D/d-control-development/scoped-original-binding-green-v2 unchanged. Notes-v23: native-resolution Vec candidate green-v5 DISCARDED;13runfamilies/failed attempts/6controls preserved; fresh unchanged real Resolve13/restored38. Prior same-source full1273/normal2/default oldcodec13/no-seams5/scopedOriginal5 remain. OriginalBody0; actual upper Body/history/control resources and source-origin/nativeI3 coupling next.
 
 
 2026-10-05に実行終了後のCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約11GBから約14GBへ戻しました。追跡6403ファイル・外部現source38ファイル・3manifestの計6444hash一致を確認。研究source・証明・実験・ログ・receipt・browser状態は削除していません。詳細はINCREMENTAL-CLEANUP-20261005-v1.json。後続buildの再生成で空きは変動します。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照scoped-original-binding-green-v2で、実3プロセスのowner受付・解決に使う元sourceの記録用データを、下位処理の前に準備しました。実際の元sourceを変更できない借用と、実際に予約して使うfragment領域により、旧記録の全項目とowner役割を保ちます。新規5件、元source全項目16件、既存受付10件・解決13件・実I3予算3件、7変更対照、通常2build・標準の関連回帰13件・追加テスト機能なし5件・同cut全1273件、38path復元を確認しました。旧実装のREDは3pass2failで下位処理後のコピーを検出し、記録を保持しています。新しい恒久runtime項目、I3許可・時計、権限・契約・通信形式の変更はありません。他の実runtime／programの記録と全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのscoped-original-binding-green-v2で、元source記録の下位処理前準備・全1273件・文書検証・2384f758の送信済み証拠を保持します。実I3解決結果の追加配列候補は採用しません。Canon spec/16の予算指定はowner代入1件に限定され、既存の1件保持欄で実結果を下位処理後・Finish前に保持できるためです。既存参照の実解決13件を再確認し、38path復元しました。候補の新規5件・既存解決13件・元source記録5件と失敗・対照ログも研究証拠として保持します。通常のS→T→S本体の実結果／制御記録を保持する領域とは別であり、その完了扱いにはしません。元sourceBodyは0で、全activationの実Body／履歴／制御領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続update再freezeが残件です。予算付き複数文への仕様変更は始めません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 Same genuine finite3parent ExpectedStart records configure ordinary source-A/owner-S static TLS pair inside bounded expected FD3 record before installation. Installed normal mode takes actual bound configuration once and joins complete own start/run/purpose/slot/program/cohort, static transport identity independent of updated M9. Real source Issue retains actual request/message/encoded frame and separate pre-Finish outgoing data; one-use transfer changes no source cursor/result/pending request. Normal QUIC opaque packet send requires inspected SPKI/reciprocal preface/initial session, reserves checked actual occurrence before write; no Runtime borrow through await.
 
@@ -23,11 +23,11 @@ Continue same W4-D: actual wholeactivation result/control used backing before pr
 
 First original statement source data → genuine real private QUIC → actual owning owner unadmitted data retention. Budgeted original owner Admit/I3 Awaiting/Resolve and actual native typed return holding realized; protected Body/M8 raw result/reply/source acknowledgment, whole distributed causality, subsequent update/multi-statement activation not realized. Data hashes/static TLS are not custody/body permission/OS authentication; no fresh full proof-audit/workspace/privacy/recovery/alpha campaign.
 
-Sole main current5source delta/2transient DATA fields/0permanent runtime or authority fields; actual owner Admit/Resolve use immutable original borrow and exact actual prelower fragment snapshot; old complete original and owner-role digest/true-return retention preserved. Generic fresh original serializer unchanged except test instrumentation. Other mutable program/runtime suppliers and upper wholeactivation obligations remain. Current scoped original binding full make docs v1 passed; final metadata focused separately.
+Sole main: candidate discarded after spec16 L1-fixed singleton budget rule and direct old inline-retention producer review; no accepted source delta. Normal ordinary S-T-S and budgeted singleton are distinct supported shapes. Actual Body/history/control resources, source-origin plus real optional nativeI3, reply/currentSourceAck/subsequentrefreeze remain. Current disposition full make docs v1 passed; final metadata focused separately.
 
-週間残量は2026-10-06T09:38:49.250923+00:00の実セッション記録で40%（使用60%）でした。次の確認は2026-10-06T10:38:49.250923+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T10:39:14.734176+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T11:39:14.734176+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
-Latest resource audit: SCOPED-ORIGINAL-BINDING-RESOURCES-20261006-v1.json at2026-10-06T10:31:21.925904+00:00; known incremental cleanup v19/v20 preserve6444hashes/research. Serial8GiBAS/-j1/testthreads1/core0; exact docs/finalmetadata/Git separately; no notifications.
+Latest resource audit: OWNER-RESOLUTION-SLOTS-DISPOSITION-RESOURCES-v1.json at2026-10-06T11:11:08.064501+00:00; incremental v21 preserves6444hashes and all candidate experiments/source/logs. Serial8GiBAS/-j1/testthreads1/core0; docs/finalmetadata/Git separately; no notifications.
 
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
@@ -56,7 +56,7 @@ Earlier2026-10-01 cleanup/pause receipt below is HISTORY; latest owner resume ab
 }
 
 
-Current owner-resume receipt: /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESUME-20261005-v1.json. Same goal active verified after owner-confirmed crash/resume2026-10-06; Sol/xhigh, below30/Astra stop unchanged. Prior native pending budget binding full make docs v1 passed; current scoped original binding full make docs v1 passed; final metadata focused separately; finalmetadata/Git separately.
+Current owner-resume receipt: /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESUME-20261005-v1.json. Same goal active verified after owner-confirmed crash/resume2026-10-06; Sol/xhigh, below30/Astra stop unchanged. Current accepted scoped original binding full make docs v1 passed; discarded native-resolution candidate disposition full make docs pending; finalmetadata/Git separately.
 
 2026-10-06に再生成可能なCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約5.7GBから約12GBへ戻しました。追跡6403ファイル・現在の外部source38・3manifestの計6444hash一致を確認。研究source・実験・証明・検証ログ・receipt・browser状態は保持しています。詳細はINCREMENTAL-CLEANUP-20261006-v1.json。後続buildで空きは変動します。
 

@@ -63769,5 +63769,41 @@
     },
     "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
     "goal": "Same active W4-D"
+  },
+  "d_owner_resolution_slots_disposition_20261006": {
+    "at": "2026-10-06T11:11:08.064501+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-DISPOSITION-20261006-v1.json",
+    "receipt_sha256": "57b8de0ccc1180513a923cabb2ad94140d4f6b4d4f737b74e74ce3f6fc688079",
+    "accepted_source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/scoped-original-binding-green-v2",
+    "source_pins_sha256": "8992845e2bc0f8cad6dd5facbbf6f416b83984decc2b674215ff29dca3a1b77d",
+    "candidate": "owner-resolution-slots-green-v5",
+    "disposition": "DISCARDED",
+    "accepted_source_delta": 0,
+    "fresh_inline_resolve": 13,
+    "prior_unchanged_full": 1273,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "remaining": "Proceed to actual original source Body/history/control result resources, actual owning source-origin handoff at the real lower entry coupled to the real optional native I3 permit. Preserve spec16 singleton budget restriction; ordinary S-T-S has no owner_ticks condition. No-budget admission only inside authentic Body interval, not through unguarded Admit or C SourceUse substitution. Original Core/allargs/global ordinal/activation/request/frame/current M9, actual upper/postBody supplier capacity, true raw returns/packet before Finish and no refund/replay proof before Body use. Actual reply/currentSourceAck/newactivation/all3 subsequent refreeze remain. Protected originalBody0. Same W4-D/no Dacceptance/E/W5+/Plan250-I3-4/newgoal/roadmap.",
+    "docs": "pending make docs/finalmetadata/Git",
+    "goal": "Same active W4-D"
+  },
+  "d_owner_resolution_slots_disposition_docs_20261006": {
+    "at": "2026-10-06T11:16:32.491739+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-disposition-docs-v1/RESULT.json",
+    "receipt_sha256": "9b0318125ef191265140d3ee93b7068a170cde88e157f547eda384ac0cabda55",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T103914Z.json",
+    "quota_sha256": "9dfb86c57470de5aa348fd63cc1b472834e4df37c8dae50d673b0d9c1ee19ae8",
+    "quota": {
+      "captured": "2026-10-06T10:39:14.734176+00:00",
+      "telemetry_timestamp": "2026-10-06T10:39:09.670Z",
+      "weekly_used_percent": 61.0,
+      "weekly_remaining_percent": 39.0,
+      "next_check_no_earlier_than": "2026-10-06T11:39:14.734176+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
+    "goal": "Same active W4-D"
   }
 }

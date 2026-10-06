@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 19:31 JST
+最終更新: 2026-10-06 20:11 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照scoped-original-binding-green-v2で、実3プロセスのowner受付・解決に使う元sourceの記録用データを、下位処理の前に準備しました。実際の元sourceを変更できない借用と、実際に予約して使うfragment領域により、旧記録の全項目とowner役割を保ちます。新規5件、元source全項目16件、既存受付10件・解決13件・実I3予算3件、7変更対照、通常2build・標準の関連回帰13件・追加テスト機能なし5件・同cut全1273件、38path復元を確認しました。旧実装のREDは3pass2failで下位処理後のコピーを検出し、記録を保持しています。新しい恒久runtime項目、I3許可・時計、権限・契約・通信形式の変更はありません。他の実runtime／programの記録と全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのscoped-original-binding-green-v2で、元source記録の下位処理前準備・全1273件・文書検証・2384f758の送信済み証拠を保持します。実I3解決結果の追加配列候補は採用しません。Canon spec/16の予算指定はowner代入1件に限定され、既存の1件保持欄で実結果を下位処理後・Finish前に保持できるためです。既存参照の実解決13件を再確認し、38path復元しました。候補の新規5件・既存解決13件・元source記録5件と失敗・対照ログも研究証拠として保持します。通常のS→T→S本体の実結果／制御記録を保持する領域とは別であり、その完了扱いにはしません。元sourceBodyは0で、全activationの実Body／履歴／制御領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続update再freezeが残件です。予算付き複数文への仕様変更は始めません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。外部未採用38path参照scoped-original
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original Issue/QUIC/Ready/budgeted Admit/I3 Awaiting/Resolve retained. Native lower-resource and pending-budget prerequisites saved. Current scoped-original binding5/sourcefields16/Admit10/Resolve13/nativepending3/7compiled controls/full1273/normal2/default oldcodec13/no-seams5/restored38 passed; current scoped original binding full make docs v1 passed; final metadata focused separately. Other full-runtime/program and wholeactivation used resources/sourceRoot+nativeI3/actual reply/currentSourceAck/subsequentrefreeze remain; originalBody0 | 後段依存: fixed actual custody/resource/refinement gates; Astra material contract or D integrated acceptance |
+| D source/I3/result/network / Macro3/6 | Accepted LAB source scoped-original-binding-green-v2/full1273 remains. Native-resolution Vec candidate DISCARDED: spec16 budgeted singleton existing inline slot sufficient, fresh actual Resolve13/restored38. Actual ordinary S-T-S Body/history/control resources and source-origin+optional native I3 coupling remain; current disposition full make docs v1 passed; final metadata focused separately; originalBody0 | 着手可能: fixed Body/resource/producer evidence before use; Astra material contract or D integrated acceptance |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,7 +69,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after the samecutfull1273 scoped-original binding component, not calendar
+These are rough active-work hours after the samecutfull1273 scoped-original binding component and discarded native-resolution array candidate, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current scoped-original binding5/sourcefields16/Admit10/Resolve13/nativepending3/7compiled controls/full1273/normal2/default oldcodec13/no-seams5/restored38 passed. Actual original metadata and same used fragment allocation prepared before native lower; old complete original/owner-role digest preserved.2transient DATA fields/0permanent authority. Other mutable runtime/program and wholeactivation obligations remain. D20–40 rough active hours low confidence unchanged.
+Current accepted external reference unchanged/full1273; native-resolution Vec candidate discarded after Canon single-assignment budget restriction and fresh old actual Resolve13. Candidate startup n3 allocation is DATA evidence only; does not close ordinary S-T-S Body/history/control resources. D20–40 rough active hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -107,11 +107,11 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T09:38:49.250923+00:00の実セッション記録で40%（使用60%）でした。次の確認は2026-10-06T10:38:49.250923+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T10:39:14.734176+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T11:39:14.734176+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 ## non-promoted references
 
-Current external/unadopted38path scoped-original-binding-green-v2; notes-v22/checkpoint.5source delta/2transient DATA fields/0new permanent runtime or authority fields. Actual owning Admit/Resolve now prepare immutable original metadata and used fragment backing before native lower; true typed returns still retained first. Same complete old original and owner-role digest/new5/sourcefields16/Admit10/Resolve13/nativepending3/7compiled controls/full1273/restored38 passed; no Rust compile-only failure. Wholeactivation/other mutable runtime-program/sourceRoot+nativeI3/actualreply/currentSourceAck/subsequentrefreeze remain; originalBody0/fixed frontier/no new phase or roadmap.
+Current accepted LAB external/unadopted38path scoped-original-binding-green-v2/notes-v23; full1273/normal2/default oldcodec13/no-seams5/scopedOriginal5 remain prior exact-cut evidence. Owner native-resolution Vec green-v5/13runfamilies DISCARDED, preserved as LAB experiments, not a missing native singleton requirement or accepted Body/history solution. Fresh unchanged actual Resolve13/logSHA/restored38. Zero Rust compile-only errors; failed fixture assumptions/unsupported multi-budget source and test-label omissions retained. Upper actual Body/control/history resources/sourceOrigin+real optional I3/actualreply/currentSourceAck/subsequentrefreeze remain; originalBody0.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.

@@ -54733,5 +54733,180 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T10:35:45.019311+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-red-check-v1/RESULT.json",
+    "sha256": "410d071339d974b2fff213944c72a1ce94cd5a195b6cb16079a1164f6451c1a6",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-green-check-v1/RESULT.json",
+    "sha256": "d8c81d4a8a2c1c29b7aa43437bb86e58c2704e17fd088b03829951dc0cf4c250",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-green-check-v2/RESULT.json",
+    "sha256": "ac2677284f3977c5b8751ab57cc8188948e62ac47b1269e30ea7e3b923e89893",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-green-check-v3/RESULT.json",
+    "sha256": "da35f053e8e131de7c7a5ef721af64af4ccddc1148cb740c10ce08277ecf7179",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-green-check-v4/RESULT.json",
+    "sha256": "0d9801bcf7059fe1b7656dadb009d2f70c7a930335d69f2399ae87719d28481d",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-green-check-v5/RESULT.json",
+    "sha256": "8ceb7fe2428d12df9738e0751a8db4fe6e02e98d7f2532dcc47a5376c1868c7f",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-late-storage-mutant-check-v1/RESULT.json",
+    "sha256": "aa71042ac79420a5ff56eea32b793fbbbd78510ed17e77bfe2989b6fa4ff12fd",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-resources-mutant-check-v1/RESULT.json",
+    "sha256": "03ce0f68412ba30859c0d251ecc0028fe52a1ad45ded7319e7ad39f3979444f7",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-current-mutant-check-v1/RESULT.json",
+    "sha256": "cdd06df0d1dac6684d9eba1e41d31d55150c3de67505bd61f3ab44154d09659f",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-only-current-mutant-check-v1/RESULT.json",
+    "sha256": "b280ec60d1767b677b979bee56ff4b662abdebd65374c4a93069c32428099469",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-lower-result-mutant-check-v1/RESULT.json",
+    "sha256": "b796a4f975177cd8f10c9f62582f89bc54f3a5167fab6e466f6c8d316535ab3e",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-short-slots-mutant-check-v1/RESULT.json",
+    "sha256": "c25eefde16663d8294fbe6955c599e2e9f4b0c11651826cece26527c785dd6b1",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-inline-alternative-check-v1/RESULT.json",
+    "sha256": "0a78b084a2cc9f50b32a65543ae49ad4516eca066a1bd4c4af551c73ede85d69",
+    "status": "reviewed-discarded-candidate-and-alternative",
+    "role": "Preserved native-resolution array candidate, failed assumptions/controls; unchanged accepted source actual Resolve13; no array/body acceptance",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-COMPONENT-PLAN-v1.json",
+    "sha256": "91c9195fdc0176f3be733bc640bba6a2b259e7035fdadd3637e9649f4484237c",
+    "status": "read-reviewed-full",
+    "role": "Discarded working array hypothesis, not a requirement",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-SCOPE-CLARIFICATION-v1.json",
+    "sha256": "4efb94196675be42cf63876ffb5389f023756ce2feb78f45f53c51f2075e7e9d",
+    "status": "read-reviewed-full",
+    "role": "Canonical singleton budget restriction/failed multi-budget fixture and DATA-only allocation scope",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-MUTANTS-v1.json",
+    "sha256": "5c2b010e96684c871598e9eb6c489a7a74c742e4cd74b7521be56f6986533a05",
+    "status": "read-reviewed-full",
+    "role": "Six compiled discarded candidate controls; short-slots indexing/QUIC consequences not clean semantic proof",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-INLINE-REVIEW-v1.json",
+    "sha256": "b16f13ea5c5cc9fefe159ca2fd131ed031f567c5ace9088b5ee452ea67017209",
+    "status": "read-reviewed-full",
+    "role": "Old native singleton inline slot and true-return/oneuse direct consumer review",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-DISPOSITION-RESOURCES-v1.json",
+    "sha256": "0b0b4d0a3203b6b365d10aa17a1463130b4d1a3b8a168603ac51a73349bb7f3d",
+    "status": "read-reviewed-full",
+    "role": "Terminal inline alternative/restored38 resource audit",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v23.json",
+    "sha256": "4756fcf641913ea55aa78c5887f0e5ca1e65513c37ac63e583e18c4831ac260e",
+    "status": "read-reviewed-full",
+    "role": "Accepted source unchanged/candidate discarded/actual Body resources next",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESOLUTION-SLOTS-DISPOSITION-20261006-v1.json",
+    "sha256": "57b8de0ccc1180513a923cabb2ad94140d4f6b4d4f737b74e74ce3f6fc688079",
+    "status": "read-reviewed-full",
+    "role": "Discard disposition/13runfamilies/current accepted source and remaining",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v21.json",
+    "sha256": "8b4fab4f18c74e96cd187bbed60650a75ec57a6635d6b5c140e7ab8f5926fbd5",
+    "status": "read-reviewed-full",
+    "role": "Known incremental cache cleanup preserves6444hashes/all experiments",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/spec/16-i3-owner-admission-budget.md",
+    "sha256": "0edd249af3c2a48df3fbb00c4f968149748b3f87ba86781892874827a84eda13",
+    "status": "read-reviewed-full",
+    "role": "Normative L1-fixed exactly-one-assignment budget restriction",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-semantics/src/surface_v0_classification.rs",
+    "sha256": "60c45bd6b173982d66603791c426352c64d5e9f5e80ae6db60651c05315f853c",
+    "status": "read-reviewed-full",
+    "role": "Actual M7 source budget owner-assignment-count diagnostic",
+    "at": "2026-10-06T11:11:08.064501+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/owner-resolution-slots-disposition-docs-v1/RESULT.json",
+    "sha256": "9b0318125ef191265140d3ee93b7068a170cde88e157f547eda384ac0cabda55",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T11:16:32.491739+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T103914Z.json",
+    "sha256": "9dfb86c57470de5aa348fd63cc1b472834e4df37c8dae50d673b0d9c1ee19ae8",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T11:16:32.491739+00:00"
   }
 ]
