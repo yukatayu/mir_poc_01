@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-07 02:31 JST
+最終更新: 2026-10-07 03:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,11 +59,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのupper-body-backing-green-v1です。実FD3から起動するownerに、元sourceの全体ordinal分の結果保持領域をRuntime起動前に確保します。通常3文・予算付き1文を扱い、requesterにはowner用領域を持たせません。永続DATAフィールド1個と準備中の共有参照を追加し、権限・custody・cursor・permit・cacheの追加は0です。記録7項目と実raw戻り値を借用して既存の状態記録へ含めます。新規5件・検出対照11件・既存準備2件・通常ビルド2種・default13件・test-seamsなし5件・全1326件が通り、38path復元済みです。借用中の領域置換はE0506で1件拒否されています。容量overflow時は実Runtime起動前に拒否し、FD3の再取得も拒否します。新規テストのBody実行は0です。空の保持領域の準備と、実Body結果の保存・履歴・Finishは別の証拠です。元sourceBodyは0で、実source由来の一度限りの許可と実I3許可の接続、実Body／履歴／完了、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-DはAstraへの切り替え前の検証済み区切りに達しました。同じgoalを維持し、Git保存後に一時停止します。現参照は外部未採用38pathのoriginal-body-reader-green-v3、notes34です。実FD3・QUIC・owner登録からBody制御区間を読むprivate readerを検証しました。role／元sourceのinstall／activation ACK送信／Ready送信／実grantのACTIVE化を確認し、既存grantとactivationの借用を使います。永続フィールド追加は0です。session／grant／activation／Finish用byte・容量・offsetを借用して状態記録に含めます。新規7件・欠落を検出した対照16件・既存Body制御8件・通常ビルド2種・default13件・test-seamsなし7件・全1333件が通り、38path復元済みです。二重借用E0499とClone E0599は各1件拒否。初回GREENのテスト用コードのcompile失敗は保存し、tests-only successorで修正しました。readerは元source由来の実行許可やnative I3 permitではなく、元SourceBody／Finish実行は0です。次はsource_root保護・実source由来許可と実I3許可の消費順序・失敗時の資源保持をAstraで検討します。設計は未決で、規範変更や反例成立は主張しません。Astraへの切り替え直前又は週間残量30%未満の検証済み区切りで止めるowner条件を適用します。
 
-W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
+W4-Dは2026-10-05にowner指示で同じgoalを再開し、現在はAstraへの切替前の検証済み区切りで停止します。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T16:43:24.918175+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T17:43:24.918175+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T17:43:34.562809+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T18:43:34.562809+00:00以降。停止理由はAstraへの切替前の引継ぎです。週間残量30%未満も確認した場合のみ追加の停止理由とします。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
@@ -177,4 +177,4 @@ active program/roadmap、official lifecycle、major blocker、accepted cut、evi
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを
 general proofやpublic product completionとして数えない。
 
-2026-10-07の整理対象は再生成可能なtarget/debug/incrementalのみ。20261006-v1～v42及び20261007-v1～v4のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。研究source・実験・証明・ログ・receipt保持。buildはincremental/debug info0。Report2614参照。
+2026-10-07の整理対象は再生成可能なtarget/debug/incrementalのみ。20261006-v1～v42及び20261007-v1～v5のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。研究source・実験・証明・ログ・receiptを保持。buildはincremental/debug info0。Report2614参照。

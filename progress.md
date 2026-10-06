@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-07 02:31 JST
+最終更新: 2026-10-07 03:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,13 +57,13 @@ public/production layers remain later.
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
-owner resumed2026-10-05 after requested cleanup/other work.
-PL1/PL2/PL0 S4/S6, with one main and no subagents. After owner resume stop after
+owner resumed2026-10-05 after requested cleanup/other work; now reader closeout is the pre-Astra stop checkpoint.
+PL1/PL2/PL0 S4/S6, with one main and no subagents. The same goal pauses at the current pre-Astra checkpoint within
 W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
+W4-Dは2026-10-05にowner指示で同じgoalを再開し、現在はAstraへの切替前の検証済み区切りで停止します。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T16:43:24.918175+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T17:43:24.918175+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T17:43:34.562809+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T18:43:34.562809+00:00以降。停止理由はAstraへの切替前の引継ぎです。週間残量30%未満も確認した場合のみ追加の停止理由とします。account resetはownerのみ。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,13 +75,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのupper-body-backing-green-v1です。実FD3から起動するownerに、元sourceの全体ordinal分の結果保持領域をRuntime起動前に確保します。通常3文・予算付き1文を扱い、requesterにはowner用領域を持たせません。永続DATAフィールド1個と準備中の共有参照を追加し、権限・custody・cursor・permit・cacheの追加は0です。記録7項目と実raw戻り値を借用して既存の状態記録へ含めます。新規5件・検出対照11件・既存準備2件・通常ビルド2種・default13件・test-seamsなし5件・全1326件が通り、38path復元済みです。借用中の領域置換はE0506で1件拒否されています。容量overflow時は実Runtime起動前に拒否し、FD3の再取得も拒否します。新規テストのBody実行は0です。空の保持領域の準備と、実Body結果の保存・履歴・Finishは別の証拠です。元sourceBodyは0で、実source由来の一度限りの許可と実I3許可の接続、実Body／履歴／完了、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-DはAstraへの切り替え前の検証済み区切りに達しました。同じgoalを維持し、Git保存後に一時停止します。現参照は外部未採用38pathのoriginal-body-reader-green-v3、notes34です。実FD3・QUIC・owner登録からBody制御区間を読むprivate readerを検証しました。role／元sourceのinstall／activation ACK送信／Ready送信／実grantのACTIVE化を確認し、既存grantとactivationの借用を使います。永続フィールド追加は0です。session／grant／activation／Finish用byte・容量・offsetを借用して状態記録に含めます。新規7件・欠落を検出した対照16件・既存Body制御8件・通常ビルド2種・default13件・test-seamsなし7件・全1333件が通り、38path復元済みです。二重借用E0499とClone E0599は各1件拒否。初回GREENのテスト用コードのcompile失敗は保存し、tests-only successorで修正しました。readerは元source由来の実行許可やnative I3 permitではなく、元SourceBody／Finish実行は0です。次はsource_root保護・実source由来許可と実I3許可の消費順序・失敗時の資源保持をAstraで検討します。設計は未決で、規範変更や反例成立は主張しません。Astraへの切り替え直前又は週間残量30%未満の検証済み区切りで止めるowner条件を適用します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C806/818 and prior D components retained; current external38path actual original source/QUIC/Ready/protected budgeted Admit/I3 Awaiting/Resolve/actual Reserved or expiry return retained, normal default+privateQUIC/no-seams positive/full1100 pass; sourcecursor/parentexpected0/body0;38paths restored | owner-resumed2026-10-05 after passed component/cleanup; establish semantic owner/I3/body/result/resource/source acceptance/full-source/subsequent re-freeze; Astra at material contract falsifier or D acceptance |
+| Implementation / operation | C806/818 and prior D components retained; current original-body-reader-green-v3: authentic FD3/control reader7/controls16/old8/normal2/default13/no-seams7/full1333/restored38, actual native Reserved retained, original SourceBody0 | owner指定のAstra切替前の停止区切り。再開後にsource-origin/native-I3許可・Body結果保持・current SourceAck・全source／次activationを検証 |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -714,3 +714,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-07 02:02 JST — M8の3recordを借用し実マップキーと旧raw／fabric bindingを維持。新規2件／対照28件／既存マップ4件／M9記録7件／通常2種／default13件／test-seamsなし2件／全1321件、E0506拒否3件と38path復元。元SourceBody0。Report2614。
 
 - 2026-10-07 02:31 JST — 実FD3 ownerの全ordinal分の保持領域をRuntime起動前に確保。新規5件／対照11件／既存準備2件／通常2種／default13件／test-seamsなし5件／全1326件、E0506拒否1件と38path復元。空領域とdetached DATAの証拠、元SourceBody0／実Body保存は未実行。Report2614。
+
+- 2026-10-07 03:22 JST — 実FD3 ownerの元source Body制御readerを検証。新規7／対照16／既存8／通常2種／default13／test-seamsなし7／全1333、借用・Clone拒否各1と38path復元。元SourceBody0。source-origin/native-I3設計判断前のAstra引継ぎを準備し、同じgoalの停止条件を適用。Report2614。

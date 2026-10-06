@@ -56973,5 +56973,250 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T17:36:09.524665+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-red-check-v1/RESULT.json",
+    "sha256": "0c3d9146c5a2bf34d5f953c1a4b1d32c5387c31ce3a766c88ce5e6b5c1665d34",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-green-check-v1/RESULT.json",
+    "sha256": "bbd22c39c05a66d3ee5fbcb9276fed305e90f848756c4c234d0c95b4fed38974",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-green-check-v2/RESULT.json",
+    "sha256": "a0ff96dad74f99866706aa75a1ae7bb61e504508b154d53b5874cf1ac5bc3717",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-green-check-v3/RESULT.json",
+    "sha256": "2df7bd5fdbad06ab5d761c571bfff15037f5b55379efea657edea78c04f3580a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-constructor-role-check-v1/RESULT.json",
+    "sha256": "515deb65027a4771c2df2ce25d451c5d3abeb0f283ab7d7ebfeb6e0e09ff42db",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-constructor-installation-check-v1/RESULT.json",
+    "sha256": "007ef9fa8fe0a9a2cd8a87574f7025ccc036533d5ee1d83a228ee74f90916e5c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-constructor-activation-ack-check-v1/RESULT.json",
+    "sha256": "b3ddadad58cb45029ab19c4f8500c26095870ed775f34078770676d81fe58044",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-constructor-ready-check-v1/RESULT.json",
+    "sha256": "43ccb8185d8ad04adce5edaa2f05cc83d23a16990174b7ae8a29742f42787570",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-constructor-kind-check-v1/RESULT.json",
+    "sha256": "aa1b65a750768f52e01350dc29f6d952dea4b5a4ad30f0a452a998496ed55528",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-data-authority-check-v1/RESULT.json",
+    "sha256": "01b2c37d6ba0c1ba0fc291422392557ad929536456d882e5f431da815c7c6ade",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-data-context-check-v1/RESULT.json",
+    "sha256": "69fe32eeba787d3992f9cac52bef26d03e6db75288d721d486cd7f7a36ab2d9c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-data-statement-check-v1/RESULT.json",
+    "sha256": "0d5bbe08e4c59aa46696ca2d5f3f4c4f4d21a63ebfcde684cdf8d2844ffa664a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-data-request-frame-check-v1/RESULT.json",
+    "sha256": "d1e26788108646b88abf730b673d5ead8b1fd8b570e2023c8fbdd8ef72b6861c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-session-check-v1/RESULT.json",
+    "sha256": "df6f7db161704fa2114df76607a8216abf8406f4a4f3e6cd1db2897c3ea419ac",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-record-check-v1/RESULT.json",
+    "sha256": "413d779d6a61e5170cc3392eb9c80a44412d1eb270b3c1bd11355a043dadb1c5",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-grant-check-v1/RESULT.json",
+    "sha256": "d690b98f8c21b6ac115a81d638ac082429cd4a2c2faf270c21481ead47d08556",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-activation-check-v1/RESULT.json",
+    "sha256": "40f6a5286142a48e0a8adc8a5677f3e75588af93c5ba33a64ae6301bbfa2e248",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-finish-capacity-check-v1/RESULT.json",
+    "sha256": "6d89aea8850f314c175fbb7b79c27999fac09d64385cb2ed724fa92ce3b8a4a0",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-finish-bytes-check-v1/RESULT.json",
+    "sha256": "2dcec2a0b25fcfa80e4b93917d1d51c720b4bd1a1f04eb1d841251d7fbf65300",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-mutant-omit-visitor-finish-offsets-check-v1/RESULT.json",
+    "sha256": "0ebcbbbd078f2767dde6f37f928bc47b93f0fc5f261142c6ca1e6cfd434bcf78",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-alias-refusal-check-v1/RESULT.json",
+    "sha256": "cccff04e10819904aecc2c6251ad43e2687c7e0abb55b0cff7d9f565a0e179f5",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-combined-check-v1/RESULT.json",
+    "sha256": "d5e20e2390cf8f4622504d9df2f87f7e148041217ef4af67e08136de6745fbe7",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Original authenticated control reader: actual RED/compile-only failed GREEN/test-only corrected successors/16controls/expected alias-Clone/normal-default-no-seams-full; no original Body or native permit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-COMPONENT-PLAN-v1.json",
+    "sha256": "b5f7cd8ebbb2bfd776af415b24a564e832267d87f4d2db9bb7d4bac62454363b",
+    "status": "read-reviewed-full",
+    "role": "Before-use bounded original control reader plan",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-MUTANTS-v1.json",
+    "sha256": "49a18747022c8bde065176e5163f7403e9abde58058b8f016575c3c0f8896274",
+    "status": "read-reviewed-full",
+    "role": "16 compiled/caught actual constructor/DATA/visitor controls and limits",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-ALIAS-REFUSAL-v1.json",
+    "sha256": "a29ec80027ce11ed787e8de1f911385021a3d9d2f2d14c516fcb1597b92af346",
+    "status": "read-reviewed-full",
+    "role": "Expected normal borrow E0499one/Clone E0599one",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-RESOURCES-v1.json",
+    "sha256": "e4dfcb353c7302ba1b3934d72ccf3d66925c2243d9401d9c00645042cc782bc3",
+    "status": "read-reviewed-full",
+    "role": "Actual post-full resource audit",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v34.json",
+    "sha256": "b1d948ffac6fe0b2d625a22e0df79431b9f866e4ea6eaecf2cd11771dedf4891",
+    "status": "read-reviewed-full",
+    "role": "Current external source and remaining originalBody joint-handoff gate",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-CHECKPOINT-20261007-v1.json",
+    "sha256": "4935c9419c445add5453e8b0e30659f3071d6ce331844eaef14c53f9bce953cc",
+    "status": "read-reviewed-full",
+    "role": "Actual22 runfamilies/new7/full1333/restored38 checkpoint",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/SOURCE_PINS.json",
+    "sha256": "d3f5936b4a80f4a31980979578c4a3048ad5bfaba8ac77f3fc12186cd7faee4e",
+    "status": "read-reviewed-full",
+    "role": "External38 pins; no adoption",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261007-v5.json",
+    "sha256": "1cc6be6a7a5428c4914c0ee82407d30f506c8d2e57338a7f41ccab7043b03041",
+    "status": "read-reviewed-full",
+    "role": "Canonical incremental cleanup/6444 hashes/research preserved",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-TESTS-CORRECTION-v1.json",
+    "sha256": "2e455e4fc019036a6e2b528d4aa042b15e3d759ed461c34fa0bd757d63d56f65",
+    "status": "read-reviewed-full",
+    "role": "Tests-only owning declaration borrow and checked ordinal conversion after real compile failure",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-TESTS-SUCCESSOR-v1.json",
+    "sha256": "55968095856785f83b8233614d00eafd5d66202882acdf17bc92913163beaa0d",
+    "status": "read-reviewed-full",
+    "role": "Tests-only actual Report rejection and independent Finish/session DATA sensitivity; production identical",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-HANDOFF-v1.json",
+    "sha256": "c2b90aefa0310441f5b103493796933280089e627c99dd90bddc43265de1330b",
+    "status": "read-reviewed-full",
+    "role": "Pre-Astra source-root/native one-use/claim/failure-resource review; exact question OPEN, no chosen new contract",
+    "at": "2026-10-06T18:22:20.876967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-docs-v1/RESULT.json",
+    "sha256": "63243a68b5543de8323f5d305e2076e2462a8f9d8dd72498f2aeb1ef104e1cfe",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T18:26:55.491480+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T174334Z.json",
+    "sha256": "8613c7ae4ae855bfb94ce47eeca638dfb0cfad5d22b9991b0cb8b816ebff4f17",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T18:26:55.491480+00:00"
   }
 ]

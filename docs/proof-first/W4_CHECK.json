@@ -64197,5 +64197,49 @@
     "stop_condition_observed": false,
     "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
     "goal": "Same active W4-D"
+  },
+  "d_original_body_reader_20261007": {
+    "at": "2026-10-06T18:22:20.876967+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-READER-CHECKPOINT-20261007-v1.json",
+    "receipt_sha256": "4935c9419c445add5453e8b0e30659f3071d6ce331844eaef14c53f9bce953cc",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3",
+    "source_pins_sha256": "d3f5936b4a80f4a31980979578c4a3048ad5bfaba8ac77f3fc12186cd7faee4e",
+    "new": 7,
+    "controls": 16,
+    "normal": 2,
+    "default_old_codec": 13,
+    "no_seams": 7,
+    "full": 1333,
+    "runfamilies": 22,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Authentic original-owner control reader, no source-origin/native-I3 Body permission",
+    "remaining": "Before any original Body, OPEN: private original-source custody producer and exact joint source-origin/genuine optional native-I3 handoff; immutable M8 source_root guard, current M9 use, same full source/Core/arguments/activation/ordinal/request/frame, claim/consume/queue order and typed failure/resource retention. Existing C local alternative does not supply native budget admission. Neither bypass source_root nor replace native one-use permit with DATA. Actual used upper result/history/Finish, network reply/current SourceAck/full S-T-S/newactivation/all3 subsequent re-freeze and D integrated acceptance remain. No implementation contract selected, normative counterexample established, source permission minted or Canon adoption. Stop at this verified pre-Astra checkpoint under owner condition; same W4-D, no E/W5+/Plan250-I3-4/new goal/roadmap.",
+    "quota_stop_observed": false,
+    "stop": "Pre-Astra joint source/native-I3 review checkpoint after source/docs/Git",
+    "handoff": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-HANDOFF-v1.json",
+    "goal": "Same W4-D; owner conditional pause pending verified docs/Git"
+  },
+  "d_original_body_reader_docs_20261007": {
+    "at": "2026-10-06T18:26:55.491480+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reader-docs-v1/RESULT.json",
+    "receipt_sha256": "63243a68b5543de8323f5d305e2076e2462a8f9d8dd72498f2aeb1ef104e1cfe",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T174334Z.json",
+    "quota_sha256": "8613c7ae4ae855bfb94ce47eeca638dfb0cfad5d22b9991b0cb8b816ebff4f17",
+    "quota": {
+      "captured": "2026-10-06T17:43:34.562809+00:00",
+      "telemetry_timestamp": "2026-10-06T17:43:31.153Z",
+      "weekly_used_percent": 64.0,
+      "weekly_remaining_percent": 36.0,
+      "next_check_no_earlier_than": "2026-10-06T18:43:34.562809+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "stop_condition_observed": true,
+    "stop_reason": "Verified pre-Astra joint-handoff checkpoint",
+    "quota_stop_observed": false,
+    "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
+    "goal": "Same W4-D, owner conditional pause after authorized Git"
   }
 }
