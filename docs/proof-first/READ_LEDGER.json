@@ -53515,5 +53515,250 @@
     "status": "verified-preserved-metadata-only-failure",
     "role": "Wrong header-label assertion and English timestamp omission; actual docs exit0/source1222 unchanged, successor actual date/focused checks",
     "at": "2026-10-06T03:57:07.704665+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-red-check-v2/RESULT.json",
+    "sha256": "ae84043f41d811a4a97ed61ece1ce61877b144accb6a5f41f230834ee2d35dab",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-red-check-v3/RESULT.json",
+    "sha256": "d58999c3e292af7fba011b0fa5b182c8f0987669f1e873578f9b2f75f7012960",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-green-check-v1/RESULT.json",
+    "sha256": "bacdc2e3cea913d7975332341b7dce9750a4173afb71cafa8d4f2e9ecf324aa8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-green-check-v2/RESULT.json",
+    "sha256": "5670995c5ebeeceff080e6fbf1d413eba94d64379b81618f6b4738a378e50199",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-guard-red-check-v1/RESULT.json",
+    "sha256": "7569159ea3ebd3422c9ba967547ba97a40abf1c199767455bd84efd20bcf986c",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-guard-red-check-v2/RESULT.json",
+    "sha256": "a5d91a89e3ec33ea47c84c848dbb54c1cff67deb0c106f141438bda03211ff45",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-green-check-v3/RESULT.json",
+    "sha256": "e42c5a0a06739cc466c4e717e5b3d56597c1aa8a7b29ac13e07f189347cfae45",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-green-check-v4/RESULT.json",
+    "sha256": "0adc78c4ccf8a584105a92a06fc9c0836df3aba226e5d5bfefa8c3f0e16e1add",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-caller-check-v1/RESULT.json",
+    "sha256": "afd9c2318a84dc64a87a9ff059ed9a1573c7c6089d94c9327b97f64f23ec0ad8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-reserve-mutant-check-v1/RESULT.json",
+    "sha256": "aa269ebc40fd5f71db56aa19425d559dd43d2d3d79ae04646f3be5b7ce10dd62",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-diagnostic-mutant-check-v1/RESULT.json",
+    "sha256": "fb3e8350d7e3c1447097b589bf735bc888b7ac958b7232d8ece984456f52cb4f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-qualified-mutant-check-v1/RESULT.json",
+    "sha256": "6d461e2766576115a31e263f4fa2a70cd998bbb09c26da7d6b1b6badc7f77ca8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-terminal-mutant-check-v1/RESULT.json",
+    "sha256": "1565daab8889867253c1eebf9d0018b75af730069623baaad934af9f9dfdc419",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-binding-mutant-check-v1/RESULT.json",
+    "sha256": "32d0987c90748c2abbc092f4ca19caf2407b09f5b1e74901671763804d7253d3",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-early-mutant-check-v1/RESULT.json",
+    "sha256": "631bb506c7ed7c997cdb257a75f44180d44cb60d8e8dd4671675aa18fa0876c3",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-kind-mutant-check-v1/RESULT.json",
+    "sha256": "8645cc1b241c094616d06cb91c19f68316525211fe5c57e1c206a9a0f9d1af4f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-legacy-mutant-check-v1/RESULT.json",
+    "sha256": "ee0ac923fdacf29439030043a539acf35c44a5403e0a65e479cbd58ef8d4a397",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-guardcopy-mutant-check-v1/RESULT.json",
+    "sha256": "27651c926c3b905c6ddd09028c494a1bf3ee4ff3d016b8ca9c7e4a6f59fd4aa2",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-guardlate-mutant-check-v1/RESULT.json",
+    "sha256": "5faaba9994ad72486ccb81c8c431943d1f2ab34cfba7b03108544e2b9de3011d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-late-mutant-check-v1/RESULT.json",
+    "sha256": "8fae989ed08bfa9f7a4acc2fecd8d9befc8dcd76ea4bc27f382bc2bc838c0549",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-combined-check-v1/RESULT.json",
+    "sha256": "36f219762035ebeb005d68b7f9b9092c00dd45b1f1a12bf2a2a9ad4aee97965e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual diagnostic/quarantine/guard RED/focused12/oldreply9+trace11+caller17/11compiled controls/default12/no-seams12/full1234/restored38; compile-only2 and green-v4 emptyfilter separately classified",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-COMPONENT-PLAN-v1.json",
+    "sha256": "70551db3e7b64c871e58e8a321e4032eae031af6fb1ce3467bae59faf02a51b7",
+    "status": "read-reviewed-full",
+    "role": "Actual failure used-backing consumer/falsifier/non-effects",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-GUARD-SUPPLEMENT-v1.json",
+    "sha256": "e3b60073654748c4eb14a05615db293e30270a9208e9d07ceed6b2e89acf37d8",
+    "status": "read-reviewed-full",
+    "role": "Actual successful-lower guard refusal resource added before protected use",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-MUTANTS-v1.json",
+    "sha256": "d1298b4099283eaa9185ff40e5296f02ab3bff223157c756b966f6103fd14838",
+    "status": "read-reviewed-full",
+    "role": "Eleven compiled timing/copy/selection/legacy controls",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-diagnostic-backing-green-v4/ACTUAL_NATIVE_DIAGNOSTIC_BACKING_FIELD_INVENTORY.json",
+    "sha256": "892dd8177d635350c27bd7ccc133f17e3743042ce0d512592c10dd0da517a9ad",
+    "status": "read-reviewed-full",
+    "role": "Failure DATA3 fields plus existing report10 guard field",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v16.json",
+    "sha256": "89d8c7377c91ab3591b3882a5bd751f35fbdab73146149060c0c5a64797383d5",
+    "status": "read-reviewed-full",
+    "role": "Actual native SYS4 resources and remaining whole upper/source gates",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-CHECKPOINT-20261006-v1.json",
+    "sha256": "d2b24a6789ac4121a03c7d81a9caa7e28e83ef9924b03fee1732fdd71d0592fe",
+    "status": "read-reviewed-full",
+    "role": "Actual samecut evidence summary",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-SHARED-PRODUCER-REVIEW-v1.json",
+    "sha256": "2d5c979e4b094d5446d88640933fc84fb28b5d4ca11ed4335d6c509e273b9db2",
+    "status": "read-reviewed-full",
+    "role": "Exact old raw quarantine/qualification/outbox equality and scalar bound equivalence",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-RESOURCES-20261006-v1.json",
+    "sha256": "19ddaecb5008729066b12d6180d81ef2c7b7237e2c3d679c3864e19f77ddc3f6",
+    "status": "read-reviewed-full",
+    "role": "After actual full exit/restored baseline resource audit",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-CRASH-RECOVERY-20261006-v1.json",
+    "sha256": "2842d109f9a488eeca6f03f31114e1aaa536b08a12a031adcfe99dde0a897f95",
+    "status": "read-reviewed-full",
+    "role": "Owner-confirmed crash, exit unobserved/no test-start; exact unchanged own38 restored without user edit loss",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-red-check-v1/RECOVERED-RESTORED-v1.json",
+    "sha256": "efc056442319591a21dadef0a305fbc7e719831c27382b73918f53941cf47007",
+    "status": "read-reviewed-full",
+    "role": "Actual verified manual38 restoration, not invented original command exit",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v7.json",
+    "sha256": "a9043feb3844345fd069747d177880a62ac3fc090d047f96d1a75e4ab7888527",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes retained",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v8.json",
+    "sha256": "520538a675b5cca977c28454b3d7b317341ebbb5ba1841b1acd2dbab75cdfe5d",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes retained",
+    "at": "2026-10-06T07:17:13.152932+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-docs-v1/RESULT.json",
+    "sha256": "1a4de48a2fdaf48b400c0029019970a8ccb516a2b6ae5bd0c70a6163bdc8a537",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful exact11/restored38; narrow finalmetadata checked separately",
+    "at": "2026-10-06T07:22:50.687528+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T063742Z.json",
+    "sha256": "801a081494a44ee64a0553aacccc96834e26f7f5ec504b2051d50713bfe52379",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
+    "at": "2026-10-06T07:22:50.687528+00:00"
   }
 ]

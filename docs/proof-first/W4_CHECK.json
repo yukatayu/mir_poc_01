@@ -63476,5 +63476,48 @@
     },
     "scope": "Full make docs exact11 inputs after restored38; narrow finalmetadata suffix focused separately, no whole-source/generalproof/alpha acceptance",
     "goal": "Same owner-resumed W4-D, no Dacceptance/E/pause"
+  },
+  "d_actual_native_diagnostic_backing_20261006": {
+    "at": "2026-10-06T07:17:13.152932+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-CHECKPOINT-20261006-v1.json",
+    "receipt_sha256": "d2b24a6789ac4121a03c7d81a9caa7e28e83ef9924b03fee1732fdd71d0592fe",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-diagnostic-backing-green-v4",
+    "source_pins_sha256": "f9d9b50cbe3fce8ba9699705d443dc3d25a8a7711789e47f18739b919cefee58",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v16.json",
+    "focused": 12,
+    "existing_reply": 9,
+    "existing_trace": 11,
+    "existing_caller": 17,
+    "omissions": 11,
+    "compile_only": 2,
+    "interrupted": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-DIAGNOSTIC-BACKING-CRASH-RECOVERY-20261006-v1.json",
+    "normal": 2,
+    "default": 12,
+    "without_test_seams": 12,
+    "full": 1234,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual native SYS4 diagnostic/quarantine/guard used backing prerequisite, protected originalBody0",
+    "docs": "pending exact11 full make docs; finalmetadata/Git separately",
+    "goal": "Same active W4-D"
+  },
+  "d_actual_native_diagnostic_backing_docs_20261006": {
+    "at": "2026-10-06T07:22:50.687528+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-diagnostic-backing-docs-v1/RESULT.json",
+    "receipt_sha256": "1a4de48a2fdaf48b400c0029019970a8ccb516a2b6ae5bd0c70a6163bdc8a537",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T063742Z.json",
+    "quota_sha256": "801a081494a44ee64a0553aacccc96834e26f7f5ec504b2051d50713bfe52379",
+    "quota": {
+      "captured": "2026-10-06T06:37:42.653951+00:00",
+      "telemetry_timestamp": "2026-10-06T06:37:19.581Z",
+      "weekly_used_percent": 59.0,
+      "weekly_remaining_percent": 41.0,
+      "next_check_no_earlier_than": "2026-10-06T07:37:42.653951+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "scope": "Full make docs exact11 inputs after restored38; narrow finalmetadata suffix focused separately, no whole-source/generalproof/alpha acceptance",
+    "goal": "Same owner-resumed W4-D, no Dacceptance/E/pause"
   }
 }
