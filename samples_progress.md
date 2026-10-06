@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-06 23:52 JST
+Last updated: 2026-10-07 00:29 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -35,7 +35,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-authority-use-green-v1です。owner request／queue trace／designated publicationが持つ発行済み権限の参照名を、旧DTOのコピーを作らず借用します。旧owner4項目とdesignated5項目、evaluator／consumerの種別と場所、任意項目のNone／空文字、実native結果とfabric全体の旧bindingを維持します。永続フィールドと権限・custodyの追加は0です。新規5件・検出対照14件・通常ビルド2種・default既存13件・QUICでtest-seamsなし5件・全1309件が通り、38path復元済みです。借用中の元データ書き換えはE0506で2件拒否されています。元sourceBodyは0で、他のmutable runtime記録生成、実Body／履歴／完了の保持領域、source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-i3-condition-green-v1です。実native AwaitingのissuanceとReservedのpermitで、admission-budget条件を旧DTOのコピーを作らず借用します。条件5項目・span7項目・source位置6項目と、許可全体の旧bindingを維持します。新たな永続フィールドと権限・custodyの追加は0で、借用後の実native handoffも各1回成功しました。新規3件・検出対照10件・既存Source Resolve13件・pending budget3件・通常ビルド2種・default13件・test-seamsなし3件・全1312件が通り、38path復元済みです。借用中の条件書き換えはE0506で1件拒否されています。条件のcaptureはnative実行前の回数0で、元sourceBodyも0です。M9 generation全体の旧DTO、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|

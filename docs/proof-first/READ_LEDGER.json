@@ -55979,5 +55979,173 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T14:57:43.040791+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-red-check-v1/RESULT.json",
+    "sha256": "e1a77492fd7ad10b65b1dfdfda131be03e3f2607c47bf12ed9e534fc335e0db6",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-green-check-v1/RESULT.json",
+    "sha256": "a560cb757087e1bd0fbd35fea6bbf000cd4ca201e7cb82cda49e0c16b757d2df",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-late-owned-check-v1/RESULT.json",
+    "sha256": "db57d2d4b6bde9e994c6e620f4a9c0fe38a9cb4930e44532c549fc1041807c6f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-budget_ticks-check-v1/RESULT.json",
+    "sha256": "877d88480648f10f298b6c2e8e9020ba7d0e98d41f25304b456b5ef3c16eba7c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-owner_locus-check-v1/RESULT.json",
+    "sha256": "0d992328a45ade124c85316fc3c515aa007db682d1f3405f513364bae44eed00",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-clock_domain-check-v1/RESULT.json",
+    "sha256": "e984578138e04ad5706283a1eef948738dbdfc913016adf285191eaaa51d56d1",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-source_span-check-v1/RESULT.json",
+    "sha256": "b95b7dba579bdd6f2095ffb62637d1efb5ef0a89ad1aa380561787d7bb7087fa",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-source_ref-check-v1/RESULT.json",
+    "sha256": "45fcdfea551c6b987bb82f1e950aacae242c09d4947375966dbb1e958f9ad68d",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-span-byte-start-check-v1/RESULT.json",
+    "sha256": "48665d769dbd69e72e406b4e67899559c8b14b3b4a93095491dfd4a7365d5af2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-span-byte-end-check-v1/RESULT.json",
+    "sha256": "2db4b74bbd20114c3926fd3a813da6e3b58ae212944c6b323f8899c8c0671a16",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-source-ref-start-column-check-v1/RESULT.json",
+    "sha256": "531838e956a2b3edb02eb63c18233b53293872e7b34ed480301c83948b67a5a9",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-mutant-stale-ticks-check-v1/RESULT.json",
+    "sha256": "0458e8adaea4644b85fa5fe26e8856286d34d55792f3362397de2be587106795",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-alias-refusal-check-v1/RESULT.json",
+    "sha256": "9755e22b843077034dc81fbbc5f3931b35de2160220e33f27f61741866fe3278",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-combined-check-v1/RESULT.json",
+    "sha256": "3c850e981e538b51030e01bf69ca782d6fe4507d5228e48bae75eb695511a8b2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual native I3 condition DATA: compiled RED/green/10controls/expected alias refusal/normal-default-no-seams-full; no sourceBody/E2E acceptance",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-I3-CONDITION-COMPONENT-PLAN-v1.json",
+    "sha256": "4fbd9a6c21973da3c4fa1ebe30c3d52e875b89a8e478bc8b6d8d0ddc9a5a6847",
+    "status": "read-reviewed-full",
+    "role": "Before-use actual held native I3 condition DATA consumer",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-I3-CONDITION-MUTANTS-v1.json",
+    "sha256": "64a45d4c5c6710e8aee5cd0720c67776a48a25408603b69142883168c8c0b77f",
+    "status": "read-reviewed-full",
+    "role": "Ten actual compiled/caught checked-condition field/late/previous-ticks controls",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-I3-CONDITION-ALIAS-REFUSAL-v1.json",
+    "sha256": "6a200ddae5f7b504a127a1bf277f09404348789b45ed9654f68127b791ba9bf3",
+    "status": "read-reviewed-full",
+    "role": "Expected E0506 exactly1; checked condition view excludes original mutable alias",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-I3-CONDITION-RESOURCES-v1.json",
+    "sha256": "5cf27f67068b2b55b735ec6565ec0249abd39740b2adce969e1f559a3b943911",
+    "status": "read-reviewed-full",
+    "role": "Actual post-full resource audit",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v30.json",
+    "sha256": "f8abcfebd17975f2cd1310645e3b80364e60f067fae38cbb6d96f7bf43bac3db",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted source and remaining original Body/joint gates",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-I3-CONDITION-CHECKPOINT-20261007-v1.json",
+    "sha256": "b2a566401098d2c80efc953e8615ce7c81e7d067630a9d60d42ae244962dfd8a",
+    "status": "read-reviewed-full",
+    "role": "Actual14 runfamilies/new3/full1312/restored38 checkpoint",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/actual-i3-condition-green-v1/SOURCE_PINS.json",
+    "sha256": "712fe157a0c6bb52411b3a47158cbfb5c1e52d92e1dee2aeb636643dcb3baa38",
+    "status": "read-reviewed-full",
+    "role": "Exact external38 source pins; no production adoption",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261007-v1.json",
+    "sha256": "8360168602c58d7e1c6b0af32404ffe21cd4f64818893a391a0e5278c2397c61",
+    "status": "read-reviewed-full",
+    "role": "Canonical incremental cleanup/6444 hashes/all experiments preserved",
+    "at": "2026-10-06T15:29:21.223697+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-i3-condition-docs-v1/RESULT.json",
+    "sha256": "a631ce71c0be85db5206ec22db421d7ebf7a96a419b08d3759c7700876fed2ba",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T15:34:22.084832+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T144027Z.json",
+    "sha256": "e128681142a7fcd2601f0e47d60aff89411118e20b9a67dd6c82659eb66ecd5e",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T15:34:22.084832+00:00"
   }
 ]

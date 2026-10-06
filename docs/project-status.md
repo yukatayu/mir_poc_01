@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-06 23:52 JST
+最終更新: 2026-10-07 00:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,7 +59,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-authority-use-green-v1です。owner request／queue trace／designated publicationが持つ発行済み権限の参照名を、旧DTOのコピーを作らず借用します。旧owner4項目とdesignated5項目、evaluator／consumerの種別と場所、任意項目のNone／空文字、実native結果とfabric全体の旧bindingを維持します。永続フィールドと権限・custodyの追加は0です。新規5件・検出対照14件・通常ビルド2種・default既存13件・QUICでtest-seamsなし5件・全1309件が通り、38path復元済みです。借用中の元データ書き換えはE0506で2件拒否されています。元sourceBodyは0で、他のmutable runtime記録生成、実Body／履歴／完了の保持領域、source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-i3-condition-green-v1です。実native AwaitingのissuanceとReservedのpermitで、admission-budget条件を旧DTOのコピーを作らず借用します。条件5項目・span7項目・source位置6項目と、許可全体の旧bindingを維持します。新たな永続フィールドと権限・custodyの追加は0で、借用後の実native handoffも各1回成功しました。新規3件・検出対照10件・既存Source Resolve13件・pending budget3件・通常ビルド2種・default13件・test-seamsなし3件・全1312件が通り、38path復元済みです。借用中の条件書き換えはE0506で1件拒否されています。条件のcaptureはnative実行前の回数0で、元sourceBodyも0です。M9 generation全体の旧DTO、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
@@ -177,4 +177,4 @@ active program/roadmap、official lifecycle、major blocker、accepted cut、evi
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを
 general proofやpublic product completionとして数えない。
 
-2026-10-06の整理対象は再生成可能なtarget/debug/incrementalのみ。v1～v32のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。研究source・実験・証明・ログ・receipt保持。重いbuildはincremental/debug info0。Report2614参照。
+2026-10-07の整理対象は再生成可能なtarget/debug/incrementalのみ。20261006-v1～v32及び20261007-v1のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。研究source・実験・証明・ログ・receipt保持。重いbuildはincremental/debug info0。Report2614参照。

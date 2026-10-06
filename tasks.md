@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 23:52 JST
+最終更新: 2026-10-07 00:29 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-authority-use-green-v1です。owner request／queue trace／designated publicationが持つ発行済み権限の参照名を、旧DTOのコピーを作らず借用します。旧owner4項目とdesignated5項目、evaluator／consumerの種別と場所、任意項目のNone／空文字、実native結果とfabric全体の旧bindingを維持します。永続フィールドと権限・custodyの追加は0です。新規5件・検出対照14件・通常ビルド2種・default既存13件・QUICでtest-seamsなし5件・全1309件が通り、38path復元済みです。借用中の元データ書き換えはE0506で2件拒否されています。元sourceBodyは0で、他のmutable runtime記録生成、実Body／履歴／完了の保持領域、source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-i3-condition-green-v1です。実native AwaitingのissuanceとReservedのpermitで、admission-budget条件を旧DTOのコピーを作らず借用します。条件5項目・span7項目・source位置6項目と、許可全体の旧bindingを維持します。新たな永続フィールドと権限・custodyの追加は0で、借用後の実native handoffも各1回成功しました。新規3件・検出対照10件・既存Source Resolve13件・pending budget3件・通常ビルド2種・default13件・test-seamsなし3件・全1312件が通り、38path復元済みです。借用中の条件書き換えはE0506で1件拒否されています。条件のcaptureはnative実行前の回数0で、元sourceBodyも0です。M9 generation全体の旧DTO、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | LAB actual-authority-use-green-v1: actual issued-reference owner4/designated5field DATA; new5/controls14/normal2/default codec13/no-seams5/full1309/restored38. SourceBody0; mutable suppliers/upper Body resources/source-origin+optional nativeI3 remain; current actual authority-use full make docs v1 passed; final metadata focused separately | 着手可能: remaining resources/joint handoff evidence before original Body; Astra material contract or D integrated acceptance |
+| D source/I3/result/network / Macro3/6 | LAB actual-i3-condition-green-v1: actual native I3 condition5field DATA; new3/controls10/normal2/default codec13/no-seams3/full1312/restored38. SourceBody0; mutable suppliers/upper Body resources/source-origin+optional nativeI3 remain; current actual i3-condition full make docs v1 passed; final metadata focused separately | 着手可能: remaining resources/joint handoff evidence before original Body; Astra material contract or D integrated acceptance |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,7 +69,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata, full program, paired admitted and issued-reference DATA components, not calendar
+These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata, full program, paired admitted, issued-reference and native I3 condition DATA components, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current LAB external reference actual-authority-use-green-v1/full1309, three actual issued-reference DATA supplier evidence; mutable suppliers/owner Body/result/history/control completion and source-origin+optional nativeI3 remain. D20–40 rough active hours low confidence unchanged.
+Current LAB external reference actual-i3-condition-green-v1/full1312, actual native I3 condition DATA evidence; mutable suppliers/owner Body/result/history/control completion and source-origin+optional nativeI3 remain. D20–40 rough active hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -111,7 +111,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 ## non-promoted references
 
-Current LAB external/unadopted38path actual-authority-use-green-v1/notes-v29: three current issued-reference DATA suppliers, old owner4/designated5fields and complete raw/fabric/native-publication binding parity. New5/14compiled caught controls/normal2/default codec13/no-seams5/full1309/restored38;18 actual run families. Expected E0506 two proves borrowed suppliers exclude original mutable alias. Other mutable suppliers/actual SourceBody/history/completion/source-origin+optional nativeI3/currentSourceAck/refreeze remain; originalBody0. Current actual authority-use full make docs v1 passed; final metadata focused separately.
+Current LAB external/unadopted38path actual-i3-condition-green-v1/notes-v30: complete old5field checked I3 condition/span7/ref6/current values and complete native Awaiting issuance/Reserved permit binding at Body0. Actual native handoff after borrowing succeeds once. New3/10compiled caught controls/Source Resolve13/pending budget3/normal2/default codec13/no-seams3/full1312/restored38;14 actual run families; E0506 one. M9 generation DTO/upper SourceBody-history-completion/source-origin+optional nativeI3/currentAck/refreeze remain OPEN; originalBody0. Current actual i3-condition full make docs v1 passed; final metadata focused separately.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
