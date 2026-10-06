@@ -1,6 +1,6 @@
 # W4-D — owner-resumed2026-10-05 / stop threshold30
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのoriginal-body-control-green-v4です。実sourceのIssue／Readyと対象owner・文の順番・全3processの現在のactivationを照合し、親のBody許可とその記録を送信前に保持する経路を検証しました。予算付き1文は実Admit／Resolveの記録も照合します。新規8件・欠落対照7件・通常ビルド2種・既存codec13件・QUICでtest-seamsなし8件・全1281件が通り、38path復元済みです。これは許可発行までの証拠で、元sourceBodyは0です。実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、残る下位処理後の記録生成資源、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-source-ref-green-v2です。実nativeの下位処理後にパスをコピーしていたSourceRefの直接生成7か所を、元データを借用する経路に置き換えました。既存の6項目・JSONの順序・任意項目の有無・実状態全体のbindingを維持します。新規5件・欠落対照6件・通常ビルド2種・default既存codec13件（新規filterは対象外0件）・QUICでtest-seamsなし5件・全1286件が通り、38path復元済みです。元sourceBodyは0です。残るprogram／identity／admitted instance／frontier・mutable runtimeの記録生成資源、実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 Same W4 goal, sole main/no subagents. Canon/Plan250/I3-4 remain separately paused. No new roadmap or adoption. Exact inputs and jobs: RESUME.md/W4_CHECK.json.
 
