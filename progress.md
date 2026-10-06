@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-06 16:51 JST
+最終更新: 2026-10-06 17:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -75,7 +75,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-finalizer-backing-green-v2で、SYS5返信の要求・連結要求・cohort文字列と、実行／書き込み記録の表と文字列をRHS実行前に準備しました。実SYS4戻り値を先に保持して借り、実結果から同じ領域へ記録を書き込み、実キューの複製できないcarrierを返信へ移動します。実返信3領域・実記録4領域の保持、連続2回の実成功と既存記録保持を検査しました。失敗や中断では将来の記録を公開せず、領域不足で拒否した要求も再利用しません。新規10件・診断12件・接続17件・8変更対照、標準10件・追加テスト機能なし10件・通常2build・同cut全1244件、38path復元を確認しました。返信取出し検査の経路／source情報のコピーと、codec・全activation領域の事前準備は残件です。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-borrowed-outbound-validation-green-v1で、実返信の取出し検査が起動済み実programの経路キーとsource情報を借りるようにし、RHS実行後のコピーを除きました。元の全ての判定と型付き拒否、実carrierの取出し順を維持します。実検査が起動時から保持する4領域を同じまま使うことを確認しました。通常受信・デコード後受信・実I3予約の3経路、15入力変更・経路表の欠落／不一致、8変更対照、SYS5既存10件・接続17件が通りました。標準3件・追加テスト機能なし3件・通常2build・同cut全1247件、38path復元を確認しました。新たな実装上の状態や権限型は追加していません。codecと全activation領域の事前準備は残件です。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -682,3 +682,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-06 16:17 JST — SYS4の実診断・隔離記録と応答拒否の領域を本体前に準備。実失敗照合後だけ移動し、成功／戻りなしでは非公開。新規12/応答9/トレース11/接続17・11変更対照・全1234件・38path復元。クラッシュ中断は別保存、元sourceBody0、SYS5/codec等は残件。Report2614。
 
 - 2026-10-06 16:51 JST — SYS5の実返信3領域・実記録4領域を本体前に準備し実結果から同じ領域へ記入。実SYS4戻り値を保持後に借りる。新規10/診断12/接続17・8変更対照・全1244件・38path復元。経路/source取出し検査とcodec等は残件、元sourceBody0。Report2614。
+
+- 2026-10-06 17:21 JST — 実返信取出しで既存programの経路キー/source情報4領域を借り、本体後のコピーを除去。3経路・15入力変更＋経路欠落／不一致・8変更対照・全1247件・38path復元。codec等は残件、元sourceBody0。Report2614。

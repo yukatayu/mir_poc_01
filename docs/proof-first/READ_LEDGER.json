@@ -53935,5 +53935,159 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
     "at": "2026-10-06T07:57:26.327337+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-red-check-v1/RESULT.json",
+    "sha256": "eb54cf70a2f783b24d346988714322bbcc41b0a9f17d6fba98765420298a5f7c",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-green-check-v1/RESULT.json",
+    "sha256": "ee3e2239fec73dac8850a8549c3fead3e5d650c21f29b07fce04fe7df90cca19",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-source-mutant-check-v1/RESULT.json",
+    "sha256": "bfd3e790442e4077f9d6ec394d1e6f38540d94b896ad5cd976e0a9606ec58ccf",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-core-mutant-check-v1/RESULT.json",
+    "sha256": "ebc34e85d77262be98dc8bc46222ded2c3ddbf13e1fd1a3c7821db8f1e97d59a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-contract-mutant-check-v1/RESULT.json",
+    "sha256": "7424b5f9c196609bfcf260aff9083b0eaa6a75b675d17f24c13902a1618f60f7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-route-mutant-check-v1/RESULT.json",
+    "sha256": "a502c5fc4ac13c014208644fdb7696e832b3839a1c39070d090fbd890f0b4a8b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-identifier-mutant-check-v1/RESULT.json",
+    "sha256": "1fe01822806e0b99f4f62d1ea6488997d6e202d9a6ac26c1487a71ec4cfb62a7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-missing-mutant-check-v1/RESULT.json",
+    "sha256": "7074fc658877d26716c34d6b749e16ea0d04392b5e4518df543b318e110235e7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-legacy-mutant-check-v1/RESULT.json",
+    "sha256": "f17e2e28d5abeadbff4344777260411f14b5b20f95b9bc48f88d657f430bcc9f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-copy-mutant-check-v1/RESULT.json",
+    "sha256": "bc501c2d1f1ef7afaa2bd21b671e84c8aa0083e8443d8f792e23ca0f9c3b799b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-combined-check-v1/RESULT.json",
+    "sha256": "e408add0cca1774d9c5b46f8a3a288aeffc5c65b5aa402e9dcce7706ccd2ff96",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual borrowed validation RED/focused3/old SYS5 backing10/caller17/15header+2index/8compiled changes/normal2/default3/no-seams3/full1247/restored38",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-BORROWED-OUTBOUND-VALIDATION-COMPONENT-PLAN-v1.json",
+    "sha256": "80c3822f6b94d7e1cf56145625521a4bf5d87ab1eba5f921f06e8b10dd94e373",
+    "status": "read-reviewed-full",
+    "role": "Same fixed source/I3 direct consumer/exact predicate/used existing resource falsifiers",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-BORROWED-OUTBOUND-VALIDATION-MUTANTS-v1.json",
+    "sha256": "8a4aa88cc1d9ef9cf803d1c08bc172690a98af0636cccaf9107840f7e82c219b",
+    "status": "read-reviewed-full",
+    "role": "Eight compiled genuine predicate/copy/legacy controls",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-borrowed-outbound-validation-green-v1/ACTUAL_NATIVE_BORROWED_OUTBOUND_VALIDATION_FIELD_INVENTORY.json",
+    "sha256": "e9cda762b47feddba79a53dcac93dc483f3511c42637c6137c131c41f07a7836",
+    "status": "read-reviewed-full",
+    "role": "No new production fields; four existing used program allocations",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v18.json",
+    "sha256": "2f7a0ff23323b727f9208f6803dd8c35509f2e40a8299e70c385085ae12dc7b5",
+    "status": "read-reviewed-full",
+    "role": "Actual native borrowed validation and remaining codec/wholeactivation/source-I3 gates",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-BORROWED-OUTBOUND-VALIDATION-CHECKPOINT-20261006-v1.json",
+    "sha256": "bf56437c61433faf0378c5b89212d835e05d961f2002194945e3c320f4da2d6f",
+    "status": "read-reviewed-full",
+    "role": "Exact final source scoped evidence summary",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-BORROWED-OUTBOUND-VALIDATION-SHARED-PRODUCER-REVIEW-v1.json",
+    "sha256": "5d0609910f485596cefb0b890bc46a26c1489f9507ee07086249aab0c4b49335",
+    "status": "read-reviewed-full",
+    "role": "Complete Eq/get/span/path/contract guard equivalence, actual four pointers, no late copies",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-BORROWED-OUTBOUND-VALIDATION-RESOURCES-20261006-v1.json",
+    "sha256": "3046975c93839e3283d49ae7208958adc6dd80e99d2d655c1852b92c759f81ea",
+    "status": "read-reviewed-full",
+    "role": "Actual full exit/restored38 resource audit",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v11.json",
+    "sha256": "ea9b7a0e79322db2df27079190ee577b32a91ec8f24e66918f33d41313ff8923",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes preserved",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v12.json",
+    "sha256": "6f41a65315021e32d6715d7622440b3c486a38f39efce95e803f2290783a16a1",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes preserved",
+    "at": "2026-10-06T08:21:28.325776+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-borrowed-outbound-validation-docs-v1/RESULT.json",
+    "sha256": "d95d472eaed08c4321b8a14ba336d855a046dc47a1b320972d3d54159f756cea",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful exact11/restored38; narrow finalmetadata checked separately",
+    "at": "2026-10-06T08:26:54.580036+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T073800Z.json",
+    "sha256": "51200419690aa3fbf21e2f4f626870bdbf9a019611d1344a4f5f9926ae02cf81",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
+    "at": "2026-10-06T08:26:54.580036+00:00"
   }
 ]
