@@ -1,6 +1,6 @@
 # W4-D — owner-resumed2026-10-05 / stop threshold30
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-owner-report-green-v3で、SYS4の実receipt、読み書き記録、storeの更新領域、step情報をRHS実行前に準備しました。実結果で値を埋め、準備済みの領域を移動して実応答まで引き継ぎます。実receiptがSYS5の実応答まで同じ領域で保持されること、実step・codec内容・store・全FabricTraceが従来経路と一致することを検査しました。領域不足ではRHSを呼ばず、取り出した要求と予約も再利用しません。新規8検査・既存接続17検査・既存トレース11検査・9変更対照、標準8件・追加テスト機能なし8件・通常2build・同cut全1213件、38path復元を確認しました。reply envelope・キュー・因果関係・診断と、SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-backing-green-v3で、SYS4の実応答envelope・識別子・キュー領域・因果関係をRHS実行前に準備しました。実結果が返った後に対応する要求と実カウンタを確認し、準備済みの領域を実応答へ移動します。予約や応答を先行公開せず、本体が戻らない場合も取り出した要求と予約を再利用しません。実キューの領域、ヘッダー・因果関係・stepの8領域、SYS5応答内のヘッダー5領域とreceipt3領域の保持を検査しました。新規9件・既存report8件・接続17件・10変更対照、標準9件・追加テスト機能なし9件・通常2build・同cut全1222件、38path復元を確認しました。失敗時の診断・隔離記録、SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 Same W4 goal, sole main/no subagents. Canon/Plan250/I3-4 remain separately paused. No new roadmap or adoption. Exact inputs and jobs: RESUME.md/W4_CHECK.json.
 

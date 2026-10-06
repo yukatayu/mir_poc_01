@@ -53319,5 +53319,201 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Fresh own weekly telemetry; below30 at verified checkpoint stop, no account/browser/Pro cap claim",
     "at": "2026-10-06T03:10:09.259190+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-red-check-v1/RESULT.json",
+    "sha256": "73e1618d7687001d95233f0e0dd51c1153df153a58a85184c2f06ade4beefe19",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-green-check-v1/RESULT.json",
+    "sha256": "c9c4ba13735f1675595f6878b51b20c0f0b60d8ec81081161fac8656331b008a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-green-check-v2/RESULT.json",
+    "sha256": "536ae641a23882ede1b48f0420ce576bed69083340e9173e34478402cdc755ef",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-green-check-v3/RESULT.json",
+    "sha256": "f4887cd6be13ece3f1567568044227510ba62d29177b4d8c3b41881afac09232",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-queue-mutant-check-v1/RESULT.json",
+    "sha256": "27ebf5b98824406be6ea026a61b3130f3bcf7dd271255afa8330155ec245927c",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-header-mutant-check-v1/RESULT.json",
+    "sha256": "341e7ee0fa69664e58f5e8e7c5853d8183724d699f5b5229c0c56f32a0ffecf1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-cause-mutant-check-v1/RESULT.json",
+    "sha256": "991a9c3605d518177be7b2c5076330519ba4224b3d9d5743b3ab9c66ee792a7b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-early-mutant-check-v1/RESULT.json",
+    "sha256": "254241b50354c6206589fcd10cf927c7eeb48c9b0fef9a73a0ba513e4ea76d2e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-counter-mutant-check-v1/RESULT.json",
+    "sha256": "63b1a07f6365cd33f045ede24d38a0e8da30e61143733ee673124c42d3be0c57",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-binding-mutant-check-v1/RESULT.json",
+    "sha256": "648922c7592f6946fbf07ff3d6b3fe548bd34fa976a22142dd7fbd61d5436ae9",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-label-mutant-check-v1/RESULT.json",
+    "sha256": "f000df8a273bf9ec59a9fb3cc9d00259384604b87d882862bd49e139c71db863",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-step-mutant-check-v1/RESULT.json",
+    "sha256": "0e3fef8c69798bf4f5b830c8f8f8ae2438f1e4834136ea6c67219af0da349483",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-legacy-mutant-check-v2/RESULT.json",
+    "sha256": "5df2a3f3d9e02de142040a927962835140f8ded6da8decb4e38c6e125629f21b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-late-mutant-check-v1/RESULT.json",
+    "sha256": "205ae6bda03312eb3436d60148e49b0d3f9219f2ab4d2bc90514b01533df3e27",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-legacy-mutant-check-v1/RESULT.json",
+    "sha256": "1acf2030d44b235c7bb78d90e163f0e900be4c0213d068bf7e0c2b688a3c960b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-combined-check-v1/RESULT.json",
+    "sha256": "5c426b50056f3e99662475797ced12e64921f570f3e5081145169800d9a1d38f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual reply backing RED1pass4fail/green9+old8+caller17/tencompiled semantic controls+legacy compile-only/normal2/default9/no-seams9/full1222/restored38",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-COMPONENT-PLAN-v1.json",
+    "sha256": "853b63b3f7172cab77a4f4109b6ee2d30f4223dc4615a64ebd016e2fd23e3e22",
+    "status": "read-reviewed-full",
+    "role": "Used actual queue/header/ID/cause consumer, falsifiers/non-effects",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-MUTANTS-v1.json",
+    "sha256": "cbf38cdf96f2f9bf73e36bc32aa95a6e69bc890bef1146ef16148107ee394f9a",
+    "status": "read-reviewed-full",
+    "role": "Ten compiled semantic controls; legacyv1 compile-only not semantic evidence",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-reply-backing-green-v3/ACTUAL_NATIVE_REPLY_BACKING_FIELD_INVENTORY.json",
+    "sha256": "81629299a4d6c6a53842be768033acc2017d6c09c8c5121fb2f4112a5736d2fa",
+    "status": "read-reviewed-full",
+    "role": "Nine transient report fields including three additions; actual used backing",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v15.json",
+    "sha256": "942bd025b7e7caeb9b5c3a8da2ae91c8dcc242f839d5e4f5108c1d53a975e9dd",
+    "status": "read-reviewed-full",
+    "role": "Actual native reply resource boundary and remaining gates",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-CHECKPOINT-20261006-v1.json",
+    "sha256": "b88476accecf7f4d86716a6d263ea91a0b414f4b43da5d06d64cc0efbc56f649",
+    "status": "read-reviewed-full",
+    "role": "Actual samecut evidence summary",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-SHARED-PRODUCER-REVIEW-v1.json",
+    "sha256": "ba5a40f04bc39358e8f38469f548cadd475b44be1035bda0584dbeb5485829aa",
+    "status": "read-reviewed-full",
+    "role": "Exact shared header and old report/queue tail equality plus genuine bounds review",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-RESOURCES-20261006-v1.json",
+    "sha256": "f022ffd2333b541d1fb4dda120bd54627f98716cbb589550f2b880ee37a00c3e",
+    "status": "read-reviewed-full",
+    "role": "After actual full exit/restoration resource audit",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v5.json",
+    "sha256": "297ac021fc2df0f7ba1cd199039a69212fe41370d40569273ac7c8242b6087b9",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/6444hash preservation",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v6.json",
+    "sha256": "f3dc0deefa2f3526f5d0a7eec7a24d5b19da030c5734eb27264773a8a856718d",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/6444hash preservation",
+    "at": "2026-10-06T03:50:20.325587+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-backing-docs-v1/RESULT.json",
+    "sha256": "4fe63788dc670b1bbeb1b30362d94db33da5a1b5e5211fac669806bdf958ae06",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful exact11/restored38; narrow finalmetadata checked separately",
+    "at": "2026-10-06T03:55:58.388207+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T025834Z.json",
+    "sha256": "89ab2888bc7c074f7bffaf89b4a4890c5226f7927bcfe2d20a2964dc2ad197c8",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
+    "at": "2026-10-06T03:55:58.388207+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-BACKING-FINAL-METADATA-ATTEMPT-v1.json",
+    "sha256": "1c7ea1c5d2825819ee903dcd11face8814237536aa6c0e04bea6b4ed170c19a4",
+    "status": "verified-preserved-metadata-only-failure",
+    "role": "Wrong header-label assertion and English timestamp omission; actual docs exit0/source1222 unchanged, successor actual date/focused checks",
+    "at": "2026-10-06T03:57:07.704665+00:00"
   }
 ]

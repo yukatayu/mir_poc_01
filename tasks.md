@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 12:03 JST
+最終更新: 2026-10-06 12:57 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-owner-report-green-v3で、SYS4の実receipt、読み書き記録、storeの更新領域、step情報をRHS実行前に準備しました。実結果で値を埋め、準備済みの領域を移動して実応答まで引き継ぎます。実receiptがSYS5の実応答まで同じ領域で保持されること、実step・codec内容・store・全FabricTraceが従来経路と一致することを検査しました。領域不足ではRHSを呼ばず、取り出した要求と予約も再利用しません。新規8検査・既存接続17検査・既存トレース11検査・9変更対照、標準8件・追加テスト機能なし8件・通常2build・同cut全1213件、38path復元を確認しました。reply envelope・キュー・因果関係・診断と、SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-backing-green-v3で、SYS4の実応答envelope・識別子・キュー領域・因果関係をRHS実行前に準備しました。実結果が返った後に対応する要求と実カウンタを確認し、準備済みの領域を実応答へ移動します。予約や応答を先行公開せず、本体が戻らない場合も取り出した要求と予約を再利用しません。実キューの領域、ヘッダー・因果関係・stepの8領域、SYS5応答内のヘッダー5領域とreceipt3領域の保持を検査しました。新規9件・既存report8件・接続17件・10変更対照、標準9件・追加テスト機能なし9件・通常2build・同cut全1222件、38path復元を確認しました。失敗時の診断・隔離記録、SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。外部未採用38path参照native-owner-re
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; prior native fabric trace full make docs v2 passed; final metadata focused separately; actual native SYS4 owner report used backing beforeBody8controls/9compiled mutations/full1213 passed; current native owner report full make docs v2 passed; final metadata focused separately; final metadata/authorized Git separately; remaining originalBody/actualreply-envelope-queue-cause-diagnostic+SYS5+codec+wholeactivation backing and same-event source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; prior native fabric trace full make docs v2 passed; final metadata focused separately; actual native SYS4 owner report used backing beforeBody8controls/9compiled mutations/full1213 passed; prior native owner report full make docs v2 passed; final metadata focused separately; actual native SYS4 reply envelope/ID/queue/causality backing9controls/10compiled mutations/full1222 passed; current native reply backing full make docs v1 passed; final metadata focused separately; finalmetadata/authorized Git separately; remaining originalBody/actualdiagnostic-quarantine+SYS5+codec+wholeactivation resources and same-event source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,13 +69,13 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after the samecutfull1213 report component, not calendar
+These are rough active-work hours after the samecutfull1222 reply component, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
 |---|---|
 | D remainder / Macro3/6 middle |20–40; actual upper resources, original source/I3/body/results and same events |
-| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual reply-envelope/queue/causality/diagnostic and SYS5 occurrence/message/codec/wholeactivation backing beforeBody; M8 core/facade, native callers, SYS5 counts/SYS4 reply IDs/nine trace views and actual receipt/store/step/FabricTrace backing passed |
+| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual diagnostic/quarantine and SYS5 occurrence/message/codec/wholeactivation backing beforeBody; M8 core/facade, native callers/counts/nine trace views/receipt/store/step/FabricTrace and actual reply envelope/IDs/queue/causality backing passed |
 | D original source + nativeI3 Body / Macro3/6 middle |4–8; full original/Core/allargs/ordinal/activation/request/frame/currentM9 and joint oneuse, no unguarded no-budget Admit |
 | D actual reply/source acknowledgment/S→T→S / Macro3/6 middle |4–8; actual transport/current source consumption/same events/wholeactivation |
 | D subsequent re-freeze + retention / Macro3/6 middle |2–4; later actual all3 held-state update; initial prepare/publish/activate passed |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current report component full1213/new8/existing17/trace11/9compiled mutations/normal2/default8/no-test-seams8/restored38 passed. Actual native SYS4 receipt/store/FabricTrace/step used backing is prepared beforeBody and retained in the genuine SYS5 reply. Upper envelope/queue/cause/diagnostic/SYS5/codec/allactivation and protected originalBody/source acknowledgment/refreeze remain. Exact full docs/final metadata/authorized Git are recorded separately.
+Current reply component full1222/new9/existingreport8/caller17/10compiled controls/normal2/default9/no-test-seams9/restored38 passed. Actual reply envelope/IDs/queue/causality backing retained after true lower success. Diagnostic/quarantine/SYS5/codec/allactivation/originalBody/source acknowledgment/refreeze remain. Full docs/finalmetadata/authorized Git recorded separately.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -111,7 +111,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 ## non-promoted references
 
-The current38path external/unadopted reference is native-owner-report-green-v3. Startup/publication/allactivation/actual firstIssue/QUIC/Ready/protectedAdmit/realI3Awaiting/Resolve and retainedReserved/expiry reply prerequisites passed in their prior cuts. Current native M8 kernel+facade, actual lower callers/counters/replyIDs/nine trace views and actual SYS4 receipt/store/FabricTrace/step used backing have scoped evidence. SourceRoot/nativeI3 jointoneuse/whole upper resources/actualreply/source acknowledgment/fullsource/subsequentrefreeze remain before use. D20–40 active hours unchanged low-confidence; no source decision/phase/roadmap recut.
+The current38path external/unadopted reference is native-reply-backing-green-v3. Actual startup/publication/allactivation/firstIssue/QUIC/Ready/protectedAdmit/I3Awaiting/Resolve and retainedReserved/expiry reply passed in their prior cuts. Actual M8 kernel/facade/callers/counts/trace/receipt/store/step and reply-envelope/queue/causality have scoped evidence. Diagnostic/quarantine/SYS5/codec/allactivation resources and genuine sourceRoot+nativeI3 jointoneuse/fullsource/actualreply/source acknowledgment/subsequentrefreeze remain before use. D20–40 active hours unchanged low-confidence, no roadmap recut.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
