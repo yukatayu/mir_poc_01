@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 16:17 JST
+最終更新: 2026-10-06 16:51 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-diagnostic-backing-green-v4で、SYS4の失敗診断・隔離記録と応答ヘッダー／カウンタ拒否の領域をRHS実行前に準備しました。実際の失敗を照合した後だけ、準備済みの診断と隔離記録を移動します。成功時や本体が戻らない場合には将来の失敗を公開せず、不足で拒否した要求と予約も再利用しません。実診断8領域・隔離記録2領域と、応答拒否の主行／文脈2領域の保持を検査しました。新規12件・既存応答9件・トレース11件・接続17件・11変更対照、標準12件・追加テスト機能なし12件・通常2build・同cut全1234件、38path復元を確認しました。クラッシュで中断した最初の検査は終了値不明の別記録として保持し、復旧後に再検査しました。SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-finalizer-backing-green-v2で、SYS5返信の要求・連結要求・cohort文字列と、実行／書き込み記録の表と文字列をRHS実行前に準備しました。実SYS4戻り値を先に保持して借り、実結果から同じ領域へ記録を書き込み、実キューの複製できないcarrierを返信へ移動します。実返信3領域・実記録4領域の保持、連続2回の実成功と既存記録保持を検査しました。失敗や中断では将来の記録を公開せず、領域不足で拒否した要求も再利用しません。新規10件・診断12件・接続17件・8変更対照、標準10件・追加テスト機能なし10件・通常2build・同cut全1244件、38path復元を確認しました。返信取出し検査の経路／source情報のコピーと、codec・全activation領域の事前準備は残件です。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。外部未採用38path参照native-diagnost
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; prior native fabric trace full make docs v2 passed; final metadata focused separately; actual native SYS4 owner report used backing beforeBody8controls/9compiled mutations/full1213 passed; prior native owner report full make docs v2 passed; final metadata focused separately; actual native SYS4 reply envelope/ID/queue/causality backing9controls/10compiled mutations/full1222 passed; prior native reply backing full make docs v1 passed; final metadata focused separately; actual native SYS4 diagnostic/quarantine/guard backing12controls/11compiled mutations/full1234 passed; current native diagnostic backing full make docs v1 passed; final metadata focused separately; finalmetadata/authorized Git separately; remaining originalBody/SYS5+codec+wholeactivation resources and same-event source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; prior native fabric trace full make docs v2 passed; final metadata focused separately; actual native SYS4 owner report used backing beforeBody8controls/9compiled mutations/full1213 passed; prior native owner report full make docs v2 passed; final metadata focused separately; actual native SYS4 reply envelope/ID/queue/causality backing9controls/10compiled mutations/full1222 passed; prior native reply backing full make docs v1 passed; final metadata focused separately; actual native SYS4 diagnostic/quarantine/guard backing12controls/11compiled mutations/full1234 passed; prior native diagnostic backing full make docs v1 passed; final metadata focused separately; actual native SYS5 finalizer message/observer backing10controls/8compiled changes/full1244 passed; current native finalizer backing full make docs v1 passed; final metadata focused separately; finalmetadata/Git separately; remaining originalBody/outboundvalidation+codec+wholeactivation resources and same-event source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,13 +69,13 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after the samecutfull1234 diagnostic component, not calendar
+These are rough active-work hours after the samecutfull1244 SYS5 finalizer component, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
 |---|---|
 | D remainder / Macro3/6 middle |20–40; actual upper resources, original source/I3/body/results and same events |
-| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual SYS5 occurrence/message/codec/wholeactivation backing beforeBody; native M8 core/facade/callers/counts/trace/store/step/report/reply envelope/IDs/queue/cause and diagnostic/quarantine/guard backing passed |
+| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual outbound validation route/source metadata, codec/wholeactivation backing beforeBody; native M8/SYS4 used backing and SYS5 message/observer resources passed |
 | D original source + nativeI3 Body / Macro3/6 middle |4–8; full original/Core/allargs/ordinal/activation/request/frame/currentM9 and joint oneuse, no unguarded no-budget Admit |
 | D actual reply/source acknowledgment/S→T→S / Macro3/6 middle |4–8; actual transport/current source consumption/same events/wholeactivation |
 | D subsequent re-freeze + retention / Macro3/6 middle |2–4; later actual all3 held-state update; initial prepare/publish/activate passed |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current diagnostic component full1234/new12/reply9/trace11/caller17/11compiled controls/normal2/default12/no-seams12/restored38 passed. Genuine failure diagnostic/terminal and successful-lower reply guard refusal resources prepared beforeBody. Actual SYS5/codec/allactivation/originalBody/source acknowledgment/refreeze remain. Full docs/finalmetadata/authorized Git separate.
+Current SYS5 finalizer message/observer component new10/diagnostic12/caller17/8compiled controls/full1244/normal2/default10/no-seams10/restored38 passed. Outbound validation route/source metadata, codec/allactivation/originalBody/actualreply/currentSourceAck/subsequentrefreeze remain; D20–40 hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -107,11 +107,11 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T06:37:42.653951+00:00の実セッション記録で41%（使用59%）でした。次の確認は2026-10-06T07:37:42.653951+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T07:38:00.357389+00:00の実セッション記録で41%（使用59%）でした。次の確認は2026-10-06T08:38:00.357389+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 ## non-promoted references
 
-The current38path external/unadopted reference is native-diagnostic-backing-green-v4. Actual startup/publication/allactivation/firstIssue/QUIC/Ready/Admit/I3Awaiting/Resolve/retainedReserved/expiry reply passed in their prior cuts. Native M8 kernel/facade/callers/counts/trace/store/step/reply and actual SYS4 diagnostic/quarantine/guard have scoped evidence. SYS5/codec/allactivation resources and genuine sourceRoot+nativeI3 jointoneuse/fullsource/actualreply/currentSourceAck/subsequentrefreeze remain before protected originalBody. D20–40 active hours unchanged low-confidence; no phase/roadmap recut.
+Current external/unadopted38path native-finalizer-backing-green-v2; notes-v17/checkpoint. Actual SYS5 message/observer used resources beforeBody passed; native raw SYS4 held then borrowed. Actual outbound validation route/source metadata still clones afterBody and requires funded used backing, followed by codec/wholeactivation/sourceRoot+nativeI3/fulloriginal/actualreply/currentSourceAck/subsequentrefreeze. Protected originalBody0. Fixed frontier/no phase or roadmap recut.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
