@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-06 11:02 JST
+最終更新: 2026-10-06 12:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,11 +59,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-fabric-trace-green-v2で、実M8が本体前に生成する成功・失敗トレースから、SYS4の実集約記録・識別子・因果関係の領域を用意しました。実結果に対応する9種のデータを移動して公開し、要求キュー・実行許可・runtimeは複製しません。領域不足や数値上限ではRHSを呼ばず、取り出し済み要求と予約も再利用しません。新規11検査・既存接続17検査・7変更対照、標準11件・追加テスト機能なし11件・通常2build・同cut全1205件、38path復元を確認しました。通常成功と本来の計算失敗の記録は従来経路と一致し、準備済みの実領域をそのまま使うことも検査しました。SYS4のreceipt・store・reply・診断と、SYS5の返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-owner-report-green-v3で、SYS4の実receipt、読み書き記録、storeの更新領域、step情報をRHS実行前に準備しました。実結果で値を埋め、準備済みの領域を移動して実応答まで引き継ぎます。実receiptがSYS5の実応答まで同じ領域で保持されること、実step・codec内容・store・全FabricTraceが従来経路と一致することを検査しました。領域不足ではRHSを呼ばず、取り出した要求と予約も再利用しません。新規8検査・既存接続17検査・既存トレース11検査・9変更対照、標準8件・追加テスト機能なし8件・通常2build・同cut全1213件、38path復元を確認しました。reply envelope・キュー・因果関係・診断と、SYS5の記録・返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06 01:58:00 UTCの確認で53%（使用47%）でした。次の確認は2026-10-06 02:58:00 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-06T02:58:34.706821+00:00の実セッション記録で52%（使用48%）でした。次の確認は2026-10-06T03:58:34.706821+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
@@ -177,4 +177,4 @@ active program/roadmap、official lifecycle、major blocker、accepted cut、evi
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを
 general proofやpublic product completionとして数えない。
 
-2026-10-06の整理対象は再生成可能なtarget/debug/incrementalのみです。INCREMENTAL-CLEANUP-20261006-v1/v2.jsonに資源auditと各6444hash保持を記録。研究source・実験・証明・ログ・receipt・browser状態を保持しています。空き容量は後続buildで変動します。詳細はReport2614。
+2026-10-06の整理対象は再生成可能なtarget/debug/incrementalのみです。INCREMENTAL-CLEANUP-20261006-v1/v2/v3/v4.jsonに各資源auditと6444hash保持を記録。研究source・実験・証明・ログ・receipt・browser状態を保持。空きは後続buildで変動。詳細はReport2614。

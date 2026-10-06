@@ -53137,5 +53137,187 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-06T02:16:49.225571+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-red-check-v1/RESULT.json",
+    "sha256": "b73c9521c427a645298161d2e7806b8d0cf8d60685c2eac8a02c9662a543f4ae",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-red-check-v2/RESULT.json",
+    "sha256": "a532d37c69ea99d3bd30b839f9697b55a1e9859e0a1fdb82981d60f0f503fd07",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-green-check-v1/RESULT.json",
+    "sha256": "9015f2520d8f06554b9179885740bd789114d0eef195b91e077d01aada49f456",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-green-check-v2/RESULT.json",
+    "sha256": "b2667a103e3e10726ce8316fb3bf0968692a411c6ea732a8f83eb2743eb576e1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-green-check-v3/RESULT.json",
+    "sha256": "83efeed8a4f12b525f6541c72cb66a2aa7ede220042ecaec20e5a8c46a69eae8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-reserve-mutant-check-v1/RESULT.json",
+    "sha256": "f8ed22a09d2a09c348fa37c517609b37108c103d7b2b6bcedf90ea9c6fc4aaa7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-box-mutant-check-v1/RESULT.json",
+    "sha256": "e2efb3b04ff61ac67997a38968ce12142bc2f169ddf8483a2a1e918412d43eea",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-store-mutant-check-v1/RESULT.json",
+    "sha256": "222293cc8c75a9812123af0f556d2a943e81aa3f6f7bf551108a70aacfa52f3f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-trace-mutant-check-v1/RESULT.json",
+    "sha256": "45138b532bdd572aaaaac2efe0f2397d3a5ef8a6846868ae5de02883ff2268c9",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-step-mutant-check-v1/RESULT.json",
+    "sha256": "2b1588cbe0d52a99a35f735b8878e4db227200d518ec1e5868ec073213b69355",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-write-mutant-check-v1/RESULT.json",
+    "sha256": "547ce7546ff2fde1a4e7490215bff5e7b32499dda3e280b3421c548a571d013a",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-read-mutant-check-v1/RESULT.json",
+    "sha256": "6479f0bf894421d3d548aeb9405ed35020d65ca6574559015a233cafec3c64d1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-legacy-mutant-check-v1/RESULT.json",
+    "sha256": "ae11b187519a751116826d2b0c0de89e8f142e81290d63ffc5c868fcedd44240",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-late-mutant-check-v1/RESULT.json",
+    "sha256": "90372272778e4dc7ad486e7b56b6a5a8a49355f3fbad0c7e9690a7ed68796a5f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-combined-check-v1/RESULT.json",
+    "sha256": "1c4bd356128e80d833ee731e21f72235418b18462271ee50572d0e320b9d802c",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 owner report: RED capacity/body1vs0 and test-specific fresh cohort correction; compiled9semantic mutants, actual8/17/11/default8/no-seams8/full1213/restored38; GREENv1 thirdfilter0 not17",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-OWNER-REPORT-COMPONENT-PLAN-v1.json",
+    "sha256": "e2bb21d7ecebfbf079130f543e9de58cda5a87e8e410a611f5b03d1b6fc52c39",
+    "status": "read-reviewed-full",
+    "role": "Actual report consumer/used backing/falsifiers/non-effects",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-OWNER-REPORT-MUTANTS-v1.json",
+    "sha256": "afd7ad7291ea838c4598962cca331fc61691790a045b69027b21c1b4dd5fc02c",
+    "status": "read-reviewed-full",
+    "role": "9 compiled semantic omissions/copy/value/legacy/late distinctions",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-owner-report-green-v3/ACTUAL_NATIVE_OWNER_REPORT_FIELD_INVENTORY.json",
+    "sha256": "25d0e4cbb5c424c5ac2cf28dce4045698b97646b439f50c45ddf6ff053fce144",
+    "status": "read-reviewed-full",
+    "role": "6new transient report DATA fields/actual same producer/real queued+finalized backing",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v14.json",
+    "sha256": "4f70400c54ee6304a4d64c12cb061ebd972449ade612011f15f6130910c8a2bd",
+    "status": "read-reviewed-full",
+    "role": "Scoped actual report backing beforeBody and upper resource/fullsource gates",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-OWNER-REPORT-CHECKPOINT-20261006-v1.json",
+    "sha256": "c02335f2b28dc49585448695e5def4f3f796f4dfdfd650a5b7c9ae4d6a2444c7",
+    "status": "read-reviewed-full",
+    "role": "Actual samecut evidence summary",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-OWNER-REPORT-SHARED-PRODUCER-REVIEW-v1.json",
+    "sha256": "4c38bcfb8aa25e1f35de5df5d738d400b1349871a0eff44ab948974acdaeae9c",
+    "status": "read-reviewed-full",
+    "role": "Sole-main exact shared counter/constructor and old report/queue tail equality; first tail slice included next helper annotation, corrected without source mutation",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v3.json",
+    "sha256": "05e155158d80fe3360e2dd371b4e00c7e4d3b3d8ef826ccada3cf65111d56b4d",
+    "status": "read-reviewed-full",
+    "role": "Known target incremental --confirm cleanup/no active cargo-rustc/all6444hashpreserved/resource audit/research retained",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v4.json",
+    "sha256": "42830becd1c16d80b044732cca447ef78fc9a55553073f5f8705dbfc50a3c50c",
+    "status": "read-reviewed-full",
+    "role": "Known target incremental --confirm cleanup/no active cargo-rustc/all6444hashpreserved/resource audit/research retained",
+    "at": "2026-10-06T02:56:45.867943+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-docs-v1/RESULT.json",
+    "sha256": "d21bd77af6fc7509f7942f99047961333104f3426da7005c12656f0755287bc4",
+    "status": "verified-docs-failure",
+    "role": "Full make docs v1 failed only stale progress snapshot header11:02<recentlog11:56; source full1213/restored38 unchanged. Actual date updates4snapshot headers before immutable successor v2.",
+    "at": "2026-10-06T03:03:23.151764+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-owner-report-docs-v2/RESULT.json",
+    "sha256": "cb988b0d07026e42c04692a421c0a3b1fcb34d85dbfe957e7cd008e670d7bd49",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful exact11inputs/restored baseline; final metadata suffix focused separately, no fullproof/source audit claim",
+    "at": "2026-10-06T03:10:09.259190+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T025834Z.json",
+    "sha256": "89ab2888bc7c074f7bffaf89b4a4890c5226f7927bcfe2d20a2964dc2ad197c8",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Fresh own weekly telemetry; below30 at verified checkpoint stop, no account/browser/Pro cap claim",
+    "at": "2026-10-06T03:10:09.259190+00:00"
   }
 ]
