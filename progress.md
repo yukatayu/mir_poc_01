@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-06 18:52 JST
+最終更新: 2026-10-06 19:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -75,7 +75,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-pending-budget-binding-green-v1で、実I3の保持中の予算条件を記録するコピーを借用に置き換えました。同じ実pendingの旧記録と全項目のバイト列が一致し、実本体の実行後にコピーがなくなることを確認しました。実I3・期限切れ・予算指定なしの新規3件、既存carrier記録4件・変換14件・接続17件、7変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規3件・同cut全1268件、38path復元を確認しました。最初の旧実装では実行後のコピー2回を検出して1件が失敗し、記録を保持しています。新しい所有DATA項目、I3時計や許可、権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照scoped-original-binding-green-v2で、実3プロセスのowner受付・解決に使う元sourceの記録用データを、下位処理の前に準備しました。実際の元sourceを変更できない借用と、実際に予約して使うfragment領域により、旧記録の全項目とowner役割を保ちます。新規5件、元source全項目16件、既存受付10件・解決13件・実I3予算3件、7変更対照、通常2build・標準の関連回帰13件・追加テスト機能なし5件・同cut全1273件、38path復元を確認しました。旧実装のREDは3pass2failで下位処理後のコピーを検出し、記録を保持しています。新しい恒久runtime項目、I3許可・時計、権限・契約・通信形式の変更はありません。他の実runtime／programの記録と全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -690,3 +690,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-06 18:23 JST — 実messageとruntime保持記録のcarrierコピー2箇所を借用へ変更。同じ実messageの旧記録と一致、新規4件・5変更対照・全1265件・38path復元。最初のtest privateアクセスcompile-only失敗1回を保持。元sourceBody0。Report2614。
 
 - 2026-10-06 18:52 JST — 実I3の保持中の予算条件を借用で記録。同じ実pendingの旧記録と一致、新規3件・7変更対照・全1268件・38path復元。旧実装RED2pass1failで実行後のコピー2回を検出。元sourceBody0。Report2614。
+
+- 2026-10-06 19:31 JST — 実owner受付・解決の元source記録を下位処理前に準備。旧全項目・owner役割が一致、新規5件・7変更対照・同cut全1273件・38path復元。RED3pass2failを保持。元sourceBody0。Report2614。
