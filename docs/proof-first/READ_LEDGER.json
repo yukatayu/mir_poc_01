@@ -56798,5 +56798,180 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T17:07:27.721188+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-red-check-v1/RESULT.json",
+    "sha256": "4b30088c3ae7da6c9ed005a95d06025c142f4b471388bcda8a07be250d8e3db1",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-green-check-v1/RESULT.json",
+    "sha256": "79b4a042a956dffc1431e8b2bdf50f6c939c2d69a72c07a8b542b1ef933ce8f9",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-history_backing-check-v1/RESULT.json",
+    "sha256": "776c0428f92bec1b72d0bad75d2db9f298bcf3c998f2f497a25bfa4a6d176b8e",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-global_ordinal-check-v1/RESULT.json",
+    "sha256": "3e78164cc6b1c175b0a105e4009bf7a0ac11472283b02a2c37135659109a40f6",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-grant-check-v1/RESULT.json",
+    "sha256": "4578c95ac79a4a1914f4534e1224ec82dcc43f476750f4a9d241ae2541afa3aa",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-request_digest-check-v1/RESULT.json",
+    "sha256": "3c1faf6985e4e5f55974b84151346f0b3a736260801cd98eb4f0bbb8696cb60b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-encoded_request_binding-check-v1/RESULT.json",
+    "sha256": "0060248459a2983f5614d966c3dc483777b8d4ae4161756941c8091a4bb9b89b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-lower_status-check-v1/RESULT.json",
+    "sha256": "deceffc6763ef085b5b38f8781545816eec087d6439f7c7a51ef3b5ce9b3fc77",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-finish_sent-check-v1/RESULT.json",
+    "sha256": "a96c36b8786b209b35c49a91d1e0ba7ac80566d7d0d2afcf2cc67a5a1b652c3a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-omit-full-raw-check-v1/RESULT.json",
+    "sha256": "c0e694dff6e5f32a03881efac17fe1323127a31ecbecbc718f329614bf0a5ff8",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-late-after-actual-runtime-start-check-v1/RESULT.json",
+    "sha256": "7e0bb1240eccfe2acbeed19a08dd07901dbd35ca58bc404a680903abb59f0f5e",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-zero-global-slots-check-v1/RESULT.json",
+    "sha256": "a68c845ecf28be4f72ee9da8aeaf8a2d0a3b03f8564a67e66610735b9453f446",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-mutant-requester-has-owner-slots-check-v1/RESULT.json",
+    "sha256": "61fd0d1a74073d37ca237c27827cdcb032138f16b60068fa14b7f8e7b8f585cd",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-alias-refusal-check-v1/RESULT.json",
+    "sha256": "4453f89ec1779e47ac15e2b0a67fe9f124d67217c2c2b6bba2fe15557d576c4d",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-combined-check-v1/RESULT.json",
+    "sha256": "e0fc483e3548d8ac60e1703c1bb260750e2fa21cc90bfa999b83098fd71f0d64",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Owner before-start upper backing1DATA/record7: actual RED/green11controls/expected alias/normal-default-no-seams-full; detached metadata/resource evidence only, no originalBody/Dacceptance",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-COMPONENT-PLAN-v1.json",
+    "sha256": "da26f99f7cc497d946aa7ab287ed32fe2c8777e9c2abdac0bf03831cddc215c5",
+    "status": "read-reviewed-full",
+    "role": "Before-use owner upper before-start backing",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-MUTANTS-v1.json",
+    "sha256": "c4791d7aad36cac41c11755372a44079bff547647a302cb411eec43d42a101db",
+    "status": "read-reviewed-full",
+    "role": "11 actual compiled/caught backing/record/full raw/timing/role controls",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-ALIAS-REFUSAL-v1.json",
+    "sha256": "9cfe0f3f989ce7f9a31776f53674ea1f056aeaa417c51cbb9e9076f4a8b5beda",
+    "status": "read-reviewed-full",
+    "role": "Expected shared history alias E0506one",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-RESOURCES-v1.json",
+    "sha256": "f556f26b1480b9d80cb91ef2e46b224f50c6e1e21bad8b269e8d06b9bab6e07f",
+    "status": "read-reviewed-full",
+    "role": "Actual post-full resource audit",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v33.json",
+    "sha256": "5c3e533c1c8333b682a7ff25cf4eb35d1b95bb4e5d9c7ded0d89e7d2991a080a",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted source and remaining actual originalBody gates",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-CHECKPOINT-20261007-v1.json",
+    "sha256": "a4821c3d364ae3967aeaaf33c8b7f0090e1a1cd7a7c6d3cc81f2b263ec5bde6f",
+    "status": "read-reviewed-full",
+    "role": "Actual15 runfamilies/new5/full1326/restored38 checkpoint",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/upper-body-backing-green-v1/SOURCE_PINS.json",
+    "sha256": "71d3b66076bc728a1f1ac68c1c3fd7ab86371a65f93f16f485f7f0f49b965a4a",
+    "status": "read-reviewed-full",
+    "role": "External38 pins; no production adoption",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261007-v4.json",
+    "sha256": "08be9eba5d2a0f5177b19effe60b8558950fbed6ad44e04d8a6eed77704384bf",
+    "status": "read-reviewed-full",
+    "role": "Canonical incremental cleanup/6444 hashes/research preserved",
+    "at": "2026-10-06T17:31:17.847114+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-docs-v1/RESULT.json",
+    "sha256": "aeb393420a5adba42f067571a38e29bc78882f5510b3be51340259a1ef41d05b",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T17:36:09.524665+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T164324Z.json",
+    "sha256": "1eccf7855e4fd71348508242de8673796888be0a8941ecbd86bc1b9c5e4fec83",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T17:36:09.524665+00:00"
   }
 ]

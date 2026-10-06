@@ -64158,5 +64158,44 @@
     "stop_condition_observed": false,
     "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
     "goal": "Same active W4-D"
+  },
+  "d_upper_body_backing_20261007": {
+    "at": "2026-10-06T17:31:17.847114+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/UPPER-BODY-BACKING-CHECKPOINT-20261007-v1.json",
+    "receipt_sha256": "a4821c3d364ae3967aeaaf33c8b7f0090e1a1cd7a7c6d3cc81f2b263ec5bde6f",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/upper-body-backing-green-v1",
+    "source_pins_sha256": "71d3b66076bc728a1f1ac68c1c3fd7ab86371a65f93f16f485f7f0f49b965a4a",
+    "new": 5,
+    "controls": 11,
+    "normal": 2,
+    "default_old_codec": 13,
+    "no_seams": 5,
+    "full": 1326,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual FD3 owner before-start upper Body backing1DATA/record7; no actual Body population or joint source-nativeI3",
+    "remaining": "Actual used upper Body/result/history/Finish, complete source-origin nonclone joint genuine optional native I3 handoff/source-root/claim order and exact allactivation numeric/producer correspondence remain OPEN before original Body. Actual network reply/currentSourceAck/full S-T-S/newactivation/all3 subsequent refreeze/Astra D integrated acceptance remain. Empty slots supply no Body permission or workflow completion; dependent caller must prove it uses the same capacity and true returns before relying on this backing. No authority/custody/root/permit/clock/wire/API/grammar/Canon adoption, Dacceptance/E/W5+/Plan250-I3-4/newgoal/roadmap.",
+    "stop_condition_observed": false,
+    "goal": "Same W4-D"
+  },
+  "d_upper_body_backing_docs_20261007": {
+    "at": "2026-10-06T17:36:09.524665+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/upper-body-backing-docs-v1/RESULT.json",
+    "receipt_sha256": "aeb393420a5adba42f067571a38e29bc78882f5510b3be51340259a1ef41d05b",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T164324Z.json",
+    "quota_sha256": "1eccf7855e4fd71348508242de8673796888be0a8941ecbd86bc1b9c5e4fec83",
+    "quota": {
+      "captured": "2026-10-06T16:43:24.918175+00:00",
+      "telemetry_timestamp": "2026-10-06T16:43:20.873Z",
+      "weekly_used_percent": 64.0,
+      "weekly_remaining_percent": 36.0,
+      "next_check_no_earlier_than": "2026-10-06T17:43:24.918175+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "stop_condition_observed": false,
+    "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
+    "goal": "Same active W4-D"
   }
 }
