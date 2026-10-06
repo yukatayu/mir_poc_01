@@ -52997,5 +52997,145 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-06T01:30:41.420516+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v1/RESULT.json",
+    "sha256": "0b9f69ce9624f0319327d9a2b04ff839d85c451e8d261ce0fa71e76c2cc1aa92",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v2/RESULT.json",
+    "sha256": "dbb2602ad476dc78b6cbef9f36604e270631a9270727ae537405c5039635e723",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v3/RESULT.json",
+    "sha256": "798ffb68d5f14996204ee0fb12ddea6008bedc2841b8cc1b6905ea209f475351",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v4/RESULT.json",
+    "sha256": "93e623d2a370a8e8ccb416344bd8010c1fa6bee16cbce750ebf28ef8c7a26246",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-green-check-v1/RESULT.json",
+    "sha256": "c963af51decce0dc76b8f4ae993f4743ae7261de94b183ba0f7e7d42e5bb09cd",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-green-check-v2/RESULT.json",
+    "sha256": "da2f2de8d4553c2e061427ce309c4d87f82a6075d83cdfef1746e8f7f162003e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-wrongroute-mutant-check-v1/RESULT.json",
+    "sha256": "8c4db80eed940f400071eb29a2451e39892232763d3013f11e69e782c4a078d2",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-late-mutant-check-v1/RESULT.json",
+    "sha256": "d0ad01094fb46d87aa6dc5897ffeae073607b837a38d83260e3859f2e9b7f446",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-clone-mutant-check-v1/RESULT.json",
+    "sha256": "95b8d47dfd886bd7cd18163ff040ec10423be659b06491a622a2cfcd02f78d67",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-qualified-mutant-check-v1/RESULT.json",
+    "sha256": "08f029d5562e2437c19edaaf6aac53b8e0788f02098f4131fad7d191eeb42ce9",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-aggregate-mutant-check-v1/RESULT.json",
+    "sha256": "a2fb2e99a2f4ebfc3707c42751f1d966baaf48e18414cff7f5e4b9c6e6bde5c1",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-unfunded-mutant-check-v1/RESULT.json",
+    "sha256": "a857ccbc37ab3ecd2b7f3f672320ee0392469c155a80ba859de894913769b0ec",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-failure-mutant-check-v1/RESULT.json",
+    "sha256": "ac935e110cc30a7044f59f08bb9b0d7c0c4c46e934f5e4c0dd39d10c7fcc8d82",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-combined-check-v1/RESULT.json",
+    "sha256": "8b0eefeba638db91118b0028c20613933385569a1e1766c5d3e4beb05355cbb4",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native M8→SYS4 trace backing: separate compile-only/testscope correction/redsemantic/11new17old/7compiled mutations/default11/no-seams11/full1205/all38restored; upper allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-fabric-trace-green-v2/ACTUAL_NATIVE_FABRIC_TRACE_FIELD_INVENTORY.json",
+    "sha256": "f4d4981034cf304ae4730576d6ebab3120e1dba8f6e4d9a83d8c9735585eba4f",
+    "status": "read-reviewed-full",
+    "role": "Nine observer DATA views plus success/failure holders/no permanent or authority/currentfloor/runtime/custody clone",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-FABRIC-TRACE-COMPONENT-PLAN-v1.json",
+    "sha256": "bbb844604af283b7b621bf023d6c59777c9d9c99fe0be7af21e4ad65c202cf32",
+    "status": "read-reviewed-full",
+    "role": "Actual readonly supplier/used allocation consumer/falsifiers/non-effects",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v13.json",
+    "sha256": "3d779ead7689e6bd5a8fb161c7bc88ca2bd1c444684f9e0a053c67dbf4ba25cb",
+    "status": "read-reviewed-full",
+    "role": "Actual used trace backing scope/true raw-failure retention and remaining upper allocation/source-I3 Body prerequisites",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v2.json",
+    "sha256": "d42c5bdca47f8278faf77bd25cb5f44fa4ef68f9f7a335b16cd491ae444dfe6b",
+    "status": "read-reviewed-full",
+    "role": "Known target incrementals only/--confirm/no active cargo-rustc/all6444hashpreserved/resource audits/research retained",
+    "at": "2026-10-06T02:02:51.589023+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-docs-v1/RESULT.json",
+    "sha256": "79afc3297afe32b768aa4515e79ca946034be6374e13829f3db09458369ac7c4",
+    "status": "failed-docs-scoped-budget",
+    "role": "Full make docs v1 exact11inputs failed project-status linebudget182>180; immutable evidence retained, summary compaction only before successor v2; source/full1205 unchanged",
+    "at": "2026-10-06T02:10:32.557080+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-docs-v2/RESULT.json",
+    "sha256": "1b978f02649940c59251464df5cd52f3332bb36679bb1bdea6c0bcb9fa870239",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-06T02:16:49.225571+00:00"
   }
 ]

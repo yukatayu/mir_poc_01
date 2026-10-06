@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 10:26 JST
+最終更新: 2026-10-06 11:02 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-id-green-v1で、実SYS4の返信IDの上限を、本体実行前に確認する処理を追加しました。準備済みM8へ接続した通常・実デコード要求と本物のI3予約で、返信用の4識別子が足りなければRHSを呼びません。取り出し済みの識別子は巻き戻さず、実返信だけが返信IDを確保します。残り5個なら、取り出し1個と返信4個を使って正常に実行できます。新規6検査・既存カウンタ7/接続17検査・5省略対照、標準6件・追加テスト機能なし6件・通常2build・同cut全1194件、38path復元を確認しました。実SYS4のトレース集約・記録と、SYS5の返信・codec・全activation領域の実行前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-fabric-trace-green-v2で、実M8が本体前に生成する成功・失敗トレースから、SYS4の実集約記録・識別子・因果関係の領域を用意しました。実結果に対応する9種のデータを移動して公開し、要求キュー・実行許可・runtimeは複製しません。領域不足や数値上限ではRHSを呼ばず、取り出し済み要求と予約も再利用しません。新規11検査・既存接続17検査・7変更対照、標準11件・追加テスト機能なし11件・通常2build・同cut全1205件、38path復元を確認しました。通常成功と本来の計算失敗の記録は従来経路と一致し、準備済みの実領域をそのまま使うことも検査しました。SYS4のreceipt・store・reply・診断と、SYS5の返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-id
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; current native reply ID full make docs v1 passed; final metadata focused separately; remaining original Body oneuse/SYS4+SYS5+codec+wholeactivation resources and same-event reply/source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; current native fabric trace full make docs v2 passed; final metadata focused separately; remaining original Body oneuse/SYS4 receipt-store-reply-diagnostic+SYS5+codec+wholeactivation resources and same-event reply/source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -75,7 +75,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | Work unit / macro position | Active hours / main uncertainty |
 |---|---|
 | D remainder / Macro3/6 middle |20–40; actual upper resources, original source/I3/body/results and same events |
-| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual aggregate/cause/counters/receipt/report/reply/codec/wholeactivation backing beforeBody; M8 lower backing/native callers and SYS5 two-counter preflight passed |
+| D actual SYS4/SYS5 resources / Macro3/6 middle |8–16; actual receipt/store/step/reply/diagnostic and SYS5 occurrence/message/codec/wholeactivation backing beforeBody; M8 core/facade, native callers, SYS5 counts/SYS4 reply IDs and nine trace/aggregate/cause DATA views passed |
 | D original source + nativeI3 Body / Macro3/6 middle |4–8; full original/Core/allargs/ordinal/activation/request/frame/currentM9 and joint oneuse, no unguarded no-budget Admit |
 | D actual reply/source acknowledgment/S→T→S / Macro3/6 middle |4–8; actual transport/current source consumption/same events/wholeactivation |
 | D subsequent re-freeze + retention / Macro3/6 middle |2–4; later actual all3 held-state update; initial prepare/publish/activate passed |
@@ -113,7 +113,7 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06 00:56:10 UTCの確認で54%（使用46%）でした。次の確認は2026-10-06 01:56:10 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-06 01:58:00 UTCの確認で53%（使用47%）でした。次の確認は2026-10-06 02:58:00 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 ## non-promoted references
 
@@ -127,3 +127,5 @@ there is no duplicate goal, automatic model switch or automatic Plan250 resume.
 2026-10-05に実行終了後のCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約11GBから約14GBへ戻しました。追跡6403ファイル・外部現source38ファイル・3manifestの計6444hash一致を確認。研究source・証明・実験・ログ・receipt・browser状態は削除していません。詳細はINCREMENTAL-CLEANUP-20261005-v1.json。後続buildの再生成で空きは変動します。
 
 2026-10-06に再生成可能なCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約5.7GBから約12GBへ戻しました。追跡6403ファイル・現在の外部source38・3manifestの計6444hash一致を確認。研究source・実験・証明・検証ログ・receipt・browser状態は保持しています。詳細はINCREMENTAL-CLEANUP-20261006-v1.json。後続buildで空きは変動します。
+
+2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。

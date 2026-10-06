@@ -62440,5 +62440,489 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_native_fabric_trace_20261006": {
+    "at": "2026-10-06T02:02:51.589023+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-FABRIC-TRACE-CHECKPOINT-20261006-v1.json",
+    "receipt_sha256": "0a6d7b60f82ce7438a60d3bd24abf634a33387bf3c68079f08015057bad82cab",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-fabric-trace-green-v2",
+    "source_pins_sha256": "060ef495d29087b33c71b2278f2276ab16a6963d6c67c6779a1f87c06c124400",
+    "field_inventory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-fabric-trace-green-v2/ACTUAL_NATIVE_FABRIC_TRACE_FIELD_INVENTORY.json",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v13.json",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v1",
+        "result_sha256": "0b9f69ce9624f0319327d9a2b04ff839d85c451e8d261ce0fa71e76c2cc1aa92",
+        "restored_sha256": "cd961854baf0596f95e0adc46daa2973f94b31240a8bc0d4c9b1e446e40a18cf",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "66dc0b682f99a8c5bb285fa84f597624d2e3aec681bca58e5d916d5000b04ced"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v2",
+        "result_sha256": "dbb2602ad476dc78b6cbef9f36604e270631a9270727ae537405c5039635e723",
+        "restored_sha256": "d90c3dde89dca15c0f5f8509d913128b8a378442aea9e767febb8503d5a27976",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "5c8094fbbe09ea77d97d766c911dfcaf6b6b1175d8565cd87738a53eabd5639d"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v3",
+        "result_sha256": "798ffb68d5f14996204ee0fb12ddea6008bedc2841b8cc1b6905ea209f475351",
+        "restored_sha256": "94fb327a0e85c0f17d9ac0906ca4044ce397da65d29fb9c767595bfbe8070d3d",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "3b25aa9564a5a29d203bf80fb0e2a3f67e8a67dffe2f22f4ff30b7e0174b20e2"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-red-check-v4",
+        "result_sha256": "93e623d2a370a8e8ccb416344bd8010c1fa6bee16cbce750ebf28ef8c7a26246",
+        "restored_sha256": "afedc12c9fd42e4ae5a0ea47bb759d524df7ff496b191e411aa1052ec70177f6",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "cecb77797f7ecdaadd6cef52576d661ec453b90a85806ce66442ece30fe9eb0b"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-green-check-v1",
+        "result_sha256": "c963af51decce0dc76b8f4ae993f4743ae7261de94b183ba0f7e7d42e5bb09cd",
+        "restored_sha256": "9bbe34bc389a67a6e2a37f6d77107a80e34a152672573e7b4ff5bf747d4606b6",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "ea93617047f113f3dc411b3905b3522e4c8149e96eaee7418e8749662934e20e"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "39366f8769abd412d5484a7f7ea1e325a2a80c9a2cfe3f780201cd465f60848d"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "6646c2d91ae02be0eb25d4594eaa8e63d5b7a59ea8269928ba292d87950ce386"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_prebody_lower_caller",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "6fa1311b73f587750d1ed13b50be440db3c5fc483d79a8f106ef1f32016f0983"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-green-check-v2",
+        "result_sha256": "da2f2de8d4553c2e061427ce309c4d87f82a6075d83cdfef1746e8f7f162003e",
+        "restored_sha256": "dc0206a1a267c8ba620501fc6756508757975dd7540911ead102e06d72aeed2f",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "2a55b1ae5221069c91c8b074255a839b29c5019aa9e0d906d5caa52c3e857d59"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_prebody_lower_caller",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "0ff9938475717683f56c2acf9a1381b1470b8e8b56f322d98d110d74be63cc54"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-wrongroute-mutant-check-v1",
+        "result_sha256": "8c4db80eed940f400071eb29a2451e39892232763d3013f11e69e782c4a078d2",
+        "restored_sha256": "011ade978495a509afaaef507d62132c16aff670d1c046db7e884ea68be47b05",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "a147f9024aac396ec0a31d49e8846b329f80306470be1363abde56152fa1e5ee"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-late-mutant-check-v1",
+        "result_sha256": "d0ad01094fb46d87aa6dc5897ffeae073607b837a38d83260e3859f2e9b7f446",
+        "restored_sha256": "8b2e5bac972a98b4985ec9cc0075b3f9e52140d3391217f64b8172fbfaf78a3d",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "a78e608ca7715530f68906f2bdfb371507916614d547e4a23fcb862a801a4b41"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-clone-mutant-check-v1",
+        "result_sha256": "95b8d47dfd886bd7cd18163ff040ec10423be659b06491a622a2cfcd02f78d67",
+        "restored_sha256": "1937b11927811e13007e56b35120739aa8d0a668fc890ee763be4ac2ec304bd4",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "fd05b35ecb77d31a627bc3d87b599a398274089d27593f4ff069c1ae63beb0e0"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-qualified-mutant-check-v1",
+        "result_sha256": "08f029d5562e2437c19edaaf6aac53b8e0788f02098f4131fad7d191eeb42ce9",
+        "restored_sha256": "651d75cd085b60aa7f31a5feed3416f1408a35be7c88792d41725e82335b9b0c",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "6df62a451e0a111c9972a9354bbd7181673a68d348c12c9e27092992f6ab9e12"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-aggregate-mutant-check-v1",
+        "result_sha256": "a2fb2e99a2f4ebfc3707c42751f1d966baaf48e18414cff7f5e4b9c6e6bde5c1",
+        "restored_sha256": "29fe40624a0ff7769a9b74a4714b274c38d8920357c0880530a924d5853dd454",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "243b79de8cfa994cead625829df99c88785dac6870ebe98ef42aab978f64ccc2"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-unfunded-mutant-check-v1",
+        "result_sha256": "a857ccbc37ab3ecd2b7f3f672320ee0392469c155a80ba859de894913769b0ec",
+        "restored_sha256": "6aa220f8abbf9acc2bea63b0deae1cbdfa77095767d2d6a8b61fda44d769ec46",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b8d610dfba08af4e544dce9e8d2a353dc0ed2b49ca7811727ea186834d741811"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-failure-mutant-check-v1",
+        "result_sha256": "ac935e110cc30a7044f59f08bb9b0d7c0c4c46e934f5e4c0dd39d10c7fcc8d82",
+        "restored_sha256": "21e501df6cc5a3ada68d0f2dc245ef390d1b33a207018b397be4be1136f81071",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "e68389f70e74f15bd39e935ebf723381e237a7624f24f06adb14e03aa0f85efe"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-combined-check-v1",
+        "result_sha256": "8b0eefeba638db91118b0028c20613933385569a1e1766c5d3e4beb05355cbb4",
+        "restored_sha256": "15ef536da383f14622bae0e8f0377b14bbd7be46cf4b2d6c583540256bf8cd12",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "934cf21b8ba9a5f3a7b0d8ea213d5e046fff373b493cd4571b861e3bb8ccf846"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "b3bec43ec6b9821fb2d4a0c8afc8654c00c27a8f22ef97c884626fc64c63a4a9"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "a79e1eef2670e1bf1399e7d5e693afbacc39817a67608b036b7fe9ee30cf5af2"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic",
+              "actual_native_fabric_trace",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "921b0ba0b6ab542c9b4d5e57eb80a1e48e8c6fc753d72d780d1e3d73eea0387c"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "51c4601b32eee94251caccab8983a01aedae2432cf18c0039788fbb9ae846672"
+          }
+        ]
+      }
+    ],
+    "focused": 11,
+    "existing_caller_controls": 17,
+    "omissions": 7,
+    "normal_builds": 2,
+    "default": 11,
+    "without_test_seams": 11,
+    "full": 1205,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual M8 readonly supplier funds actual native SYS4 qualified/aggregate/causal observer DATA before RHS. Upper trace prerequisite only; protected sourceBody0.",
+    "docs": "pending full11 docs/metadata/actual Git separately",
+    "goal": "same owner-resumed W4-D"
+  },
+  "d_actual_native_fabric_trace_docs_20261006": {
+    "at": "2026-10-06T02:16:49.225571+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-fabric-trace-docs-v2/RESULT.json",
+    "receipt_sha256": "1b978f02649940c59251464df5cd52f3332bb36679bb1bdea6c0bcb9fa870239",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }

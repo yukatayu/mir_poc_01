@@ -35,11 +35,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-id-green-v1で、実SYS4の返信IDの上限を、本体実行前に確認する処理を追加しました。準備済みM8へ接続した通常・実デコード要求と本物のI3予約で、返信用の4識別子が足りなければRHSを呼びません。取り出し済みの識別子は巻き戻さず、実返信だけが返信IDを確保します。残り5個なら、取り出し1個と返信4個を使って正常に実行できます。新規6検査・既存カウンタ7/接続17検査・5省略対照、標準6件・追加テスト機能なし6件・通常2build・同cut全1194件、38path復元を確認しました。実SYS4のトレース集約・記録と、SYS5の返信・codec・全activation領域の実行前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-fabric-trace-green-v2で、実M8が本体前に生成する成功・失敗トレースから、SYS4の実集約記録・識別子・因果関係の領域を用意しました。実結果に対応する9種のデータを移動して公開し、要求キュー・実行許可・runtimeは複製しません。領域不足や数値上限ではRHSを呼ばず、取り出し済み要求と予約も再利用しません。新規11検査・既存接続17検査・7変更対照、標準11件・追加テスト機能なし11件・通常2build・同cut全1205件、38path復元を確認しました。通常成功と本来の計算失敗の記録は従来経路と一致し、準備済みの実領域をそのまま使うことも検査しました。SYS4のreceipt・store・reply・診断と、SYS5の返信・codec・全activation領域の事前準備は残っています。本来のsourceと実I3許可を消費するBodyはまだ0です。実返信送受信・現在権限のsource受領・S→T→S・次activation・後続update再freezeも未完了です。199module監査は別cutの条件付き証拠です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06 00:56:10 UTCの確認で54%（使用46%）でした。次の確認は2026-10-06 01:56:10 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
+週間残量は2026-10-06 01:58:00 UTCの確認で53%（使用47%）でした。次の確認は2026-10-06 02:58:00 UTC以降。最新owner条件は残量30%未満の後の区切り、又はAstraへの判断引継ぎで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
@@ -534,3 +534,5 @@ official I3 lifecycle entry remains unaccepted.
 必要な内容だけを通常の source hierarchy へ mirror します。
 
 2026-10-06に再生成可能なCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約5.7GBから約12GBへ戻しました。追跡6403ファイル・現在の外部source38・3manifestの計6444hash一致を確認。研究source・実験・証明・検証ログ・receipt・browser状態は保持しています。詳細はINCREMENTAL-CLEANUP-20261006-v1.json。後続buildで空きは変動します。
+
+2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
