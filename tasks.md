@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 22:34 JST
+最終更新: 2026-10-06 23:17 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-program-green-v4です。FabricProgramが持つ実projectionと全14項目の旧snapshotを構築時に組にして保持し、実native実行後のbinding生成では保持済みデータを借用します。追加の永続フィールドはDATA1個で、権限・custodyを増やしません。唯一のprocess imageを消費する既存改変テストとconst getterの挙動も維持します。新規6件・検出できた対照7件・通常ビルド2種・default既存13件・QUICでtest-seamsなし6件・全1297件が通り、38path復元済みです。対照1件は外側の拒否処理が残るため未検出、0件のfilter2回は成功件数に含めません。修正前コンパイル失敗・fixture失敗・期待した書換え拒否・全体回帰のビルド容量不足を別分類で保持します。容量不足後は同じソースで増分キャッシュとデバッグ情報を抑えて再検証しました。元sourceBodyは0です。admitted instance／mutable runtime、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-admitted-green-v3です。M8LocalRuntimeの実admitted instanceと全9項目の旧snapshotを組にして保持し、構築・既存の2種類のpatch・cold cut installerで次の利用前に組を置き換えます。実native実行後のbinding生成は保持済みデータを借用します。追加の永続フィールドはDATA1個で、権限・custodyを増やしません。旧データ形式・clone／Debug／比較・公開cutの型と拒否条件を維持します。新規7件・検出対照9件・通常ビルド2種・default既存13件・QUICでtest-seamsなし7件・全1304件が通り、38path復元済みです。fixtureとAuthDeferred補助関数の不一致による6pass1failは残し、実装を変えずにfixtureを修正しました。cold cut installerのDATA検査は、異なるprovenanceの通常restoreが許可されるという主張ではありません。元sourceBodyは0です。他のmutable runtime記録生成、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | LAB actual-program-green-v4: actual full immutable program snapshot backing/borrowed DATA; actual new6/7caught+1insensitive/normal2/default codec13/no-seams6/full1297/restored38. Actual SourceBody/history/completion/resources/source-origin+optional nativeI3 remain; current actual program full make docs v1 passed; final metadata focused separately; originalBody0 | 着手可能: remaining Body/resource/joint handoff evidence before use; Astra material contract or D integrated acceptance |
+| D source/I3/result/network / Macro3/6 | LAB actual-admitted-green-v3: paired actual admitted9field DATA; new7/controls9/normal2/default codec13/no-seams7/full1304/restored38. SourceBody0; mutable suppliers/upper Body resources/source-origin+optional nativeI3 remain; current actual admitted full make docs v1 passed; final metadata focused separately | 着手可能: remaining resources/joint handoff evidence before original Body; Astra material contract or D integrated acceptance |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,7 +69,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata and full program DATA components, not calendar
+These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata, full program and paired admitted DATA components, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current LAB external reference actual-program-green-v4/full1297, actual full immutable program DATA backing evidence; owner result/history/control completion and joint source-origin/optional native I3 remain. D20–40 rough active hours low confidence unchanged.
+Current LAB external reference actual-admitted-green-v3/full1304, actual paired admitted DATA evidence; mutable suppliers/owner Body/result/history/control completion and source-origin+optional nativeI3 remain. D20–40 rough active hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -111,7 +111,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 ## non-promoted references
 
-Current LAB external/unadopted38path actual-program-green-v4/notes-v27: actual full immutable program snapshot backing/borrowed DATA, all14 old snapshot fields/JSON/bytes/current route data and complete actual raw/fabric bindings. Normal2/default codec13/no-seams6/full1297/7caught+1insensitive/restored38;18 run families. Native-resolution array candidate remains discarded and preserved; parent grant/control interval remains genuine grant-only evidence. Remaining admitted instance/mutable suppliers and actual SourceBody/history/completion/source-origin+optional native I3/currentSourceAck/refreeze remain; originalBody0. Current actual program full make docs v1 passed; final metadata focused separately.
+Current LAB external/unadopted38path actual-admitted-green-v3/notes-v28: actual paired admitted DATA, complete old9field snapshot/current raw+fabric bindings after genuine native RHS1. New7/9compiled controls/normal2/default codec13/no-seams7/full1304/restored38;15 run families. One compiled fixture mismatch6pass1fail preserved, corrected existing typed nonM9 DATA admission without production change. Cold cut installer DATA test does not claim normal different-provenance restore acceptance. Mutable suppliers/actual SourceBody/history/completion/source-origin+optional nativeI3/currentSourceAck/refreeze remain; originalBody0. Current actual admitted full make docs v1 passed; final metadata focused separately.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
