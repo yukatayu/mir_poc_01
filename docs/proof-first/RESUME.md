@@ -2,14 +2,14 @@
 
 Same owner-resumed W4; sole main/no subagents/no Oracle/new goal. Owner explicitly resumed2026-10-05 after the passed component/authorized cleanup. Continue same W4-D until material contract counterexample, Astra D integrated acceptance, or remaining weekly capacity below30% followed by a sensible verified checkpoint; STOP before E. Plan250/I3-4 separately owner-paused. OwnerProtemporarycap preference explicit xhigh, actual model/effort verify, never silently medium; no current Oracle.
 
-Predecessor HEAD41d171f6 pushed/parity0/0/clean; GIT-ACTUAL-I3-CONDITION-v1.json verified. Actual37 run families terminal/restored38; current M9 generation docs then GIT-ACTUAL-M9-GENERATION-v1.json records authorized Git.
+Predecessor HEAD7d21fbcb pushed/parity0/0/clean; GIT-ACTUAL-M9-GENERATION-v1.json verified. Actual32 run families terminal/restored38; current M8 record docs then GIT-ACTUAL-M8-AUTHORITY-RECORD-v1.json records authorized Git.
 
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Current external/unadopted38path D/d-control-development/actual-m9-generation-green-v3, notes-v31. M9 generation full21field DATA: new7/controls31/normal2/default codec13/no-seams7/full1319/37runfamilies/restored38. OriginalSourceBody0; separate M8authority3 suppliers/upper Body/joint source-nativeI3/currentAck/refreeze remain OPEN.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Current external/unadopted38path D/d-control-development/actual-m8-authority-record-green-v1, notes-v32. M8 full record4-12-5 DATA: new2/controls28/normal2/default codec13/no-seams2/full1321/32runfamilies/restored38. OriginalSourceBody0; upper Body/history/completion/joint source-nativeI3/currentAck/refreeze remain OPEN.
 
 
 2026-10-05に実行終了後のCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約11GBから約14GBへ戻しました。追跡6403ファイル・外部現source38ファイル・3manifestの計6444hash一致を確認。研究source・証明・実験・ログ・receipt・browser状態は削除していません。詳細はINCREMENTAL-CLEANUP-20261005-v1.json。後続buildの再生成で空きは変動します。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-m9-generation-green-v3です。M9 generationの21項目と内部の権限・関係・lineage・失効・失敗・3種類の実観測マップを、旧DTOのコピーを作らず借用します。旧記録の全項目・順序・現在の値と、実native処理後のraw／fabric全体のbindingを維持します。永続・cache・権限・custodyフィールドの追加は0です。新規7件・検出対照31件・既存M9記録3件・局所状態維持7件・通常ビルド2種・default13件・test-seamsなし7件・全1319件が通り、38path復元済みです。借用中のgeneration書き換えはE0506で1件拒否されています。実native処理は各1回で、元sourceBodyは0です。別のM8権限マップ3か所、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-m8-authority-record-green-v1です。M8権限マップのmembership4項目・capability12項目・witness5項目を、旧DTOのコピーを作らず借用します。マップの実キーとrecord referenceを区別し、旧記録の項目・順序・現在の値と実native処理後のraw／fabric全体のbindingを維持します。既存の借用形式を使い、永続・cache・権限・custodyフィールドの追加は0です。新規2件・検出対照28件・既存マップ4件・M9記録7件・通常ビルド2種・default13件・test-seamsなし2件・全1321件が通り、38path復元済みです。借用中の元record書き換えはE0506で3件拒否されています。実native処理は各1回で、元sourceBodyは0です。実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 Same genuine finite3parent ExpectedStart records configure ordinary source-A/owner-S static TLS pair inside bounded expected FD3 record before installation. Installed normal mode takes actual bound configuration once and joins complete own start/run/purpose/slot/program/cohort, static transport identity independent of updated M9. Real source Issue retains actual request/message/encoded frame and separate pre-Finish outgoing data; one-use transfer changes no source cursor/result/pending request. Normal QUIC opaque packet send requires inspected SPKI/reciprocal preface/initial session, reserves checked actual occurrence before write; no Runtime borrow through await.
 
@@ -23,11 +23,11 @@ Continue same W4-D: actual wholeactivation result/control used backing before pr
 
 First original statement source data → genuine real private QUIC → actual owning owner unadmitted data retention. Budgeted original owner Admit/I3 Awaiting/Resolve and actual native typed return holding realized; protected Body/M8 raw result/reply/source acknowledgment, whole distributed causality, subsequent update/multi-statement activation not realized. Data hashes/static TLS are not custody/body permission/OS authentication; no fresh full proof-audit/workspace/privacy/recovery/alpha campaign.
 
-Sole main: full21field current M9 generation DATA borrowed after genuine native RHS1; full old raw/fabric binding and all3 genuine observation maps retained. Separate M8authority3/upper Body/joint handoff remains OPEN. SourceBody0. Current actual M9 generation full make docs v1 passed; final metadata focused separately.
+Sole main: three M8 authority record suppliers borrowed after genuine native RHS1; full old key/record/raw/fabric binding and M9 all3 observations retained. Upper Body/joint handoff remains OPEN. SourceBody0. Current actual M8 record full make docs v1 passed; final metadata focused separately.
 
-週間残量は2026-10-06T15:40:39.308159+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T16:40:39.308159+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T16:43:24.918175+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T17:43:24.918175+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
-Latest resource audit: ACTUAL-M9-GENERATION-RESOURCES-v1.json at2026-10-06T16:19:49.302931+00:00; incremental20261007-v2 preserves6444hashes/all experiments. Serial8GiBAS/core0/-j1/threads1/incremental-debug0; no external mount assumption/notifications.
+Latest resource audit: ACTUAL-M8-AUTHORITY-RECORD-RESOURCES-v1.json at2026-10-06T17:02:58.789645+00:00; incremental20261007-v3 preserves6444hashes/all experiments. Serial8GiBAS/core0/-j1/threads1/incremental-debug0; no external mount assumption/notifications.
 
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。

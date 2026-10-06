@@ -64119,5 +64119,44 @@
     "stop_condition_observed": false,
     "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
     "goal": "Same active W4-D"
+  },
+  "d_actual_m8_authority_record_20261007": {
+    "at": "2026-10-06T17:02:58.789645+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M8-AUTHORITY-RECORD-CHECKPOINT-20261007-v1.json",
+    "receipt_sha256": "11a71173c9414b4e840ed26e3b2489b37ef61b29c67292ed288eefe14fe22dd4",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/actual-m8-authority-record-green-v1",
+    "source_pins_sha256": "85f4ef3339c43cdfbb9e1eb17f5ffee6dfeb403cc995e1f6cc7069d37fe19054",
+    "new": 2,
+    "controls": 28,
+    "normal": 2,
+    "default_old_codec": 13,
+    "no_seams": 2,
+    "full": 1321,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual borrowed M8 record4-12-5 DATA/native RHS1; upper Body/joint source-nativeI3 OPEN",
+    "remaining": "Upper original SourceBody/result/history/parent completion/currentAck resources and exact source-origin nonclone handoff jointly with genuine optional native I3 permit remain OPEN before original Body. Actual reply/currentSourceAck/full S-T-S/newactivation/all3 subsequent refreeze/Astra D integrated acceptance remain. Audit any further mutable DATA supplier before dependent use; this closes exactly3 record sites, no global OOM/allocation/recovery guarantee. No authority/custody/root/permit/clock-provider/wire/API/grammar/Canon adoption, Dacceptance/E/W5+/Plan250-I3-4/newgoal/roadmap.",
+    "stop_condition_observed": false,
+    "goal": "Same W4-D"
+  },
+  "d_actual_m8_authority_record_docs_20261007": {
+    "at": "2026-10-06T17:07:27.721188+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m8-authority-record-docs-v1/RESULT.json",
+    "receipt_sha256": "c8d9ac6f0347eb3a6411b52f176710669a141d3744d3c35dce6ba12621894f76",
+    "exit": 0,
+    "quota_path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T164324Z.json",
+    "quota_sha256": "1eccf7855e4fd71348508242de8673796888be0a8941ecbd86bc1b9c5e4fec83",
+    "quota": {
+      "captured": "2026-10-06T16:43:24.918175+00:00",
+      "telemetry_timestamp": "2026-10-06T16:43:20.873Z",
+      "weekly_used_percent": 64.0,
+      "weekly_remaining_percent": 36.0,
+      "next_check_no_earlier_than": "2026-10-06T17:43:24.918175+00:00",
+      "stop_rule": "owner2026-10-05 below30% at sensible verified checkpoint; Astra only material boundary or D integrated acceptance",
+      "scope": "Own session bounded4MiB token_count metadata only; no account/browser model/Pro cap assertion"
+    },
+    "stop_condition_observed": false,
+    "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
+    "goal": "Same active W4-D"
   }
 }

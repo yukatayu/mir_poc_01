@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-07 01:19 JST
+最終更新: 2026-10-07 02:02 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-m9-generation-green-v3です。M9 generationの21項目と内部の権限・関係・lineage・失効・失敗・3種類の実観測マップを、旧DTOのコピーを作らず借用します。旧記録の全項目・順序・現在の値と、実native処理後のraw／fabric全体のbindingを維持します。永続・cache・権限・custodyフィールドの追加は0です。新規7件・検出対照31件・既存M9記録3件・局所状態維持7件・通常ビルド2種・default13件・test-seamsなし7件・全1319件が通り、38path復元済みです。借用中のgeneration書き換えはE0506で1件拒否されています。実native処理は各1回で、元sourceBodyは0です。別のM8権限マップ3か所、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-m8-authority-record-green-v1です。M8権限マップのmembership4項目・capability12項目・witness5項目を、旧DTOのコピーを作らず借用します。マップの実キーとrecord referenceを区別し、旧記録の項目・順序・現在の値と実native処理後のraw／fabric全体のbindingを維持します。既存の借用形式を使い、永続・cache・権限・custodyフィールドの追加は0です。新規2件・検出対照28件・既存マップ4件・M9記録7件・通常ビルド2種・default13件・test-seamsなし2件・全1321件が通り、38path復元済みです。借用中の元record書き換えはE0506で3件拒否されています。実native処理は各1回で、元sourceBodyは0です。実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | LAB actual-m9-generation-green-v3: full21field current M9 DATA; new7/controls31/normal2/default codec13/no-seams7/full1319/restored38. SourceBody0; separate M8authority3/upper Body/source-origin+optional nativeI3 remain; current actual M9 generation full make docs v1 passed; final metadata focused separately | 着手可能: remaining resources/joint handoff evidence before original Body; Astra material contract or D integrated acceptance |
+| D source/I3/result/network / Macro3/6 | LAB actual-m8-authority-record-green-v1: three M8 complete record4-12-5 DATA suppliers; new2/controls28/normal2/default codec13/no-seams2/full1321/restored38. SourceBody0; upper Body/joint sourceOrigin-nativeI3/currentAck/refreeze remain; current actual M8 record full make docs v1 passed; final metadata focused separately | 着手可能: upper resources/joint handoff evidence before original Body; Astra material contract or D integrated acceptance |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,7 +69,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata, full program, paired admitted, issued-reference, native I3 condition and complete M9 generation DATA components, not calendar
+These are rough active-work hours after scoped-original binding, discarded native-resolution array candidate, parent Body interval, direct SourceRef, immutable metadata, full program, paired admitted, issued-reference, native I3 condition and complete M9 generation and direct M8 authority-record DATA components, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current LAB external reference actual-m9-generation-green-v3/full1319; separate M8authority3/upper Body/history/completion/source-origin+optional nativeI3 remain. D20–40 rough active hours low confidence unchanged.
+Current LAB external reference actual-m8-authority-record-green-v1/full1321; upper Body/history/completion/source-origin+optional nativeI3/currentAck/refreeze remain. D20–40 rough active hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -107,15 +107,15 @@ or host-share workspace; preserve all source/evidence/browser state.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T15:40:39.308159+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T16:40:39.308159+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T16:43:24.918175+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T17:43:24.918175+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 ## non-promoted references
 
-Actual M9AuthorityGeneration DATA uses one stable shared borrow with borrowed ordered iterators/row fields instead of complete old21field owned DTO in actual prepared binding after genuine native RHS1. Old21fields and all nested authority3arrays/membership4/capability12/tagged5scope/witness5/relation10/owner-use4/designated-use5/fresh-binding9/optionalfresh12/owner and remote keys-lineages/failures-revocations/all3 actual observation maps/current counts and ordering retained. No new permanent/cache/authority-custody fields or owned collection in the selected formatter. Borrowed map iterator cursor copying reviewed against primary rust-lang release1.94.1 source; no authority/collection clones in selected formatter. True M8/SYS4/finalizer/raw and entire live-fabric old binding remain. Private DATA formatters only, no Serialize on live generation/authority/grant/permit. OriginalSourceBody0; no total allocation or all-supplier closure claim.
+Actual M8 authority-map prepared visitor borrows complete membership4/capability12(including optional tagged5scope/resultVersion)/witness5 DATA at its3 direct record sites, reusing verified private one-reference views. Old exact actual(backing key,record) tuples/map lengths/order/optional None-empty/current values and entire true raw/live-fabric binding retained. No added permanent/cache/authority-custody fields or owned collection. Private row formatters only, no live grant/state Serialize or usable permission exporter. M9 complete21field borrowing/actual3 observation maps remain. Genuine ordinary/I3 native RHS1 with true M8/SYS4/finalizer results; OriginalSourceBody0. No total allocation or all-supplier closure claim.
 
-Actual compiled native ordinary/I3 RED0pass2fail each sees two owned M9 DTO copies at native Body1. Green1 new6/retained M9 map3/genuine child-frame7/prior I3 condition3 pass. Green2 tests-only successor compile-only E0599two: two mistaken M8-style error names, no tests ran. Green3 tests-only correction new7 adds detached Some12field fresh lineage and nonempty failure/revocation metadata; production identical and original controls retained. Genuine validation increments all3 observation maps and two distinct current metadata rows preserve actual order/counts. Nested metadata units preserve optional None/empty, five tagged capability scopes, full authority and relation fields; detached variations never installed into live issuer/permit. Original28 plus forward3 controls all compiled/caught: late-owned/top21 omissions/nested4/stale generation/zero actual counts/current fresh incarnation/remote lineage and failure key mappings. Controls change exact fields/typed values without JSONValue reconstruction or key-order ambiguity. Expected compiler shared-generation alias refusal E0506 exactly1/exit101 separate. Samecut normal2/default oldcodec13/QUIC no process-test-seams7/full1319 pass;37 actualrunfamilies/logSHA/restored38. One tests-only compile failure (green2 E0599two) retained and corrected without production change; no ordinary production compiler/fixture/resource failure or zero-test filter.
+Actual compiled native ordinary/I3 RED0pass2fail each detects15 owned authority-record DTO copies at native Body1. Green new2/existing typed authority-map4/previous M9generation7 pass. Existing full nested record metadata units preserve all optional fields/five scope variants/current values. Three late-owned sites, complete21 record field omissions, three backing-key controls and stale principal total28 compiled/caught. Key controls run existing4 typed map-key tests; other controls run genuine native2. Shared field serializers also serve M9; no isolated single-consumer mutation claim. Exact old binding equality uses retained real data, no JSONValue key reorder. Expected mutable record alias refusal E0506 exactly3/exit101 separately. Samecut normal2/default codec13/QUIC no process-test-seams2/full1321 pass;32 actualrunfamilies/logSHA/restored38. No ordinary compiler/fixture/resource failure or zero-test filter in this component.
 
-Separate M8 authority-map prepared visitor still owns membership/capability/witness DTOs at3 direct sites; other mutable/upper SourceBody/result/history/parent completion/currentAck suppliers remain OPEN before original Body. Source-origin nonclone handoff plus genuine optional I3 permit, actual reply/currentSourceAck/full S-T-S/newactivation/all3 subsequent refreeze/Astra D integrated acceptance remain. No global allocation/OOM/recovery/permission factory/clock-provider/authority/custody/root/permit/wire/API/grammar/Canon adoption, Dacceptance/E/W5+/Plan250-I3-4/newgoal/roadmap. Current actual M9 generation full make docs v1 passed; final metadata focused separately.
+Upper original SourceBody/result/history/parent completion/currentAck resources and exact source-origin nonclone handoff jointly with genuine optional native I3 permit remain OPEN before original Body. Actual reply/currentSourceAck/full S-T-S/newactivation/all3 subsequent refreeze/Astra D integrated acceptance remain. Audit any further mutable DATA supplier before dependent use; this closes exactly3 record sites, no global OOM/allocation/recovery guarantee. No authority/custody/root/permit/clock-provider/wire/API/grammar/Canon adoption, Dacceptance/E/W5+/Plan250-I3-4/newgoal/roadmap. Current actual M8 record full make docs v1 passed; final metadata focused separately.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.
