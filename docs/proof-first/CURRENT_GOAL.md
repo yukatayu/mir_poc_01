@@ -1,6 +1,6 @@
 # W4-D — owner-resumed2026-10-05 / stop threshold30
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-metadata-green-v1です。実状態のbinding生成でコピーしていたchecked identityとfrontierの直接生成5か所を、元データを借用する経路に置き換えました。既存のidentity全4項目・その中のSourceRef・構造上のentry全件と、frontier全件の順序・値を維持します。新規5件・欠落対照8件・通常ビルド2種・default既存codec13件・QUICでtest-seamsなし5件・全1291件が通り、38path復元済みです。新規defaultテストはfeature対象外なので数えません。元sourceBodyは0です。残るprogram全体／projection／admitted instance・mutable runtimeの記録生成資源、実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-program-green-v4です。FabricProgramが持つ実projectionと全14項目の旧snapshotを構築時に組にして保持し、実native実行後のbinding生成では保持済みデータを借用します。追加の永続フィールドはDATA1個で、権限・custodyを増やしません。唯一のprocess imageを消費する既存改変テストとconst getterの挙動も維持します。新規6件・検出できた対照7件・通常ビルド2種・default既存13件・QUICでtest-seamsなし6件・全1297件が通り、38path復元済みです。対照1件は外側の拒否処理が残るため未検出、0件のfilter2回は成功件数に含めません。修正前コンパイル失敗・fixture失敗・期待した書換え拒否・全体回帰のビルド容量不足を別分類で保持します。容量不足後は同じソースで増分キャッシュとデバッグ情報を抑えて再検証しました。元sourceBodyは0です。admitted instance／mutable runtime、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 Same W4 goal, sole main/no subagents. Canon/Plan250/I3-4 remain separately paused. No new roadmap or adoption. Exact inputs and jobs: RESUME.md/W4_CHECK.json.
 
@@ -11,8 +11,8 @@ does not itself start a new Oracle consultation during the sole-main Sol work.
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T12:39:36.481668+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T13:39:36.481668+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
-Updated 2026-10-06T02:02:51.589023+00:00
+週間残量は2026-10-06T13:39:51.407515+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T14:39:51.407515+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+Updated 2026-10-06T13:34:22.281483+00:00
 
 ディスクはownerの2026-10-01の依頼で整理済みです。直前の空き約4.8GiBから約12.4GiBへ、約7.6GiBを回収しました。repo targetと5か所のCargo専用buildだけを削除し、研究保存先133841ファイルとrepo追跡6403ファイルの削除前後のhash一致を確認しました。実験source・証明・検証ログ・receipt・browser状態は保持しています。Cargo build成果物は再開時に再生成します。詳細は外部storage-owner-pause-20261001-v1/RESULT.json。
 

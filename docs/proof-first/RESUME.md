@@ -2,14 +2,14 @@
 
 Same owner-resumed W4; sole main/no subagents/no Oracle/new goal. Owner explicitly resumed2026-10-05 after the passed component/authorized cleanup. Continue same W4-D until material contract counterexample, Astra D integrated acceptance, or remaining weekly capacity below30% followed by a sensible verified checkpoint; STOP before E. Plan250/I3-4 separately owner-paused. OwnerProtemporarycap preference explicit xhigh, actual model/effort verify, never silently medium; no current Oracle.
 
-Predecessor HEADdf922692 pushed/parity0/0/clean; GIT-ACTUAL-SOURCE-REF-v1.json verified. Actual11 run families terminal/restored38; current actual metadata docs then GIT-ACTUAL-METADATA-v1.json records actual authorized Git.
+Predecessor HEADda2013d9 pushed/parity0/0/clean; GIT-ACTUAL-METADATA-v1.json verified. Actual18 run families terminal/restored38; current actual program docs then GIT-ACTUAL-PROGRAM-v1.json records actual authorized Git.
 
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Current external/unadopted38path D/d-control-development/actual-metadata-green-v1, notes-v26. Actual five direct borrowed metadata suppliers only: new5/normal2/default codec13/no-seams5/full1291/8controls;11runfamilies/restored38. OriginalSourceBody0; actual result/history/completion/resources and source-origin/optional nativeI3 still OPEN.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; D=I/d-source-process. Current external/unadopted38path D/d-control-development/actual-program-green-v4, notes-v27. Actual full immutable program DATA backing only: new6/normal2/default codec13/no-seams6/full1297/7caught+1insensitive;18runfamilies/restored38. OriginalSourceBody0; actual result/history/completion/resources and source-origin/optional nativeI3 still OPEN.
 
 
 2026-10-05に実行終了後のCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約11GBから約14GBへ戻しました。追跡6403ファイル・外部現source38ファイル・3manifestの計6444hash一致を確認。研究source・証明・実験・ログ・receipt・browser状態は削除していません。詳細はINCREMENTAL-CLEANUP-20261005-v1.json。後続buildの再生成で空きは変動します。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-metadata-green-v1です。実状態のbinding生成でコピーしていたchecked identityとfrontierの直接生成5か所を、元データを借用する経路に置き換えました。既存のidentity全4項目・その中のSourceRef・構造上のentry全件と、frontier全件の順序・値を維持します。新規5件・欠落対照8件・通常ビルド2種・default既存codec13件・QUICでtest-seamsなし5件・全1291件が通り、38path復元済みです。新規defaultテストはfeature対象外なので数えません。元sourceBodyは0です。残るprogram全体／projection／admitted instance・mutable runtimeの記録生成資源、実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-program-green-v4です。FabricProgramが持つ実projectionと全14項目の旧snapshotを構築時に組にして保持し、実native実行後のbinding生成では保持済みデータを借用します。追加の永続フィールドはDATA1個で、権限・custodyを増やしません。唯一のprocess imageを消費する既存改変テストとconst getterの挙動も維持します。新規6件・検出できた対照7件・通常ビルド2種・default既存13件・QUICでtest-seamsなし6件・全1297件が通り、38path復元済みです。対照1件は外側の拒否処理が残るため未検出、0件のfilter2回は成功件数に含めません。修正前コンパイル失敗・fixture失敗・期待した書換え拒否・全体回帰のビルド容量不足を別分類で保持します。容量不足後は同じソースで増分キャッシュとデバッグ情報を抑えて再検証しました。元sourceBodyは0です。admitted instance／mutable runtime、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 Same genuine finite3parent ExpectedStart records configure ordinary source-A/owner-S static TLS pair inside bounded expected FD3 record before installation. Installed normal mode takes actual bound configuration once and joins complete own start/run/purpose/slot/program/cohort, static transport identity independent of updated M9. Real source Issue retains actual request/message/encoded frame and separate pre-Finish outgoing data; one-use transfer changes no source cursor/result/pending request. Normal QUIC opaque packet send requires inspected SPKI/reciprocal preface/initial session, reserves checked actual occurrence before write; no Runtime borrow through await.
 
@@ -23,11 +23,11 @@ Continue same W4-D: actual wholeactivation result/control used backing before pr
 
 First original statement source data → genuine real private QUIC → actual owning owner unadmitted data retention. Budgeted original owner Admit/I3 Awaiting/Resolve and actual native typed return holding realized; protected Body/M8 raw result/reply/source acknowledgment, whole distributed causality, subsequent update/multi-statement activation not realized. Data hashes/static TLS are not custody/body permission/OS authentication; no fresh full proof-audit/workspace/privacy/recovery/alpha campaign.
 
-Sole main: direct immutable metadata borrowed DATA retains complete old identity/frontier raw/fabric binding parity after genuine native RHS1; no Body/Finish or authority fabricated. Fresh full1291/restored38. Actual Body/history/completion/resources/joint source-nativeI3/networkAck/refreeze next; current actual metadata full make docs v1 passed; final metadata focused separately.
+Sole main: actual full immutable program DATA backing retains complete old14field snapshot/raw/fabric binding parity after genuine native RHS1; no Body/Finish or authority fabricated. Fresh full1297/restored38. Actual Body/history/completion/resources/joint source-nativeI3/networkAck/refreeze next; current actual program full make docs v1 passed; final metadata focused separately.
 
-週間残量は2026-10-06T12:39:36.481668+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T13:39:36.481668+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T13:39:51.407515+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T14:39:51.407515+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
-Latest resource audit: ACTUAL-METADATA-RESOURCES-v1.json at2026-10-06T12:49:09.697198+00:00; incremental v26/v27 preserves6444hashes/all experiments. Serial8GiBAS/-j1/testthreads1/core0; full docs/finalmetadata/Git separately; no notifications.
+Latest resource audit: ACTUAL-PROGRAM-RESOURCES-v1.json at2026-10-06T13:34:22.281483+00:00; incremental v28/v29/v30(empty0B) preserves6444hashes/all experiments. Serial8GiBAS/-j1/testthreads1/core0; full docs/finalmetadata/Git separately; no notifications.
 
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。

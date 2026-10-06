@@ -55384,5 +55384,229 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T12:53:48.198955+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-red-check-v1/RESULT.json",
+    "sha256": "ac6c9e4223480996d39c0c4610df48f69caef8f6ef8f5d1cd5918016a0344312",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-green-check-v1/RESULT.json",
+    "sha256": "18deceb118c4d986ff8f26349805bbd9726c7c0f35064f7bb227bb06956d2aa4",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-green-check-v2/RESULT.json",
+    "sha256": "6d1eb3846b11574b20ec0643601ecc8eba5b4a991fdd77ada2e59c52a2fe2396",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-green-check-v3/RESULT.json",
+    "sha256": "0cf3ab920dba27c3491d5b8f5caaafa363b7ab14ed498fea2ba6b9d8fabc9bc5",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-green-check-v4/RESULT.json",
+    "sha256": "be1a91372d0f790157b9afc37c4886291edb16d07066c6be0a2163889378440f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-late-owned-check-v1/RESULT.json",
+    "sha256": "82c4180c0358e7e8eefaeaaf6dd051236fec337d33e77c428077fcae228f5719",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-cache-missing-check-v1/RESULT.json",
+    "sha256": "0128e2d256897f50051b96174867d17de5106ce057125d54808446dfa7723c50",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-stale-value-check-v1/RESULT.json",
+    "sha256": "d8b0b063493cf78b518494d53f51451c5609d23ffbc42a0066e4506ddbead33d",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-omit-source-map-check-v1/RESULT.json",
+    "sha256": "8baf35ed4d0925d655d371b9ac5ec4877aacaed385064f17c9bb0b7d7b035c4b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-omit-admission-check-v1/RESULT.json",
+    "sha256": "bfda05b27dfcd6adc8bfef8aad0500d808f70bc7644088b96f0334adc9c2ebe2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-remove-no-refresh-check-v1/RESULT.json",
+    "sha256": "5737e02ee26bd49d578bdb948ce8ea8adbd8746cdb13045d2fa79ab0ab543cc3",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-mismatch-no-refresh-check-v1/RESULT.json",
+    "sha256": "4e1e3422d743afc33ecf03af2578e31ae97d520ae47fd68981d08d61ff731c5c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-mutant-refuse-no-poison-check-v1/RESULT.json",
+    "sha256": "0aa993e96cd863f0898520bea682db46bd60b71850749918b48c5a1b8c93d085",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-alias-refusal-check-v1/RESULT.json",
+    "sha256": "cd07da6bbe0eba20414f274d19b7ff4789780cda74f921fd31758b8bf9521b6f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-focused-check-v1/RESULT.json",
+    "sha256": "3f3162a34709f4081216c7168889dbb79039e9c23bda95ece737a024335789f0",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-focused-check-v2/RESULT.json",
+    "sha256": "105b5653cbd4fff9a5c9cb102a3a0ab1274dd1f9d52b4a8075e18a70ff31cfa3",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-combined-check-v1/RESULT.json",
+    "sha256": "f6aa90f372e336c1f1169f8be6577ce54ee0ebd4ab2cdee47398d9b41024e53a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-combined-check-v2/RESULT.json",
+    "sha256": "6c56132528e02a35a37c900abb6d801507bfcedeed69bc6768151f7e4c58a4ed",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual full immutable program DATA component: compiled RED/green/7caught+1insensitive/normal-default-no-seams-full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-COMPONENT-PLAN-v1.json",
+    "sha256": "90b667d502fe8431ca3ee5c18bb9cb99a574575c96d4feae6e300083eae5ca35",
+    "status": "read-reviewed-full",
+    "role": "Before-use actual constructor-funded full immutable program DATA backing",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-COMPONENT-SCOPE-CLARIFICATION-v1.json",
+    "sha256": "14a8955f134cdb33a0245df8b2f3988c71e8594ddcfc839423466d154e32fb42",
+    "status": "read-reviewed-full",
+    "role": "Existing detached finite mutation and const getter compatibility; admitted/mutable suppliers OPEN",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-MUTANTS-v1.json",
+    "sha256": "4de47c1e8956cd18b60cdd7a962202fcc0b2e2080c8dc76f7bd2cf136808be56",
+    "status": "read-reviewed-full",
+    "role": "Eight actual controls: seven caught plus one insensitive outer-guard case; originalBody0",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-ALIAS-REFUSAL-v1.json",
+    "sha256": "ce6de7653a54df287788fa1f6090acdd87edb8f3d4aad8380db1969760d2c475",
+    "status": "read-reviewed-full",
+    "role": "Expected compiler E0594 one, no raw mutable alias",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-BUILD-RESOURCE-DISPOSITION-v1.json",
+    "sha256": "2e52fd106fb6dbe779745099139b9998959fe81770d6dd5a3a2888afd212e9e2",
+    "status": "read-reviewed-full",
+    "role": "Actual full compile ENOSPC, no semantic tests; same source successor reduces disposable compiler output",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-RESOURCES-v1.json",
+    "sha256": "7d7a5a1905e7843e14c344d665f872fe745574495ae268e84547460e92f5f8e6",
+    "status": "read-reviewed-full",
+    "role": "Terminal source38/full resource audit",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v27.json",
+    "sha256": "a4d8a994aaa6bb3d28f0f0fad99129c8136c8d5545f42a2fd764c648e41a6301",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted reference and remaining Body/resource/joint proof gates",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-PROGRAM-CHECKPOINT-20261006-v1.json",
+    "sha256": "560f27b30a77dd438df6db94df6125a2a80de8d8d9ea09512ac044f405993552",
+    "status": "read-reviewed-full",
+    "role": "Actual immutable full program DATA checkpoint/full1297/restored38",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/actual-program-green-v4/SOURCE_PINS.json",
+    "sha256": "66bcf4cd7996a9865b7ff4c3dfbf2ad560324ef858bea7ee42a666a2a9b6e632",
+    "status": "read-reviewed-full",
+    "role": "Exact external38source pins, no Rust adoption",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v28.json",
+    "sha256": "0aa933211f52940e2924bf3f01b2dfd38460ff84260dfe231eb462607c76f80f",
+    "status": "read-reviewed-full",
+    "role": "Known disposable cache cleanup preserving6444hashes/all experiments",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v29.json",
+    "sha256": "d5d3f24c268718c395fb6a7fdf2e1d66bae0acfd790ed11fb8bf95fa9779369f",
+    "status": "read-reviewed-full",
+    "role": "Known disposable cache cleanup preserving6444hashes/all experiments",
+    "at": "2026-10-06T13:34:22.281483+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v30.json",
+    "sha256": "dbaa10ff8b024813d783e760c19f72ae1db1b7fe15534681485333fa51ab2637",
+    "status": "read-reviewed-full",
+    "role": "After actual full1297 terminal, empty Cargo incremental directory removed with --confirm; zero logical bytes,6444 hashes preserved",
+    "at": "2026-10-06T13:35:43.178261+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-program-docs-v1/RESULT.json",
+    "sha256": "7878e81815af21f37418a44ac1bb697696085c97470f0808970f40b80de3287d",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T13:40:44.069555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T133951Z.json",
+    "sha256": "f64b7057c71ae2f8d356121d8e6bb8f0e15696798c0af5908664b9cae4c3805e",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T13:40:44.069555+00:00"
   }
 ]

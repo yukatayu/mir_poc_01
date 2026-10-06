@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-06 21:49 JST
+Last updated: 2026-10-06 22:34 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -31,11 +31,11 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T12:39:36.481668+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T13:39:36.481668+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T13:39:51.407515+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T14:39:51.407515+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-metadata-green-v1です。実状態のbinding生成でコピーしていたchecked identityとfrontierの直接生成5か所を、元データを借用する経路に置き換えました。既存のidentity全4項目・その中のSourceRef・構造上のentry全件と、frontier全件の順序・値を維持します。新規5件・欠落対照8件・通常ビルド2種・default既存codec13件・QUICでtest-seamsなし5件・全1291件が通り、38path復元済みです。新規defaultテストはfeature対象外なので数えません。元sourceBodyは0です。残るprogram全体／projection／admitted instance・mutable runtimeの記録生成資源、実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-program-green-v4です。FabricProgramが持つ実projectionと全14項目の旧snapshotを構築時に組にして保持し、実native実行後のbinding生成では保持済みデータを借用します。追加の永続フィールドはDATA1個で、権限・custodyを増やしません。唯一のprocess imageを消費する既存改変テストとconst getterの挙動も維持します。新規6件・検出できた対照7件・通常ビルド2種・default既存13件・QUICでtest-seamsなし6件・全1297件が通り、38path復元済みです。対照1件は外側の拒否処理が残るため未検出、0件のfilter2回は成功件数に含めません。修正前コンパイル失敗・fixture失敗・期待した書換え拒否・全体回帰のビルド容量不足を別分類で保持します。容量不足後は同じソースで増分キャッシュとデバッグ情報を抑えて再検証しました。元sourceBodyは0です。admitted instance／mutable runtime、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、実返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
