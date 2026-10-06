@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-06 17:52 JST
+最終更新: 2026-10-06 18:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,7 +59,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-codec-backing-green-v2で、実返信の通信変換と送信パケットに使う2領域をRHS実行前に確保しました。実M8・SYS4・SYS5の戻り値を先に保持し、実返信とcarrierを借りて同じ領域へ変換します。バイト列・形式・上限と拒否条件を保ち、領域不足では本体前に拒否します。変換失敗でも実結果を失わず、切れたパケットを公開しません。3実経路で2領域の同一性と容量を確認し、通常要求・成功返信・期限切れ返信、文字列エスケープ・上限65536byteと超過、15拒否条件、実保持情報の変更検出、12変更対照を検査しました。新規14件・既存3／10件・接続17件、標準13件・追加テスト機能なし14件・通常2build・同cut全1261件、38path復元を確認しました。4つの実所有DATA項目を追加し、権限・契約・通信形式は変更していません。全activationの領域準備と本来のsource／実I3許可を消費するBodyは残件で、元sourceBodyは0です。実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeも未完了です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-retained-carrier-binding-green-v1で、実結果と保持中のruntimeを記録する2箇所のcarrierコピーを借用に置き換えました。同じ実messageの旧記録と全項目のバイト列が一致し、実RHS後のコピーがなくなることを3実経路で確認しました。新規4件・既存変換14件・接続17件、5変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規4件・同cut全1265件、38path復元を確認しました。最初のテスト用privateアクセスでcompile-only失敗1回があり、記録を保持しています。新しい本番項目や権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
@@ -177,4 +177,4 @@ active program/roadmap、official lifecycle、major blocker、accepted cut、evi
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを
 general proofやpublic product completionとして数えない。
 
-2026-10-06の整理対象は再生成可能なtarget/debug/incrementalのみ。v1～v12とv13／後続のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。v13空き5.4G→8.9G（df-h、後続buildで変動）。研究source・実験・証明・ログ・receipt・browserを保持。Report2614参照。
+2026-10-06の整理対象は再生成可能なtarget/debug/incrementalのみ。v1～v16のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。v16空き8.8G（df-h、後続buildで変動）。研究source・実験・証明・ログ・receipt・browserを保持。Report2614参照。

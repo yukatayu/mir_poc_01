@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-06 17:52 JST
+Last updated: 2026-10-06 18:23 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -35,7 +35,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-codec-backing-green-v2で、実返信の通信変換と送信パケットに使う2領域をRHS実行前に確保しました。実M8・SYS4・SYS5の戻り値を先に保持し、実返信とcarrierを借りて同じ領域へ変換します。バイト列・形式・上限と拒否条件を保ち、領域不足では本体前に拒否します。変換失敗でも実結果を失わず、切れたパケットを公開しません。3実経路で2領域の同一性と容量を確認し、通常要求・成功返信・期限切れ返信、文字列エスケープ・上限65536byteと超過、15拒否条件、実保持情報の変更検出、12変更対照を検査しました。新規14件・既存3／10件・接続17件、標準13件・追加テスト機能なし14件・通常2build・同cut全1261件、38path復元を確認しました。4つの実所有DATA項目を追加し、権限・契約・通信形式は変更していません。全activationの領域準備と本来のsource／実I3許可を消費するBodyは残件で、元sourceBodyは0です。実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeも未完了です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-retained-carrier-binding-green-v1で、実結果と保持中のruntimeを記録する2箇所のcarrierコピーを借用に置き換えました。同じ実messageの旧記録と全項目のバイト列が一致し、実RHS後のコピーがなくなることを3実経路で確認しました。新規4件・既存変換14件・接続17件、5変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規4件・同cut全1265件、38path復元を確認しました。最初のテスト用privateアクセスでcompile-only失敗1回があり、記録を保持しています。新しい本番項目や権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|

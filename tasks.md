@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-06 17:52 JST
+最終更新: 2026-10-06 18:23 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -24,7 +24,7 @@ Sole main/no subagents. Follow W4_D_IMPLEMENTATION_HANDOFF.md; return to Astra
 for material boundary changes or D integrated acceptance. E tests can use Sol
 following that acceptance; E/A–E synthesis uses Astra. No automatic model change.
 
-W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-codec-backing-green-v2で、実返信の通信変換と送信パケットに使う2領域をRHS実行前に確保しました。実M8・SYS4・SYS5の戻り値を先に保持し、実返信とcarrierを借りて同じ領域へ変換します。バイト列・形式・上限と拒否条件を保ち、領域不足では本体前に拒否します。変換失敗でも実結果を失わず、切れたパケットを公開しません。3実経路で2領域の同一性と容量を確認し、通常要求・成功返信・期限切れ返信、文字列エスケープ・上限65536byteと超過、15拒否条件、実保持情報の変更検出、12変更対照を検査しました。新規14件・既存3／10件・接続17件、標準13件・追加テスト機能なし14件・通常2build・同cut全1261件、38path復元を確認しました。4つの実所有DATA項目を追加し、権限・契約・通信形式は変更していません。全activationの領域準備と本来のsource／実I3許可を消費するBodyは残件で、元sourceBodyは0です。実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeも未完了です。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。外部未採用38path参照native-retained-carrier-binding-green-v1で、実結果と保持中のruntimeを記録する2箇所のcarrierコピーを借用に置き換えました。同じ実messageの旧記録と全項目のバイト列が一致し、実RHS後のコピーがなくなることを3実経路で確認しました。新規4件・既存変換14件・接続17件、5変更対照、通常2build・標準の既存変換13件・追加テスト機能なし新規4件・同cut全1265件、38path復元を確認しました。最初のテスト用privateアクセスでcompile-only失敗1回があり、記録を保持しています。新しい本番項目や権限・契約・通信形式の変更はありません。全activationの領域準備、本来のsource／実I3許可を消費するBody、実返信送受信・現在権限でのsource受領・S→T→S・次activation・後続update再freezeは残件です。元sourceBodyは0で、D完了ではありません。重要な契約変更又はD統合判定ではAstraへ、週間残量30%未満では検証済み区切りで停止します。
 
 ## ordered self-driven packages
 
@@ -33,7 +33,7 @@ W4-Dは同じgoalで継続中です。外部未採用38path参照native-reply-co
 | D normal build / Macro3 early | Fix actual private-QUIC feature closure, preserve fault controls | 着手可能: CLOSED reference: baselineRED then normal check/15 controls/full487 feature tests pass; prior472 receipt retained; no production adoption |
 | D frozen startup / Macro3/6 middle | Original inert data10, actual three-child FD3 startup21, prior28path normal builds/full937 (startup cut); entire actual Runtime owned and initial grant closed | CLOSED startup reference evidence; first source Issue now passed in successor, full continuation remains incomplete |
 | D whole-state preparation / Macro3/6 middle | Actual owning all3 prepared ACK→genuine parent M9 publication→all3 activation before grant-state reopening38path/full1054 passed; actual3child FD3 partial ACK/missing third/replay/raw fields/floor/independent publisher controls. First source Issue/real parent origin/actual QUIC/owning retention/Ready join/protected budgeted owner Admit/actual I3 Awaiting/Resolve/held Reserved or native expiry reply38path/full1100 passed; subsequent re-freeze and semantic owner/I3/body/result/resource | owner-resumed within handoff contract; proof/producer/caller/resource evidence before body use; Sol xhigh |
-| D source/I3/result/network / Macro3/6 | Actual original source/QUIC/Ready and protected budgeted Admit→actual I3 Awaiting→Resolve/real Reserved or typed expiry reply/actual rawreturn held; nativeM8 and authentic I3/SYS4/SYS5 raw-return caller9controls/5omissions/full1120 passed; ordinary no-budget typed/decoded raw caller12controls/6omissions/full1132 baseline passed; current original expiry reply prepared beforeFinish13controls/7omissions/full1136 passed; actual M8 kernel preBody backing15controls/8omissions/full1151 passed; native M8 facade used backing13controls/9omissions/full1164 passed; prior facade backing full make docs v1 passed; final metadata focused separately; native ordinary/decoded/genuineI3 prepared lower caller17controls/8omissions/full1181 passed; prior native prebody caller full make docs v1 passed; final metadata focused separately; real SYS5 served/write counters beforeBody7controls/6omissions/full1188 passed; prior native finalizer counts full make docs v1 passed; final metadata focused separately; native reply identifiers6controls/5omissions/full1194 passed; prior native reply ID full make docs v1 passed; final metadata focused separately; actual native SYS4 trace DATA beforeBody11controls/7omissions/full1205 passed; prior native fabric trace full make docs v2 passed; final metadata focused separately; actual native SYS4 owner report used backing beforeBody8controls/9compiled mutations/full1213 passed; prior native owner report full make docs v2 passed; final metadata focused separately; actual native SYS4 reply envelope/ID/queue/causality backing9controls/10compiled mutations/full1222 passed; prior native reply backing full make docs v1 passed; final metadata focused separately; actual native SYS4 diagnostic/quarantine/guard backing12controls/11compiled mutations/full1234 passed; prior native diagnostic backing full make docs v1 passed; final metadata focused separately; actual native SYS5 finalizer message/observer backing10controls/8compiled changes/full1244 passed; prior native finalizer backing full make docs v1 passed; final metadata focused separately; actual native borrowed outbound validation3controls/8compiled changes/15header+2index/full1247 passed; prior native borrowed outbound validation full make docs v1 passed; final metadata focused separately; actual native reply codec/frame/packet backing14controls/12compiled changes/full1261 passed; current native reply codec backing full make docs v1 passed; final metadata focused separately; finalmetadata/Git separately; remaining originalBody/wholeactivation resources and same-event source acknowledgment | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
+| D source/I3/result/network / Macro3/6 | Actual original Issue/QUIC/Ready/budgeted Admit/I3 Awaiting/Resolve retained. Native M8/SYS4/SYS5 lower-resource prerequisites passed; prior codec14/full1261 saved. Current retained-carrier binding4/oldcodec14/caller17/5 compiled controls/full1265/normal2/default oldcodec13/no-seams new4/restored38 passed; current native retained carrier binding full make docs v1 passed; final metadata focused separately. Wholeactivation used resources/full original sourceRoot+nativeI3/actual reply/currentSourceAck/subsequentrefreeze remain; protected originalBody0 | 後段依存: actual custody/resource/refinement gates; Astra for material contract decisions, Sol for fixed implementation |
 | D integrated acceptance / Macro3/6 | Exact-cut positive/falsifier/regression evidence, full residual reconciliation and docs/Git | 後段依存; Astra xhigh; stop before E |
 | E / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and A–E/119-row residual union | Inactive pending owner resume; Sol xhigh tests, Astra xhigh synthesis/acceptance |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration | Future horizon, not current execution; W8 remains separate long-term work |
@@ -69,7 +69,7 @@ Do not infer approval of119 proposals, signed acceptance or an alpha profile.
 
 ## provisional remaining effort, updated2026-10-06
 
-These are rough active-work hours after the samecutfull1261 reply codec backing component, not calendar
+These are rough active-work hours after the samecutfull1265 retained-carrier binding component, not calendar
 commitments or measured completion. D subrows are contained in D remainder.
 
 | Work unit / macro position | Active hours / main uncertainty |
@@ -85,7 +85,7 @@ commitments or measured completion. D subrows are contained in D remainder.
 | W6 / future horizon, inactive |40–100; actual secret-bearing two-run/observer resource/debug guarantees |
 | W7 / future horizon, inactive |24–60; coherent reusable finite alpha system and final review |
 
-Current actual reply codec backing14tests/12compiled controls/full1261/normal2/default13/no-seams14/restored38 passed; actual two64KiB allocations prepared before genuine native RHS and used for unchanged reply frame/separate packet.4owned DATA fields/complete visitor/true return retained. Wholeactivation/originalBody/actualreply/currentSourceAck/subsequentrefreeze remain; D20–40 hours low confidence unchanged.
+Current retained-carrier binding4tests/5compiled controls/full1265/normal2/default oldcodec13/no-seams new4/restored38 passed; genuine retained message/runtime borrows complete actual carrier DATA and keeps same old digest. No new production fields; other original/program/budget-condition DATA resource obligations remain. D20–40 rough active hours low confidence unchanged.
 
 Total140–340 active hours is a low-confidence planning estimate, not calendar
 commitment, measured completion, accepted scope or a new roadmap. W5/W6 bounds
@@ -111,7 +111,7 @@ W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。
 
 ## non-promoted references
 
-Current external/unadopted38path native-reply-codec-backing-green-v2; notes-v19/checkpoint.3source delta;4owned DATA fields/23borrowed-or-scalar view fields/no authority/contract/wire change. Actual used2allocations prepared before native RHS;14focused/12compiled controls/full1261/restored38 passed. Wholeactivation/sourceRoot+nativeI3/fulloriginal/actualreply/currentSourceAck/subsequentrefreeze remain; protected originalBody0/fixed frontier/no phase or roadmap recut.
+Current external/unadopted38path native-retained-carrier-binding-green-v1; notes-v20/checkpoint.2source delta/2production expression changes/0new production fields or types/no authority/contract/wire change. Genuine3routes/same-message old digest/new4/oldcodec14/caller17/5compiled controls/full1265/restored38 passed. Initial E0624 private test access1compile-only preserved; production visibility unchanged. Wholeactivation/sourceRoot+nativeI3/fulloriginal/actualreply/currentSourceAck/subsequentrefreeze remain; protected originalBody0/fixed frontier/no phase or roadmap recut.
 Conditional general proofs, finite Rust tests and physical process evidence are
 distinct. A–C bounded closure does not promote Canon/THM/OBL/phase/public/alpha
 status. R01–R12 and119 rows retain their original ownership and adoption status.

@@ -54278,5 +54278,145 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
     "at": "2026-10-06T08:58:02.825661+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-red-check-v1/RESULT.json",
+    "sha256": "482551b27d7d5119edf70106e67d293079584509686d86dcf74654a3bafa8fe8",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-red-check-v2/RESULT.json",
+    "sha256": "baa0d5447231b2f7d0145124937e6a1edd7d922cd7d784cc008b41a14992ab07",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-green-check-v1/RESULT.json",
+    "sha256": "5a3df4e39c6ca2a20d42dde26d5b166d982c16c1ff7291d51bc3490264c790e0",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-message-copy-mutant-check-v1/RESULT.json",
+    "sha256": "0ceec7d692bc491b4e194f82c24c1160e80f9e4fd29286ef8b3f7468621e3a64",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-runtime-copy-mutant-check-v1/RESULT.json",
+    "sha256": "47815c0c565e1e1544f5fca2a1a745492973509d091f00f9b70832965e285458",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-cohort-mutant-check-v1/RESULT.json",
+    "sha256": "42621e2f8fd45244acdea1e1f466b556674dcfa4c8f4612b0a7a019ff1ef3c9b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-carrier-mutant-check-v1/RESULT.json",
+    "sha256": "e79dc7586944713c0bca2b8b84b47f3ba2a7fad3664c17968a64093f6df45575",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-linked-mutant-check-v1/RESULT.json",
+    "sha256": "0320a6f90c8c1c4020d2d354912af452c65808e2acf7e76434178e9181beea5e",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-combined-check-v1/RESULT.json",
+    "sha256": "975d3f9bd1be87e3f9b1206115e288d0e9e578ba6047b81fb0a81b01da88901d",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual carrier binding initial compile-only/RED4/green4+oldcodec14/caller17/5compiled changes/normal2/default oldcodec13/no-seams new4/full1265/restored38",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-RETAINED-CARRIER-BINDING-COMPONENT-PLAN-v1.json",
+    "sha256": "0cf4f58cc284c3b775cf7627038ef5663949503308d6c0ca06ce9141167a4769",
+    "status": "read-reviewed-full",
+    "role": "Fixed current held-source/I3 result capture consumer/two genuine carrier copy suppliers/falsifiers",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-RETAINED-CARRIER-BINDING-MUTANTS-v1.json",
+    "sha256": "7cad79b9287d900a5f61d555e65c4a2f4984adf65791962f07526714b756f83a",
+    "status": "read-reviewed-full",
+    "role": "Five compiled actual copy/cohort/carrier/linked controls",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-retained-carrier-binding-green-v1/ACTUAL_NATIVE_RETAINED_CARRIER_BINDING_FIELD_INVENTORY.json",
+    "sha256": "cc5141472481bf3138adf8f602f98e0aeff42f6e108fd91a20bc75a7bd64c454",
+    "status": "read-reviewed-full",
+    "role": "Two production expression changes/zero new production fields or types",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v20.json",
+    "sha256": "7b3a249e56271266255f6f1c17705b6f2e39799c995842f3cf8e03d10ae5b358",
+    "status": "read-reviewed-full",
+    "role": "Actual carrier binding and remaining wholeactivation/source-I3 gates",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-RETAINED-CARRIER-BINDING-CHECKPOINT-20261006-v1.json",
+    "sha256": "472d37ff77440dc460799cdd009339417afe37e2d1b839891dea133cbbf6134b",
+    "status": "read-reviewed-full",
+    "role": "Exact final source scoped evidence summary",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-RETAINED-CARRIER-BINDING-SHARED-PRODUCER-REVIEW-v1.json",
+    "sha256": "f699e8ba7074a6bb4f21ab0daddf42290eea44bbe74caf8f82ca39cc4eb0b9b8",
+    "status": "read-reviewed-full",
+    "role": "Exact two production changes/verbatim old test reference/genuine3routes/same held digest/complete visitor",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-RETAINED-CARRIER-BINDING-RESOURCES-20261006-v1.json",
+    "sha256": "b7e26eaeb7e62abe0614adb95f057ef5d06dbec8b104b4cd22bad76118d49981",
+    "status": "read-reviewed-full",
+    "role": "Actual full exit/restored38 resource audit",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v15.json",
+    "sha256": "364b2a7aa68e3d5eaa8ab93c377c49cbe572218d72b2335801d95eaa8660adf0",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes preserved",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v16.json",
+    "sha256": "3875507906e725256647267b9bb6bc81e5b4dee6bfcc18e199c7e13dd5b2279c",
+    "status": "read-reviewed-full",
+    "role": "Known incremental --confirm cleanup/no active cargo-rustc/all6444hashes preserved",
+    "at": "2026-10-06T09:23:54.205555+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-retained-carrier-binding-docs-v1/RESULT.json",
+    "sha256": "984000b90893fdc86ff56f9dd8a81e06c7af479b5da3395ba8304c174e4c6783",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful exact11/restored38; narrow finalmetadata checked separately",
+    "at": "2026-10-06T09:29:08.399956+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T083837Z.json",
+    "sha256": "fac01f5c33fb07fe981a275a54fdd16de3626931b0df590a4522064634e62228",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Actual own weekly telemetry; below30 verified checkpoint stop, no Pro cap/account reset assertion",
+    "at": "2026-10-06T09:29:08.399956+00:00"
   }
 ]
