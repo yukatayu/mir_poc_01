@@ -54908,5 +54908,173 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T11:16:32.491739+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-red-check-v1/RESULT.json",
+    "sha256": "1bab24dbcaad9d04cfe83c52b41e18e1a693bd76d68621470d2e925dc73eb1b5",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-green-check-v1/RESULT.json",
+    "sha256": "76004cfdd483d634f8a4a8a59e97e02b428f682c63cc6155d0b4d935dca2203d",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-green-check-v2/RESULT.json",
+    "sha256": "2400020d3f5decb72dbdcd4095dd16fb7b098d6ce3fe5838cf286da6c5dfde93",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-green-check-v3/RESULT.json",
+    "sha256": "f886d9626222b32474e031e8f5be5eb5eaded57116f2e96a19e6437cedfd3187",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-green-check-v4/RESULT.json",
+    "sha256": "d72b3dc25fb5ffd5db64b31bab701b6277097d0730beb4530575d253bae714cb",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-source-join-check-v1/RESULT.json",
+    "sha256": "32ab65cb28f0436b6d6c3d20ce8c880edd162ea8e5031b12471f853ce80d0dee",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-owner-role-check-v1/RESULT.json",
+    "sha256": "087a46143f483945dda3cf549a60a98e7370a090eadd36e8679a8ee56a56a560",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-activation-check-v1/RESULT.json",
+    "sha256": "28eb01d2826e91b9ab02fe3f18dea4c227e91b41267a15f655fb9f569e38b07c",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-capacity-check-v1/RESULT.json",
+    "sha256": "da3d85ac9a83c6dc0c0a9dc7fd33cf5be4af66716ea426796c777285e5c76008",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-budget-stage-check-v1/RESULT.json",
+    "sha256": "4d5c87cdca51a2e1cc8fd1ca812e893231ccf192c3a429a4468553c68bd5e0d6",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-late-row-check-v1/RESULT.json",
+    "sha256": "6b99a890053bcfb8d6cff9b2d00351f429a9c4511169bbdfcb9f25eb28f61a4a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-mutant-field-omission-check-v1/RESULT.json",
+    "sha256": "db9a06b7e27d0c1006be8aec6baf2a56248241f560a0264179e0c991f0d07615",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-combined-check-v1/RESULT.json",
+    "sha256": "06445f1b2edfb4a9486f3562b9d0ee1e21d158d20b691490a12dcdb7d2bbeb68",
+    "status": "read-reviewed-actual-terminal",
+    "role": "Actual original parent Body control component: compiled RED/compile-only/expectation failure/green/refusal/controls/full, no SourceBody/E2E acceptance",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-CONTROL-COMPONENT-PLAN-v1.json",
+    "sha256": "3bb531b560062420799a3fb65069973883906edc7127cb95a3dd03a8bbb6eaa4",
+    "status": "read-reviewed-full",
+    "role": "Before-use bounded parent grant/real interval DATA direct consumer",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-I3-BODY-CORRESPONDENCE-DRAFT-v2.json",
+    "sha256": "b2360847dfd79c3351929e33c2326a7d8dc14425dc707e3babfcbd58c99d4762",
+    "status": "read-reviewed-full",
+    "role": "Known Canon singleton budget restriction/conditional native I3 route, still OPEN before Body",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-CONTROL-MUTANTS-v1.json",
+    "sha256": "01707784a438ab2dc96829a45e8c99de8b07551f394ef3276d1980c80dd5f6ed",
+    "status": "read-reviewed-full",
+    "role": "Seven compiled missing-check/retention/field controls, body0",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-CONTROL-RESOURCES-v1.json",
+    "sha256": "656c3564158d12a50bdca3e3248cf8b8832dd12b45812bb49c0e2d17c5351602",
+    "status": "read-reviewed-full",
+    "role": "Terminal source38/full resource audit",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v24.json",
+    "sha256": "fdd5e91b45c1769860ee16d3404106bea5cab364af3cfd681226a18a602cac33",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted reference and actual remaining Body/resource/joint permit gates",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-CONTROL-CHECKPOINT-20261006-v1.json",
+    "sha256": "20f684accf96c2c278eb4453a4852ed45a0af2854c3f9c7e22742629dfa5efca",
+    "status": "read-reviewed-full",
+    "role": "Actual parent Body interval checkpoint/full1281/restored38",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-control-green-v4/SOURCE_PINS.json",
+    "sha256": "bd13d724aea3d1c85ba41dc2284ac9d2d59c7646b65e127ec6fed63c7528c57c",
+    "status": "read-reviewed-full",
+    "role": "Exact external38source pins, no Rust adoption",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v22.json",
+    "sha256": "9ebe2509a0c5b4a22a73570a37ea6f891349417aa618a9119b04ef9a1f7d07b7",
+    "status": "read-reviewed-full",
+    "role": "Known disposable cache cleanup preserving6444hashes/all experiments",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v23.json",
+    "sha256": "d67ae533b70a7f534033f2faa74437f07876fe2923d59ec77728987a714d295a",
+    "status": "read-reviewed-full",
+    "role": "Known disposable cache cleanup preserving6444hashes/all experiments",
+    "at": "2026-10-06T11:48:09.689940+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-control-docs-v1/RESULT.json",
+    "sha256": "4015bca54f72fe98eb9e91dcaada463c307d76aac816d62e5665a3e8263ed3b8",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T11:52:33.771868+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T113924Z.json",
+    "sha256": "2f7638b21a17e1dbbb5628b32a923a3a8f78ef8d3a271c1354fd1b6545df3a62",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T11:52:33.771868+00:00"
   }
 ]

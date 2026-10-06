@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-06 20:11 JST
+最終更新: 2026-10-06 20:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T10:39:14.734176+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T11:39:14.734176+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T11:39:24.162156+00:00の実セッション記録で39%（使用61%）でした。次の確認は2026-10-06T12:39:24.162156+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,7 +75,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのscoped-original-binding-green-v2で、元source記録の下位処理前準備・全1273件・文書検証・2384f758の送信済み証拠を保持します。実I3解決結果の追加配列候補は採用しません。Canon spec/16の予算指定はowner代入1件に限定され、既存の1件保持欄で実結果を下位処理後・Finish前に保持できるためです。既存参照の実解決13件を再確認し、38path復元しました。候補の新規5件・既存解決13件・元source記録5件と失敗・対照ログも研究証拠として保持します。通常のS→T→S本体の実結果／制御記録を保持する領域とは別であり、その完了扱いにはしません。元sourceBodyは0で、全activationの実Body／履歴／制御領域、実source由来の一度限りの許可と実I3許可の接続、実返信・現在権限でのsource受領・次activation・後続update再freezeが残件です。予算付き複数文への仕様変更は始めません。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのoriginal-body-control-green-v4です。実sourceのIssue／Readyと対象owner・文の順番・全3processの現在のactivationを照合し、親のBody許可とその記録を送信前に保持する経路を検証しました。予算付き1文は実Admit／Resolveの記録も照合します。新規8件・欠落対照7件・通常ビルド2種・既存codec13件・QUICでtest-seamsなし8件・全1281件が通り、38path復元済みです。これは許可発行までの証拠で、元sourceBodyは0です。実Body／履歴／完了記録の保持領域、実source由来の一度限りの許可と実I3許可の接続、残る下位処理後の記録生成資源、実返信・現在権限でのsource受領・次activation・後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
@@ -694,3 +694,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-06 19:31 JST — 実owner受付・解決の元source記録を下位処理前に準備。旧全項目・owner役割が一致、新規5件・7変更対照・同cut全1273件・38path復元。RED3pass2failを保持。元sourceBody0。Report2614。
 
 - 2026-10-06 20:11 JST — Native解決結果の配列候補を非採用。Canon spec/16は予算指定を1代入に限定し、既存参照の実解決13件・38path復元を確認。本体／履歴／制御領域は残件、元sourceBody0。Report2614。
+
+- 2026-10-06 20:48 JST — 実Issue／Readyと現行activationを照合する親Body許可・送信前保持を新規8件／対照7件／全1281件で検証し38path復元。実SourceBody0、Body／履歴／完了領域・実source／I3許可接続は残件。Report2614。
