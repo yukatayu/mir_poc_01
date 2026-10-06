@@ -35,11 +35,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。ownerがSolへ切替えた後にD実装を再開し、2026-10-01に一時停止し、2026-10-05の指示で現在は再開しています。AstraによるDの統合判断前で次のmodel切替checkpointを設けます。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-i3-condition-green-v1です。実native AwaitingのissuanceとReservedのpermitで、admission-budget条件を旧DTOのコピーを作らず借用します。条件5項目・span7項目・source位置6項目と、許可全体の旧bindingを維持します。新たな永続フィールドと権限・custodyの追加は0で、借用後の実native handoffも各1回成功しました。新規3件・検出対照10件・既存Source Resolve13件・pending budget3件・通常ビルド2種・default13件・test-seamsなし3件・全1312件が通り、38path復元済みです。借用中の条件書き換えはE0506で1件拒否されています。条件のcaptureはnative実行前の回数0で、元sourceBodyも0です。M9 generation全体の旧DTO、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
+W4-Dは同じgoalで継続中です。現参照は外部未採用38pathのactual-m9-generation-green-v3です。M9 generationの21項目と内部の権限・関係・lineage・失効・失敗・3種類の実観測マップを、旧DTOのコピーを作らず借用します。旧記録の全項目・順序・現在の値と、実native処理後のraw／fabric全体のbindingを維持します。永続・cache・権限・custodyフィールドの追加は0です。新規7件・検出対照31件・既存M9記録3件・局所状態維持7件・通常ビルド2種・default13件・test-seamsなし7件・全1319件が通り、38path復元済みです。借用中のgeneration書き換えはE0506で1件拒否されています。実native処理は各1回で、元sourceBodyは0です。別のM8権限マップ3か所、実Body／履歴／完了の保持領域、実source由来の一度限りの許可と実I3許可の接続、返信／現在権限でのsource受領／次activation／後続再freezeは残件です。予算指定はCanon spec16の1代入制限を維持します。重要な契約変更・反例又はD統合判定ではAstraへの切り替え前に、週間残量30%未満では検証済み区切りで停止します。
 
 W4-Dは2026-10-05のowner指示で同じgoalの実装を再開しています。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
 
-週間残量は2026-10-06T14:40:27.184368+00:00の実セッション記録で38%（使用62%）でした。次の確認は2026-10-06T15:40:27.184368+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
+週間残量は2026-10-06T15:40:39.308159+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T16:40:39.308159+00:00以降。残量30%未満又はAstra判断引継ぎでは検証済み区切りで停止。account resetはownerのみ。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

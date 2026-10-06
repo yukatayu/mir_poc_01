@@ -56147,5 +56147,362 @@
     "status": "read-reviewed-own-session-quota",
     "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
     "at": "2026-10-06T15:34:22.084832+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-red-check-v1/RESULT.json",
+    "sha256": "d91292940dcb166dda8816a2662f8766697e4575ff641486abcbebe1b2dffcad",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-green-check-v1/RESULT.json",
+    "sha256": "ec6cc24f3e8ad945674cd78ac048865f6cbcac904f8aafdd7502b1c8bf178c35",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-green-check-v2/RESULT.json",
+    "sha256": "7a6390c564ce30befa0651dfa2bc75c868cdb397d3fb2df51247e6509ab6d180",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-green-check-v3/RESULT.json",
+    "sha256": "e31cef6a8a74c52c20f5b48677c8208de79a2534219dd76a67fe637261d2ad83",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-late-owned-check-v1/RESULT.json",
+    "sha256": "e4dfbb602eb79e95d170eee9f385919274666645f95d8826cd9e6837d470c07b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-version-check-v1/RESULT.json",
+    "sha256": "b1c3d5dff79339a4ddec950a08c8bb906e9e4588d1f80504fe729f408f49bd25",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-program_identity-check-v1/RESULT.json",
+    "sha256": "cd8c86cdee236e3328ff5ecc08c0a51871aeb075333b9f63c8ce5a5920380641",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-generation-check-v1/RESULT.json",
+    "sha256": "51c2e41f22262ddaa01da4657510d7d79debfb64b8b5b7802edef9ce31914548",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-generation_ref-check-v1/RESULT.json",
+    "sha256": "3b8730d931aebd9ea1a668fbf0e29cd4eb75c2ec290f871f277e1d77881eddd1",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-authority_state-check-v1/RESULT.json",
+    "sha256": "edc0cd1f41e223ec3bccad997ffaf2aa734955589a72d20acd936ef1e26e69f2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-owner_uses-check-v1/RESULT.json",
+    "sha256": "6181549b0862fef026461f0083102a36369ef7d1e55cc589c0f34ff1b07cd36f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-relation_uses-check-v1/RESULT.json",
+    "sha256": "29cb32e1e8b93d036ce7318a2961211506755dd8abaa97bf63877b2af49c2ff7",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-fresh_relation_reacquire_bindings-check-v1/RESULT.json",
+    "sha256": "9b82b88c6e9d1d59b192bbc41a83803d13515aaf762737cfb97df48e04981af4",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_evaluation_uses-check-v1/RESULT.json",
+    "sha256": "1c94b0f619f9b4ad1647508be81ccbc9d9884d131e88e309f4697c63a017b49b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_consumption_uses-check-v1/RESULT.json",
+    "sha256": "cf2e81007ba42b43959c0788b33449fcaf2df3213547c6ea8405b25ceec52da2",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-kernel_owner_lineages-check-v1/RESULT.json",
+    "sha256": "a33a4a02487fa6b3edda2edab184fbe545fe531d416f485081e5281eb2c53f0f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-revoked_owner_capabilities-check-v1/RESULT.json",
+    "sha256": "1521fcf9b3e4cad985ae18b61dc19ed581b4575b6179c6b0479a0e871916305b",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-revoked_designated_consumption_capabilities-check-v1/RESULT.json",
+    "sha256": "5717cec61f56dfe2b543b1d70ad2a4647379e60ec67c952c40343ab654a17d70",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-kernel_designated_remote_input_lineages-check-v1/RESULT.json",
+    "sha256": "a1ae149acec20619d016559ac576b0fb85e52b141a9d6334dc85fd6a36344df9",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_consumer_failures-check-v1/RESULT.json",
+    "sha256": "b1c70f03fd8f3596ba05b666d999849ec73c786d7ca8df44614e59ba3c2d88a4",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_consumer_witness_retirements-check-v1/RESULT.json",
+    "sha256": "4977b8effd278b73358fddac96a99b4e0d47a0c39f5f4734686ef4a056c57f93",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_source_release_failures-check-v1/RESULT.json",
+    "sha256": "d45c7539c1cb4e3a12c0c346ca9b8bd7a6100f35d6ee7b72728e4097aabb5868",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-designated_consumer_validation_occurrences-check-v1/RESULT.json",
+    "sha256": "b630a8cd14b313b63e675e4bf771fff0c2769dce74e6cb4949b5826bde5675a3",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-owner_operation_validation_occurrences-check-v1/RESULT.json",
+    "sha256": "13aacd1ce77b4764d712e4e7c52db01ca3f4653a96a394e81fe2406d892f607a",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-source_release_validation_occurrences-check-v1/RESULT.json",
+    "sha256": "9d68c4e9f7679590ebb62bec3a13042962c9c507832c7cb8944446c55a13f15f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-omit-integrity_ref-check-v1/RESULT.json",
+    "sha256": "4c5215fef475977b26ab76dd94df04ba1a4097c5c41c3785c7d27156c13b5dab",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-nested-membership-epoch-check-v1/RESULT.json",
+    "sha256": "37e95b5325dc62118ba6784e8579165bc57ad6b511168379704d34e89621a7f3",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-nested-capability-scope-check-v1/RESULT.json",
+    "sha256": "0db9559780839c687e7c966f6d64a0295caa2d78e3daa1cd918fd0ae7555fb70",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-nested-witness-live-check-v1/RESULT.json",
+    "sha256": "edbce8777311a9726f8e875dff256831a68cc6daeb1baceae11136a86277cc6f",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-nested-relation-witness-epoch-check-v1/RESULT.json",
+    "sha256": "d925909753daade428ea86ced6a95d2672526928d62a027b2ab247bcb378d5a8",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-stale-generation-check-v1/RESULT.json",
+    "sha256": "402ce86f64516b89d010c2343910ad96a67613875a46b3bf20c8a666ec4bb318",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-zero-current-occurrence-counts-check-v1/RESULT.json",
+    "sha256": "1dac84e4cacea95e999fa9883f17230ab9714784aea22085c815458f4fa3e1e1",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-fresh-incarnation-previous-check-v1/RESULT.json",
+    "sha256": "44d3c1b2ef54036098c28c0432dc0a22acacaeccf524a791a44245b19d10de46",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-remote-key-producer-evaluator-swapped-check-v1/RESULT.json",
+    "sha256": "f50a1f5463053c70382fbb045af95130effe8eb8454db61a2860d7552f1322f7",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-mutant-failure-key-wrong-producer-check-v1/RESULT.json",
+    "sha256": "616a01e0c029f4b4475de961427ae288ab0c653bb42eef183940c64161bb0356",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-alias-refusal-check-v1/RESULT.json",
+    "sha256": "4e8f1ce52c64c9a82482cb035cde34bf71d70faab1e16b9f513d301754fe09d5",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-combined-check-v1/RESULT.json",
+    "sha256": "369a4ad0e2a10710b78f3a9e86c5b775dec4cca82471bb8a82c7c48ae11ffe15",
+    "status": "read-reviewed-actual-terminal",
+    "role": "M9 current21field DATA: compiled RED/greens31controls/expected alias/normal-default-no-seams-full; no originalBody/Dacceptance",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-COMPONENT-PLAN-v1.json",
+    "sha256": "9f90831642794006002d4869f9d691f1b6d693786fc966b28ed3c4f675e6b7bc",
+    "status": "read-reviewed-full",
+    "role": "Before-use actual M9 generation DATA consumer",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-MUTANTS-v1.json",
+    "sha256": "911810dc83c45ae0156d264a9f4e930eae5d4507181e70c00e7901430313bfd6",
+    "status": "read-reviewed-full",
+    "role": "Original28 compiled/caught controls",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-MUTANTS-v2.json",
+    "sha256": "f502d9b928eb1c78ff1f39a7ccd584f03573414e9f71a11254afb0da1eb494a3",
+    "status": "read-reviewed-full",
+    "role": "Forward3 exact field-value/key controls",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-ALIAS-REFUSAL-v1.json",
+    "sha256": "0f88cbb2730fd429e67a6946d1cad7815f40a432eaee459ca9301816bef9bca9",
+    "status": "read-reviewed-full",
+    "role": "Expected shared generation alias E0506one",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-TESTS-SUCCESSOR-v1.json",
+    "sha256": "ff20e298522276613214b9eadc187c9adae83ee9a85c77af340e152ed0724137",
+    "status": "read-reviewed-full",
+    "role": "Tests-only successor/production identical/Some lineage and failure metadata",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-ITERATOR-REVIEW-v1.json",
+    "sha256": "0686f9b4de213665db4035bf2bdadd6de5665604e9a525cd725090f5d1e60cd5",
+    "status": "read-reviewed-full",
+    "role": "Primary Rust1.94.1 borrowed iterator implementation review; no global allocation proof",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-TESTS-CORRECTION-v1.json",
+    "sha256": "ccec7039eafbfe83d367047ad8673a115ad4a5bb6e5e3f1a43796f7dfb3914dc",
+    "status": "read-reviewed-full",
+    "role": "Tests-only E0599two correction; no production change; failed source/run retained",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-RESOURCES-v1.json",
+    "sha256": "88f5d85aa4a00660c9ea57f5fade6b3544d2230242b1434044fdf529ca674da3",
+    "status": "read-reviewed-full",
+    "role": "Actual post-full resource audit",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v31.json",
+    "sha256": "6bd324e505bfdb06779659abcaca697d00cc91416a1347e4214e1ec6ec1aff67",
+    "status": "read-reviewed-full",
+    "role": "Current unadopted source and remaining originalBody gates",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ACTUAL-M9-GENERATION-CHECKPOINT-20261007-v1.json",
+    "sha256": "1ed0498e401b72da828692eb78975a1af7929f04bded555fe6f06f59e0278778",
+    "status": "read-reviewed-full",
+    "role": "Actual37 runfamilies/new7/full1319/restored38 checkpoint",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/actual-m9-generation-green-v3/SOURCE_PINS.json",
+    "sha256": "d180a4d9b3168fb0333b7d66fad773c800a7584615a12713ee57a74317f8ed99",
+    "status": "read-reviewed-full",
+    "role": "External38 pins; no production adoption",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261007-v2.json",
+    "sha256": "06003d9221f2ebd1b56a776683b07bc2e0bc5980638d5f9d4cf6c2f18a97f9f8",
+    "status": "read-reviewed-full",
+    "role": "Canonical incremental cleanup/6444 hashes/research preserved",
+    "at": "2026-10-06T16:19:49.302931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/actual-m9-generation-docs-v1/RESULT.json",
+    "sha256": "9921cde242182e89f770c15ac3d7d6342fb93ee9a3f784bbf52cb4f17a3fc41e",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs actual exit0/exact11/logSHA/restored38; finalmetadata separately",
+    "at": "2026-10-06T16:25:01.616352+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261006T154039Z.json",
+    "sha256": "5214b4c1e6b216c5c0f0d3619897cfe96d2fedb9841fe1a4ad79f583cff82aa9",
+    "status": "read-reviewed-own-session-quota",
+    "role": "Own session weekly telemetry/strictbelow30 verified checkpoint stop; no Pro cap/account reset assertion",
+    "at": "2026-10-06T16:25:01.616352+00:00"
   }
 ]
