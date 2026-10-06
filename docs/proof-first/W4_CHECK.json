@@ -62085,5 +62085,360 @@
     "exit": 0,
     "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
     "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
+  },
+  "d_actual_native_reply_id_20261006": {
+    "at": "2026-10-06T01:26:19.313895+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-ID-CHECKPOINT-20261006-v1.json",
+    "receipt_sha256": "7abac9149ac2c99005cf3d5c0ce3ad66680828c231c2ec77e242e3626b868126",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-reply-id-green-v1",
+    "source_pins_sha256": "15d8760df6f94cc78c31e02cdd0f40501c7b91b3d99d48f6049b0ba1d1f4f6ff",
+    "field_inventory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-reply-id-green-v1/ACTUAL_NATIVE_REPLY_ID_FIELD_INVENTORY.json",
+    "lower_notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v12.json",
+    "runs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-red-check-v1",
+        "result_sha256": "cc650dba86fe10ea3a5c91c15917eb696d8919863c6fac6e4944b6f8f7dc973b",
+        "restored_sha256": "7fe4f584060487ccd6c5759e453f4b456db129e00ab3c5104a486a7810b7521f",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "853a651c82e5bdb493f2b9ce36d051f0765aa87accd524be0afe483ee16633dd"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-green-check-v1",
+        "result_sha256": "38e95dffac49ae873fb15a1c34e2406b2367661c42fc554f1a577630d7103de6",
+        "restored_sha256": "f5316f755c6274fe44ea326d6e274f0776e2d573d7ffb74fb0fe7c7ce423cc11",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "43eb1593cd4f637b5899e4c4303e23f57929976ddc759556ae58d3b86cfd6975"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "d2faf01ef372005acb21d70e03866eb6ff358c5dcd0379630792cb1961c2243b"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "192277beeeb65bac06bd3713df57c341585eb4953ee8b687ce6359fb844e8c05"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_finalizer_counts",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "536e225bb9a189bd2e123632ce5dba6ea95b723612c8b18100f06f12623c1ad1"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_prebody_lower_caller",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "e2e1cf5b417385608338b8e0a89dd10ceb6f919b69b42102827bae57f1768c41"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-omit-mutant-check-v1",
+        "result_sha256": "22c5bfa70988c9e9b8391028e032aa7243f2fdcb6976f44386b5f317f5136be7",
+        "restored_sha256": "035945b7d62220e4b80624f316c70d5c9ba7f04734f082c1cd4f47f35182ff92",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "1e4e63162cee3a3f91b8107cc4edd1f8a5137656b40cf6cbbf97bf10c6418254"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-weak-mutant-check-v1",
+        "result_sha256": "6d7bf1ac32ffc82bd971e148c06aeb6d114875afeea62a20db0dd8e9c422adff",
+        "restored_sha256": "ac68996aa627559631f3928eff53810dd80414da0016cd26ae201c2c1762065a",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "b51421cd42a07eff261796efbaf370f70c4794149b886b5aecf7134097bf7a10"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-strict-mutant-check-v1",
+        "result_sha256": "2029362947a85cd03ffef02f05fbb9f6e5a29e9ed2e4e039f77ba6cc4a05fa3f",
+        "restored_sha256": "bba5e167565f517f508281db812ccc4c97f4bb378014920b2827b2880d1d352c",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "2d794688ca1324b677a7e57cdc3b75bed66e5621357bfe784dfecd37ef1e7725"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-legacyroute-mutant-check-v1",
+        "result_sha256": "9aceb551b64c291dc144b8f1e917821a7c50da33cf21a3d2b51d37383d2aa502",
+        "restored_sha256": "c9e3095e7c2968bca5f20c1bc72d8cf4958b92c5f97188f0e359162b4e22ce1a",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "7649a2d52b3eb219a49d90a776c89d9afd43bfbd1de7c9efbbc48209c4492fc9"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-late-mutant-check-v1",
+        "result_sha256": "8eb3840adec9d9eeaa1ca4ce13eaa652a116959380a97f5276fda12544eee078",
+        "restored_sha256": "9f0144f40219373f7b4daf2c0d8439f481df23867ffba84b89215c5c9fc30069",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 101,
+            "log_sha256": "0fbb3820cce3dabbf6e2b99a0bda688b6943a341e50373823dd9373ef77604bb"
+          }
+        ]
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-combined-check-v1",
+        "result_sha256": "b426e29a7e72ce601bea910465c6aa079c0401488599f513b94d56a958fb3ac7",
+        "restored_sha256": "c6e19f6b2782c5d488b60f6ecfa3db3da82ab11ae47621f9e50be5d82d67ebcf",
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib"
+            ],
+            "exit": 0,
+            "log_sha256": "7ad29d1a8e0b18f9b828c276e21a64233fbc67ee107a160a6a9f8a154a65d811"
+          },
+          {
+            "command": [
+              "cargo",
+              "check",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic"
+            ],
+            "exit": 0,
+            "log_sha256": "a79717aa786c2b95433fa8a5c77c1bd1d9d8bbbbb779a75401fd87a28a977881"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "bd667ffd62e255f5b368e8890d29c70577fc621129823f426c894e6cb3460327"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic",
+              "actual_native_reply_id",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "5da306f8ccc42cb9dd0ddce627618ce2112b720c68ce609a76ebf57589832867"
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-j1",
+              "-p",
+              "mir-runtime",
+              "--lib",
+              "--features",
+              "i3-private-quic,i3-process-test-seams",
+              "--",
+              "--test-threads=1"
+            ],
+            "exit": 0,
+            "log_sha256": "d894e673b99e607873e3a8306e4aaf102cd6c385429c569a9e80936a558435f0"
+          }
+        ]
+      }
+    ],
+    "focused": 6,
+    "existing_caller_controls": 17,
+    "existing_sys5_controls": 7,
+    "omissions": 5,
+    "normal_builds": 2,
+    "default": 6,
+    "without_test_seams": 6,
+    "full": 1194,
+    "all38_restored": true,
+    "sourceBody": 0,
+    "scope": "Actual native SYS4 prepared lower caller checks four successful reply identifiers before dependent RHS. Numeric prerequisite only, not actual reply/aggregate allocation, whole source/activation or distributed acceptance.",
+    "docs": "pending full11 docs/metadata/actual Git separately",
+    "goal": "same active W4-D"
+  },
+  "d_actual_native_reply_id_docs_20261006": {
+    "at": "2026-10-06T01:30:41.420516+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-docs-v1/RESULT.json",
+    "receipt_sha256": "e8830d585bab1e2fa42c482e5f9ebd491fc6ce2a6a9596ea2f9c0220349dc817",
+    "exit": 0,
+    "scope": "Full make docs on exact11owned docs/restored38baseline source; final metadata suffix verified separately, not fresh general proof/source audit",
+    "goal": "SAME active W4-D, no acceptance/pause/new roadmap"
   }
 }

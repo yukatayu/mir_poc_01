@@ -52906,5 +52906,96 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
     "at": "2026-10-06T01:02:19.850758+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-red-check-v1/RESULT.json",
+    "sha256": "cc650dba86fe10ea3a5c91c15917eb696d8919863c6fac6e4944b6f8f7dc973b",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-green-check-v1/RESULT.json",
+    "sha256": "38e95dffac49ae873fb15a1c34e2406b2367661c42fc554f1a577630d7103de6",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-omit-mutant-check-v1/RESULT.json",
+    "sha256": "22c5bfa70988c9e9b8391028e032aa7243f2fdcb6976f44386b5f317f5136be7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-weak-mutant-check-v1/RESULT.json",
+    "sha256": "6d7bf1ac32ffc82bd971e148c06aeb6d114875afeea62a20db0dd8e9c422adff",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-strict-mutant-check-v1/RESULT.json",
+    "sha256": "2029362947a85cd03ffef02f05fbb9f6e5a29e9ed2e4e039f77ba6cc4a05fa3f",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-legacyroute-mutant-check-v1/RESULT.json",
+    "sha256": "9aceb551b64c291dc144b8f1e917821a7c50da33cf21a3d2b51d37383d2aa502",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-late-mutant-check-v1/RESULT.json",
+    "sha256": "8eb3840adec9d9eeaa1ca4ce13eaa652a116959380a97f5276fda12544eee078",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-combined-check-v1/RESULT.json",
+    "sha256": "b426e29a7e72ce601bea910465c6aa079c0401488599f513b94d56a958fb3ac7",
+    "status": "verified-scoped-result-and-log",
+    "role": "Actual native SYS4 reply identifier preflight beforeBody: compiled RED2pass4fail/new6/existingSYS5counter7+caller17/5compiled omissions/default6/no-seams6/full1194/all38restored; actual allocation/sourceBody/generalproof remain",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/native-reply-id-green-v1/ACTUAL_NATIVE_REPLY_ID_FIELD_INVENTORY.json",
+    "sha256": "78e0226405ff2babdf0b6c3530eeda78086d4f2b5f651ff3f11305e4674ee42d",
+    "status": "read-reviewed-full",
+    "role": "Readonly actual counters/shared consumers/no new field or authority/unchanged native finalizer and capture",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NATIVE-REPLY-ID-COMPONENT-PLAN-v1.json",
+    "sha256": "890025202a23139dc134082b140f8bdb9d4d3ce98531a632db84748594cd8701",
+    "status": "read-reviewed-full",
+    "role": "Selected actual preBody counter consumers/smallest alternative/falsifiers/non-effects",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v12.json",
+    "sha256": "04814433e9c7ea0a437f7e6ed896ba61cd0751d68ef0cfedba81f56c2218ff1d",
+    "status": "read-reviewed-full",
+    "role": "Numeric preflight scope and remaining actual upper allocation/source-I3 Body prerequisites",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/INCREMENTAL-CLEANUP-20261006-v1.json",
+    "sha256": "edf72f75c793454e6d8fc2990ebb52e648feb6ac6fa8589acb0d2ec2545069bb",
+    "status": "verified-known-disposable-cleanup",
+    "role": "Only target/debug/incremental removed with --confirm/no active cargo/rustc;6444hashpreserved/resource audits/research retained",
+    "at": "2026-10-06T01:26:19.313895+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/native-reply-id-docs-v1/RESULT.json",
+    "sha256": "e8830d585bab1e2fa42c482e5f9ebd491fc6ce2a6a9596ea2f9c0220349dc817",
+    "status": "validated-exact-docs-snapshot",
+    "role": "Full make docs successful11inputs on restored baseline, final metadata suffix separately; no full proof/source audit claim",
+    "at": "2026-10-06T01:30:41.420516+00:00"
   }
 ]
