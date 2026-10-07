@@ -21,3 +21,5 @@ Updated 2026-10-06T18:22:20.876967+00:00
 2026-10-06に再生成可能なCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約5.7GBから約12GBへ戻しました。追跡6403ファイル・現在の外部source38・3manifestの計6444hash一致を確認。研究source・実験・証明・検証ログ・receipt・browser状態は保持しています。詳細はINCREMENTAL-CLEANUP-20261006-v1.json。後続buildで空きは変動します。
 
 2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
+
+2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。

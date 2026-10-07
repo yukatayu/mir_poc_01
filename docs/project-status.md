@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-07 03:22 JST
+最終更新: 2026-10-07 12:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -177,4 +177,4 @@ active program/roadmap、official lifecycle、major blocker、accepted cut、evi
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを
 general proofやpublic product completionとして数えない。
 
-2026-10-07の整理対象は再生成可能なtarget/debug/incrementalのみ。20261006-v1～v42及び20261007-v1～v5のINCREMENTAL-CLEANUP receiptに資源audit・6444hash保持を記録。研究source・実験・証明・ログ・receiptを保持。buildはincremental/debug info0。Report2614参照。
+2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。

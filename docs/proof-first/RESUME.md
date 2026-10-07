@@ -27,7 +27,7 @@ Sole main: authentic original owner control reader verified; no duplicate/Clone.
 
 週間残量は2026-10-06T17:43:34.562809+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T18:43:34.562809+00:00以降。停止理由はAstraへの切替前の引継ぎです。週間残量30%未満も確認した場合のみ追加の停止理由とします。account resetはownerのみ。
 
-Latest resource audit: ORIGINAL-BODY-READER-RESOURCES-v1.json at2026-10-06T18:22:20.876967+00:00; incremental20261007-v5 preserves6444hashes/all experiments. Serial8GiBAS/core0/-j1/threads1/incremental-debug0; no external mount assumed/notifications.
+Latest resource audit: /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v1/RESULT.json; only canonical Cargo target removed; all preserved hashes match; goal remains paused. Explicit resume requires regeneration of Cargo artifacts; current source/notes34/reader evidence unchanged.
 
 
 W4-Dは2026-10-05にowner指示で同じgoalを再開し、現在はAstraへの切替前の検証済み区切りで停止します。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
@@ -63,3 +63,5 @@ Current owner-resume receipt: /home/codex/.local/state/mirrorea-proof-first/w4-2
 2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
 
 Next owner action: switch to gpt-6-astra with explicit xhigh, then goal resume on the existing W4 goal. No clear/new goal required. Review pinned ORIGINAL-SOURCE-NATIVE-I3-ASTRA-HANDOFF-v1.json before choosing the joint private source-origin/native-I3 handoff. This handoff does not activate Plan250/I3-4 or E/W5+.
+
+2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。

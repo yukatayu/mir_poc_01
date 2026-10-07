@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-07 03:22 JST
+最終更新: 2026-10-07 12:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -716,3 +716,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-07 02:31 JST — 実FD3 ownerの全ordinal分の保持領域をRuntime起動前に確保。新規5件／対照11件／既存準備2件／通常2種／default13件／test-seamsなし5件／全1326件、E0506拒否1件と38path復元。空領域とdetached DATAの証拠、元SourceBody0／実Body保存は未実行。Report2614。
 
 - 2026-10-07 03:22 JST — 実FD3 ownerの元source Body制御readerを検証。新規7／対照16／既存8／通常2種／default13／test-seamsなし7／全1333、借用・Clone拒否各1と38path復元。元SourceBody0。source-origin/native-I3設計判断前のAstra引継ぎを準備し、同じgoalの停止条件を適用。Report2614。
+
+- 2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。

@@ -64241,5 +64241,27 @@
     "quota_stop_observed": false,
     "scope": "Full make docs exact11/restored38; narrow finalmetadata suffix separately checked, no generalproof/fullsource/Dacceptance",
     "goal": "Same W4-D, owner conditional pause after authorized Git"
+  },
+  "owner_storage_cleanup_paused_20261007": {
+    "at": "2026-10-07T03:00:05.676029+00:00",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v1/RESULT.json",
+    "sha256": "f26a6b1faee0289f998958fcd8c6f7e438e87ba867715fff195b529ca67d74c9",
+    "preserved_manifest": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v1/PRESERVED.json",
+    "preserved_manifest_sha256": "5426a33e21784736101c1e29a262788612613d480c32643ba17e81105718e0bd",
+    "removed_only": "/home/codex/dev/mir_poc_01/target",
+    "preserved_files": {
+      "research": 154531,
+      "repository": 6453
+    },
+    "all_preserved_hashes_match": true,
+    "freed_bytes": 6465085440,
+    "goal_status": "paused, no resume",
+    "scope": "Operational cleanup only; source/test/proof evidence unchanged; no fresh runtime tests",
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v1/DOCS-RESULT.json",
+      "sha256": "2efb17024d933dd47422c20bb0d89b5b434b4387c3783b941d45fd9d6fb96e6c",
+      "exit": 0,
+      "scope": "Full frozen11 docs plus separate focused finalmetadata suffix; no build or research resume"
+    }
   }
 }

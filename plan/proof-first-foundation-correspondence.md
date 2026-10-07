@@ -3087,3 +3087,10 @@ Actual three-FD3 ordinary and budgeted real-QUIC RED0pass2fail (MissingRetention
 Before any original Body, OPEN: private original-source custody producer and exact joint source-origin/genuine optional native-I3 handoff; immutable M8 source_root guard, current M9 use, same full source/Core/arguments/activation/ordinal/request/frame, claim/consume/queue order and typed failure/resource retention. Existing C local alternative does not supply native budget admission. Neither bypass source_root nor replace native one-use permit with DATA. Actual used upper result/history/Finish, network reply/current SourceAck/full S-T-S/newactivation/all3 subsequent re-freeze and D integrated acceptance remain. No implementation contract selected, normative counterexample established, source permission minted or Canon adoption. Stop at this verified pre-Astra checkpoint under owner condition; same W4-D, no E/W5+/Plan250-I3-4/new goal/roadmap.
 
 Handoff: /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-HANDOFF-v1.json; pinned actual reader/source/run results, no selected normative contract.
+
+
+### 2026-10-07 12:00 JST — 再開前のCargo成果物整理（LAB運用記録）
+
+2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
+
+意味論・source参照・検証コマンド・current roadmap・未決のsource/native I3接続は変更なし。過去の回帰証拠は保持し、今回新たに実行したとは扱わない。
