@@ -64263,5 +64263,40 @@
       "exit": 0,
       "scope": "Full frozen11 docs plus separate focused finalmetadata suffix; no build or research resume"
     }
+  },
+  "owner_astra_resume_joint_review_20261007": {
+    "at": "2026-10-07T04:47:02.830233+00:00",
+    "owner_resume": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESUME-ASTRA-20261007-v1.json",
+    "owner_resume_sha256": "69579178a3e947e3ff166b650e8fe82b7b59423e3ed4e91ff69093305f03ca40",
+    "review": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json",
+    "review_sha256": "8dc173bf82df3a5b4204be5c46a20ab6c8e2eac5126731ecff9ea8c7f193928d",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3",
+    "source_pins_sha256": "d3f5936b4a80f4a31980979578c4a3048ad5bfaba8ac77f3fc12186cd7faee4e",
+    "goal_status": "active",
+    "model": "gpt-6-astra/xhigh observed",
+    "weekly_remaining_percent_observed": 98,
+    "stop": "approximately50% remaining at sensible verified checkpoint; checks>=1h",
+    "scope": "Before-use LAB joint source/native-I3 review, no new Rust/Lean execution, no original Body enabled",
+    "candidate": "authentic private source claim + genuine optional native I3; exclusive same-kernel guard through enqueue/service; actual used raw/result/resources",
+    "remaining": [
+      "Concrete typed guard/feature-boundary implementation and actual compiler borrow closure",
+      "Full post-Body supplier audit on actual used source route",
+      "Actual parent Body completion/Finish, reply/current-source acknowledgment, complete S-T-S, next activation and all3 re-freeze",
+      "D integrated acceptance; E remains inactive until explicit E resume"
+    ],
+    "docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/astra-resume-review-docs-v3/RESULT.json",
+      "sha256": "2f58c275dc77ab128eaca14274016443cbb5cd10a6a29d0794cedbe3a9d9a26e",
+      "exit": 0,
+      "prior_failures": [
+        "astra-resume-review-docs-v1: missing literal Canon notice",
+        "astra-resume-review-docs-v2: required task headings/order"
+      ],
+      "scope": "Full pass before receipt metadata; final metadata narrowly checked"
+    },
+    "proof_correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-PROOF-CORRESPONDENCE-v1.json",
+      "sha256": "f86059beea46883177ab6f991704280925f1853c42d87d8d4b3beee821a333b8"
+    }
   }
 }

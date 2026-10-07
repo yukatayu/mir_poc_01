@@ -3094,3 +3094,16 @@ Handoff: /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d
 2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
 
 意味論・source参照・検証コマンド・current roadmap・未決のsource/native I3接続は変更なし。過去の回帰証拠は保持し、今回新たに実行したとは扱わない。
+
+
+### 2026-10-07 13:47 JST — 同じW4-DをAstraで再開（LAB）
+
+2026-10-07のowner指示で、同じW4-Dをgpt-6-astra/xhighで再開しました。外部未採用38pathのoriginal-body-reader-green-v3／notes34が検証済み基準です。実FD3・QUIC上のBody制御readerは新規7件・対照16件・全1333件などの保存証拠を持ちますが、元SourceBody／Finishは0です。Astra review v2で、認証済みBody区間からのprivate source claimと既存のnative I3許可を別々に消費する接続候補を整理しました。同じM8実行器の排他的借用を投入から実行まで保持し、元source全体・引数・global ordinal・immutable source_root・現M9を照合する案です。実producer・借用・資源・実結果のテストを通す前のLAB候補であり、接続の受理や実Body成功は主張しません。
+
+現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+
+週間残量は2026-10-07T04:24:56.417Zの自分の実セッション記録で98%（使用2%、10080分window）でした。次の確認は2026-10-07T05:26:36.156274+00:00以降。モデルは同04:24:44.851Zのgpt-6-astra/xhighを確認済みです。残量やresetを推測せず、account resetはownerのみが扱います。
+
+Candidate/failure order: ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json。source claimは実owner/Body区間からのみ、native I3は既存の真正permit、M8は同一kernel排他借用を候補とする。全root/Core/引数と実queueを照合し、spent権限を返却せず、実結果を後続の失敗より先に保存する。C local source entryへの置換はnative I3が無いため棄却。before-useの実装・テストは未実行で、元Body0/Finish0。既存reference/証拠・Plan250・規範に変更なし。
+
+Rough remaining D20–40 active hours: design1–3, jointBody3–5, result/resources8–16, reply/currentAck/S→T→S4–8, nextactivation/refreeze2–4, Dacceptance2–4; overlapping work, low confidence. E16–40 remains inactive. Earlier model/stop notes above are historical and superseded by this owner instruction.

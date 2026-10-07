@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-07 12:00 JST
+Last updated: 2026-10-07 13:47 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -25,17 +25,17 @@ regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
 2026-09-28のowner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
 
-2026-09-30追加owner指示: Solへの切替え後、同じD実装を自走再開。重要な境界変更又はD統合判定でAstraへ戻すため停止。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+履歴2026-09-30: Sol実装から重要な境界判断時にAstraへ戻す条件を設定。2026-10-07にownerがAstraへ切替え、同じDを再開済み。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-W4-Dは2026-10-05にowner指示で同じgoalを再開し、現在はAstraへの切替前の検証済み区切りで停止します。主担当一人で、sub-agent・Oracle・新goal・E/W5+/Plan250-I3-4は開始しません。Astraでの重要な境界判断又はD統合判定が必要な地点、または週間残量30%未満を確認した後の検証済み区切りで、実ソース・検証ログ・再開地点を保存して停止します。2026-10-01の作業都合によるpauseと旧50%条件は更新されました。
+現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-06T17:43:34.562809+00:00の実セッション記録で36%（使用64%）でした。次の確認は2026-10-06T18:43:34.562809+00:00以降。停止理由はAstraへの切替前の引継ぎです。週間残量30%未満も確認した場合のみ追加の停止理由とします。account resetはownerのみ。
+週間残量は2026-10-07T04:24:56.417Zの自分の実セッション記録で98%（使用2%、10080分window）でした。次の確認は2026-10-07T05:26:36.156274+00:00以降。モデルは同04:24:44.851Zのgpt-6-astra/xhighを確認済みです。残量やresetを推測せず、account resetはownerのみが扱います。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-DはAstraへの切り替え前の検証済み区切りに達しました。同じgoalを維持し、Git保存後に一時停止します。現参照は外部未採用38pathのoriginal-body-reader-green-v3、notes34です。実FD3・QUIC・owner登録からBody制御区間を読むprivate readerを検証しました。role／元sourceのinstall／activation ACK送信／Ready送信／実grantのACTIVE化を確認し、既存grantとactivationの借用を使います。永続フィールド追加は0です。session／grant／activation／Finish用byte・容量・offsetを借用して状態記録に含めます。新規7件・欠落を検出した対照16件・既存Body制御8件・通常ビルド2種・default13件・test-seamsなし7件・全1333件が通り、38path復元済みです。二重借用E0499とClone E0599は各1件拒否。初回GREENのテスト用コードのcompile失敗は保存し、tests-only successorで修正しました。readerは元source由来の実行許可やnative I3 permitではなく、元SourceBody／Finish実行は0です。次はsource_root保護・実source由来許可と実I3許可の消費順序・失敗時の資源保持をAstraで検討します。設計は未決で、規範変更や反例成立は主張しません。Astraへの切り替え直前又は週間残量30%未満の検証済み区切りで止めるowner条件を適用します。
+2026-10-07のowner指示で、同じW4-Dをgpt-6-astra/xhighで再開しました。外部未採用38pathのoriginal-body-reader-green-v3／notes34が検証済み基準です。実FD3・QUIC上のBody制御readerは新規7件・対照16件・全1333件などの保存証拠を持ちますが、元SourceBody／Finishは0です。Astra review v2で、認証済みBody区間からのprivate source claimと既存のnative I3許可を別々に消費する接続候補を整理しました。同じM8実行器の排他的借用を投入から実行まで保持し、元source全体・引数・global ordinal・immutable source_root・現M9を照合する案です。実producer・借用・資源・実結果のテストを通す前のLAB候補であり、接続の受理や実Body成功は主張しません。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -515,4 +515,4 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 
 2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
 
-2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
+2026-10-07 12:00 JSTの整理ではrepoのCargo targetだけを削除して約6.0GiBを回収し、研究154531ファイル・repo6453ファイル・symlink40件の保持を照合済みです。同13時台にownerが同じgoalを再開しました。Cargo成果物は次の必要なテストで再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。

@@ -57239,5 +57239,191 @@
     "status": "validated-exact-docs-snapshot",
     "role": "Cleanup-only full make docs exit0; finalmetadata suffix checked separately; no Rust/Lean build or goal resume",
     "at": "2026-10-07T03:04:22.289900+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESUME-ASTRA-20261007-v1.json",
+    "sha256": "69579178a3e947e3ff166b650e8fe82b7b59423e3ed4e91ff69093305f03ca40",
+    "status": "read-reviewed-verified",
+    "role": "Owner same-goal Astra/xhigh resume; local telemetry and approximate50% stop, no quota inference",
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json",
+    "sha256": "8dc173bf82df3a5b4204be5c46a20ab6c8e2eac5126731ecff9ea8c7f193928d",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main actual entry correspondence review; selected falsifiable bounded candidate; no new execution acceptance",
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/sys5_i3_original_source_process.rs",
+    "sha256": "1d29f8b0ce7613364fca523b2511bf74bbec5e8af1632afa40f51b1f67a22d5a",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      93,
+      567,
+      628,
+      753
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/sys5_i3_source_control.rs",
+    "sha256": "cc2349335fb8a973444bccc96a65cabc638e5bc8d1cd9d7d54dd9edf4e2b8e80",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      2046,
+      2085,
+      2250
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/sys5_i3_process_runtime.rs",
+    "sha256": "c3ee43f5795b23f2fcfdf6149084bbbcf26bfa57dd3b880d9285c323c232ff79",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      10128,
+      11238,
+      12465,
+      12533,
+      12578,
+      12715
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/sys4_dispatch.rs",
+    "sha256": "6a998743c1475dc34efbe0d0bbf82ebcd3454d826c0a296e7e27b052ef943e1c",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      12686,
+      13110,
+      16103,
+      16261,
+      20966,
+      21375
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/sys4_i3_original_source.rs",
+    "sha256": "019069155bd53eb6f1155ea7cd9ff0f82c1180452d3c1669ee20cd0f375a0d86",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      24,
+      215,
+      299
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/m8_runtime_owner_queue.rs",
+    "sha256": "3e8bb8e9d2d29bff89a0ca6476b270ec105b5a21a470f4cc3dc3016862047403",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      1035,
+      1153,
+      1330,
+      1764,
+      2267
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/m8_runtime_local_cut.rs",
+    "sha256": "88037de9cc082a04c201b62d047b5a4a0bad9db848f69bbd1332df2d974794f7",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      3184,
+      4225
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/m8_owner_admission_gate.rs",
+    "sha256": "517a50bc95ca0ae1c10c4d8fdf742355ae0654567995e063c6aabc27e41b238b",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      59,
+      67,
+      331,
+      367
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reader-green-v3/m8_runtime_admission.rs",
+    "sha256": "5efbcad9a23236efd2ac2a7a10feaf737a8664eada887656ced7df72b9d9ab05",
+    "status": "partial-read-reviewed",
+    "role": "Bounded actual joint lower/guard/resource entry review; not full-file re-read",
+    "reviewed_entry_lines": [
+      883,
+      917
+    ],
+    "at": "2026-10-07T04:47:02.830233+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/astra-resume-review-docs-v1/RESULT.json",
+    "sha256": "9c41b3471b215604da1469f84e812825a6691eb3a609220f55e972f6d5184368",
+    "status": "read-reviewed-verified",
+    "role": "Actual full docs command/result; exit2, failed runs retained separately",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/astra-resume-review-docs-v2/RESULT.json",
+    "sha256": "2a2c6e372f09820457afb79f68d1c38ea83e73dc4429622b4085348926d5c196",
+    "status": "read-reviewed-verified",
+    "role": "Actual full docs command/result; exit2, failed runs retained separately",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/astra-resume-review-docs-v3/RESULT.json",
+    "sha256": "2f58c275dc77ab128eaca14274016443cbb5cd10a6a29d0794cedbe3a9d9a26e",
+    "status": "read-reviewed-verified",
+    "role": "Actual full docs command/result; exit0, failed runs retained separately",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-PROOF-CORRESPONDENCE-v1.json",
+    "sha256": "f86059beea46883177ab6f991704280925f1853c42d87d8d4b3beee821a333b8",
+    "status": "read-reviewed-verified",
+    "role": "Existing pinned general-model/physical-premise correspondence, no new Lean execution",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementOriginalEntry.lean",
+    "sha256": "48a07071fe404416774bf4d7f765c7bff20306bd7774f8c22f6e101d5a468a19",
+    "status": "partial-read-reviewed",
+    "role": "lines1–159 only, exact raw guard and full manifest portions; check_exact/protected_rejected/ordinary_accepted preserve legacy raw guard; manifestCheck_exact includes whole positional source rather than subset. Constructor/physical authority is explicitly external.",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementEntryGate.lean",
+    "sha256": "6a9e4aa061d0b1198ba36e4f54db6400f26e9a588442844222503ee7bd753eaa",
+    "status": "read-reviewed-verified",
+    "role": "full module through final namespace; execute compares actual live queued candidate; execute_refines/no_repeated_execution/execute_committed_complete require actual source/currentness/lower meaning and independently physical exclusion.",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAdmission.lean",
+    "sha256": "ecf3fe52e768e931e12832136b0c28ba2bad9dfd03ef971b465b302abf149620",
+    "status": "read-reviewed-verified",
+    "role": "full module; admitted_facts/source_prefix/owner_completion derive from actual rooted transition history, not a predicate set.",
+    "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementLiveCustodian.lean",
+    "sha256": "581b5bbd6de630663386a27173f7f03156c54d4b6e2469aaf4a26cf8e521fe10",
+    "status": "read-reviewed-verified",
+    "role": "full module; stage_exact/execute_exact/executed_no_repeat/path_bounded/no_duplicate_dispatch_serials concern one designated live lifecycle; copied mathematical State is not physical custody; serial bound is not all resource funding.",
+    "at": "2026-10-07T05:05:31.675138+00:00"
   }
 ]

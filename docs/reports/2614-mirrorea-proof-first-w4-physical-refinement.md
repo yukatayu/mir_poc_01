@@ -5513,3 +5513,29 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 22. sub-agent session close status — No agents started; same goal stays paused throughout and will remain paused at return.
 
 - 2026-10-07T03:04:22.321684+00:00: 再開前cleanupのfull make docs exit0、11ファイルの入力hash一致。最終metadata追記はdiff／旧W4キー529件／ledger先頭7671件／target未再生成を別途確認。通常docs-only commit/push・remote一致・cleanの実結果はstorage-owner-pause-20261007-v1/GIT-RESULT.jsonへ記録。goalはpausedのままで再開しない。
+
+
+### 2026-10-07 13:47 JST — Astra再開とjoint source/native-I3使用前review
+
+1. Title and identifier — Report2614 same-goal Astra resume and before-use review; no new milestone.
+2. Objective — Resume existing W4-D after owner model switch; state remainder/time and approximate50% stop before further implementation.
+3. Scope and assumptions — External unadopted38path/notes34. Same Canon/selected D handoff; sole-main/no agents/Oracle. E remains inactive.
+4. Start state / dirty state — Clean main63df8f4d; target previously cleaned; external source38 and Canon/handoff pins match.
+5. Documents consulted — Canon README/MAP and task spec16/architecture10; W4_D_IMPLEMENTATION_HANDOFF; pinned Astra handoff, draftv2, actual lower entries recorded by reviewv2 and READ_LEDGER; current LAB tasks/progress/RESUME.
+6. Actions taken — 2026-10-07のowner指示で、同じW4-Dをgpt-6-astra/xhighで再開しました。外部未採用38pathのoriginal-body-reader-green-v3／notes34が検証済み基準です。実FD3・QUIC上のBody制御readerは新規7件・対照16件・全1333件などの保存証拠を持ちますが、元SourceBody／Finishは0です。Astra review v2で、認証済みBody区間からのprivate source claimと既存のnative I3許可を別々に消費する接続候補を整理しました。同じM8実行器の排他的借用を投入から実行まで保持し、元source全体・引数・global ordinal・immutable source_root・現M9を照合する案です。実producer・借用・資源・実結果のテストを通す前のLAB候補であり、接続の受理や実Body成功は主張しません。 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+7. Files changed — Exactly11 owned LAB documentation/evidence files; no adopted Rust edits. The review used the verified baseline; an unexecuted RED successor was prepared separately while docs validation ran.
+8. Commands run — Bounded source reads/pin checks, own-session model/quota telemetry, df/free/date and current-goal read. make docs v3 exit0; earlier v1/v2 required-document-format failures preserved.
+9. Evidence / outputs / test results — /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json SHA256 8dc173bf82df3a5b4204be5c46a20ab6c8e2eac5126731ecff9ea8c7f193928d; owner receipt /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-RESUME-ASTRA-20261007-v1.json. Prior reader1333/38 restoration remains prior evidence, no fresh Rust/Lean tests. Full make docs v3 exit0; v1 missing literal Canon notice and v2 missing fixed task headings were preserved and corrected. Narrow post-run metadata checks recorded separately; no fresh Rust/Lean execution in this review checkpoint.
+10. What changed in understanding — Both raw enqueue and service protect immutable source_root. A private same-kernel exclusive guard is the selected candidate to connect source custody to existing optional native I3 without a transferable queue ticket or raw Boolean.
+11. Open questions — Concrete producer/borrow closure, actual used source result/resources, Finish/currentAck/full S-T-S/subsequent activation and D acceptance remain before respective use.
+12. Suggested next prompt — Continue same active W4-D with actual FD3/QUIC tests and bounded joint handoff; no further owner answer currently needed.
+13. plan/ update status — Current owner control and bounded candidate/failure order appended; no new roadmap.
+14. Documentation.md update status — Current resume/model/stop and source boundary mirrored; historical evidence kept distinct.
+15. docs/project-status.md update status — Same current snapshot mirrors within180lines; Canon paused state unchanged.
+16. progress.md update status — Current D resume/three-axis readiness and timestamped recent log updated.
+17. tasks.md update status — Complete snapshot rewritten with current candidate, remaining active-hour estimates, owner/research boundaries and E inactivity.
+18. samples_progress.md update status — Resume/resource/status text updated; paths/commands/workflow readiness unchanged.
+19. reviewer findings and follow-up — Sole-main Astra actual-entry review; source root guards apply at both stages; native permit cannot be replaced by C; new guard still requires real tests. v1 invalid Canon architecture path retained and corrected by v2 before reliance. No independent agent review claimed.
+20. skipped validations and reasons — No new Rust/Lean tests: this checkpoint changes owner-control/docs and records before-use review only. Necessary source tests follow in new immutable cuts; no successful Body claim. Full make docs v3 exit0; v1 missing literal Canon notice and v2 missing fixed task headings were preserved and corrected. Narrow post-run metadata checks recorded separately; no fresh Rust/Lean execution in this review checkpoint.
+21. commit / push status — Exact11 docs-only authorized normal Git after validation; no external notifications or publication.
+22. sub-agent session close status — No subagents/Oracle started; same goal active and work continues after this checkpoint.
