@@ -57719,5 +57719,47 @@
     "status": "read-reviewed-verified",
     "role": "Actual full make docs retry exit0; original failure preserved",
     "at": "2026-10-07T09:21:15.199308+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json",
+    "sha256": "710cb5f96adb4416961211d5343cdbc83b3fbbefc9726f62dfe62b6d5e1b04d5",
+    "status": "read-reviewed-verified",
+    "role": "Verified32 focused tests/privateQUIC build, failed helper compile and separate uncompiled peer draft",
+    "at": "2026-10-07T09:43:58.875686+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-PEER-HISTORY-DESIGN-v1.json",
+    "sha256": "4c81c74c350693b93deeb63ce7d5ed81fb03f7f6e23767a3aeaffe1deda4bbf8",
+    "status": "read-reviewed-verified",
+    "role": "Next bounded peer/history design; not implementation acceptance",
+    "at": "2026-10-07T09:43:58.875686+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/QUOTA-ASTRA-20261007-hourly-v5.json",
+    "sha256": "df81dd17e05e724a436d94f583d1a3fe99722bea7d79b792cb822b157042adc9",
+    "status": "read-reviewed-verified",
+    "role": "Own weekly79%; current stop explicitly owner requested",
+    "at": "2026-10-07T09:43:58.875686+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v2/RESULT.json",
+    "sha256": "492b6897d9f24ee3275ae7550c0d6fc193d8be421b75995e7f64f507495a3a0a",
+    "status": "read-reviewed-verified",
+    "role": "Exact repo Cargo target cleanup; full protected file hashes/symlinks retained",
+    "at": "2026-10-07T09:43:58.875686+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/flow-owner-pause-docs-v1/CANCELED.json",
+    "sha256": "99d6b17a2705f3409c38ece594e43a5e3e3689433d6cdbf52e16383b64027950",
+    "status": "read-reviewed-verified",
+    "role": "Canceled only read-only doc validator after discovering line-count violation; no acceptance inferred",
+    "at": "2026-10-07T09:46:28.214095+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/flow-owner-pause-docs-v2/RESULT.json",
+    "sha256": "c5dcb0edcf595bfef6b755d70bafa7c08cafc1bf613e68a0da76822f7b959dbe",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs exit0 after verified flow checkpoint/owner pause/safe cleanup",
+    "at": "2026-10-07T09:52:07.568163+00:00"
   }
 ]

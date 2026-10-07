@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual first ordinary/budgeted source Ack1 with genuine owner-result join (notes38/origin-green-v2). Full S→T→S/network-held update/next activation/D remain open. Latest owner direction authorizes E after D acceptance; stop after E or a verified checkpoint below50% weekly remaining. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
+Current package map (2026-10-07 18:43 JST): W4-A/B/C bounded closes; W4-D owner-paused after verified flow DATA/current Ack checkpoint and safe cleanup. Same goal retained; E already authorized after D acceptance, but do not resume any research/build until owner resumes. Stop after E or a saved checkpoint below50% weekly. Plan250/I3-4 remain separately paused. Older dated entries retain their historical status.
 
 ## Authority and retained history
 
@@ -3185,3 +3185,13 @@ Evidence: ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v38.
 現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
 Existing D handoff and dated entries preserve former stop rules as history. OWNER-W4-E-AUTHORIZATION-20261007-v1.json records the explicit successor instruction. Full-sequence original-sequence-red-v2 / original-sequence-red-check-v1 executes real FD3/QUIC first source Ack and fails at actual cursor1 versus required3; no sequence completion inferred. Exact38 ROOT files restored clean. Existing selected private original DATA-reader design remains the next bounded implementation consumer; no new roadmap or Canon decision.
+
+## 2026-10-07 18:43 JST — bounded flow DATA/Ack checkpoint; owner pause and cleanup
+
+W4-Dは、ownerの一時停止・安全なディスク整理の依頼により、検証済みの区切りで停止しています。外部未採用38pathのoriginal-flow-ack-check-v2で、有限DATA受信3件と新受信経路での実source受理2件、既存受理15件、実結果改変の拒否2件、返信保持10件、通常privateQUIC buildが通過しました。同じ接続の再受信でも前のDATAを保持し、取消・解析失敗後は予約を戻しません。元の最初の文と予算付き単文の実Body／Finish／返信／現在のsource受理までの証拠です。全列S→T→S、実分散graph、network DATA保持中の権限更新、次activation／all3 refreezeとD統合は未完了。複数peer設定の途中案は別cutに保存し、未compile・未検証としています。
+
+現行owner停止条件（2026-10-07・一時停止／cleanup）: 切りの良い地点で保存し、安全な整理後に停止する最新指示を優先しています。明示的な再開指示までは研究・buildを再開しません。再開後は同じgoalでDの受理後にEまで続行し、E完了又は週間残量50%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+
+2026-10-07 18:43 JSTの安全整理では、このrepoの再生成可能なCargo targetだけを削除しました。cargo cleanの結果と研究・repoソースの全hash保持はstorage-owner-pause-20261007-v2/RESULT.jsonに記録。削除前target約568MiB、整理直後の空き14.21GiB。研究データ、証明、ログ、未検証の途中案、他projectとbrowser状態を保持し、再開待ちです。
+
+Actual component evidence: ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json. Separate new normal DATA receiver owns finite actual read slots across await; generic initial reconnect permit remains unacquired, no reset/semantic authority. Whole original source supplies per-peer receive budget. A consuming union holds genuine old/new received capsules in actual owner/requester state, with exhaustive full bindings. Real component DATA3 and first ordinary/budgeted Ack2, prior Ack15/result-origin2/reply10 and normal privateQUIC pass. A test-only type helper compile failure is retained; successor fixes only its type/evidence access. Full regression/Lean not rerun for this bounded cut. Prior notes38 owns full1386 evidence. Multiple peer configuration draft is pinned/uncompiled; next true sequence consumer still needs exact peer selection, completed per-ordinal native/control history, real graph, held-data authority update and next activation. Current draft/design must not replace accepted evidence or create a source/Canon/public contract.

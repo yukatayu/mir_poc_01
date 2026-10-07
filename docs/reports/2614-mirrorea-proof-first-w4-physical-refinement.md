@@ -5664,3 +5664,28 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 20. skipped validations and reasons — No fresh Rust/Lean regression for this documentation authority update; actual RED does not establish full-sequence correctness.
 21. commit / push status — Authorized exact11 docs-only commit/push/parity; actual execution receipt GIT-W4-E-AUTHORIZATION-v1.json is recorded after freezing this text.
 22. sub-agent session close status — None started; same goal remains active.
+
+### 2026-10-07 18:43 JST — 有限DATA受信／source受理の保存とowner依頼の停止・安全整理
+
+1. Title and identifier — Report2614 flow DATA/current Ack checkpoint and owner cleanup pause.
+2. Objective — Save verified component and unfinished source, then remove only known disposable build artifacts and stop.
+3. Scope and assumptions — Same W4-D; E already authorized after D acceptance, but latest explicit pause takes precedence. Sole main Astra/xhigh; no source/Canon adoption.
+4. Start state / dirty state — HEAD5373209ce795bf591b810806de6b6730da384358 clean. Each38path overlay restored. Uncompiled peer draft frozen before cleanup.
+5. Documents consulted — Canon16/architecture10, D handoff, sequence before-use and peer/history design, actual run receipts, prior guarded cleanup script and storage policy.
+6. Actions taken — Added finite original DATA receiver with retained prefix/body across await, irreversible read reservation, separate capsule and exact per-peer occurrence material. Real Mode retains consuming old/new capsule union; same current M9/native original Ack checks remain. Preserved actual failed test compile attempt and corrected helper types. Saved uncompiled peer configuration successor; stopped implementation. Guarded cargo clean used explicit --confirm after no-open-use/mount/process checks and full protected file hashes.
+7. Files changed — Same eleven LAB docs. External reference38 contains three changed Rust files relative notes38; verified flow source and unverified peer draft distinct. Only repo target deleted; research/source/logs/proofs retained.
+8. Commands run — original-flow-reader-run-v1, original-flow-ack-run-v1/v2 receipts retain exact argv/log hashes. Storage audit df -h, free -h, lsblk -f, findmnt, du -sh . and target/.git/.cargo/.lake before/after; missing mount and absent .cargo/.lake explicitly retained. cargo clean locked/offline exact target. First read-only make docs canceled without acceptance after local line-count review found project-status182 exceeds180. Repeated cleanup detail removed from that snapshot (retained in other docs/report); full make docs retry exit0; final receipt metadata narrowly checked.
+9. Evidence / outputs / test results — Verified flow-ack-v2: normal privateQUIC check; DATA3/new flow firstAck2/prior Ack15/result-origin2/reply10 pass,32 focused tests. v1 normal check passed but test helpers had old type/accessor compile errors; v2 test-only correction passes. Every overlay restored38 clean. Cleanup RESULT records all protected hashes equal, symlink preservation and actual free space. No full source or D acceptance.
+10. What changed in understanding — Repeated DATA reception must own its own finite slots; a successful read does not provide a semantic source/Body grant. Malformed complete DATA and canceled reads retain reservations/buffers. Per-peer/source/control history is still the next whole-sequence consumer.
+11. Open questions — S->T->S remains open; prior actual RED cursor1 versus3 retained. Peer table draft uncompiled, Ready history design unimplemented. Distributed graph/held DATA authority/next activation/refreeze, D acceptance and E remain.
+12. Suggested next prompt — Explicitly resume same goal from verified checkpoint and pinned uncompiled peer draft; D before authorized E, stop after E or quota checkpoint.
+13. plan/ update status — Current map and dated candidate/history/cleanup record synchronized; no new roadmap.
+14. Documentation.md update status — Paused checkpoint/current evidence and cleanup synchronized.
+15. docs/project-status.md update status — Paused checkpoint and cleanup synchronized within180 lines.
+16. progress.md update status — Paused snapshot and actual timestamp log; prior full1386 retains original cut.
+17. tasks.md update status — Whole snapshot rewritten; all implementation waits explicit owner resume; E already authorized after D.
+18. samples_progress.md update status — External component/stop status updated; no sample path, taxonomy or workflow-ready promotion.
+19. reviewer findings and follow-up — Sole-main source/actual run review; no subagents/Oracle/independent review. Guarded cleanup compares all protected file hashes after exact target deletion. Peer draft not reviewed/accepted as executable.
+20. skipped validations and reasons — No fresh default/full regression or Lean on this incremental cut; owner pause requested. Peer draft not compiled/tested. D/E completion and public/OS/recovery/privacy claims excluded.
+21. commit / push status — Authorized exact11 docs-only save; final actual hash/push/parity receipt GIT-FLOW-OWNER-PAUSE-v1.json is written after freezing this text.
+22. sub-agent session close status — None started. All Rust/overlay processes completed; same goal to be marked paused, no automatic continuation after cleanup.

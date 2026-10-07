@@ -1,10 +1,11 @@
-# RESUME — W4-D first actual current source Ack, same active goal
+# RESUME — owner pause after flow DATA/current Ack checkpoint
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
 
-現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+W4-Dは、ownerの一時停止・安全なディスク整理の依頼により、検証済みの区切りで停止しています。外部未採用38pathのoriginal-flow-ack-check-v2で、有限DATA受信3件と新受信経路での実source受理2件、既存受理15件、実結果改変の拒否2件、返信保持10件、通常privateQUIC buildが通過しました。同じ接続の再受信でも前のDATAを保持し、取消・解析失敗後は予約を戻しません。元の最初の文と予算付き単文の実Body／Finish／返信／現在のsource受理までの証拠です。全列S→T→S、実分散graph、network DATA保持中の権限更新、次activation／all3 refreezeとD統合は未完了。複数peer設定の途中案は別cutに保存し、未compile・未検証としています。
 
-週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+現行owner停止条件（2026-10-07・一時停止／cleanup）: 切りの良い地点で保存し、安全な整理後に停止する最新指示を優先しています。明示的な再開指示までは研究・buildを再開しません。再開後は同じgoalでDの受理後にEまで続行し、E完了又は週間残量50%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+
+週間残量は2026-10-07T09:30:26.161Zの自分の実セッション記録で79%（使用21%、10080分window）でした。確認は2026-10-07T09:30:45.704974+00:00、次は2026-10-07T10:30:45.704974+00:00以降。今回は残量制限ではなくownerの停止依頼に従っています。
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process
@@ -32,3 +33,11 @@ Overlay runner D/run-source-overlay-astra-v1.py requires clean ROOT and no concu
 Same11 owned LAB docs, one Report2614 and existing plan memory; no new report/roadmap/WRK/Canon/adopted Rust. Full make docs exit0 at D/original-source-ack-docs-v1; Git receipt after authorized commit/push/parity: GIT-ORIGINAL-SOURCE-ACK-v1.json.
 
 最新owner指示と実全列RED: D/OWNER-W4-E-AUTHORIZATION-20261007-v1.json。W4_D_IMPLEMENTATION_HANDOFF.mdの旧D後停止は履歴。original-sequence-red-v2は実3processでcursor1（期待3）を確認し、元の38pathへ復元済みです。全列実装はまだ未完了。
+
+Current verified external source: D/d-control-development/original-flow-ack-check-v2. ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json contains exact32 focused tests/privateQUIC build results and failed compiler attempt. No fresh default/full regression or Lean for this cut. Adopted ROOT38 restored clean before cleanup. Prior notes38/full1386 remains its own earlier source cut.
+
+Unfinished, uncompiled source: D/d-control-development/original-peer-configuration-unverified-pause-v1 (38 pinned paths), same bytes as mutable original-sequence-work-v1 at pause. Adds original-derived S/T peer table, per-peer take flags and full visitors, peer-bound DATA retention and tests for profile budgets/S-first Ack; NO compiler/test execution. Do not treat this draft as a verified successor. Per-ordinal owner/control Ready history is still design only; read ORIGINAL-SEQUENCE-PEER-HISTORY-DESIGN-v1.json. Reuse funded Body/Ack history slots for actual completed input/Ready moves before later acquisition. Never reset the generic reconnect permit or overwrite prior state.
+
+Upon explicit resume only: inspect pinned draft and guards, normal privateQUIC check, original_sequence_actual_peer_profiles_derive_s2_t1 and original_flow_ tests; fix any compile/refusal evidence in successor cuts. Then implement true original source/controller/owner history progression, run whole S->T->S from actual source cursor (prior RED cursor1 versus3), real distributed graph/network-held authority update and next activation/all3 refreeze before D acceptance. Owner already authorized E after D; stop after E or at a verified checkpoint below50% weekly. Latest cleanup pause remains in force until explicit resume.
+
+No live build/overlay or sub-agent remains. Cargo target removed and will rebuild after explicit resume. Cleanup preservation evidence is I/storage-owner-pause-20261007-v2/RESULT.json. Do not rerun cleanup or fresh builds merely to reread this handoff. Current saved commit/push/parity is recorded in D/GIT-FLOW-OWNER-PAUSE-v1.json.

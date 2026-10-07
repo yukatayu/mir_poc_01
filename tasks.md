@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-07 18:08 JST
+最終更新: 2026-10-07 18:43 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,9 +15,9 @@ Plan250 remains the sole Canon-authorized roadmap, independently owner-paused af
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
 LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
+W4-Dは、ownerの一時停止・安全なディスク整理の依頼により、検証済みの区切りで停止しています。外部未採用38pathのoriginal-flow-ack-check-v2で、有限DATA受信3件と新受信経路での実source受理2件、既存受理15件、実結果改変の拒否2件、返信保持10件、通常privateQUIC buildが通過しました。同じ接続の再受信でも前のDATAを保持し、取消・解析失敗後は予約を戻しません。元の最初の文と予算付き単文の実Body／Finish／返信／現在のsource受理までの証拠です。全列S→T→S、実分散graph、network DATA保持中の権限更新、次activation／all3 refreezeとD統合は未完了。複数peer設定の途中案は別cutに保存し、未compile・未検証としています。
 
-現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・一時停止／cleanup）: 切りの良い地点で保存し、安全な整理後に停止する最新指示を優先しています。明示的な再開指示までは研究・buildを再開しません。再開後は同じgoalでDの受理後にEまで続行し、E完了又は週間残量50%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
 W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md; current accepted component receipt is ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json; before-use reviews are ORIGINAL-CURRENT-SOURCE-ACK-BEFORE-USE-v2/v3.json and final review is ORIGINAL-SOURCE-ACK-REVIEW-v1.json. Prior joint-entry/Finish/reply resource evidence remains in notes35/36/37. Exact source/history is in RESUME.md/W4_CHECK.json and one Report2614. No adopted Rust changes.
 
@@ -41,7 +41,7 @@ Macro0 preserves evidence/reproduction; Macro1/5 establish semantic/proof bounda
 
 ## user decision gates
 
-The owner explicitly resumed the same W4-D on2026-10-07 and selected Astra. Routine bounded LAB implementation choices can be resolved autonomously. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain owner-reserved. The latest owner instruction explicitly authorizes E after D acceptance; stop after E or a verified checkpoint below50% weekly remaining. No new owner design answer is presently required.
+The owner explicitly requested a checkpoint pause and safe cleanup on2026-10-07; remain paused until explicit resume. Astra/xhigh and the same W4 goal are retained. Routine bounded LAB implementation choices can be resolved autonomously. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain owner-reserved. The latest owner instruction explicitly authorizes E after D acceptance; stop after E or a verified checkpoint below50% weekly remaining. No new design answer is needed; explicit resume is required to lift the current operational pause.
 
 ## research discovery items
 
@@ -59,12 +59,14 @@ Maintain one Report2614, existing plan memory, CURRENT_GOAL/RESUME, W4_CHECK and
 
 2026-10-07 12:00 JSTの整理ではrepoのCargo targetだけを削除して約6.0GiBを回収し、研究154531ファイル・repo6453ファイル・symlink40件の保持を照合済みです。同13時台にownerが同じgoalを再開しました。Cargo成果物は次の必要なテストで再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
 
-週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T09:30:26.161Zの自分の実セッション記録で79%（使用21%、10080分window）でした。確認は2026-10-07T09:30:45.704974+00:00、次は2026-10-07T10:30:45.704974+00:00以降。今回は残量制限ではなくownerの停止依頼に従っています。
 
 Heavy commands serial with resource audit; Rust8GiB/-j1/testthreads1, incremental/debug disabled. Preserve experiments, source/proofs/logs/receipts and browser state. No external notification, Oracle, subagents or hostshare.
 
 ## non-promoted references
 
-Current external source is original-source-ack-origin-green-v2/notes38. First ordinary/budgeted source Ack1 follows actual request/Body1/Finish1/reply, authentic owner-result join and current source gate. Full S→T→S/network-held update/next activation/D remain open. Conditional general proofs, finite Rust tests and actual process evidence are distinct. No model-state copy or DATA equality grants physical custody; first actual source Ack does not establish the full source workflow or D/E completion. R01–R12 and119 rows retain their original ownership/adoption status.
+Latest verified external component is original-flow-ack-check-v2; notes38 retains the previous full-regression baseline. First ordinary/budgeted source Ack1 follows actual request/Body1/Finish1/reply, authentic owner-result join and current source gate. Full S→T→S/network-held update/next activation/D remain open. Conditional general proofs, finite Rust tests and actual process evidence are distinct. No model-state copy or DATA equality grants physical custody; first actual source Ack does not establish the full source workflow or D/E completion. R01–R12 and119 rows retain their original ownership/adoption status.
 
 全列RED: original-sequence-red-v2 / original-sequence-red-check-v1は実cursor1に対し3を要求して失敗。ROOT38pathは復元済み。次は専用の有限DATA受信・exact peer設定・元ordinalごとの履歴保持を実装します。
+
+Current handoff: ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json; saved uncompiled draft original-peer-configuration-unverified-pause-v1. Per-ordinal Ready/input archival is design only in ORIGINAL-SEQUENCE-PEER-HISTORY-DESIGN-v1.json. All packages above remain paused until explicit resume. 2026-10-07 18:43 JSTの安全整理では、このrepoの再生成可能なCargo targetだけを削除しました。cargo cleanの結果と研究・repoソースの全hash保持はstorage-owner-pause-20261007-v2/RESULT.jsonに記録。削除前target約568MiB、整理直後の空き14.21GiB。研究データ、証明、ログ、未検証の途中案、他projectとbrowser状態を保持し、再開待ちです。

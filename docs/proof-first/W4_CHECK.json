@@ -64437,5 +64437,38 @@
       "exit": 0,
       "scope": "Full pass; final receipt metadata checked narrowly"
     }
+  },
+  "d_flow_ack_owner_pause_20261007": {
+    "at": "2026-10-07T09:43:58.875686+00:00",
+    "status": "owner-paused after bounded flow DATA/current Ack checkpoint; no D/E acceptance",
+    "checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json",
+      "sha256": "710cb5f96adb4416961211d5343cdbc83b3fbbefc9726f62dfe62b6d5e1b04d5"
+    },
+    "cleanup": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/storage-owner-pause-20261007-v2/RESULT.json",
+      "sha256": "492b6897d9f24ee3275ae7550c0d6fc193d8be421b75995e7f64f507495a3a0a"
+    },
+    "quota": {
+      "checked_at": "2026-10-07T09:30:45.704974+00:00",
+      "source": "own session token_count.rate_limits only; bounded last4MiB",
+      "weekly": {
+        "observed_at": "2026-10-07T09:30:26.161Z",
+        "slot": "primary",
+        "used_percent": 21.0,
+        "remaining_percent": 79.0,
+        "window_minutes": 10080,
+        "resets_at": 1791948547
+      },
+      "next_check_not_before": "2026-10-07T10:30:45.704974+00:00",
+      "stop": "Below50% remaining, then verified/saved checkpoint; otherwise continue D then E, stop after E"
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/flow-owner-pause-docs-v2/RESULT.json",
+      "sha256": "c5dcb0edcf595bfef6b755d70bafa7c08cafc1bf613e68a0da76822f7b959dbe",
+      "exit": 0,
+      "scope": "Full pass; final receipt metadata narrowly checked"
+    },
+    "next": "Explicit resume, validate saved uncompiled peer draft, then full original sequence/current held-network authority/next activation/refreeze; D then authorized E"
   }
 }

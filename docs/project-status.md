@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-07 17:57 JST
+最終更新: 2026-10-07 18:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -59,11 +59,11 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-07にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
+W4-Dは、ownerの一時停止・安全なディスク整理の依頼により、検証済みの区切りで停止しています。外部未採用38pathのoriginal-flow-ack-check-v2で、有限DATA受信3件と新受信経路での実source受理2件、既存受理15件、実結果改変の拒否2件、返信保持10件、通常privateQUIC buildが通過しました。同じ接続の再受信でも前のDATAを保持し、取消・解析失敗後は予約を戻しません。元の最初の文と予算付き単文の実Body／Finish／返信／現在のsource受理までの証拠です。全列S→T→S、実分散graph、network DATA保持中の権限更新、次activation／all3 refreezeとD統合は未完了。複数peer設定の途中案は別cutに保存し、未compile・未検証としています。
 
-現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・一時停止／cleanup）: 切りの良い地点で保存し、安全な整理後に停止する最新指示を優先しています。明示的な再開指示までは研究・buildを再開しません。再開後は同じgoalでDの受理後にEまで続行し、E完了又は週間残量50%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T09:30:26.161Zの自分の実セッション記録で79%（使用21%、10080分window）でした。確認は2026-10-07T09:30:45.704974+00:00、次は2026-10-07T10:30:45.704974+00:00以降。今回は残量制限ではなくownerの停止依頼に従っています。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-07 17:57 JST
+Last updated: 2026-10-07 18:43 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -29,13 +29,13 @@ regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・一時停止／cleanup）: 切りの良い地点で保存し、安全な整理後に停止する最新指示を優先しています。明示的な再開指示までは研究・buildを再開しません。再開後は同じgoalでDの受理後にEまで続行し、E完了又は週間残量50%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T09:30:26.161Zの自分の実セッション記録で79%（使用21%、10080分window）でした。確認は2026-10-07T09:30:45.704974+00:00、次は2026-10-07T10:30:45.704974+00:00以降。今回は残量制限ではなくownerの停止依頼に従っています。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
+W4-Dは、ownerの一時停止・安全なディスク整理の依頼により、検証済みの区切りで停止しています。外部未採用38pathのoriginal-flow-ack-check-v2で、有限DATA受信3件と新受信経路での実source受理2件、既存受理15件、実結果改変の拒否2件、返信保持10件、通常privateQUIC buildが通過しました。同じ接続の再受信でも前のDATAを保持し、取消・解析失敗後は予約を戻しません。元の最初の文と予算付き単文の実Body／Finish／返信／現在のsource受理までの証拠です。全列S→T→S、実分散graph、network DATA保持中の権限更新、次activation／all3 refreezeとD統合は未完了。複数peer設定の途中案は別cutに保存し、未compile・未検証としています。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -516,3 +516,5 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
 
 2026-10-07 12:00 JSTの整理ではrepoのCargo targetだけを削除して約6.0GiBを回収し、研究154531ファイル・repo6453ファイル・symlink40件の保持を照合済みです。同13時台にownerが同じgoalを再開しました。Cargo成果物は次の必要なテストで再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
+
+2026-10-07 18:43 JSTの安全整理では、このrepoの再生成可能なCargo targetだけを削除しました。cargo cleanの結果と研究・repoソースの全hash保持はstorage-owner-pause-20261007-v2/RESULT.jsonに記録。削除前target約568MiB、整理直後の空き14.21GiB。研究データ、証明、ログ、未検証の途中案、他projectとbrowser状態を保持し、再開待ちです。
