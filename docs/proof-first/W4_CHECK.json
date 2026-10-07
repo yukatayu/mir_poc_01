@@ -64330,5 +64330,37 @@
       "scope": "Full pass before receipt metadata; final metadata narrowly checked"
     },
     "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-JOINT-BODY-v1.json"
+  },
+  "d_original_body_finish_20261007": {
+    "at": "2026-10-07T06:43:01.188142+00:00",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-finish-green-v5",
+    "source_pins_sha256": "4bea7071d74fe7792e98d1cedcbce7da83189a7dbe4d95218482889156637ab7",
+    "notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v36.json",
+    "notes_sha256": "3d6e236a0a49ca806ef6812f2386965136b927397b1dfec93a08b5ec33b8104a",
+    "integration": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-INTEGRATION-v1.json",
+    "integration_sha256": "f56569166598e796463a5a9c30769656cff1d917f71e1cbbce00f5f64c82d74b",
+    "evidence": "Final green-v5 normal default/privateQUIC checks2, no-test-seams13 and full1358 pass; preceding green-v4 focused13 pass and v5 adds only the normal feature gate. Two actual original FD3/QUIC positives (ordinary first statement and budgeted singleton) each Body1/Finish1 with real completion held in parent and ACTIVE cleared. Seven other actual process cases: receive/outcome allocation and receive-counter refusal before Body, ordinary/budgeted actual program-data capture loss after real retained Body, ordinary/budgeted actual Finish send loss retaining raw result/frame and ACTIVE with no repeat/refund. Four registered-channel decoder tests cover partial prefix/body input, eight wrong canonical fields/digest cases, real token retained before failed acceptance, receive-counter exhaustion. Actual receive/outcome pointers/capacities are preserved; original fragment backing prepared before lower is reused. Component wire data tests are not Body evidence.",
+    "scope": "External unadopted38 Rust files, changed4 relative notes35; adopted repository restored",
+    "remaining": "Actual retained reply QUIC delivery, registered/current source acknowledgment, complete original S->T->S, next activation/all3 refreeze and D acceptance remain. This is not whole original distributed workflow, current Ack, D/E acceptance, Canon/source/public API adoption, recovery/global allocation/OS proof or fresh Lean campaign.",
+    "status": "same goal active; D incomplete; Body1/Finish1 in positives, source ordinal0",
+    "quota": {
+      "checked_at": "2026-10-07T06:27:26.598783+00:00",
+      "weekly": {
+        "observed_at": "2026-10-07T06:27:10.383Z",
+        "used_percent": 11.0,
+        "remaining_percent": 89.0,
+        "window_minutes": 10080
+      },
+      "next_check_not_before": "2026-10-07T07:27:26.598783+00:00",
+      "stop_remaining_percent_approximately": 50,
+      "stop_at_verified_checkpoint": true
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-finish-docs-v1/RESULT.json",
+      "sha256": "c4e8d69f825b0cec54b9b8e9a1d5efcf650db7f0b380ab69ca649948ee79b4fa",
+      "exit": 0,
+      "scope": "Full pass before receipt metadata; final metadata narrowly checked"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-BODY-FINISH-v1.json"
   }
 }

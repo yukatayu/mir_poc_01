@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D is active on Astra/xhigh. Actual original first Body and budgeted singleton now have joint source/native-I3 evidence (notes35/green-v8), with Finish/currentAck/full S→T→S still open. W4-E remains inactive until explicit resume after D acceptance. Stop near50% weekly remaining at a verified checkpoint; checks>=1h. Older dated states below are history; Plan250/I3-4 remain separately paused.
+Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual original first ordinary/budgeted Body and Finish now retained and accepted (notes36/finish-green-v5). source ordinal0/currentSourceAck/full S→T→S/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
 
 ## Authority and retained history
 
@@ -3123,3 +3123,21 @@ Review corrected a preBody enqueue-return retention gap: the actual Result now m
 残りの実作業時間の粗い目安: Dの実結果／Finish／資源8–16h、返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計16–32h。E16–40hを含むW4残りは32–72h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。これまで資源・実結果の条件検証で延伸しており、上限や経過時間を保証しません。
 
 Evidence: ORIGINAL-JOINT-BODY-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v35.json; one Report2614. Same sole-main scope and approximately50% stop.
+
+### 2026-10-07 15:43 JST — Actual Body full capture and Finish acceptance (LAB)
+
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-body-finish-green-v5／notes36で、実FD3・QUICから元の最初の文と予算付き単文のBodyを各1回実行し、実結果の保持・全状態の検査・Finish送信・親での受理まで接続しました。追加13件、テスト専用機能なし13件、通常build2構成、全1358件が通過。Finishの受信領域と結果保持用メモリはBody前に確保し、実際に同じ領域を使っています。確保失敗はBody前に拒否し、実Body後の状態データ欠損・送信失敗でも結果を保持して再実行しません。成功時はBody1／Finish1で親の実行中区間を閉じますが、source ordinalは0のままです。返信のQUIC送信・現在のsourceでの受理・S→T→S全体・次activation・D統合判定が残ります。
+
+Same authentic original Body interval now spans genuine joint lower, actual retained full-state capture and owned Finish. Private nonclone actual-producer receipt consumes the same registered child grant. Actual original declaration material, existing native reply/child Finish buffers and parent canonical receive/outcome/grant backing are funded before Body. Parent registered-stream-only decoder receives into those actual buffers, preserves partial prefix/body counts, checks complete canonical fixed fields/sequence and actual lowercase digest, moves existing owned fields to a sealed completion in the actual original-ordinal history before clearing parent/channel ACTIVE. No serde decoding or owned field cloning after Body in this receiver; no new DATA-to-permission factory. Native Body Finish has no issued_source payload. Source ordinal remains0; source Ack remains a distinct later grant/current-authority boundary.
+
+Final green-v5 normal default/privateQUIC checks2, no-test-seams13 and full1358 pass; preceding green-v4 focused13 pass and v5 adds only the normal feature gate. Two actual original FD3/QUIC positives (ordinary first statement and budgeted singleton) each Body1/Finish1 with real completion held in parent and ACTIVE cleared. Seven other actual process cases: receive/outcome allocation and receive-counter refusal before Body, ordinary/budgeted actual program-data capture loss after real retained Body, ordinary/budgeted actual Finish send loss retaining raw result/frame and ACTIVE with no repeat/refund. Four registered-channel decoder tests cover partial prefix/body input, eight wrong canonical fields/digest cases, real token retained before failed acceptance, receive-counter exhaustion. Actual receive/outcome pointers/capacities are preserved; original fragment backing prepared before lower is reused. Component wire data tests are not Body evidence.
+
+Actual retained reply QUIC delivery, registered/current source acknowledgment, complete original S->T->S, next activation/all3 refreeze and D acceptance remain. This is not whole original distributed workflow, current Ack, D/E acceptance, Canon/source/public API adoption, recovery/global allocation/OS proof or fresh Lean campaign.
+
+Decided within bounded candidate: fund actual parent receive/canonical/outcome/owned fields before grant; generic allocating decoder is not used for this post-Body consumer. Full original immutable source material remains borrowed across true lower and capture. Actual partial input and completion stay in the real ordinal record; error never refunds ACTIVE/serial or reruns Body. Public grammar/authority/source Ack remains unchanged.
+
+Test suffix collision and default feature-gate failure remain in immutable run receipts. Final capture-loss falsifier removes actual prepared program DATA after Body, so the real state visitor must refuse. Existing conditional CoordinatorUse finish identity model remains a premise boundary; no Rust refinement or fresh Lean run claimed.
+
+残りの実作業時間の粗い目安: Dの返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16h。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
+
+Evidence: ORIGINAL-BODY-FINISH-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v36.json; one Report2614.

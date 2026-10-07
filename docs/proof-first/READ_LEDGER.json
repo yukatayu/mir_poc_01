@@ -57481,5 +57481,75 @@
     "status": "read-reviewed-verified",
     "role": "Actual full make docs command/result/log hash, exit0",
     "at": "2026-10-07T06:11:40.737945+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v36.json",
+    "sha256": "3d6e236a0a49ca806ef6812f2386965136b927397b1dfec93a08b5ec33b8104a",
+    "status": "read-reviewed-verified",
+    "role": "Verified bounded actual Body/Finish component and remaining source Ack gates",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-INTEGRATION-v1.json",
+    "sha256": "f56569166598e796463a5a9c30769656cff1d917f71e1cbbce00f5f64c82d74b",
+    "status": "read-reviewed-verified",
+    "role": "Actual pinned commands/results/log hashes and restoration",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-BEFORE-USE-DRAFT-v2.json",
+    "sha256": "8461bacf495b1ead38f83f4147e4b01a75d7b55ffc352639c88b3e729b572053",
+    "status": "read-reviewed-verified",
+    "role": "Before-use parent receive resources and actual capture/receipt plan",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-REVIEW-v2.json",
+    "sha256": "2e9d3d8983b35b730026414b177777cd12c392845ea01c584ddb66ab1b99a2dd",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main final resource/provenance/canonical-reader/failure review; no independent review",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-REVIEW-DELTA-v2.patch",
+    "sha256": "a989ead398fd65e49c869d945969a1fc38e9dc14502647c91b3e0b0cda783c80",
+    "status": "read-reviewed-verified",
+    "role": "Focused changed source delta reviewed",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-FINISH-REVIEW-NORMAL-GATE-v1.patch",
+    "sha256": "856eddf89d2155849bd7cd6c35fca9d3aedf8859eaf0f3f9d0fbc83ed65b628b",
+    "status": "read-reviewed-verified",
+    "role": "Full one-line feature-gate correction read",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/QUOTA-ASTRA-20261007-hourly-v2.json",
+    "sha256": "80ee311d77345712adef6a5e6503b169d46f3d9c4ad5484273e11cb5989ea681",
+    "status": "read-reviewed-verified",
+    "role": "Own-session weekly89%; next check >=1h",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCoordinatorUse.lean",
+    "sha256": "d90d3e9fba2d20fd3e14600a111bcf3b212f352b148980f4002fae1780c8d40c",
+    "status": "partial-read-reviewed",
+    "role": "partial: lines1-75,117-143,199-230; plus symbol search; Finish exact active endpoint/kind/serial is conditional; actual endpoint authentication/resource/retained-result conditions remain physical obligations. No model source or proof audit changed.",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerWorkInterval.lean",
+    "sha256": "b74d45ffb1d4650a328061f551bf586bddd512c9942324ffcbdb4765bae407cb",
+    "status": "read-reviewed",
+    "role": "full module read; Older generated worker model, contextual only; bounded64/credit premise is not native Rust/D evidence and is not reused as Finish proof.",
+    "at": "2026-10-07T06:43:01.188142+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-finish-docs-v1/RESULT.json",
+    "sha256": "c4e8d69f825b0cec54b9b8e9a1d5efcf650db7f0b380ab69ca649948ee79b4fa",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs command/result/log hash, exit0",
+    "at": "2026-10-07T06:48:04.180147+00:00"
   }
 ]

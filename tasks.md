@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-07 15:06 JST
+最終更新: 2026-10-07 15:43 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,22 +15,21 @@ Plan250 remains the sole Canon-authorized roadmap, independently owner-paused af
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
 LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-joint-body-green-v8／notes35で、実FD3・QUICから元の最初の文と予算付き単文のBodyを各1回実行できました。認証済みsource claimと既存native I3許可を分離し、同じM8の排他借用・元の全文列・全引数・現M9を照合しています。新規12件、テスト専用機能なし12件、通常build2構成、全1345件が通過。型の拒否対照2件と全文列検査を弱める実行対照2件も確認しました。実enqueue／serve／SYS4／finalizer／返信bytesを保持し、保存直後の異常終了でも結果を失わないことを検証しています。Finishは0で、実結果からの完了通知・返信受理・S→T→S全体・次activation・D統合判定が残ります。
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-body-finish-green-v5／notes36で、実FD3・QUICから元の最初の文と予算付き単文のBodyを各1回実行し、実結果の保持・全状態の検査・Finish送信・親での受理まで接続しました。追加13件、テスト専用機能なし13件、通常build2構成、全1358件が通過。Finishの受信領域と結果保持用メモリはBody前に確保し、実際に同じ領域を使っています。確保失敗はBody前に拒否し、実Body後の状態データ欠損・送信失敗でも結果を保持して再実行しません。成功時はBody1／Finish1で親の実行中区間を閉じますが、source ordinalは0のままです。返信のQUIC送信・現在のsourceでの受理・S→T→S全体・次activation・D統合判定が残ります。
 
 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md; current accepted component receipt is ORIGINAL-JOINT-BODY-INTEGRATION-v1.json; before-use review is ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json. The actual enqueue return retention correction is recorded in ORIGINAL-JOINT-BODY-REVIEW-RETENTION-v2.json. Exact source/history is in RESUME.md/W4_CHECK.json and one Report2614. No adopted Rust changes.
+W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md; current accepted component receipt is ORIGINAL-BODY-FINISH-INTEGRATION-v1.json; before-use resource review is ORIGINAL-BODY-FINISH-BEFORE-USE-DRAFT-v2.json and final review is ORIGINAL-BODY-FINISH-REVIEW-v2.json. Prior joint-entry retention/type evidence remains in notes35. Exact source/history is in RESUME.md/W4_CHECK.json and one Report2614. No adopted Rust changes.
 
 ## ordered self-driven packages
 
 次に自走で進める順番とrough estimate。
 
-残りの実作業時間の粗い目安: Dの実結果／Finish／資源8–16h、返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計16–32h。E16–40hを含むW4残りは32–72h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。これまで資源・実結果の条件検証で延伸しており、上限や経過時間を保証しません。
+残りの実作業時間の粗い目安: Dの返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16h。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
 
 | Package / macro position | Direct consumer and required evidence | Readiness / hours |
 |---|---|---|
-| D result/history/Finish/resources / Macro3/6 middle | Use actual all-global-ordinal backing and real post-Body capture/completion; no lost result or reservation refund. | 着手可能・次の直接consumer; 8–16h |
-| D reply/currentSourceAck/S→T→S / Macro3/6 middle | Real reply transport and current source acceptance over the same actual events; full original cursor. | 後段依存; 4–8h |
+| D reply/currentSourceAck/S→T→S / Macro3/6 middle | Real reply transport and current source acceptance over the same actual events; full original cursor. | 着手可能・次の直接consumer; 4–8h |
 | D next activation/refreeze / Macro3/6 middle | Actual subsequent all3 prepare/publish/activate with preserved held state/history. | 後段依存; 2–4h |
 | D integrated acceptance / Macro3/6 close | Exact-cut positive/falsifier/regression and residual/source/proof/doc reconciliation. | 後段依存; Astra xhigh; 2–4h; stop before E |
 | E campaign and A–E/119 union / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and unresolved-obligation reconciliation. | Inactive until explicit E resume; 16–40h |
@@ -38,7 +37,7 @@ W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/p
 
 ## self-driven macro phase reading
 
-Macro0 preserves evidence/reproduction; Macro1/5 establish semantic/proof boundaries; Macro2/3 implement references; Macro6 connects physical process/transport. There is no new whole-project phase recut. Current formal models remain conditional evidence. D normal feature closure, frozen three-FD3 startup, all3 prepared ACK→actual parent publication→all3 activation, first source Issue/QUIC/owner Ready, budgeted Admit/Resolve and first actual original Body/result retention are retained exact-cut evidence. The complete original-source distributed workflow is still open.
+Macro0 preserves evidence/reproduction; Macro1/5 establish semantic/proof boundaries; Macro2/3 implement references; Macro6 connects physical process/transport. There is no new whole-project phase recut. Current formal models remain conditional evidence. D normal feature closure, frozen three-FD3 startup, all3 prepared ACK→actual parent publication→all3 activation, first source Issue/QUIC/owner Ready, budgeted Admit/Resolve and first actual original Body/result retention and exact Finish acceptance are retained exact-cut evidence. The complete original-source distributed workflow is still open.
 
 ## user decision gates
 
@@ -60,10 +59,10 @@ Maintain one Report2614, existing plan memory, CURRENT_GOAL/RESUME, W4_CHECK and
 
 2026-10-07 12:00 JSTの整理ではrepoのCargo targetだけを削除して約6.0GiBを回収し、研究154531ファイル・repo6453ファイル・symlink40件の保持を照合済みです。同13時台にownerが同じgoalを再開しました。Cargo成果物は次の必要なテストで再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
 
-週間残量は2026-10-07T05:27:00.213Zの自分の実セッション記録で94%（使用6%、10080分window）でした。確認は同05:27:13.807660Z、次は2026-10-07T06:27:13.807660+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T06:27:10.383Zの自分の実セッション記録で89%（使用11%、10080分window）でした。確認は2026-10-07T06:27:26.598783+00:00、次は2026-10-07T07:27:26.598783+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
 Heavy commands serial with resource audit; Rust8GiB/-j1/testthreads1, incremental/debug disabled. Preserve experiments, source/proofs/logs/receipts and browser state. No external notification, Oracle, subagents or hostshare.
 
 ## non-promoted references
 
-Current external source is original-joint-body-green-v8/notes35. Joint entry now has real first ordinary/budgeted Body and retained-result evidence; Finish0/full S→T→S open remains the component boundary. Conditional general proofs, finite Rust tests and actual process evidence are distinct. No model-state copy or DATA equality grants physical custody; no source acknowledgment or D/E completion is inferred. R01–R12 and119 rows retain their original ownership/adoption status.
+Current external source is original-body-finish-green-v5/notes36. First ordinary/budgeted Body1/Finish1 has real retained-result/capture/parent-completion evidence; source ordinal0/currentSourceAck/full S→T→S remain open. Conditional general proofs, finite Rust tests and actual process evidence are distinct. No model-state copy or DATA equality grants physical custody; no source acknowledgment or D/E completion is inferred. R01–R12 and119 rows retain their original ownership/adoption status.

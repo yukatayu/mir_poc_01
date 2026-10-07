@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: owner-resumed2026-10-07 on Astra/xhigh; W4-D original joint Body green-v8/notes35, new12/no-seams12/normal2/full1345; actual first ordinary/budgeted Body and real result retention. Finish0/full S→T→S/D acceptance open; E inactive. Stop around50% weekly remaining at a verified checkpoint. Earlier dated states are history.
+- Current state: owner-resumed2026-10-07 Astra/xhigh; W4-D actual original Body/Finish green-v5/notes36, new13/no-seams13/normal2/full1358. Successful ordinary/budgeted Body1/Finish1, actual results and received completion retained; source ordinal0/currentAck/full S→T→S/D open. E inactive; stop around50% weekly at verified checkpoint. Older dated states are history.
 
 ## Objective
 
@@ -5564,3 +5564,28 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 20. skipped validations and reasons — No fresh Lean campaign, full source S→T→S/currentSourceAck/subsequent re-freeze, D/E acceptance, recovery/OS/allocation-global/alpha validation: later direct consumers or outside current component. Finish deliberately remains0.
 21. commit / push status — Pending authorized exact11 docs-only commit/push, to be recorded in GIT-ORIGINAL-JOINT-BODY-v1.json after actual parity verification.
 22. sub-agent session close status — None started; sole main. Existing goal remains active, quota checkpoint not reached.
+
+### 2026-10-07 15:43 JST — 実Bodyの全状態検査・Finish送信と親の受理
+
+1. Title and identifier — Report2614 actual original Body full capture/Finish checkpoint
+2. Objective — Keep real Body result and complete state coherent through authentic Finish and actual parent receipt, with dependent resources preflighted.
+3. Scope and assumptions — External unadopted38 Rust files, changed4 relative notes35; adopted repository restored; first ordinary statement and budgeted singleton only.
+4. Start state / dirty state — HEADc9c2f8dce3e66639cb5e121bdadf89954233aa05; notes35/joint-green-v8. Clean before each overlay; exact38 restored, own child processes drained.
+5. Documents consulted — Fixed D handoff; before-use draftv2 and reviewv2; existing conditional CoordinatorUse partial read. Older OwnerWorkInterval full read is context only; its worker/credit bounds are not D evidence.
+6. Actions taken — Same authentic original Body interval now spans genuine joint lower, actual retained full-state capture and owned Finish. Private nonclone actual-producer receipt consumes the same registered child grant. Actual original declaration material, existing native reply/child Finish buffers and parent canonical receive/outcome/grant backing are funded before Body. Parent registered-stream-only decoder receives into those actual buffers, preserves partial prefix/body counts, checks complete canonical fixed fields/sequence and actual lowercase digest, moves existing owned fields to a sealed completion in the actual original-ordinal history before clearing parent/channel ACTIVE. No serde decoding or owned field cloning after Body in this receiver; no new DATA-to-permission factory. Native Body Finish has no issued_source payload. Source ordinal remains0; source Ack remains a distinct later grant/current-authority boundary.
+7. Files changed — Four external Rust files relative notes35 within frozen38path; same eleven LAB docs; no adopted Rust or Canon.
+8. Commands run — 10 pinned commands across 7 run families; exact argv/logSHA in integration receipt. Full make docs exit0; final receipt metadata checked narrowly. Exact source closure: normal2/no-seams13/full1358; focused13 on preceding cut with only a normal feature-gate correction. Real process and registered decoder falsifiers passed. No fresh Lean campaign.
+9. Evidence / outputs / test results — Final green-v5 normal default/privateQUIC checks2, no-test-seams13 and full1358 pass; preceding green-v4 focused13 pass and v5 adds only the normal feature gate. Two actual original FD3/QUIC positives (ordinary first statement and budgeted singleton) each Body1/Finish1 with real completion held in parent and ACTIVE cleared. Seven other actual process cases: receive/outcome allocation and receive-counter refusal before Body, ordinary/budgeted actual program-data capture loss after real retained Body, ordinary/budgeted actual Finish send loss retaining raw result/frame and ACTIVE with no repeat/refund. Four registered-channel decoder tests cover partial prefix/body input, eight wrong canonical fields/digest cases, real token retained before failed acceptance, receive-counter exhaustion. Actual receive/outcome pointers/capacities are preserved; original fragment backing prepared before lower is reused. Component wire data tests are not Body evidence.
+10. What changed in understanding — Preallocated Option alone does not fund receiving/decoding after Body: actual canonical receive and owned outcome fields are now preflighted. Fault suffix collision could mask an intended counter/resource test and was corrected. Actual lost prepared program DATA must refuse capture after retaining real Body.
+11. Open questions — Actual retained reply QUIC delivery, registered/current source acknowledgment, complete original S->T->S, next activation/all3 refreeze and D acceptance remain. This is not whole original distributed workflow, current Ack, D/E acceptance, Canon/source/public API adoption, recovery/global allocation/OS proof or fresh Lean campaign.
+12. Suggested next prompt — Continue same active D with actual reply transfer/current source acknowledgment; no new owner input needed inside fixed scope.
+13. plan/ update status — Updated current package map and durable comparison/limits; older entries retained.
+14. Documentation.md update status — Current Body/Finish evidence and remaining gates synchronized.
+15. docs/project-status.md update status — Updated within180 lines; no macro-phase recut.
+16. progress.md update status — Snapshot, implementation row, actual timestamp log updated.
+17. tasks.md update status — Complete snapshot rewritten with fixed8 headings; finished result/Finish package removed from active order; reply/currentAck next; D8–16h/E16–40h estimates tentative.
+18. samples_progress.md update status — Current external component evidence updated; no active sample path/taxonomy or public workflow promotion.
+19. reviewer findings and follow-up — Sole-main Astra/xhigh per standing owner no agents/Oracle. Actual source/receipt/resources and complete visitors reviewed. Fault suffix collision corrected; normal default missing QUIC gate corrected. No independent review claimed.
+20. skipped validations and reasons — Fresh Lean campaign, full source sequence/currentSourceAck/refreeze/D/E acceptance, OS/recovery/global allocation proof remain later or out of this bounded component.
+21. commit / push status — Pending authorized exact11 docs-only commit/push/parity; actual receipt GIT-ORIGINAL-BODY-FINISH-v1.json.
+22. sub-agent session close status — None started; sole main. Same goal active; quota89% remains above requested approximate50% stop.
