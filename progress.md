@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-07 13:47 JST
+最終更新: 2026-10-07 15:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T04:24:56.417Zの自分の実セッション記録で98%（使用2%、10080分window）でした。次の確認は2026-10-07T05:26:36.156274+00:00以降。モデルは同04:24:44.851Zのgpt-6-astra/xhighを確認済みです。残量やresetを推測せず、account resetはownerのみが扱います。
+週間残量は2026-10-07T05:27:00.213Zの自分の実セッション記録で94%（使用6%、10080分window）でした。確認は同05:27:13.807660Z、次は2026-10-07T06:27:13.807660+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,13 +75,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-07にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-2026-10-07のowner指示で、同じW4-Dをgpt-6-astra/xhighで再開しました。外部未採用38pathのoriginal-body-reader-green-v3／notes34が検証済み基準です。実FD3・QUIC上のBody制御readerは新規7件・対照16件・全1333件などの保存証拠を持ちますが、元SourceBody／Finishは0です。Astra review v2で、認証済みBody区間からのprivate source claimと既存のnative I3許可を別々に消費する接続候補を整理しました。同じM8実行器の排他的借用を投入から実行まで保持し、元source全体・引数・global ordinal・immutable source_root・現M9を照合する案です。実producer・借用・資源・実結果のテストを通す前のLAB候補であり、接続の受理や実Body成功は主張しません。
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-joint-body-green-v8／notes35で、実FD3・QUICから元の最初の文と予算付き単文のBodyを各1回実行できました。認証済みsource claimと既存native I3許可を分離し、同じM8の排他借用・元の全文列・全引数・現M9を照合しています。新規12件、テスト専用機能なし12件、通常build2構成、全1345件が通過。型の拒否対照2件と全文列検査を弱める実行対照2件も確認しました。実enqueue／serve／SYS4／finalizer／返信bytesを保持し、保存直後の異常終了でも結果を失わないことを検証しています。Finishは0で、実結果からの完了通知・返信受理・S→T→S全体・次activation・D統合判定が残ります。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | C806/818 and prior D components retained; current original-body-reader-green-v3: authentic FD3/control reader7/controls16/old8/normal2/default13/no-seams7/full1333/restored38, actual native Reserved retained, original SourceBody0 | 着手可能: Astra再開済み。joint source/native-I3候補の実producer・排他借用・結果保持を検証し、current SourceAck・全source／次activationへ接続 |
+| Implementation / operation | External original-joint-body-green-v8/notes35: original first Body and budgeted singleton each once; new12/no-seams12/normal2/full1345/type refusals2/coverage controls2/restored38; actual results and preBody reply backing retained | 着手可能: actual full-state capture/Finish、reply/currentSourceAck、full S→T→Sと次activationへ接続。Finish0/D incomplete |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -720,3 +720,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-07 12:00 JST — owner依頼で再開前の整理のみ実施。repoのCargo targetだけを削除し、空き約20.9GiBから約26.9GiBへ、約6.0GiBを回収。研究保存先154531ファイル、repo内6453ファイル、symlink40件を削除前後で照合し保持。研究source・実験・証明・ログ・receiptを保持。既存W4-D goalはpausedのままで、実装は再開していません。次の明示的resume時にビルド成果物を再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
 
 - 2026-10-07 13:47 JST — ownerがAstra/xhighで同じW4-Dを再開。既存38sourceとhandoffを照合し、joint source/native-I3の消費順・排他借用・失敗時保持をLAB候補に記録。週間残量98%、停止を約50%へ更新。新規Body／Rust実行はまだ0。Report2614。
+
+- 2026-10-07 15:06 JST — W4-D original source/native-I3 joint entry: real Body、結果保持、保存直後の異常終了を検証。最終外部cutは12/no-seams12/normal2/full1345、型拒否2・coverage反例2。Finish0を保持して次は実完了通知へ。Report2614。

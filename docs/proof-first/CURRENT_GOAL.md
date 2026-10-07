@@ -1,23 +1,19 @@
-# W4-D — owner-resumed Astra/xhigh; joint source/native-I3 review
+# W4-D — actual original joint Body; Finish remains open
 
-2026-10-07のowner指示で、同じW4-Dをgpt-6-astra/xhighで再開しました。外部未採用38pathのoriginal-body-reader-green-v3／notes34が検証済み基準です。実FD3・QUIC上のBody制御readerは新規7件・対照16件・全1333件などの保存証拠を持ちますが、元SourceBody／Finishは0です。Astra review v2で、認証済みBody区間からのprivate source claimと既存のnative I3許可を別々に消費する接続候補を整理しました。同じM8実行器の排他的借用を投入から実行まで保持し、元source全体・引数・global ordinal・immutable source_root・現M9を照合する案です。実producer・借用・資源・実結果のテストを通す前のLAB候補であり、接続の受理や実Body成功は主張しません。
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-joint-body-green-v8／notes35で、実FD3・QUICから元の最初の文と予算付き単文のBodyを各1回実行できました。認証済みsource claimと既存native I3許可を分離し、同じM8の排他借用・元の全文列・全引数・現M9を照合しています。新規12件、テスト専用機能なし12件、通常build2構成、全1345件が通過。型の拒否対照2件と全文列検査を弱める実行対照2件も確認しました。実enqueue／serve／SYS4／finalizer／返信bytesを保持し、保存直後の異常終了でも結果を失わないことを検証しています。Finishは0で、実結果からの完了通知・返信受理・S→T→S全体・次activation・D統合判定が残ります。
 
 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T04:24:56.417Zの自分の実セッション記録で98%（使用2%、10080分window）でした。次の確認は2026-10-07T05:26:36.156274+00:00以降。モデルは同04:24:44.851Zのgpt-6-astra/xhighを確認済みです。残量やresetを推測せず、account resetはownerのみが扱います。
+週間残量は2026-10-07T05:27:00.213Zの自分の実セッション記録で94%（使用6%、10080分window）でした。確認は同05:27:13.807660Z、次は2026-10-07T06:27:13.807660+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
-Same W4 goal active; no new goal or automatic model switch. Canon/Plan250/I3-4 remain independently owner-paused. No adopted Rust/Canon/public contract changes.
+Same W4 goal active. W1–W3 and W4-A/B/C have bounded closes; D is incomplete. E requires explicit resume after D acceptance. Canon/Plan250/I3-4 remain independently owner-paused. No adopted Rust/Canon/public contract changes.
 
-Current receipts: OWNER-RESUME-ASTRA-20261007-v1.json and ORIGINAL-SOURCE-NATIVE-I3-ASTRA-REVIEW-v2.json under external d-source-process. Review v1 is preserved; v2 corrects its Canon architecture path only. Exact source, evidence and next steps: RESUME.md / W4_CHECK.json.
+Current receipts: SOURCE-OWNER-LOWER-NOTES-v35.json and ORIGINAL-JOINT-BODY-INTEGRATION-v1.json under external d-source-process. Before-use review and prior failed attempts remain immutable. Exact source, commands and next steps: RESUME.md / W4_CHECK.json.
 
-Before original Body use, verify the actual owning producer, nonclone claim, same-kernel exclusive guard, native optional one-use permit, full original root/current M9 and actual used result/resource backing. No source cursor/current acknowledgment or Finish completion is inferred from lower Body.
+Next: establish actual post-Body full-state capture/receipt/parent completion resources, then real reply/current source acknowledgment and full original sequence. Neither native Body nor a retained historical reply grants current source acknowledgment.
 
-Rough active work remaining: design review1–3h; joint Body/falsifiers3–5h; actual result/history/Finish/resources8–16h; reply/currentAck/S→T→S4–8h; subsequent activation/refreeze2–4h; D integration2–4h. D total20–40h is approximate with overlapping work. E16–40h remains inactive pending explicit resume.
+残りの実作業時間の粗い目安: Dの実結果／Finish／資源8–16h、返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計16–32h。E16–40hを含むW4残りは32–72h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。これまで資源・実結果の条件検証で延伸しており、上限や経過時間を保証しません。
 
-2026-10-07 12:00 JSTの整理ではrepoのCargo targetだけを削除して約6.0GiBを回収し、研究154531ファイル・repo6453ファイル・symlink40件の保持を照合済みです。同13時台にownerが同じgoalを再開しました。Cargo成果物は次の必要なテストで再生成します。証跡: storage-owner-pause-20261007-v1/RESULT.json。
+Safe cleanup2026-10-07 preserved research/source/proofs/logs; the needed bounded Cargo outputs have been regenerated. Earlier cleanup/model/pause receipts remain history. One main; no subagents/Oracle/notifications/hostshare. No automatic model switch or medium fallback.
 
-Earlier cleanup/resource receipts remain historical in Report2614, W4_CHECK and plan memory; no experiment, proof, log or browser state is deleted.
-
-Owner effort preference: keep explicit xhigh when an authorized fallback is needed; never silently reduce to medium. This does not authorize another Oracle session.
-
-Updated 2026-10-07T04:47:02.830233+00:00
+Updated 2026-10-07T06:06:50.486931+00:00

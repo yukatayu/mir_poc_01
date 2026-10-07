@@ -57425,5 +57425,61 @@
     "status": "read-reviewed-verified",
     "role": "full module; stage_exact/execute_exact/executed_no_repeat/path_bounded/no_duplicate_dispatch_serials concern one designated live lifecycle; copied mathematical State is not physical custody; serial bound is not all resource funding.",
     "at": "2026-10-07T05:05:31.675138+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v35.json",
+    "sha256": "531207444b2616fd673f1493f8625d3f6f869cd283c3b290d2a684b6ac81c2df",
+    "status": "read-reviewed-verified",
+    "role": "Verified bounded original joint Body component, remaining Finish/currentAck/full sequence gates",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-INTEGRATION-v1.json",
+    "sha256": "fbdf0d6909ca21e6096a7cb8bc0b90757d991edef6d04aa8ab8d4e147199c7ab",
+    "status": "read-reviewed-verified",
+    "role": "Actual pinned commands/results/log hashes and full restoration",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-PROOF-CORRESPONDENCE-v1.json",
+    "sha256": "f86059beea46883177ab6f991704280925f1853c42d87d8d4b3beee821a333b8",
+    "status": "read-reviewed-verified",
+    "role": "Bounded existing model correspondence, no fresh Lean run",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-REVIEW-DELTA-v1.patch",
+    "sha256": "bb31d14f37732edf9310a70843ba411e6658db123387eb4e145f193e82947fd7",
+    "status": "read-reviewed-verified",
+    "role": "Changed source delta reviewed, not claim of rereading every old source line",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-REVIEW-RETENTION-v2.patch",
+    "sha256": "81f7abd5621d30cc106352361dbaa33ee92415d35f22c96ef470b1f93d82bf35",
+    "status": "read-reviewed-verified",
+    "role": "Full actual-return retention correction delta reviewed",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-CONTROLS-RESULT-v2.json",
+    "sha256": "9892472a11bd8c77ea786fe5e96ed0adfb0b88e1a5cbf07d223fd43b32bd1e4b",
+    "status": "read-reviewed-verified",
+    "role": "Verified compile refusals and two real weakened-coverage failures",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/QUOTA-ASTRA-20261007-hourly-v1.json",
+    "sha256": "9485c9ad100ba2af96d1d1a1ad5804e58c4b1f3cde2d63cecdd098ad7e7fcab2",
+    "status": "read-reviewed-verified",
+    "role": "Actual own-session weekly telemetry; next check at least one hour later",
+    "at": "2026-10-07T06:06:50.486931+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-joint-body-docs-v1/RESULT.json",
+    "sha256": "9b8784d5e4c7262c7708c333dfc7735f38196cbe37e740c37ff608b8030177a3",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs command/result/log hash, exit0",
+    "at": "2026-10-07T06:11:40.737945+00:00"
   }
 ]

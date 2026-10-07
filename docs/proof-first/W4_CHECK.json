@@ -64298,5 +64298,37 @@
       "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-PROOF-CORRESPONDENCE-v1.json",
       "sha256": "f86059beea46883177ab6f991704280925f1853c42d87d8d4b3beee821a333b8"
     }
+  },
+  "d_original_joint_body_20261007": {
+    "at": "2026-10-07T06:06:50.486931+00:00",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-joint-body-green-v8",
+    "source_pins_sha256": "cbfae154ad15c3b42d91f43e60ec4c865c69e40429f6bf77c3d94f2aa475391c",
+    "notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v35.json",
+    "notes_sha256": "531207444b2616fd673f1493f8625d3f6f869cd283c3b290d2a684b6ac81c2df",
+    "integration": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-JOINT-BODY-INTEGRATION-v1.json",
+    "integration_sha256": "fbdf0d6909ca21e6096a7cb8bc0b90757d991edef6d04aa8ab8d4e147199c7ab",
+    "evidence": "Final green-v8: focused12 and normal-private-QUIC no-test-seams12 pass; default/privateQUIC normal checks2 and full1345 pass. Real ordinary original first statement and budgeted singleton each Body1; actual all-global-history pointer/length/capacity used, real reply buffers match preBody pointer/capacity with no growth. Refusals cover omitted later S ordinal, duplicate root entry, absent current plan, M8/facade resource failure, native instance/binding mismatch, unregistered target. Two actual post-return loss cases preserve enqueue at Body0 or real serve/native committed snapshot at Body1 while absent upper publication stays absent. Type controls reject second live mutable kernel E0499 and Clone E0599. Removing full-handler coverage executes both root-gap/root-duplicate cases and fails their expected refusals. Parent remains ACTIVE, source ordinal0, Finish0; repeated owner entry cannot execute again.",
+    "scope": "External unadopted38 Rust files; adopted repository restored. Fixed W4-D direct consumer.",
+    "remaining": "Actual post-Body full-state capture and owned Finish/parent completion, reply transport/current source acknowledgment, complete original S->T->S, subsequent activation/all3 refreeze, D integrated acceptance remain. This component is not full distributed workflow, D acceptance, E execution, source/production/Canon adoption, global allocation/OS recovery guarantee or a fresh general Lean campaign.",
+    "status": "same goal active; D incomplete; Finish0",
+    "quota": {
+      "checked_at": "2026-10-07T05:27:13.807660+00:00",
+      "weekly": {
+        "observed_at": "2026-10-07T05:27:00.213Z",
+        "used_percent": 6.0,
+        "remaining_percent": 94.0,
+        "window_minutes": 10080
+      },
+      "next_check_not_before": "2026-10-07T06:27:13.807660+00:00",
+      "stop_remaining_percent_approximately": 50,
+      "stop_at_verified_checkpoint": true
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-joint-body-docs-v1/RESULT.json",
+      "sha256": "9b8784d5e4c7262c7708c333dfc7735f38196cbe37e740c37ff608b8030177a3",
+      "exit": 0,
+      "scope": "Full pass before receipt metadata; final metadata narrowly checked"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-JOINT-BODY-v1.json"
   }
 }
