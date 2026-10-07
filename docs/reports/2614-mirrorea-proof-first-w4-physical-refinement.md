@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- Current state: owner-resumed2026-10-07 Astra/xhigh; W4-D actual original Body/Finish green-v5/notes36, new13/no-seams13/normal2/full1358. Successful ordinary/budgeted Body1/Finish1, actual results and received completion retained; source ordinal0/currentAck/full S→T→S/D open. E inactive; stop around50% weekly at verified checkpoint. Older dated states are history.
+- Current state: owner-resumed2026-10-07 Astra/xhigh; W4-D actual original reply-green-v3/notes37, reply10/affected13/no-seams10/normal2/full1368. Successful ordinary/budgeted Body1/Finish1 and actual reply retained; source ordinal0/receipts0/currentAck/full S→T→S/D open. E inactive; stop around50% weekly at verified checkpoint. Older dated states are history.
 
 ## Objective
 
@@ -5589,3 +5589,28 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 20. skipped validations and reasons — Fresh Lean campaign, full source sequence/currentSourceAck/refreeze/D/E acceptance, OS/recovery/global allocation proof remain later or out of this bounded component.
 21. commit / push status — Pending authorized exact11 docs-only commit/push/parity; actual receipt GIT-ORIGINAL-BODY-FINISH-v1.json.
 22. sub-agent session close status — None started; sole main. Same goal active; quota89% remains above requested approximate50% stop.
+
+### 2026-10-07 16:24 JST — 実Body/Finish後の返信を同じQUIC接続で受信・保持
+
+1. Title and identifier — Report2614 actual original request/Body/Finish/reply checkpoint
+2. Objective — Carry the actual preBody prepared reply over the same verified session and retain received DATA before fallible association checks.
+3. Scope and assumptions — External unadopted38 Rust files, changed3 relative notes36; adopted repository restored; first ordinary statement and budgeted singleton only.
+4. Start state / dirty state — HEADfa0b3a59bb4ea52de33d2f0372cf14a065f235ad; notes36/finish-green-v5. Clean before each overlay; exact38 restored, own child processes drained.
+5. Documents consulted — Fixed D handoff; before-use draftv3 and final reply reviewv2; earlier source/Finish resource evidence. Current Ack mapping reads only relevant native reply and C source publication boundaries; no fresh proof execution.
+6. Actions taken — Actual original first ordinary statement and budgeted singleton now retain the verified QUIC session across request transfer, authentic Ready/Admit/Resolve/Body/Finish, and actual reply transfer. Owner exports the actual pre-Body-funded reply network_packet Vec only after true Finish and exact retained-frame equality; one-use move preserves actual result/frame/history. Requester stores the real sealed received capsule in its source-owned inline slot before association validation, independent of pending DATA, and complete prepared-state visitor includes the actual capsule. Network futures capture transport/DATA only, never mutable Mode/Runtime. Physical connection close is not a semantic receipt. No source result, pending consumption, native receipt or source cursor advancement occurs; current source Ack remains separate.
+7. Files changed — Three external Rust files relative notes36 within frozen38path; same eleven LAB docs; no adopted Rust or Canon.
+8. Commands run — 9 pinned commands across 5 run families; exact argv/logSHA in integration receipt. Full make docs exit0; final receipt metadata checked narrowly. Exact source closure: normal2/no-seams10/full1368; focused10 and affected Finish13 on preceding cut with only exhaustive-match/dead-RED cleanup. Real process request/reply retention falsifiers passed. No fresh Lean campaign.
+9. Evidence / outputs / test results — Exact green-v3 normal default/privateQUIC checks2, no-test-seams10 and full1368 pass. Source-v2 focused reply10 and affected Finish13 pass; v3 only exhaustive-match/dead-RED cleanup. Real FD3/QUIC ordinary and budgeted request/Body1/Finish1/reply positives. Six ordinary receiver refusals (wrong request/control/initial session/ordinal, missing pending/transport), two budgeted (missing pending/wrong request) retain actual received capsule and source state while freezing semantic reuse. Missing pending cannot discard actual reply; duplicate receive/export refuses. Actual reply Vec pointer/length/capacity moved from preBody backing; failed Finish cannot export it. Source ordinal0/results empty/native accepted receipts0 throughout.
+10. What changed in understanding — Pending-nested received DATA can be lost if pending validation fails: actual received capsule now has independent source ownership. Network lifetime must encompass actual Body/Finish between async transport blocks. Transport-only captures do not by themselves prove control-loop progress during a held network operation.
+11. Open questions — Current authenticated source acknowledgment/current M9 and atomic original source publication, full S->T->S, next activation/all3 refreeze and D integration remain. Current control/network driver has separate transport-only futures, but actual authority update while network DATA is held still needs integrated scheduling evidence. One first finite connection only; later acquisition/current ingress/history progression remain. Not whole original distributed workflow, D/E acceptance, Canon/source/public API adoption, recovery/global allocator/OS proof or fresh Lean campaign.
+12. Suggested next prompt — Continue same active D with authenticated current source acknowledgment; no new owner input needed inside fixed scope.
+13. plan/ update status — Updated current package map, retention alternative and direct-consumer constraints; older entries retained.
+14. Documentation.md update status — Current actual reply evidence and remaining gates synchronized.
+15. docs/project-status.md update status — Updated within180 lines; no macro-phase recut.
+16. progress.md update status — Snapshot, implementation row, actual timestamp log updated.
+17. tasks.md update status — Complete snapshot rewritten with fixed8 headings; real first reply evidence accepted, currentAck/full sequence next; D8–16h/E16–40h estimates tentative.
+18. samples_progress.md update status — Current external component evidence updated; no active sample taxonomy or public workflow promotion.
+19. reviewer findings and follow-up — Sole-main Astra/xhigh per standing owner no agents/Oracle. Actual packet movement/capsule retention/complete visitor and failure preservation reviewed. RED label corrected to isolate actual missing-reply failure. Final cleanup reviewed and full regression passed. No independent review claimed.
+20. skipped validations and reasons — Fresh Lean campaign, currentSourceAck/full source sequence/refreeze/D/E acceptance, OS/recovery/global allocator proof remain later or out of this component.
+21. commit / push status — Pending authorized exact11 docs-only commit/push/parity; actual receipt GIT-ORIGINAL-BODY-REPLY-v1.json.
+22. sub-agent session close status — None started; sole main. Same goal active; quota85% at2026-10-07T07:27:41.374Z last observed remains above requested approximate50% stop.

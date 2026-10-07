@@ -64362,5 +64362,37 @@
       "scope": "Full pass before receipt metadata; final metadata narrowly checked"
     },
     "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-BODY-FINISH-v1.json"
+  },
+  "d_original_body_reply_20261007": {
+    "at": "2026-10-07T07:24:43.909276+00:00",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-body-reply-green-v3",
+    "source_pins_sha256": "cf35fe119f3fef116049c00a964fe1d66f74e2513225336d7e09c1922d3f15f1",
+    "notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v37.json",
+    "notes_sha256": "8cb9569c84b0133c5b75732c0c91144eab230e095d8821c5af83372e4eab1f86",
+    "integration": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-REPLY-INTEGRATION-v1.json",
+    "integration_sha256": "ce4691c9881040ef29280c0672fe7cfb129c8d49fa97107366338b703c99a0c1",
+    "evidence": "Exact green-v3 normal default/privateQUIC checks2, no-test-seams10 and full1368 pass. Source-v2 focused reply10 and affected Finish13 pass; v3 only exhaustive-match/dead-RED cleanup. Real FD3/QUIC ordinary and budgeted request/Body1/Finish1/reply positives. Six ordinary receiver refusals (wrong request/control/initial session/ordinal, missing pending/transport), two budgeted (missing pending/wrong request) retain actual received capsule and source state while freezing semantic reuse. Missing pending cannot discard actual reply; duplicate receive/export refuses. Actual reply Vec pointer/length/capacity moved from preBody backing; failed Finish cannot export it. Source ordinal0/results empty/native accepted receipts0 throughout.",
+    "scope": "External unadopted38 Rust files, changed3 relative notes36; adopted repository restored",
+    "remaining": "Current authenticated source acknowledgment/current M9 and atomic original source publication, full S->T->S, next activation/all3 refreeze and D integration remain. Current control/network driver has separate transport-only futures, but actual authority update while network DATA is held still needs integrated scheduling evidence. One first finite connection only; later acquisition/current ingress/history progression remain. Not whole original distributed workflow, D/E acceptance, Canon/source/public API adoption, recovery/global allocator/OS proof or fresh Lean campaign.",
+    "status": "same goal active; D incomplete; actual Body1/Finish1/reply, source ordinal0/receipts0",
+    "quota": {
+      "checked_at": "2026-10-07T07:27:58.039280+00:00",
+      "weekly": {
+        "observed_at": "2026-10-07T07:27:41.374Z",
+        "used_percent": 15.0,
+        "remaining_percent": 85.0,
+        "window_minutes": 10080
+      },
+      "next_check_not_before": "2026-10-07T08:27:58.039280+00:00",
+      "stop_remaining_percent_approximately": 50,
+      "stop_at_verified_checkpoint": true
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reply-docs-v1/RESULT.json",
+      "sha256": "68dfb9beebaccfd3e215949e81e1864bcdd940c5b62d97cd9571df21cae37b8f",
+      "exit": 0,
+      "scope": "Full pass before receipt metadata; final metadata narrowly checked"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-BODY-REPLY-v1.json"
   }
 }

@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual original first ordinary/budgeted Body and Finish now retained and accepted (notes36/finish-green-v5). source ordinal0/currentSourceAck/full S→T→S/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
+Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual original first ordinary/budgeted Body/Finish/reply now retained (notes37/reply-green-v3). source ordinal0/currentSourceAck/full S→T→S/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
 
 ## Authority and retained history
 
@@ -3141,3 +3141,21 @@ Test suffix collision and default feature-gate failure remain in immutable run r
 残りの実作業時間の粗い目安: Dの返信／currentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16h。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
 
 Evidence: ORIGINAL-BODY-FINISH-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v36.json; one Report2614.
+
+### 2026-10-07 16:24 JST — Actual retained original reply over the same QUIC session (LAB)
+
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-body-reply-green-v3／notes37で、元の最初の文と予算付き単文について、実FD3・QUICの要求送信→Body1／Finish1→返信の受信と保持まで接続しました。返信10件、影響するFinish13件、テスト専用機能なし10件、通常build2構成、全1368件が通過。Body前に確保した返信バッファを実際の送信に移し、受信した実データは要求の対応検査より先に保持します。要求・接続・実行位置の不一致やpending欠損でも受信済みデータを捨てず、実行位置を進めません。source ordinal0／受理済みreceipt0のままであり、現在の権限でのsource受理、S→T→S全体、次activation、D統合判定が残ります。
+
+Actual original first ordinary statement and budgeted singleton now retain the verified QUIC session across request transfer, authentic Ready/Admit/Resolve/Body/Finish, and actual reply transfer. Owner exports the actual pre-Body-funded reply network_packet Vec only after true Finish and exact retained-frame equality; one-use move preserves actual result/frame/history. Requester stores the real sealed received capsule in its source-owned inline slot before association validation, independent of pending DATA, and complete prepared-state visitor includes the actual capsule. Network futures capture transport/DATA only, never mutable Mode/Runtime. Physical connection close is not a semantic receipt. No source result, pending consumption, native receipt or source cursor advancement occurs; current source Ack remains separate.
+
+Exact green-v3 normal default/privateQUIC checks2, no-test-seams10 and full1368 pass. Source-v2 focused reply10 and affected Finish13 pass; v3 only exhaustive-match/dead-RED cleanup. Real FD3/QUIC ordinary and budgeted request/Body1/Finish1/reply positives. Six ordinary receiver refusals (wrong request/control/initial session/ordinal, missing pending/transport), two budgeted (missing pending/wrong request) retain actual received capsule and source state while freezing semantic reuse. Missing pending cannot discard actual reply; duplicate receive/export refuses. Actual reply Vec pointer/length/capacity moved from preBody backing; failed Finish cannot export it. Source ordinal0/results empty/native accepted receipts0 throughout.
+
+Current authenticated source acknowledgment/current M9 and atomic original source publication, full S->T->S, next activation/all3 refreeze and D integration remain. Current control/network driver has separate transport-only futures, but actual authority update while network DATA is held still needs integrated scheduling evidence. One first finite connection only; later acquisition/current ingress/history progression remain. Not whole original distributed workflow, D/E acceptance, Canon/source/public API adoption, recovery/global allocator/OS proof or fresh Lean campaign.
+
+Decided within bounded candidate: keep a requester-owned inline received-capsule slot independent of pending, rather than nesting it under a pending object whose absence would lose already received DATA. Slot exists from installation and is covered by the complete visitor. Owner moves the real preBody reply packet once; no reencoding or DATA-to-authority factory. Real stale/wrong bindings retire reuse while preserving received data. Current source Ack must start after reply arrival, with no semantic grant held over network await.
+
+Open direct-consumer research: native Ack action and source-ready DATA association; actual M9/lineage/original frame validation, full-state retention and coherent source publication. Native generic reply receipt lacks the original current-source acceptance and raw-lower-retention boundary. Later owner/current ingress stages and session acquisition must progress while preserving actual history.
+
+残りの実作業時間の粗い目安: DのcurrentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16h。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
+
+Evidence: ORIGINAL-BODY-REPLY-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v37.json; one Report2614.

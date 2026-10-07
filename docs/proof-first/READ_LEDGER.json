@@ -57551,5 +57551,61 @@
     "status": "read-reviewed-verified",
     "role": "Actual full make docs command/result/log hash, exit0",
     "at": "2026-10-07T06:48:04.180147+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v37.json",
+    "sha256": "8cb9569c84b0133c5b75732c0c91144eab230e095d8821c5af83372e4eab1f86",
+    "status": "read-reviewed-verified",
+    "role": "Verified bounded actual Body/Finish/reply and remaining current source Ack gates",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-REPLY-INTEGRATION-v1.json",
+    "sha256": "ce4691c9881040ef29280c0672fe7cfb129c8d49fa97107366338b703c99a0c1",
+    "status": "read-reviewed-verified",
+    "role": "Actual pinned commands/results/log hashes and restoration",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-REPLY-CURRENT-ACK-BEFORE-USE-DRAFT-v3.json",
+    "sha256": "776a153e8327ae5bb8c40df1adc7add66082d304b85a25989dc493d95172cae7",
+    "status": "read-reviewed-verified",
+    "role": "Before-use real network lifetime, independent source ingress retention and current Ack split",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-REPLY-REVIEW-v2.json",
+    "sha256": "bbbab93df585d4133985a49dbef5652f1d8a12e86f1064cb26ddf10012b4c000",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main final actual provenance/resources/retention/failure review; no independent review",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-REPLY-REVIEW-DELTA-v1.patch",
+    "sha256": "c0815d5d261b46de1d566da79558aeaa67795d9b684f7bdec7b8aec7513a5f43",
+    "status": "read-reviewed-verified",
+    "role": "Focused changed source delta reviewed",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-BODY-REPLY-REVIEW-CLEANUP-v1.patch",
+    "sha256": "6508d77408fa22313f3ed412360c1df6c0593a86a664af87d74c457dea942b86",
+    "status": "read-reviewed-verified",
+    "role": "Exact final exhaustive match and unreachable old RED test cleanup read",
+    "at": "2026-10-07T07:24:43.909276+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-body-reply-docs-v1/RESULT.json",
+    "sha256": "68dfb9beebaccfd3e215949e81e1864bcdd940c5b62d97cd9571df21cae37b8f",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs command/result/log hash, exit0",
+    "at": "2026-10-07T07:29:31.914155+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/QUOTA-ASTRA-20261007-hourly-v3.json",
+    "sha256": "3f22c9b9e5448defb0246a68352acff2e746bf6d01d954fc6512ce158e7778bf",
+    "status": "read-reviewed-verified",
+    "role": "Own session weekly85%; next check >=1h, continue same goal",
+    "at": "2026-10-07T07:29:31.914155+00:00"
   }
 ]
