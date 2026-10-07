@@ -64394,5 +64394,37 @@
       "scope": "Full pass before receipt metadata; final metadata narrowly checked"
     },
     "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-BODY-REPLY-v1.json"
+  },
+  "d_original_source_ack_20261007": {
+    "at": "2026-10-07T08:57:34.452059+00:00",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-source-ack-origin-green-v2",
+    "source_pins_sha256": "54663100b1c0b3f26fd14ab030c56d286c402c7c1f36c04638f867245a2790e0",
+    "notes": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v38.json",
+    "notes_sha256": "da27b1425d7ae967ecbfc467b67ae7c1f82754ea7c5ae55b84348dfc6335da83",
+    "integration": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json",
+    "integration_sha256": "cc06141e6ce4a2863008238dda2833afd012685c6084b53088229d9136330753",
+    "evidence": "Exact frozen source normal default/privateQUIC checks2, no-test-seams17 and full1386 pass. Focused actual Ack15, real result-origin refusals2, affected Finish14 pass. Genuine ordinary and budgeted source cursor1/native receipt1/parent ordinal1. Current floor, full actual source arguments, missing native pending, numeric IDs/counter, actual allocation, wrong grant kind, capture and Finish-send failures refuse with real state retained. Capture/send failure after true native publication keeps cursor1/result/raw while parent stays0/ACTIVE held; earlier refusal keeps cursor0 and pending/ingress. Actual result-only corruption on the same verified QUIC session is rejected before Ack grant; owner Body1/Finish1 remain true, requester receipt0/cursor0, received capsule and parent pending SourceReady remain retained.",
+    "scope": "External unadopted38 Rust files, changed7 relative notes37; adopted repository restored",
+    "remaining": "Only first ordinary statement and budgeted singleton accepted at this component checkpoint. Full original S->T->S, later peer/read acquisition with preserved actual history, source/control/parent correspondence, distributed graph, actual authority update while network DATA is held, next activation/all3 refreeze and D integration remain. Existing PendingIngress is one initial-session reconnect acquisition; no global permit reset or sequence support inferred. E inactive until explicit resume after D. No adopted Rust/Canon/public contract, recovery/global allocator/OS theorem or fresh Lean campaign.",
+    "status": "same goal active; D incomplete; first source/native receipt/parent ordinal1; real result-origin refusal before grant",
+    "quota": {
+      "checked_at": "2026-10-07T08:29:06.367023+00:00",
+      "weekly": {
+        "observed_at": "2026-10-07T08:28:36.289Z",
+        "used_percent": 17.0,
+        "remaining_percent": 83.0,
+        "window_minutes": 10080
+      },
+      "next_check_not_before": "2026-10-07T09:29:06.367023+00:00",
+      "stop_remaining_percent_approximately": 50,
+      "stop_at_verified_checkpoint": true
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-ack-docs-v1/RESULT.json",
+      "sha256": "46a8f459ea5c734fccf82b299e5388bebe1829b864c970f1ce19434abf80ac18",
+      "exit": 0,
+      "scope": "Full pass before receipt metadata; final metadata narrowly checked"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-SOURCE-ACK-v1.json"
   }
 }

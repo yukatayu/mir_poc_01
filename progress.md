@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-07 16:24 JST
+最終更新: 2026-10-07 17:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,7 +63,7 @@ W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after
 
 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T07:27:41.374Zの自分の実セッション記録で85%（使用15%、10080分window）でした。確認は2026-10-07T07:27:58.039280+00:00、次は2026-10-07T08:27:58.039280+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,13 +75,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-07にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-body-reply-green-v3／notes37で、元の最初の文と予算付き単文について、実FD3・QUICの要求送信→Body1／Finish1→返信の受信と保持まで接続しました。返信10件、影響するFinish13件、テスト専用機能なし10件、通常build2構成、全1368件が通過。Body前に確保した返信バッファを実際の送信に移し、受信した実データは要求の対応検査より先に保持します。要求・接続・実行位置の不一致やpending欠損でも受信済みデータを捨てず、実行位置を進めません。source ordinal0／受理済みreceipt0のままであり、現在の権限でのsource受理、S→T→S全体、次activation、D統合判定が残ります。
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
 | Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
 | User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | External original-body-reply-green-v3/notes37: actual first ordinary/budgeted Body1/Finish1/reply received; reply10/affected13/no-seams10/normal2/full1368/restored38 | 着手可能: currentSourceAck、full S→T→S、次activationへ接続。source ordinal0/D incomplete |
+| Implementation / operation | External original-source-ack-origin-green-v2/notes38: first ordinary/budgeted actual source Ack1; Ack15/origin2/Finish14/no-seams17/normal2/full1386/restored38 | 着手可能: full S→T→S、network-held update、次activationへ接続。first source ordinal1/D incomplete |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -726,3 +726,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-07 15:43 JST — W4-D実BodyからFinish受理まで検証。メモリ事前確保・途中受信・実状態欠損・送信失敗・再実行拒否を確認し、最終cutはno-seams13/normal2/full1358。source ordinal0を保持して次は実返信とcurrentSourceAckへ。Report2614。
 
 - 2026-10-07 16:24 JST — W4-D実Body/Finishから同じQUIC接続での返信受信・保持まで検証。返信10/影響するFinish13、最終no-seams10/normal2/full1368。対応不一致・pending欠損でも実受信データを保持し、source ordinal0。次はcurrentSourceAck。Report2614。
+
+- 2026-10-07 17:57 JST — W4-Dの実返信を現在の権限で受理。正例はsource/native receipt/parent ordinal各1。結果改変2件を許可前に拒否し、実受信データ保持。Ack15/Finish14/no-seams17/normal2/full1386。全列・次activationは未完。Report2614。

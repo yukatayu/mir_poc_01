@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-07 16:24 JST
+Last updated: 2026-10-07 17:57 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -31,11 +31,11 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 
 現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
-週間残量は2026-10-07T07:27:41.374Zの自分の実セッション記録で85%（使用15%、10080分window）でした。確認は2026-10-07T07:27:58.039280+00:00、次は2026-10-07T08:27:58.039280+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
+週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-body-reply-green-v3／notes37で、元の最初の文と予算付き単文について、実FD3・QUICの要求送信→Body1／Finish1→返信の受信と保持まで接続しました。返信10件、影響するFinish13件、テスト専用機能なし10件、通常build2構成、全1368件が通過。Body前に確保した返信バッファを実際の送信に移し、受信した実データは要求の対応検査より先に保持します。要求・接続・実行位置の不一致やpending欠損でも受信済みデータを捨てず、実行位置を進めません。source ordinal0／受理済みreceipt0のままであり、現在の権限でのsource受理、S→T→S全体、次activation、D統合判定が残ります。
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
 
 | W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|

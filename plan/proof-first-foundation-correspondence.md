@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual original first ordinary/budgeted Body/Finish/reply now retained (notes37/reply-green-v3). source ordinal0/currentSourceAck/full S→T→S/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
+Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual first ordinary/budgeted source Ack1 with genuine owner-result join (notes38/origin-green-v2). Full S→T→S/network-held update/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
 
 ## Authority and retained history
 
@@ -3159,3 +3159,23 @@ Open direct-consumer research: native Ack action and source-ready DATA associati
 残りの実作業時間の粗い目安: DのcurrentSourceAck／S→T→S4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16h。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
 
 Evidence: ORIGINAL-BODY-REPLY-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v37.json; one Report2614.
+
+### 2026-10-07 17:57 JST — Current source acknowledgment of the actual owner result (LAB)
+
+W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
+
+Actual original first ordinary statement and budgeted singleton now complete real request/Body1/Finish1/reply/current source Ack. Requester sends an owning SourceReady DATA notice; parent joins actual original Issue and authentic Body completion, then issues distinct native Acknowledge with no invented source statement permission. Original full Core/arguments/pending/request/reply and current M9/live floor are checked at actual native entry. Real SYS4 reply result is retained immediately; native pending, actual received capsule and original pending move into preallocated per-ordinal history. Native receipt/result/source cursor publish by fixed field moves while the same strong current floor is held. Actual Ack Finish is separately retained before parent cursor advances.
+
+Material RED: changing only one owner receipt write value after genuine packet export preserved request/Core/route/lineage but advanced native receipt/source cursor1 in both ordinary and budgeted cases. Fix binds the actual retained reply frame digest in authentic original Body Finish, with actual sender and parent receive/owned-string backing funded before Body. Parent compares received SourceReady frame before grant and repeats at issuance. Hash equality is DATA association, never semantic authority. Canonical reader validates fixed fields and both digest holes without post-Body serde/allocation; actual owned reply String uses the funded Vec. Missing/malformed digest and real reply-slot allocation failure refuse. Generic I3/public wire unchanged; private original control candidate changes only.
+
+Exact frozen source normal default/privateQUIC checks2, no-test-seams17 and full1386 pass. Focused actual Ack15, real result-origin refusals2, affected Finish14 pass. Genuine ordinary and budgeted source cursor1/native receipt1/parent ordinal1. Current floor, full actual source arguments, missing native pending, numeric IDs/counter, actual allocation, wrong grant kind, capture and Finish-send failures refuse with real state retained. Capture/send failure after true native publication keeps cursor1/result/raw while parent stays0/ACTIVE held; earlier refusal keeps cursor0 and pending/ingress. Actual result-only corruption on the same verified QUIC session is rejected before Ack grant; owner Body1/Finish1 remain true, requester receipt0/cursor0, received capsule and parent pending SourceReady remain retained.
+
+Decided within candidate: authenticated original Body Finish carries the actual retained reply frame binding, with sender/receiver slots reserved before Body. A separate post-Finish owner notice would add another sequence/retention boundary without an independent consumer, so it was not selected. SourceReady remains DATA; current authenticated native Ack and current M9 guard remain separate. Actual result-only corruption is the falsifier, preserved as RED2 before repair.
+
+Only first ordinary statement and budgeted singleton accepted at this component checkpoint. Full original S->T->S, later peer/read acquisition with preserved actual history, source/control/parent correspondence, distributed graph, actual authority update while network DATA is held, next activation/all3 refreeze and D integration remain. Existing PendingIngress is one initial-session reconnect acquisition; no global permit reset or sequence support inferred. E inactive until explicit resume after D. No adopted Rust/Canon/public contract, recovery/global allocator/OS theorem or fresh Lean campaign.
+
+Direct-consumer working candidate: a private original-flow sequential DATA ingress, compared with finite genuine per-statement sessions; the before-use draft selects it for a falsifiable LAB pass. Existing generic reconnect PendingIngress cannot be reset to manufacture another acquisition. Original source chooses actual peer/ordinal; per-ordinal owner/control history must remain retained through next source use and authority preparation. No implementation or normative adoption yet; cancellation, exact peer mapping and actual per-ordinal retention remain acceptance gates.
+
+残りの実作業時間の粗い目安: DのS→T→S全列／境界検証4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16hを暫定維持します。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
+
+Evidence: ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v38.json; one Report2614.

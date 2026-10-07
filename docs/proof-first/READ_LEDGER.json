@@ -57607,5 +57607,82 @@
     "status": "read-reviewed-verified",
     "role": "Own session weekly85%; next check >=1h, continue same goal",
     "at": "2026-10-07T07:29:31.914155+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v38.json",
+    "sha256": "da27b1425d7ae967ecbfc467b67ae7c1f82754ea7c5ae55b84348dfc6335da83",
+    "status": "read-reviewed-verified",
+    "role": "Verified first original current source acknowledgment and remaining full sequence gates",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json",
+    "sha256": "cc06141e6ce4a2863008238dda2833afd012685c6084b53088229d9136330753",
+    "status": "read-reviewed-verified",
+    "role": "Exact source/command/log/restoration receipts",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-CURRENT-SOURCE-ACK-BEFORE-USE-v2.json",
+    "sha256": "1aaf2fe8b3cb739e146066068e66a0551fb8ad60625356445a724ad232d46921",
+    "status": "read-reviewed-verified",
+    "role": "Native current Ack producer/retention/authority/resource mapping; original proof reading scopes",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-CURRENT-SOURCE-ACK-BEFORE-USE-v3.json",
+    "sha256": "0b25fd014a09a6675b775747699d05a49164a0951064eff6eb17c0dc43c60e6f",
+    "status": "read-reviewed-verified",
+    "role": "Result-origin repair before use; selected actual Body Finish binding and smallest alternative",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-ACK-ORIGIN-RED-RESULT-v1.json",
+    "sha256": "d68cc21c6f91636afc50dafea54fbd43b3a176032c933157f9463aa5b5beb43a",
+    "status": "read-reviewed-verified",
+    "role": "Actual altered owner-result accepted RED2; not source rejection or transport-only failure",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-ACK-REVIEW-v1.json",
+    "sha256": "d1c53c76ee995e40284084725921e912b394375c6307ada77ed58aff153d2c8b",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main actual origin/authority/retention/resource/failure final review; no independent reviewer",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-ACK-REVIEW-DELTA-v2.patch",
+    "sha256": "89c2c6287c68c0347c46f6e7d052545b5323279020ef4ca977b80c515d06dc50",
+    "status": "read-reviewed-verified",
+    "role": "Exact seven-file delta against notes37 reviewed",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-NEXT-CONSUMER-MAP-v1.json",
+    "sha256": "4c4dc0d140d8f0fdc4c0383447db9897a10fdf30ba6c0448bdfac6958fa139aa",
+    "status": "read-reviewed-verified",
+    "role": "Read-only later original source peer/history/ingress/graph obligations, no adopted design",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-BEFORE-USE-DRAFT-v1.json",
+    "sha256": "df65b156f576fa1883e25ba0556d8735981a4bc5d2e1e5ca075bb0f3081bb65b",
+    "status": "read-reviewed-verified",
+    "role": "Bounded LAB candidate private original-flow DATA ingress versus per-statement sessions; unimplemented, explicit falsifiers",
+    "at": "2026-10-07T08:57:34.452059+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-source-ack-docs-v1/RESULT.json",
+    "sha256": "46a8f459ea5c734fccf82b299e5388bebe1829b864c970f1ce19434abf80ac18",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs command/result/log hash, exit0",
+    "at": "2026-10-07T09:03:21.517344+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/QUOTA-ASTRA-20261007-hourly-v4.json",
+    "sha256": "64c5c0a747a52a087720af923cc4be79e64720b953cc27ed1dbf7bdedcc3f8b5",
+    "status": "read-reviewed-verified",
+    "role": "Own session weekly83%; next check >=1h, continue same goal",
+    "at": "2026-10-07T09:03:21.517344+00:00"
   }
 ]
