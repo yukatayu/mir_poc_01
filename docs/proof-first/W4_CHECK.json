@@ -64426,5 +64426,16 @@
       "scope": "Full pass before receipt metadata; final metadata narrowly checked"
     },
     "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/GIT-ORIGINAL-SOURCE-ACK-v1.json"
+  },
+  "owner_w4_e_authorization_20261007": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-W4-E-AUTHORIZATION-20261007-v1.json",
+    "sha256": "1b0e059cc7d8a52b08b6057f367163310a5f6bc68e1802f175231fd94e52afd3",
+    "status": "E explicitly authorized after D acceptance; stop after E or verified quota checkpoint",
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/w4-e-authorization-docs-v2/RESULT.json",
+      "sha256": "e4c7efbe55288aa1f291a9e02bab94badd26807c7532c73d80c55f2bdf1e20ba",
+      "exit": 0,
+      "scope": "Full pass; final receipt metadata checked narrowly"
+    }
   }
 }

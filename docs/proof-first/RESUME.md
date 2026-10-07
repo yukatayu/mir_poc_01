@@ -2,7 +2,7 @@
 
 W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
 
-現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
 週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
@@ -21,7 +21,7 @@ Exact frozen source normal default/privateQUIC checks2, no-test-seams17 and full
 
 Original Ack RED2 required cursor1 but actual0. Initial compiler/counter-test failures retained. v5 SourceReady timeout exposed physical QUIC teardown before control; v6 moves teardown after Ack. Material result-origin RED2 accepted altered result. Origin green-v1 production rejects before grant but test helper assumed active grant; v2 adjusts only test stage. Final source2+15+14/normal2/no-seams17/full1386 pass. No fresh Lean or independent review.
 
-Only first ordinary statement and budgeted singleton accepted at this component checkpoint. Full original S->T->S, later peer/read acquisition with preserved actual history, source/control/parent correspondence, distributed graph, actual authority update while network DATA is held, next activation/all3 refreeze and D integration remain. Existing PendingIngress is one initial-session reconnect acquisition; no global permit reset or sequence support inferred. E inactive until explicit resume after D. No adopted Rust/Canon/public contract, recovery/global allocator/OS theorem or fresh Lean campaign.
+Only first ordinary statement and budgeted singleton accepted at this component checkpoint. Full original S->T->S, later peer/read acquisition with preserved actual history, source/control/parent correspondence, distributed graph, actual authority update while network DATA is held, next activation/all3 refreeze and D integration remain. Existing PendingIngress is one initial-session reconnect acquisition; no global permit reset or sequence support inferred. E authorized after D acceptance; stop after E or at the weekly quota checkpoint. No adopted Rust/Canon/public contract, recovery/global allocator/OS theorem or fresh Lean campaign.
 
 残りの実作業時間の粗い目安: DのS→T→S全列／境界検証4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16hを暫定維持します。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
 
@@ -30,3 +30,5 @@ Next direct consumer: full original S→T→S. Actual requester cursor/results/a
 Overlay runner D/run-source-overlay-astra-v1.py requires clean ROOT and no concurrent cargo/make; use frozen successor38 source, new output, exact argv,8GiB/-j1/testthreads1 and incremental/debug off. Never edit installed/frozen source or docs/Git during an overlay. Check df/free; /mnt/mirrorea-work remains unmounted. No hostshare or research cleanup.
 
 Same11 owned LAB docs, one Report2614 and existing plan memory; no new report/roadmap/WRK/Canon/adopted Rust. Full make docs exit0 at D/original-source-ack-docs-v1; Git receipt after authorized commit/push/parity: GIT-ORIGINAL-SOURCE-ACK-v1.json.
+
+最新owner指示と実全列RED: D/OWNER-W4-E-AUTHORIZATION-20261007-v1.json。W4_D_IMPLEMENTATION_HANDOFF.mdの旧D後停止は履歴。original-sequence-red-v2は実3processでcursor1（期待3）を確認し、元の38pathへ復元済みです。全列実装はまだ未完了。

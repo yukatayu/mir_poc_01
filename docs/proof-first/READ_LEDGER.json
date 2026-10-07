@@ -57684,5 +57684,40 @@
     "status": "read-reviewed-verified",
     "role": "Own session weekly83%; next check >=1h, continue same goal",
     "at": "2026-10-07T09:03:21.517344+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-W4-E-AUTHORIZATION-20261007-v1.json",
+    "sha256": "1b0e059cc7d8a52b08b6057f367163310a5f6bc68e1802f175231fd94e52afd3",
+    "status": "read-reviewed-verified",
+    "role": "Latest explicit owner continuation; E after D; weekly50% stop",
+    "at": "2026-10-07T09:08:29.060771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-red-check-v1/RESULT.json",
+    "sha256": "bbf230281396da51b9fcadb99caf9c7dcc81fe772d6ff2022349a47131446932",
+    "status": "read-reviewed-verified",
+    "role": "Actual full-sequence RED exit101/cursor1 versus3;38 restored",
+    "at": "2026-10-07T09:08:29.060771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-BEFORE-USE-DRAFT-v1.json",
+    "sha256": "df65b156f576fa1883e25ba0556d8735981a4bc5d2e1e5ca075bb0f3081bb65b",
+    "status": "read-reviewed-verified",
+    "role": "Selected reader/peer/history working candidate; old E pause superseded by owner",
+    "at": "2026-10-07T09:08:29.060771+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/w4-e-authorization-docs-v1/RESULT.json",
+    "sha256": "bcb1ff59dd819b2cd50defa7ea4668db8dca18bd37f5cee679427b85eae96530",
+    "status": "read-reviewed-verified",
+    "role": "Actual make docs exit2: stale progress timestamp; preserve failure, correct header before retry",
+    "at": "2026-10-07T09:15:05.874116+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/w4-e-authorization-docs-v2/RESULT.json",
+    "sha256": "e4c7efbe55288aa1f291a9e02bab94badd26807c7532c73d80c55f2bdf1e20ba",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs retry exit0; original failure preserved",
+    "at": "2026-10-07T09:21:15.199308+00:00"
   }
 ]

@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual first ordinary/budgeted source Ack1 with genuine owner-result join (notes38/origin-green-v2). Full S→T→S/network-held update/next activation/D remain open. E inactive until explicit resume after D. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
+Current package map (2026-10-07 owner resume): W4-A/B/C have bounded closes; W4-D active Astra/xhigh. Actual first ordinary/budgeted source Ack1 with genuine owner-result join (notes38/origin-green-v2). Full S→T→S/network-held update/next activation/D remain open. Latest owner direction authorizes E after D acceptance; stop after E or a verified checkpoint below50% weekly remaining. Stop near50% weekly at verified checkpoint; checks>=1h. Older dated entries are history; Plan250/I3-4 remain separately paused.
 
 ## Authority and retained history
 
@@ -3179,3 +3179,9 @@ Direct-consumer working candidate: a private original-flow sequential DATA ingre
 残りの実作業時間の粗い目安: DのS→T→S全列／境界検証4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16hを暫定維持します。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは未着手の暫定値で、今回の自走対象ではありません。調査と反例で延伸し得る実作業時間であり、暦日や上限を保証しません。
 
 Evidence: ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json, SOURCE-OWNER-LOWER-NOTES-v38.json; one Report2614.
+
+## 2026-10-07 18:08 JST — W4-E continuation authorized; full-sequence RED
+
+現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+
+Existing D handoff and dated entries preserve former stop rules as history. OWNER-W4-E-AUTHORIZATION-20261007-v1.json records the explicit successor instruction. Full-sequence original-sequence-red-v2 / original-sequence-red-check-v1 executes real FD3/QUIC first source Ack and fails at actual cursor1 versus required3; no sequence completion inferred. Exact38 ROOT files restored clean. Existing selected private original DATA-reader design remains the next bounded implementation consumer; no new roadmap or Canon decision.

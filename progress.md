@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-07 17:57 JST
+最終更新: 2026-10-07 18:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,9 +59,9 @@ The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
 owner resumed2026-10-07 with gpt-6-astra/xhigh after the reader checkpoint and safe cleanup.
 PL1/PL2/PL0 S4/S6, with one main and no subagents. The same goal is active within
-W4-D before E; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
+W4-D then authorized E; stop after E. W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
 週間残量は2026-10-07T08:28:36.289Zの自分の実セッション記録で83%（使用17%、10080分window）でした。確認は2026-10-07T08:29:06.367023+00:00、次は2026-10-07T09:29:06.367023+00:00以降。停止条件は残量約50%での検証済み区切りです。gpt-6-astra/xhighを継続し、残量やresetは推測しません。
 
@@ -728,3 +728,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-07 16:24 JST — W4-D実Body/Finishから同じQUIC接続での返信受信・保持まで検証。返信10/影響するFinish13、最終no-seams10/normal2/full1368。対応不一致・pending欠損でも実受信データを保持し、source ordinal0。次はcurrentSourceAck。Report2614。
 
 - 2026-10-07 17:57 JST — W4-Dの実返信を現在の権限で受理。正例はsource/native receipt/parent ordinal各1。結果改変2件を許可前に拒否し、実受信データ保持。Ack15/Finish14/no-seams17/normal2/full1386。全列・次activationは未完。Report2614。
+
+- 2026-10-07 18:08 JST — ownerがW4-Eまでの続行を明示。D後停止を更新し、E完了又は週間残量50%未満での検証済み区切りで停止。全列S→T→Sの実テストは期待cursor3に対してactual1で失敗を確認、未実装範囲を保持。

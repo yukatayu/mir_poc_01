@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-07 17:57 JST
+最終更新: 2026-10-07 18:08 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -17,7 +17,7 @@ LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.
 
 W4-Dはgpt-6-astra/xhighで進行中です。外部未採用38pathのoriginal-source-ack-origin-green-v2／notes38で、元の最初の文と予算付き単文について、実FD3・QUICの要求→Body1／Finish1→返信→現在の権限でのsource受理まで接続しました。正常時はsource ordinal1／native receipt1／parent ordinal1です。受理15件、実結果の改変を拒否する2件、Finish14件、通常build2構成、テスト専用機能なし17件、全1386件が通過。実行側の保持した返信を正規のBody完了通知に結び付け、受信側との一致を受理許可より前に検査します。現在の権限、元の全引数、pending、資源、完了通知の失敗でも実結果を保持します。S→T→S全列、network DATA保持中の実権限更新、次activation／all3 refreeze、D統合判定が残ります。
 
-現行owner停止条件（2026-10-07）: 週間残量がおよそ50%になった後、検証・保存できる切りの良い地点で停止します。確認は1時間以上あけ、厳密な時刻や閾値監視より主作業を優先します。旧30%条件とAstra切替前pauseは更新済みです。主担当一人、sub-agent・Oracle・通知・hostshareなし。同じgoalでDを継続し、EはD受理後の明示的resumeまでinactive、W5+・Plan250/I3-4・新goal・規範採用は開始しません。
+現行owner停止条件（2026-10-07・Eまでの続行指示）: 同じgoalでDの受理後にEの検証・記録・W4統合判定まで自走し、E完了後に停止します。途中で週間残量が50%を下回った場合は、検証・保存できる切りの良い地点で停止します。残量確認は1時間以上あけます。従来のD後停止・Eへの別途resume待ちはこの明示指示で更新しました。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。
 
 W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md; current accepted component receipt is ORIGINAL-SOURCE-ACK-INTEGRATION-v1.json; before-use reviews are ORIGINAL-CURRENT-SOURCE-ACK-BEFORE-USE-v2/v3.json and final review is ORIGINAL-SOURCE-ACK-REVIEW-v1.json. Prior joint-entry/Finish/reply resource evidence remains in notes35/36/37. Exact source/history is in RESUME.md/W4_CHECK.json and one Report2614. No adopted Rust changes.
 
@@ -31,8 +31,8 @@ W4-A/B/C remain closed only in their bounded LAB scopes. The D handoff is docs/p
 |---|---|---|
 | D full S→T→S / Macro3/6 middle | First source Ack accepted; full original cursor, actual distributed graph, live authority update while network DATA held and later receive/history progression. | 着手可能・次の直接consumer; 4–8h |
 | D next activation/refreeze / Macro3/6 middle | Actual subsequent all3 prepare/publish/activate with preserved held state/history. | 後段依存; 2–4h |
-| D integrated acceptance / Macro3/6 close | Exact-cut positive/falsifier/regression and residual/source/proof/doc reconciliation. | 後段依存; Astra xhigh; 2–4h; stop before E |
-| E campaign and A–E/119 union / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and unresolved-obligation reconciliation. | Inactive until explicit E resume; 16–40h |
+| D integrated acceptance / Macro3/6 close | Exact-cut positive/falsifier/regression and residual/source/proof/doc reconciliation. | 後段依存; Astra xhigh; 2–4h; then authorized E |
+| E campaign and A–E/119 union / Macro3/6 close | Fresh full network/fault/observer/bypass/I3 campaign and unresolved-obligation reconciliation. | Authorized, dependency-gated by D acceptance; 16–40h |
 | W5/W6/W7 | Recovery, secret observation/debug, finite verified-alpha integration. | Future horizon, not authorized current work; old40–100/40–100/24–60h estimates need profile-specific reassessment |
 
 ## self-driven macro phase reading
@@ -41,7 +41,7 @@ Macro0 preserves evidence/reproduction; Macro1/5 establish semantic/proof bounda
 
 ## user decision gates
 
-The owner explicitly resumed the same W4-D on2026-10-07 and selected Astra. Routine bounded LAB implementation choices can be resolved autonomously. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain owner-reserved. E remains separately inactive after D; a D resume is not E authorization. No new owner design answer is presently required.
+The owner explicitly resumed the same W4-D on2026-10-07 and selected Astra. Routine bounded LAB implementation choices can be resolved autonomously. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, billing/publication, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain owner-reserved. The latest owner instruction explicitly authorizes E after D acceptance; stop after E or a verified checkpoint below50% weekly remaining. No new owner design answer is presently required.
 
 ## research discovery items
 
@@ -66,3 +66,5 @@ Heavy commands serial with resource audit; Rust8GiB/-j1/testthreads1, incrementa
 ## non-promoted references
 
 Current external source is original-source-ack-origin-green-v2/notes38. First ordinary/budgeted source Ack1 follows actual request/Body1/Finish1/reply, authentic owner-result join and current source gate. Full S→T→S/network-held update/next activation/D remain open. Conditional general proofs, finite Rust tests and actual process evidence are distinct. No model-state copy or DATA equality grants physical custody; first actual source Ack does not establish the full source workflow or D/E completion. R01–R12 and119 rows retain their original ownership/adoption status.
+
+全列RED: original-sequence-red-v2 / original-sequence-red-check-v1は実cursor1に対し3を要求して失敗。ROOT38pathは復元済み。次は専用の有限DATA受信・exact peer設定・元ordinalごとの履歴保持を実装します。
