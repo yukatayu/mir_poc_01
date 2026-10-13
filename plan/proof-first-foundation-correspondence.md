@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 14:47 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S, finite send retention and actual current distributed graph verified. Held-DATA authority update/full Flow preparation, next source activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 separately paused; earlier entries are history.
+Current package map (2026-10-13 16:34 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S, distributed graph, owned Flow and same3-process held-DATA authority update verified. Distinct next source activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 separately paused; earlier entries are history.
 
 ## Authority and retained history
 
@@ -3247,3 +3247,23 @@ v1の通常build失敗、v2のsummary種別表記によるsetup拒否、v3のcur
 No D/E acceptance. Flow-to-Mode/full-preparation custody, actual authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. No adopted Rust, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim. Existing narrow reference/count output goes only to the registered trusted parent.
 
 証跡: ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json、ORIGINAL-DISTRIBUTED-GRAPH-REVIEW-v1.json、SOURCE-OWNER-LOWER-NOTES-v41.json、Report2614。
+
+## 2026-10-13 16:34 JST — 実Flow所有とDATAを保持した同じ3者の権限更新
+
+W4-Dは、実Flowを各Modeが所有し、同じ3プロセスでDATAと実native履歴を保持したまま2回目の権限更新を検証済みです。実処理の完了待ち、全3者のprepare→publish→activate、古いrequest／Ackの拒否、更新後に発行した処理と履歴graphを確認しました。外部未採用39pathのauthority v8で通常default／private QUIC build、新規13件をseamsあり／なし、関連回帰を通過。次source activation／all3 refreeze、D統合とEは残っています。
+
+選択したLAB候補は、実Flowを元sourceに対応するModeの有限slotへ一度だけ移し、実prepareの全状態走査に含めるものです。profileを取り出したのに実Flowが所有されていない場合はprepare前に拒否します。元sourceのstatement数NからN+1個の完了権限cycleを事前確保し、親は実publication／stage／全3者receipt、子は実Prepared／Activatedを全条件の確認後に移動します。以前のslotを消去する代案は履歴と同じ世界の対応を失うため棄却しました。
+
+実反例は3種類ありました。最初の実装は2回目のstageをBusyで拒否し、更新開始時の正当な処理待ちでunavailableになり、発行を閉じると既に書かれた正当なFinishも拒否しました。修正後も、新規AckのClosed拒否がunavailableを立てる別の反例がありました。現在は新規8入口が変化前にClosedを返し、正当なIssue／Admit／Resolve／Body完了を受け取ってから更新できます。
+
+実SのBody／Ack後に全3者をG2へ更新し、現在の権限で発行したT／Sを実行する正例と、古いrequest／SourceReady／未送信replyを保持した拒否例を確認しました。無関係な失効でもordinaryの古いlineageは新しい権限へ置換しません。未送信replyに実native結果が残ることと、sourceが現在受理できることを分離します。影響のない3番目の子が実Prepared ACKを送らない場合もpublicationしません。
+
+履歴graphの実反例では、G1の完了済みDATAに現在Ack用のlineage条件を使ったため、G2のReportが失敗しました。既に実Ack済みの履歴に限り、元source全引数／Core／edge／budget／実carrier lineageのDATA対応を用います。native Ackはこの対応に加えて現在のlineage、実grantとfloor、reply検証を要求し続けます。14種類のDATA変異を拒否しました。
+
+Authority v8 at the identical39-path cut: normal default/privateQUIC checks pass;13 actual authority-cycle tests pass both with and without i3-process-test-seams. Serial regression counts are [13, 17, 22, 5, 8, 3, 2, 2, 58]: authority13 combined, then no-seams source Ack, owner, graph, actual lower held-M9, full prepared ACK, in-place preparation, whole Mode binding and control module respectively. These are filtered suites, not a whole-library or fresh Lean campaign. Flow v2 earlier had normal2 plus actual custody/field and focused regressions; those immutable receipts retain their own cut.
+
+No D/E acceptance. Distinct next source activation in the same world, its all3 refreeze, full D proof/resource/entry correspondence and E fresh campaign remain. D keeps actual M8 enqueue/serve inside the single Body interval; I3 Awaiting/ServeReserved is not an M8 queued use. Lower held-M9 controls and D close/drain evidence must be reconciled explicitly at integrated acceptance. No adopted Rust, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim.
+
+次source activationは新しいsource producerと有限資源を使用前に設計する必要があります。元のcursorやspent Flow budgetのreset、runtime再作成は採りません。既存proofの任意retained-state frameを、今回追加した全所有fieldと次activationへ対応させる作業はD統合の残件です。
+
+証跡: ORIGINAL-FLOW-CUSTODY-INTEGRATION-v1.json、ORIGINAL-AUTHORITY-CYCLE-INTEGRATION-v1.json、ORIGINAL-AUTHORITY-CYCLE-REVIEW-v1.json、SOURCE-OWNER-LOWER-NOTES-v42.json、Report2614。

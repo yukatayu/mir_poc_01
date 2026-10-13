@@ -5765,3 +5765,28 @@ Full docs v1 failed only because rewritten tasks.md omitted the required “cano
 20. skipped validations and reasons — No fresh whole-library1413/1393, Lean, OS/recovery/global allocator or broad privacy campaign. Same final39 cut normal2 and owning module191 no-seams verified; then-final D/E full campaign still required.
 21. commit / push status — Authorized eleven-doc checkpoint; actual commit/push/parity receipt after docs freeze: GIT-ORIGINAL-DISTRIBUTED-GRAPH-v1.json.
 22. sub-agent session close status — None started; no Oracle/notifications/hostshare. Same active W4 continues until E/saved quota stop.
+
+### 2026-10-13 16:34 JST — 実Flow所有とDATA保持中の全3者権限更新
+
+1. Title and identifier — Report2614 owned Flow and repeated authority cycle; same W4-D continues.
+2. Objective — Physically own/capture actual Flow, preserve real histories and update all3 actual endpoints while DATA survives.
+3. Scope and assumptions — External39 paths; finite N+1 past authority cycles plus current; existing authority contract; no D/E acceptance or adoption.
+4. Start state / dirty state — Clean HEAD54c47f6ed95004ca22798b4b6aad91a2275d4106; previous graph checkpoint. All recorded overlays restored exact39 baseline paths.
+5. Documents consulted — Canon architecture10/spec16, D handoff, Flow/authority/historical-DATA before-use records, proof boundary, actual source/control/M8/SYS4/SYS5 and exact receipts.
+6. Actions taken — Owned Flow move/private borrow/full visitor; funded whole prior-cycle transfer; healthy close/drain; actual all3 G2 with held DATA/native histories; separate historical Report DATA from current native Ack; guard eight closed entry paths.
+7. Files changed — External normal source/control/Flow/observation and tests; eleven LAB docs and this existing report. No adopted Rust/Canon/new sample root.
+8. Commands run — Exact argv/exits/log hashes in ORIGINAL-AUTHORITY-CYCLE-INTEGRATION-v1.json and Flow integration. Serial locked/offline8GiB/j1/testthreads1 with resource audit; First full docs-v1 failed only the tasks.md required Canon-notice phrase; corrected the exact notice and retained that failed receipt. full make docs passed in 261.195s on exact frozen eleven-doc input, receipt original-authority-cycle-docs-v2/RESULT.json; final metadata checked separately.
+9. Evidence / outputs / test results — Authority v8 at the identical39-path cut: normal default/privateQUIC checks pass;13 actual authority-cycle tests pass both with and without i3-process-test-seams. Serial regression counts are [13, 17, 22, 5, 8, 3, 2, 2, 58]: authority13 combined, then no-seams source Ack, owner, graph, actual lower held-M9, full prepared ACK, in-place preparation, whole Mode binding and control module respectively. These are filtered suites, not a whole-library or fresh Lean campaign. Flow v2 earlier had normal2 plus actual custody/field and focused regressions; those immutable receipts retain their own cut.
+10. What changed in understanding — Completed historical DATA cannot require the new native Ack lineage; exact historical provenance and current effect authorization are separate. Closing new issuance also must not poison the exact in-flight Finish path. Real REDs retained. Test-only heavy mutation placement was moved after network completion, with no deadline change.
+11. Open questions — No D/E acceptance. Distinct next source activation in the same world, its all3 refreeze, full D proof/resource/entry correspondence and E fresh campaign remain. D keeps actual M8 enqueue/serve inside the single Body interval; I3 Awaiting/ServeReserved is not an M8 queued use. Lower held-M9 controls and D close/drain evidence must be reconciled explicitly at integrated acceptance. No adopted Rust, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim.
+12. Suggested next prompt — Continue before-use actual next source activation/funding/history, same-world all3 refreeze, D integration and E.
+13. plan/ update status — Existing memory updated with selected design, rejected clearing/reset alternative, actual counterexamples and next consumer. No new roadmap.
+14. Documentation.md update status — Current bounded authority/Flow evidence and limits synchronized.
+15. docs/project-status.md update status — Current summary synchronized, within180 lines.
+16. progress.md update status — Current evidence and command-derived timestamp log updated.
+17. tasks.md update status — Whole eight-heading snapshot rewritten; next direct consumer and rough estimates current.
+18. samples_progress.md update status — Authority/Flow evidence row added; prior graph row marked historical cut; unchanged active roots/workflow classification.
+19. reviewer findings and follow-up — Sole-main review in ORIGINAL-AUTHORITY-CYCLE-REVIEW-v1.json and Flow review. Actual historical/currentness and Closed-poison findings resolved with retained RED→GREEN; distinct source activation and all-entry proof correspondence remain. No independent review under owner constraint.
+20. skipped validations and reasons — No fresh full-library/Lean/OS/recovery/global allocator or broad privacy campaign. Normal2 and focused final-cut controls/regressions verified; then-final D/E full campaign required. D budgeted admission states do not substitute for lower queued-use semantics.
+21. commit / push status — Authorized eleven-doc checkpoint; actual commit/push/parity receipt after docs freeze: GIT-ORIGINAL-AUTHORITY-CYCLE-v1.json.
+22. sub-agent session close status — None started; no Oracle/notifications/hostshare. Same active W4 continues until E/saved quota stop.
