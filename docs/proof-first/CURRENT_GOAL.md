@@ -1,19 +1,23 @@
-# W4 — D technical integration verified; E fresh campaign next
+# W4 — 有限候補の検証と保存
 
-W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。
 
-現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
+既存の通常sourceからchecked Core・生成owner request・実private QUIC・native実行・型付き観測までを接続しました。選択したLinuxの3プロセスで、同じRuntime・Flow・履歴を保ってS→T→Sを2回実行し、実権限更新、古い応答の拒否、owner期限切れ、結果不明と確定失敗の区別を検証しています。外部候補は40 Rust pathで、採用済みRust/LeanとCanonは変更していません。
 
-週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
+最終の同一40pathで9commandが通過しました。workspace全体2630件、private QUIC通常構成（test seamsなし）1420件、default通常構成1022件、private doc-test1件は失敗・除外0です。構成間の重複を含む件数であり、要件数の合計ではありません。
 
-Same active W4 goal. W4-A/B/C bounded closes. D technical candidate reviewed at source-declared-observer-controls-v2; finish documentation/Git save and continue directly to authorized E. Plan250/I3-4 remains separately paused. Exact receipts: RESUME.md, W4_CHECK.json, D-INTEGRATED-TECHNICAL-REVIEW-v1.json and notes44.
+一般証明は明示した前提の下の205module・20989所有宣言・211偽命題対照を、空の状態から417commandで再検査済みです。Rust/compiler/Quinn/OSの正しさを機械証明したものではありません。A/Bのnative動的構築・変更とDのQUIC通常代入は別の実行証拠であり、任意の構築・hot-plug・保存復旧・秘密を守る観測を備えた単一システムにはなっていません。
 
-Exact external source-declared-observer-controls-v2: normal default/private-QUIC builds pass; no-seams whole source-process217/control59/lower held-M9 8 pass; combined-feature continuation8 and declared-expiry4 pass. Required I3 native admission/clock, ledger, retry, image-origin, lower original entry/lifecycle and local-cut regressions pass with nonzero selections. Normal compiler controls reject four private custody fields (E0616) and owning Mode Clone (E0277). Fresh205 modules/20989 owned constants/211 qualified false controls pass in417 serial Lean4.29.1 --trust=0 commands from an empty local object cache. This is not a whole-library Rust campaign; E runs the fresh union.
+119要件のU/D・元source hash・未承認区分を保持し、各行にW4の証拠、未達範囲、次の利用前条件を記録しました。30判断事項・18証明目標・24シナリオ・α条件8件・全体目標7件も一括受理していません。I3-3の20故障群・9順序境界は67の実際に通ったtestへ対応付け、I3-4/5/6の未受理条件を残します。
 
-Next: E fresh actual network/fault/observer/bypass/I3 campaign, source/proof integrity, A–E119 disposition, R01–R12 and W1–W3 carried obligations, final review and authorized normal Git save. A counterexample reopens the smallest used premise before further dependent use. No W5+ or production/Canon adoption.
+このW4候補の検証・保存で停止し、後続packageは開始しません。 主担当一人、Astra/xhigh。sub-agent・Oracle・通知・hostshareは使用しません。W5以降、新goal、採用、Plan250/I3-4は自動開始しません。週間残量の停止目安は60%程度で、過去の30%・50%を置き換えています。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
 
-D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
 
-Dの技術統合後は、Eの実試験・反例・全要件照合に16–40h程度を見込みます。新しい反例や対応不足が見つかれば延伸します。今回の作業はE完了又は週間残量60%程度の検証済み保存地点までです。W5以降の保存・復旧、秘密を守る観測、公開α統合は開始しません。
+実行範囲はLinux固定3cohort・native ST・既存Surface v0の通常代入・事前確保した1/2 activationです。確定期限切れのsource接続は既存budgeted singletonのactivation0を対象とし、tickはhostが実native handleへ供給します。一般のOW1分散継続、物理clock、OS/allocator/OOM保証、復旧、広いcallee/構築/関係/指定結果/patch catalog、非干渉、公開API/wire/grammarは未達です。外部絶対pathのTLS fixtureとserial testに依存し、fresh checkoutでの公開workflowとは扱いません。
 
-Updated 2026-10-13T12:22:45.221733+00:00
+Exact receipt index: `W4_CHECK.json#e_integration_20261013`; one milestone report: Report2614. Mandatory protocol corpus at the D39710deb cut:2920 files, comprising2798 exact full reads,85 authored/reviewed proof records,23 full cumulative reconciliations and14 separately parsed/hash/direct-consumer generated-record dispositions. The14 are not claimed as full semantic reads. Final40 Rust source coverage includes the fully read predecessor, tool-produced formatting and complete reviewed lint deltas.
+
+最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。 このE統合cutの保存は`git commit --no-gpg-sign`と通常pushで行い、HEAD・remote一致・cleanの実結果を外部E-GIT-CLOSE-v1.jsonへ記録します。自己参照するcommit hashは文書内に作りません。保存後の最終判定はE-FINAL-CLOSE-v1.jsonです。
+
+Updated 2026-10-13T16:04:54.655600+00:00

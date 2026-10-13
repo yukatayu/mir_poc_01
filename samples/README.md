@@ -340,7 +340,7 @@ fresh検査する（`--with-publication` を含む）。既存のW3 source検査
 active rootの追加や移動はない。
 
 
-## W4-B preserved host correspondence model (integration candidate)
+## W4-B preserved host correspondence model (closed bounded LAB candidate)
 
 The same LAB foundation root now retains the exact 206-module dependency cut
 in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
@@ -356,8 +356,7 @@ import paths and successful source/object outputs before/after use; its fresh
 full validation passed278commands with236build receipts and9168file bindings.
 The current V2 observed model passed278commands/9169bindings; native preparation
 passed235commands and the repaired physical stage passed68commands/15profiles/53
-controls. Whole exits and bound inputs were verified. Final W4-B integration and
-Rust/Core/privateQUIC remain open; see the three-stage workflow in `scripts/README.md`.
+controls. Whole exits and bound inputs were verified. W4-B bounded integration is closed. Its native/private-pipe cut remains distinct from the later external D/E Rust/Core/privateQUIC candidate; see the three-stage workflow in `scripts/README.md`.
 
 Candidate command (existing external workroot required):
 
@@ -378,8 +377,8 @@ The candidate source inputs under
 referenceAt/instantiateAt library profile is not a public grammar adoption.
 Native entry/input-generator sources and an extracted test header live under
 `lean/host-reference/`, within the existing active Lean root. Their physical
-workflow remains under integration; no saved expected result is a source input.
+workflow passed at the bounded B cut; no saved expected result is a source input.
 See `scripts/README.md` and the W4 host manifest for preparation and evidence limits.
 
 
-W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに6proof/controlと所有宣言auditを保存します。現在199source/177対照のrecipeで、9module差分監査が通過、全199fresh再構築は未実行です。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。
+W4-Dのrepo内199source/177対照recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定manifestは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。これらは、当時の9module再構築・全所有宣言auditを再現する歴史的cutです。後続の外部205module/20989所有宣言/211偽命題対照は、別の空cacheから417commandで検査済みです。199recipeを205再現手順に読み替えません。現行外部source/process/privateQUIC候補、exact pins・コマンド・TCB・未達境界は `docs/proof-first/RESUME.md`、W4_CHECKの `e_integration_20261013`、Report2614を参照してください。採用済みproof/Rust・既存sample root・公開workflowの変更ではありません。

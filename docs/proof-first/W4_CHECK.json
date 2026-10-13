@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-30T05:21:58.192490+00:00",
-  "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "C closed bounded LAB local profile and integrated; D boundary design active; W4 incomplete, stop before E",
+  "timestamp": "2026-10-13T16:04:54.655600+00:00",
+  "base_head": "39710deb9505c36b0b7d94f49ca73dfa1cb5b9e9",
+  "status": "W4 A-E finite LAB technical/obligation/document candidate verified; actual saved disposition is E-FINAL-CLOSE-v1.json after authorized normal Git/parity. No successor activated.",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -112,23 +112,18 @@
     }
   },
   "open": [
-    "physical message/image origin and namespace",
-    "complete nonempty source-derived participant coverage",
-    "actual serialized entry/permit/completion coverage",
-    "actual source-generated owner computation/mutation",
-    "bounded resource/overflow discipline",
-    "physical source/network/observation refinement",
-    "required review and integration",
-    "outcome-preserving entry refinement",
-    "general reachable settled normal-round existence",
-    "owner completion/publication linearization without circular wait"
+    "Actual save/parity receipt determines final saved candidate disposition; no remaining known current-path technical or document blocker.",
+    "General distributed instance/relation/designated/patch, Q18/H/H2/C/C2, recovery, noninterference, portable workflow and formal adoption remain unaccepted before-use gates."
   ],
   "nonclaims": [
-    "W4 complete",
-    "real-network implementation of new model",
+    "All119 system requirements accepted",
+    "Single alpha system or general dynamic catalog over QUIC",
+    "Mechanized Rust/compiler/OS correctness",
     "W5 recovery",
     "W6 confidentiality",
-    "owner policy approval",
+    "Strict-global Clippy warnings zero",
+    "Portable public workflow",
+    "Owner policy/source/Canon adoption",
     "Plan250 I3-4/5/6 acceptance"
   ],
   "integrated_publication": {
@@ -1051,10 +1046,8 @@
     }
   },
   "docs_validation_latest": {
-    "status": "failed_header_corrected_rerun_pending",
-    "evidence": "7d39a6",
-    "cause": "progress header23:23 older than new recent log23:24",
-    "corrected": "2026-09-14 23:29 JST"
+    "status": "superseded-use-docs_validation_current",
+    "at": "2026-10-13T15:59:26.819590+00:00"
   },
   "oracle_reservation": {
     "session": "mir-w4-reservatio",
@@ -1181,14 +1174,31 @@
     "nonclaim": "no durable commit/recovery/liveness/authenticated provenance"
   },
   "docs_validation_current": {
+    "at": "2026-10-13T16:10:03.267991+00:00",
     "status": "passed",
-    "exit": 0,
-    "command": "python3 scripts/validate_docs.py",
-    "collection": "d20d4c",
-    "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_DOCS_FINAL.log",
-    "log_sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
-    "reports": 1764,
-    "scope": "final pause snapshot; seven proof sources unchanged; final result/Git bookkeeping separately diff-checked"
+    "full_make": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-validation-v1/RESULT.json",
+      "sha256": "786323f56aca860d7175c505b3a308c06bb82472cd3e2edcd79e551b2ace624d"
+    },
+    "focused_inputs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/INPUTS.json",
+      "sha256": "8333556f392d2e65ea2bbbd5070e7ae3bc9b29674f49f3492205a9829d174b4a"
+    },
+    "focused_result": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RESULT.json",
+      "sha256": "1a84e8b522ae1ad60e8399af59a6e62471e6bc7517114f091b0a64440b075a03"
+    },
+    "focused_logs": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-00.log",
+        "sha256": "37d0e890dcf418f548196f1cc01efbf21806ba5fbae01d0c7a63f67274a8e941"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-01.log",
+        "sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116"
+      }
+    ],
+    "scope": "Full make on exact16 inputs, then source hierarchy and full validate_docs after status substitutions. This final receipt-only W4_CHECK/READ_LEDGER delta is parsed and preservation/diff checked separately."
   },
   "oracle_custody_retry": {
     "session": "mir-w4-custody-retry",
@@ -6941,10 +6951,10 @@
     "pending": "RunLiteralUnified tool81371; JointWorkCursor written not yet compiled; same-history full work/driver/monitor coupling remains"
   },
   "current_checkpoint": {
-    "at": "2026-09-27T23:54:48.407617+00:00",
-    "package": "W4-C",
-    "status": "Theory/checker boundary research; D/E gated",
-    "next": "Current-context relative admission and first-consumer entry/authority mechanism mapping"
+    "at": "2026-10-13T16:04:54.655600+00:00",
+    "package": "W4-E finite candidate",
+    "status": "W4 A-E finite LAB technical/obligation/document candidate verified; actual saved disposition is E-FINAL-CLOSE-v1.json after authorized normal Git/parity. No successor activated.",
+    "next": "Stop after actual E-GIT-CLOSE/E-FINAL-CLOSE receipts. No new package, source adoption or Plan250 resume."
   },
   "oracle37_waiting_interior": {
     "receipt": {
@@ -18037,31 +18047,12 @@
     "lease_candidate": "FIRST PASScheckExact/fresh only, fullpreservationNOTPROVEN, noadmissionguard"
   },
   "quota_current": {
-    "checked_at": "2026-09-23T06:14:34.704058+00:00",
-    "event": {
-      "timestamp": "2026-09-23T06:14:17.594Z",
-      "rate_limits": {
-        "limit_id": "codex",
-        "limit_name": null,
-        "primary": {
-          "used_percent": 67.0,
-          "window_minutes": 10080,
-          "resets_at": 1790424717
-        },
-        "secondary": null,
-        "credits": {
-          "has_credits": false,
-          "unlimited": false,
-          "balance": "0"
-        },
-        "individual_limit": null,
-        "spend_control_reached": null,
-        "plan_type": "pro",
-        "rate_limit_reached_type": null
-      }
+    "receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261013T151543Z.json",
+      "sha256": "442252256fd51aaf13376e27b70c605c43a062f34c51aebcc9162bc7d77c06e1"
     },
-    "next_check_not_before": "2026-09-23T07:14:34.704058+00:00",
-    "scope": "bounded own rollout rate_limits only; no general quota API guarantee"
+    "stop_remaining_percent_approx": 60,
+    "check_spacing_hours_min": 1
   },
   "total_current": {
     "at": "2026-09-23T05:14:52.395860+00:00",
@@ -41531,10 +41522,90 @@
         "port": 33569,
         "last_check": "2026-09-26T09:27:33.419Z"
       }
+    },
+    {
+      "retained_at": "2026-10-13T15:59:26.819590+00:00",
+      "reason": "E current-header reconciliation; prior values are immutable historical observations, not current execution state",
+      "headers": {
+        "timestamp": "2026-09-30T05:21:58.192490+00:00",
+        "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
+        "status": "C closed bounded LAB local profile and integrated; D boundary design active; W4 incomplete, stop before E",
+        "open": [
+          "physical message/image origin and namespace",
+          "complete nonempty source-derived participant coverage",
+          "actual serialized entry/permit/completion coverage",
+          "actual source-generated owner computation/mutation",
+          "bounded resource/overflow discipline",
+          "physical source/network/observation refinement",
+          "required review and integration",
+          "outcome-preserving entry refinement",
+          "general reachable settled normal-round existence",
+          "owner completion/publication linearization without circular wait"
+        ],
+        "nonclaims": [
+          "W4 complete",
+          "real-network implementation of new model",
+          "W5 recovery",
+          "W6 confidentiality",
+          "owner policy approval",
+          "Plan250 I3-4/5/6 acceptance"
+        ],
+        "current_checkpoint": {
+          "at": "2026-09-27T23:54:48.407617+00:00",
+          "package": "W4-C",
+          "status": "Theory/checker boundary research; D/E gated",
+          "next": "Current-context relative admission and first-consumer entry/authority mechanism mapping"
+        },
+        "current_head": "9d86052d4f3982a2ddb077a610d02abed4f08327",
+        "history_key_policy": "Dated component entries and previous header_history are historical; current execution is integration_20260926/current_checkpoint/RESUME, not old total_current or prior component live statuses.",
+        "docs_validation_current": {
+          "status": "passed",
+          "exit": 0,
+          "command": "python3 scripts/validate_docs.py",
+          "collection": "d20d4c",
+          "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_DOCS_FINAL.log",
+          "log_sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+          "reports": 1764,
+          "scope": "final pause snapshot; seven proof sources unchanged; final result/Git bookkeeping separately diff-checked"
+        },
+        "docs_validation_latest": {
+          "status": "failed_header_corrected_rerun_pending",
+          "evidence": "7d39a6",
+          "cause": "progress header23:23 older than new recent log23:24",
+          "corrected": "2026-09-14 23:29 JST"
+        },
+        "quota_current": {
+          "checked_at": "2026-09-23T06:14:34.704058+00:00",
+          "event": {
+            "timestamp": "2026-09-23T06:14:17.594Z",
+            "rate_limits": {
+              "limit_id": "codex",
+              "limit_name": null,
+              "primary": {
+                "used_percent": 67.0,
+                "window_minutes": 10080,
+                "resets_at": 1790424717
+              },
+              "secondary": null,
+              "credits": {
+                "has_credits": false,
+                "unlimited": false,
+                "balance": "0"
+              },
+              "individual_limit": null,
+              "spend_control_reached": null,
+              "plan_type": "pro",
+              "rate_limit_reached_type": null
+            }
+          },
+          "next_check_not_before": "2026-09-23T07:14:34.704058+00:00",
+          "scope": "bounded own rollout rate_limits only; no general quota API guarantee"
+        }
+      }
     }
   ],
-  "current_head": "9d86052d4f3982a2ddb077a610d02abed4f08327",
-  "history_key_policy": "Dated component entries and previous header_history are historical; current execution is integration_20260926/current_checkpoint/RESUME, not old total_current or prior component live statuses.",
+  "current_head": "39710deb9505c36b0b7d94f49ca73dfa1cb5b9e9",
+  "history_key_policy": "Current W4 state is timestamp/status/current_checkpoint/e_integration_20261013 and docs_validation_current. Other component records, old *_latest/*_current quota or partial statuses and retained header_history are historical at their own dates. Never relabel their source cuts or failed executions.",
   "current_head_note": "9d86052d is code/proof evidence cut; final docs-only continuation commit is recorded by Git and external I/B_RECOVERY_GIT.json after commit",
   "b_closeout_20260928": {
     "at": "2026-09-27T23:53:14.198988+00:00",
@@ -64810,5 +64881,146 @@
       "sha256": "b63ba7963fa4e74ebc90399feacea04d69a361a3204df698964d98327fcca932",
       "status": "pass263.572s; superseded for final wording by v2, not invalidated technical evidence"
     }
+  },
+  "current_head_scope": "Exact adopted-source and clean pre-E-doc baseline; final documentation save commit/parity is in external E-GIT-CLOSE-v1.json, not a self-referential commit field.",
+  "e_integration_20261013": {
+    "at": "2026-10-13T16:04:54.655600+00:00",
+    "status": "W4 A-E finite LAB technical/obligation/document candidate verified; actual saved disposition is E-FINAL-CLOSE-v1.json after authorized normal Git/parity. No successor activated.",
+    "base_head": "39710deb9505c36b0b7d94f49ca73dfa1cb5b9e9",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/SOURCE_PINS.json",
+      "sha256": "d8dbfab906dd633c7eaf32202f91aad66244e316f218a2e2350adf3ce9ff8bde"
+    },
+    "campaign": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-FRESH-CAMPAIGN-v2.json",
+      "sha256": "0ccfd53154782c3df3909a6eda295491f88d49de927d236de3cba5c8bdc5573d"
+    },
+    "profiles": [
+      {
+        "profile": "workspace-combined-all-targets",
+        "passed": 2630,
+        "failed": 0,
+        "ignored": 0,
+        "filtered_out": 0
+      },
+      {
+        "profile": "runtime-private-no-seams",
+        "passed": 1420,
+        "failed": 0,
+        "ignored": 0,
+        "filtered_out": 0
+      },
+      {
+        "profile": "runtime-default",
+        "passed": 1022,
+        "failed": 0,
+        "ignored": 0,
+        "filtered_out": 0
+      },
+      {
+        "profile": "runtime-private-doc",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "filtered_out": 0
+      }
+    ],
+    "scope": "Original4 W4 outputs/3 exits and R01-R12 finite candidate union. A/B source reparent/retirement and separate Place controls are not combined with D QUIC as general dynamic alpha. All119 U/D and unaccepted source/adoption fields retained.",
+    "evidence": {
+      "E-FRESH-CAMPAIGN-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-FRESH-CAMPAIGN-v2.json",
+        "sha256": "0ccfd53154782c3df3909a6eda295491f88d49de927d236de3cba5c8bdc5573d"
+      },
+      "I3-3-REGRESSION-MAP-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/I3-3-REGRESSION-MAP-v2.json",
+        "sha256": "8dc33f0e9664fbde24cc09963844aeb4e626eab2cbc19fb0b4b10e0db76e66a5"
+      },
+      "E-SCOPE-AND-CARRYOVER-REVIEW-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-SCOPE-AND-CARRYOVER-REVIEW-v2.json",
+        "sha256": "3f6563272109e0d007b9d723c1a81a6e645ce0a0e3cc893354dae7a0c0fb2c8f"
+      },
+      "E-REQUIREMENT-REGISTRY-REVIEW-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-REQUIREMENT-REGISTRY-REVIEW-v2.json",
+        "sha256": "00c425b635c49ab378cc6452ff5db66eb69001ef0f2b7044c3c2d08cf3052347"
+      },
+      "E-ORIGINAL-REGISTRY-DISPOSITION-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-ORIGINAL-REGISTRY-DISPOSITION-v2.json",
+        "sha256": "85c12b802f293aeea70ecd099c337b9ee42dff36203525992cc46ca4ec4b5f05"
+      },
+      "NATIVE-DYNAMIC-SCOPE-CORRECTION-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/NATIVE-DYNAMIC-SCOPE-CORRECTION-v1.json",
+        "sha256": "d62ea3d967cc2e54be4fb5077ce62238dd64e43b822014e37e9b9f8b17a2beb3"
+      },
+      "SOURCE-READ-COVERAGE-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/SOURCE-READ-COVERAGE-v2.json",
+        "sha256": "3dbec228476068806d0b63616689ddbf042244c90a5e43eb1f8e3c8b4893a407"
+      },
+      "CORPUS-RECONCILIATION-v3": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/CORPUS-RECONCILIATION-v3.json",
+        "sha256": "4372763622c1ab7ac6f7dd7780164991a3fe211db47ce198cd7e70e6fb48cb63"
+      },
+      "RETAINED-EVIDENCE-INTEGRITY-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/RETAINED-EVIDENCE-INTEGRITY-v1.json",
+        "sha256": "38a6487f9aa12b5ad68ba1f097702db938a2ff741ca4c74fb0bd7d4df898bd32"
+      },
+      "GENERATED-RECORD-DISPOSITION-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/GENERATED-RECORD-DISPOSITION-v1.json",
+        "sha256": "b4c1fd6a10370cadd3d8ceb8b739551cb536805763f747d91538b57a7125188b"
+      },
+      "LOCAL-REPRODUCTION-DEPENDENCIES-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LOCAL-REPRODUCTION-DEPENDENCIES-v1.json",
+        "sha256": "fc2c5fdc72e5b779301e1b36e2813d572757b839f8cf8409d6b1b8331956a0d6"
+      },
+      "LINT-BASELINE-COMPARISON-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-BASELINE-COMPARISON-v1.json",
+        "sha256": "26560fa036cecadcb47c79d7f9c347ce60a52f4839553e4e3196bf0a7e1a58aa"
+      },
+      "LINT-DIFF-REVIEW-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-DIFF-REVIEW-v1.json",
+        "sha256": "b79a949c6589edb44b39087dc0f8fb9064bef077154b599b2935977ffc7adce9"
+      },
+      "LINT-DIFF-REVIEW-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-DIFF-REVIEW-v2.json",
+        "sha256": "5cfd654802529fcd33a01d3fb31bd51b8a0096818a15a83e3386b0ebb7cb092d"
+      }
+    },
+    "reviewer": "sole main Astra/xhigh; no independent review under owner restriction",
+    "restoration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-final-campaign-v1/RESTORED.json",
+      "sha256": "961cd4b60a034b3d2b5d1a40716fa61cdea7431d6224604d7794ba2f73825d7e"
+    },
+    "source_adoption": false,
+    "canon_change": false,
+    "docs": {
+      "at": "2026-10-13T16:10:03.267991+00:00",
+      "status": "passed",
+      "full_make": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-validation-v1/RESULT.json",
+        "sha256": "786323f56aca860d7175c505b3a308c06bb82472cd3e2edcd79e551b2ace624d"
+      },
+      "focused_inputs": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/INPUTS.json",
+        "sha256": "8333556f392d2e65ea2bbbd5070e7ae3bc9b29674f49f3492205a9829d174b4a"
+      },
+      "focused_result": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RESULT.json",
+        "sha256": "1a84e8b522ae1ad60e8399af59a6e62471e6bc7517114f091b0a64440b075a03"
+      },
+      "focused_logs": [
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-00.log",
+          "sha256": "37d0e890dcf418f548196f1cc01efbf21806ba5fbae01d0c7a63f67274a8e941"
+        },
+        {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-01.log",
+          "sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116"
+        }
+      ],
+      "scope": "Full make on exact16 inputs, then source hierarchy and full validate_docs after status substitutions. This final receipt-only W4_CHECK/READ_LEDGER delta is parsed and preservation/diff checked separately."
+    },
+    "git_close_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-GIT-CLOSE-v1.json",
+    "stop": "Stop after verified candidate save. No W5+, new goal, source/Canon adoption or Plan250/I3-4 resume.",
+    "final_close_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-FINAL-CLOSE-v1.json"
   }
 }

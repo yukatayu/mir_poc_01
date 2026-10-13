@@ -135,7 +135,7 @@ active rootの追加や移動はない。
 公開操作の全経路、予約容量・freshness、実通信との対応は別の未完了条件である。
 
 
-## W4-B preserved host correspondence model (integration candidate)
+## W4-B preserved host correspondence model (closed bounded LAB candidate)
 
 The same LAB foundation root now retains the exact 206-module dependency cut
 in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
@@ -152,7 +152,7 @@ full validation passed278commands with236build receipts and9168file bindings.
 The current V2 observed model passed278commands/9169bindings; native preparation
 passed235commands and the repaired physical stage passed68commands/15profiles/53
 controls. Whole exits and bound inputs were verified. W4-B bounded integration
-is closed; C premises and Rust/Core/privateQUIC correspondence remain open; see the three-stage workflow in `scripts/README.md`.
+is closed; historical C premises and later external D/E correspondence are indexed by W4_CHECK/RESUME; see the three-stage workflow in `scripts/README.md`.
 
 Candidate command (existing external workroot required):
 
@@ -174,8 +174,7 @@ reference sources are staged externally by `scripts/proof_first_host_prepare.py`
 the current observed native preparation and repaired physical runs passed235 and68
 commands respectively, with whole exits and input bindings checked. Final W4-B
 scope review was collected and locally disposed; B is a bounded LAB integrated
-candidate. C admission/authority premises remain open; Rust/Core/privateQUIC
-remains unconnected. Their source
+candidate. Later selected C conditions and external D/E Rust/Core/privateQUIC evidence are recorded separately in W4_CHECK/RESUME. Their source
 origins/transformations are in `docs/proof-first/W4_HOST_MANIFEST.json`.
 
 
@@ -209,4 +208,4 @@ companion内の外部fresh-copyコマンドで再構築できます。既存W4-B
 
 W4-Cの通常代入列は [OwnerStatementAdmission](foundations/OwnerStatementAdmission.md) に現在の190module/156反例recipeと段階別証拠を保持します。元sourceの全handler・引数・文順序、現在のM9、実結果と一度だけの受理、局所全入口・資源条件について選定した局所範囲を閉じ、78756ad5で統合しました。外部15Rust参照のdefault806/feature818はtest-onlyの検証で、production採用ではありません。
 
-W4-Dの使用前モデルは [DPrerequisites](foundations/MirroreaProofFirstDPrerequisites.md) と独立199source manifestに保存します。中央利用区間・保持中権限更新・正確な子の検証記録frameを監査し、199module/20455所有宣言/177偽命題対照が通過しました。9module再構築、C190は固定再利用です。旧197/v5のfresh-copy366commandは別receiptです。実M9/backend/FD/source/資源と実networkの接続は未完了で、model切替の引継ぎでowner pauseします。
+W4-Dのrepo内199source/177対照recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定manifestは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。これらは、当時の9module再構築・全所有宣言auditを再現する歴史的cutです。後続の外部205module/20989所有宣言/211偽命題対照は、別の空cacheから417commandで検査済みです。199recipeを205再現手順に読み替えません。現行外部source/process/privateQUIC候補、exact pins・コマンド・TCB・未達境界は `docs/proof-first/RESUME.md`、W4_CHECKの `e_integration_20261013`、Report2614を参照してください。採用済みproof/Rust・既存sample root・公開workflowの変更ではありません。

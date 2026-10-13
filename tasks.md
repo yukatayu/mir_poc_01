@@ -1,63 +1,62 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-13 21:22 JST
+最終更新: 2026-10-14 01:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source. Everything outside is LAB; if LAB conflicts with canon, canon wins. This snapshot creates no Canon/THM/OBL/SCN/Gate/Phase decision or new roadmap.
 
 ## document role
 
-Plan250 remains the sole Canon-authorized roadmap, separately owner-paused after accepted I3-3 under ADR-0043. I3-4 requires explicit owner resume; Plans247/249 are closed baselines. This W4 research is independently authorized.
+Plan250 remains the sole Canon-authorized roadmap, owner-paused after accepted I3-3 under ADR-0043. I3-4 requires explicit owner resume; Plans247/249 are closed baselines. The W4 task was separately authorized and does not alter that program.
 
 ## current promoted package
 
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
 LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 外部未採用40 Rust pathについて最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過。source→Core→生成owner→実QUIC→native結果→型付き観測と、同じ3プロセスでの次source activation・実M9更新を検証しました。証明はfresh205module/20989所有宣言/211偽命題対照、417commandです。
 
-現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
+119行と元のQ/PT/SC/α条件には個別dispositionを追加し、U/D・承認区分を保持します。A/Bのnative動的構築とDの固定cohort QUICは別証拠です。一般の分散instance/relation/hot-plug、保存復旧、二実行の秘密保持、αの単一システム統合は未達です。採用済みRust/Lean、Canon、Plan250のpauseは変更しません。
 
-W4-A/B/C remain bounded LAB closes. D technical review: D-INTEGRATED-TECHNICAL-REVIEW-v1.json / notes44. Required documentation/Git close precedes E. The former D-stop/model/50% preamble of W4_D_IMPLEMENTATION_HANDOFF.md is historical; owner continuation receipts in RESUME.md override it. Adopted Rust/Lean is unchanged.
+このW4候補の検証・保存で停止し、後続packageは開始しません。 W5以降、新goal、採用、Plan250/I3-4は自動開始しません。証拠と再現条件はReport2614、`docs/proof-first/W4_CHECK.json`、`docs/proof-first/RESUME.md`、既存foundation planにあります。今回D/Eの独立reviewはownerの禁止に従い実施していません。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
 
 ## ordered self-driven packages
 
-次に自走で進める順番とrough estimate。
+次に自走で進める順番とrough estimate。今回の有限候補を検証・保存した時点が停止線です。W5以降の新規packageは選択しません。
 
-Dの技術統合後は、Eの実試験・反例・全要件照合に16–40h程度を見込みます。新しい反例や対応不足が見つかれば延伸します。今回の作業はE完了又は週間残量60%程度の検証済み保存地点までです。W5以降の保存・復旧、秘密を守る観測、公開α統合は開始しません。
-
-| Package / macro position | Direct consumer and required evidence | Readiness / hours |
+| Package / macro position | Direct consumer and required evidence | Readiness / estimate |
 |---|---|---|
-| E fresh campaign and A–E/119 union / Macro3/6 close | Fresh actual network/fault/observer/bypass and I3 regressions; R01–R12 and W1–W3 retained obligations; final119 disposition. | 承認済み; continue after D save;16–40h |
-| W5/W6/W7 | Save/recovery, secret observation/debug and finite verified-alpha integration. | 今回は対象外; no automatic resume |
+| W4 A–E / Macro1/3/5/6 finite candidate | Existing Report2614 and exact E receipts; source, proof, real-path positive/falsifier, all-entry,119 and regression union | 有限候補の技術・文書検証済み。保存結果はE-GIT-CLOSE-v1.json。後続なし。 |
+| Save/recovery, private observation/debug, unified alpha / Macro1/5/6/7 | Original W5/W6/W7 boundaries; a concrete successor needs its used proof premises, scope and owner authorization | 今回対象外。仕様と候補が未確定のため新見積もりを捏造しない |
 
 ## self-driven macro phase reading
 
-Macro0 preserves reproducible evidence; Macro1/5 establish semantics/proofs; Macro2/3 implement references; Macro6 connects actual processes/transport. No whole-project recut. D now has the required finite source/native/physical correspondence; E must challenge the combined candidate and reconcile the union. Model proof, concrete controls and product acceptance remain separate.
+Macro0 holds exact evidence and current snapshots; Macro1/5 hold conditional semantics/proofs; Macro3/6 have finite native/source/private-QUIC evidence. This is snapshot maintenance, not a whole-project phase recut. Mir, Mirrorea, Typed-Effect, PrismCascade and View/app remain separable. No new active package is selected.
 
 ## user decision gates
 
-No further input is needed for bounded D/E. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, Q18/H/H2/C/C2 adoption, public operations and Canon/Plan250 resume remain owner-reserved. Stop at E completion or a verified saved checkpoint around60% weekly remaining.
+このW4候補の検証・保存で停止し、後続packageは開始しません。 L0/L1, authority/privacy weakening, public API/ABI/wire, adoption, Q18 and H/H2/C/C2 policy adoption, public operations and Canon/Plan250 resume remain owner-reserved. Native request reservation does not decide prepared-patch authority reservation. A further task must not be inferred from W4 completion or a quota checkpoint.
 
 ## research discovery items
 
 | Item | Impact / alternatives / current position and falsifier |
 |---|---|
-| Combined candidate | E must exercise the same39-path source cut; a new counterexample reopens the smallest implicated D premise before dependent use. Do not infer whole-library/fresh campaign success from D module suites. |
-| Known failure versus unknown | Real Resolve expiry plus actual requester terminal and both current Reports yield the typed failure view. Missing completion or Report stays unknown; no Body-success substitute. |
-| Ownership and resources | Same Runtime/Flow/cursor stay owned; funded capacity and actual retained returns support the concrete consumer. Hash/data equality or numeric bounds alone do not establish custody/physical allocation. |
-| Queue and authority | D internal M8 enqueue/serve uses one Body interval; lower ST/OW1 queued-M9 evidence is a separate profile. Wider queued recovery cannot inherit D acceptance. |
-| Formal and physical limits | Fresh205 audits the general proof cone under explicit initial/authentic/physical premises. E119 must retain unresolved Rust/OS/recovery/secrecy/public-adoption obligations. |
+| Wider source/dynamic distribution | A/B native construction/mutation and D QUIC assignments are separate witnesses. Before a QUIC instance/relation/patch consumer, supply its actual generation, lifetime, authority and graph evidence. Fixed cohort cannot stand in for that result. |
+| All protected entry/resource paths | Final C/D review covers the selected owning path and alternative ingress. Any new writer, restore/clone/deserialization route, caller or larger funding profile reopens the smallest affected premise before use. |
+| Known failure/unknown and recovery | Genuine expiry is typed terminal failure; missing completion remains unknown. New cancellation/retry/recovery must not refund, retry or resurrect from missing evidence. |
+| Observation/privacy | Current reference/count projection has actual joins and inherited redaction. General two-run secrecy, timing/resource noninterference and active-debug authority need separate evidence. |
+| Legacy helper and designated input | Old W1 AssignmentAdmission/finite source-contract helpers remain unreviewed and unused by B206/D205. Raw missing-SourceRef designated input is a static panic candidate, not an executed new defect; reproduce/repair before using that route. |
+| Reproduction/TCB | Local exact overlays depend on pinned external TLS fixtures, tools and serial tests. Portable fresh-checkout workflow and mechanized Rust/OS correctness remain open. |
 
 ## maintenance tasks
 
-One Report2614, existing plan, CURRENT_GOAL/RESUME, append-only READ_LEDGER and preserved W4_CHECK keys. Heavy commands serial with resource audit, Rust8GiB/-j1/testthreads1 and explicit no incremental/debug; Lean6GiB/--trust=0. No cleanup, notifications, subagents, Oracle or hostshare.
+One Report2614; existing plan, CURRENT_GOAL/RESUME, append-only READ_LEDGER and historical W4_CHECK keys are retained. 最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。 このE統合cutの保存は`git commit --no-gpg-sign`と通常pushで行い、HEAD・remote一致・cleanの実結果を外部E-GIT-CLOSE-v1.jsonへ記録します。自己参照するcommit hashは文書内に作りません。保存後の最終判定はE-FINAL-CLOSE-v1.jsonです。
 
-週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
+Heavy commands remain serial with resource audit; Rust8GiB/-j1/testthreads1 and explicit no incremental/debug, Lean6GiB/--trust=0. No automatic cleanup, notifications, subagents, Oracle or hostshare. 週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
 
 ## non-promoted references
 
-Exact external source-declared-observer-controls-v2: normal default/private-QUIC builds pass; no-seams whole source-process217/control59/lower held-M9 8 pass; combined-feature continuation8 and declared-expiry4 pass. Required I3 native admission/clock, ledger, retry, image-origin, lower original entry/lifecycle and local-cut regressions pass with nonzero selections. Normal compiler controls reject four private custody fields (E0616) and owning Mode Clone (E0277). Fresh205 modules/20989 owned constants/211 qualified false controls pass in417 serial Lean4.29.1 --trust=0 commands from an empty local object cache. This is not a whole-library Rust campaign; E runs the fresh union.
+実行範囲はLinux固定3cohort・native ST・既存Surface v0の通常代入・事前確保した1/2 activationです。確定期限切れのsource接続は既存budgeted singletonのactivation0を対象とし、tickはhostが実native handleへ供給します。一般のOW1分散継続、物理clock、OS/allocator/OOM保証、復旧、広いcallee/構築/関係/指定結果/patch catalog、非干渉、公開API/wire/grammarは未達です。外部絶対pathのTLS fixtureとserial testに依存し、fresh checkoutでの公開workflowとは扱いません。
 
-D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
 
-Historical cuts/runs retain their original scope. R01–R12 and119 U/D/adoption state is not silently promoted; E owns that explicit reconciliation. Active sample roots and workflow classification remain unchanged.
+All119 U/D/source approval/adoption fields, original Q/PT/SC/alpha and R01–R12 retain their individual scope. No final public/product completion, lifecycle promotion or new active sample root follows.

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-13 21:22 JST
+最終更新: 2026-10-14 01:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,94 +55,25 @@ public/production layers remain later.
 
 ## current milestone position
 
-The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
-sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
-owner resumed2026-10-13 with gpt-6-astra/xhigh after the flow/history checkpoint and earlier safe cleanup.
-PL1/PL2/PL0 S4/S6, with one main and no subagents. The same goal is active within
-W4-D then authorized E; stop at E completion or a verified checkpoint around 60% weekly remaining. W5+/alpha are not active. Plan250 remains separately paused after I3-3.
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。
 
-現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
+既存の通常sourceからchecked Core・生成owner request・実private QUIC・native実行・型付き観測までを接続しました。選択したLinuxの3プロセスで、同じRuntime・Flow・履歴を保ってS→T→Sを2回実行し、実権限更新、古い応答の拒否、owner期限切れ、結果不明と確定失敗の区別を検証しています。外部候補は40 Rust pathで、採用済みRust/LeanとCanonは変更していません。
 
-週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
+最終の同一40pathで9commandが通過しました。workspace全体2630件、private QUIC通常構成（test seamsなし）1420件、default通常構成1022件、private doc-test1件は失敗・除外0です。構成間の重複を含む件数であり、要件数の合計ではありません。
 
-W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
+一般証明は明示した前提の下の205module・20989所有宣言・211偽命題対照を、空の状態から417commandで再検査済みです。Rust/compiler/Quinn/OSの正しさを機械証明したものではありません。A/Bのnative動的構築・変更とDのQUIC通常代入は別の実行証拠であり、任意の構築・hot-plug・保存復旧・秘密を守る観測を備えた単一システムにはなっていません。
 
-閉じたW4-Cの外部参照foreign-fault-retention-green-v1は、default全806件とprocess-test feature全818件を通過し、失敗・skipはありません。最後のOracle指摘は、容量不足の別要求が注入済みfaultを失う実経路でした。ST/OW1の4失敗と4正例で再現し、fault消費を移動成功後へ移した修正は追加8件と両full profileで確認しました。Oracleの回答全文・23入力・実model設定を照合し、14項目を処置しました。この最後の小差分は主担当が検査し、Oracleの再実行とは記録していません。
+119要件のU/D・元source hash・未承認区分を保持し、各行にW4の証拠、未達範囲、次の利用前条件を記録しました。30判断事項・18証明目標・24シナリオ・α条件8件・全体目標7件も一括受理していません。I3-3の20故障群・9順序境界は67の実際に通ったtestへ対応付け、I3-4/5/6の未受理条件を残します。
 
-CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの局所実験です。既存の採用cut e5450e38と通常libraryの動作を置き換えていません。Dでは既存source→checked Core→生成edge→実private QUIC→同じ実行の観測へ接続します。唯一のrequester custodyと他processの非実行descriptor、元source/Core/引数/activation/ordinalと実request/result、M9とTLSの分離、新しい資源poolと未公開識別子の非escapeを使用前に確認します。単に局所Arcを渡す、操作IDを外部loopで順に呼ぶ、手書きreceiptを返す方法では完了にしません。
-
-観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
-
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。その後、Dの実process/network統合候補の技術確認を完了しました。現在は記録とGitの保存を終えて、承認済みEへ進む段階です。
-
-W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
-
-| W4 axis | Current evidence | Remaining gate / startability |
-|---|---|---|
-| Logical specification | D gate/source/observation/continuation and existing foundations: fresh205 modules/20989 owned/211 false controls; explicit physical premises | 着手可能: E fresh A–E union and119 disposition |
-| User-facing specification | Existing original source and separate successful/terminal-failure typed observations; no new grammar or public observer API | 着手可能: E evidence reconciliation; public alpha remains owner-reserved |
-| Implementation / operation | Same-world two invocations/all3 refreeze plus genuine terminal expiry confirmation; normal2, source217/control59/lower8, required I3 and ownership compiler controls | 着手可能: E fresh campaign; D technical integration checked |
-
-Publication revisions remain separate from authority generations. Actual source
-and owner messages carry complete private values and proof/auth context; these
-pipes are privileged evidence, not a public observer. Source-only local adoption
-checks do not prove permanent funding. Required initialization debt and each
-actual completed-but-unnotified owner operation need retained custody; unknown
-IO retires the candidate cohort without refund or recovery claims. Report2614,
-W4_CHECK and the LAB plan retain historical failures and exact reviewed cuts.
-The earlier W4-A provisional fragment remains distinct from the selected C Surface v0
-assignment profile. Parser/reference acceptance alone is not D checked Core integration.
-
-Scope duplication remains an actual native falsifier, so authenticated publication
-and physical exclusive custody stay open. This is privileged-pipe evidence, not QUIC.
-
-W2's finite checked/reviewed result and committed/pushed cut remain preserved:
-24-file kernel/18-mutation evidence, one private captured frame/history,
-mathematical resources and supplied authentic context/metadata. This is not a
-whole-language source/runtime or machine-quota guarantee.
-
-W3 dependencies are mirrored under samples/lean/foundations: named catalog
-elaboration, dynamic support, per-kind DAG, old current use, support impact and
-current choice. The corrected fresh11-file/19-mutation run passes. A full imported
-module declaration audit checks1716 declarations, including private/unused ones,
-against the three logical axioms. Entry and material dependency Oracle answers
-are recovered and dispositioned; an insensitive mutation target was corrected.
-No grant is issued by insertion, but an already issued numeric-target grant may
-be applicable after insertion. The controls distinguish these claims.
-
-The maintained-reference/session extension is integrated at81f82a0b, normally
-pushed with exact remote parity. Actual17statement source builds ABC/AC, performs
-ordinary assignment/alias calls, fallback/reacquire/release and supports separately
-parsed same-session additions/repairs. Generic proofs cover admitted engine/source/
-session entries, current/historical authority, exact pending/result use, actual
-origins/read producers, parsed placement, source partitions and retained archives.
-Fresh76module/9055owned-declaration audit,32actualsource controls,13integrity/consumer
-negatives and5proof-weakening controls pass; original source and dynamic regressions
-pass. Reproduce with `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`.
-Counts describe this finite evidence, not total requirement completion.
-
-Twelve substantive Oracle reviews are recovered/dispositioned. Actual Session
-consumer, complete fresh recipe and generated-byte handoff findings were corrected.
-The last review substantiates no further material defect, with explicit limits:
-name checks alone do not assert witness types/ownership; honest exclusive workdir
-ownership covers capture, compiler artifacts and final publication. Helper-copy
-controls are not full parent fault injection. H/C policy alternatives and Q18
-remain distinct, conditional and unadopted. W3 candidate closure is separate from
-physical distribution, durable restoration, secret observation, alpha or Canon
-acceptance. No next semantic package or Plan250 resume is selected.
-
-Scoped W1 dependencies retain their boundaries. The whole mandatory corpus
-remains incomplete;1004 previous full reads match current hashes,12 changed
-files were excluded from reuse at startup. No new whole-project roadmap adopted.
-Memory: `plan/proof-first-foundation-correspondence.md`; current evidence: Report2614; W3 history: Report2613,
-`docs/proof-first/W3_ENTRY_CHECK.json` and preserved Reports2611/2612.
+このW4候補の検証・保存で停止し、後続packageは開始しません。 主担当一人、Astra/xhigh。sub-agent・Oracle・通知・hostshareは使用しません。W5以降、新goal、採用、Plan250/I3-4は自動開始しません。週間残量の停止目安は60%程度で、過去の30%・50%を置き換えています。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
 
 | Task axis | Current status | Startability |
 |---|---|---|
-| 論理仕様 | general conditional Lean proofs; source IFC/current-head/all-mutator/physical bridge open | reversible research **着手可能** |
-| ユーザ向け仕様 |119-row task disposition registry retains U/D and nonacceptance; ordinary-source alpha profile not adopted | necessary source/type investigation **着手可能**; irreversible policy **要仕様確認** |
-| 実装 / 運用 | actual existing QUIC regression9 and local journal experiment18 pass at recorded cuts; no integrated network/durable alpha | relevant proof gates **後段依存** |
+| 論理仕様 | 選定した通常source/current-use/資源/結果/観測の条件付き証明と具体対応を検証。一般のRust/OS correctnessと広い動的分散構成は未証明 | 今回は有限候補の検証済み。拡張は利用前条件を再開 |
+| ユーザ向け仕様 |119行・Q/PT/SC/αの未承認区分を保持。公開workflow/grammar未受理 | 新しい目的・公開契約は**要仕様確認** |
+| 実装 / 運用 | 有限の実process/private QUIC候補と回帰。採用済みsourceを置換しない | W5+は今回対象外。新規拡張は**後段依存** |
 
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
 The finite profile covers all twenty failure/order families; retained assurance
@@ -314,6 +245,12 @@ requirements do not govern that independent research.
 | upper applications | toy + historical consumers | no domain Core promotion | product-specific |
 
 ## current validation checkpoint
+
+最終の同一40pathで9commandが通過しました。workspace全体2630件、private QUIC通常構成（test seamsなし）1420件、default通常構成1022件、private doc-test1件は失敗・除外0です。構成間の重複を含む件数であり、要件数の合計ではありません。
+
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
+
+Final E receipts: `docs/proof-first/W4_CHECK.json#e_integration_20261013`. 最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。
 
 Source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa` is accepted by
 ADR-0043; Canon/status integration is `aafde92229bb0ff18116f38d4750a0a8f61cb069`.
@@ -745,3 +682,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-13 19:31 JST — 同じ3プロセス・Runtime・Flowで元S→T→Sを2回実行、旧履歴保持と全3者再prepareを確認。通常2build・継続8両feature・source-process213/control59/lower8通過、201module/20511owned/187false監査。D統合/Eへ継続、Report2614。
 
 - 2026-10-13 21:22 JST — 既存期限切れの実返信・source終端保持・型付き観測と9拒否／2保持境界を確認。通常2build、source217/control59/lower8、必要I3、所有境界拒否、fresh205/20989/211を通過。D技術統合を保存しEへ、Report2614。
+
+- 2026-10-14 01:04 JST: W4-Eの最終候補・元要件とR01–R12の和集合・I3回帰・証拠identityを照合。最終Rust9commandと文書検査が通過。有限候補として保存して停止、後続packageなし。Report2614。

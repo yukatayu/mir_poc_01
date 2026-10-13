@@ -16,8 +16,8 @@
 今回の task-local proof-first LAB evidence / dependency memory は
 [`proof-first-foundation-correspondence.md`](proof-first-foundation-correspondence.md)。
 W4-A〜W4-Eの作業区切り・完了条件・推奨model/effort・残項目回収も同ファイルを参照します。
-W4-Aは限定証拠完了、W4-Bは限定LAB統合候補として完了し、W4-Cは選択した局所条件で閉じ、W4-Dの確定実装が現在地です。
-Dの統合判定は未完了です。ownerは2026-10-13に同じgoalを再開し、D受理後のEまでを承認済みです。E完了又は週間残量30%未満で検証・保存して停止します。
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 R01–R12・119行・元Q/PT/SC/α条件と実証範囲を照合し、未達の一般構成・復旧・秘密保持は次の利用前条件として保持します。このW4候補の検証・保存で停止し、後続packageは開始しません。 停止目安は週間残量60%程度です。
+
 別の roadmap や正式な W program ではなく、Plan250 の pause は保持します。
 
 ## 先に読む順序

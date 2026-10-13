@@ -1,52 +1,34 @@
 # samples_progress
 
-Last updated: 2026-10-13 12:59 JST
+Last updated: 2026-10-14 01:04 JST
 
-Plan250 execution control: I3-3 is accepted and owner-paused with no active
-semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
-dependency-gated inactive and I3-4 requires explicit owner resume. No sample,
-program completion or official lifecycle entry claim follows.
+Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
-Task-authorized W3 is closed as a finite theory/reference candidate, retaining
-W1/W2 evidence. Actual source builds ABC/AC, computes assignment/alias calls,
-maintains fallback/reacquire/release and continues or repairs the same Session.
-Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives and5
-proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
-source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
-physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner resumed W4 only on2026-09-26; W4-B and W4-C are closed within their bounded LAB scopes; W4-D is incomplete and owner-resumed2026-10-13 from its passed implementation checkpoint.
-Previously integrated publication/owner/registration proofs remain under the
-existing reference checker and Lean sample root. The preserved host-store/full-field/lease/fault proof cone is now mirrored;
-its existing-runner integration has passed the B criterion. Repository prepare/
-physical runners now stage the preserved sources into fresh external workdirs. Prior I3 process/QUIC46case results remain
-regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 外部未採用40 Rust pathについて最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過。source→Core→生成owner→実QUIC→native結果→型付き観測と、同じ3プロセスでの次source activation・実M9更新を検証しました。証明はfresh205module/20989所有宣言/211偽命題対照、417commandです。
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（選定した局所条件・完了）→W4-D（Rust/Core/private QUIC接続・現在地）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Cの局所条件を閉じ、model切替後にDの確定実装を再開し、2026-10-01の依頼で一時停止した後、2026-10-05に再開しています。EはD受理後に続行し、E完了後が現在の停止点です。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
+119行と元のQ/PT/SC/α条件には個別dispositionを追加し、U/D・承認区分を保持します。A/Bのnative動的構築とDの固定cohort QUICは別証拠です。一般の分散instance/relation/hot-plug、保存復旧、二実行の秘密保持、αの単一システム統合は未達です。採用済みRust/Lean、Canon、Plan250のpauseは変更しません。
 
-履歴2026-09-28: D後停止を指定。2026-10-07の最新指示でEまでの続行が明示され、この停止点は更新済みです。
+このW4候補の検証・保存で停止し、後続packageは開始しません。 W5以降、新goal、採用、Plan250/I3-4は自動開始しません。証拠と再現条件はReport2614、`docs/proof-first/W4_CHECK.json`、`docs/proof-first/RESUME.md`、既存foundation planにあります。今回D/Eの独立reviewはownerの禁止に従い実施していません。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
 
-履歴2026-09-30: Sol実装から重要な境界判断時にAstraへ戻す条件を設定。2026-10-07にownerがAstraへ切替え、同じDを再開済み。手順は `docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md`。
+| Current W4 evidence | Reproduction / exact record | Status and boundary |
+|---|---|---|
+| Final source/private QUIC candidate | W4_CHECK → e_integration_20261013; RESUME exact overlay command and external40-path pins | 最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過; finite local research evidence, not adopted source or public workflow |
+| Fresh general proof cone | D/declared-observer-fresh205-v1, indexed from W4_CHECK |205modules/20989owned/211false/417commands; explicit model/TCB premises |
+| I3 regression | E/I3-3-REGRESSION-MAP-v2.json |20families/9order boundaries/67 distinct passed names; evidence classes retained, no I3-4/5/6 acceptance |
+| Required source/corpus/119 | E source/corpus/registry receipts and repo REQUIREMENT_DISPOSITIONS |119 individual boundaries and2920 corpus dispositions; generated-record dispositions are not full semantic reads |
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
+Active sample roots remain `samples/clean-near-end/`, `samples/current-l2/` and `samples/lean/`. External candidates and generated receipts do not create new roots. The following C/D rows record their historical cuts; their old open statements describe that cut and do not replace the current E row.
 
-現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
-
-週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
-
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。B/Cは限定LAB範囲で完了し、Dのprocess前提が現在地です。Eは未着手です。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
-
-W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
-
-| W4-C/D evidence | Reproduction | Remaining boundary |
+| Historical W4-C/D evidence | Reproduction | Remaining boundary |
 |---|---|---|
 | D authority/coordinator/local frame | `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`; W4_CHECK `d_local_frame_proof_20260930` and Report2614 | Conditional199module/20455owned/177false/187command proof evidence; prior registered-control/native-owner/resource/first-Ack runs retain their exact historical cuts. Authentic all3 preparation→parent publication→activation and normal original native entry are connected; latest whole sequence is the next row. No OS/custody/public workflow theorem. |
 | D original S→T→S/history | `docs/proof-first/W4_CHECK.json` → `d_original_sequence_history_20261013`; external ORIGINAL-SEQUENCE-INTEGRATION-v1.json records exact source/argv/logs | Actual source/native/parent3 and S2/T1; v4 full1400, v6 closure/budgeted2/no-seams10/normal2. Historical38-path component; graph, held-DATA and next-activation/refreeze successors are below. |
 | D bounded actual send retention | `docs/proof-first/W4_CHECK.json` → `d_original_flow_send_20261013`; external ORIGINAL-FLOW-SEND-INTEGRATION-v1.json | Actual send6 controls,19 field mutations; final v4 no-seams flow12/sequence2. Same original source3 and ownerS2/T1, actual send completions6. Historical38-path send component; later Report/graph and actual owned Flow preparation are verified below. |
 | D actual distributed observation | `docs/proof-first/W4_CHECK.json` → `d_original_distributed_graph_20261013`; external ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json | Actual source3/S2/T1, transport12 and native serve/write/receipt3 each; ten real refusal cases,35 parent falsifiers and32 fields per Report. Same39-path normal2/no-seams module191 pass. Historical graph-v6 cut; owned Flow and held-DATA successor below. |
-| D owned Flow and repeated authority update | `docs/proof-first/W4_CHECK.json` → `d_original_authority_cycle_20261013`; external ORIGINAL-AUTHORITY-CYCLE-INTEGRATION-v1.json | Same3 process actual G2 while DATA/history held;13 controls both features, normal2 and focused regressions. Previous completed DATA remains observable; old native Ack stays refused. This authority-v8 row is historical; next source activation is verified in the successor row. D/E integration remains. |
-| D same-world original source continuation | `docs/proof-first/W4_CHECK.json` → `d_original_source_continuation_20261013`; external ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json | Two exact S→T→S invocations in same3 processes/Runtime/Flow; source6/ownerS4/T2, retained old histories, finite exhaustion, metadata/replay/partial-Finish controls and all3 G2. Normal2, continuation8 both features, entire source-process213/control59/lower8. Proof201/20511/187 is delta+owned audit, not fresh201. Historical continuation cut; D technical integration is recorded below and E remains; evidence only. |
-| D integrated source and declared terminal failure | `docs/proof-first/W4_CHECK.json` → `d_integrated_technical_20261013`; external SOURCE-DECLARED-FAILURE-INTEGRATION-v1.json and D-CURRENT-* correspondence | Genuine owner expiry→QUIC→source terminal1/cursor0/no success/typed two-endpoint Report;9 pre-dequeue and2 postterminal loss cases. Normal2/source217/control59/lower8/required I3/compile refusals; fresh205/20989/211. External unadopted finite evidence; E fresh campaign remains. |
-| Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D actual owner/source custody exists in the external candidate, with integrated refinement still open; actual original S→T→S passed in external D; same-event distributed observation and held-DATA authority update are verified in the D rows above; source continuation is verified above; D acceptance remains. No production/public adoption. |
+| D owned Flow and repeated authority update | `docs/proof-first/W4_CHECK.json` → `d_original_authority_cycle_20261013`; external ORIGINAL-AUTHORITY-CYCLE-INTEGRATION-v1.json | Same3 process actual G2 while DATA/history held;13 controls both features, normal2 and focused regressions. Previous completed DATA remains observable; old native Ack stays refused. This authority-v8 row is historical; next source activation is verified in the successor row. D/E successor status is in the current E row above. |
+| D same-world original source continuation | `docs/proof-first/W4_CHECK.json` → `d_original_source_continuation_20261013`; external ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json | Two exact S→T→S invocations in same3 processes/Runtime/Flow; source6/ownerS4/T2, retained old histories, finite exhaustion, metadata/replay/partial-Finish controls and all3 G2. Normal2, continuation8 both features, entire source-process213/control59/lower8. Proof201/20511/187 is delta+owned audit, not fresh201. Historical continuation cut; D technical integration and E successor are indexed above; evidence only. |
+| D integrated source and declared terminal failure | `docs/proof-first/W4_CHECK.json` → `d_integrated_technical_20261013`; external SOURCE-DECLARED-FAILURE-INTEGRATION-v1.json and D-CURRENT-* correspondence | Genuine owner expiry→QUIC→source terminal1/cursor0/no success/typed two-endpoint Report;9 pre-dequeue and2 postterminal loss cases. Normal2/source217/control59/lower8/required I3/compile refusals; fresh205/20989/211. Historical D cut; final external E campaign is indexed above. |
+| Ordinary owner statement admission | `samples/lean/foundations/OwnerStatementAdmission.md`; W4_CHECK → `c_technical_close_20260930` / `c_inbox_head_theory_20260930` | LAB190modules/19502owned/156false controls retained. Latest unadopted test-only reference default806/feature818 all pass,0fail0skip; actual foreign fault retention8controls pass. Inventory20pins/205lexicalcalls. C closed selected profile and integrated78756ad5; D actual owner/source custody exists in the external candidate, at its historical cut; original S→T→S, same-event observation, held-DATA authority update and source continuation are reflected in the later D/E rows above. No production/public adoption. |
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
 | Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |
 | Existing owner identity lookup | `samples/lean/foundations/MirroreaProofFirstOperationIdentity.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_duplicate_owner_identity -- --test-threads=1` | General positional selection/algorithm equivalence checked; actual ordinary/provider/local refusal and singleton controls pass. Distinct-owner fragment collisions, source order and source-free restore remain open. |
@@ -147,7 +129,7 @@ does not change any sample's runnable or workflow status.
 
 Non-claims: `samples/alpha/` remains alpha-0 evidence;
 `samples/practical-alpha1/` remains first-floor fixture evidence;
-`samples/product-alpha1/` is the current product alpha root. Surface Mir
+`samples/product-alpha1/` is a historical LAB product-alpha family, not one of the three current active roots. Surface Mir
 `samples/full-system-v1-surface/syntax/`, `indexed-state/`, `elaboration/`,
 `role-admission/`, `source-patch/`, `devtools/`, and the six operational roots
 exist as alpha evidence; none is a final Surface runtime/transport, final
@@ -161,8 +143,7 @@ actual captures, normalizers, source/object imports and complete process exits.
 These retained receipts are not repo sample commands: their one-shot launchers
 create fresh evidence and must not overwrite existing runs. The proof/reference cone is now mirrored and verified through existing repo
 runners; prior external receipts remain historical evidence. No new sample root, taxonomy, public observer or workflow-ready
-status has been adopted. W4-C is closed within its selected local scope; D prerequisites are active; source/Core/privateQUIC,
-authenticated ingress and physical namespace remain direct consumers.
+status has been adopted. W4-C/D selected conditions and the current E evidence have the bounded status shown above. General source/catalog/recovery/privacy extensions retain explicit before-use gates.
 
 ## Legend
 
@@ -502,8 +483,8 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 
 | W4-B integration candidate | Source / command | Evidence and blocker |
 |---|---|---|
-| Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; B bounded integration closed; C admission/authority prerequisites open |
-| Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; B bounded integration closed; C admission/authority prerequisites open |
+| Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; B bounded integration closed; historical C prerequisite state, with C/D/E successors indexed above |
+| Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; B bounded integration closed; historical C prerequisite state, with C/D/E successors indexed above |
 
 
 | W4-C bounded owner-currentness evidence | Source / command | Status / remaining boundary |

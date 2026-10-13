@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 21:22 JST): W4-A/B/C bounded closes; D technical integration verified at declared-observer-controls-v2 with fresh205 and explicit entry/resource/queue/proof correspondence. Authorized E fresh campaign/A–E119 union is next after D documentation/Git save. Stop after E or saved checkpoint around60% weekly. Plan250/I3-4 separately paused; older dated entries are history.
+Current package map (2026-10-14 01:04 JST): W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 Final external40-path source, fresh205 proof and explicit119/R01–R12/original-registry scope are indexed by W4_CHECK e_integration_20261013. このW4候補の検証・保存で停止し、後続packageは開始しません。 No source/Canon adoption or Plan250/I3-4 resume. Older dated entries remain history.
 
 ## Authority and retained history
 
@@ -43,8 +43,7 @@ Current task-local goal, updated 2026-09-14 09:21 JST: W4 physical refinement, s
 PL1/PL2/PL0 S4/S6, theory/refinement before bounded implementation. Owner explicitly
 requested W4 after W3 closure; stop after W4. Reports2611/2612/2613 and their
 original dated active/unreviewed/stop records remain history, not parallel goals.
-Report2614 is the one current milestone report. The mandatory reading corpus
-remains incomplete; no whole-project plan adopted.
+Report2614 is the one W4 milestone report. The earlier incomplete mandatory-reading state is historical. At the D39710deb input cut, E reconciles all2920 protocol-root files by exact full reads, authored/reviewed proof records, full cumulative deltas or explicitly limited generated-record dispositions. No whole-project plan is adopted.
 
 ## Relation to Plan250 and requested alpha
 
@@ -3305,3 +3304,32 @@ Exact external source-declared-observer-controls-v2: normal default/private-QUIC
 D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
 
 独立reviewはownerの禁止条件により実施していません。主担当が使用前モデル・反例・実返り値・所有境界・全入口と資源対応を照合しました。Eは同じ候補を新規試験し、119要件とR01–R12、W1–W3の持越し義務を統合します。証跡はSOURCE-DECLARED-FAILURE-INTEGRATION-v1.json、D-INTEGRATED-TECHNICAL-REVIEW-v1.json、D-CURRENT-*、notes44、Report2614です。
+
+
+## 2026-10-14 01:04 JST — W4-E最終候補と元要件の和集合
+
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。
+
+既存の通常sourceからchecked Core・生成owner request・実private QUIC・native実行・型付き観測までを接続しました。選択したLinuxの3プロセスで、同じRuntime・Flow・履歴を保ってS→T→Sを2回実行し、実権限更新、古い応答の拒否、owner期限切れ、結果不明と確定失敗の区別を検証しています。外部候補は40 Rust pathで、採用済みRust/LeanとCanonは変更していません。
+
+最終の同一40pathで9commandが通過しました。workspace全体2630件、private QUIC通常構成（test seamsなし）1420件、default通常構成1022件、private doc-test1件は失敗・除外0です。構成間の重複を含む件数であり、要件数の合計ではありません。
+
+一般証明は明示した前提の下の205module・20989所有宣言・211偽命題対照を、空の状態から417commandで再検査済みです。Rust/compiler/Quinn/OSの正しさを機械証明したものではありません。A/Bのnative動的構築・変更とDのQUIC通常代入は別の実行証拠であり、任意の構築・hot-plug・保存復旧・秘密を守る観測を備えた単一システムにはなっていません。
+
+119要件のU/D・元source hash・未承認区分を保持し、各行にW4の証拠、未達範囲、次の利用前条件を記録しました。30判断事項・18証明目標・24シナリオ・α条件8件・全体目標7件も一括受理していません。I3-3の20故障群・9順序境界は67の実際に通ったtestへ対応付け、I3-4/5/6の未受理条件を残します。
+
+このW4候補の検証・保存で停止し、後続packageは開始しません。 主担当一人、Astra/xhigh。sub-agent・Oracle・通知・hostshareは使用しません。W5以降、新goal、採用、Plan250/I3-4は自動開始しません。週間残量の停止目安は60%程度で、過去の30%・50%を置き換えています。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
+
+判断の単位は、元W4の4出力（具体/抽象対応、既存Rust/QUIC/queue/memory、I3-4/5/6対応、sourceからruntime観測）と3終了条件（実process/transport正例・反例、I3-3回帰、追加条件の迂回拒否）です。A–E分割はこれを縮小しません。実際に使用するsource/権限/資源/観測の前提が未達ならW4を閉じず、最小の依存条件を先に再開します。より広い能力は、現在の経路が使用せず、その保証も主張しない場合に限り、名前を付けた次consumerの利用前条件として残します。
+
+A/Bのnative通常sourceで行う構築・reparent・instance retireと、別の局所controlによるPlace退出・再参加、DのQUIC通常代入は、それぞれ別の実行証拠です。ID-02/03、DS-01、EV-01の古いW3残件文を保持し、一般のinstance/relation/patchをDのQUICへ統合したとは扱いません。W7が要求する単一システムの構築/参加/View/input/SC24/α条件1–8は未達で、今回自動開始しません。
+
+残る判断はQ18のprepared patch失効/予約政策、H/H2の所有/取得権、C/C2の現在cancel権/起点継続abort権です。native request予約やM9世代更新でこれらを決めたとは扱いません。W1の古いAssignmentAdmission/有限source契約は未review履歴として保持し、B206/D205は依存しません。raw指定結果のmissing-SourceRef getterはstatic panic候補で、通常代入からは消費しません。将来の指定結果consumerでは実再現・修正・検証を先に行います。
+
+EのCLI3失敗はfixtureのsource binding1行に由来し、外部successorで修正しました。整形不足はrustfmtで、候補追加lintは狭い差分と理由付きitem属性で処置しました。既存警告やbaseline compile failure、厳密syn AST比較の不一致を隠さず、後者を等価性証明として使用しません。元source全文/累積差分読了、mechanical formattingの由来、lint差分全文reviewと最終実試験を区別します。
+
+Mandatory corpus2920は2798 exact full、85 authored/reviewed proof、23 exact cumulative reconciliation、14 generated-record dispositionです。14は重複key拒否のJSON parse、hash、consumer/役割確認であり、生成JSONの全文意味読了とは書きません。2931個の保存証拠hash検査は2930一致と1件の説明済み歴史的observer live-path driftです。その実行で使用した旧observer copyは一致して残り、後続実行は後続hashを保持します。
+
+最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。 このE統合cutの保存は`git commit --no-gpg-sign`と通常pushで行い、HEAD・remote一致・cleanの実結果を外部E-GIT-CLOSE-v1.jsonへ記録します。自己参照するcommit hashは文書内に作りません。保存後の最終判定はE-FINAL-CLOSE-v1.jsonです。 既存Report2614に22項目で記録し、snapshotを同期します。新report、roadmap、active sample root、公開workflowは追加しません。

@@ -492,7 +492,7 @@ active rootの追加や移動はない。
 公開操作の全経路、予約容量・freshness、実通信との対応は別の未完了条件である。
 
 
-## W4-B preserved host correspondence model (integration candidate)
+## W4-B preserved host correspondence model (closed bounded LAB candidate)
 
 The same LAB foundation root now retains the exact 206-module dependency cut
 in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
@@ -621,16 +621,18 @@ The optional `MIR_PROOF_SCHEMA_EXPORT` test variable writes genuine checked fact
 to a caller-selected existing external directory using create-new semantics;
 it does not generate expected runtime events or establish import authority.
 
-W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](../samples/lean/foundations/OwnerStatementAdmission.md) に記録します。
+歴史的W4-C175 cutの通常代入列の証明候補は [OwnerStatementAdmission](../samples/lean/foundations/OwnerStatementAdmission.md) に記録します。
 169依存moduleのsource-only再構築と追加差分による175module全所有宣言auditを用い、到達履歴・元の文位置・
 実応答受理・確定履歴を分け、所有者ごとの現在の登録情報を選びます。登録差分はreview待ちです。
 初期schema・物理custody・総資源量、Rustの文順序・局所dispatch・全entry接続は未完了です。
 既存W4-B manifest、sample root、host runnerの契約は変更しません。
 
-W4-Cのsource受理接続は `OwnerStatementAdmission.md` の180module/61反例recipe、
+歴史的W4-C180 cutのsource受理接続は `OwnerStatementAdmission.md` の180module/61反例recipe、
 W4_CHECKの `c_statement_source_consumer_20260929` とreview後続recordを参照。
 実tick/transfer/service/typed consumeの一般命題と受理済み2文経路を検査しています。
 Rust参照版は実2文・S→T→S・同じworldでの継続を検査済みですが、全下位入口、
 書込み前資源と下位結果保持は未閉鎖で、production採用・α完成ではありません。
 
-W4-Dの使用前Leanモデルと再現recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定sourceは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。新しいCLI/script又はsample rootは作らず、既存Lean rootに6proof/controlと所有宣言auditを保存します。現在199source/177対照のrecipeで、9module差分監査が通過、全199fresh再構築は未実行です。中央利用区間・保持中権限更新の条件付き証拠であり、実M9/control/source/資源の物理接続や実network完了ではありません。
+W4-Dのrepo内199source/177対照recipeは `samples/lean/foundations/MirroreaProofFirstDPrerequisites.md`、固定manifestは `docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json` にあります。これらは、当時の9module再構築・全所有宣言auditを再現する歴史的cutです。後続の外部205module/20989所有宣言/211偽命題対照は、別の空cacheから417commandで検査済みです。199recipeを205再現手順に読み替えません。現行外部source/process/privateQUIC候補、exact pins・コマンド・TCB・未達境界は `docs/proof-first/RESUME.md`、W4_CHECKの `e_integration_20261013`、Report2614を参照してください。採用済みproof/Rust・既存sample root・公開workflowの変更ではありません。
+
+Cの現行保存cutは190module/156対照で限定close済みです。上記175/180段階のreview待ち・入口未閉鎖の文は当時の状態であり、現行statusはOwnerStatementAdmission.mdとW4_CHECKのc_technical_close_20260930、後続D/EはRESUMEを参照します。Script/sampleのtaxonomyと契約は変更しません。

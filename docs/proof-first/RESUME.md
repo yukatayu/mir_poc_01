@@ -1,45 +1,53 @@
-# RESUME — D technical integration verified; authorized E next
+# RESUME — 有限候補の検証と保存
 
-W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
+W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。
 
-現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
+既存の通常sourceからchecked Core・生成owner request・実private QUIC・native実行・型付き観測までを接続しました。選択したLinuxの3プロセスで、同じRuntime・Flow・履歴を保ってS→T→Sを2回実行し、実権限更新、古い応答の拒否、owner期限切れ、結果不明と確定失敗の区別を検証しています。外部候補は40 Rust pathで、採用済みRust/LeanとCanonは変更していません。
 
-週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
+最終の同一40pathで9commandが通過しました。workspace全体2630件、private QUIC通常構成（test seamsなし）1420件、default通常構成1022件、private doc-test1件は失敗・除外0です。構成間の重複を含む件数であり、要件数の合計ではありません。
 
+一般証明は明示した前提の下の205module・20989所有宣言・211偽命題対照を、空の状態から417commandで再検査済みです。Rust/compiler/Quinn/OSの正しさを機械証明したものではありません。A/Bのnative動的構築・変更とDのQUIC通常代入は別の実行証拠であり、任意の構築・hot-plug・保存復旧・秘密を守る観測を備えた単一システムにはなっていません。
+
+119要件のU/D・元source hash・未承認区分を保持し、各行にW4の証拠、未達範囲、次の利用前条件を記録しました。30判断事項・18証明目標・24シナリオ・α条件8件・全体目標7件も一括受理していません。I3-3の20故障群・9順序境界は67の実際に通ったtestへ対応付け、I3-4/5/6の未受理条件を残します。
+
+このW4候補の検証・保存で停止し、後続packageは開始しません。 主担当一人、Astra/xhigh。sub-agent・Oracle・通知・hostshareは使用しません。W5以降、新goal、採用、Plan250/I3-4は自動開始しません。週間残量の停止目安は60%程度で、過去の30%・50%を置き換えています。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+
+The current stop is task-local. Read Canon README/MAP/spec16/architecture10 before any new dependent work. Plan250/I3-4 remains paused; the original W4_D_IMPLEMENTATION_HANDOFF.md model/D-stop/50% preamble is historical. OWNER-W4-E-AUTHORIZATION-20261007-v1.json and OWNER-W4-RESUME-20261013-v1.json authorized D→E; OWNER-W4-STOP60-20261013-v1.json set the current stop threshold. No new goal or model switch is inferred.
+
+Local retained workroot:
+
+```text
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 D=I/d-source-process
-Starting checkpoint HEAD 704127336eda6dcf83ae0514a654c93288dc5e21. All39 overlays restored to exact adopted baseline, including removal of absent-baseline files. No adopted Rust/Lean or Canon changes. Authorized eleven-doc normal commit/push/parity receipt after verification: D/GIT-D-INTEGRATED-v1.json. Earlier cuts and failed logs are immutable.
+E=D/e-campaign-preparation-v1
+```
 
-Current candidate: D/d-control-development/source-declared-observer-controls-v2, SOURCE_PINS SHA256 ccf9088abb5b6694c028944b8ca8dfb10b8a4b81471c9583374a92c7707828d9. New typed failure integration: SOURCE-DECLARED-FAILURE-INTEGRATION-v1.json. Final technical review: D-INTEGRATED-TECHNICAL-REVIEW-v1.json, D-CURRENT-ENTRY-CLOSURE-v1.json, D-CURRENT-RESOURCE-CORRESPONDENCE-v1.json, D-CURRENT-PROOF-CORRESPONDENCE-v1.json and D-CURRENT-QUEUED-USE-DISPOSITION-v1.json. Notes44 links the exact paths. Final documentation acceptance receipt follows source-declared-docs-v2/RESULT.json; no E result is inferred.
+The notation above is shorthand, not shell assignment syntax for reproduction. D began E at clean HEAD39710deb9505c36b0b7d94f49ca73dfa1cb5b9e9. Final source candidate: `D/d-control-development/e-lint-cleanup-v2`;40 paths and exact SOURCE_PINS retained. The one added CLI fixture path and formatting/lint successors do not relabel earlier39-path D tests. Final test receipts: `D/e-final-campaign-v1`; old failing and passing cuts are immutable. 最終overlayの40pathは全て復元され、文書編集前にHEAD39710debのROOT cleanを確認しました。
 
-Read Canon README/MAP/spec16/architecture10, current snapshots and foundation plan. W4_D_IMPLEMENTATION_HANDOFF.md's old model/D-stop/50% preamble is historical. OWNER-W4-E-AUTHORIZATION-20261007-v1.json and OWNER-W4-RESUME-20261013-v1.json authorize D→E; OWNER-W4-STOP60-20261013-v1.json sets the current threshold. No new goal, automatic model switch or Plan250 resume.
+For authorized local reproduction, use a new, unused output directory under D and the exact commands file, from a clean checkout with no concurrent Cargo/make or root edits:
 
-The same actual owning Runtime and finite Flow still execute the unchanged S→T→S source twice: native source6/ownerS4/T2 and six distinct requests, finalS22/T17 each invocation. ContinueSource is a seventh explicit intentional input, separate from authority preparation. One/two activations and old/new result/control/history/Flow capacity are funded before startup. All3 actual coherent completions precede new Issue. All3 genuine M9 reprepare/publish/activate preserves old/current histories, actual native state and Flow; no reconstructed Runtime or spent-ID reset.
+```bash
+python3 /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/run-source-overlay-astra-v1.py \
+  --source /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2 \
+  --commands /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/FINAL-CAMPAIGN-COMMANDS-v1.json \
+  --output /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/NEW-UNUSED-REPRODUCTION-DIRECTORY \
+  --timeout 3600
+```
 
-Existing checked budgeted singleton failure now follows actual owner clock4→native Resolve expiry→real encoded reply→QUIC→normal SourceReady/Ack→TerminalFailureConsumed. Parent derives a unique Resolve-failure or Body-success origin from retained actual completions. No Body is issued on expiry. Source commits the native terminal before removing pending; cursor0/resultFailure/no successful receipt. Repeated normal driver read returns the same TerminalFailure without allocating another grant. The fixture host advances the genuine native handle; there is no test-only expiry constructor or claim of installed physical clock/standalone CLI.
+The runner checks clean HEAD, source hashes and baseline bytes, serializes work, preserves actual command/log hashes and restores the40 baseline paths, including removal of paths absent in baseline. Its restore removal is limited to its own unchanged temporary overlay; it is not repository cleanup. Commands explicitly disable incremental/debug and use -j1/testthreads1. TLS fixtures live in `D/d-control-development/original-source-quic-fixtures-v1`;43 file hashes, toolchain and environment assumptions are indexed by `E/LOCAL-REPRODUCTION-DEPENDENCIES-v1.json`. Fixture private contents must not be printed or published. This is local reproduction, not a portable product workflow.
 
-Nine before-dequeue controls preserve pending/counters/native results. Two postterminal capture/Finish failures keep actual terminal/raw result and block repeat; parent remains unavailable, incomplete observation refuses. Full-ledger case uses64 synthetic DATA rows. Actual prior Ready/completion moves into existing history through a sealed real completion proof. Both endpoint Reports use the funded actual Vec and retained native/Flow records; current authority, full original/request/decision/frames, all completion origins and four network events must match. Missing Report or native completion stays unknown; inactive third endpoint is not guessed. The complete-success graph remains a distinct projection.
+Fresh proof evidence remains `D/declared-observer-fresh205-v1`:205 source modules/20989 owned constants/211 qualified false controls in417 serial Lean4.29.1 --trust=0 commands from empty local objects. The unchanged proof cut is bound independently from Rust formatting. The repo D199 recipe is historical and is not relabeled as a205-module reproduction. Standard permitted logical axioms remain propext/Classical.choice/Quot.sound.
 
-Source/control/Report full-field visitors include the new failure outcome and archived owner Ready. Controls mutate32 common fields per endpoint plus3 source/4 owner new fields,11 source and13 owner archived fields, presence and68 parent DATA join fields, byte corruption and missing records; funded restored positive companions remain. No every-leaf mutation claim.
+D entry/resource/proof/queue correspondence is retained in D-CURRENT-* and D-INTEGRATED-TECHNICAL-REVIEW-v1.json. Actual M8 enqueue/serve remains inside one Body interval. I3 Awaiting/ServeReserved is a different ledger; lower ST/OW1 held-M9 tests do not establish distributed queued refresh/recovery. A/B dynamic native construction and D fixed-cohort QUIC remain distinct physical profiles.
 
-Exact external source-declared-observer-controls-v2: normal default/private-QUIC builds pass; no-seams whole source-process217/control59/lower held-M9 8 pass; combined-feature continuation8 and declared-expiry4 pass. Required I3 native admission/clock, ledger, retry, image-origin, lower original entry/lifecycle and local-cut regressions pass with nonzero selections. Normal compiler controls reject four private custody fields (E0616) and owning Mode Clone (E0277). Fresh205 modules/20989 owned constants/211 qualified false controls pass in417 serial Lean4.29.1 --trust=0 commands from an empty local object cache. This is not a whole-library Rust campaign; E runs the fresh union.
+整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
 
-Required I3 exact selections: sys5_i3_process_runtime::sys5_i3_owner_admission_tests:: test result: ok. 179 passed; 0 failed; 0 ignored; 0 measured; 1261 filtered out; finished in 13.65s; sys5_i3_process_runtime::i3_owner_request_ledger_tests:: test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1439 filtered out; finished in 0.26s; sys5_i3_process_runtime::i3_original_owner_request_retry_tests:: test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1438 filtered out; finished in 0.53s; sys5_i3_process_runtime::proof_first_invocation_process_tests:: test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 1434 filtered out; finished in 4.75s; proof_first_source_entry_ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 1436 filtered out; finished in 0.02s; proof_first_source_lifecycle_ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 1436 filtered out; finished in 0.02s; sys5_i3_process_local_cut::sys5_i3_process_local_cut_tests:: test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 1434 filtered out; finished in 8.52s
+実行範囲はLinux固定3cohort・native ST・既存Surface v0の通常代入・事前確保した1/2 activationです。確定期限切れのsource接続は既存budgeted singletonのactivation0を対象とし、tickはhostが実native handleへ供給します。一般のOW1分散継続、物理clock、OS/allocator/OOM保証、復旧、広いcallee/構築/関係/指定結果/patch catalog、非干渉、公開API/wire/grammarは未達です。外部絶対pathのTLS fixtureとserial testに依存し、fresh checkoutでの公開workflowとは扱いません。
 
-Fresh proof: D/declared-observer-fresh205-v1, source205/owned20989/qualified-false211/417commands; initially empty local object directory, Lean4.29.1 --trust=0 -j1/6GiB. All owned dependencies limited to propext/Classical.choice/Quot.sound. Before-use delta204/205 receipts remain historical, not relabeled as fresh runs. Complete source/log/object hashes were rechecked. Native/body/control/FD/physical allocation premises stay separate from general lemmas.
+E source/corpus/evidence, I3 mapping, R01–R12/119/original-registry review and final disposition records are pinned from `W4_CHECK.json#e_integration_20261013`. One historical observer live path differs; its exact executed per-run copy is preserved and the raw integrity report records the drift. Failed CLI, formatting, strict-Clippy and exploratory strict-syn-comparison outputs are preserved. Strict syn AST equality was inconclusive and supplies no equivalence proof.
 
-D entry correspondence covers fixed FD registration, every owning semantic family, legacy Runtime/emitter/typed/decoded/test-feature ingress, lifecycle/cut/report, transport custody, M9 and next source activation. Normal sibling compile controls reject mutable Runtime/control/source/Flow extraction and Mode Clone. The lexical locator list is only an index; compiler checks and selected physical adversaries supplement the main source/caller review, not a whole-program mechanization.
+Q18 and H/H2/C/C2 remain different unadopted policies. W1 unreviewed standalone AssignmentAdmission and finite source-contract helpers are outside the B206/D205 proof cones. A legacy raw designated receipt with missing SourceRef is a static panic candidate; no execution/fix is claimed and the D assignment profile does not admit that input. Reopen before a dependent designated consumer.
 
-Queue disposition: the actual D M8 guard excludes M9 between native enqueue/service and retains real results through Body Finish. Native I3 Awaiting/ServeReserved is a different ledger. Lower C actual ST/OW1 queued own/unrelated revocation and old-Ack cases have their own8-case regression; they are not upgraded to a distributed pause/refresh/recovery scenario.
+最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。 このE統合cutの保存は`git commit --no-gpg-sign`と通常pushで行い、HEAD・remote一致・cleanの実結果を外部E-GIT-CLOSE-v1.jsonへ記録します。自己参照するcommit hashは文書内に作りません。保存後の最終判定はE-FINAL-CLOSE-v1.jsonです。
 
-D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
-
-Failed native/observer REDs, proof elaboration attempts, stale harness success count and incomplete staging attempts remain documented. No failure was relabeled. Sole-main Astra/xhigh review only, no independent reviewer under owner constraint.
-
-Dの技術統合後は、Eの実試験・反例・全要件照合に16–40h程度を見込みます。新しい反例や対応不足が見つかれば延伸します。今回の作業はE完了又は週間残量60%程度の検証済み保存地点までです。W5以降の保存・復旧、秘密を守る観測、公開α統合は開始しません。
-
-E must first pin the same39 candidate/proof cut and its explicit external/unadopted scope, then run its full fresh network/fault/observer/bypass/I3 campaign and reconcile A–E119/R01–R12/W1–W3 carried obligations. Do not overwrite closed evidence or mark whole W4 complete from D alone. Keep every unsupported/unaccepted public/recovery/privacy obligation visible. Final source adoption is not authorized.
-
-Overlay runner D/run-source-overlay-astra-v1.py requires clean ROOT/no concurrent cargo or make and restores exact baseline. Use explicit CARGO_INCREMENTAL=0, CARGO_PROFILE_DEV_DEBUG=0, CARGO_PROFILE_TEST_DEBUG=0 for every Cargo command. Rust8GiB/-j1/testthreads1, Lean6GiB/--trust=0; heavy runs serial. Never edit ROOT source/docs/Git during overlay. No assumed mount/hostshare/cleanup, agents, Oracle or notifications.
-
-Eleven owned LAB docs, existing plan and one Report2614. Full make docs passed in 262.949s on exact frozen eleven-doc inputs, receipt source-declared-docs-v2/RESULT.json; final receipt-only metadata checked separately. Active roots and workflow classification unchanged.
+No subagent or Oracle was used for D/E; sole-main review does not constitute independent review. No notification or host-share delivery. ここで停止する。後続実装・採用・I3再開を希望する場合は、新しいowner指示で対象と保証範囲を指定する。

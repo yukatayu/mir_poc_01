@@ -61352,5 +61352,901 @@
     "status": "read-reviewed-verified",
     "role": "Full docs command/frozen inputs/exit and log inspected; final receipt-only metadata checked separately",
     "at": "2026-10-13T12:32:55.422196+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/project-status.md",
+    "sha256": "25fe6e6ffaebf7b93ba0c7a7322abb9ef8d9dcd6ae096853d7b8614094d492c6",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "8adf4ab8a180a1a4d041b5d73cb22849feadd81382df0da7889d7cb8c79e7fc1",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/RESUME.md",
+    "sha256": "5a3b25a19512c14e4d9b00bbe7ce706b49b22da89e07bf3719630051a921c7f2",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/00-index.md",
+    "sha256": "d092823bdf3981d2dc6f945eb351db0906a534ce7f788480289b28ebf8eede0e",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/proof-first-foundation-correspondence.md",
+    "sha256": "962f634ccb202364efc19278b35961ee3e65e807f3911ca7e1c2e937e259e520",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/README.md",
+    "sha256": "c697dc1058e345ebfba0bb4b4291b8bfc39d414755c07f1d395135bd8ca0b7cd",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-positive/README.md",
+    "sha256": "cf906f410c25d6b2664721692b8207a8a6a2646877aa7b6862ed93b56bc97468",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-positive/main/src/renderer-pose-positive.mir",
+    "sha256": "945201f53d63dda2cc9734fa177f5310ee2b62d2deb85a1a443ad99d4600582d",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/README.md",
+    "sha256": "70e177f59fc033ea4de33230f0912914cc4e771ebdd0de11da1d2574f4655e9b",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+    "sha256": "9084eb5a238317b1c3f81cd36967306ba9c831a3a4a6ee4504c766e488f50b86",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/README.md",
+    "sha256": "456028870b3124d51e8dc37e469b48103ea899d544d8b999fddf83391d8b2ec8",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+    "sha256": "cfea3d57f99a534013c5eff0579d5bc0f17b2a7f1816105c6785b56cf0ce9d3b",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/README.md",
+    "sha256": "dd322797be39c6fa403351a9132743cae0086cb24eb9f6d027a91110e049a1e0",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstAbortFlow.md",
+    "sha256": "c5a7ea642bcc3b8c39b00a0a454ce0689d31fac22fc879a18fd61c04e1a9f853",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstAddressFlow.md",
+    "sha256": "8bdc80a6b4fc0a6b9d3c6eb4972036f900006d9cb1002fbc8961ba591dbd5e6c",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstDPrerequisites.md",
+    "sha256": "b4d063f856e247d00380c39a1a7f90ce522edebc426acb13af19e2ff7e41e468",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstOwnerSchema.md",
+    "sha256": "9d72d111b591b86cc062f4f5a10edd77eef247ecc31700d9fb99a443f4c2d122",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerEffectReceipt.lean",
+    "sha256": "dffbcf70c95a70cc2f2c5582048a551523eb77f277d0967b7c5497b2ce25ea3a",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerMetadataRegistry.lean",
+    "sha256": "7174dc9b3ef6bcccad6fa7ffc2deb00bd18bff87306fa1474f2720b689da77cc",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerPartialAbort.lean",
+    "sha256": "259cf871c2acb9ea66c40835d2183417844700825f29f485238fea513cefe973",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerSourceFlow.lean",
+    "sha256": "63c7f2f3b22b4d60ad2b7e0331eff54fb9c92c4dd7d51920d8c02afc9ec71111",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementAdmission.md",
+    "sha256": "8e643f4ef23389f7a9b7cce05ffeaee128acddfc546defca70bb3e7f6244f242",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/OwnerStatementIntegratedAudit.lean",
+    "sha256": "dbab1303bcbccd13f3ecc329fc69ee7225563cec38ab9683d07b47aa4d4e03bc",
+    "status": "full-read-cumulative-reconciled",
+    "role": "Exact fully read predecessor plus complete reviewed delta; CORPUS-RECONCILIATION-v3 and its batch receipts. This records the pre-E-document cut.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/FOUNDATION_CHECK.json",
+    "sha256": "b7f161837954e517840eed8909396493dda2cd4216e0de1b6355fab1ce909846",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical W1 kernel and finite correspondence receipts. AssignmentAdmission/source-contract unreviewed experiments are not in current D205 dependency cone and remain unreviewed historical evidence; no new source/authority/NI claim relies on them. Abort/Address successor disposition is recorded by C. Exact relevant leaves consulted, not every embedded historical source/log reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/OBSERVER_BASELINE_CHECK.json",
+    "sha256": "5554930649b723b1887dd2f91e6e8fd50cdf69c252e301291b062d70f203dfe6",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical four existing observer tests and effective-label counterexample; supplied policy consistency does not establish general source-derived release. D uses registered private reference/count observer, not generic Public M8 policy.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/READ_LEDGER.json",
+    "sha256": "fc1824348a8f31d5f14de8f20e260d45097e006711368c245766a9ab092c28ce",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Generated append-only read-provenance record, parsed in full and exact current hash checked. Explicit source read status/hash/body coverage drives corpus reconciliation, no semantic claims inferred from row count.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W2_COMPUTATION_CHECK.json",
+    "sha256": "ff7fed69caa7c005cec7ebfa2e5c0eff2aa4fd829796f73292111d5ed9d3cf97",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical finite W2 computation/composition proof and control receipts. No current physical source/whole Rust refinement inferred; semantic sources have separate exact full/body-reviewed ledger entries.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W2_EXTENSION_CHECK.json",
+    "sha256": "c5b45edb5e7d60b4f694d5826036e033900c2af22b9bce6f9006bc6b91a7c8ac",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical W2 extension source/proof/case receipts. Per-cut source/capture/failure limits retained; repeated embedded logs are evidence storage, not new normative sources.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W2_MIRROR_CHECK.json",
+    "sha256": "109c40c1a75559d5235a94199ce0231e21b15c13cdd6359f0b275e84a5202433",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical import-preserving mirror and later module-boundary controls; top-level UNREVIEWED is scoped to recorded cut, not authority for current D. Separate source/receipt cut maintained.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W3_DYNAMIC_CHECK.json",
+    "sha256": "1bf3ae3731a08bf0daf340bfc2b6851b20a82cf7d2df0f406bad9f16c948709f",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical finite dynamic calculus/checker checkpoint, not physical attach/detach demonstration. Dynamic source proof cones are independent of fixed3 D execution.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W3_REFERENCE_CHECK.json",
+    "sha256": "ca8d60d2c5a63c606421cbfeffe11ae6e0eb741accb09ea05c2cb16cfe6b25e4",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Closed finite W3 reference/source/checker review and controls; physical placement/lifecycle/conformance residuals retained for119 union, not discharged by metadata.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W3_SOURCE_CHECK.json",
+    "sha256": "8c7f7df5e3e644dcdbd176e7e51364fc4c4a086878abe8898536bf3cb69b12a9",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Historical parser/source-history dependency checkpoint. Exact source file proof reads separate; no general runtime or W4 physical workflow claim.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_CHECK.json",
+    "sha256": "dd4bd261ae9accc6f0ffc926480f422219d222742898e605d7923a4545cf69db",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. Generated forward evidence register A-D. Selected final B whole-run logs and D205 proof/integration references hash-checked here, exact40 Rust source reads separately recorded. Historical top status/open rows require current navigation update after active overlay restoration; old evidence remains unchanged.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json",
+    "sha256": "477b389058f1b114e15d36f225f1a2a8f1b00cd19bf88f9025887acef043d1d8",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. All190 current source pins and audit verified. Frozen conditional C model/current successor records remain distinct from D physical source producer; no new proof execution.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_D_PREREQUISITE_SOURCE_MANIFEST.json",
+    "sha256": "b6a8f6e4208de395d2dd5a2743a90abb889bb51e3f0bc0fc56e0d8ee26e13c4a",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. All199 source pins, audit/negative recipe and retained audit result verified. Frozen199 prerequisite is not relabeled205; D205 fresh source/logs verified separately.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_HOST_MANIFEST.json",
+    "sha256": "600416cb8ee04d1b7fd305a2c747dbc7bdcf73b10b932360d64d81ee866a0874",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. All56 current private host helper source pins verified. Historical finite private-pipe producer and observed whole-run evidence retained; not QUIC D proof or public product.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_SOURCE_MANIFEST.json",
+    "sha256": "d5eef1dd0feedcbaa25122c861f4cc5de8dbfedff45f16c71c3d67ade4a8a209",
+    "status": "generated-record-integrity-consumer-disposition",
+    "role": "Complete JSON parsed with duplicate-key rejection; current inventory hash verified. Structural/integrity disposition, not fresh full semantic read. All206 preserved B proof source pins verified. Current conditional D205 is a separate dependency cone, not a replacement of B206.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/lib.rs",
+    "sha256": "5daac4806109ac8a2cc2c40ebf177034a20ceb4471ff21ea742f8f69d569f229",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m10_reference_system.rs",
+    "sha256": "85e7c893ea668a3a6c95fd1ac3a8ad346dd37665e47f9cf73d120e5dedd6b172",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_owner_budget_snapshot_tests.rs",
+    "sha256": "26f9934ac4ca5224c7052d696ab765ebfea42fa6bb2f88738799e920e02c388d",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_admission.rs",
+    "sha256": "4b955580b5e78113b24520b2cbb44203d8749028c1d2b538cecd90e87776aafa",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_local_cut.rs",
+    "sha256": "c73e674ba0a43740f29894a21612048c82f2a1d2e5e83c5f2b8b7553b16dd25e",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_owner_queue.rs",
+    "sha256": "6f11a9c9294bb71819da649cfacfb56756b06cc24b6d64b8a2284c3df9f84bb1",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_patch.rs",
+    "sha256": "1bbc0d34c66d15c6739f44df1b7142cf8469ae3d59d231ad0fa54187f1a8f906",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m9_auth_verification.rs",
+    "sha256": "8ddfadadce2ebb065dc65a97cde4a3bc1e40441bf1e4aa1a4c4c0de42475245c",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m9_auth_verification_i3_tests.rs",
+    "sha256": "7b5fdc0f7947f373ead3203873fe905465791d7153c146ef1eaa0bc894c4eee0",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/proof_first_owner_schema_tests.rs",
+    "sha256": "32118ec3acc20696d0100d683dbeabc9b09cca16bc1a9fd1a19b639253b7a5b7",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys2_execution_backend.rs",
+    "sha256": "e63e3b04e10b95d5d4ad1907382f1c35cf97c28615bde11af7455e3127a92069",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys3_i3_private_snapshot.rs",
+    "sha256": "dda5fd0f57d6e0386bbcf2cbb8e115567f4ac09a8046389f06056f3a50bf0ed3",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_dispatch.rs",
+    "sha256": "c8a5835f49410679bb3c0fce4ca613b48477b9f01f930edf0aceb1befed55732",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_i3_original_source.rs",
+    "sha256": "c62ee769a22a35c6e895a8e429b96c89c6b69df04173322d7242411c2aef058f",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_i3_original_source_tests.rs",
+    "sha256": "c24633b6915c01026767fc7e2cf8ab7d4621173f3eb715de05064d6df8045937",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_i3_source_authority.rs",
+    "sha256": "dcac48d989cc8346d69c5d81adc73add3b471edf9af4f7b86da4605eab066b36",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_i3_source_authority_tests.rs",
+    "sha256": "613a8fc767392bca0361573f95eb91ddcd6a4459fad59509808779c145c025d3",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_invocation_tests.rs",
+    "sha256": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_original_source_process.rs",
+    "sha256": "df12b8deb5b97abfa424a03e350e69ad9b37deab790a943acd1fea7be8ba270e",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_original_source_process_tests.rs",
+    "sha256": "6980263001c5c14e22dcab9d775f6f2a515632de5b670aba80c8b44264423417",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_owner_admission_tests.rs",
+    "sha256": "9f56f386a56e01171f2d4c3bc088f7e5a92d07e77924c054ba37c3516ac7a4c8",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_private_quic.rs",
+    "sha256": "62bc1a51c43645967c5dfd9953f64327663c0f6d169255a3ffb6390611df8b1e",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_process_runtime.rs",
+    "sha256": "6cabb8486141cd54687f0aaf84430b787d13bfc9a106110d14b4b09ca287b06a",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_provider_composite_tests.rs",
+    "sha256": "25258ac11369fad6bd1b50400f19ebcb09c76fa50f4b486c2ec86d3b2f9ece7d",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_source_control.rs",
+    "sha256": "9659b1794f64407185b0b90a1edef3709b64416fd62c18ba8afbfe9ea38a6568",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_source_control_tests.rs",
+    "sha256": "07d5cc38abad1fa01483fac2a14d69c76e93c409cd10448ecde07028c38abd8e",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/surface_v0_pipeline.rs",
+    "sha256": "e9982b42eaa6126cb0a96a7d2f71ec8da3e35f081dc29f469874a2cf05854151",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/private_snapshot.rs",
+    "sha256": "d61b41fa5ff21caaabed50b8c857ea7d35c0c638864958b81fad22e35f6d8f59",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/i3_private_prepared_binding.rs",
+    "sha256": "e46a68ddc80ccad0ad45092107afbca1f83f37a5845fa6999ca23d3f45a6e28b",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_owner_admission_gate.rs",
+    "sha256": "e0a04a0ff9be1bda99db2c59e39073b1b379e4c4a9fed99c987fe75ec592aab4",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_private_prepared_owner_binding.rs",
+    "sha256": "05dfa9877d1baad63b310e121a7d9603775fd1a6fa0ac8f4a4cd3bd69f64670a",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_authority.rs",
+    "sha256": "19333322f188a2554676e0fb873d5ffc42563923e5d16d6228451ab85f8ce649",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_relation_projection.rs",
+    "sha256": "0639e658e04fd45c044083f6a0b6d7ec578bc53c543fdd8e495a391149d0d429",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_private_prepared_relation_binding.rs",
+    "sha256": "a9d89beb0302339fe094e9a031447b72ab813ade27864418fa4aa11c7774a6be",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_runtime_designated_value.rs",
+    "sha256": "9847cbb207dea2094a92df95b977f6ae8edf84f8e1f76c3f1fecb6b3626b0588",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_private_prepared_designated_binding.rs",
+    "sha256": "a30a6508c0ac0ea6986a68b6665f1685e48c4812455f519e65266bad5569c927",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/m8_private_prepared_local_binding.rs",
+    "sha256": "880447e61b60d24f41945f82b2652603b2d73da7b83e0047507c6d70a830ab9c",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys4_private_prepared_fabric_binding.rs",
+    "sha256": "6a1d2ca20e6222b7c17f8a61827992de704ff7da21fc60ff1fba5aa0eec419b1",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/sys5_i3_original_source_observation.rs",
+    "sha256": "24e10a53ce7abc52336eec16effb88326f57c42255a74e9b2724da3c0a5ea949",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/e-lint-cleanup-v2/full_system_v1_cli.rs",
+    "sha256": "4e9f3e2a8d477b6a0b350239cf3ad192385f634d9dfea7eda88eaa8016101378",
+    "status": "full-predecessor-mechanical-format-reviewed-delta",
+    "role": "Exact full/cumulative predecessor, tool rustfmt provenance and entire lint differences reviewed; SOURCE-READ-COVERAGE-v2. Not a fresh full reread of formatted text or an AST equality proof.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-FRESH-CAMPAIGN-v2.json",
+    "sha256": "0ccfd53154782c3df3909a6eda295491f88d49de927d236de3cba5c8bdc5573d",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/I3-3-REGRESSION-MAP-v2.json",
+    "sha256": "8dc33f0e9664fbde24cc09963844aeb4e626eab2cbc19fb0b4b10e0db76e66a5",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-SCOPE-AND-CARRYOVER-REVIEW-v2.json",
+    "sha256": "3f6563272109e0d007b9d723c1a81a6e645ce0a0e3cc893354dae7a0c0fb2c8f",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-REQUIREMENT-REGISTRY-REVIEW-v2.json",
+    "sha256": "00c425b635c49ab378cc6452ff5db66eb69001ef0f2b7044c3c2d08cf3052347",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/E-ORIGINAL-REGISTRY-DISPOSITION-v2.json",
+    "sha256": "85c12b802f293aeea70ecd099c337b9ee42dff36203525992cc46ca4ec4b5f05",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/NATIVE-DYNAMIC-SCOPE-CORRECTION-v1.json",
+    "sha256": "d62ea3d967cc2e54be4fb5077ce62238dd64e43b822014e37e9b9f8b17a2beb3",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/SOURCE-READ-COVERAGE-v2.json",
+    "sha256": "3dbec228476068806d0b63616689ddbf042244c90a5e43eb1f8e3c8b4893a407",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/CORPUS-RECONCILIATION-v3.json",
+    "sha256": "4372763622c1ab7ac6f7dd7780164991a3fe211db47ce198cd7e70e6fb48cb63",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/RETAINED-EVIDENCE-INTEGRITY-v1.json",
+    "sha256": "38a6487f9aa12b5ad68ba1f097702db938a2ff741ca4c74fb0bd7d4df898bd32",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/GENERATED-RECORD-DISPOSITION-v1.json",
+    "sha256": "b4c1fd6a10370cadd3d8ceb8b739551cb536805763f747d91538b57a7125188b",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LOCAL-REPRODUCTION-DEPENDENCIES-v1.json",
+    "sha256": "fc2c5fdc72e5b779301e1b36e2813d572757b839f8cf8409d6b1b8331956a0d6",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-BASELINE-COMPARISON-v1.json",
+    "sha256": "26560fa036cecadcb47c79d7f9c347ce60a52f4839553e4e3196bf0a7e1a58aa",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-DIFF-REVIEW-v1.json",
+    "sha256": "b79a949c6589edb44b39087dc0f8fb9064bef077154b599b2935977ffc7adce9",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/LINT-DIFF-REVIEW-v2.json",
+    "sha256": "5cfd654802529fcd33a01d3fb31bd51b8a0096818a15a83e3386b0ebb7cb092d",
+    "status": "authored-reviewed-evidence-disposition",
+    "role": "Authored/structured validated E reconciliation record with stated reading limits; not a claim of full reading every embedded raw log or historical JSON.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/Documentation.md",
+    "sha256": "bedd90ceef2058055234313ef069dc3c79e23b72d984091bcd0f8f406ffc2be6",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples_progress.md",
+    "sha256": "925d7e323fd6009cbda5807eb0dc30e0276fd1516a38a844f32b10100ded62b7",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/tasks.md",
+    "sha256": "c3ba18a11e43adec31810c36050a2a7eaec7c3da20c4e5f98accce8b179d39e3",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/progress.md",
+    "sha256": "0551ff8c91ec5a51d08b037df74332da9ad16fa65077aa6b663dc708d726b3bb",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/00-index.md",
+    "sha256": "b33b416234b86f40a37b53c64e1338070f74f38c82b214f72a72c93278c68727",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/proof-first-foundation-correspondence.md",
+    "sha256": "5b41cc12bbbd030b88606be9eff37b3e2cd89925a896ee172d87c9a67021b63f",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/scripts/README.md",
+    "sha256": "54f57d5bdfccf3c1dd2d181bbe2a58fdb48168e6e283b5c2e27ec760dc753d35",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/project-status.md",
+    "sha256": "cef3170dc52f68ad9b02f49bc7e32ecb7e9e3512395ca04b946fbb84d0c4dc1c",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/README.md",
+    "sha256": "082193ec5ff347f761e86755ad1a80114d8139c09f9e0a7e182ea8f02384d6a5",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/reports/2614-mirrorea-proof-first-w4-physical-refinement.md",
+    "sha256": "39fabf0d23249a149e4b4e0f34220a5956d2a518787e75703ee04ab98e235a8a",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/RESUME.md",
+    "sha256": "42fcf12ba97874541fe6cb037c8b145a1fb8643fbdc5be2892491afecf2d486f",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "3a6e7306c57da3f54157f065ac4725607fb5417e35d44d05ad5afcddc6a82cb5",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/README.md",
+    "sha256": "f146969da9dc89ea5d657ae7fa628f98830c4a909e4fce17e2fc5d51eb853fb4",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_CHECK.json",
+    "sha256": "f060b7cf73309f1bcd98985d49c80ba63a355b675f49872e07f64d96214f08fa",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
+    "sha256": "0f986964206374972407c1f040ddb3144c541857fbbae1c4f6d8ce40a1cc263e",
+    "status": "authored-reviewed-current-delta",
+    "role": "E snapshot authored and reviewed against pinned baseline; historical content retained. Large JSON reviewed as changed fields/structured preservation checks, not a new entire historical semantic reread.",
+    "at": "2026-10-13T15:59:26.819590+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/Documentation.md",
+    "sha256": "efefc917b0119178521c45f80a637093559bcd7106029ca80af4a26265552bb1",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples_progress.md",
+    "sha256": "cf13613162864a49da126364af517038d30cd7f4a8d3c73e2672c6002b3017de",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/tasks.md",
+    "sha256": "65f19732dbfd035545f040d3c77a1948361e2449e3ab6e9524e2fa1059b622ae",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/progress.md",
+    "sha256": "998fca7ef4176ae0dafe84450c084f1fcbfd9765134542d4dff3b3fb049a4d47",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/00-index.md",
+    "sha256": "4325bb2992d4e9f404d7094364df8991ff519b5d8709330379e11351e56049b8",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/plan/proof-first-foundation-correspondence.md",
+    "sha256": "f471e2a321609e51c2869b180e62865c41b8406295e523fa0fd3881059499a63",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/scripts/README.md",
+    "sha256": "54f57d5bdfccf3c1dd2d181bbe2a58fdb48168e6e283b5c2e27ec760dc753d35",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/project-status.md",
+    "sha256": "94376b85783b90b180234537607588af39b679a47f4767fccfebb9b8ee07b277",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/README.md",
+    "sha256": "082193ec5ff347f761e86755ad1a80114d8139c09f9e0a7e182ea8f02384d6a5",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/reports/2614-mirrorea-proof-first-w4-physical-refinement.md",
+    "sha256": "1072ef227dfb6d103cb660865ee76ccf1f4c156526c73440ce51f44284cf612e",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/RESUME.md",
+    "sha256": "c06ea9304cd2cbdb6b9863a15416670f2e6fc169486e0951ec94378dc262b914",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "88dcdadb2f9db861bad90b574dd4eb88c478e18cdab59c21705472ce3f7c16bb",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/README.md",
+    "sha256": "f146969da9dc89ea5d657ae7fa628f98830c4a909e4fce17e2fc5d51eb853fb4",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_CHECK.json",
+    "sha256": "2accb645f504194e72bb934e455582ab531656418fc2bcf4c9d4d7045363afd3",
+    "status": "read-reviewed-result-metadata-delta",
+    "role": "Only verified result/status/timestamp substitutions after actual full make docs; authored/read exact replacements. Actual Git results remain external and are not claimed in advance.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-validation-v1/INPUTS.json",
+    "sha256": "7b9b0084e6287cefa5f42e61b76fbbb6dec922234474f48301ebaf3de6c2c80f",
+    "status": "verified-doc-validation-receipt",
+    "role": "Structured complete command/input hash/result and validation log reviewed before close; later status-only metadata has a separate focused check.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-validation-v1/RESULT.json",
+    "sha256": "786323f56aca860d7175c505b3a308c06bb82472cd3e2edcd79e551b2ace624d",
+    "status": "verified-doc-validation-receipt",
+    "role": "Structured complete command/input hash/result and validation log reviewed before close; later status-only metadata has a separate focused check.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-validation-v1/RUN-00.log",
+    "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+    "status": "verified-doc-validation-receipt",
+    "role": "Structured complete command/input hash/result and validation log reviewed before close; later status-only metadata has a separate focused check.",
+    "at": "2026-10-13T16:04:54.655600+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_CHECK.json",
+    "sha256": "97c96b6f22e05472438b64bc514dba1a7a4d45a67f3a3c97e34e719e651986a9",
+    "status": "read-reviewed-final-receipt-delta",
+    "role": "Actual focused documentation result and final receipt-only metadata; no new source/semantic claim. Command/result/input hashes checked and validation logs read.",
+    "at": "2026-10-13T16:10:03.267991+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/INPUTS.json",
+    "sha256": "8333556f392d2e65ea2bbbd5070e7ae3bc9b29674f49f3492205a9829d174b4a",
+    "status": "read-reviewed-final-receipt-delta",
+    "role": "Actual focused documentation result and final receipt-only metadata; no new source/semantic claim. Command/result/input hashes checked and validation logs read.",
+    "at": "2026-10-13T16:10:03.267991+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RESULT.json",
+    "sha256": "1a84e8b522ae1ad60e8399af59a6e62471e6bc7517114f091b0a64440b075a03",
+    "status": "read-reviewed-final-receipt-delta",
+    "role": "Actual focused documentation result and final receipt-only metadata; no new source/semantic claim. Command/result/input hashes checked and validation logs read.",
+    "at": "2026-10-13T16:10:03.267991+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-00.log",
+    "sha256": "37d0e890dcf418f548196f1cc01efbf21806ba5fbae01d0c7a63f67274a8e941",
+    "status": "read-reviewed-final-receipt-delta",
+    "role": "Actual focused documentation result and final receipt-only metadata; no new source/semantic claim. Command/result/input hashes checked and validation logs read.",
+    "at": "2026-10-13T16:10:03.267991+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/e-campaign-preparation-v1/e-docs-focused-v1/RUN-01.log",
+    "sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+    "status": "read-reviewed-final-receipt-delta",
+    "role": "Actual focused documentation result and final receipt-only metadata; no new source/semantic claim. Command/result/input hashes checked and validation logs read.",
+    "at": "2026-10-13T16:10:03.267991+00:00"
   }
 ]
