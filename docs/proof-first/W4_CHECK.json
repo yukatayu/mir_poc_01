@@ -64530,5 +64530,50 @@
       "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-HISTORY-REVIEW-v2.json",
       "sha256": "885ad9eebfd58dcbaae09be7d4ad4e99ac79129045f8c031c8aef4a94d878392"
     }
+  },
+  "d_original_flow_send_20261013": {
+    "at": "2026-10-13T04:38:34.548053+00:00",
+    "status": "Verified finite actual send custody; same D continues, not D acceptance",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-flow-send-green-v4",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-flow-send-green-v4/SOURCE_PINS.json",
+      "sha256": "872c0787beeca55dd1a253bcc3b153b47cca581fee9344f882afdb22c4fcb8f0"
+    },
+    "integration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-SEND-INTEGRATION-v1.json",
+      "sha256": "854f5ca2ab61f02d64be5b7e9b7b1b4d059de25338fa725034878d1d2ab03180"
+    },
+    "review": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-SEND-REVIEW-v1.json",
+      "sha256": "f95afde5172af1ee171bc831348e5445c112fa022cdff6cd8b31e16cc48149d0"
+    },
+    "notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v40.json",
+      "sha256": "35c056ebe655c62552d270642df7c3e6d890723eb4ce288c43e87d33fed2c6e3"
+    },
+    "next_design": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-BEFORE-USE-v1.json",
+      "sha256": "20bc7b0d7b97a8f6cc52eb6e9d657e65117393a5e380da2d7946173ea4305b76"
+    },
+    "quota": {
+      "checked_at": "2026-10-13T03:56:56.040574+00:00",
+      "source": "own session token_count.rate_limits only; bounded last4MiB",
+      "weekly": {
+        "observed_at": "2026-10-13T03:56:20.624Z",
+        "slot": "primary",
+        "used_percent": 24.0,
+        "remaining_percent": 76.0,
+        "window_minutes": 10080,
+        "resets_at": 1792295904
+      },
+      "next_check_not_before": "2026-10-13T04:56:56.040574+00:00",
+      "stop": "Below30% remaining, then verified/saved checkpoint; otherwise continue D then E, stop after E"
+    },
+    "docs_validation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-flow-send-docs-v1/RESULT.json",
+      "sha256": "3281be9ce1f4af176adadba0142c487a53bfe6511777a377e57dc25bac5c7c94",
+      "exit": 0,
+      "scope": "Full make docs pass on unchanged eleven-doc inputs; final receipt metadata and transport-coverage wording checked narrowly"
+    }
   }
 }

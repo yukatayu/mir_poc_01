@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-13 12:59 JST
+最終更新: 2026-10-13 13:38 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,11 +15,11 @@ Plan250 remains the sole Canon-authorized roadmap, separately owner-paused after
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
 LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Dを2026-10-13のowner指示で再開し、実3プロセスとprivate QUICによる元sourceのS→T→Sを検証しました。source cursor・native受理・parent ordinalは各3、Sの実Bodyは2回、Tは1回です。完了済みの受信データ・受付／解決・Ready／Finishを事前確保した履歴へ移し、次の処理でも保持します。実データ2件を用いたBusy拒否でも、呼び出し元と現在の状態を保持しました。外部未採用38pathの履歴v4で全1400件が通過し、専用feature条件3か所とテスト2件を補ったv6は予算付き2件、test-seamsなしの履歴8件／全列・peer設定2件、通常default／private QUIC buildを確認済みです。実分散graph、network DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
+W4-Dは、実3プロセスの元source S→T→Sと完了履歴に加え、実QUIC送信の有限枠・中断時保持を検証済みです。送信前に実パケットと試行記録を事前確保した枠へ移し、取消・解析／通信失敗でも保持します。枠を使い切った拒否では呼び出し元にパケットを残し、取消後の送信／受信は再開しません。外部未採用38pathのsend v4で、test-seamsなしの送受信12件と全列・peer設定2件が通過。通常default／private QUIC buildも同じproduction部分で確認済みです。元sourceのnative受理3、Sの実Body2／T1と、実送信完了6件を保持します。現在の権限に従う分散graph、DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
 
 現行owner指示（2026-10-13・再開）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量30%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。2026-10-07の作業停止と50%閾値は、この指示で更新されました。
 
-W4-A/B/C are closed only within their bounded LAB scopes. Current component: ORIGINAL-SEQUENCE-INTEGRATION-v1.json / notes39. Fixed scope: docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md, whose older D-after-stop/model-switch preamble is historical. Exact source/commands/continuation: RESUME.md and W4_CHECK.json; one Report2614. Adopted Rust is restored.
+W4-A/B/C are closed only within their bounded LAB scopes. Current component: ORIGINAL-FLOW-SEND-INTEGRATION-v1.json / notes40. Fixed scope: docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md, whose older D-after-stop/model-switch preamble is historical. Exact source/commands/continuation: RESUME.md and W4_CHECK.json; one Report2614. Adopted Rust is restored.
 
 ## ordered self-driven packages
 
@@ -49,7 +49,7 @@ The 2026-10-13 owner resume lifts the earlier operational pause and changes the 
 |---|---|
 | Source custody/native I3 | Genuine source cursor/full Core/arguments and native one-use admission remain separate. Original derives owner/ordinal; free-standing IDs or matching peer cannot replace custody. |
 | History/resource preservation | Move only genuine completed Body/Ack records into already funded per-ordinal slots. Missing completion, wrong grant, replay/refund or loss of actual caller capsule falsifies the candidate. |
-| Distributed observation | Retain actual send/receive/native records before joining reference-only output. Test-only arrays, local C graph or reconstructed counts do not establish the required provenance. |
+| Distributed observation | Actual finite send/receive retention is verified. Next join actual native/control records through a registered current Report. Test-only arrays, C-local graph or reconstructed counts do not establish provenance. |
 | Current authority | Held network DATA alone does not prevent actual update. Preserve all child observations/native state, require actual all3 prepare→parent publication→activation, and revalidate current use; transport or historic result is insufficient. |
 | Later activation | Preserve earlier full runtime/source/result/control history in the same world. A new source activation differs from protocol revision/M9 generation; no generic reconnect reset or recreated runtime. |
 
@@ -65,4 +65,4 @@ History v4: focused history6, actual sequence/profile2, prior Issue11 and full14
 
 No D/E acceptance yet. Real distributed graph from the same native/transport events, actual authority update while network DATA is held, subsequent source activation in the same world/all3 re-freeze and integrated correspondence remain. No adopted Rust, Canon/public interface/roadmap change, new active sample root, fresh Lean campaign, independent review, OS/recovery/global allocator or broad privacy claim.
 
-Old full1386/first Ack and full-sequence RED remain immutable history. R01–R12 and119 requirements retain their original U/D/adoption status. Samples keep existing paths and workflow classification.
+Current send v4 has no-seams flow12/sequence2 evidence and two normal builds on unchanged production bytes; no whole1408 rerun. Old full1386/first Ack, sequence full1400 and full-sequence RED remain immutable history. R01–R12 and119 requirements retain their original U/D/adoption status. Samples keep existing paths and workflow classification.

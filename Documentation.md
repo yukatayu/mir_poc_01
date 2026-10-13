@@ -35,7 +35,7 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
 
-W4-Dを2026-10-13のowner指示で再開し、実3プロセスとprivate QUICによる元sourceのS→T→Sを検証しました。source cursor・native受理・parent ordinalは各3、Sの実Bodyは2回、Tは1回です。完了済みの受信データ・受付／解決・Ready／Finishを事前確保した履歴へ移し、次の処理でも保持します。実データ2件を用いたBusy拒否でも、呼び出し元と現在の状態を保持しました。外部未採用38pathの履歴v4で全1400件が通過し、専用feature条件3か所とテスト2件を補ったv6は予算付き2件、test-seamsなしの履歴8件／全列・peer設定2件、通常default／private QUIC buildを確認済みです。実分散graph、network DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
+W4-Dは、実3プロセスの元source S→T→Sと完了履歴に加え、実QUIC送信の有限枠・中断時保持を検証済みです。送信前に実パケットと試行記録を事前確保した枠へ移し、取消・解析／通信失敗でも保持します。枠を使い切った拒否では呼び出し元にパケットを残し、取消後の送信／受信は再開しません。外部未採用38pathのsend v4で、test-seamsなしの送受信12件と全列・peer設定2件が通過。通常default／private QUIC buildも同じproduction部分で確認済みです。元sourceのnative受理3、Sの実Body2／T1と、実送信完了6件を保持します。現在の権限に従う分散graph、DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
 
 現行owner指示（2026-10-13・再開）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量30%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。2026-10-07の作業停止と50%閾値は、この指示で更新されました。
 

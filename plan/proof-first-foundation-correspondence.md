@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 12:50 JST): W4-A/B/C bounded closes; same W4-D owner-resumed2026-10-13. Original three-process S→T→S/history component verified; distributed observation, network-held authority update, next activation/all3 refreeze and D integration remain. Continue authorized E after D acceptance; stop after E or saved checkpoint below30% weekly. Plan250/I3-4 stay independently paused. Earlier dated entries remain history.
+Current package map (2026-10-13 13:38 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S/history and finite actual send retention are verified components. Registered current Report/distributed graph, held-DATA authority update, next activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 remain independently paused; earlier dated entries are history.
 
 ## Authority and retained history
 
@@ -3211,3 +3211,19 @@ History v4: focused history6, actual sequence/profile2, prior Issue11 and full14
 残りの実作業時間の粗い目安は、Dの分散観測／受信中の権限境界4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16hです。S→T→Sは通過しましたが、未解決境界の検証が残るため従来の幅を維持します。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは今回の自走対象外の暫定値です。調査と反例で延伸し得る実作業時間であり、期限や上限ではありません。
 
 証跡: ORIGINAL-SEQUENCE-INTEGRATION-v1.json、SOURCE-OWNER-LOWER-NOTES-v39.json、ORIGINAL-SEQUENCE-HISTORY-REVIEW-v1.json、ORIGINAL-DISTRIBUTED-NEXT-CONSUMER-MAP-v1.json。Report2614一件に追記し、索引の古いE再開待ちも訂正しました。Canonと採用Rustは変更していません。
+
+## 2026-10-13 13:38 JST — 実送信の有限保持枠と取消・失敗
+
+W4-Dは、実3プロセスの元source S→T→Sと完了履歴に加え、実QUIC送信の有限枠・中断時保持を検証済みです。送信前に実パケットと試行記録を事前確保した枠へ移し、取消・解析／通信失敗でも保持します。枠を使い切った拒否では呼び出し元にパケットを残し、取消後の送信／受信は再開しません。外部未採用38pathのsend v4で、test-seamsなしの送受信12件と全列・peer設定2件が通過。通常default／private QUIC buildも同じproduction部分で確認済みです。元sourceのnative受理3、Sの実Body2／T1と、実送信完了6件を保持します。現在の権限に従う分散graph、DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
+
+今回のLAB候補では元sourceから算出したpeerごとの送信枠を接続前に確保し、送信前に実パケットをその枠へ移します。await後にテスト用の配列へ証跡をコピーする案は、取消と途中失敗で実パケットや試行の対応を失うため採りません。前者は実2件の成功と3件目の拒否、実prefix送信後の取消、解析不正、枠／カウンタ枯渇、実peer切断で検証しました。完了は実本文のwrite成功後だけに記録し、相手の受理とは分けます。nativeのBodyやsource進行をtransport処理から再実行しません。
+
+Send v1: normal default/privateQUIC checks2, combined flow7 and sequence2 pass. v3: sender6/reader3/sequence2 pass. Final v4: no-test-seams sequence2/flow12 pass. Nineteen real send-field mutations distinguish and restore full binding. v1→v4 normal production bytes are identical; changes are cfg(test) controls and test lifecycle fixes. Prior sequence full1400 is its own historical cut; no fresh full1408 is claimed.
+
+失敗履歴: 上限REDを保持。追加テストの初回は同期ファイルの後片付け漏れで後続peerが早く閉じました。修正後のno-seams全列では接続先ファイルのcreateとwriteの隙間を読み、解析に失敗しました。後片付けと書き終わったファイルのrenameで修正し、通常処理とdeadlineは変えていません。
+
+次の直接consumerは実分散graphです。既存I3の実4送受信とnative serve/write/receipt照合を参照し、元source順序・実Issue/Body/Ack保持を結びます。現在の登録済みReport grantとactual M9/floorを確認し、出力は既存のprivate reference/count範囲に留めます。これは使用前のLAB設計であり、実装・受理済みではありません。欠損・別peer・古いfloor・偽のfragmentで完成graphを作れた場合は設計を再開します。一般の公開observerや秘密の非干渉を新たに主張しません。
+
+No D/E acceptance. Actual registered current Report and same-event distributed graph, live authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. Flow captures the new send/receive records and logical counters but still lives outside Mode; complete transport-to-preparation ownership is not yet accepted. No adopted Rust, Canon/public contract, fresh Lean, independent review, recovery or broad secrecy/noninterference claim.
+
+証跡: ORIGINAL-FLOW-SEND-INTEGRATION-v1.json、SOURCE-OWNER-LOWER-NOTES-v40.json、ORIGINAL-FLOW-SEND-REVIEW-v1.json、ORIGINAL-DISTRIBUTED-GRAPH-BEFORE-USE-v1.json。Report2614へ追記。

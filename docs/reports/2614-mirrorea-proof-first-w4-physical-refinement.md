@@ -5714,3 +5714,28 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 20. skipped validations and reasons — No full1402 rerun for final v6: its delta from full1400 v4 is three feature guards and two tests, with enabled privateQUIC logic unchanged. Both normal profiles, added tests and all new no-seams cases executed. No fresh Lean/OS/recovery/global-allocation/privacy campaign; D/E final integration still pending.
 21. commit / push status — Authorized twelve-doc checkpoint; actual commit/push/remote parity recorded after freezing text in GIT-ORIGINAL-SEQUENCE-v1.json.
 22. sub-agent session close status — None started. Same goal remains active; no notifications/Oracle/hostshare. Weekly76% observed2026-10-13T03:56:20.624Z exceeds30% stop; continue D without waiting for user input.
+
+### 2026-10-13 13:38 JST — 実QUIC送信の有限枠・取消／失敗時保持
+
+1. Title and identifier — Report2614 actual original Flow send retention; same W4-D continues.
+2. Objective — Preserve actual outgoing packet/attempt across finite-limit refusal, codec/counter/IO error and real cancellation, for the same-event distributed graph consumer.
+3. Scope and assumptions — External unadopted38 paths. Original finite per-peer source budget and existing private references; no new public protocol or graph acceptance.
+4. Start state / dirty state — Clean HEADd4814ee0beb62fae6f9f5556a7683ba3b2026329; saved original sequence/history checkpoint. Every overlay restored38 actual baseline paths.
+5. Documents consulted — Canon architecture10/spec16, fixed D handoff/current snapshots, before-use send and graph records, actual Flow/source/native/control, and partial existing I3 probe join.
+6. Actions taken — Fund finite send slots before session use; borrowed Option pretransfer guard; move actual packet before fallible decode/IO; store genuine per-peer attempt and mark full application write only after success. Canceled/failed operation keeps shared unavailable state. Add exhaustive visitor and actual failure/custody controls.
+7. Files changed — External normal QUIC send path and process tests; eleven LAB docs/one report. No adopted Rust, Canon, new report or sample taxonomy.
+8. Commands run — Exact argv/exits/source/log hashes in ORIGINAL-FLOW-SEND-INTEGRATION-v1.json; serial locked/offline8GiB/j1/testthreads1 and resource audit. Full make docs passed (exit0,272.563s, all eleven input hashes unchanged) in original-flow-send-docs-v1/RESULT.json; final receipt metadata and transport-coverage wording checked narrowly.
+9. Evidence / outputs / test results — Send v1: normal default/privateQUIC checks2, combined flow7 and sequence2 pass. v3: sender6/reader3/sequence2 pass. Final v4: no-test-seams sequence2/flow12 pass. Nineteen real send-field mutations distinguish and restore full binding. v1→v4 normal production bytes are identical; changes are cfg(test) controls and test lifecycle fixes. Prior sequence full1400 is its own historical cut; no fresh full1408 is claimed.
+10. What changed in understanding — Pre-await custody is necessary for truthful canceled/failed send evidence. New tests also exposed stale coordination files and create-before-write locator visibility; both were test-only lifecycle faults, corrected without changing normal deadlines. Send success does not establish peer receipt.
+11. Open questions — No D/E acceptance. Actual registered current Report and same-event distributed graph, live authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. Flow captures the new send/receive records and logical counters but still lives outside Mode; complete transport-to-preparation ownership is not yet accepted. No adopted Rust, Canon/public contract, fresh Lean, independent review, recovery or broad secrecy/noninterference claim.
+12. Suggested next prompt — Continue normal registered current Report and actual distributed graph, then held-DATA update, subsequent activation/refreeze, D integration and authorized E. No new owner input needed.
+13. plan/ update status — Existing memory updated with selected/alternative/actual falsifiers and next graph consumer; no new roadmap.
+14. Documentation.md update status — Current external send evidence and remaining gates synchronized.
+15. docs/project-status.md update status — Current summary synchronized; keep within180 lines.
+16. progress.md update status — Actual timestamp/current evidence updated; no completion percentage.
+17. tasks.md update status — Whole eight-heading snapshot rewritten from current validated snapshot; next consumer/current evidence updated, all Canon/plan source references preserved.
+18. samples_progress.md update status — New bounded send evidence row; same active roots and classification, no public workflow claim.
+19. reviewer findings and follow-up — Sole-main review in ORIGINAL-FLOW-SEND-REVIEW-v1.json; exact v1→v4 production-byte correspondence verified, actual custody/full binding controls pass. Flow-to-preparation ownership remains open. No independent review under owner instruction.
+20. skipped validations and reasons — No fresh whole1408/Lean/OS/recovery/privacy campaign on this component; exact normal builds, new controls and no-seams original sequence run. Then-final D and E require fresh integration campaigns.
+21. commit / push status — Authorized eleven-doc checkpoint; actual commit/push/remote parity will be recorded after freeze in GIT-ORIGINAL-FLOW-SEND-v1.json.
+22. sub-agent session close status — None started; same goal active, no Oracle/notifications/hostshare. Continue current D then E until agreed scope/quota stop.
