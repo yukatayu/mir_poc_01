@@ -64730,5 +64730,85 @@
       },
       "scope": "Full make docs on exact frozen eleven-doc input; receipt-only final metadata checked separately"
     }
+  },
+  "d_integrated_technical_20261013": {
+    "at": "2026-10-13T12:22:45.221733+00:00",
+    "status": "D technical candidate verified; documentation/Git close then authorized E; W4 not complete",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/SOURCE_PINS.json",
+      "sha256": "ccf9088abb5b6694c028944b8ca8dfb10b8a4b81471c9583374a92c7707828d9"
+    },
+    "integration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-FAILURE-INTEGRATION-v1.json",
+      "sha256": "e7f638dd5e45b9bc0be25d0e128af5156658b69c2fe6c7bd3f4b41ee9282907e"
+    },
+    "review": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-INTEGRATED-TECHNICAL-REVIEW-v1.json",
+      "sha256": "449c27208557d9a5f2aa281879a59fd729fb997af8bbc12cf408cff80a7b53d0"
+    },
+    "correspondence": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-ENTRY-CLOSURE-v1.json",
+        "sha256": "4d2b1e1eaf2fb4315c49d54a1f4126802df0efa32dad5d6f26151fe5e30d50f9"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-RESOURCE-CORRESPONDENCE-v1.json",
+        "sha256": "d53944c9b00d662d17d6aade7528e2d082ba38d29c5fe93ebcd88112235f137d"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-PROOF-CORRESPONDENCE-v1.json",
+        "sha256": "f47925e43822396ea40466929825f9694279d3dd010f6535546b8457dc1da11f"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-QUEUED-USE-DISPOSITION-v1.json",
+        "sha256": "4a9bc427ea5be19890eb732e5d8720857bc59a54ec01feccd69db2eb589d0983"
+      }
+    ],
+    "notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v44.json",
+      "sha256": "3269c2eba8c14a60ef3f4f9d2e49c7dd5ee9803af9fde73c0e6f3ce8ff61fc30"
+    },
+    "proof": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/RESULT.json",
+      "sha256": "9ed499733b173b3c697ee197e73fc89b24550be1719f62e4f55751a2b343fcad"
+    },
+    "quota": {
+      "checked_at": "2026-10-13T12:07:39.354806+00:00",
+      "source": "Own session bounded 4MiB tail; rate_limits token_count only",
+      "weekly": {
+        "observed_at": "2026-10-13T12:07:13.208Z",
+        "window": "primary",
+        "used_percent": 13.0,
+        "window_minutes": 10080,
+        "resets_at": 1792472425
+      },
+      "remaining_percent": 87.0,
+      "next_check_not_before": "2026-10-13T13:07:39.354806+00:00",
+      "owner_stop": "around60% remaining at verified saved checkpoint; current W4 continues"
+    },
+    "next": "E fresh actual campaign and A–E119/R01–R12/W1–W3 union",
+    "docs_validation": {
+      "result": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/RESULT.json",
+        "sha256": "add94e8cb8068f41df7c220c15a91cac130e77f4a5b6a38b357a3b14e00f2259"
+      },
+      "inputs": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/INPUTS.json",
+        "sha256": "24c5894f00bbda4d98693ef2d98041be627a83d3ad7746d888cf3073f6f3cb89"
+      },
+      "log": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/RUN.log",
+        "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+      },
+      "scope": "Full make docs on exact frozen eleven-doc input; receipt-only final metadata checked separately"
+    },
+    "source_adopted": false,
+    "canon_changed": false,
+    "docs_prior": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v1/RESULT.json",
+      "sha256": "b63ba7963fa4e74ebc90399feacea04d69a361a3204df698964d98327fcca932",
+      "status": "pass263.572s; superseded for final wording by v2, not invalidated technical evidence"
+    }
   }
 }

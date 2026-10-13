@@ -60638,5 +60638,719 @@
     "status": "read-reviewed-verified",
     "role": "Full docs command/frozen inputs/exit and log inspected; final receipt-only metadata checked separately",
     "at": "2026-10-13T10:44:26.205458+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-FAILURE-INTEGRATION-v1.json",
+    "sha256": "e7f638dd5e45b9bc0be25d0e128af5156658b69c2fe6c7bd3f4b41ee9282907e",
+    "status": "read-reviewed-verified",
+    "role": "Exact new failure/source/observer results, failed predecessors and restoration reviewed",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-INTEGRATED-TECHNICAL-REVIEW-v1.json",
+    "sha256": "449c27208557d9a5f2aa281879a59fd729fb997af8bbc12cf408cff80a7b53d0",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main final D technical integration and explicit physical/non-adoption scope",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v44.json",
+    "sha256": "3269c2eba8c14a60ef3f4f9d2e49c7dd5ee9803af9fde73c0e6f3ce8ff61fc30",
+    "status": "read-reviewed-verified",
+    "role": "Verified candidate and direct E consumer",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/SOURCE_PINS.json",
+    "sha256": "ccf9088abb5b6694c028944b8ca8dfb10b8a4b81471c9583374a92c7707828d9",
+    "status": "read-reviewed-verified",
+    "role": "Exact39 candidate source hashes verified",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261013T120739Z.json",
+    "sha256": "94ba720785013c49a9d75859ccda306b914ad2796e351cb8661192a8fbf244c5",
+    "status": "read-reviewed-verified",
+    "role": "Own-session bounded rate-limit record, weekly87 remaining, checks>=1h",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-ENTRY-LOCATORS-v1.json",
+    "sha256": "1e4f7dcf7e500f9e1a45ff974930a2dfc959b0eff32a50ff2adf02043711c534",
+    "status": "read-reviewed-verified",
+    "role": "Machine-generated locator inventory only; does not establish reachability",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-ENTRY-CLOSURE-v1.json",
+    "sha256": "4d2b1e1eaf2fb4315c49d54a1f4126802df0efa32dad5d6f26151fe5e30d50f9",
+    "status": "read-reviewed-verified",
+    "role": "Final group-by-group entry/resource/general-proof/queue correspondence reviewed against pinned concrete source and actual evidence",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-RESOURCE-CORRESPONDENCE-v1.json",
+    "sha256": "d53944c9b00d662d17d6aade7528e2d082ba38d29c5fe93ebcd88112235f137d",
+    "status": "read-reviewed-verified",
+    "role": "Final group-by-group entry/resource/general-proof/queue correspondence reviewed against pinned concrete source and actual evidence",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-PROOF-CORRESPONDENCE-v1.json",
+    "sha256": "f47925e43822396ea40466929825f9694279d3dd010f6535546b8457dc1da11f",
+    "status": "read-reviewed-verified",
+    "role": "Final group-by-group entry/resource/general-proof/queue correspondence reviewed against pinned concrete source and actual evidence",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-CURRENT-QUEUED-USE-DISPOSITION-v1.json",
+    "sha256": "4a9bc427ea5be19890eb732e5d8720857bc59a54ec01feccd69db2eb589d0983",
+    "status": "read-reviewed-verified",
+    "role": "Final group-by-group entry/resource/general-proof/queue correspondence reviewed against pinned concrete source and actual evidence",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-FAILURE-BEFORE-USE-v1.json",
+    "sha256": "592bebb0c01952b2d6ed8b2a704ef88e7e94c136425b1f45b4203f2bd126b87e",
+    "status": "read-reviewed-verified",
+    "role": "Read complete before-use model/physical obligations, exact audit scope or queued-use distinction",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-FAILURE-PROOF-v1.json",
+    "sha256": "a9adf74f889d3f750ac8334dd680502fb409d6f9bc954c81598cb8c2dbcc8be2",
+    "status": "read-reviewed-verified",
+    "role": "Read complete before-use model/physical obligations, exact audit scope or queued-use distinction",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-OBSERVER-BEFORE-USE-v1.json",
+    "sha256": "80803da126825a7c2c67be64c6dfbd425e79ed632b06d5f6801ec7f5d17ad75d",
+    "status": "read-reviewed-verified",
+    "role": "Read complete before-use model/physical obligations, exact audit scope or queued-use distinction",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-DECLARED-OBSERVER-PROOF-v1.json",
+    "sha256": "2a61fe6b430b59eb0939d810fba1fd8b3666359a067a6aba941a62f9acbc12cc",
+    "status": "read-reviewed-verified",
+    "role": "Read complete before-use model/physical obligations, exact audit scope or queued-use distinction",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/D-QUEUED-USE-DISPOSITION-PRECHECK-v1.json",
+    "sha256": "1266d98dda679709bb3521a11a018121ede542e5b25a6a0b7eb37da455e7fc78",
+    "status": "read-reviewed-verified",
+    "role": "Read complete before-use model/physical obligations, exact audit scope or queued-use distinction",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v1/INPUTS.json",
+    "sha256": "b5e5919efb348c99e8a7efddcab6d5dcd8976fb7a664c049e8eeab9c14f710a9",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v1/RESULT.json",
+    "sha256": "d7763a6d2c4a4d9fa882d70b989488d88c9c5f58cd23ab7217e2c5de91c4f94f",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v1/RESTORED.json",
+    "sha256": "ffa11a4df4ffc3506cbebbecd2498f2ec1ef24e1930f70d1c820e8d2f2e11f12",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v1/RUN-00.log",
+    "sha256": "e6a83f54ae7098fdc82d8456512999ae774960f598dc84c7b754d7de34eca3e8",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v2/INPUTS.json",
+    "sha256": "8b769bd3dd886d54596b67989425b0e00378152c756fd47a05ce8da59f3d967c",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v2/RESULT.json",
+    "sha256": "3f1b1f3e5203d93fe63ebacbd576372dc4a89c6d798437c6daf3a0d2a6ec6821",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v2/RESTORED.json",
+    "sha256": "85429b6f244ca42f93bdd87cbb2d8c8211cd5da651a96fab3964913837685db3",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-expiry-red-run-v2/RUN-00.log",
+    "sha256": "fb908a84650041ebc559c7ba2193fff1718dcd54e79d812959388853c4a5c0af",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/INPUTS.json",
+    "sha256": "8400f297708c60c2ba6457821ccb4e704dceeb5830265d93a76fe999c32963db",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/RESULT.json",
+    "sha256": "20a93e466c1a4eb27fdae0eca35b8d72b23d2a4a118ddb45b88a925e6bb24ea8",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/RESTORED.json",
+    "sha256": "ab91bd6929a102f22b3b4ef56cedd1087115b56b9041fe206f9a2cf070d7d073",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/RUN-00.log",
+    "sha256": "3310e42a207274e0aecd885d5b452ca8987cd6fefccea495e7acb67ca1b7a769",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/RUN-01.log",
+    "sha256": "0ed6eb4930e8afc52094d3a5d5c97ca1afe4e31610ad44c0ce41eabd9a733dea",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v1/RUN-02.log",
+    "sha256": "2b29ce8ac097e4c00f910af8b64d10b7b1eee10658f6638d01c246261c8fd737",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v2/INPUTS.json",
+    "sha256": "49aa0bfc787b252df188b1a73eec091540cac60ebf2ed1dd6fc82f5750860acb",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v2/RESULT.json",
+    "sha256": "fa92e95be9ce11a85bca934d04490c9517f9fd015ebd6610b572df82fc08ab6d",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v2/RESTORED.json",
+    "sha256": "1ed9aaade5dd7ca2e58ffa3827e9fe2d87262de032b1ae4caca0096e893a2ab3",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-candidate-run-v2/RUN-00.log",
+    "sha256": "9ed8866d76b7a50e0fb131e90df5a30185cfacf3988f993ee9fd08929ef05811",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/INPUTS.json",
+    "sha256": "8c9d9387735a8de30409f75cf17ad6261e67aa4e06c106d02c342c4f2d6634f1",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RESULT.json",
+    "sha256": "8aa05a6ebf1ebacf7ad1af4d530d377e00694845eef5a7317dcd54dab6f236bd",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RESTORED.json",
+    "sha256": "569c83ef8a9be1be25d7797e74197c3447603a70dd99eba575ff9ebc45c13134",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RUN-00.log",
+    "sha256": "82312735ee0b6c7c7ee1f6afee90b6a364960afd87253a36695f3b21fc597cfd",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RUN-01.log",
+    "sha256": "12711f4cbe8edd68e6a5e5b3d5a842587e907fb220f87c16a2412b1edea5b70d",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RUN-02.log",
+    "sha256": "9e7ed34e14dcaaf2df9d3cd08aa734376ecf3cf87d509d2a4f836c1af3a5b711",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-failure-focused-regression-v1/RUN-03.log",
+    "sha256": "d61f003706fb4ddbf2e039c1cdabfb85fb878a05aff3f696b9dc838b58817d10",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-red-run-v1/INPUTS.json",
+    "sha256": "883bc6d46f990ed6c8c41b019c17ac19a1aee212867f2a4d7c38b53129b4f342",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-red-run-v1/RESULT.json",
+    "sha256": "d707765703e291dace71d53c664eadac4b036649f471e51d0a7c11dc2a171b7f",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-red-run-v1/RESTORED.json",
+    "sha256": "d41b34e25a48d21a06030274b61a75a38a38fb43cca1efe3b4f02de8a1a12630",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-red-run-v1/RUN-00.log",
+    "sha256": "c3fbc455dacd013a3a2a5ae787d2f28e9558228130bac572b570f7ee9202cc52",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/INPUTS.json",
+    "sha256": "70d855f1fb46fd3d46c922b734f87b06de6a534d5f3ca06daf6a90dd80e35b72",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/RESULT.json",
+    "sha256": "a3fc0d7a7958fd46f3b3e358e4513e73e61b43457ca03f19cdf6cd8718413471",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/RESTORED.json",
+    "sha256": "62a4dd4971486ec2dbc2ead480217a16dd69b99b5f3afdfa00b42e0e75ee8c10",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/RUN-00.log",
+    "sha256": "223289121aca3796fc8f0d9f4605f573c4806cd44851ccbd0e8cb1587a1afa48",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/RUN-01.log",
+    "sha256": "08a4d6ad111f79e40d1341a6e8fbe487d6a15ebb1696f00e176baece1ef0cf4d",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-candidate-run-v1/RUN-02.log",
+    "sha256": "8b6eeb46fd3fabbd3fe5a40b67bc1b0ca371a021c5da5c9a1d0237a883ec4180",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-controls-run-v1/INPUTS.json",
+    "sha256": "ff709a7d0956adeef9053927f4299f7632162d2d0c7c08989b7ddd141a836a5d",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-controls-run-v1/RESULT.json",
+    "sha256": "36f30612478a15c5da03913fe27973d7c31daa195bdd24774ab522efc1565ba6",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-controls-run-v1/RESTORED.json",
+    "sha256": "74d6d7e50ed4792d94c38b0295c38cfc1a144833f00059d7ed4922c5746f327f",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-observer-controls-run-v1/RUN-00.log",
+    "sha256": "1690cf47655bd4469566642e6c69c9f290b4d0094ce3de291e7d95deaa3f88bc",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-native-negative-run-v1/INPUTS.json",
+    "sha256": "4fabc7f472c0da17a71ce75d9e4d013b32a954076bb7a5a907a3aaeb66bee067",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-native-negative-run-v1/RESULT.json",
+    "sha256": "84b2ccaa00acaf535a86f66295f4ea71297cf7d9dd486b120b7a2b7dc6d255ce",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-native-negative-run-v1/RESTORED.json",
+    "sha256": "a310bb97479f00f5101b507b4babc7fc62295c22aa7367523b704b6d40f08816",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-native-negative-run-v1/RUN-00.log",
+    "sha256": "b6235f5f3757deba7c38292f604df0cbb9ef05d81cf77da0d7362eded39bd26c",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-native-negative-run-v1/RUN-01.log",
+    "sha256": "e4a0780080e6524f1eec7aef74d17993a6030bac38df4523b592828e80cae17d",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/INPUTS.json",
+    "sha256": "81509490c79a829e165c000836d21b06b061fc301ddab7e51a037e373e197a54",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RESULT.json",
+    "sha256": "74a6fe03ef7f7c4fee3b5c41021c9f6a34a985afbc2b3f10f4f529e7f757dc3a",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RESTORED.json",
+    "sha256": "db4e4047a8c103e4ef70fc3efdd3a51bfd2959c3f488a20cdb17d15a561265ca",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-00.log",
+    "sha256": "3c9441094dddfac5bff4ce968549aec6ec07fee77d103abc50f65e7b44c4b30a",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-01.log",
+    "sha256": "9b7bc72a3f0acf1da5cdde4f1597d4af44956e0b590c8a5abc5f9c4bef487969",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-02.log",
+    "sha256": "c485ebb96a29aee32dd9f8cb02d6fb2c150501cd5030267fec12824e0d8e4142",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-03.log",
+    "sha256": "c37407bfb781820c9d08c48e1efb7fb2c6f7693c6ae2ed3ffa86b7ddf25d3f63",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-04.log",
+    "sha256": "3b36865754ce552701508baa28a350bdf2c8fec489fd50304b40ea87cad54372",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-05.log",
+    "sha256": "d751487163dfbcb56134061f5354034daa3e0c7d9186874dce0a1084ee329bbf",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-final-regression-v1/RUN-06.log",
+    "sha256": "010a3e0cad6c5a86619b86fc2009b0154cc4a271b91aa927b103431bb0fd74ec",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/INPUTS.json",
+    "sha256": "d5b7a0cc3d3b05e91b587ee46714f52680cad27646d26c92f0b45fe4cf0d8839",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RESULT.json",
+    "sha256": "197b66bec6ab78abc590898be004fd2ea551ca14cf86d7a4b3e9cfa98d098563",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RESTORED.json",
+    "sha256": "e89ec05952a3e8f7450e24c65ed01793e5d81f6ef620881685861af9074e27c8",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-00.log",
+    "sha256": "04508592a34d0c868f1d76a7ed1a120caa892e4143d5afca4e54bca23caf7958",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-01.log",
+    "sha256": "c20a3ed7f7820a9012817d15b57e487a4230266d0955ec733aa6214b616ce472",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-02.log",
+    "sha256": "a9cbbc8292ffbd2401e5e255b0c20de34a03a9581bf8d4ab115a4313f3c5c66a",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-03.log",
+    "sha256": "dd545e3f1389fe8714734f512814620e322eb0bbd5b699b25be978f79853a2f2",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-04.log",
+    "sha256": "85fec13dc1b086d40a7771540cc809e9294e6d83ad953ac5a33ce9719b26f678",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-05.log",
+    "sha256": "ef1aa2c5e6e6c858154052bc66ffd29a49ecf28eddeed6805ceb4831ed3b99ae",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-i3-regression-v1/RUN-06.log",
+    "sha256": "0a91e8a33f242f0f03b07374a4ddf23f1125360388fc523b9d5b221b49ef37d8",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-entry-compile-control-run-v1/INPUTS.json",
+    "sha256": "d16106aa69401917f40cee6f0b983117e7894bd7f2c51c5a333b7b5b890ea86a",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-entry-compile-control-run-v1/RESULT.json",
+    "sha256": "db0d8be6705e27549200419cc90f2104741ddbdb4d990b48bdc8e997aaa9ab23",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-entry-compile-control-run-v1/RESTORED.json",
+    "sha256": "ed32c74f5bbbf7d018c1d3f8c1c03c5933203c4a692ba1fa6f3d096c03cb814c",
+    "status": "read-reviewed-verified",
+    "role": "Exact candidate commands/result/restoration checked; scope distinguishes semantic RED, compile refusal and passing tests",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-entry-compile-control-run-v1/RUN-00.log",
+    "sha256": "1b55b45bcef0160c3d5e823f70eed46ddc41d7072e02f956fe53099017f8bda2",
+    "status": "read-reviewed-verified",
+    "role": "Read result summaries/diagnostics and checked hash; not a claim to have read every warning line",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/INPUTS.json",
+    "sha256": "c8ce0339de94570206ec11c17fcfdc67035d97f7b62e8fec9a55694af745bd39",
+    "status": "read-reviewed-verified",
+    "role": "Fresh205/owned20989/211-qualified-false/417 commands, exact owned axiom policy and pinned source/log/object integrity checked",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/RESULT.json",
+    "sha256": "9ed499733b173b3c697ee197e73fc89b24550be1719f62e4f55751a2b343fcad",
+    "status": "read-reviewed-verified",
+    "role": "Fresh205/owned20989/211-qualified-false/417 commands, exact owned axiom policy and pinned source/log/object integrity checked",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/DeclaredFailureIntegratedAudit.lean",
+    "sha256": "7b79eb05ce2cb806a6117d0d6edd26961524cc3a263459e48fe449598431f055",
+    "status": "read-reviewed-verified",
+    "role": "Fresh205/owned20989/211-qualified-false/417 commands, exact owned axiom policy and pinned source/log/object integrity checked",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/DeclaredFailureIntegratedAudit.log",
+    "sha256": "3ac251f9c78bec05fbc525d5fb9de8806216cf21f259e0a5f502afafba8c0952",
+    "status": "read-reviewed-verified",
+    "role": "Fresh205/owned20989/211-qualified-false/417 commands, exact owned axiom policy and pinned source/log/object integrity checked",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/MirroreaProofFirstDeclaredExpiryGate.lean",
+    "sha256": "90ec850602ecd5e1fc8ae9b2c414c9d87969d2706deaedab4898d899cfa9d58e",
+    "status": "read-reviewed-verified",
+    "role": "Changed gate/source/projection definitions, proof/positive/false controls read and integrated; physical premises remain explicit",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/MirroreaProofFirstSourceDeclaredFailureUse.lean",
+    "sha256": "5b3032147ac683df3b05116a09d8aefd753bb5efc278bdabe8ad5f54ab3bc66d",
+    "status": "read-reviewed-verified",
+    "role": "Changed gate/source/projection definitions, proof/positive/false controls read and integrated; physical premises remain explicit",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/MirroreaProofFirstSourceDeclaredFailureUseControls.lean",
+    "sha256": "682c548462bb3eea88ec5aee80bec9ff53a148e3cb136ff47f7876475ab7f4fc",
+    "status": "read-reviewed-verified",
+    "role": "Changed gate/source/projection definitions, proof/positive/false controls read and integrated; physical premises remain explicit",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/declared-observer-fresh205-v1/MirroreaProofFirstDeclaredFailureObservation.lean",
+    "sha256": "ef012e888dd14c5b0a5e957ef6c9689a2e21266cdabed885ac6d121edf85a116",
+    "status": "read-reviewed-verified",
+    "role": "Changed gate/source/projection definitions, proof/positive/false controls read and integrated; physical premises remain explicit",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys4_dispatch.rs",
+    "sha256": "3bfb540cd8f5230f7a6b2ede7c5c75a163ec3b9ac0d5e0179c0ca67df97391f0",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys4_i3_original_source.rs",
+    "sha256": "eb3bf2061e4978cb3b775690621faf267c6f6a53114bf6038da3aba3791c46ee",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys5_i3_original_source_process.rs",
+    "sha256": "4fd3b5c6a5dd6b6d4fb52775484524a397cf45885203eae8542de625e7a2de86",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys5_i3_original_source_process_tests.rs",
+    "sha256": "22933e7b3bfb3cd435a07eb396179484c00ccdea26c1ad9ca6fdb5868c520ab5",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys5_i3_process_runtime.rs",
+    "sha256": "6b4ccf9936b3e7f2fe3708133c570a9ea8228f0c78fcc5100f5239a0ed62aecb",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys5_i3_source_control.rs",
+    "sha256": "5142a3ee2ca456746f9b79cfa0029acdda1ada603341451f0c1d461abc98bea2",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-declared-observer-controls-v2/sys5_i3_original_source_observation.rs",
+    "sha256": "7830fb9c00661d17499cbd3c1cfdc4f35330fe91d80919a21df350d73280b53b",
+    "status": "read-reviewed-verified",
+    "role": "Changed native failure/source/archive/observer/control/tests and relevant existing entry/retention portions reviewed; not a whole-file read claim",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/mirrorea_canon/spec/16-i3-owner-admission-budget.md",
+    "sha256": "0edd249af3c2a48df3fbb00c4f968149748b3f87ba86781892874827a84eda13",
+    "status": "read-reviewed-verified",
+    "role": "Full source previously read; clock/order/terminal-before-pending boundary rechecked for final D integration",
+    "at": "2026-10-13T12:22:45.221733+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/INPUTS.json",
+    "sha256": "24c5894f00bbda4d98693ef2d98041be627a83d3ad7746d888cf3073f6f3cb89",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt-only metadata checked separately",
+    "at": "2026-10-13T12:32:55.422196+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/RESULT.json",
+    "sha256": "add94e8cb8068f41df7c220c15a91cac130e77f4a5b6a38b357a3b14e00f2259",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt-only metadata checked separately",
+    "at": "2026-10-13T12:32:55.422196+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-declared-docs-v2/RUN.log",
+    "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt-only metadata checked separately",
+    "at": "2026-10-13T12:32:55.422196+00:00"
   }
 ]

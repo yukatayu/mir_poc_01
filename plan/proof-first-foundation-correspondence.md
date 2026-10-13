@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 19:31 JST): W4-A/B/C bounded closes; same W4-D active. Two original invocations in same3 processes/Runtime/Flow and later all3 refreeze verified. D declared-failure connection and integrated acceptance then authorized E remain. Stop after E or saved checkpoint around60% weekly. Plan250/I3-4 separately paused; earlier entries are history.
+Current package map (2026-10-13 21:22 JST): W4-A/B/C bounded closes; D technical integration verified at declared-observer-controls-v2 with fresh205 and explicit entry/resource/queue/proof correspondence. Authorized E fresh campaign/A–E119 union is next after D documentation/Git save. Stop after E or saved checkpoint around60% weekly. Plan250/I3-4 separately paused; older dated entries are history.
 
 ## Authority and retained history
 
@@ -3287,3 +3287,21 @@ Exact external continuation harness green v1: normal default/private-QUIC builds
 No D/E acceptance. D original-source typed terminal-failure connection, integrated proof/resource/all-entry correspondence and exact queued-use disposition remain before E. D keeps actual M8 enqueue/serve inside one Body interval; I3 Awaiting/ServeReserved is not an M8 queued use. Source continuation is a distinct intentional input, separate from M9 preparation. The model does not prove FD/OS/allocator/physical all3 execution. No adopted Rust/Lean, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim.
 
 証跡: ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json、REVIEW-v1.json、PROOF-v1.json、SOURCE-OWNER-LOWER-NOTES-v43.json、Report2614。
+
+## 2026-10-13 21:22 JST — 実期限切れのsource確認・観測とD技術統合
+
+W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
+
+既存spec16の期限切れ判定をそのまま使います。ownerの実クロック入力からnative gateが宣言済み失敗を導き、実QUIC返信を受けたrequesterが元request／全引数／現在権限を確認して、pendingを除く前に終端結果を保持します。失敗を成功Bodyの代わりに置く案は棄却しました。親は実Resolve又は実Bodyの完了から返信の出所を一意に導き、通常driverはTerminalFailureを別の結果として返します。source cursorは0、owner Body・serve・writeと成功receiptは0、終端記録は1です。
+
+実REDは、正しいnative失敗を受信した後のSourceReady／親出所joinが成功専用で拒否すること、その修正後も旧Reportが成功専用で拒否することを示しました。使用前に期限gate・source終端・観測の一般モデルを追加し、それぞれの物理対応を実装しました。ownerとrequesterの実Reportが揃った時だけ型付き失敗観測を組み立て、片側欠落や完了欠落は未確認のままにします。未使用の第3endpointの件数を推測しません。
+
+使用前の9拒否条件と、native終端後のcapture／Finish送信失敗2条件を実通信で検査しました。後者でも終端・実返り値・cursorは保持され、親はactive／unavailableのままです。full-ledger反例は64件の不活性DATA行を使う容量試験であり、64回の分散失敗実行とは数えません。観測の実確保済み領域、追加field、旧Ready／完了履歴、親joinの68DATA改変・記録欠落・byte改変も検査しました。
+
+Dの最終対応表は、元source所有、登録control、旧Runtime／cut／lifecycle／ingress経路、native I3、Body、Ack、観測、実Flow、M9全3者更新、次activationを分けています。D内部のM8 enqueue／serveは同じBody intervalに閉じ、途中でM9更新しません。CのST／OW1 queued-use更新8ケースは別の下位profileとして保持します。ここを実分散のqueue復旧へ読み替えません。
+
+Exact external source-declared-observer-controls-v2: normal default/private-QUIC builds pass; no-seams whole source-process217/control59/lower held-M9 8 pass; combined-feature continuation8 and declared-expiry4 pass. Required I3 native admission/clock, ledger, retry, image-origin, lower original entry/lifecycle and local-cut regressions pass with nonzero selections. Normal compiler controls reject four private custody fields (E0616) and owning Mode Clone (E0277). Fresh205 modules/20989 owned constants/211 qualified false controls pass in417 serial Lean4.29.1 --trust=0 commands from an empty local object cache. This is not a whole-library Rust campaign; E runs the fresh union.
+
+D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
+
+独立reviewはownerの禁止条件により実施していません。主担当が使用前モデル・反例・実返り値・所有境界・全入口と資源対応を照合しました。Eは同じ候補を新規試験し、119要件とR01–R12、W1–W3の持越し義務を統合します。証跡はSOURCE-DECLARED-FAILURE-INTEGRATION-v1.json、D-INTEGRATED-TECHNICAL-REVIEW-v1.json、D-CURRENT-*、notes44、Report2614です。

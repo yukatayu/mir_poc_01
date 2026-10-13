@@ -1,65 +1,63 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-10-13 19:31 JST
+最終更新: 2026-10-13 21:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source. Everything outside is LAB; if LAB conflicts with canon, canon wins. This snapshot creates no Canon/THM/OBL/SCN/Gate/Phase decision or new roadmap.
 
 ## document role
 
-Plan250 remains the sole Canon-authorized roadmap, separately owner-paused after accepted I3-3 under ADR-0043. I3-4 requires explicit owner resume; Plans247/249 are closed baselines. This task-local W4 research is independently authorized.
+Plan250 remains the sole Canon-authorized roadmap, separately owner-paused after accepted I3-3 under ADR-0043. I3-4 requires explicit owner resume; Plans247/249 are closed baselines. This W4 research is independently authorized.
 
 ## current promoted package
 
 Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
-LAB dependency/current-task memory: `plan/proof-first-foundation-correspondence.md`.
+LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
 
-W4-Dは、同じ3プロセス・Runtime・実Flowで元のS→T→S sourceを2回実行し、旧activationの結果・native・制御履歴を保持した全3者の再prepare／publish／activateを検証済みです。6個の実request ID、source6・ownerS4/T2、有限枠の消費、途中失敗・古い制御frame・未完了時の発行拒否を確認しました。外部未採用39pathのcontinuation harness green v1は通常2build、seamsなし8件とsource-process全213件、control59件、lower held-M9 8件、seamsあり8件を通過。D統合受理とEは残っています。
+W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
 
 現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
 
-W4-A/B/C remain bounded LAB closes. Current component: ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json / notes43. Fixed D contract: docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md; earlier model/stop/50% preamble is historical. Exact evidence: RESUME.md, W4_CHECK.json and one Report2614. Adopted Rust/Lean is unchanged.
+W4-A/B/C remain bounded LAB closes. D technical review: D-INTEGRATED-TECHNICAL-REVIEW-v1.json / notes44. Required documentation/Git close precedes E. The former D-stop/model/50% preamble of W4_D_IMPLEMENTATION_HANDOFF.md is historical; owner continuation receipts in RESUME.md override it. Adopted Rust/Lean is unchanged.
 
 ## ordered self-driven packages
 
 次に自走で進める順番とrough estimate。
 
-残りの実作業時間の粗い目安はDの確定失敗接続・統合7–16h、E16–40h、W4計23–56hです。元sourceの次activation／all3 refreezeは今回の有限範囲で通過しました。統合時の反例や形式対応の不足があれば延伸します。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは今回の対象外の暫定値で、期限や上限ではありません。
+Dの技術統合後は、Eの実試験・反例・全要件照合に16–40h程度を見込みます。新しい反例や対応不足が見つかれば延伸します。今回の作業はE完了又は週間残量60%程度の検証済み保存地点までです。W5以降の保存・復旧、秘密を守る観測、公開α統合は開始しません。
 
 | Package / macro position | Direct consumer and required evidence | Readiness / hours |
 |---|---|---|
-| D declared failure and integrated acceptance / Macro3/6 close | Connect the existing genuine typed expiry to normal source confirmation, then exact source/proof/entry/resource audit and queued-use disposition. | 着手可能; Astra xhigh;7–16h |
-| E fresh campaign and A–E/119 union / Macro3/6 close | Fresh network/fault/observer/bypass/I3 campaign and retained unresolved obligations. | 承認済み・D受理に依存;16–40h |
-| W5/W6/W7 | Save/recovery, secret observation/debug and finite verified-alpha integration. | 今回は対象外; future profile-dependent40–100/40–100/24–60h |
+| E fresh campaign and A–E/119 union / Macro3/6 close | Fresh actual network/fault/observer/bypass and I3 regressions; R01–R12 and W1–W3 retained obligations; final119 disposition. | 承認済み; continue after D save;16–40h |
+| W5/W6/W7 | Save/recovery, secret observation/debug and finite verified-alpha integration. | 今回は対象外; no automatic resume |
 
 ## self-driven macro phase reading
 
-Macro0 preserves reproducible evidence; Macro1/5 establish semantics/proofs; Macro2/3 implement references; Macro6 connects actual processes/transport. No whole-project phase recut. Original source continuation and later all3 authority preparation are distinct verified finite transitions. D declared-failure connection and integration remain; general models, Rust controls and physical execution retain their separate scopes.
+Macro0 preserves reproducible evidence; Macro1/5 establish semantics/proofs; Macro2/3 implement references; Macro6 connects actual processes/transport. No whole-project recut. D now has the required finite source/native/physical correspondence; E must challenge the combined candidate and reconcile the union. Model proof, concrete controls and product acceptance remain separate.
 
 ## user decision gates
 
-No further input is needed for bounded D/E under the2026-10-13 resume. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, public/paid operations, Q18/H/H2/C/C2 adoption and Canon/Plan250 resume remain owner-reserved. No new goal or W5+ resume.
+No further input is needed for bounded D/E. L0/L1, authority/privacy weakening, public API/ABI/wire, production adoption, Q18/H/H2/C/C2 adoption, public operations and Canon/Plan250 resume remain owner-reserved. Stop at E completion or a verified saved checkpoint around60% weekly remaining.
 
 ## research discovery items
 
-| Item | Impact / alternatives / position / falsifier |
+| Item | Impact / alternatives / current position and falsifier |
 |---|---|
-| Source custody/native I3 | Original cursor/Core/arguments and native one-use admission remain distinct; matching peer/free IDs do not grant custody. Exact private continuation uses a dedicated authentic grant. |
-| Source history/funding | Whole old records move to funded history; current slots and cumulative Flow capacity are preallocated. All3 actual Finishes gate new Issue. Clearing old data/resetting spent transport or recreating Runtime fails same-world correspondence. |
-| Authority and DATA | Completed history remains DATA; native Ack requires current lineage/floor. Actual M9 preparation must preserve the aggregate source/native/control/Flow frame across both invocations. |
-| Declared failure consumer | Existing native owner expiry can produce a real typed reply, while the original-source Ready/Ack and parent origin join are success-only. Verify actual delivery/terminal confirmation before D acceptance; never relabel failure as success or unconfirmed owner decision as caller-known. |
-| Queued-use scope | D enqueue/serve/retained result stays inside one Body interval with no intervening M9 update. Existing lower C queued refresh controls are separate; integrated disposition must justify the exact consumer boundary. |
-| Formal/physical relation | Seventh-kind invokeAgain lemmas preserve abstract state/history; registered FD, all3 physical sequence, finite backing, ST runtime and environment assumptions remain explicit. |
+| Combined candidate | E must exercise the same39-path source cut; a new counterexample reopens the smallest implicated D premise before dependent use. Do not infer whole-library/fresh campaign success from D module suites. |
+| Known failure versus unknown | Real Resolve expiry plus actual requester terminal and both current Reports yield the typed failure view. Missing completion or Report stays unknown; no Body-success substitute. |
+| Ownership and resources | Same Runtime/Flow/cursor stay owned; funded capacity and actual retained returns support the concrete consumer. Hash/data equality or numeric bounds alone do not establish custody/physical allocation. |
+| Queue and authority | D internal M8 enqueue/serve uses one Body interval; lower ST/OW1 queued-M9 evidence is a separate profile. Wider queued recovery cannot inherit D acceptance. |
+| Formal and physical limits | Fresh205 audits the general proof cone under explicit initial/authentic/physical premises. E119 must retain unresolved Rust/OS/recovery/secrecy/public-adoption obligations. |
 
 ## maintenance tasks
 
-One Report2614, existing plan, CURRENT_GOAL/RESUME, W4_CHECK and append-only READ_LEDGER. Preserve failures/pins/logs/restoration. Heavy runs serial with resource audit,8GiB/-j1/testthreads1. No cleanup, notifications, subagents, Oracle or hostshare.
+One Report2614, existing plan, CURRENT_GOAL/RESUME, append-only READ_LEDGER and preserved W4_CHECK keys. Heavy commands serial with resource audit, Rust8GiB/-j1/testthreads1 and explicit no incremental/debug; Lean6GiB/--trust=0. No cleanup, notifications, subagents, Oracle or hostshare.
 
-週間残量は2026-10-13T10:02:27.141Zの自分の実セッション記録で92%（使用8%、10080分window）でした。確認は2026-10-13T10:03:05.444119+00:00、次は2026-10-13T11:03:05.444119+00:00以降です。ownerのreset時刻変更の報告後に取得した残量です。停止目安は現行指示の60%程度です。
+週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
 
 ## non-promoted references
 
-Exact external continuation harness green v1: normal default/private-QUIC builds pass; continuation8 pass without and with i3-process-test-seams. No-seams entire original-source-process module213, control59 and lower held-M9 8 pass serially. These are module/filtered suites, not a whole-library run. External proof-v5 audits201 modules/20511 owned declarations and187 qualified false controls in194 commands over195 SHA-verified inherited objects plus6 rebuilt/new modules; not a fresh201 rebuild.
+Exact external source-declared-observer-controls-v2: normal default/private-QUIC builds pass; no-seams whole source-process217/control59/lower held-M9 8 pass; combined-feature continuation8 and declared-expiry4 pass. Required I3 native admission/clock, ledger, retry, image-origin, lower original entry/lifecycle and local-cut regressions pass with nonzero selections. Normal compiler controls reject four private custody fields (E0616) and owning Mode Clone (E0277). Fresh205 modules/20989 owned constants/211 qualified false controls pass in417 serial Lean4.29.1 --trust=0 commands from an empty local object cache. This is not a whole-library Rust campaign; E runs the fresh union.
 
-No D/E acceptance. D original-source typed terminal-failure connection, integrated proof/resource/all-entry correspondence and exact queued-use disposition remain before E. D keeps actual M8 enqueue/serve inside one Body interval; I3 Awaiting/ServeReserved is not an M8 queued use. Source continuation is a distinct intentional input, separate from M9 preparation. The model does not prove FD/OS/allocator/physical all3 execution. No adopted Rust/Lean, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim.
+D is a bounded unadopted LAB candidate: Linux fixed3 cohort, native ST, existing Surface v0 original assignments, explicitly funded1/2 activations; declared-failure observation is the existing budgeted singleton at activation0. Genuine native tick input is supplied by the test host, not a fabricated timeout or installed physical clock provider. No mechanized Rust/OS correctness, general allocation/OOM/crash recovery, OW1 distributed continuation, broad confidentiality/noninterference, public API/wire/grammar, adopted Rust/Lean/Canon or Plan250/I3-4 change. E fresh campaign and119 dispositions remain before W4 completion.
 
-Prior authority v8/graph v6/full1400 receipts retain their historical cuts. R01–R12 and119 requirements retain original U/D/adoption status. Existing sample roots/workflow classifications remain unchanged.
+Historical cuts/runs retain their original scope. R01–R12 and119 U/D/adoption state is not silently promoted; E owns that explicit reconciliation. Active sample roots and workflow classification remain unchanged.

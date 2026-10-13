@@ -33,13 +33,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network全体の統合受理は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。その後、Dの実process/network統合候補の技術確認を完了しました。現在は記録とGitの保存を終えて、承認済みEへ進む段階です。
 
-W4-Dは、同じ3プロセス・Runtime・実Flowで元のS→T→S sourceを2回実行し、旧activationの結果・native・制御履歴を保持した全3者の再prepare／publish／activateを検証済みです。6個の実request ID、source6・ownerS4/T2、有限枠の消費、途中失敗・古い制御frame・未完了時の発行拒否を確認しました。外部未採用39pathのcontinuation harness green v1は通常2build、seamsなし8件とsource-process全213件、control59件、lower held-M9 8件、seamsあり8件を通過。D統合受理とEは残っています。
+W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
 
 現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
 
-週間残量は2026-10-13T10:02:27.141Zの自分の実セッション記録で92%（使用8%、10080分window）でした。確認は2026-10-13T10:03:05.444119+00:00、次は2026-10-13T11:03:05.444119+00:00以降です。ownerのreset時刻変更の報告後に取得した残量です。停止目安は現行指示の60%程度です。
+週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-13 19:31 JST
+最終更新: 2026-10-13 21:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,11 +59,11 @@ The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, resumed on2026-09-26 and again on2026-09-30 after the owner switched to GPT-6.1-sol xhigh,
 owner resumed2026-10-13 with gpt-6-astra/xhigh after the flow/history checkpoint and earlier safe cleanup.
 PL1/PL2/PL0 S4/S6, with one main and no subagents. The same goal is active within
-W4-D then authorized E; stop after E. W5+/alpha are not active. Plan250 remains separately paused after I3-3.
+W4-D then authorized E; stop at E completion or a verified checkpoint around 60% weekly remaining. W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
 現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
 
-週間残量は2026-10-13T10:02:27.141Zの自分の実セッション記録で92%（使用8%、10080分window）でした。確認は2026-10-13T10:03:05.444119+00:00、次は2026-10-13T11:03:05.444119+00:00以降です。ownerのreset時刻変更の報告後に取得した残量です。停止目安は現行指示の60%程度です。
+週間残量は2026-10-13T12:07:13.208Zの自分の実セッション記録で87%（使用13%、10080分window）でした。確認は2026-10-13T12:07:39.354806+00:00、次は2026-10-13T13:07:39.354806+00:00以降です。停止目安は現行指示の60%程度です。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -73,15 +73,15 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network全体の統合受理は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。その後、Dの実process/network統合候補の技術確認を完了しました。現在は記録とGitの保存を終えて、承認済みEへ進む段階です。
 
-W4-Dは、同じ3プロセス・Runtime・実Flowで元のS→T→S sourceを2回実行し、旧activationの結果・native・制御履歴を保持した全3者の再prepare／publish／activateを検証済みです。6個の実request ID、source6・ownerS4/T2、有限枠の消費、途中失敗・古い制御frame・未完了時の発行拒否を確認しました。外部未採用39pathのcontinuation harness green v1は通常2build、seamsなし8件とsource-process全213件、control59件、lower held-M9 8件、seamsあり8件を通過。D統合受理とEは残っています。
+W4-Dの実装・証明・試験の統合確認が済みました。同じ3プロセス・Runtime・実Flowで元S→T→Sを2回実行する経路に加え、既存のowner期限切れを実QUICで返し、sourceが成功と区別して終端保持・型付き観測する経路を検証しました。外部未採用39pathの通常2build、source-process217件、control59件、lower held-M9 8件、seamsあり継続8件・期限切れ4件、必要I3回帰と所有境界のコンパイル拒否を確認。Leanは空の状態から205module・20989定数・211偽命題、計417commandを通過しました。次は承認済みEの新規検証とA–E／119要件の統合です。W4全体は未完了です。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | C selected-profile conditions plus D coordinator/held-authority/frame and explicit seventh-kind continuation:201 modules/20511 owned/187 false, delta+owned audit | 着手可能: exact final D physical-premise/all-entry correspondence |
-| User-facing specification | Existing checked Surface v0 ordered assignments/full arguments, actual source-to-private-request and same-event redacted observation; no new grammar | 着手可能: D/E evidence reconciliation; public alpha/profile remains owner-reserved |
-| Implementation / operation | Same actual world: two complete original invocations,6 unique native requests, owned finite Flow, retained old source/native/control history and subsequent all3 G2. Exact source-process213/control59/lower8 plus continuation8 both feature profiles. | 着手可能: D declared-failure connection/integrated acceptance; E depends on D |
+| Logical specification | D gate/source/observation/continuation and existing foundations: fresh205 modules/20989 owned/211 false controls; explicit physical premises | 着手可能: E fresh A–E union and119 disposition |
+| User-facing specification | Existing original source and separate successful/terminal-failure typed observations; no new grammar or public observer API | 着手可能: E evidence reconciliation; public alpha remains owner-reserved |
+| Implementation / operation | Same-world two invocations/all3 refreeze plus genuine terminal expiry confirmation; normal2, source217/control59/lower8, required I3 and ownership compiler controls | 着手可能: E fresh campaign; D technical integration checked |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -743,3 +743,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-13 16:34 JST: W4-D実Flow所有と同じ3者の2回目権限更新を検証。通常2構成、新規13件両feature、Ack／owner／graph／lower保持／prepare／control回帰が通過。次source activationへ続行。Report2614。
 
 - 2026-10-13 19:31 JST — 同じ3プロセス・Runtime・Flowで元S→T→Sを2回実行、旧履歴保持と全3者再prepareを確認。通常2build・継続8両feature・source-process213/control59/lower8通過、201module/20511owned/187false監査。D統合/Eへ継続、Report2614。
+
+- 2026-10-13 21:22 JST — 既存期限切れの実返信・source終端保持・型付き観測と9拒否／2保持境界を確認。通常2build、source217/control59/lower8、必要I3、所有境界拒否、fresh205/20989/211を通過。D技術統合を保存しEへ、Report2614。
