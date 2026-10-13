@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-07 18:43 JST): W4-A/B/C bounded closes; W4-D owner-paused after verified flow DATA/current Ack checkpoint and safe cleanup. Same goal retained; E already authorized after D acceptance, but do not resume any research/build until owner resumes. Stop after E or a saved checkpoint below50% weekly. Plan250/I3-4 remain separately paused. Older dated entries retain their historical status.
+Current package map (2026-10-13 12:50 JST): W4-A/B/C bounded closes; same W4-D owner-resumed2026-10-13. Original three-process S→T→S/history component verified; distributed observation, network-held authority update, next activation/all3 refreeze and D integration remain. Continue authorized E after D acceptance; stop after E or saved checkpoint below30% weekly. Plan250/I3-4 stay independently paused. Earlier dated entries remain history.
 
 ## Authority and retained history
 
@@ -3195,3 +3195,19 @@ W4-Dは、ownerの一時停止・安全なディスク整理の依頼により�
 2026-10-07 18:43 JSTの安全整理では、このrepoの再生成可能なCargo targetだけを削除しました。cargo cleanの結果と研究・repoソースの全hash保持はstorage-owner-pause-20261007-v2/RESULT.jsonに記録。削除前target約568MiB、整理直後の空き14.21GiB。研究データ、証明、ログ、未検証の途中案、他projectとbrowser状態を保持し、再開待ちです。
 
 Actual component evidence: ORIGINAL-FLOW-ACK-CHECKPOINT-v1.json. Separate new normal DATA receiver owns finite actual read slots across await; generic initial reconnect permit remains unacquired, no reset/semantic authority. Whole original source supplies per-peer receive budget. A consuming union holds genuine old/new received capsules in actual owner/requester state, with exhaustive full bindings. Real component DATA3 and first ordinary/budgeted Ack2, prior Ack15/result-origin2/reply10 and normal privateQUIC pass. A test-only type helper compile failure is retained; successor fixes only its type/evidence access. Full regression/Lean not rerun for this bounded cut. Prior notes38 owns full1386 evidence. Multiple peer configuration draft is pinned/uncompiled; next true sequence consumer still needs exact peer selection, completed per-ordinal native/control history, real graph, held-data authority update and next activation. Current draft/design must not replace accepted evidence or create a source/Canon/public contract.
+
+## 2026-10-13 12:50 JST — 実3プロセスの元source全列と履歴保持
+
+W4-Dを2026-10-13のowner指示で再開し、実3プロセスとprivate QUICによる元sourceのS→T→Sを検証しました。source cursor・native受理・parent ordinalは各3、Sの実Bodyは2回、Tは1回です。完了済みの受信データ・受付／解決・Ready／Finishを事前確保した履歴へ移し、次の処理でも保持します。実データ2件を用いたBusy拒否でも、呼び出し元と現在の状態を保持しました。外部未採用38pathの履歴v4で全1400件が通過し、専用feature条件3か所とテスト2件を補ったv6は予算付き2件、test-seamsなしの履歴8件／全列・peer設定2件、通常default／private QUIC buildを確認済みです。実分散graph、network DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
+
+現行owner指示（2026-10-13・再開）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量30%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。2026-10-07の作業停止と50%閾値は、この指示で更新されました。
+
+決定済みの境界は元source/custody・現在のM9・native一回限りの入口です。今回のLAB候補では、既存の事前確保済みBody/Ack領域へ実完了記録を移す方法を選び、別の可変長履歴poolは増やしていません。Readyを消すだけの方法は、実受信データと完了の対応を失うため採りません。実全列REDはordinal1で前のSourceReadyが残って次を拒否し、真正な完了に限って履歴へ移すことで通過しました。未完了・grant不一致は移動前に拒否し、実結果と受信データを保持します。
+
+History v4: focused history6, actual sequence/profile2, prior Issue11 and full1400 pass; subsequent normal default check fails3 E0433 for unguarded QUIC visitors. Final v6 adds three matching feature guards and two budgeted tests: normal default/privateQUIC checks2, budgeted archival/refusal2, no-test-seams history8 and sequence2 pass. v3 history5/6 passed with owner field-mutation work delaying DATA until the unchanged control deadline; v4 moves only those assertions after real transport. No full1402 run is claimed: enabled privateQUIC logic is unchanged from v4 after removing the three cfg lines, and all other production bytes are identical.
+
+今後の仮説と検証点: 実transport送受信とnative occurrenceを同じ実行から集めた分散graphが直接consumerです。現状の全列テストは実send evidenceを保存せず、Cの局所graphも代替になりません。送信取消・未確定結果・有限保持枠、登録済みchildからの出所を使用前に詰めます。次の権限更新には、初回のprepared/publication/activated記録を保存したまま後続へ進む処理も必要です。source activationと権限revisionは別です。既存通常sourceや権限をDATA比較で作り直さず、実記録欠損・別peer・旧floor・不完全all3の反例で確認します。
+
+残りの実作業時間の粗い目安は、Dの分散観測／受信中の権限境界4–8h、次activation／all3 re-freeze2–4h、D統合2–4h、計8–16hです。S→T→Sは通過しましたが、未解決境界の検証が残るため従来の幅を維持します。E16–40hを含むW4残りは24–56h程度。W5保存・復旧40–100h、W6秘密を守る観測40–100h、W7限定検証済みα統合24–60hは今回の自走対象外の暫定値です。調査と反例で延伸し得る実作業時間であり、期限や上限ではありません。
+
+証跡: ORIGINAL-SEQUENCE-INTEGRATION-v1.json、SOURCE-OWNER-LOWER-NOTES-v39.json、ORIGINAL-SEQUENCE-HISTORY-REVIEW-v1.json、ORIGINAL-DISTRIBUTED-NEXT-CONSUMER-MAP-v1.json。Report2614一件に追記し、索引の古いE再開待ちも訂正しました。Canonと採用Rustは変更していません。

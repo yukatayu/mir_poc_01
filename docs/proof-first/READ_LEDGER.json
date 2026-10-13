@@ -57761,5 +57761,530 @@
     "status": "read-reviewed-verified",
     "role": "Actual full make docs exit0 after verified flow checkpoint/owner pause/safe cleanup",
     "at": "2026-10-07T09:52:07.568163+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-W4-RESUME-20261013-v1.json",
+    "sha256": "6766c3ada895878f9d4fe7a4d3d1b46e85513454c193f72f4927eae921fae703",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261013T025437Z.json",
+    "sha256": "cc605eda3152e63e69639b5042a0c97df017b1e4842311be7819f5c46b48048f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-PEER-HISTORY-DESIGN-v1.json",
+    "sha256": "4c81c74c350693b93deeb63ce7d5ed81fb03f7f6e23767a3aeaffe1deda4bbf8",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-HISTORY-REVIEW-v1.json",
+    "sha256": "32657c358752c1350920f9dbbe85596b75b74787f9c7d50d8d71d1f6e0fd9b27",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-NEXT-CONSUMER-MAP-v1.json",
+    "sha256": "d34c17f450e710c69233a2f9992a6ac2fc36eee2d995ef61dfcffee1de0ba59c",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-INTEGRATION-v1.json",
+    "sha256": "bdc1d54430135c33615a6dd8895bed9994963ae6b2983eb7f5b3d677e5044402",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v39.json",
+    "sha256": "4a21bdf84c6f2e803eaac39fcbadb1a1b64b562122e36639dafb2adfb95f3d13",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-FINAL-VALIDATION-SCOPE-v1.json",
+    "sha256": "8a53ad18dd3e170695d1c2b456e538341e5cbe247b438f099cc40cea9f1a40d2",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/PATHS.json",
+    "sha256": "a721ec99cf9d1ec464a9b433978eef133fd1844da502d36a7d3d3cb199988651",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/SOURCE_PINS.json",
+    "sha256": "78d6df69478b3b988a44edc88ddb94d093664b3c23235ac70a540eefbc7e95ab",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/INPUTS.json",
+    "sha256": "b7210d11c760718afec489cfbe397549eadadd8463610ba34624e28ead6cd418",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RESULT.json",
+    "sha256": "b35a89703943666d8a11f45de87de74e2bbea48630218e84f2d478757e91761d",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RESTORED.json",
+    "sha256": "386fb9230e71236fa7fda9c8bf6dc4792f227e1516dfba7d186d1b2a734f5240",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RESOURCES.json",
+    "sha256": "2ae18162d9179a8c1032d5be223c9b1cf2263045a8a5398254be1321dad6cd5f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RUN-00.log",
+    "sha256": "746ba987a1f04dd0dd0f54b0d1c4dc62dc1ca63cc6a9ed7191a591ef9b438c63",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RUN-01.log",
+    "sha256": "bbf7ff1cf8f3a7d865f1eed80b10bd20811e710f899bb3a1a314d164d8105f15",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-peer-resume-run-v1/RUN-02.log",
+    "sha256": "dc82e4828860616e6258ea5112c50fe268b641bbb460f197f547e8da18361cfd",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-live-red-run-v1/INPUTS.json",
+    "sha256": "fd4a128f3de315d5fba4e4213080d1396ca581a37f3f9745e861a1758250c1da",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-live-red-run-v1/RESULT.json",
+    "sha256": "513cd8fa5f96e1ac1301eb0cea65c97f88e49be0cc4ebc0616a6cc22ef0cb55a",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-live-red-run-v1/RESTORED.json",
+    "sha256": "855f1847fd85a025750e3c4c8a2e75b58ac58b5fe5d1c79d427e49a37729e04f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-live-red-run-v1/RESOURCES.json",
+    "sha256": "e73ca72e5e6c9928f7817bb7b23af8df08ca451eba2689e35715e450cd66307e",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-live-red-run-v1/RUN-00.log",
+    "sha256": "d7b9a4c76ad59ac83f65e67a306580ba18fecfb97bc7dd973b13e741783d9342",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v1/INPUTS.json",
+    "sha256": "11e3f9161a0164161dc3e7516e877ad8fa5d86e7db3e8a150f3eaa200f4c9a13",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v1/RESULT.json",
+    "sha256": "72b5d2b213964bff3e911aa76b8cbf78d4385d2d15c13d1ad46fd6b90bb24b7f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v1/RESTORED.json",
+    "sha256": "d109ea4077412d14f874e72d330be1547681d0e7ba9dc6c866509604f3dcb7b4",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v1/RESOURCES.json",
+    "sha256": "6a6010d08938e1daadab8633c70c614fe5f22ceb848f195211ec3fabb7211724",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v1/RUN-00.log",
+    "sha256": "75b1ae21592d5b4cbefd5de0891cb0b44d66d7cbffde987bdf4dd26c8bdc49be",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/INPUTS.json",
+    "sha256": "6876570b42bbf680f20f66dfd815a1b7af599b052b0e0a8e1eddf1cbff40031f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/RESULT.json",
+    "sha256": "ccabe6ceab677bef14332c0e11d327711f70be7c68d7885efd24f5f2550f2c8e",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/RESTORED.json",
+    "sha256": "243189c3010a9505893eee2ebffe052c5f3a017d215680f2535cc6eb0367e8f0",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/RESOURCES.json",
+    "sha256": "6a93c269c10000d00c95d232155842e0c3f7ba6ae27021739425964e848235df",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/RUN-00.log",
+    "sha256": "484f63ef3edd64ce1ee57143f35bf46a6d3099adcb1a132aafad538de1063ead",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v2/RUN-01.log",
+    "sha256": "eff7f2e93c66fbdf14ef72b563c3cff0951a97d2821144c93fdeb504c94d4aa5",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/INPUTS.json",
+    "sha256": "76019b6ad3d2170715f7e7f57402b9f768a3e61b60bfa4d0f15be6226ed68e30",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RESULT.json",
+    "sha256": "d85819cefee15b76255c40ff41db0643d60ac295e81b83128787f272c29f1392",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RESTORED.json",
+    "sha256": "53b35988771b9fde6df69758bc951c958c1fd5110a9359ad34c6d8e344a56254",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RESOURCES.json",
+    "sha256": "d8e4429aeb9791a9555aeeaf5187a45aeeebde793f5f295b2b8ca485c5b3c41d",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RUN-00.log",
+    "sha256": "e7ad50562b8135023fec01da97297f2a865fd461d18040ce61be927ba70fb920",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RUN-01.log",
+    "sha256": "c69d89ee59fe971d027b3b778d889803d62cd6d1686e11e35662351963b7e25e",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v3/RUN-02.log",
+    "sha256": "62f4b10a958de17b66dfd93abe58ffe0693ce69c8d5bf2282f0c609b77629819",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/INPUTS.json",
+    "sha256": "54cb4ca5ed3f9c13cbcf41f91788c93a140c504f3342ac492cec8aa1a0069d1f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RESULT.json",
+    "sha256": "e0ccd00f4681c0eb485110c7fc5eac3431ccbbdff5e971724fb22b6a8004255e",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RESTORED.json",
+    "sha256": "4dd302577d10f5ee3d7577c60b4a4c5d09b1d60e983d32b8805dbc828a505900",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RESOURCES.json",
+    "sha256": "6bb4b88feaa86c0ddae2e1ebc0fd6388af0d1417a71295e3dab350aa63d481bb",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RUN-00.log",
+    "sha256": "406b907bbd70a991cc3fc7b0257cd58a226f0bb232b1d90ac0f2395be270a3c4",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RUN-01.log",
+    "sha256": "ea1bfab06121fbbc339c4a0374527540b4374d19652a337069a412fc9369e4ca",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RUN-02.log",
+    "sha256": "097366129bab0e4ddc528c5a2574bbb9c3a62d89ae4f867dd4a9f5cc54f37d0c",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RUN-03.log",
+    "sha256": "657582710fc147efaf06542aba00fed46416918e61233b191c378d1310e10f9b",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v4/RUN-04.log",
+    "sha256": "94801fdda2f6b19bee10ad8167827cc956f547b2b922fe21a5e85425e3a894d8",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/INPUTS.json",
+    "sha256": "f56e4cef017be5203ddde55c1cf75e02b4e44935baec51498f0bdaf693a3aad0",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RESULT.json",
+    "sha256": "b39288f3a268685d27c95ea69224c73a2322ba528b255267df0c947bb2d1f5ff",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RESTORED.json",
+    "sha256": "fbd0bc9020797b119dac0719cefb9d11529eef3b0a697c9317fa2d22cdc1cb64",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RESOURCES.json",
+    "sha256": "3fa3c1bc3ffe823719590f54b218914e59babbf6d2ee650dbb2566c25b95e6d5",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RUN-00.log",
+    "sha256": "f2eef810d28b1f9d4669996c37f8762e46e641a5cddf05a04a648c56de43819e",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RUN-01.log",
+    "sha256": "221645baad20e3457785b0ff309b7672e943ac7402aa8727a68659abc01b2ae5",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RUN-02.log",
+    "sha256": "fe2f50f33f1193bf29931cb22cd83274d1197adab7e5ceac420dbd22726b43df",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RUN-03.log",
+    "sha256": "fe025a5da1b0878ba30f359e6cfdc53900c736f4aa45b3a32e9c69fe8d0b67b5",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-history-run-v6/RUN-04.log",
+    "sha256": "cd0e55b11e6c98d3673d1446563c81b652d56768fba2f7bc5513f41b3158be90",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/sys5_i3_original_source_process.rs",
+    "sha256": "416c7d3eb08e9163730b0f0186f8ac3563a2bb8187f6d8b4b664d3c2c2a1748f",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/sys5_i3_original_source_process_tests.rs",
+    "sha256": "075f7a602d41cec52028ff5a81bdb0325a660e62d99c4793e0c3eabde17389ce",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/sys5_i3_private_quic.rs",
+    "sha256": "e031a4f4e35f8ac72ecc2d6480e01c8a31c7862618607d5cbb74ab8b7ac02d40",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/sys5_i3_source_control.rs",
+    "sha256": "c4a25ec255145c5354d73350b54803a99de4221511989e264f96f3edc976f0e5",
+    "status": "read-reviewed-verified",
+    "role": "W4-D original sequence/history source/run evidence; exact success/failure scope in integration receipt; not D acceptance",
+    "at": "2026-10-13T03:50:08.576607+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261013T035656Z.json",
+    "sha256": "2bfb530dcbb250ebaefe82ba1943048eede17b3867d117abadcb81e12d8d1dfe",
+    "status": "read-reviewed-verified",
+    "role": "Own hourly weekly quota numbers only,76%; no account/credit details mirrored",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-HISTORY-REVIEW-v2.json",
+    "sha256": "885ad9eebfd58dcbaae09be7d4ad4e99ac79129045f8c031c8aef4a94d878392",
+    "status": "read-reviewed-verified",
+    "role": "Final bounded history/source review against actual normal/no-seams/budgeted and prior full1400 receipts",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v1/RESULT.json",
+    "sha256": "71170b423d23518f6e0a9eacf54ed15d93b29d0defadc7b99b0de66074a28f93",
+    "status": "read-reviewed-verified",
+    "role": "Actual failed docs command and unchanged input pins; source-hierarchy notice fixed before retry",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v1/RUN.log",
+    "sha256": "c9dee0e4797b4e439df3fa6bc1a1f27b9eea5b587533c65700658eb2d21a1a71",
+    "status": "read-reviewed-verified",
+    "role": "Actual required-literal failure in tasks.md, no passed-docs claim",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-SEND-BEFORE-USE-v1.json",
+    "sha256": "84b36eb2dcda6eb4601904f2051f272c12894beba7b52ee1176bad5118df0172",
+    "status": "read-reviewed-verified",
+    "role": "Next direct-consumer LAB before-use candidate; no implementation acceptance",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementResultOrigin.lean",
+    "sha256": "0f2137bd56eb8242ab322c6311bfb4d5042cdb35562ca147f87d9207f6cf541f",
+    "status": "read-reviewed-verified",
+    "role": "Read full existing result-origin model; no new Lean execution",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/CohortHostObservation.lean",
+    "sha256": "22c3ad64d8ab5507960e951c9a6bcf2b069a0c3e825c9829e05fba28fbcc41e8",
+    "status": "read-reviewed-verified",
+    "role": "Read full exact observation model; no hash/count substitute or new execution",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstGraphValidation.md",
+    "sha256": "164a3b634bd86f9a0e4ab3cc306b5d184702df2f22d417fa80cf1761b9549ae8",
+    "status": "read-reviewed-verified",
+    "role": "Read full relation-graph boundary; not automatically distributed causal/authorized observer correctness",
+    "at": "2026-10-13T03:59:02.394257+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v2/RESULT.json",
+    "sha256": "d4a529e02554db0f9756fcbae4770f06cdeafb25306ccc62ec1a45749211b9d0",
+    "status": "read-reviewed-verified",
+    "role": "Actual failed full docs retry; fixed omitted tasks current-position source references",
+    "at": "2026-10-13T04:05:48.775568+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v2/RUN.log",
+    "sha256": "faf2f3d0e48fdf9e98eadc0c8f37a5f9ef3cf96b0ee9367e3b25eea127b84d4d",
+    "status": "read-reviewed-verified",
+    "role": "Actual last-guard source-path refusal; previous guards passed",
+    "at": "2026-10-13T04:05:48.775568+00:00"
+  },
+  {
+    "path": "scripts/validate_docs.py",
+    "sha256": "3f543f68482aa1bddf9797fcf19aa60671c6bc0b307d4ce6bdf07cb67d348be5",
+    "status": "read-reviewed-verified",
+    "role": "Partial read of notice/heading/timestamp/source-reference validators and main ordering to close exact documentation failures",
+    "at": "2026-10-13T04:05:48.775568+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v3/RESULT.json",
+    "sha256": "2813dd67d95735c60df948c7a999cd1bac856789024eec5a6d82d08f464f9303",
+    "status": "read-reviewed-verified",
+    "role": "Actual full make docs pass; immutable input pins unchanged",
+    "at": "2026-10-13T04:10:50.344552+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v3/RUN.log",
+    "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+    "status": "read-reviewed-verified",
+    "role": "Full docs validation log on final original sequence/history snapshot",
+    "at": "2026-10-13T04:10:50.344552+00:00"
   }
 ]

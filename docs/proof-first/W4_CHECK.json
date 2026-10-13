@@ -64470,5 +64470,65 @@
       "scope": "Full pass; final receipt metadata narrowly checked"
     },
     "next": "Explicit resume, validate saved uncompiled peer draft, then full original sequence/current held-network authority/next activation/refreeze; D then authorized E"
+  },
+  "d_original_sequence_history_20261013": {
+    "at": "2026-10-13T03:50:08.576607+00:00",
+    "status": "same W4-D active; actual full sequence/history component verified; no D/E acceptance",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-sequence-history-green-v6/SOURCE_PINS.json",
+      "sha256": "78d6df69478b3b988a44edc88ddb94d093664b3c23235ac70a540eefbc7e95ab"
+    },
+    "integration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-INTEGRATION-v1.json",
+      "sha256": "bdc1d54430135c33615a6dd8895bed9994963ae6b2983eb7f5b3d677e5044402"
+    },
+    "notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v39.json",
+      "sha256": "4a21bdf84c6f2e803eaac39fcbadb1a1b64b562122e36639dafb2adfb95f3d13"
+    },
+    "owner_resume": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/OWNER-W4-RESUME-20261013-v1.json",
+      "sha256": "6766c3ada895878f9d4fe7a4d3d1b46e85513454c193f72f4927eae921fae703"
+    },
+    "quota": {
+      "checked_at": "2026-10-13T03:56:56.040574+00:00",
+      "source": "own session token_count.rate_limits only; bounded last4MiB",
+      "weekly": {
+        "observed_at": "2026-10-13T03:56:20.624Z",
+        "slot": "primary",
+        "used_percent": 24.0,
+        "remaining_percent": 76.0,
+        "window_minutes": 10080,
+        "resets_at": 1792295904
+      },
+      "next_check_not_before": "2026-10-13T04:56:56.040574+00:00",
+      "stop": "Below30% remaining, then verified/saved checkpoint; otherwise continue D then E, stop after E"
+    },
+    "next": "Actual distributed observation/network-held authority update, then next source activation/all3 refreeze and D integration; E authorized afterwards",
+    "docs_validation": {
+      "initial": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v1/RESULT.json",
+        "sha256": "71170b423d23518f6e0a9eacf54ed15d93b29d0defadc7b99b0de66074a28f93",
+        "exit": 2,
+        "reason": "Shortened tasks.md notice lacked literal hierarchy markers; corrected"
+      },
+      "retry": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v2/RESULT.json",
+        "sha256": "d4a529e02554db0f9756fcbae4770f06cdeafb25306ccc62ec1a45749211b9d0",
+        "exit": 2,
+        "reason": "tasks.md current-package section omitted explicit Canon/plan source paths; restored"
+      },
+      "final_retry": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-sequence-docs-v3/RESULT.json",
+        "sha256": "2813dd67d95735c60df948c7a999cd1bac856789024eec5a6d82d08f464f9303",
+        "exit": 0,
+        "scope": "Full make docs pass on pinned unchanged twelve-doc inputs; final receipt-only metadata checked separately"
+      }
+    },
+    "final_review": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SEQUENCE-HISTORY-REVIEW-v2.json",
+      "sha256": "885ad9eebfd58dcbaae09be7d4ad4e99ac79129045f8c031c8aef4a94d878392"
+    }
   }
 }

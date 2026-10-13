@@ -17,7 +17,7 @@
 [`proof-first-foundation-correspondence.md`](proof-first-foundation-correspondence.md)。
 W4-A〜W4-Eの作業区切り・完了条件・推奨model/effort・残項目回収も同ファイルを参照します。
 W4-Aは限定証拠完了、W4-Bは限定LAB統合候補として完了し、W4-Cは選択した局所条件で閉じ、W4-Dの確定実装が現在地です。
-Dの統合判定は未完了で、EはD受理後のowner再開待ちです。
+Dの統合判定は未完了です。ownerは2026-10-13に同じgoalを再開し、D受理後のEまでを承認済みです。E完了又は週間残量30%未満で検証・保存して停止します。
 別の roadmap や正式な W program ではなく、Plan250 の pause は保持します。
 
 ## 先に読む順序
