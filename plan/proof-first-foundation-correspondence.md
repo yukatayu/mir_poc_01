@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 13:38 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S/history and finite actual send retention are verified components. Registered current Report/distributed graph, held-DATA authority update, next activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 remain independently paused; earlier dated entries are history.
+Current package map (2026-10-13 14:47 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S, finite send retention and actual current distributed graph verified. Held-DATA authority update/full Flow preparation, next source activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 separately paused; earlier entries are history.
 
 ## Authority and retained history
 
@@ -3227,3 +3227,23 @@ Send v1: normal default/privateQUIC checks2, combined flow7 and sequence2 pass. 
 No D/E acceptance. Actual registered current Report and same-event distributed graph, live authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. Flow captures the new send/receive records and logical counters but still lives outside Mode; complete transport-to-preparation ownership is not yet accepted. No adopted Rust, Canon/public contract, fresh Lean, independent review, recovery or broad secrecy/noninterference claim.
 
 証跡: ORIGINAL-FLOW-SEND-INTEGRATION-v1.json、SOURCE-OWNER-LOWER-NOTES-v40.json、ORIGINAL-FLOW-SEND-REVIEW-v1.json、ORIGINAL-DISTRIBUTED-GRAPH-BEFORE-USE-v1.json。Report2614へ追記。
+
+## 2026-10-13 14:47 JST — 同じ実行からの現在権限に従う分散観測
+
+W4-Dは、実3プロセスの元source S→T→Sと同じ送受信・native実行から、現在の権限で許可された分散観測graphを検証済みです。実Issue／Body／Ack、QUIC送受信12件、serve／write／receipt各3件を結合し、事前確保した実記録を保持します。元source受理3、Sの実Body2／T1を維持し、欠損・別peer・古いfloorなど10種類の実プロセス上の拒否も確認。外部未採用39pathのgraph v6で、通常default／private QUIC buildとtest-seamsなしの関連モジュール191件が通過しました。DATA保持中の権限更新、次source activation／all3 refreeze、D統合とEは残っています。
+
+選択したLAB候補は、登録済みReportが実current M9/floorを確認し、実source/native/送受信記録を借用してreference/countだけを親へ渡すものです。親は実Issue／Ready／Body／SourceReady／Ackの完了と元source全体を照合します。テスト配列やC内のmapからgraphを作る代案は、実送受信・実lower結果を欠いても成功し得るため棄却しました。出力の論理的整合だけでは実由来を証明しません。
+
+主担当による追加点検で、v5は実SYS4の結果を使いながらraw M8の存在を確認していないことが分かりました。実native完了後にM8を取り除いたREDでReportが通りました。v6は実M8の成功したenqueue／serve、元source全引数・owner・source、実SYS4消費envelopeと受信edgeまで照合します。欠損と別statementの実M8入替を拒否し、元の正例も通過しました。これは実装候補の由来確認を強めたもので、規範変更ではありません。
+
+実ReportはBody前に確保した同じVecへ移動し、途中失敗時もpartial DATAとnative結果を保持します。実最後の完了を履歴へ移してからReportを受け、親のglobal intervalは全DATA照合まで保持します。3 Reportそれぞれ32項目のbinding変異と親35の独立照合反例を確認しました。owner writeのgraph辺は実writeのprojection関係であり、2回の物理書込みを表しません。
+
+Graph v6: combined-feature graph5 pass, including ten real three-process refusal scenarios,35 parent join/frame/current falsifiers and32 retained-field mutations for each of three actual Reports. At the identical39-path cut, normal default/privateQUIC checks pass and the entire original_source_process module passes191 tests without i3-process-test-seams. Full-library1413/1393 and fresh Lean were not run; prior full1400 remains historical.
+
+v1の通常build失敗、v2のsummary種別表記によるsetup拒否、v3のcurrent-thread Tokio未pollによる実通信停止を保存しました。v4以降のテストdriverは実runtimeをpollするだけで、mode/native grantを持ちません。通常deadlineを変更していません。
+
+次はFlowを実prepare対象へ所有させ、前回のprepare／activate／publicationを完了確認の上で有限履歴へ移し、DATA保持中の更新を実行します。Quinn／OSの内部状態全体を固定したと主張しません。選択・反証条件は次consumerの使用前記録へ分離します。
+
+No D/E acceptance. Flow-to-Mode/full-preparation custody, actual authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. No adopted Rust, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim. Existing narrow reference/count output goes only to the registered trusted parent.
+
+証跡: ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json、ORIGINAL-DISTRIBUTED-GRAPH-REVIEW-v1.json、SOURCE-OWNER-LOWER-NOTES-v41.json、Report2614。

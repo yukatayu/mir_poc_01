@@ -64575,5 +64575,53 @@
       "exit": 0,
       "scope": "Full make docs pass on unchanged eleven-doc inputs; final receipt metadata and transport-coverage wording checked narrowly"
     }
+  },
+  "d_original_distributed_graph_20261013": {
+    "at": "2026-10-13T05:47:59.347084+00:00",
+    "status": "Verified same-event distributed current observation; same D continues, not D acceptance",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/SOURCE_PINS.json",
+      "sha256": "bb6e867e4ec266e43fd817aae9d9d520b69f9e8f58848e7f397c7c97d7dce334"
+    },
+    "integration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json",
+      "sha256": "4a59c66ddd01678f9fd082a34922b79de4c897994044686420c4abee5e432ba6"
+    },
+    "review": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-REVIEW-v1.json",
+      "sha256": "45cc210de72c83e7d007764c7efb2f9ececc82c169ec1758742bb008c8741f17"
+    },
+    "notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v41.json",
+      "sha256": "90656c623be6b39649cece00c2128899e9e9c3ecf9dd522e04535287edd9ed50"
+    },
+    "next_design": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-PREPARATION-BEFORE-USE-v1.json",
+      "sha256": "d3636678a7e19941b855f4fb316ec54fa2b4a4314a129616e30a3ba0f786a96a"
+    },
+    "quota": {
+      "observed_at": "2026-10-13T05:58:02.545Z",
+      "used_percent": 2.0,
+      "window_minutes": 10080,
+      "remaining_percent": 98.0,
+      "checked_at": "2026-10-13T05:58:25.457596+00:00",
+      "next_check_not_before": "2026-10-13T06:58:25.457596+00:00"
+    },
+    "docs_validation": {
+      "result": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/RESULT.json",
+        "sha256": "90cf7055e13a69f341d4403cc5c9ac6e9917836190883ba70a98b745c780c278"
+      },
+      "inputs": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/INPUTS.json",
+        "sha256": "d37e7ccac0ce9021070cb2141c9f1409509e3c8272fb59e181abe0aa0f131123"
+      },
+      "log": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/RUN.log",
+        "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+      },
+      "scope": "Full make docs on exact frozen eleven-doc input; receipt/quota-only final metadata independently checked afterwards"
+    }
   }
 }

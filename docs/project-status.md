@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-13 13:38 JST
+最終更新: 2026-10-13 14:47 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -57,13 +57,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 観測は既存private I3のredacted reference/count範囲を保持します。一般の公開observer、広いcallee/混合source、秘密依存の時刻・件数の非干渉や復旧の条件を満たしたとは扱いません。これらのconsumerが必要になれば、依存するC条件を先に再開します。R01〜R12の義務と119行のU/D・承認区分は保持し、Eが行う最終和集合照合へ使用中の前提を先送りしません。
 
-W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network接続は未完了です。
+W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network全体の統合受理は未完了です。
 
-W4-Dは、実3プロセスの元source S→T→Sと完了履歴に加え、実QUIC送信の有限枠・中断時保持を検証済みです。送信前に実パケットと試行記録を事前確保した枠へ移し、取消・解析／通信失敗でも保持します。枠を使い切った拒否では呼び出し元にパケットを残し、取消後の送信／受信は再開しません。外部未採用38pathのsend v4で、test-seamsなしの送受信12件と全列・peer設定2件が通過。通常default／private QUIC buildも同じproduction部分で確認済みです。元sourceのnative受理3、Sの実Body2／T1と、実送信完了6件を保持します。現在の権限に従う分散graph、DATA保持中の権限更新、次activation／all3 refreeze、D統合とEは残っています。
+W4-Dは、実3プロセスの元source S→T→Sと同じ送受信・native実行から、現在の権限で許可された分散観測graphを検証済みです。実Issue／Body／Ack、QUIC送受信12件、serve／write／receipt各3件を結合し、事前確保した実記録を保持します。元source受理3、Sの実Body2／T1を維持し、欠損・別peer・古いfloorなど10種類の実プロセス上の拒否も確認。外部未採用39pathのgraph v6で、通常default／private QUIC buildとtest-seamsなしの関連モジュール191件が通過しました。DATA保持中の権限更新、次source activation／all3 refreeze、D統合とEは残っています。
 
 現行owner指示（2026-10-13・再開）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量30%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。2026-10-07の作業停止と50%閾値は、この指示で更新されました。
 
-週間残量は2026-10-13T03:56:20.624Zの自分の実セッション記録で76%（使用24%、10080分window）でした。確認は2026-10-13T03:56:56.040574+00:00、次は2026-10-13T04:56:56.040574+00:00以降です。確認時点では30%の停止条件に達していません。
+週間残量は2026-10-13T05:58:02.545Zの自分の実セッション記録で98%（使用2%、10080分window）でした。確認は2026-10-13T05:58:25.457596+00:00、次は2026-10-13T06:58:25.457596+00:00以降です。確認時点では30%の停止条件に達していません。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

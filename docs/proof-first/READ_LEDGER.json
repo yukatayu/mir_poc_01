@@ -58587,5 +58587,467 @@
     "status": "read-reviewed-verified",
     "role": "Actual full make docs pass with unchanged pinned eleven-doc inputs",
     "at": "2026-10-13T04:44:24.167967+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-FLOW-PREPARATION-BEFORE-USE-v1.json",
+    "sha256": "d3636678a7e19941b855f4fb316ec54fa2b4a4314a129616e30a3ba0f786a96a",
+    "status": "read-reviewed-verified",
+    "role": "Before-use actual Flow custody/capture design with old-carrier vs queued-use constraint",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json",
+    "sha256": "4a59c66ddd01678f9fd082a34922b79de4c897994044686420c4abee5e432ba6",
+    "status": "read-reviewed-verified",
+    "role": "Exact graph source/commands/pass/failure/restoration integration",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-REVIEW-v1.json",
+    "sha256": "45cc210de72c83e7d007764c7efb2f9ececc82c169ec1758742bb008c8741f17",
+    "status": "read-reviewed-verified",
+    "role": "Sole-main source/custody/current authority review; no independent review",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v41.json",
+    "sha256": "90656c623be6b39649cece00c2128899e9e9c3ecf9dd522e04535287edd9ed50",
+    "status": "read-reviewed-verified",
+    "role": "Verified graph continuation and explicit remaining gates",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-DISTRIBUTED-GRAPH-BEFORE-USE-v1.json",
+    "sha256": "20bc7b0d7b97a8f6cc52eb6e9d657e65117393a5e380da2d7946173ea4305b76",
+    "status": "read-reviewed-verified",
+    "role": "Selected bounded design and falsifiers before graph use",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/SOURCE_PINS.json",
+    "sha256": "bb6e867e4ec266e43fd817aae9d9d520b69f9e8f58848e7f397c7c97d7dce334",
+    "status": "read-reviewed-verified",
+    "role": "Exact39 current source hashes",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/M8-PROVENANCE-CORRECTION.json",
+    "sha256": "686ecb04f48f686fa2c7c50bf0b56fd5a341e21fe91da4bb48bab9cdc44ead6b",
+    "status": "read-reviewed-verified",
+    "role": "Actual missing-M8 RED and exact normal source correction",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-interface-red-run-v1/INPUTS.json",
+    "sha256": "0c8b1f577e9f9f80577c147f016fde529fe8f256959e0c5435cccf79b39e41cb",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-interface-red-run-v1/RESULT.json",
+    "sha256": "e4567cca452e95a794587fd532549598043858a3288c5b2e223edf8392ac1f2a",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-interface-red-run-v1/RESTORED.json",
+    "sha256": "7f7d5519ad321a3c65861a8efb9d2e2985f1b2786a829421b70df48dc2d726ca",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-interface-red-run-v1/RUN-00.log",
+    "sha256": "4be31a3c2f3d8488b5de44acb49b965ac44f656a6a762282ca93822cc3234289",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v1/INPUTS.json",
+    "sha256": "6afab08b586a3ad032dd51d0a9828ca7f78452c2c068a5c3e623d76020ea7718",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v1/RESULT.json",
+    "sha256": "0f173d8a0b33b05705971f222bb094f17d4b0724da0423026eecc132adcb49ea",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v1/RESTORED.json",
+    "sha256": "eb37a2f41165d7d1904450d7737941282b9f3a5fb83235bdf39a100cccfd32a9",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v1/RUN-00.log",
+    "sha256": "2608619acdebff4fa750a2230d0fd543f7efa3cb250bf0c468e004fc3e3d9cfa",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v1/RUN-01.log",
+    "sha256": "3a8decbf447ea3e56fe44d860b0d57deb50ed349e86a9c60ba23f3266252a265",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/INPUTS.json",
+    "sha256": "ba3cf8608dac3cacdba7ec1a36d99137ec38fbc7e4eaa69b2a3ca177704aa449",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/RESULT.json",
+    "sha256": "8939c2196975d2a276ec1f9129137068b3608b187519454a0cdafbe9749059ba",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/RESTORED.json",
+    "sha256": "5c6809226414091c61decbaf4cc3e7595263569d5bb5fa9ac3d0bb94545e46d9",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/RUN-00.log",
+    "sha256": "556772f3e57c144733b0a9e2fe0732c10ad49ce8b855cabe22b1ad2eef4a7aaf",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/RUN-01.log",
+    "sha256": "393598b09ba3bcfb87f93305116f6708b047cb3111b1b8dba9ac006c06070d81",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v2/RUN-02.log",
+    "sha256": "6ccfedda08ef679452bf20dfea5d54c8351ea972082300bb184380c1e02701f0",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/INPUTS.json",
+    "sha256": "28871b7da559f8d93bac35d9b621ae49b27e643277b65eab4e3a9a82116783b0",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/RESULT.json",
+    "sha256": "c772f441f1320e2f31dfede264df7a2675bf5f547f94d918d64be8c1b0a3695b",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/RESTORED.json",
+    "sha256": "f5668570888d26745314af61d0a43545c7b5ce2021a119cafe297fa39cf394d4",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/RUN-00.log",
+    "sha256": "b817eb7203c21de00b97da9b1b985c696498d7cb129ed827ab5344d5c295c67f",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/RUN-01.log",
+    "sha256": "e4d40bebcce941c7d80f86349d33f0455190b1fe891e7591e5d54e87357e9757",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v3/RUN-02.log",
+    "sha256": "f266266181a12dd319c319513ec3a7d5676485db7bde1c31ecc94636e2618108",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v4/INPUTS.json",
+    "sha256": "fae043c04e3ff8bd5259b4e39e1c2dfba9c288a4b50dda510027b985c44313ac",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v4/RESULT.json",
+    "sha256": "bb2006123887c4ee9d0c29355f37d0319efb371c40c284b6351dac286b1da569",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v4/RESTORED.json",
+    "sha256": "3cce80164d6da72354ff10d935cf02b61a2454697c5b51fd6b2eaa73a40a6996",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v4/RUN-00.log",
+    "sha256": "fbf670670f58121ad8c5005e68c7b6014b607ba78dd38793af5a59900d71035b",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v5/INPUTS.json",
+    "sha256": "6ddc0fc0b5edbcad4f441e52543af7bd0087e3bec7060d7adb86a3e270c25031",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v5/RESULT.json",
+    "sha256": "43f0fbf2382559717d915795c8543574153d17d3e3422ba1f7e881ac8e9b0ec2",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v5/RESTORED.json",
+    "sha256": "a86c0d09a0ed525bc5206733aed6a47ea812f9773a582f72858cc84f5a9608f1",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v5/RUN-00.log",
+    "sha256": "558c3adba8e4a513ff7c834876628e6b758264636c65340c4dbb92dcca4a6cd1",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-owner-m8-red-run-v1/INPUTS.json",
+    "sha256": "a10f158e09e1fb0c48d86bd5b03495e702762bd0c1beb43665366904238333ad",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-owner-m8-red-run-v1/RESULT.json",
+    "sha256": "212dfb583c1b02f5ee8350fe9c1371fc7aa2d981ef4406bd5390f8ce33e02311",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-owner-m8-red-run-v1/RESTORED.json",
+    "sha256": "a2f9b1c4ed568ac0b47dca0df58bed92041fb8f64d9a15d09b408b5324702db9",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-owner-m8-red-run-v1/RUN-00.log",
+    "sha256": "10708b0179d91b3f6ddf8d50a2d85129332ad36c72969f3e923d319ee68a744d",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v6/INPUTS.json",
+    "sha256": "c7a647db2316e92573ba63c0760127968f736fcb3817e19ce1bdddc98112b4fb",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v6/RESULT.json",
+    "sha256": "77b7061cca9f4f308ec8c8d64d4a35049e86585bf76cc1491fc24dd29153da54",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v6/RESTORED.json",
+    "sha256": "57be2db3f66cf8ded5d7c93372f5e210a66dffe50a53347cf012a573880e7387",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-run-v6/RUN-00.log",
+    "sha256": "127fc4de7aa623ad601c4e4dde99f5f693a52ddf1cd92624cd3022e433571b7b",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/INPUTS.json",
+    "sha256": "16ce410271f34eec378a2584075be86994c4cde63b6c1887699f3737e8339156",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/RESULT.json",
+    "sha256": "c92bfda433af6b8275b9cd8c33d4a7d4526d4c85084d34d3d9bac5a39a16a852",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/RESTORED.json",
+    "sha256": "f2318052405eccb5e9e3f7e5f60d6ced9ea39be4cd1fe98b6c39fc347e5a081c",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed exact source/commands/restoration and pass or failure scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/RUN-00.log",
+    "sha256": "1a4527fc22e25c7c3fd08ca8b812ec658ad4cef55131380f8746d4aba8c4ad33",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/RUN-01.log",
+    "sha256": "db8bfb0d2e777122ea583caa2c231474c4290f91833a93c379caf96d50737926",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-graph-regression-v1/RUN-02.log",
+    "sha256": "6064ef8a8f42e224dd95bbf67e9d974fc75214f0ecc212d7f5f9ded10aa99e04",
+    "status": "read-reviewed-verified",
+    "role": "Read test/build summaries and diagnostic evidence; preserve exact run scope",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys5_i3_original_source_observation.rs",
+    "sha256": "95afca5857c07c980b64bfc54e9c785dbbabc5509e70933beeed6f3e0b58630d",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys5_i3_source_control.rs",
+    "sha256": "63cb12b4e99d9081eed6e089417e4f5597e50c140922de1c00fc9a7b49db7c6f",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys5_i3_private_quic.rs",
+    "sha256": "e63a6bd269a2e88723f99fc31b22ec5efbdb1949aeec04ab0ca352637b463eab",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys5_i3_original_source_process.rs",
+    "sha256": "b4b37bfa4dad4cd6df8c596bd53d378b34c1b908d4a4ae2125ab3b80d3cd92c4",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys5_i3_original_source_process_tests.rs",
+    "sha256": "3ff8f85e13453589713f6dd07f5964b75800dd0b315d8b8392822c16fcf8b7f9",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/sys4_i3_original_source.rs",
+    "sha256": "ec38735f72aed28f092e55a174c2bc057c8320adda6dd4d222131f0ed7f1445c",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/original-graph-green-v6/m8_runtime_local_cut.rs",
+    "sha256": "b0146fb8a0df0618e5812795b6cf4ad0d4e4a84cd13f8c86bd84e8e9df86e688",
+    "status": "read-reviewed-verified",
+    "role": "Reviewed graph/current/funding/full visitor and actual M8/source/native/transport correspondence",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/docs/proof-first/W4_D_IMPLEMENTATION_HANDOFF.md",
+    "sha256": "ec497d66e937857e437f8f88b66030507304cd43c4246b502a7f7864d408347d",
+    "status": "read-reviewed-verified",
+    "role": "Reread full selected contract/required acceptance and remaining gates; old operational preamble superseded",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstDPrerequisites.md",
+    "sha256": "b4d063f856e247d00380c39a1a7f90ce522edebc426acb13af19e2ff7e41e468",
+    "status": "read-reviewed-verified",
+    "role": "Reread proof boundary: abstract arbitrary retained frame vs actual physical preparation obligations",
+    "at": "2026-10-13T05:47:59.347084+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v1/INPUTS.json",
+    "sha256": "6ac146a63fc36b84a6d7fbfb33b3ae1b9dc99f8d40b62b497f7cb086fdc02406",
+    "status": "read-reviewed-failure",
+    "role": "Full docs v1: tasks.md missing explicit canon wins; exact failed input/log/exit preserved and sentence restored before successor",
+    "at": "2026-10-13T05:54:07.906208+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v1/RESULT.json",
+    "sha256": "99e0022434d42c0dc989a9b7039a6d79640bf989f277e40369afbde2c85b4077",
+    "status": "read-reviewed-failure",
+    "role": "Full docs v1: tasks.md missing explicit canon wins; exact failed input/log/exit preserved and sentence restored before successor",
+    "at": "2026-10-13T05:54:07.906270+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v1/RUN.log",
+    "sha256": "a44c263665b378b7f9a619626a1a583afda7db03df806ca416f139fed9e43b2b",
+    "status": "read-reviewed-failure",
+    "role": "Full docs v1: tasks.md missing explicit canon wins; exact failed input/log/exit preserved and sentence restored before successor",
+    "at": "2026-10-13T05:54:07.906300+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/INPUTS.json",
+    "sha256": "d37e7ccac0ce9021070cb2141c9f1409509e3c8272fb59e181abe0aa0f131123",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt/quota-only metadata checked separately",
+    "at": "2026-10-13T05:59:26.804009+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/RESULT.json",
+    "sha256": "90cf7055e13a69f341d4403cc5c9ac6e9917836190883ba70a98b745c780c278",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt/quota-only metadata checked separately",
+    "at": "2026-10-13T05:59:26.804009+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/original-distributed-graph-docs-v2/RUN.log",
+    "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+    "status": "read-reviewed-verified",
+    "role": "Full docs command/frozen inputs/exit and log inspected; final receipt/quota-only metadata checked separately",
+    "at": "2026-10-13T05:59:26.804009+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/quota-20261013T055825Z.json",
+    "sha256": "c65d8bfd59805845b3ea71a8cbc0bfcd8968691bc2ac7348e64015d064e36fa0",
+    "status": "read-reviewed-verified",
+    "role": "Latest bounded own-session weekly rate-limit record;98% remaining, next check >=1h",
+    "at": "2026-10-13T05:59:57.176990+00:00"
   }
 ]

@@ -5739,3 +5739,29 @@ W4-DはAstraへの切り替え前の区切りで停止準備中です。同じgo
 20. skipped validations and reasons — No fresh whole1408/Lean/OS/recovery/privacy campaign on this component; exact normal builds, new controls and no-seams original sequence run. Then-final D and E require fresh integration campaigns.
 21. commit / push status — Authorized eleven-doc checkpoint; actual commit/push/remote parity will be recorded after freeze in GIT-ORIGINAL-FLOW-SEND-v1.json.
 22. sub-agent session close status — None started; same goal active, no Oracle/notifications/hostshare. Continue current D then E until agreed scope/quota stop.
+
+### 2026-10-13 14:47 JST — 実分散graphと現在権限に従う観測
+
+1. Title and identifier — Report2614 actual original distributed observation; same W4-D continues.
+2. Objective — Join same actual source/native/transport/control events under a genuine current registered Report.
+3. Scope and assumptions — External39 paths; existing private reference/count effect only; no public observer, D/E acceptance or adoption.
+4. Start state / dirty state — Clean HEADdd217e72ee543d4672ecd829021ab2db2d3ad4bc; previous send checkpoint. Every graph overlay restored its exact baseline; final runs restore39 paths.
+5. Documents consulted — Canon architecture10/spec16, D handoff, graph before-use record, current proof boundary, actual M8/SYS4/SYS5/Flow/control/source and all run receipts.
+6. Actions taken — Add normal private projection/current floor guard, actual funded retention/full visitor, registered bounded fragments and whole-original parent join. Fix raw M8 omission after a genuine counterexample.
+7. Files changed — External graph/native lookup/control/source and process tests; eleven LAB docs and this existing report. No adopted Rust/Canon/new sample root.
+8. Commands run — Exact argv/exits/log hashes in ORIGINAL-DISTRIBUTED-GRAPH-INTEGRATION-v1.json. Serial locked/offline8GiB/j1/testthreads1 with resource audit; full make docs passed in 266.016s on exact frozen eleven-doc input, receipt original-distributed-graph-docs-v2/RESULT.json; final metadata checked separately.
+9. Evidence / outputs / test results — Graph v6: combined-feature graph5 pass, including ten real three-process refusal scenarios,35 parent join/frame/current falsifiers and32 retained-field mutations for each of three actual Reports. At the identical39-path cut, normal default/privateQUIC checks pass and the entire original_source_process module passes191 tests without i3-process-test-seams. Full-library1413/1393 and fresh Lean were not run; prior full1400 remains historical.
+Full docs v1 failed only because rewritten tasks.md omitted the required “canon wins” notice. Restored that sentence; v1 inputs/log/exit remain preserved, successor v2 validation follows.
+10. What changed in understanding — Actual SYS4 result presence did not by itself discharge selected raw M8 provenance. Removal after real completion was accepted in RED. Explicit actual original/M8/SYS4/received context now rejects missing/foreign return. Current-thread test runtime also needs real network polling during synchronous Report wait.
+11. Open questions — No D/E acceptance. Flow-to-Mode/full-preparation custody, actual authority update while DATA is held, subsequent source activation/all3 refreeze and final correspondence remain. No adopted Rust, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim. Existing narrow reference/count output goes only to the registered trusted parent.
+12. Suggested next prompt — Continue actual Flow/full-preparation custody and genuine prior-stage history, held-DATA unrelated/own revocation, next source activation/all3 refreeze, D integration and E.
+13. plan/ update status — Existing memory updated with choice/alternative/real M8 counterexample and next consumer. No new roadmap.
+14. Documentation.md update status — Current actual graph evidence and limits synchronized.
+15. docs/project-status.md update status — Current summary synchronized, within180 lines.
+16. progress.md update status — Current evidence and command-derived timestamp log updated.
+17. tasks.md update status — Whole eight-heading snapshot rewritten; next direct consumer and rough estimates current.
+18. samples_progress.md update status — Bounded graph evidence row added, unchanged active roots and workflow classification.
+19. reviewer findings and follow-up — Sole-main review recorded in ORIGINAL-DISTRIBUTED-GRAPH-REVIEW-v1.json. M8 provenance finding resolved by actual RED→GREEN; Flow/full physical capture remains open. No independent review under owner constraint.
+20. skipped validations and reasons — No fresh whole-library1413/1393, Lean, OS/recovery/global allocator or broad privacy campaign. Same final39 cut normal2 and owning module191 no-seams verified; then-final D/E full campaign still required.
+21. commit / push status — Authorized eleven-doc checkpoint; actual commit/push/parity receipt after docs freeze: GIT-ORIGINAL-DISTRIBUTED-GRAPH-v1.json.
+22. sub-agent session close status — None started; no Oracle/notifications/hostshare. Same active W4 continues until E/saved quota stop.
