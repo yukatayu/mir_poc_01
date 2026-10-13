@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-13 16:34 JST
+最終更新: 2026-10-13 19:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -61,9 +61,9 @@ owner resumed2026-10-13 with gpt-6-astra/xhigh after the flow/history checkpoint
 PL1/PL2/PL0 S4/S6, with one main and no subagents. The same goal is active within
 W4-D then authorized E; stop after E. W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-現行owner指示（2026-10-13・再開）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量30%未満での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。2026-10-07の作業停止と50%閾値は、この指示で更新されました。
+現行owner指示（2026-10-13・停止目安更新）: 同じW4 goalでDの受理後にEまで続行し、E完了又は週間残量60%程度での検証・保存可能な区切りで停止します。残量確認は1時間以上あけます。主担当一人、gpt-6-astra/xhigh、sub-agent・Oracle・通知・hostshareなし。W5+・Plan250/I3-4・新goal・規範採用は開始しません。以前の30%・50%閾値はこの指示で更新されました。
 
-週間残量は2026-10-13T06:59:29.442Zの自分の実セッション記録で97%（使用3%、10080分window）でした。確認は2026-10-13T06:59:50.914515+00:00、次は2026-10-13T07:59:50.914515+00:00以降です。確認時点では30%の停止条件に達していません。
+週間残量は2026-10-13T10:02:27.141Zの自分の実セッション記録で92%（使用8%、10080分window）でした。確認は2026-10-13T10:03:05.444119+00:00、次は2026-10-13T11:03:05.444119+00:00以降です。ownerのreset時刻変更の報告後に取得した残量です。停止目安は現行指示の60%程度です。
 
 W4-Cの実装前基礎条件は、選択した通常代入列と局所ownerの限定LAB範囲で技術的に閉じました。文書検査とcommit/push（78756ad5、remote一致）を完了し、W4-Dの境界設計へ進みました。単一source進行、元の全checked Core・引数、現在のM9利用、実結果の回収、一度だけの完了、共有資源と全入口の条件を対応付けました。190module・19502所有宣言・156偽命題対照の監査結果を保持します。一般証明は明示した前提の下の命題であり、物理的な認証を発行しません。
 
@@ -75,13 +75,13 @@ CのRust参照15ファイルは未採用で、通常source cursorはtest-onlyの
 
 W4-A/Bは限定証拠・統合候補として完了済みです。Bの206依存source、V2モデル278command・236module、native準備235command、実process68commandの保存証拠はそれぞれのcutで保持します。以前のSol実装とowner pauseを経て、2026-10-13にAstra/xhighで同じDを再開しています。主担当一人、sub-agent禁止を保持し、W5+・alpha・Plan250/I3-4を開始しません。Dの確定実装packageを保存した地点から再開しています。Dの実process/network全体の統合受理は未完了です。
 
-W4-Dは、実Flowを各Modeが所有し、同じ3プロセスでDATAと実native履歴を保持したまま2回目の権限更新を検証済みです。実処理の完了待ち、全3者のprepare→publish→activate、古いrequest／Ackの拒否、更新後に発行した処理と履歴graphを確認しました。外部未採用39pathのauthority v8で通常default／private QUIC build、新規13件をseamsあり／なし、関連回帰を通過。次source activation／all3 refreeze、D統合とEは残っています。
+W4-Dは、同じ3プロセス・Runtime・実Flowで元のS→T→S sourceを2回実行し、旧activationの結果・native・制御履歴を保持した全3者の再prepare／publish／activateを検証済みです。6個の実request ID、source6・ownerS4/T2、有限枠の消費、途中失敗・古い制御frame・未完了時の発行拒否を確認しました。外部未採用39pathのcontinuation harness green v1は通常2build、seamsなし8件とsource-process全213件、control59件、lower held-M9 8件、seamsあり8件を通過。D統合受理とEは残っています。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | C local original-entry/current-use/result/resource conditions and general proof/audit closed in selected profile | 着手可能: D's new custody/protocol refinement and changed physical premises before use |
-| User-facing specification | Existing checked Surface v0 ordered assignments/full arguments; no new grammar | 着手可能: connect one actual source manifest to generated private process requests and same-event observation |
-| Implementation / operation | External history v4 full1400; v6 three feature guards/two tests: budgeted2/no-seams10/normal2. Actual original S→T→S with source/native/parent3, ownerS2/T1 and retained actual history. | 着手可能: distributed graph/network-held authority update; next activation/refreeze remain; D incomplete |
+| Logical specification | C selected-profile conditions plus D coordinator/held-authority/frame and explicit seventh-kind continuation:201 modules/20511 owned/187 false, delta+owned audit | 着手可能: exact final D physical-premise/all-entry correspondence |
+| User-facing specification | Existing checked Surface v0 ordered assignments/full arguments, actual source-to-private-request and same-event redacted observation; no new grammar | 着手可能: D/E evidence reconciliation; public alpha/profile remains owner-reserved |
+| Implementation / operation | Same actual world: two complete original invocations,6 unique native requests, owned finite Flow, retained old source/native/control history and subsequent all3 G2. Exact source-process213/control59/lower8 plus continuation8 both feature profiles. | 着手可能: D declared-failure connection/integrated acceptance; E depends on D |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -741,3 +741,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-13 14:47 JST: W4-D実分散graph v6を検証。実M8欠損の反例を修正し、正例・実拒否10種、通常2構成、no-seams関連モジュール191件が通過。DATA保持中の権限更新へ続行。Report2614。
 
 - 2026-10-13 16:34 JST: W4-D実Flow所有と同じ3者の2回目権限更新を検証。通常2構成、新規13件両feature、Ack／owner／graph／lower保持／prepare／control回帰が通過。次source activationへ続行。Report2614。
+
+- 2026-10-13 19:31 JST — 同じ3プロセス・Runtime・Flowで元S→T→Sを2回実行、旧履歴保持と全3者再prepareを確認。通常2build・継続8両feature・source-process213/control59/lower8通過、201module/20511owned/187false監査。D統合/Eへ継続、Report2614。

@@ -64677,5 +64677,58 @@
       },
       "scope": "Full make docs on exact frozen eleven-doc input; receipt-only final metadata checked separately"
     }
+  },
+  "d_original_source_continuation_20261013": {
+    "at": "2026-10-13T10:31:13.885181+00:00",
+    "status": "Verified same-world original-source continuation/all3 refreeze component; D declared-failure connection and integrated acceptance next",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-continuation-harness-green-v1",
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/d-control-development/source-continuation-harness-green-v1/SOURCE_PINS.json",
+      "sha256": "b0e45599ea58d0da7d534e2ed77a8aa977be7dbe56f1d51b8bc7a60d3dbafee0"
+    },
+    "integration": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json",
+      "sha256": "28762787a506a1add32eae4ecf5883702ca3da665868c5e3ab8708e6f2a1cdbd"
+    },
+    "review": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-CONTINUATION-REVIEW-v1.json",
+      "sha256": "d24a46e85f1c2a90b7ab71ae19f31784f6662e7eaa4d541384f48523b2223daa"
+    },
+    "proof": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/ORIGINAL-SOURCE-CONTINUATION-PROOF-v1.json",
+      "sha256": "fcb9fc45a3a99430da8779687f6d53a5628d39b1e513840ee78104274bee704b"
+    },
+    "notes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/SOURCE-OWNER-LOWER-NOTES-v43.json",
+      "sha256": "78ab8829232d9c1f857118863f7288ecdf7c936288d48e9dcd3733c3271733d5"
+    },
+    "quota": {
+      "checked_at": "2026-10-13T10:03:05.444119+00:00",
+      "observed_at": "2026-10-13T10:02:27.141Z",
+      "remaining_percent": 92.0,
+      "weekly": {
+        "used_percent": 8.0,
+        "window_minutes": 10080,
+        "resets_at": 1792472425
+      },
+      "scope": "Own active session token_count rate_limits only; bounded4MiBtail; no account or unrelated session read",
+      "stop_policy": "owner requested approximately60percent remaining saved/verified checkpoint; hourly check minimum"
+    },
+    "next": "D original-source declared-failure connection and integrated all-entry/proof/resource/queued-use acceptance then E",
+    "docs_validation": {
+      "result": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-continuation-docs-v2/RESULT.json",
+        "sha256": "3f9e134fea7f8b8a69a68aefa89604fd0eed73b0893f5de3e28c964767e420dd"
+      },
+      "inputs": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-continuation-docs-v2/INPUTS.json",
+        "sha256": "1527d1742c5084dbfcdee1a26ad51c4148f3181eaf6bdab38cb9a381084dbae3"
+      },
+      "log": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/d-source-process/source-continuation-docs-v2/RUN.log",
+        "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+      },
+      "scope": "Full make docs on exact frozen eleven-doc input; receipt-only final metadata checked separately"
+    }
   }
 }

@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-13 16:34 JST): W4-A/B/C bounded closes; same W4-D active. Original S→T→S, distributed graph, owned Flow and same3-process held-DATA authority update verified. Distinct next source activation/all3 refreeze and D integration remain; E authorized afterwards. Stop after E or saved checkpoint below30% weekly. Plan250/I3-4 separately paused; earlier entries are history.
+Current package map (2026-10-13 19:31 JST): W4-A/B/C bounded closes; same W4-D active. Two original invocations in same3 processes/Runtime/Flow and later all3 refreeze verified. D declared-failure connection and integrated acceptance then authorized E remain. Stop after E or saved checkpoint around60% weekly. Plan250/I3-4 separately paused; earlier entries are history.
 
 ## Authority and retained history
 
@@ -3267,3 +3267,23 @@ No D/E acceptance. Distinct next source activation in the same world, its all3 r
 次source activationは新しいsource producerと有限資源を使用前に設計する必要があります。元のcursorやspent Flow budgetのreset、runtime再作成は採りません。既存proofの任意retained-state frameを、今回追加した全所有fieldと次activationへ対応させる作業はD統合の残件です。
 
 証跡: ORIGINAL-FLOW-CUSTODY-INTEGRATION-v1.json、ORIGINAL-AUTHORITY-CYCLE-INTEGRATION-v1.json、ORIGINAL-AUTHORITY-CYCLE-REVIEW-v1.json、SOURCE-OWNER-LOWER-NOTES-v42.json、Report2614。
+
+## 2026-10-13 19:31 JST — 同じ世界での次source activationと全3者の再prepare
+
+W4-Dは、同じ3プロセス・Runtime・実Flowで元のS→T→S sourceを2回実行し、旧activationの結果・native・制御履歴を保持した全3者の再prepare／publish／activateを検証済みです。6個の実request ID、source6・ownerS4/T2、有限枠の消費、途中失敗・古い制御frame・未完了時の発行拒否を確認しました。外部未採用39pathのcontinuation harness green v1は通常2build、seamsなし8件とsource-process全213件、control59件、lower held-M9 8件、seamsあり8件を通過。D統合受理とEは残っています。
+
+LAB候補は専用ContinueSource grantを使い、M9のprepareとは別の意図的なsource入力として次activationへ進みます。元cohortの設置前に1回又は2回分を明示的に確保し、親・子control・Modeの旧履歴領域と新結果／Ack／owner／Report領域、Flowの総S4/T2枠を用意します。旧cursorだけを戻す、spent counterをresetする、Runtimeを再生成する代案は、履歴と同じ世界の条件を失うため棄却しました。
+
+全3者の旧Reportと実結果を確認後、親は共有grant境界を継続中にし、ownerからrequesterの順に実完了を保持します。3者すべてが終わるまで通常6種類のgrant、上位8入口、M9更新を拒否します。子は実drained条件・現在floor・登録streamの元／次activationを確認し、全条件を満たしてから旧記録を移動します。転送後のcapture／Finish送信失敗でも新状態と旧履歴が残り、親は再実行を許可しません。
+
+実反例を3件修正しました。第1は未来分のFlow枠を既に消費済みと要求していたReport判定で、完了prefixと未使用suffixを厳密に照合する形にしました。第2は実floor lockを保持したまま全状態走査が同じlockを再取得するdeadlockで、局所転送後にguardを解放しつつ登録済みglobal intervalをFinishまで保持します。第3は継続途中に下位の通常Issueが発行できる経路で、共有supervisor境界にも継続中の拒否条件を置きました。いずれも失敗証跡を保存しています。
+
+元sourceはS.hp=21、T.amount=17、S.hp=S.hp+1なので、各invocationの最終値はS22/T17です。使用前メモの24/18予想を訂正し、source自体は変えていません。6個の新規native ID、実source6／ownerS4/T2と旧activation記録で2回の実行を確認します。実旧制御frameの再送では4個目のnative requestが生じません。
+
+Exact external continuation harness green v1: normal default/private-QUIC builds pass; continuation8 pass without and with i3-process-test-seams. No-seams entire original-source-process module213, control59 and lower held-M9 8 pass serially. These are module/filtered suites, not a whole-library run. External proof-v5 audits201 modules/20511 owned declarations and187 qualified false controls in194 commands over195 SHA-verified inherited objects plus6 rebuilt/new modules; not a fresh201 rebuild.
+
+一般モデルはContinueSourceを明示した7種類目として、実active grant下の既存invokeAgainとの合成を証明します。実全3者、FD、ST queueのdrain、確保済み領域は物理前提で、Rust全体の機械的refinementを主張しません。
+
+No D/E acceptance. D original-source typed terminal-failure connection, integrated proof/resource/all-entry correspondence and exact queued-use disposition remain before E. D keeps actual M8 enqueue/serve inside one Body interval; I3 Awaiting/ServeReserved is not an M8 queued use. Source continuation is a distinct intentional input, separate from M9 preparation. The model does not prove FD/OS/allocator/physical all3 execution. No adopted Rust/Lean, Canon/public contract, independent review, recovery or broad secrecy/noninterference claim.
+
+証跡: ORIGINAL-SOURCE-CONTINUATION-INTEGRATION-v1.json、REVIEW-v1.json、PROOF-v1.json、SOURCE-OWNER-LOWER-NOTES-v43.json、Report2614。
