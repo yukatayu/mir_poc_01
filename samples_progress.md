@@ -1,14 +1,14 @@
 # samples_progress
 
-Last updated: 2026-10-30 08:26 JST
+Last updated: 2026-10-30 08:49 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
-W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-30のSSD増設・PC再起動に備えるowner指示で停止しました。研究原本・検証済みarchiveと未検証草稿を保存済みです。閉じたAstra研究handoffはReport2616、単一実装reportは2617を維持し、明示再開まで新しい研究を行いません。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageの呼出し元30scope/73localと計測構成38scope/99localを、分岐・loop・条件費用を含む84宣言/22反例へ接続。今回はsource/formal照合で、新native実行なし。worker/並行保持、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
 
-最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
+最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
 
 閉じたAstraの証拠はReport2616/W6_CHECK、現在の実装証拠はReport2617/W6_CHECK.implementationで区別する。下表は現在の受理状態。旧Native21/61、旧223formal、各部分実行と失敗cutはReport2617と凍結receiptに保持し、現在の待機queueとして再掲しない。active sample rootsは不変で、external LAB evidenceをpublic workflow-readyと扱わない。
 
@@ -45,6 +45,7 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| W6 reboot preservation | owner-reboot-20261030-v1/RESULT.json | tmpfs12384file/17853entryを永続archiveへ全照合。worker草稿未検証、runnable evidenceを再生成しない。owner pause |
 | OriginalImage caller paths | ORIGINAL-CALLER-PATHS-JOIN-v1 | 30scope/73localと条件・loopを84宣言/22反例へ対応。48logとparser6入力を独立照合、source12/結合16拒否。新native実行なし。worker/共通入力/物理資源はOPEN |
 | OriginalImage pipeline | ORIGINAL-IMAGE-PIPELINE-JOIN-v2 | 全6関数を118宣言/25反例に対応。84log読戻し、source20/結合15拒否。新native実行なし。元32MiB枠超過を保持し後続容量監査。全caller/共通入力/物理資源はOPEN |
 | Restore comparison scopes | RESTORE-COMPARISON-SCOPES-JOIN-v1 | 41宣言/14反例・実48/184有限命題。同内容改変12拒否。全原ログgzip読戻し。全caller/共通入力/物理資源はOPEN |

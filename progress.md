@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-30 08:26 JST
+最終更新: 2026-10-30 08:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,17 +55,17 @@ public/production layers remain later.
 
 ## current milestone position
 
-W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-30のSSD増設・PC再起動に備えるowner指示で停止しました。研究原本・検証済みarchiveと未検証草稿を保存済みです。閉じたAstra研究handoffはReport2616、単一実装reportは2617を維持し、明示再開まで新しい研究を行いません。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageの呼出し元30scope/73localと計測構成38scope/99localを、分岐・loop・条件費用を含む84宣言/22反例へ接続。今回はsource/formal照合で、新native実行なし。worker/並行保持、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
 
-最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
+最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
 
 | Task axis | Current status | Startability |
 |---|---|---|
-| 論理仕様 | 275module/41526宣言/1995反例をfresh/replayで受理。追加の寿命・局所費用・型rankは別cutで検証 | **着手可能・W6再開済み**。Native63の23意味対応/153outward出所を照合済み。全caller資源・他profileと最終受理は未完 |
+| 論理仕様 | 275module/41526宣言/1995反例をfresh/replayで受理。追加の寿命・局所費用・型rankは別cutで検証 | **owner pause・明示再開待ち**。Native63の23意味対応/153outward出所を照合済み。全caller資源・他profileと最終受理は未完 |
 | ユーザ向け仕様 | 現行FD5の全field/status/count/order/length/EOF/no-frameと他channelの出所・認可・TCBをLABで棚卸し。成功emptyは不在証明ではない | graph/coverage/loss/absence/active debugの具体化は着手可能。最終Q26/Q27は **要仕様確認**、未採用を維持 |
-| 実装 / 運用 | Native63全1750/45reader/全履歴と他1190/7doctestを受理。別計測構成の45校正と実3world/各2cold readerも受理 | **着手可能・容量監視**。計測構成全1790回帰、public全資源、最終reviewは残る |
+| 実装 / 運用 | Native63全1750/45reader/全履歴と他1190/7doctestを受理。別計測構成の45校正と実3world/各2cold readerも受理 | **owner pause・明示再開待ち**。計測構成全1790回帰、public全資源、最終reviewは残る |
 
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
@@ -1375,3 +1375,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-30 07:53 JST: OriginalImage/V1/V2全6関数の局所保持を118宣言/25反例へ接続し84logを照合。source20/結合15改変を拒否。新native実行なし。
 
 - 2026-10-30 08:26 JST: OriginalImage呼出し元30scope/73localと条件・loop費用を84宣言/22反例へ接続し48logを照合。source12/結合16改変を拒否。新native実行なし。
+
+- 2026-10-30 08:49 JST: SSD増設/再起動前のowner pause。caller pathsの検証済みcommitを保持し、worker未実行草稿とtmpfs12384fileの永続archiveを全照合。研究とquota/Oracle確認を停止。

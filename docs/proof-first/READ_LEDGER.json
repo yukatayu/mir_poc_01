@@ -103616,5 +103616,47 @@
     "range": "whole metadata receipt",
     "role": "W6 caller-path checkpoint availability and storage",
     "status": "resource cap passed; Oracle unavailable; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-REBOOT-PAUSE-20261030-v1.json",
+    "sha256": "9abc95f7800dc0dff63754889b7878c9dc9164fb5e492fbc47a48de3265d08a6",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v380.json",
+    "sha256": "49d8d0dbe9f74c64ef5762a97502881deff9b54eeacb287eae2d437533585e2e",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/owner-reboot-20261030-v1/RESULT.json",
+    "sha256": "34a955e8d560974b0503fac7deb44fb4299b407af73ffef360a54cd3bc9b0235",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/owner-reboot-20261030-v1/MANIFEST.json",
+    "sha256": "1e11f2fa6a7475d8c4f47e5805e2f49e0374ee5763dd3006f775fe82d8b26f08",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/owner-reboot-20261030-v1/RESOURCE-AUDIT.json",
+    "sha256": "dd3368f5312459501602991e1da0afb05e9b714688cd47230f7ee276c6cc2c47",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/WORKER-OWNERSHIP-OWNER-PAUSE-v1.json",
+    "sha256": "680248193fb1575a7d360719f7a3629c315ff240e890399244ffcf786147c197",
+    "range": "complete pause/archive metadata; archived regular bytes independently read back",
+    "role": "W6 owner reboot pause",
+    "status": "preserved; worker proof unexecuted; W6 incomplete"
   }
 ]

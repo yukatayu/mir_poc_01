@@ -1,18 +1,18 @@
-# RESUME — W6 resumed; OriginalImage caller paths connected
+# RESUME — W6 owner-paused for SSD installation and reboot
 
-Updated 2026-10-30 08:26 JST
+Updated 2026-10-30 08:49 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
-W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-30のSSD増設・PC再起動に備えるowner指示で停止しました。研究原本・検証済みarchiveと未検証草稿を保存済みです。閉じたAstra研究handoffはReport2616、単一実装reportは2617を維持し、明示再開まで新しい研究を行いません。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageの呼出し元30scope/73localと計測構成38scope/99localを、分岐・loop・条件費用を含む84宣言/22反例へ接続。今回はsource/formal照合で、新native実行なし。worker/並行保持、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
 
 ## Current authority
 
-最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
+最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
 
-Owner messages: 「引き続きW6の作業をお願いします。」「ストレージの空きには適宜注意してくださいね」。W6-OWNER-RESUME-20261029-v1で6807保護fileと保存receiptを再照合済み。研究再開時HEAD=34adc79f88f40a85dcf07a228bb9b9adef05b94d、dirtyなし。先行pause/cleanup記録は履歴として保持する。
+最新owner指示はSSD増設・PC分解/再起動前の停止と、別SATA SSD/NVMe TBWへの配慮。先行再開指示「引き続きW6の作業をお願いします。」「ストレージの空きには適宜注意してくださいね」は今回pauseにより停止。W6-OWNER-RESUME-20261029-v1で6807保護fileと保存receiptを再照合済み。研究再開時HEAD=34adc79f88f40a85dcf07a228bb9b9adef05b94d、dirtyなし。先行pause/cleanup記録は履歴として保持する。
 
 ## Exact roots and preserved evidence
 
@@ -77,11 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-最新quotaは08:11JST残量85%、指定reset使用1回。次回確認は09:11JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は09:31JST以降。
-
-10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは08:31JSTのPro利用上限が最新で、次回確認は09:31JST以降。
-
-W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
+Owner pause。最後のquotaは08:11JST残量85%、Oracleは08:31JST利用上限。確認は停止。10/30指定resetは01:45JSTに1回使用済み、追加reset/購入なし。全研究jobと文書jobは終了、Oracle待機browserも終了。再開には明示指示を要する。
 
 ## Repository backup scope
 
@@ -626,3 +622,19 @@ Repository backup: 先行画像pipelineの13文書をb6ff9b932e6c96e282ce38178bd
 2026-10-30 08:31 JST: OriginalImage caller pathsのfull make docsは6410入力不変・exit0。先行focused396は21項目成功、検証metadataはfocused397で別検証。W6最終統合full/Oracleは未完了。
 
 2026-10-30 08:32 JST: 新保存物20982890byteと後続metadata用1MiBを32MiB枠内で確認。root/tmpfs予備を維持。Oracleは08:31JSTも利用上限、次回09:31JST以降。prompt未送信。
+
+## Owner pause before SSD installation
+
+2026-10-30 08:49 JST: 検証済みcaller pathsを維持して研究を停止。worker-ownership-v1の両構成7source解析、parser、38保存file/13019324byteと未実行W6WorkerOwnership_v1.leanをhash固定した。一般証明・source guard/反例・native component・worker全体受理は未実行。
+
+再起動で消えるW6 tmpfs全81rootの12384 regular file、17853全entry、論理7417200732byteをw6-volatile.tar.zst（1330292039byte）へ保存。全fileのSHA256/長さ、mode/uid/gid/mtime、hardlink/symlink関係、圧縮EOFを独立読戻しで照合。原本削除なし。archive SHA256=74e89575e2a19cb90a51bb5460c1f823061ef53cd649b4b010da9be8b4d4801d。
+
+Archive: B/owner-reboot-20261030-v1/w6-volatile.tar.zst。Manifest/RESULT/AUTHORITY/RESOURCE-AUDITを同directoryへ保持。GitHubへ大容量archiveは送信していない。
+
+SATA SSDの別mountへheavy artifact/cache/logを配置することは可能だが、増設後の実mount/filesystem/空き/権限を確認するまで新pathを前提にしない。NVMeのTBW増加原因は未測定。tmpfsもswapを利用し得るため、再開後に実I/Oとswap配置を点検する。今回はformat/fstab/mount/swap変更なし。
+
+明示再開後、まず永続archiveのhashとmanifestを確認する。新SSDへ空の退避先を用意して展開/全読戻し後に配置を決め、旧source-pinned pathへの対応を検査する。揮発cacheを再生成で置換したり、既受理1750/45readerを自動再実行したりしない。必要subsetだけを復元する。
+
+W6未完了。worker/並行保持、共通入力/履歴、物理資源/進行、他profile/全要件/計測構成1790の必要回帰、最終統合docs/Oracleは残る。停止は完了受理又はquota不足によるblockedではない。
+
+2026-10-30 08:50 JST: 停止metadataのfocused398は21項目成功。最終receipt metadataをfocused399で確認しcommit/pushする。直前full docsは履歴として保持し、停止後のfull再実行は行わない。
