@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; expression temporary scopes connected
+# RESUME — W6 resumed; auxiliary aggregate scopes connected
 
-Updated 2026-10-30 06:45 JST
+Updated 2026-10-30 07:13 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。式の一時値10箇所と隠れたendpoint比較を101宣言/17反例・実20ケースと18構文形状試験へ接続。残る補助関数/restore/全caller、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。PublisherImageとFlowの所有移動・置換・比較保持を159宣言/18反例・実56ケース/402有限命題へ接続。実行後raw容量超過は失敗記録のまま、独立読戻しを別受理。残るcallee/全caller、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-最新quotaは06:11JST残量90%、指定reset使用1回。次回確認は07:11JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は07:30JST以降。
+最新quotaは07:11JST残量88%、指定reset使用1回。次回確認は08:11JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は07:30JST以降。
 
 10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは06:30JSTのPro利用上限が最新で、次回確認は07:30JST以降。
 
@@ -518,3 +518,31 @@ Oracleは06:30JSTも同じtabでGPT-6 Pro5of5/Usage limit reached。prompt未送
 Repository backup: original/prestagedの13文書を48ceb9137380540d90def6d9d3c881042317e902へcommit/pushし、ls-remote一致とcleanを確認（SOURCE-CAPTURE-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-30 06:51 JST: expression-temporaries cutのfull make docsは6410入力不変・exit0、focused388は21項目成功。検証metadataとcurrent Oracle/quota aliasの同期はfocused389で別検証。W6最終統合full/Oracleは未完了。
+
+## Auxiliary aggregate ownership and replacement scopes
+
+2026-10-30 07:13 JST: 14個の補助関数全bodyを固定し、PublisherImageのexpected比較Vec、restrictionsのVecから配列への移動、FlowのDATA clone後のfield置換、dormant復元と再capture比較を対応した。返却値・一時値・消費した入力を分け、3関数のmarker付き本体を元sourceへ厳密に戻せることを確認。2改変も別にcompileした。
+
+PublisherImageのexpectedは全field生成後まで残り、restrictionsを配列へ移すと子Treeは残ってVec backingだけが解放される。Flow recaptureでは新しいhexの生成中も置換前のhexを保持する。dormant復元は入力DTOを移動し、復元bufferと再capture比較DTOを同時保持した後、比較DTOだけを解放する。
+
+保持Lの状態で新規stage Fを実行してdを解放すると、peak=max(先行peak,L+F.peak)、返却保持=L-d+F.retained、要求累計=先行要求+F.requests。d≤Lは所有条件で、失敗でも先行費用は返金しない。Publisher返却保持はC.retained-b+I.retained+P.retained+B.retained、要求はC/E/I/P/B全stageの和。Eは比較Vec、bはCのbacking。借用native入力と各stageの共通public費用上限は独立条件で、物理予約ではない。
+
+新159宣言/18反例と、実56ケースへの402有限命題をfresh/replayで検証し、全98logを独立照合。Publisher16、dormant22、recapture18ケースは44成功/12自然な拒否。178242計測event/177552baseline event/44072解放eventを読戻し、通常caseの内容・peak・要求量は元関数と一致。3allocator校正/1無割当controlを確認。有限readback856宣言を一般定理又は固定275manifestへ加算しない。
+
+二つの独立private seedでrevision/key/bindingとDATA bufferの内容変化を確認。expected Vec又は置換前hexを早く解放する2種の改変は、返却内容が同じ12ケースを寿命検査が拒否した。source15/reader21/結合19改変も拒否。空key/restriction不一致とFlow version/slot/hex/capacityの自然な拒否を区別した。
+
+元9画像にあるFlowBundle全12値を部品入力として再利用した。追加のseeded DATAはlive Quinn session又はsource activationではない。新network worldは0。live Flow capture、held非空のvalidation、Publisher restore/OwnerImage pending、外側control Publisher/encodeは今回の新実行対象外で、source対応と既存stage費用の条件を保持する。入力setup/借用元native保持とhost/OS費用も別に残す。
+
+残るtransitive callee/restoreと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
+
+一般Lean v1の帰納仮説への余分な引数と、readback v1で再帰legalを一段しか展開しない箇所を後続cutで修正し、元の命題を保持。Native v1は共有source込みの論理270740393byteで容量ガード停止し、生成途中の原本を保存した。v2は中間生成物をtmpfsへ置き、new root占有を別計数。3試験はexit0だがraw78247431byteが事前48MiBを超え、launcherはFAILEDのまま保持。後続の128MiB制限付き独立readerで原本を再検査し、試験を再実行せず別の証拠受理とした。5warningは既存のunused項目として原logへ保持。
+
+既存sourceをread-only hardlinkし、変更fileだけを別inodeへ置換して全hashを前後照合。依存103library再利用、cache復元/cleanupなし。失敗cutの新占有194433720byteと今回root212444752byteを保持し、tmpfsのbinary131892240byteも保存。今回root256MiB/tmpfs512MiB枠と実行中root2GiB/tmpfs512MiBの空きreserveを維持。root空き約2.7GiB、tmpfs約1.5GiB、MemAvailable約12GiB。計測用3MiB/threadはnative物理予算の外。
+
+Oracleは06:30JSTも同じtabでGPT-6 Pro5of5/Usage limit reached。prompt未送信、次回07:30JST以降。quotaは07:11JST残量88%、次回08:11JST以降。指定reset1回使用済み・35%停止、追加reset/購入なし。
+
+再現: prepare_auxiliary_aggregate_v1.py → check_auxiliary_aggregate_formal_v2.py → prepare_auxiliary_native_v1.py / verify_auxiliary_source_v1.py → run_auxiliary_native_v2.py（raw-cap FAILEDを保持）→ verify_auxiliary_native_v1.py → check_auxiliary_readback_v2.py → qualify_auxiliary_aggregate_v1.py。既存成功cutはno-clobber、再現は新cut名を使い、RESOURCE-PREREGISTRATION-v2/READBACK-RESOURCE-PREREGISTRATION-v1を参照。
+
+Repository backup: 式の一時値/endpointの13文書をf5be742b3bc8f1afafc948fd8d26352c8423940fへcommit/pushし、ls-remote一致とcleanを確認（EXPRESSION-TEMPORARIES-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 07:19 JST: auxiliary-aggregate cutのfull make docsは6410入力不変・exit0、focused390は21項目成功。検証metadataとcurrent Oracle/quota aliasの同期はfocused391で別検証。W6最終統合full/Oracleは未完了。

@@ -103329,5 +103329,75 @@
     "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
     "role": "W6 expression temporary scopes and hidden endpoint capture",
     "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/AUXILIARY-AGGREGATE-SCOPES-JOIN-v1.json",
+    "sha256": "dc9df0bcf6ffb66ff4f5a31abd18e4ec663897705e5efe504a55f9c7c74f2a62",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/AUXILIARY-AGGREGATE-CHECKPOINT-v1.json",
+    "sha256": "a4e3817149f6f0e11fafc7aacbe832fef2e5284118bed9d78427883e3f408bdb",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary-aggregate-scopes-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "2ea47aad336c950dc4216e0d68e018dfa69a69dbe11ef473a788b331c1680642",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary-aggregate-scopes-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "e22102b7803cd7e5ce2e5b853ffa75eddc6e0a640b7587b36d5a01d95dc3cd3f",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary-aggregate-scopes-v1/READBACK-VERIFICATION-v2.json",
+    "sha256": "b9a734a9c0e5b3cb766840dc8472e9f05ccbd28c8717c2514898a14db7a23fc2",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary-aggregate-scopes-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "fa5564add1085292908daa98e17cc3cbd78fc5a350ed94be76cbea14ceb552a6",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6AuxiliaryAggregates_v2.lean",
+    "sha256": "721e15193bd93b6a1980bb7906046b3c718e10215091234753c5681aab441d72",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary_reader_v1.py",
+    "sha256": "e40fb0fe56e0434a81e765ea34d1d22e9d0fa577575b81c21176cfb95ff7cb62",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_auxiliary_aggregate_v1.py",
+    "sha256": "ca81a16137197684cc0bee53240273fda9be95763eaafe47128f589c4e2568d1",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/auxiliary-aggregate-scopes-v1/READBACK-RESOURCE-PREREGISTRATION-v1.json",
+    "sha256": "67054dd56cc4b8c7e2beeaac63e48a01033db3cdadbe4234d27c30c8c3b33c58",
+    "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
+    "role": "W6 auxiliary aggregate ownership and replacement",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
   }
 ]
