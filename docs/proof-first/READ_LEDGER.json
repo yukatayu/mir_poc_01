@@ -102811,5 +102811,68 @@
     "range": "complete general proof/source/native lifetime readback and controls",
     "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
     "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-CONSTRUCTOR-TRANSFER-JOIN-v1.json",
+    "sha256": "9d168608494662aa049a78e617d6ad61e38b7a9e949862e0fbae4819b0d73c54",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-TRANSFER-CHECKPOINT-v1.json",
+    "sha256": "b422b05c5bbb803c2f90e2074e558bab4484d235ee62c41019b7b053ba35e9c9",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-transfer-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "ef4ab0ee76cdd6bb27073753abe7a3521eacbdb1728fbd7b491ba52d6d9bd91e",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-transfer-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "42cdd6d14ad0e6ff50d412a120833c1c484df76e821cd60bf20461fc2252cdc3",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-transfer-v1/NATIVE-VERIFICATION-v2.json",
+    "sha256": "2f4dc47bc6055cf9ca041df11fd11ae1ccaea4587568f9ee9e4f5d4066f9fd31",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6TreeTransfer_v3.lean",
+    "sha256": "17b3f1f36e6f66c06eee2ab42d036bf48b1fb41811d3c78081cb90053e4e82f6",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_transfer_probe_v1.rs",
+    "sha256": "1690b2fbafb6c1c9a2f4d74a51d063293ad5822295a52ab68d47fc66d15700f2",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_transfer_reader_v2.py",
+    "sha256": "05907a1622ecec77419f7a89d581453ba77522782e9b7320ccb2eee939772ad2",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_tree_transfer_v1.py",
+    "sha256": "e049c9ba536dd7c15a1d77d408dea51a57a4f8c7fec727bff6763d108017d189",
+    "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
+    "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
+    "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
   }
 ]

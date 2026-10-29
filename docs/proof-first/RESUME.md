@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; discarded guard lifetimes connected
+# RESUME — W6 resumed; Tree constructor ownership transfer connected
 
-Updated 2026-10-30 02:40 JST
+Updated 2026-10-30 03:02 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree返却/CaptureGraph保持に続き、3関数4か所の比較用一時Treeとsnapshot/registryの寿命を59宣言/12反例・実型35ケースへ接続。残るcallee生成peak/全caller寿命、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree返却/Graph/guard寿命に続き、3constructorの所有権移動と旧/新Vecの重なりを70宣言/12反例・実45ケースへ接続。入力容量条件、全callee/caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Next instantiate constructor transient backing, other callee/caller retained/peak/escape frames and failed-prefix costs. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. Next instantiate all node argument-vector capacity premises, remaining callee/caller retained/peak/escape frames and failed-prefix costs. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-最新quotaは02:05JST残量99%、指定reset使用1回。次回確認は03:05JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は03:28JST以降。
+最新quotaは03:06JST残量97%、指定reset使用1回。次回確認は04:06JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は03:28JST以降。
 
 10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは02:28JSTのPro利用上限が最新で、次回確認は03:28JST以降。
 
@@ -306,3 +306,27 @@ Lean予約binder prefixを改名。Drop実装のAST分類をimplからmethodも�
 Repository backup: CaptureGraphの13文書をab87d9384ccdcbd46a94e166aa2bd57765728feeへcommit/pushし、ls-remote一致とcleanを確認（CAPTURE-GRAPH-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-30 02:45 JST: guard-capture cutのfull make docsは6410入力不変・exit0、focused372は21項目成功。検証metadataはfocused373で別検証。W6最終統合full/Oracleは未完了。
+
+## Tree constructor ownership transfer
+
+2026-10-30 03:02 JST: node/sequence/mappingの実3constructorを固定。nodeは88byte借用tupleの旧Vecを保持し、96byte所有tupleの新Vecとnominal/variant/key文字列を確保する。子Treeのheapはcloneせず同じ割当ての所有権を移し、旧Vecはcollect後に解放する。
+
+nodeの要求量は96*n+nominal+variant+keys、生成peakはchild_heap+88*input_capacity+要求量。入力capacity≤8*nと子Treeの容量証明があればpeak+72≤100*N+8*S_wire。sequence/mapは元Vecを保持してnominalだけ追加し、条件付きpeak+72≤88*N+8*S_wire。N/Sは返却TreeのJSON構造数/UTF-8文字列byteで、全callerの物理予約ではない。
+
+新70宣言/12反例をfresh/replay・42logで独立照合。source10/出力16改変を拒否。実45constructorケースの828生成eventと32824解放event、4校正を全読戻しし、21件で形状上限条件を確認。入力過剰確保21件と子過剰確保3件はその条件外として保持した。
+
+子cloneと出力Vec reserveを別にcompileし、返却Treeが同じでも6ケースを要求量/割当てidentity/寿命で拒否。nodeの空入力も旧Vec容量をpeakへ含み、sequence/mapは空でも元容量を保持する。失敗割当ては一般traceの費用を返金しないが、実OOMや全capture失敗prefixの上限は今回確認していない。
+
+固定thread-local event bufferで各System allocator呼出し前後を記録し、独立readerが全pointer/layout/予約/解放と入力出力内容を再構成。scalar子は実Inert/codecから生成。反復keyを持つrootは割当て圧力用のconstructor入力であり、受理済みOriginalImageとは呼ばない。新whole native/network worldは0、全1750/45readerと計測1790全回帰は再実行していない。
+
+全node呼出しの入力Vec容量条件、引数評価前の生成、残るcallee/DTO/失敗・部分prefixと全caller寿命、画像全体履歴/共通public入力、並行worker、非割当work/stack/TLS/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Rust specialization/ABI/dispatch/drop/codegen/allocatorはTCB。Native production/Canon変更、W6/T10受理なし。
+
+Leanのtrace帰納、record簡約と自然数減算をv2/v3で訂正し、元source/log/反例を保持。最初のPython readerの数値直後の空白不足をv2で訂正。成功条件を弱めず、実45ケースを再実行して成功を選び直していない。
+
+今回の3binary/全出力は20208995byte、全raw出力は16MiB以内。依存20libraryを再利用し、cache復元/cleanupなし。root空き約5.0GiB、tmpfs約1.6GiB。原本と失敗cutを保持する。
+
+再現: prepare_tree_transfer_v1.py → check_tree_transfer_formal_v3.py → prepare_tree_transfer_native_v1.py / run_tree_transfer_native_v1.py → verify_tree_transfer_source_v1.py / verify_tree_transfer_native_v2.py → qualify_tree_transfer_v1.py。成功cutはno-clobber、再現は新cut名を使う。
+
+Repository backup: guard寿命の13文書をff0c60c2b8370329bc932466f4a7e8df7e769039へcommit/pushし、ls-remote一致とcleanを確認（GUARD-CAPTURE-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 03:07 JST: tree-transfer cutのfull make docsは6410入力不変・exit0、focused374は21項目成功。検証metadataと旧quota current aliasの訂正はfocused375で別検証。W6最終統合full/Oracleは未完了。
