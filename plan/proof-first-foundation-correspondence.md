@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; current W6 implementation evidence: Report2
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-29 23:31 JST): W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。粗いwhole予約案の棄却とcaller保持対応を維持し、容量検査の一時領域とTree保持量を新189宣言/28反例・57部品実行で条件付き接続。全生成経路の容量前提、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+Current package map (2026-10-29 23:59 JST): W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。funded scan/Tree保持量へ、選択した生成経路の容量条件を新117宣言/14反例・38部品実行で接続。全capture callerの網羅、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Authority and retained history
 
@@ -4701,3 +4701,5 @@ W6 selected reachable cache (2026-10-29 21:54 JST): 初期の公開Source4/役�
 W6 caller frames (2026-10-29 22:41 JST): 共通S/Nに一律の最大型費用とrankを掛ける予約候補を検査し、original_restore=31132022279638245799、追加対応検査まで=34020786534319897540でu64上限を超えると確認。この粗い上限の予約利用を棄却し、実sourceの型/field別費用と保持寿命を使う経路へ進む。実消費量の下限又はNative overflowとは主張しない。 Parts一時Treeは条件式後に解放されるがCaptureGraph backingは残り、ProcessBundle let bindingもbootstrap検査まで残る。restoreが返したRecoveredSourceは追加検査中も保持する。readerの入力・独立template・自分の実行ファイルbuffer・拒否試験用JSON/registration等をcaller frameへ残し、shadowingをdrop、partial moveを全消去と扱わない。 対応検査の各calleeのpeak/保持/escape契約、callerの初期保持、失敗/drop prefixと全後続分岐はsymbolicな前提。共通public数値と画像全体履歴/到達可能性、全caller/並行worker、非割当work/OS/allocator/stack/kernel/物理資源/進行は未完了。Native変更・新Native実行・RSS/物理予約又はW6/T10受理なし。
 
 W6 funded scan / Tree (2026-10-29 23:31 JST): 実funded scanが借用Treeを順に走査することを源コードへ対応し、各numberの一時領域をmax、失敗を含む全attemptの累積要求を和として保持。一般raw≤1MiBのscratch上限317825088byte、raw≤128を別に確認した入力では1193792byteを導いた。上限超過rawはparse前に拒否する。 Treeは実String/Vec容量とprivate layout（Tree72、String/Tree96、Tree/Tree144byte）を使い、各String容量≤8*(長さ+1)、Vec容量≤8*要素数を前提にheap+600≤88*N+8*S_nativeを帰納的に証明。root inline72を含めても88*N+8*S_wireで覆う。serialized長さだけでは任意の事前確保を覆えない。 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。
+
+W6 selected Tree producers (2026-10-29 23:59 JST): 成功したfresh Vec生成を、正しいsize hintと最終長以下のreserve要求から任意長の遷移として証明し、容量≤8*最終長を得た。各Tree constructorへ帰納的に合成して既存heap+72≤88*N+8*S_wireへ接続した。失敗途中の費用、元入力と返却値の同時保持は別に残す。 nodeのborrowed-name tuple88byte→owned-name tuple96byteは既存領域再利用の条件を満たさず、新規Vecへ写す。新規cloneはString/Vecを長さどおりに確保する。owned collect、sequence/mapへの任意Vec移動、過剰予約したValue::String、clone_fromは容量を保持し得るため一般的な正規化とは扱わない。 全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。

@@ -100374,5 +100374,335 @@
     "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
     "role": "W6 funded scan scratch and Tree residency",
     "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-PRODUCER-CAPACITY-JOIN-v1.json",
+    "sha256": "548829b2e7ac245e02d2e607d95b1c55c8486d477314f743a6f5ad16333bde7e",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-PRODUCERS-CHECKPOINT-v1.json",
+    "sha256": "db98d96c01e58e637baa436e9cbb952c81456b1bb9913aa1e013475c38d1d499",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "43677942535b82aa058fd831e702cfdfac8fb5a317850a4821df5549ea842eeb",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6TreeProducers_v2.lean",
+    "sha256": "c10d1495f8391b5672b048696d7a97e447579917f06c694c6672e51db785391e",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_producer_reader_v1.py",
+    "sha256": "890398a00e4343a16bcece87b25d18d8ed823edb5bf43019d54e2de1d3258151",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_producers_v1.py",
+    "sha256": "a7c4e7487cd5983a1d4f434d6a27c78d25e0308b9d3e05804255ee110c528865",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_producer_source_v2.py",
+    "sha256": "2c806614817ee50bc2eb8bf42f7ce6a93c8bd1f607a02f14bc6241c71e193e72",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_tree_producers_v1.py",
+    "sha256": "631b58388aed27cc845be2de3fadf23d4aac3c0a0fc19f274c1a23723b98fd12",
+    "range": "complete source/formal/component/independent reader and negatives",
+    "role": "W6 selected Tree producer capacity provenance",
+    "status": "finite conditional LAB;allcapture/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_tree.rs",
+    "sha256": "d4f11d56f24108525b6013761ae3a2b0292069061e54eeed36c1c36cac1150ee",
+    "range": [
+      1,
+      136
+    ],
+    "role": "All four Tree constructors derive fresh clone; node creates String keys, expands borrowed-name tuple88 to owned96 and allocates fresh exact-length Vec. sequence/mapping move supplied vectors and require caller provenance.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_record_codec.rs",
+    "sha256": "a5ba46f7d7afa5c77662a2da5185ec9e4336dfa450a3cf70ec97923888aca2e6",
+    "range": [
+      1,
+      322
+    ],
+    "role": "Append-only fresh byte writer; successful requested length never exceeds completed length. from_utf8 retains capacity, so use growth bound rather than exact text allocation.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_support.rs",
+    "sha256": "17f94245cbc4bfc89fa7a3aed00b0363b80ae9328b6d4c04b5b0651944a7664e",
+    "range": [
+      1,
+      307
+    ],
+    "role": "Borrowed Vec/slice chunk iterators have no owning Vec into_iter to reuse; Result shunt has lower0. Children require their separate capture proof. Bytes canonical strings use fresh codec. Encoded native capacity is DATA and distinct from resulting Tree vector capacity.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_semantics.rs",
+    "sha256": "c42fb7bc79c3dcb1bdbc4847e83cde8fa3dd0cdffcc885912c993abc11d8f47c",
+    "range": [
+      1,
+      91
+    ],
+    "role": "Selected semantic snapshot Record uses same fresh writer.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_publisher_image.rs",
+    "sha256": "7538453d10c15f4a448d8cffdd3fe4646224926b678d24ade9cfa85cba0899db",
+    "range": [
+      1,
+      210
+    ],
+    "role": "Selected publisher checked-generation Record uses same fresh writer.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_prestaged_image.rs",
+    "sha256": "ef7fe0454fc97ff1aa344589724c0e786352bbcf8cdb96e43b1b3eb2eb59b35f",
+    "range": [
+      1,
+      141
+    ],
+    "role": "Selected prestaged macro Record uses same fresh writer.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/vec/spec_from_iter.rs",
+    "sha256": "584c9018149f930b5cd56ca3ba7a7d70f48583b2dfc32b243926a6ae4cb10566",
+    "range": [
+      1,
+      64
+    ],
+    "role": "Unadvanced owned Vec iterator may retain arbitrary capacity even when empty; no unconditional collect normalization claim.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/vec/spec_from_iter_nested.rs",
+    "sha256": "f3c1a06f43734a65e102b6a107e2fd5adadd7d94d9a226d6ffe1610d1e7e1466",
+    "range": [
+      1,
+      63
+    ],
+    "role": "Fresh generic successful iteration uses valid lower bound and amortized growth; TrustedLen uses exact upper. Dishonest iterators and failed-final-length assumptions excluded.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/vec/in_place_collect.rs",
+    "sha256": "4d3bb7a31de144bcb7470b371c5643f0739466c731f11cd7924e1fc951932c4b",
+    "range": [
+      1,
+      429
+    ],
+    "role": "Pinned node88->96 with step1 cannot reuse buffer; same-layout owned collect can, so not globally fresh.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/stdlib-supplement/into_iter.rs",
+    "sha256": "cd31180b395f914d4707b9b9a1a450b1ca8676ccccdbc75410f96756d2db801a",
+    "range": [
+      1,
+      548
+    ],
+    "role": "Vec IntoIter is one source/destination step.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/stdlib-supplement/map.rs",
+    "sha256": "2a9cb86b5110b292f271ec1cd8904a9bad27f8d553af0141837f41e753fe83d3",
+    "range": [
+      1,
+      241
+    ],
+    "role": "Map preserves exact size hint and step ratios.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/stdlib-supplement/mod.rs",
+    "sha256": "b124c3b91722826aca7b890e50981b14b0090ce4ef55d469cc8ceb4964944c76",
+    "range": [
+      1,
+      229
+    ],
+    "role": "Result shunt lower0 and original iterator provenance; not claimed to erase owning reuse for arbitrary underlying iterator.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/stdlib-supplement/result.rs",
+    "sha256": "4b8826db56f83239d45b3c510969f1f20a425447a2f678f37aa0d0bf83851acc",
+    "range": [
+      1,
+      2207
+    ],
+    "role": "Result collection delegates through shunt.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/raw_vec/mod.rs",
+    "sha256": "0c006d1bedcc8c1aa6d8f37ad5553e1b14c452c732745612cf23c4663c090965",
+    "range": [
+      1,
+      873
+    ],
+    "role": "Successful recorded capacities follow checked request/max/doubling; Global usable backing padding is not measured capacity. Zero-sized types excluded; all Tree container element widths are positive.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/vec/mod.rs",
+    "sha256": "4a27ab4bcce0908cb3338cb0c94983a00fb01bb3b25f70d37f62750eff3fd5ae",
+    "range": [
+      1,
+      4418
+    ],
+    "role": "Vec fresh clone delegates to slice exact-length allocation.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/slice.rs",
+    "sha256": "f8488ec0c88f2cd5ac8610c4c7be5561ecff35191ab4fa1c3be75b4799df26a6",
+    "range": [
+      1,
+      871
+    ],
+    "role": "Both nontrivial and trivial slice clone allocate requested len, recursive children clone. Success only; partial clone prefix separate.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/json-physical-source-v1/library/alloc/src/string.rs",
+    "sha256": "4436d55804bbac0c1691a251042ff82e30b5eab0d4d0bebc20b016b60a0c07a7",
+    "range": [
+      1,
+      3608
+    ],
+    "role": "String clone normalizes backing; clone_from may retain old capacity and is excluded.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/stdlib-supplement/str.rs",
+    "sha256": "02e739ddde026222b06b9fc8dd1c6a6206f919bb33b2e33dcc6163a24bbd29e2",
+    "range": [
+      1,
+      713
+    ],
+    "role": "Borrowed text creates fresh byte slice clone.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/impls.rs",
+    "sha256": "2f8e2ef9d343875bb996319e69feae0dee2287e2548cedd8d3c752b64812331c",
+    "range": [
+      1,
+      3173
+    ],
+    "role": "Derived ordinary Tree deserialize allocates new vector from cautious honest hints; owned String is moved, so arbitrary Value string remains a counterexample. No deserialize_in_place normalization claim.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/private/size_hint.rs",
+    "sha256": "350694a2abaad94ca5d33958710a5bb8973a2ea1a3dcc50a41405c943761b81f",
+    "range": [
+      1,
+      30
+    ],
+    "role": "Cautious preallocation cannot exceed exact honest source length. User-defined dishonest SeqAccess not covered.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/de.rs",
+    "sha256": "4998d7e252eb513be85b298e287048b4fb283882e9ba7df905f572f07200f3f3",
+    "range": [
+      1,
+      2714
+    ],
+    "role": "Raw JSON strings enter borrowed/copy visitor, producing fresh owned strings; parser scratch remains separate caller cost.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/value/de.rs",
+    "sha256": "ceda1bf415aafde89caa83bf275811b70d393717d4e1038e0c61822d2da02993",
+    "range": [
+      1,
+      1507
+    ],
+    "role": "Value sequence hint is exact final count, newly allocated native Vec; owned text keeps source capacity. Closed raw/clone/to_value provenance is required.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/value/ser.rs",
+    "sha256": "11f2b7daa1eba826d4086d5497f73729478dd7647bff77deccde5e47b0f126f2",
+    "range": [
+      1,
+      1063
+    ],
+    "role": "Serialized Tree strings are copied from borrowed str; no native String overcapacity transfer into Value.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_interned_wire.rs",
+    "sha256": "f25ee7b9c2ed3df02c3fed6b5bde739469f01281784054f8ef5fcb455927170b",
+    "range": [
+      1,
+      218
+    ],
+    "role": "V1 dictionary text cloned fresh at each reference; expanded arrays fresh. Every alias charged/owned separately, no sharing assumption.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_wire.rs",
+    "sha256": "5b8806b7d132e79afcddc36d30ae7341144294fa1e3852fdb61b13849e95e191",
+    "range": [
+      1,
+      383
+    ],
+    "role": "Lift/inflate parse cloned Value and substitute freshly serialized bytes Tree. Other strings keep closed decoder provenance.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_source_image.rs",
+    "sha256": "cdbef78d69fa070c31d31c37b30a9393a7cab5be025a7114ba1e04670ce3d4dc",
+    "range": [
+      1,
+      674
+    ],
+    "role": "Original V1 keeps closed control decoder values; V2 reparses full raw JSON after bounded chunk reconstruction. Then typed native Tree deserialization uses honest hints and owned strings from these paths.",
+    "status": "pinned source correspondence, not machine-verified Rust implementation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prepare_tree_producer_component_v3.py",
+    "sha256": "2b9788ca9e4d8e7dcd30acf1f7e40e46282f7ee4e42fe0c6e4dd62f7475b664f",
+    "range": "complete source/replay recipe and exact twelve-source comparison",
+    "role": "W6 selected Tree producer reproducible component",
+    "status": "LAB saved source replay match; no duplicate test execution counted"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-producers-v1/component-replay-v3-REPLAY-PREPARATION.json",
+    "sha256": "5cea59d4242d1269d62c465ad83139e9363e7c70f2d24f9ae6e8ba59eaa95a7b",
+    "range": "complete source/replay recipe and exact twelve-source comparison",
+    "role": "W6 selected Tree producer reproducible component",
+    "status": "LAB saved source replay match; no duplicate test execution counted"
   }
 ]

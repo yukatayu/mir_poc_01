@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-29 23:31 JST
+Last updated: 2026-10-29 23:59 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。粗いwhole予約案の棄却とcaller保持対応を維持し、容量検査の一時領域とTree保持量を新189宣言/28反例・57部品実行で条件付き接続。全生成経路の容量前提、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。funded scan/Tree保持量へ、選択した生成経路の容量条件を新117宣言/14反例・38部品実行で接続。全capture callerの網羅、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
@@ -45,6 +45,7 @@ W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doc
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Selected Tree producer capacity | TREE-PRODUCER-CAPACITY-JOIN-v1 | 条件付き117宣言/14反例、38部品138stage、source26/出力16/compiled2改変拒否。全capture callerと物理資源はOPEN |
 | Funded scan / Tree retained memory | FUNDED-SCAN-TREE-RESIDENT-JOIN-v1 | 条件付き189宣言/28反例・57部品実行。source9/output25とcompiled4改変拒否。全生成経路の容量由来/全caller/物理資源はOPEN |
 | Original caller frames / reservation falsifier | ORIGINAL-CALLER-FRAMES-JOIN-v1 / WHOLE-BUDGET-FEASIBILITY-v1 | 条件付き67宣言/14反例、数値70宣言/6反例、実2構成source照合。粗い予約案を棄却。public数値/全caller/物理資源はOPEN |
 | Selected reachable cache | REACHABLE-CACHE-JOIN-v1 | 新165宣言/18反例、9画像/45registry、既存90式再照合。選択経路H≤23449953。任意import/画像全体履歴/物理資源はOPEN |

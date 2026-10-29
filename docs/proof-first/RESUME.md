@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; funded scan scratch and Tree residency conditional
+# RESUME — W6 resumed; selected Tree producer capacities connected
 
-Updated 2026-10-29 23:31 JST
+Updated 2026-10-29 23:59 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。粗いwhole予約案の棄却とcaller保持対応を維持し、容量検査の一時領域とTree保持量を新189宣言/28反例・57部品実行で条件付き接続。全生成経路の容量前提、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。funded scan/Tree保持量へ、選択した生成経路の容量条件を新117宣言/14反例・38部品実行で接続。全capture callerの網羅、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Next establish the capacity premises for every relevant capture/clone/restore producer and instantiate remaining callee/caller frames. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. Next audit all recursive capture call-sites and instantiate remaining callee/caller frames. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-2026-10-29 23:03JSTの週次残量45%、指定10/30 Full reset使用0回。次回確認は10/30 00:03JST以降。Oracleは23:25JSTもGPT-6 Pro利用上限、prompt未送信。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
+2026-10-30 00:04JSTの週次残量43%、指定10/30 Full reset使用0回。次回確認は01:04JST以降。Oracleは23:25JSTもGPT-6 Pro利用上限、prompt未送信。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
 
 W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
@@ -188,3 +188,23 @@ Leanの予約binder prefix、record projection簡約、recursion depth、reducib
 Repository backup: caller-framesの13文書を4a149f6f48524f2c67f1ebe198ec8bf69d184ba8へcommit/push、ls-remote一致とcleanを確認（ORIGINAL-CALLER-FRAMES-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-29 23:38 JST: funded-scan-tree cutのfull make docsは6410入力不変・exit0、focused361は21項目成功。検証記録追記はfocused362で別検証。W6最終統合full/Oracleは未完了。
+
+## Selected Tree producer capacity evidence
+
+2026-10-29 23:59 JST: 成功したfresh Vec生成を、正しいsize hintと最終長以下のreserve要求から任意長の遷移として証明し、容量≤8*最終長を得た。各Tree constructorへ帰納的に合成して既存heap+72≤88*N+8*S_wireへ接続した。失敗途中の費用、元入力と返却値の同時保持は別に残す。
+
+nodeのborrowed-name tuple88byte→owned-name tuple96byteは既存領域再利用の条件を満たさず、新規Vecへ写す。新規cloneはString/Vecを長さどおりに確保する。owned collect、sequence/mapへの任意Vec移動、過剰予約したValue::String、clone_fromは容量を保持し得るため一般的な正規化とは扱わない。
+
+新117宣言/14反例をfresh/replay・46logで照合。現Rust1.94.1/serdeと実source26対応、26source/16出力改変拒否、実compileした過剰nominal/事前予約captureの2改変拒否を確認。38部品実行138stageのうち130は条件成立、8は反例として保持。旧275formal/Native全1750/計測全1790へ二重加算しない。
+
+9元画像の27Treeを先にcloneせずValueから直接取り出して復元し、全容量条件を確認。その27個の新規cloneも独立照合。raw JSON、V1 dictionary展開、V2 full JSON、fresh serializer文字列の由来を別々に確認した。有限例の最大値を全入力のpublic上限へ読み替えない。
+
+全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。
+
+Lean v1のmax_le名/opaque Propをv2で訂正。部品v1の計測shape helper/capture_vec不足、v2の既存MAX_COUNT重複をv3で訂正し、実capture_vecをそのまま追加した。source比較の初回は既存抽出部品に未使用Tree check/encode/decodeが含まれないことを検出。v2で使用する完全constructor prefixを照合し、未使用methodを明示的に範囲外とした。失敗source/logと成功条件を保持。
+
+再現: prepare_tree_producers_v1.py → check_tree_producers_formal_v2.py → prepare_tree_producer_component_v1.py / repair_tree_producer_component_v2.py → prepare_tree_producer_component_v3.py（再生成source全一致を確認） → build_tree_producer_component_v3.py → run_tree_producer_component_v3.py / run_tree_producer_mutants_v1.py → verify_tree_producer_source_v2.py → verify_tree_producers_v1.py → qualify_tree_producers_v1.py。成功cutはno-clobber、再現時は新cut名を使う。
+
+Repository backup: funded-scan-treeの13文書を77fe89aa9b3cdbdcd0a7832acffeb51647da4f46へcommit/push、ls-remote一致とcleanを確認（FUNDED-SCAN-TREE-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 00:05 JST: tree-producers cutのfull make docsは6410入力不変・exit0、focused363は21項目成功。検証記録追記はfocused364で別検証。W6最終統合full/Oracleは未完了。
