@@ -103189,5 +103189,75 @@
     "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
     "role": "W6 capture boundary ownership and shared graph prefixes",
     "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SOURCE-CAPTURE-FRAMES-JOIN-v1.json",
+    "sha256": "d625e0d5a253a74609fe8785eb7c4792240d755c58ebf31af8b0f3716ea09c82",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SOURCE-CAPTURE-CHECKPOINT-v1.json",
+    "sha256": "f96a8218fbe4657e371bdfeaae0262b83e76245247f2a817b6bf296566816f24",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source-capture-frames-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "a96ac1fb78003df4e6b11f7d2dcb2617e07bf1b8b1b494d420382f3dc7d3f493",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source-capture-frames-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "4ea7e414ce8110a6212afa453f548dffa67ac9a7b3ffbc84180248c7a5f42fab",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source-capture-frames-v1/READBACK-VERIFICATION-v2.json",
+    "sha256": "8ced0286dfc3e01be97eb537776e8cfd0daf9f81a1a97bcc6efe5de97bb4b4ed",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source-capture-frames-v1/NATIVE-VERIFICATION-v2.json",
+    "sha256": "ce50922fc864a787dc01cd087aadd33f539cf8d62f4733ba0594ef3777df4a42",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6SourceCaptureFrames_v2.lean",
+    "sha256": "0bce9db30f14d308353401b751128b11f6d28665cb9cf838d0839b777b9f0ced",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source_capture_reader_v2.py",
+    "sha256": "c77e29dd684ff5fa4d6b0507cc04b0f6c0555e47f00fab9b00391551e3d01db2",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_source_capture_v2.py",
+    "sha256": "d4876aea50734c618cd49ac8b2499043d673389042a368d0af14225d441d6f34",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/source-capture-frames-v1/OBSERVER-CORRECTION-v1.json",
+    "sha256": "8b313e710ca4cc864e7c11512799d3ca05ac1715aab838efafd4465adffca865",
+    "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
+    "role": "W6 original/prestaged capture scopes and failed prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
   }
 ]

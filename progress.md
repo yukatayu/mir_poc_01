@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-30 05:48 JST
+最終更新: 2026-10-30 06:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Record/DTOの所有移動と保持期間を202宣言/18反例・実389ケースへ接続し、失敗を含む共有graph26prefixを再照合。残るcallee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。original sourceと2種のprestaged captureの保持期間を121宣言/20反例・実43ケースへ接続。残るrestore/callee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
@@ -1363,3 +1363,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-30 05:19 JST: 8scalar/byte共通費用を151宣言/19反例・実47ケース/1096数値命題へ接続。旧56wrapper原本を照合。一般public入力/DTO/共有graphと全callerへ継続。
 
 - 2026-10-30 05:48 JST: Record/DTO所有移動・保持期間を202宣言/18反例・実389ケースへ接続。失敗を含むgraph26prefixを再照合。全caller/共通入力/物理資源へ継続。
+
+- 2026-10-30 06:17 JST: original/prestaged capture保持を121宣言/20反例・実43ケースへ接続。計測TLSを修正し、元関数とpeak/要求/内容を照合。残るcaller/共通入力/物理資源へ継続。
