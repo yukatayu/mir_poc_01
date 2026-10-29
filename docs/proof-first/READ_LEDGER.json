@@ -100080,5 +100080,75 @@
     "range": "complete source/actual outputs and independent readback",
     "role": "W6 prior-image shape/codec conditional join",
     "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SAVED-CACHE-PUBLIC-JOIN-v2.json",
+    "sha256": "fb58afa2a0f34a893d9b3724c1c576cd6373399452ea1941bb686000e025e04a",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SAVED-CACHE-CHECKPOINT-v1.json",
+    "sha256": "8f4e35fda9af36f99cc6138a9941d3e658f84458059f6a6bb0d750cd0e7a99b5",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "4deb2636032d7e08cd9a05b9eeba8e46d3d964ffa70a00b53566d3c069e9c70b",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "3c6fd43ce336d8d724e16b125db152b508684457a2cb8a31c13d952cf04a64d4",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/SOURCE-AST.json",
+    "sha256": "12afb091920dabda498aa61a1b3680eedc07b653d8986c388b508675b4d4f26b",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/SOURCE-BINDING-VERIFICATION-v1.json",
+    "sha256": "0634ce840fdf07fb33a9b1ee8fffeff5355e2556d1f315ead89d4aee2e3efce8",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/COMPOSITION-v1.json",
+    "sha256": "bc8af78a92cf42cbdcfc84c3c0d663002bfe5464bb5541e92a63a6f1eba7e48b",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved-cache-public-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "09db406920cd5a6dd11eeb4a05a55b0741d52f47048b0577cde8f3b6872c47fc",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/saved_cache_reader_v1.py",
+    "sha256": "cadeb87bb63be39b34a366592be7bdc516080a676415d351ad79ea9e1c2dd7bc",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_saved_cache_v2.py",
+    "sha256": "0481f14fe10cff9f4ab7e3804324dab601b418a5c1bb420df4c461c8f1dcb8e2",
+    "range": "complete source/actual output/independent native-geometry and90formula readback",
+    "role": "W6 savedcache conditional native charge join",
+    "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
   }
 ]

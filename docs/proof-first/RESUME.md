@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; prior-image geometry conditionally accepted
+# RESUME — W6 resumed; saved-cache cost conditionally connected
 
-Updated 2026-10-29 21:06 JST
+Updated 2026-10-29 21:31 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式と完全初回画像に続き、fresh/V1/V2画像の条件付き事前形状を新104宣言/16反例・実codec24ケースで照合。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像に続き、保存cacheのnative形状と条件付き費用Hを新45宣言/16反例で結合し、既存全90費用式を再照合。到達可能履歴・共通whole入力条件・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -64,10 +64,10 @@ python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation
 
 The command verifies each archive and protected file before restoring, preserves exact bytes/modes/mtime, and will not overwrite an existing different file. It requires enough free space for each selected cache plus a 512MiB margin. Never substitute a new build for archived evidence or rewrite successful receipts. The retained executables remain at their original paths; the archived .rlib/.rmeta/.d files must be restored for direct rustc components. No restoration is needed merely to read the research records.
 
-## Remaining work after admitted prior-image geometry
+## Remaining work after conditional saved-cache join
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole and fresh/V1/V2 pre-typed/typed entry geometry are accepted conditionally. Connect saved-cache native shape/cost H and prove reachable retained histories; keep independent registry custody. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Next establish reachable histories and common whole-input parameters, then allcaller lifetimes/usable physical funding; keep independent registry custody. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -114,3 +114,19 @@ EntryのA/F/N≤478150656、S≤8598323200は閉じた型補完・初回source�
 再現: check_prior_image_formal_v2.py → run_prior_image_codec_v1.py → run_prior_image_mutants_v1.py → verify_prior_image_v1.py → PRIOR-IMAGE-SHAPE-JOIN-v1.json。成功cutはno-clobber、再現時は新cut名を使う。
 
 2026-10-29 21:13 JST: prior-image cutのfull make docsは6410入力不変・exit0、focused353は21項目成功。metadata追記はfocused354で別検証する。Oracleは21:07も利用上限で最終review未実施。
+
+## Saved cache cost evidence
+
+2026-10-29 21:31 JST: 保存cacheを実行用instance/独立registryと分け、全59型constructor/36named/72variantを現3module・14import/aliasへ照合。省略Noneと透明Option/Boxを含むnative形状から費用Hを導き、既存6registry項と90費用式の残項を保持して代入した。
+
+新45宣言/16反例（100log）と90数値式（70log）をfresh/replayで照合。45実registryのnative clone測定、9保存画像、7追加DATA例、source25/reader6/数値10/合成12改変拒否を受理。27registry組・36実測区間を再利用し、新Native全体実行はない。
+
+H=225726309597184は約205TiBの保守的な累積clone要求上限であり、使用可能な物理予約ではない。閉じた型/初回又はguarded入力条件、独立current registryを要する。任意mutable履歴の到達可能性、共通whole入力の全費用、全caller保持寿命/work/host/OS/物理資源・進行は未受理。既存cacheと同じことを一般の保存cacheへ仮定せず、spent/historyを残す。
+
+Lean namespace不足/冗長dsimpと、readerの改変用nested型構築の構文誤りはsuccessorで訂正。90式の最初のrunnerは16MiB生成物上限で停止し、失敗を保持。事前登録済み24MiB上限のrunnerを選び直し、同一proof/inputの新cutで両回成功。source/type/import対応と意味条件は弱めない。
+
+再現: check_saved_cache_formal_v3.py → verify_saved_cache_v2.py → compose_saved_cache_v1.py → check_saved_cache_readback_v2.py → qualify_saved_cache_v2.py → SAVED-CACHE-PUBLIC-JOIN-v2.json。成功cutはno-clobber、再現時は新cut名を使う。
+
+Repository backup: prior-imageの13文書を458a8c86910363e9962cc0cf3cffef704dc2eb3cへcommit/pushし、ls-remote一致とcleanを確認（PRIOR-IMAGE-PUSH-v1）。研究ソース/proof/raw/log/cache archiveはGit外のローカル保持。
+
+2026-10-29 21:38 JST: saved-cache cutのfull make docsは6410入力不変・exit0、focused355は21項目成功。検証記録追記はfocused356で別検証。W6最終統合full/Oracleは未完了。
