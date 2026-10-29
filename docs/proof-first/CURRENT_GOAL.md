@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：再開・PublisherとFlowの所有移動・置換を接続
+# W6 — 秘密を含む観測とdebug：再開・復元時の参照Vecと比較保持を接続
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。PublisherImageとFlowの所有移動・置換・比較保持を159宣言/18反例・実56ケース/402有限命題へ接続。実行後raw容量超過は失敗記録のまま、独立読戻しを別受理。残るcallee/全caller、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。M9/Publisher復元と参照Vecの寿命を41宣言/14反例・実48ケース/184有限命題へ接続。約505MBの原ログを完全読戻しし、返却同一の寿命改変12件を拒否。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
-Updated 2026-10-30 07:13 JST
+Updated 2026-10-30 07:34 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -60,3 +60,5 @@ Updated 2026-10-30 07:13 JST
 - 2026-10-30 06:45 JST: 255個の非primitive Tree返却関数内の1262呼出しを分類し、一時値10箇所と11補助関数の全bodyを固定。json_treeのraw文字列、registry key、received candidate/preface、FlowBundle/encodeの一時値が残る式の範囲を対応した。Registry::check_endpoint内部の追加Tree生成も別に数える。 借用receiverとなる一時値はcapture_inert直後に必ず解放されるわけではない。外側nodeと後続fieldまで残る式、let初期化のsemicolonで解放される式、callback/match arm内で解放される式を分けた。endpointは空keyならcaptureを省略し、非空なら不一致でもcapture費用を払い、比較終了後にTreeを解放する。 残る補助関数内部/restore/calleeと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
 
 - 2026-10-30 07:13 JST: 14個の補助関数全bodyを固定し、PublisherImageのexpected比較Vec、restrictionsのVecから配列への移動、FlowのDATA clone後のfield置換、dormant復元と再capture比較を対応した。返却値・一時値・消費した入力を分け、3関数のmarker付き本体を元sourceへ厳密に戻せることを確認。2改変も別にcompileした。 PublisherImageのexpectedは全field生成後まで残り、restrictionsを配列へ移すと子Treeは残ってVec backingだけが解放される。Flow recaptureでは新しいhexの生成中も置換前のhexを保持する。dormant復元は入力DTOを移動し、復元bufferと再capture比較DTOを同時保持した後、比較DTOだけを解放する。 残るtransitive callee/restoreと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
+
+- 2026-10-30 07:34 JST: 14個の復元関数全bodyを固定し、M9のfield参照Vec4個、expected Tree、返却nativeと再capture比較の保持を対応。PublisherImageのexpected Vec、復元したrestrictionsとnative、比較DTOも接続した。2つの通常本体と3つの寿命改変を別関数としてcompileし、markerと明示改変を除けば元source全体へ戻ることを照合した。 field参照Vecは参照先Treeを所有・複製せず、8byte pointerを5個ずつ持つ4Vecの計160byteを独立に保持する。early encodeの一時Vecはsemicolonで消えるが、expectedとfield参照Vecはnative生成・再captureまで残る。比較用Tree/DTOは比較後に解放され、成功返却にはnativeだけが残る。 残るtransitive helperと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust型/評価/drop/serde/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。

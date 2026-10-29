@@ -103399,5 +103399,75 @@
     "range": "complete aggregate proofs,current source and56normal12control full native originals; rawcap failure retained",
     "role": "W6 auxiliary aggregate ownership and replacement",
     "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/RESTORE-COMPARISON-SCOPES-JOIN-v1.json",
+    "sha256": "283007e6f06420e28eab8917217366c495cedf306c90017f538b308a75e1a02a",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/RESTORE-COMPARISON-CHECKPOINT-v1.json",
+    "sha256": "c36670bf023d70017f8a8c87796e540a48591533b056c8169c7916209217bff4",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore-comparison-scopes-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "41a98809e5e9e8df3648215942b9d50bee0c5381103e76e77d98634ae077c518",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore-comparison-scopes-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "0038a8d2c06204a0385c93d6a10eddb937ac9cc387b0005153a8fe0dd8ea7676",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore-comparison-scopes-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "c425a4d0793d05166ec3b94620daa1fbb97b9786ea4dcd0216267375ca99ef26",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore-comparison-scopes-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "a9b93ad7a38fa19216c8f1094d3dc71d8af79fc6fa4e126ee9a7087d57bbec3b",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6RestoreComparison_v2.lean",
+    "sha256": "5fc90b8639078b098818aa1787544de96f18c0fc189b912dae50f7ba9c0fa693",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore_reader_v1.py",
+    "sha256": "8a0cdd01ef9924910be6d735e10f3a62a3bf9cd25781722db38ac1762852f7e7",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_restore_comparison_v1.py",
+    "sha256": "6373fc10391a4efa36772786e8e323692c119d4881d9633b460760ba9ed22aba",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/restore-comparison-scopes-v1/OBSERVER-RESOURCE-REVISION-v3.json",
+    "sha256": "2dfeac0c0e73bed65228423dd2bbf8e64cf832813133ac11de2b32894b812495",
+    "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
+    "role": "W6 restore comparison and reference backing",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
   }
 ]
