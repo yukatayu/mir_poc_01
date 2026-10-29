@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-10-29 18:54 JST
+Last updated: 2026-10-29 19:39 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
@@ -14,6 +14,7 @@ W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/
 
 | Current W6 finite LAB evidence | Reproduction / receipt | Boundary |
 |---|---|---|
+| Additional paused generated cache | ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1 | Lean cache4553/部品binary17を全byte照合済みarchiveへ保存。再実行/hash照合前の復元はRESUME。source/proof/raw/log保持、W6 pause |
 | Paused build cache | pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json | 5177fileをexact archiveへ一時退避。証拠binary281本/研究原本を保持。再build前のrestore --confirmはRESUME参照。受理済み試験の再実行ではない |
 | Current native regression | NATIVE63-FULL1750-ACCEPTANCE-v1; native-full1750-v1/PIN | 全1750/0failed/0ignored、6575source/実binary/7488raw/21plain/53stageを受理。再起動不要。Native59/60/62の旧失敗は保持 |
 | Current independent readers | NATIVE63-FULL1750-READER-QUEUE-MANIFEST-v1 / RESULT-v1 | 全45readerを現原本へ新規実行・独立照合済み。旧prefix成功を流用しない |

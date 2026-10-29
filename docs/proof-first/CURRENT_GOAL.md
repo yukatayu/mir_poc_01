@@ -6,7 +6,7 @@ W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/
 
 2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
 
-Updated 2026-10-29 18:54 JST
+Updated 2026-10-29 19:39 JST
 
 - Authority: latest owner pause after accepted initial Backend; retain RUN_CODEX_MIRROREA and resume prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -18,3 +18,5 @@ Updated 2026-10-29 18:54 JST
 
 - Pause receipt: OWNER-PAUSE-20261029-v2.json / pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json。
 - 再開後、Native63依存cache又は計測targetを要する再build/依存hash再検査の前に、cleanup_w6_build_cache_20261029_v1.py restore --confirmでexact archiveをno-clobber復元する。保存済みの試験成功は維持するが、整理したcacheが元pathに存在すると仮定しない。
+
+- Additional storage checkpoint (2026-10-29 19:39 JST): ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。

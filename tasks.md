@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-29 18:54 JST
+最終更新: 2026-10-29 19:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -26,7 +26,7 @@ W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
 | Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 復元と初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabric/完全Backendまで結合。完全初回画像→public初期履歴/cache/全caller物理資源。再開後の最初の対象 |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | Backend focused342受理。今回の停止記録full make docs通過（6410入力不変）。以後の文書差分はfocused343で確認。W6最終統合fullは再開後 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | Backend focused342受理。今回の停止記録full make docs通過（6410入力不変）。追加storage後の文書検証はADDITIONAL-STORAGE-DOCS-RECEIPT-20261029-v1へ保存。W6最終統合fullは再開後 |
 | Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 18:34:16JSTもOracle Pro5of5/Usage limit reached。最終review未実施、停止中のpollingなし |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
@@ -36,7 +36,7 @@ Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のr
 
 ## user decision gates
 
-容量: 再生成可能Cargo cacheだけを5177file（計測2811/native63非実行2366）整理。全内容をhash照合済みの2archive（計817469713byte）へ保持し、証拠用実行ファイル281本は元pathに残した。Canon221/閉じた5文書/Native63全6575source/主要6receiptの計6807fileと119要件の承認rowを保持。研究ソース・証明・raw原本・ログは削除しない。 archive作成前からの正味容量改善はroot約1.50GiB/tmpfs約0.57GiB。整理後の確認時点でroot約5.3GiB/tmpfs約2.0GiB空き。並行する他作業により空きは変動する。 再開後、Native63依存cache又は計測targetを要する再build/依存hash再検査の前に、cleanup_w6_build_cache_20261029_v1.py restore --confirmでexact archiveをno-clobber復元する。保存済みの試験成功は維持するが、整理したcacheが元pathに存在すると仮定しない。
+容量: ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。
 
 Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証も現在はowner pause。再開後の技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 

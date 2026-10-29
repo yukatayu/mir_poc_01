@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-29 19:05 JST
+最終更新: 2026-10-29 19:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -1327,3 +1327,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-29 18:54 JST: owner指示で完全Backendの検証済みcut後に停止。再生成可能Cargo cache5177fileをexact archiveへ退避し、研究原本と281実行ファイルの保持を再照合。復元手順・残課題を保存。W6未完了。
 
 - 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
+
+- 2026-10-29 19:39 JST: 再開対象は研究でなく追加cache整理とownerに確認。4553 Lean cache/17部品binaryをexact archiveへ保存し正味約4.10GiB削減、proof/source/raw保持。swap変更なし、W6 pause維持。

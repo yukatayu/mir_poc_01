@@ -447,41 +447,31 @@
       }
     },
     "documentation_validation_current": {
-      "at": "2026-10-29T10:06:06.980154+00:00",
-      "status": "passed full pause cut plus focused343/344/346 final metadata and push-receipt deltas",
+      "at": "2026-10-29T10:45:26.399801+00:00",
+      "status": "passed full additional-storage cut and focused347/348 final documentation",
       "full": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
-        "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
-      },
-      "focused": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused343-owner-pause.json",
-        "sha256": "c525fa274b908a81f10929eaad9b1fbd59ba2e71b79a361c7847934abd6ed514"
-      },
-      "full_input_files": 6410,
-      "scope": "exact full input cut plus final docs-only delta; does not imply whole W6 acceptance",
-      "owner_pause": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
-        "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
-      },
-      "unverified": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v331.json",
-        "sha256": "683f711548acd3a6684d020f07f9390e666e136374196dc34ba24ed384e4f720"
-      },
-      "git_diff_check": true,
-      "whole_W6_complete": false,
-      "git_backup_covers_external_research": false,
-      "prior": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-DOCS-RECEIPT-v2.json",
-        "sha256": "c812b8bbe4b125c646f56975e988fcb56998cdaf584e7702f9b5caf0b98b727b"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+        "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
       },
       "focused_final": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused346-owner-pause-push.json",
-        "sha256": "a1223503deb477cd666ae0d7f15a114288de87795c76d09f422b92480f0476bf"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
+        "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
       },
-      "retained_failed_header_check": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused345-owner-pause-push.json",
-        "sha256": "de98c2e1b2f22b713aee3413aef29532358d1d29ce9b6b7c05470d3e7baccbb2"
-      }
+      "checkpoint": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+        "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+      },
+      "research_sizes": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
+        "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
+      },
+      "retained_docs_draft_failure": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
+        "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+      },
+      "whole_W6_complete": false,
+      "research_resumed": false,
+      "swap_changed": false
     },
     "new_exact_claim_native_test": {
       "status": "passed component and all47; not a full1593library run",
@@ -1716,8 +1706,8 @@
       "main_replay_condition_satisfied": true
     },
     "documentation_full_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
-      "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+      "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
     },
     "native_active_kernel_candidate": {
       "status": "current69combinedPASS/sourcebinaryfrozen; boundedkernel only; Nativewire/wholeW6notaccepted",
@@ -8385,45 +8375,80 @@
     "storage_pause_current": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json",
       "sha256": "f23263e7318a9e92fb8c2c984b8557f71b49488e35dafbd5b7dfaac9c0486614"
+    },
+    "documentation_validation_before_additional_storage_20261029": {
+      "at": "2026-10-29T10:06:06.980154+00:00",
+      "status": "passed full pause cut plus focused343/344/346 final metadata and push-receipt deltas",
+      "full": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
+        "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+      },
+      "focused": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused343-owner-pause.json",
+        "sha256": "c525fa274b908a81f10929eaad9b1fbd59ba2e71b79a361c7847934abd6ed514"
+      },
+      "full_input_files": 6410,
+      "scope": "exact full input cut plus final docs-only delta; does not imply whole W6 acceptance",
+      "owner_pause": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
+        "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
+      },
+      "unverified": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v331.json",
+        "sha256": "683f711548acd3a6684d020f07f9390e666e136374196dc34ba24ed384e4f720"
+      },
+      "git_diff_check": true,
+      "whole_W6_complete": false,
+      "git_backup_covers_external_research": false,
+      "prior": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-DOCS-RECEIPT-v2.json",
+        "sha256": "c812b8bbe4b125c646f56975e988fcb56998cdaf584e7702f9b5caf0b98b727b"
+      },
+      "focused_final": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused346-owner-pause-push.json",
+        "sha256": "a1223503deb477cd666ae0d7f15a114288de87795c76d09f422b92480f0476bf"
+      },
+      "retained_failed_header_check": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused345-owner-pause-push.json",
+        "sha256": "de98c2e1b2f22b713aee3413aef29532358d1d29ce9b6b7c05470d3e7baccbb2"
+      }
+    },
+    "additional_storage_current": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+      "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+    },
+    "documentation_full_before_additional_storage_20261029": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
+      "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
     }
   },
   "predecessor_snapshot_notice": "Root predecessor proof/baseline/oracle/acceptance fields retain the closed Astra research cut; current implementation status is in implementation. Historical evidence is not current native acceptance.",
   "documentation_validation_current": {
-    "at": "2026-10-29T10:06:06.980154+00:00",
-    "status": "passed full pause cut plus focused343/344/346 final metadata and push-receipt deltas",
+    "at": "2026-10-29T10:45:26.399801+00:00",
+    "status": "passed full additional-storage cut and focused347/348 final documentation",
     "full": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
-      "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
-    },
-    "focused": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused343-owner-pause.json",
-      "sha256": "c525fa274b908a81f10929eaad9b1fbd59ba2e71b79a361c7847934abd6ed514"
-    },
-    "full_input_files": 6410,
-    "scope": "exact full input cut plus final docs-only delta; does not imply whole W6 acceptance",
-    "owner_pause": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
-      "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
-    },
-    "unverified": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v331.json",
-      "sha256": "683f711548acd3a6684d020f07f9390e666e136374196dc34ba24ed384e4f720"
-    },
-    "git_diff_check": true,
-    "whole_W6_complete": false,
-    "git_backup_covers_external_research": false,
-    "prior": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-DOCS-RECEIPT-v2.json",
-      "sha256": "c812b8bbe4b125c646f56975e988fcb56998cdaf584e7702f9b5caf0b98b727b"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+      "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
     },
     "focused_final": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused346-owner-pause-push.json",
-      "sha256": "a1223503deb477cd666ae0d7f15a114288de87795c76d09f422b92480f0476bf"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
+      "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
     },
-    "retained_failed_header_check": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused345-owner-pause-push.json",
-      "sha256": "de98c2e1b2f22b713aee3413aef29532358d1d29ce9b6b7c05470d3e7baccbb2"
-    }
+    "checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+      "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+    },
+    "research_sizes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
+      "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
+    },
+    "retained_docs_draft_failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
+      "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+    },
+    "whole_W6_complete": false,
+    "research_resumed": false,
+    "swap_changed": false
   },
   "oracle_latest_readonly": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261027-v18.json",
@@ -8486,8 +8511,8 @@
     }
   },
   "documentation_full_current": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
-    "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+    "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
   },
   "documentation_full_before_storage_20261027": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-combined-v1/RESULT.json",
@@ -8847,5 +8872,50 @@
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-FIRST-PUSH-v1.json",
       "sha256": "8730b93a85889ebeaa5a446b2ec529a376764938ddd9da2bb2d0008a86a4fe3d"
     }
+  },
+  "documentation_validation_before_additional_storage_20261029": {
+    "at": "2026-10-29T10:06:06.980154+00:00",
+    "status": "passed full pause cut plus focused343/344/346 final metadata and push-receipt deltas",
+    "full": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
+      "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+    },
+    "focused": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused343-owner-pause.json",
+      "sha256": "c525fa274b908a81f10929eaad9b1fbd59ba2e71b79a361c7847934abd6ed514"
+    },
+    "full_input_files": 6410,
+    "scope": "exact full input cut plus final docs-only delta; does not imply whole W6 acceptance",
+    "owner_pause": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
+      "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
+    },
+    "unverified": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v331.json",
+      "sha256": "683f711548acd3a6684d020f07f9390e666e136374196dc34ba24ed384e4f720"
+    },
+    "git_diff_check": true,
+    "whole_W6_complete": false,
+    "git_backup_covers_external_research": false,
+    "prior": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-DOCS-RECEIPT-v2.json",
+      "sha256": "c812b8bbe4b125c646f56975e988fcb56998cdaf584e7702f9b5caf0b98b727b"
+    },
+    "focused_final": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused346-owner-pause-push.json",
+      "sha256": "a1223503deb477cd666ae0d7f15a114288de87795c76d09f422b92480f0476bf"
+    },
+    "retained_failed_header_check": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused345-owner-pause-push.json",
+      "sha256": "de98c2e1b2f22b713aee3413aef29532358d1d29ce9b6b7c05470d3e7baccbb2"
+    }
+  },
+  "additional_storage_current": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+    "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+  },
+  "documentation_full_before_additional_storage_20261029": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
+    "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
   }
 }

@@ -1,6 +1,6 @@
 # RESUME — W6 owner pause after accepted initial Backend
 
-Updated 2026-10-29 19:05 JST
+Updated 2026-10-29 19:39 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
@@ -38,6 +38,19 @@ Current source/cost: native63-semantic-source-v2で33source/23対応/153出力�
 The selected initial ST Backend has N≤37932/S≤3925183, retaining both snapshots and four authorities. INITIAL-BACKEND-SHAPE-JOIN-v1 records 554 certificate declarations, 16 falsifiers, 16 native capture cases (9 shape-qualified / 7 outside), two compiled source mutations and nine original images. This does not establish arbitrary restored-cache reachability or whole-image/physical funding.
 
 ## Cache cleanup and exact restoration
+
+ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。
+
+追加整理後の復元条件（初回pauseのCargo cacheとは別）:
+
+```bash
+python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/cleanup_additional_lean_cache_20261029_v1.py restore --confirm
+python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/cleanup_component_binaries_20261029_v1.py restore --confirm
+```
+
+Lean側は必要に応じて `--prefix formal-small-disk-runtime-20261025/` 等で登録済みsubsetを復元できる。未復元pathを読む古いverifierは失敗するので、receiptの上限・前提を変えず原byteを先に復元する。
+
+再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。
 
 再生成可能Cargo cacheだけを5177file（計測2811/native63非実行2366）整理。全内容をhash照合済みの2archive（計817469713byte）へ保持し、証拠用実行ファイル281本は元pathに残した。Canon221/閉じた5文書/Native63全6575source/主要6receiptの計6807fileと119要件の承認rowを保持。研究ソース・証明・raw原本・ログは削除しない。
 
@@ -77,3 +90,5 @@ OWNER-PAUSE-20261029-v2 and QUOTA-OWNER-POLICY-v5 supersede autonomous schedulin
 停止記録のfull make docsは6410入力不変・exit0で通過。以後のcommit/push許可・検証結果の文書差分はfocused343で確認し、W6最終統合full/Oracleは未完了のまま保持する。
 
 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
+
+Additional disk analysis (2026-10-29 19:39 JST): 調査開始時、root使用約173.1GiB/一般利用者の空き約5.4GiB。Mirrorea研究作業85.3GiB（W6 63.2/W4等22.1）、Codex関連19.4GiB（session記録16.8）、swap.img16GiB。W6の圧縮済み保存物23.0GiB、JSON記録9.0GiB、保存image9.3GiB等が大きい。四世代のfull native実行記録は合計16.4GiBで前記分類の内数。通常のtargetディレクトリはroot上約0.14GiB。tmpfs約5.9GiBはRAM/swap側でroot使用量に加算しない。 swapは調査開始時約7.6GiB使用、整理中に約9GiBへ変動したが変更なし。sudoによるroot側全量auditはpasswordが必要で実行不可、読取可能範囲のduとstatvfsを区別する。rootの予約領域約8.9GiBはdfの一般利用者空きに含まれない。研究原本・旧成功/失敗・会話記録・他project・OS設定は削除しない。任意の全artifactを再生成可能と認定したものではない。

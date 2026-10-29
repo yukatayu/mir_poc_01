@@ -22,6 +22,8 @@ Canon README/MAPとtask-specific theory07/architecture08、RUN/00_START/workstre
 
 ## Actions taken
 
+2026-10-29 19:39 JST: ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。
+
 2026-10-29 18:54 JST: 完全Backendの検証済みcutでsemantic作業を止め、明示許可された再生成可能Cargo cacheだけを検証済み圧縮archiveへ退避した。再生成可能Cargo cacheだけを5177file（計測2811/native63非実行2366）整理。全内容をhash照合済みの2archive（計817469713byte）へ保持し、証拠用実行ファイル281本は元pathに残した。Canon221/閉じた5文書/Native63全6575source/主要6receiptの計6807fileと119要件の承認rowを保持。研究ソース・証明・raw原本・ログは削除しない。
 
 2026-10-29 18:32 JST: 選択Source4の完全Backendを、Local/Owner/Relation/Designated/FrozenInstanceの全fieldと事前文字列・件数・分岐条件から導出。instanceとcacheの両snapshot、元/現owner plan、四authorityを独立に保持した。
@@ -215,6 +217,8 @@ W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/
 ASTRA-JOINT-REVIEW-v1は動的suffix/close予約を可逆な候補Aとして選び、同一journal内の静的枠分割Bを最小代替として保持。malformed/core count不一致、policy proposal/accepted decision、純粋dispatch/実crash phase、closeとowning quarantineを区別する。以前の作業証拠は日時つき履歴に保持。
 
 ## Files changed
+
+2026-10-29 19:39 JST: LAB10文書/台帳、外部workrootのaudit/manifest/archives/restore scripts。source/proof/rawとCanon/closed cuts/119承認rows不変。規範変更なし。
 
 2026-10-29 18:54 JST: LAB13文書/台帳と外部workrootの停止receipt/cleanup script・manifest・archive。Native63source、Canon221、閉じた5文書、119承認row不変。規範変更なし。
 
@@ -469,6 +473,8 @@ Root production/Canonは不変。external formal-v1へW6ActivationCatalogを追�
 - `docs/project-status.md`
 
 ## Commands run
+
+2026-10-29 19:39 JST: disk-usage-analysis-20261029-v1のdu/statvfs/df/free/lsblk/findmnt/swapon/docker audit。cleanup_additional_lean_cache_20261029_v1.py prepare → retire --confirm → verify、cleanup_component_binaries_20261029_v1.py prepare → retire --confirm → verify。各manifestとarchive全hashを照合。full docs/focused347の結果は別receiptへ。
 
 2026-10-29 19:00 JST: full make docsが完了。最新の文書差分はcheck_docs_focused.py docs-validation-focused343-owner-pause.jsonとgit diff --checkで検査する。
 
@@ -935,6 +941,10 @@ focused-docs-v105はprogress.md更新日時が08:04実logより古い07:45のた
 run_native_active_originals_rebuild_v1.pyとsame-binary child-only/child-and-parent controls、verify_active_step_tuple_v1.py、run_native_frozen_gzip_v1.pyの全82と現全1628、check_formal_runtime_bounded_v3.py formal-fresh-v48、replay_formal_runtime_bounded_v3.py formal-fresh-v48 formal-replay-v48-a、verify_initialized_outcome_formal_v1.py、run_initialized_outcome_campaign_v1.py、verify_initialized_outcome_campaign_v1.py。source/binary/argv/logは各RESULT/PIN。旧compiler43/44のarchive/readback/--confirm retireは独立receiptへ全対象/資源auditを保存。
 
 ## Evidence / outputs / test results
+
+2026-10-29 19:45 JST: 追加storageのfull make docsは6410入力不変/exit0で通過。研究領域全体のduは85.296→81.252GiB（manifest/復元記録等を含む実減約4.04GiB）。生成物からarchiveを差し引いた削減4.10GiBとは区別する。最終文書metadataはfocused348へ分ける。
+
+2026-10-29 19:39 JST: 調査開始時、root使用約173.1GiB/一般利用者の空き約5.4GiB。Mirrorea研究作業85.3GiB（W6 63.2/W4等22.1）、Codex関連19.4GiB（session記録16.8）、swap.img16GiB。W6の圧縮済み保存物23.0GiB、JSON記録9.0GiB、保存image9.3GiB等が大きい。四世代のfull native実行記録は合計16.4GiBで前記分類の内数。通常のtargetディレクトリはroot上約0.14GiB。tmpfs約5.9GiBはRAM/swap側でroot使用量に加算しない。 ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 Lean4553個/406内容objectは121.19MiB、terminal component17本は556.86MiB。後者は135038保護file、前者はpaired Lean source4553と先行6807保護fileを操作前後で全照合。研究原本の再生成や新規Native/Lean testではない。
 
 2026-10-29 19:00 JST: 停止記録のfull make docsは6410入力不変・exit0で通過。以後のcommit/push許可・検証結果の文書差分はfocused343で確認し、W6最終統合full/Oracleは未完了のまま保持する。
 
@@ -1614,6 +1624,10 @@ native-foundation-complete-v1の統合25件はPASS、全source不変、保存bin
 
 ## What changed in understanding
 
+2026-10-29 19:40 JST: docs同期draftはarchive名をdirectoryの部分一致から推測して失敗したため、PREPARED.jsonの明示archive.pathを使うv2へ訂正。失敗時はbackupのみでrepo変更なし、原script/失敗receiptを保持。cleanup/元archive/sourceは変更しない。
+
+2026-10-29 19:39 JST: 主容量はtargetでなく複数世代の実行原本・保存画像・台帳・圧縮済み保存物。root外のtmpfsと固定swap fileを別会計とし、生成cacheだけをexact archiveへまとめても約4.10GiB削減できる。
+
 2026-10-29 18:54 JST: 現在の実行停止はownerの明示指示によるもので、W6完了や技術上のblockerではない。cache整理後の依存pathは一時不在であり、保存済みの受理結果と将来buildの準備状態を分ける。
 
 2026-10-29 18:32 JST: 準備draftの条件式空白とPresentationPoliciesの3field名、存在しないReceiptState選択を実schemaへ訂正。source監査はnativeの展開済みSerializeと外部型のderive属性を区別し、list keyをtupleへ、Record macroを実field.image表記へ修正。登録時に存在しなかったtypedcompletion略名は実ENVELOPE-JOINと全151型sourceへ明示接続。旧draft/失敗cutを保持し、上限や入力条件の弱化なし。
@@ -1868,6 +1882,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 
 ## Open questions
 
+2026-10-29 19:39 JST: swapは調査開始時約7.6GiB使用、整理中に約9GiBへ変動したが変更なし。sudoによるroot側全量auditはpasswordが必要で実行不可、読取可能範囲のduとstatvfsを区別する。rootの予約領域約8.9GiBはdfの一般利用者空きに含まれない。研究原本・旧成功/失敗・会話記録・他project・OS設定は削除しない。任意の全artifactを再生成可能と認定したものではない。 W6の全画像/全caller資源/他profile/最終reviewは引き続き未完了。
+
 2026-10-29 18:54 JST: 完全初回画像の合成、共通public初期履歴/cache、全callerの保持寿命・非割当work・host/OS・物理資源と進行、他profile、全要件/出所/証明の最終照合、計測構成1790の必要回帰、W6最終統合docs/独立Oracle reviewは未完了。
 
 2026-10-29 18:32 JST: 選択Source4の初回ST、事前String256/既定collection32と個別件数、35分岐条件、固定public admitted/plan、Rust/serde/compiler/型対応が前提。合成したcacheエラー2caseは形状内でも実Source4到達性を受理しない。新Nativeはcapture componentであり、sourceIssue/Body/network/authority受理ではない。完全初回画像、共通public初期履歴/cache・全caller保持/work/host/物理資源/進行、他profile/最終Oracleは未完。
@@ -1973,6 +1989,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparison/runtime/setup/test-host/physical、Native61全体/45reader/workspace、最終source/proof/docs/Oracleが残る。
 
 ## Suggested next prompt
+
+2026-10-29 19:39 JST: 追加整理は完了した保存状態から読む。W6研究は明示再開まで停止。再開時にはRESUMEの3種の復元条件を確認。
 
 2026-10-29 18:54 JST: 明示的なW6再開後、RESUME/停止receiptとcache復元条件を確認し、完全初回画像の合成から続ける。自動再開なし。
 
@@ -2082,6 +2100,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Plan update status
 
+2026-10-29 19:39 JST: LAB plan/indexへ容量内訳と追加cleanup/復元前提を同期。Canon/Plan250/研究queue不変。
+
 2026-10-29 18:54 JST: LAB plan/indexの現在位置をowner pauseへ同期、履歴と既存依存順を保持。Canon/Plan250不変。
 
 2026-10-29 18:32 JST: LAB plan/indexへBackendの条件付き形状を同期。Canon/Plan250不変。
@@ -2184,6 +2204,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Documentation.md update status
 
+2026-10-29 19:39 JST: Documentation.md 更新不要。既存のowner pause/原本保持/再開参照は正しく、詳細復元条件をRESUMEへ集約。
+
 2026-10-29 18:54 JST: 停止状態、保持済み証拠と未完了項目を同期。
 
 2026-10-29 18:32 JST: 最新の有限証拠と残課題を同期。
@@ -2283,6 +2305,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: M9証拠と全Native実行を区別。
 
 ## docs/project-status.md update status
+
+2026-10-29 19:39 JST: docs/project-status.md 更新不要。phase/受理/owner pause状態不変。resource detailはprogress/tasks/RESUMEへ同期。
 
 2026-10-29 18:54 JST: 現在地をowner pauseへ同期。派生snapshotだけで、全体phaseやCanonical decisionは不変。
 
@@ -2384,6 +2408,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## progress.md update status
 
+2026-10-29 19:39 JST: 容量整理とowner clarificationを実日時logへ追加。
+
 2026-10-29 18:54 JST: 停止状態/着手条件と実日時logを同期。
 
 2026-10-29 18:32 JST: snapshotと実日時logを同期。
@@ -2483,6 +2509,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: current summaryと実date log。大局phase不変。
 
 ## tasks.md update status
+
+2026-10-29 19:39 JST: 全体を現況snapshotとして再書込み。容量/復元前提だけ更新し、研究の順序とpauseを保持。
 
 2026-10-29 18:54 JST: 全体を停止時snapshotとして書き直し、全将来packageを明示resume後に限定。
 
@@ -2585,6 +2613,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 全snapshot更新済み: 全Native→45reader→workspace、全H/F/J/物理費用と最終gate。
 
 ## samples_progress.md update status
+
+2026-10-29 19:39 JST: compiled evidenceの保存/復元rowを追加。active source roots、taxonomy、sample authorityは変更なし。
 
 2026-10-29 18:54 JST: cache一時退避と復元前提をrowへ記録。研究原本/証拠binary保持、sample taxonomyとactive roots不変。
 
@@ -2689,6 +2719,8 @@ Flow行同期時の旧outer行重複をfocused diffで発見し、1行をFlow証
 更新済み: 旧Native60実行中/旧reader current参照をNative61へ訂正、M9証拠row追加。workflow-readyへ昇格なし。
 
 ## Reviewer findings and follow-up
+
+2026-10-29 19:39 JST: Mainによるpaired-source/terminal-binary/全archive objectと保護135038fileの読戻し・差分確認。sub-agentなし。旧成功/失敗receiptを上書きしない。
 
 2026-10-29 19:05 JST: focused345はpush log追記に対しprogress.mdの最終更新headerが古いことだけを検出し失敗。実日時でheaderを更新し、focused346で再検査。失敗receiptを保持し、Rust/Lean/証拠内容の変更なし。
 
@@ -2834,6 +2866,8 @@ mainが16native/24DTO、10constructor/18vector、156実M9shape/156欠落/156履�
 
 ## Skipped validations and reasons
 
+2026-10-29 19:39 JST: W6研究はowner確認により停止中。新Rust/Lean試験はなし。これは既存cache/生成binaryのlossless preservation検証であり、再実行又は全W6 acceptanceではない。sudo audit不可はswapは調査開始時約7.6GiB使用、整理中に約9GiBへ変動したが変更なし。sudoによるroot側全量auditはpasswordが必要で実行不可、読取可能範囲のduとstatvfsを区別する。rootの予約領域約8.9GiBはdfの一般利用者空きに含まれない。研究原本・旧成功/失敗・会話記録・他project・OS設定は削除しない。任意の全artifactを再生成可能と認定したものではない。
+
 2026-10-29 19:03 JST: push確認追記は文書metadataのみ。全体make docs通過済みcutに対する差分をfocused345/git diff --checkで確認する。Rust/Leanの再実行なし。plan/・samples_progress.md・tasks.mdは到達点/実行条件不変のため追加更新不要。
 
 2026-10-29 18:54 JST: ownerの停止指示により次のsemantic package、計測構成full1790、最終source/proof/要件照合と独立Oracle reviewは未実施。既受理Native63全1750/45reader/他1190を再実行しない。停止cutのdocs検証とW6最終検証を区別する。
@@ -2976,6 +3010,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 
 ## Commit / push status
 
+2026-10-29 19:39 JST: ownerの継続commit/push許可に従い、この追加整理・復元条件を検証後に保存する。大容量archiveや研究原本の外部uploadは行わない。
+
 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
 
 2026-10-29 19:00 JST: 追加owner指示「あと、切りの良いところでcommit&pushも適宜お願いします（研究データが消えると悲しいので）」により、この停止記録と蓄積済みrepository変更のcommit/pushだけを許可。W6の研究停止は維持する。Git管理外の研究ソース/証明/raw原本/大容量ログ/cache archiveはローカル保持で、今回のGitHub pushに含めない。 現時点は実行準備。実際のcommit id/remote一致はpush後に追記する。
@@ -3079,6 +3115,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 未commit・未push。owner指定どおり既存未commit成果を保持。外部write/Discord通知/共有folder配置なし。
 
 ## Sub-agent session close status
+
+2026-10-29 19:39 JST: 単独作業、sub-agentなし。cleanup/documentation以外のsemantic jobなし。W6 goalはpaused。
 
 2026-10-29 18:54 JST: 単独作業、sub-agentなし。goalはowner pause。研究・runtime・reader・計測のbackground serviceを残さず停止する。
 

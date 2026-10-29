@@ -99884,5 +99884,47 @@
     "range": "complete",
     "role": "Final repository push receipt documentation validation",
     "status": "passed; W6 paused and incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+    "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3",
+    "range": "complete",
+    "role": "Owner-requested additional reproducible cache cleanup and source preservation",
+    "status": "verified archival only; no W6 resumption"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/additional-lean-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json",
+    "sha256": "278fd6b318cb5111385c6896fa9f1c6caf479388a55815f6253f25d80b713429",
+    "range": "complete",
+    "role": "Owner-requested additional reproducible cache cleanup and source preservation",
+    "status": "verified archival only; no W6 resumption"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/additional-component-cleanup-20261029-v1/FINAL-VERIFICATION.json",
+    "sha256": "13b90349207785403f4cf95da35d8ba72cbfe23f94a6c5e3235c6759264891fc",
+    "range": "complete",
+    "role": "Owner-requested additional reproducible cache cleanup and source preservation",
+    "status": "verified archival only; no W6 resumption"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+    "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a",
+    "range": "complete",
+    "role": "Additional cleanup final documentation verification",
+    "status": "passed; no research resume"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
+    "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369",
+    "range": "complete",
+    "role": "Additional cleanup final documentation verification",
+    "status": "passed; no research resume"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-RECEIPT-20261029-v1.json",
+    "sha256": "74ee1f0aeac9f246d5cf9441077fe215909e95e667d181c8144869a0fd9838c4",
+    "range": "complete",
+    "role": "Additional cleanup final documentation verification",
+    "status": "passed; no research resume"
   }
 ]
