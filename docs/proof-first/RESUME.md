@@ -1,6 +1,6 @@
 # RESUME — W6 owner pause after accepted initial Backend
 
-Updated 2026-10-29 18:54 JST
+Updated 2026-10-29 19:05 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
@@ -75,3 +75,5 @@ OWNER-PAUSE-20261029-v2 and QUOTA-OWNER-POLICY-v5 supersede autonomous schedulin
 追加owner指示「あと、切りの良いところでcommit&pushも適宜お願いします（研究データが消えると悲しいので）」により、この停止記録と蓄積済みrepository変更のcommit/pushだけを許可。W6の研究停止は維持する。Git管理外の研究ソース/証明/raw原本/大容量ログ/cache archiveはローカル保持で、今回のGitHub pushに含めない。
 
 停止記録のfull make docsは6410入力不変・exit0で通過。以後のcommit/push許可・検証結果の文書差分はfocused343で確認し、W6最終統合full/Oracleは未完了のまま保持する。
+
+2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。

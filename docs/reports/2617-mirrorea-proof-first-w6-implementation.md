@@ -2690,6 +2690,8 @@ Flow行同期時の旧outer行重複をfocused diffで発見し、1行をFlow証
 
 ## Reviewer findings and follow-up
 
+2026-10-29 19:05 JST: focused345はpush log追記に対しprogress.mdの最終更新headerが古いことだけを検出し失敗。実日時でheaderを更新し、focused346で再検査。失敗receiptを保持し、Rust/Lean/証拠内容の変更なし。
+
 2026-10-29 18:54 JST: Mainがcleanup全archive/object、保護hash、対象pathとprocess状態を再照合。ownerの単独作業指定に従いsub-agentなし。最終読取は2026-10-29 18:33:01JSTで週次残量60%、指定10/30 Full reset使用0回。18:34:16JSTのOracleはPro5of5/Usage limit reached。停止中は再照会・reset自動使用を行わない。 independent final Oracleは未実施。
 
 2026-10-29 18:32 JST: Mainが44formal log、実16case、2実コード改変、全151Serialize/99Record sourceと9原本画像の完全Backendを独立照合。owner指示どおりsub-agentなし。2026-10-29 17:32:50JSTの週次残量63%。指定Full resetは未使用。17:33:25JSTの同一Oracle tabはPro5of5/Usage limit reached。次回quota18:32:50/Oracle18:33:25JST以降。prompt/model/reset操作なし。
@@ -2832,6 +2834,8 @@ mainが16native/24DTO、10constructor/18vector、156実M9shape/156欠落/156履�
 
 ## Skipped validations and reasons
 
+2026-10-29 19:03 JST: push確認追記は文書metadataのみ。全体make docs通過済みcutに対する差分をfocused345/git diff --checkで確認する。Rust/Leanの再実行なし。plan/・samples_progress.md・tasks.mdは到達点/実行条件不変のため追加更新不要。
+
 2026-10-29 18:54 JST: ownerの停止指示により次のsemantic package、計測構成full1790、最終source/proof/要件照合と独立Oracle reviewは未実施。既受理Native63全1750/45reader/他1190を再実行しない。停止cutのdocs検証とW6最終検証を区別する。
 
 2026-10-29 18:32 JST: 選択Source4の初回ST、事前String256/既定collection32と個別件数、35分岐条件、固定public admitted/plan、Rust/serde/compiler/型対応が前提。合成したcacheエラー2caseは形状内でも実Source4到達性を受理しない。新Nativeはcapture componentであり、sourceIssue/Body/network/authority受理ではない。完全初回画像、共通public初期履歴/cache・全caller保持/work/host/物理資源/進行、他profile/最終Oracleは未完。 既受理1750/45readerは不変。計測構成全1790と最終統合full/Oracleは未実施。
@@ -2971,6 +2975,8 @@ Native61全1729 sender10実行中で別heavy buildなし。workspace/最終full 
 Native61全1729は実行中。45full reader/workspace未実行（workspaceは3GiB tmpfs開始条件未充足）。追加18moduleの旧223への再結合、全H/F/J/残work/host/physical、最終full docs/Oracleは未完。
 
 ## Commit / push status
+
+2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
 
 2026-10-29 19:00 JST: 追加owner指示「あと、切りの良いところでcommit&pushも適宜お願いします（研究データが消えると悲しいので）」により、この停止記録と蓄積済みrepository変更のcommit/pushだけを許可。W6の研究停止は維持する。Git管理外の研究ソース/証明/raw原本/大容量ログ/cache archiveはローカル保持で、今回のGitHub pushに含めない。 現時点は実行準備。実際のcommit id/remote一致はpush後に追記する。
 
