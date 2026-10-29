@@ -8859,18 +8859,15 @@
     "whole_W6_complete": false
   },
   "repository_backup_current": {
-    "at": "2026-10-29T10:02:56.939744+00:00",
-    "status": "passed authorized snapshot commit/push and fresh remote equality",
-    "commit": "4259bb9e038bef2744d78cc3191feb873fc8edf3",
-    "remote_head": "4259bb9e038bef2744d78cc3191feb873fc8edf3",
-    "remote": "origin",
-    "branch": "main",
-    "files": 18,
-    "external_research_pushed": false,
+    "at": "2026-10-29T10:46:08.090688+00:00",
+    "status": "passed additional storage checkpoint push",
+    "head": "be46027e420c4f5252d54b4ac3653f991bb91f91",
+    "origin_main": "be46027e420c4f5252d54b4ac3653f991bb91f91",
     "whole_W6_complete": false,
+    "external_research_pushed": false,
     "receipt": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-FIRST-PUSH-v1.json",
-      "sha256": "8730b93a85889ebeaa5a446b2ec529a376764938ddd9da2bb2d0008a86a4fe3d"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-PUSH-v1.json",
+      "sha256": "23e39bebf35fef7587ff08878fadef73e240cf34b13bffd3a4d463cd531e6469"
     }
   },
   "documentation_validation_before_additional_storage_20261029": {
@@ -8917,5 +8914,20 @@
   "documentation_full_before_additional_storage_20261029": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
     "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+  },
+  "repository_backup_before_additional_storage": {
+    "at": "2026-10-29T10:02:56.939744+00:00",
+    "status": "passed authorized snapshot commit/push and fresh remote equality",
+    "commit": "4259bb9e038bef2744d78cc3191feb873fc8edf3",
+    "remote_head": "4259bb9e038bef2744d78cc3191feb873fc8edf3",
+    "remote": "origin",
+    "branch": "main",
+    "files": 18,
+    "external_research_pushed": false,
+    "whole_W6_complete": false,
+    "receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-FIRST-PUSH-v1.json",
+      "sha256": "8730b93a85889ebeaa5a446b2ec529a376764938ddd9da2bb2d0008a86a4fe3d"
+    }
   }
 }

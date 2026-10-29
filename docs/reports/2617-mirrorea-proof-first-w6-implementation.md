@@ -3010,6 +3010,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 
 ## Commit / push status
 
+追加storage記録のcommit be46027e420c4f5252d54b4ac3653f991bb91f91 をorigin/mainへpushし、fresh git ls-remote一致を確認。この追記は結果のmetadataだけで、最終focused349で検査する。大容量archive/研究原本はローカル保持。
+
 2026-10-29 19:39 JST: ownerの継続commit/push許可に従い、この追加整理・復元条件を検証後に保存する。大容量archiveや研究原本の外部uploadは行わない。
 
 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
