@@ -103063,5 +103063,68 @@
     "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
     "role": "W6 funded capture wrapper ownership and failure composition",
     "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SCALAR-WRITER-COMMON-BOUNDS-JOIN-v1.json",
+    "sha256": "94f009de9199f75c740d4fa856c60ca504dfb34a690420100653cbd0f1511a4b",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SCALAR-WRITER-CHECKPOINT-v1.json",
+    "sha256": "a512eb543987208fcf75cf8f39f6916a48f2c4b966e784b0c7fb2245679f3440",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/scalar-writer-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "9b4e3bbade158757e090000c56ec160f28e413c6b91c4b91bc9d9071a19e4ba0",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/scalar-writer-v1/FORMAL-VERIFICATION-v9.json",
+    "sha256": "23ea5d9779c3aadf2a920d2ada6c2d577c04d78236715828bba58dde59aec404",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/scalar-writer-v1/READBACK-VERIFICATION-v4.json",
+    "sha256": "8a94ab052fe13a4308d439042227a20a434646053f9d6eb56eac958ac6d637f6",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/scalar-writer-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "176c0f01a19dc2d6940f5405cac3d97ab2c44d434627a4e822d8760697e34932",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6ScalarWriter_v9.lean",
+    "sha256": "c8c28bf429b7163a456b032e77133cf82699206d6f4c90556fcfe5536018b871",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/scalar_writer_reader_v2.py",
+    "sha256": "670fad2d4c684e9c9769bfc07e7e9895f7e3271d9d164a603db639a5a387e0eb",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_scalar_writer_v3.py",
+    "sha256": "9f935ed922ab3d8fa69417f00d294d14ab617e4ac40f5125e43ef473d9e28e70",
+    "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
+    "role": "W6 scalar writer and common byte bounds",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
   }
 ]
