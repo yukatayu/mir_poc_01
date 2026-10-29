@@ -22,11 +22,11 @@ memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
-W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
 ALIGN-2 の受理済み境界は
 [`architecture/07-browser-host-trust-boundaries.md`](mirrorea_canon/architecture/07-browser-host-trust-boundaries.md)

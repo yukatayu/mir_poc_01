@@ -1,20 +1,20 @@
 # samples_progress
 
-Last updated: 2026-10-29 19:39 JST
+Last updated: 2026-10-29 20:30 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
-W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
 閉じたAstraの証拠はReport2616/W6_CHECK、現在の実装証拠はReport2617/W6_CHECK.implementationで区別する。下表は現在の受理状態。旧Native21/61、旧223formal、各部分実行と失敗cutはReport2617と凍結receiptに保持し、現在の待機queueとして再掲しない。active sample rootsは不変で、external LAB evidenceをpublic workflow-readyと扱わない。
 
 | Current W6 finite LAB evidence | Reproduction / receipt | Boundary |
 |---|---|---|
-| Additional paused generated cache | ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1 | Lean cache4553/部品binary17を全byte照合済みarchiveへ保存。再実行/hash照合前の復元はRESUME。source/proof/raw/log保持、W6 pause |
+| Additional paused generated cache | ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1 | Lean cache4553/部品binary17を全byte照合済みarchiveへ保存。再実行/hash照合前の復元はRESUME。source/proof/raw/log保持、W6再開済み |
 | Paused build cache | pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json | 5177fileをexact archiveへ一時退避。証拠binary281本/研究原本を保持。再build前のrestore --confirmはRESUME参照。受理済み試験の再実行ではない |
 | Current native regression | NATIVE63-FULL1750-ACCEPTANCE-v1; native-full1750-v1/PIN | 全1750/0failed/0ignored、6575source/実binary/7488raw/21plain/53stageを受理。再起動不要。Native59/60/62の旧失敗は保持 |
 | Current independent readers | NATIVE63-FULL1750-READER-QUEUE-MANIFEST-v1 / RESULT-v1 | 全45readerを現原本へ新規実行・独立照合済み。旧prefix成功を流用しない |
@@ -45,6 +45,7 @@ W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Initial whole image shape | INITIAL-WHOLE-IMAGE-JOIN-v1 | 新82宣言/16反例・9原本画像/24返却。source条件付きN1115075/S228393048。新Native実行なし、一般履歴/物理資源はOPEN |
 | Initial Backend shape | INITIAL-BACKEND-SHAPE-JOIN-v1 | 554certificate宣言/16反例、実16case/2コード改変/9画像。Backend N37932/S3925183、両snapshot/四authority保持。全画像・物理資源は別 |
 | Initial Fabric shape | INITIAL-FABRIC-SHAPE-JOIN-v1 | 774certificate宣言/16反例、実18初回画像・最終15成功3拒否/2コード改変/9画像。FabricBundle N479731+BackendN/S81488704+BackendS。Backend/全画像・物理資源は別 |
 | Initial Process shape | INITIAL-PROCESS-SHAPE-JOIN-v1 | 456certificate宣言/16反例、実18case/2コード改変/9画像。ProcessBundle N418076+FabricN/S52355055+FabricS。Fabric/全画像・物理資源は別 |

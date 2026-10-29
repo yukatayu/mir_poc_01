@@ -99933,5 +99933,96 @@
     "range": "complete",
     "role": "Additional storage checkpoint authorized commit/push",
     "status": "remote main matches; data remains local"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-JOIN-v1.json",
+    "sha256": "0d418b810acd52dead9136513b4b84718b2a53ffbe5e1dfedd54a6b1ad99708b",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-CHECKPOINT-v1.json",
+    "sha256": "376e604b38ad712657c64638ecae85978ad66e7130036a7f6b54f48b50e4c128",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-RESUME-20261029-v1.json",
+    "sha256": "1812bd329c9d8757e7423cde6dd2f3edd3c6c6d14d9872994bb1733c50c97ea6",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v6.json",
+    "sha256": "399fa8aa945b2100bf14be0db3ba8ca58d0d6340ca002e3d68bb69ba9059d0ab",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/initial-whole-image-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "ec14bcf6f038b7b5daeedda37c02791a1f8644cd83255597e8d6c5cb1384454c",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/initial-whole-image-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "4175845e8db9a5152aa2385d24822d49684869f8ec7f3aeac6d0052550a1a603",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_source_image.rs",
+    "sha256": "cdbef78d69fa070c31d31c37b30a9393a7cab5be025a7114ba1e04670ce3d4dc",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/initial_whole_image_reader_v1.py",
+    "sha256": "410d4bb9e39e696e2735db988ddf75d9454a2eeca25c56a2dbe5d6ebe4705016",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/initial-whole-image-v1/PREREGISTRATION.json",
+    "sha256": "8afcc55429e0d35f28f29391b35f16e549dff54078293fd18960fc86a5c62fc5",
+    "range": "complete source/actual output and independent readback",
+    "role": "Owner resumed W6 and initial whole-image conditional composition",
+    "status": "accepted finite LAB;publichistory/allcaller/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v2/RESULT.json",
+    "sha256": "8b0a7a5e34d5e27e44ffd49ba5c8dca1bcc47111c704a3fad449ba776eba2f58",
+    "range": "complete result/source pins",
+    "role": "Initial whole image final docs verification",
+    "status": "accepted checkpoint; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused352-initial-whole-image-commit.json",
+    "sha256": "f0a6dd46421d42e0c04cf59e1750b29f8f81f413e5e1724fb5f48480cea3ec97",
+    "range": "complete result/source pins",
+    "role": "Initial whole image final docs verification",
+    "status": "accepted checkpoint; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-DOCS-RECEIPT-v1.json",
+    "sha256": "30ee7dc7f011ef9f10f7a0d77d98baf7c15eb8e1e3424beaba586ab481844c2a",
+    "range": "complete result/source pins",
+    "role": "Initial whole image final docs verification",
+    "status": "accepted checkpoint; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v334.json",
+    "sha256": "2cb6b0b9fe3c7922ae75d35e70c8fa6c82ff018dc6ab4f6bee8bc8be0babb1c3",
+    "range": "complete result/source pins",
+    "role": "Initial whole image final docs verification",
+    "status": "accepted checkpoint; W6 incomplete"
   }
 ]

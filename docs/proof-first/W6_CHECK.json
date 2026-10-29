@@ -1,6 +1,6 @@
 {
-  "status": "W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
-  "updated_at": "2026-10-29T09:54:09.820277+00:00",
+  "status": "W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
+  "updated_at": "2026-10-29T11:30:43.991595+00:00",
   "base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
   "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation",
   "entry_design": "ENTRY-DESIGN.md",
@@ -191,7 +191,7 @@
     "sha256": "1577414d7742cf39c4e81adf037aa5826ed3aa6a550c9b45f19ea2a4223deefa"
   },
   "implementation": {
-    "status": "W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
+    "status": "W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
     "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation",
     "report": "docs/reports/2617-mirrorea-proof-first-w6-implementation.md",
     "owner_authorized_at": "2026-10-19T03:33:40Z",
@@ -344,7 +344,7 @@
       "next_action": "continue W6 toward owner40percent threshold; all further resets prohibited",
       "redemption_performed_by_this_read_only_checker": false
     },
-    "updated_at": "2026-10-29T09:54:09.820277+00:00",
+    "updated_at": "2026-10-29T11:30:43.991595+00:00",
     "native_same_program_private_profile": {
       "pin": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-admission-all-v1/PIN.json",
       "status": "passed current five-profile campaign with independently signed negatives and constant sink",
@@ -447,31 +447,26 @@
       }
     },
     "documentation_validation_current": {
-      "at": "2026-10-29T10:45:26.399801+00:00",
-      "status": "passed full additional-storage cut and focused347/348 final documentation",
+      "at": "2026-10-29T11:42:32.176528+00:00",
+      "status": "passed full initialwhole6410 unchanged and focused352 metadata",
       "full": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
-        "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v2/RESULT.json",
+        "sha256": "8b0a7a5e34d5e27e44ffd49ba5c8dca1bcc47111c704a3fad449ba776eba2f58"
       },
       "focused_final": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
-        "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused352-initial-whole-image-commit.json",
+        "sha256": "f0a6dd46421d42e0c04cf59e1750b29f8f81f413e5e1724fb5f48480cea3ec97"
       },
       "checkpoint": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
-        "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-CHECKPOINT-v1.json",
+        "sha256": "376e604b38ad712657c64638ecae85978ad66e7130036a7f6b54f48b50e4c128"
       },
-      "research_sizes": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
-        "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
-      },
-      "retained_docs_draft_failure": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
-        "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+      "retained_first_full_failure": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v1/RESULT.json",
+        "sha256": "887960e30852e3aecc0b9881773aca0dd2f99c993e1f7652f6f95b21071553a9"
       },
       "whole_W6_complete": false,
-      "research_resumed": false,
-      "swap_changed": false
+      "final_integrated_review": false
     },
     "new_exact_claim_native_test": {
       "status": "passed component and all47; not a full1593library run",
@@ -903,8 +898,8 @@
       "local_evidence": "native61pass and intended negative detected; no incomplete gate promoted"
     },
     "unverified_checks": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v331.json",
-      "sha256": "683f711548acd3a6684d020f07f9390e666e136374196dc34ba24ed384e4f720",
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v334.json",
+      "sha256": "2cb6b0b9fe3c7922ae75d35e70c8fa6c82ff018dc6ab4f6bee8bc8be0babb1c3",
       "items": [
         {
           "id": "current-full-regression",
@@ -966,16 +961,16 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE63-FULL1750-ACCEPTANCE-v1.json",
             "sha256": "1cb0444695af8e711f1b9af26015c19bd991a7cc7c1e73343e7f0da29d52dc68"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "current-independent-review",
           "test_rows": "T15",
-          "status": "OPEN / 2026-10-29 18:34:16JST UsageLimitReached; owner pause",
+          "status": "OPEN / 2026-10-29 20:05JST UsageLimitReached; owner resumed",
           "unchecked": "Integrated275formal accepted;new2lifetime/snapshot individuallychecked. Current runtime/history/resource cut and final Oracle remain.",
           "reason": "Oracle read nine supplied Lean bodies and selected Native sources, not omitted72bodies, kernel runs or Native campaigns.",
           "available_evidence": "oracle-joint-phase-product-v1/ANSWER-PIN.json; all362lines read;15main dispositions; actual identicaljournal/cursorcounterexample verified.; ORACLE-AVAILABILITY-20261022-v2 read-only UI check shows Pro Usage limit reached; no prompt submitted and no access/reset action used.; ORACLE-AVAILABILITY-20261022-v3 read-only23:17UTC remains Pro usage limit reached; no new prompt/access/reset action.; ORACLE-AVAILABILITY-20261022-v4 read-only03:47UTC still Pro Usage limit reached; no prompt/model/access/reset action.;04:57UTC read-only Pro menu still Usage limit reached; no new consultation/access/model/reset action.; FORMAL-DISTRIBUTED-GRAPH-VERIFICATION-v2:13 supplemental modules/2583owned declarations/87false each,101commands fresh+replay over independently full109base. Source-derived22nodes/12typededges/341byte graph, whole-scope classification before filter, separate metadata/absence, shared current/spent/fullhistory and stage-specific reload/physical quarantine, adaptive joint wire/reload and bounded reserved journal proved. Native3role outward registry/service not implemented.; New counterevidence: Native append failure clears raw attached internally; formal v2 did not. Frozen v2 retained, successor physical/joint-journal v3/89false unexecuted. Physical failure acceptance waits for revalidation.; Formalv3 fresh/replay corrected append attachment semantics and Native34 current service independently reconstructed. Final current review remains unavailable; browser process now absent, no new UI availability or prompt claim.; 2026-10-23T09:16:07.908Z visible menu still Usage limit reached; no prompt/model/access/reset action.",
-          "next_check": "Independent final review after explicit resume and integrated evidence; no polling while paused.",
+          "next_check": "Independent final review after integrated evidence; read-only availability checks at least one hour apart.",
           "latest_readonly_observation": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261027-v18.json",
             "sha256": "faf53c08e924d4b944c4f7f803c765bb2d81f77c53de1cce6731fc99cef15272"
@@ -988,7 +983,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261028-v4.json",
             "sha256": "139a251891a287bddd3a5a4be7bd21a0fc92c9f90e7caf74edf901300f4fca0c"
           },
-          "next_check_not_before": "2026-10-29T00:29:44Z",
+          "next_check_not_before": "2026-10-29T12:05:00Z",
           "availability_check_paused": false,
           "combined_preregistration": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/COMBINED-FORMAL-PREREGISTRATION-v3.json",
@@ -999,14 +994,14 @@
             "sha256": "0a03e74a39650e800c969afd5cffd75257b182179980c036792a3bca88060e7f"
           },
           "current_availability": {
-            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261028-v6.json",
-            "sha256": "b9285c485ac5321ae6d3b3da22695e1690429a8825549b2a59f3a3d8fc96a97d"
+            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261029-v12.json",
+            "sha256": "27ab04a42a7d77bd0f25ef21edec5eb821e7f1b58752a06f335c33ed6bae6f18"
           },
           "latest_read_only_observation": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261029-v1.json",
             "sha256": "e5029ca7306f3ca35e527fa26da71b86aaaf0087df40f65a3ee14f12a0222624"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "private-control-correspondence",
@@ -1032,7 +1027,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native63-semantic-source-v2/RESULT.json",
             "sha256": "ce798faf21bd75f7e2b44c1cff296e7989c60b588c0677dc603e0147025526c4"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "graph-identity-coverage",
@@ -1046,7 +1041,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native63-semantic-source-v2/RESULT.json",
             "sha256": "ce798faf21bd75f7e2b44c1cff296e7989c60b588c0677dc603e0147025526c4"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "certified-absence-loss",
@@ -1060,7 +1055,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native63-semantic-source-v2/RESULT.json",
             "sha256": "ce798faf21bd75f7e2b44c1cff296e7989c60b588c0677dc603e0147025526c4"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "classification-mutators",
@@ -1078,7 +1073,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native63-semantic-source-v2/RESULT.json",
             "sha256": "ce798faf21bd75f7e2b44c1cff296e7989c60b588c0677dc603e0147025526c4"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "observer-source-continuation",
@@ -1092,16 +1087,16 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE61-FULL-ITERATOR-CHECKPOINT-v1.json",
             "sha256": "220c88aed9d82f6600a0c4eaaa58a62563ecce918fd922e0d328c23435a252a8"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "physical-progress-cost",
           "test_rows": "T03,T04,T10,T11",
-          "status": "PARTIAL / initial Backend accepted;wholeinitial/allcaller/physical open",
-          "unchecked": "選択Source4の初回ST、事前String256/既定collection32と個別件数、35分岐条件、固定public admitted/plan、Rust/serde/compiler/型対応が前提。合成したcacheエラー2caseは形状内でも実Source4到達性を受理しない。新Nativeはcapture componentであり、sourceIssue/Body/network/authority受理ではない。完全初回画像、共通public初期履歴/cache・全caller保持/work/host/物理資源/進行、他profile/最終Oracleは未完。",
+          "status": "PARTIAL / wholeinitial accepted;publichistory/allcaller/physical open",
+          "unchecked": "各componentのsource事前条件と固定public初期materialが前提。NはJSON構文node/鍵、SはUTF-8文字列byteで、encoded長・heap/RSS・物理予約ではない。上限は後段encoder capを超え、capture成功からencode成功や失敗前費用の免除を導かない。任意import履歴/cacheはsymbolic residualを残し、到達可能性と共通public上限は未証明。Native変更・新実機実行はない。全caller寿命/work/host/物理資源/進行、他profile/最終統合reviewも未完。",
           "reason": "prefunded journal/attempt limit/deadlineは全physical costや公平性の証明ではない。20msはadmin未完了の観測区間で、update_policy内lock待機時間ではない。16byte slow readerは自然なbackpressureでない。",
           "available_evidence": "Current Native63/current instrumented independent registry/prefix and fixed-role public contribution accepted.",
-          "next_check": "Remaining whole initial image join and publichistory/cache,then allcaller/lifetime/work/physical funding.",
+          "next_check": "Common reachable initial history/cache; allcaller lifetime/work/funding/host/progress.",
           "initial_template_measured_comparison": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-TEMPLATE-MEASURED-COMPARISON-v1.json",
             "sha256": "4fa84184ffe75f5d618097e3846c17d8a76440161e6871f4503842384d9d56c4"
@@ -1491,7 +1486,11 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-BACKEND-SHAPE-JOIN-v1.json",
             "sha256": "c5ad39f2234000180488d49dbc8abca7132f2aa253326318fa55743a324229ff"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks",
+          "initial_whole_image": {
+            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-JOIN-v1.json",
+            "sha256": "0d418b810acd52dead9136513b4b84718b2a53ffbe5e1dfedd54a6b1ad99708b"
+          }
         },
         {
           "id": "native-full-history-refinement",
@@ -1522,7 +1521,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native63-semantic-source-v2/RESULT.json",
             "sha256": "ce798faf21bd75f7e2b44c1cff296e7989c60b588c0677dc603e0147025526c4"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "active-debug-invocation",
@@ -1536,7 +1535,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE61-FULL1729-ACCEPTANCE-v1.json",
             "sha256": "af05184de5cad1cf61f8b4c38960ee4b285a548e5c012553ebedbd16637797b7"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "general-native-restore",
@@ -1546,7 +1545,7 @@
           "reason": "Native26/27 now connect actual original publisher and expected writer sessions to authenticated cold W5 DATA and the same live ledger. This does not establish a replacement current owner after loss of that original custody.",
           "available_evidence": "W5-OBSERVATION-REATTACHMENT-SOURCE-AUDIT-v2: saved authority_generation and new floor come from DATA in quarantine; FreshHostTurn is not authority. Existing same-file input/spent/unknown retention passes, but cannot authorize a different Source.; W5-HISTORICAL-REATTACHMENT-DESIGN-AUDIT-v2 identifies real independently surviving SourceAuthorityPublisher/coordinator and quarantined saved DATA; read-only body/origin seam plus owning-file/current-guard process connection remain unresolved.; Independent old accepted W5 image byte/lexical/blob/budget reader:3actual images75mutants. Current Native22 5world prefix tests and129raw/130mutant verifier prepared UNRUN; no restored current authority accepted.; Current outer SourceAuthorityPublisher/inner Clone boundary and PersistentRelease/GraphReattach premises audited. Fresh DATA worker with independently surviving registry/ledger is next; separate observer-process crash reconciliation stays open. Prefix verifierv3 corrects empty failed-owner controls before execution.; CORRECTION: actual T retains first99write in failed worlds. The empty-prefix premise in prior preparation was wrong. Current unrun verifierv4 keeps130original controls and adds2consistent successful-outcome forgeries against actual failed Body originals,132total.; Comparator completeness preflight on10 original producer records:40 omissions/success suppression/duplication/history-size mutants accepted by v2 then rejected by v3;2 actual old W5 owner images retain exact native decoding. Current Native22 verifier v5 has172 controls prepared UNRUN.; Native22 actual W5 preflight: missing transport custody correctly rejected, existing move-only transport branch selected and capture now passes; encoder ByteBudget unresolved. Three failed cuts frozen. No restored prefix/current authority acceptance.; Native22 red-v3: explicit bounded V2 envelope preserves full original JSON and existing W5 wire/cap limits; actual3images created,2owners restore/correspondence passes then missing prefix stub WrongBinding. Wire legacy/roundtrip/15negative checks pass. GREEN shares byte-identical old DATA capture algorithm over5borrowed native fields; unaccepted/running.; GREENv1 first3worlds9images6ownerprefixes passed, but overflow-world teardown borrowed a now-Closed executable transport interface. Failed cut frozen. Three cleanup sites now directly close already-owned Flow, preserving all assertions/timeout/history. GREENv2 running; all5world acceptance absent.; GREENv2 Native22 dfad644b/source6546/inventory1681 passed3tests, actual5worlds/15images/10prefix/129originals with172native and120chunk-envelope controls independently rejected. All full W5 before/after correspondence and different writer/reader PIDs verified. New HistoricalRegistry proof draft passes and24false controls reject; whole fresh58/replay58 pending. Original publisher/current lease separate from secret-dependent Source execution status; no current authority minted by saved DATA.; Native22 legacy3initial/reserved/completed tests and9images225codec mutations plus old actual capture1test PASS same dfad644b binary. HistoricalRegistry fullfresh58/replay58 has109modules/68W6/18144decls/653false; original108modules/629false preserved. Supplemental independently paired images/status11declarations/3false and own axiom/replay verified separately, not a110module full rebuild. Native23 only generic common delivery; six method bodies unchanged,39tests PASS. Historical authority/attested image pipeline unimplemented.; Native23 common generic delivery39tests and real graph4tests10worlds274raw68queries215mutants PASS same162f42ef/source6546/inventory1681. New historical current guard and authenticated cold DATA/ledger integration remain unimplemented.; Native24 actual original boxed parent/publisher retained preprivate and through all three child exits; five input worlds129raw/60reader mutations and native owner/revision/same-generation-facts/staging negatives accepted. Genuine Source failure remains Err(Io) in overflow/missing; historical current guard succeeds. Legacy actual SourceDrop denial passes same binary2004ab7a.; Native25 actual original writer and genuinely fresh cold W5 reader authenticate10ownerimages/10ownerprefix/129originals, with15total native images restored while same original publisher remains current; original parent counter increases without reset; exact source/class/owner/session/image subject retained. Native and independent cryptographic/canonical controls pass, no observe permission or new ledger created.; Native26 retains the one actual prepared publisher and original writer assignments beforeprivate, registers separate historical lease/purpose and original locked ledger, authenticates real W5 prefixes, serves75FD5queries and5actual cold reloads across5worlds;15total restart charges including10refusals. Same file/owner/fullhistory/spent/attempts retained. Independent129originals/15W5images/10ownerprefixes and270journal records checked; original publisher/revision/facts/lease/session and current grant controls exercised.; same-binary off/on5pairs258originals/107347fields/828native-reference uses checked;45comparison corruptions rejected. Common delivery39 and actual SourceDrop1 PASS on this exact Native26 cut.; Native27 source6554/binary706fcb8c/inventory1685:8actual historical sender schedules232originals/104peer queries/89acquired/317journal records/252ledger controls.24actualW5images192envelope mutations,54testkeys/16sessions/38freshchallenges;3partial/current-release cases and5actual physical outcome append cuts retain same owner/fullhistory/spent. All initial/r1/r2 sidecars now separately retained. Samebinary erasure pending; no wholeW6 acceptance.; Native27 samebinary offworld0/on8sender schedules:261distinct original records/464uses/207800fields/1648native refs,72negative controls. Exactbinary legacy39delivery/actualSourceDrop1 PASS.; Native28actual7reload faults terminalPASS1813.69s/runner1822.663541s;203originals/82queries/264records/14charged restarts/241ledger controls independently verified. Oldtoken/fullhistory/sameowner retained; fatal3 no later acquisition. Conditional Lean supplement178decls/8false own audit and identical replay.; Native28samebinary OFF5worlds129originals/20keys/10fresh challenges independently checked;7A31/B0fault pairs compare232distinct originals/406record uses/181825fields1442Native refs0Report refs,63erasure controls. Common delivery40 and actual SourceDrop1 regressions PASS.; Native34 source6568/binary05354556/inventory1703: ten private worlds,258originals/30images/90keys/60fresh challenges; all230scalar/distributed queries,800records/40paid reloads independently reconstructed;640ledger controls plus563526wire byte mutations and18640other auth/provenance controls. Both metadata rounds checked against actual reaped PIDs. Formalv3 retains frozenv2 counterevidence and corrects raw attached=false in both physical/joint models:13supplements/2587decls/89false/103commands eachfresh/replay.; Native35 source6569/inventory1704/binary543650b9:10 actual failed-reload worlds/290originals/30images/206queries/194acquired/646records/10charges,403ledger controls. Full oldDATA/challenges/history/spent/owner/file/lock preserved; logical refusal remains usable, physical append/readback fault quarantines and leaves later122requestbytes unread. Hash-valid changed disk is independently separated from retained RAM. Both actual reader rounds/MAC/context/provenance checked. Native34 actual private args258occurrences/30wrong-profile controls additionally verified.; Native36 source6570/inventory1705:10 actual distributed sender worlds/290originals/30images/225queries/210acquired/700records/5coldreloadcharges,395ledger controls. Actual3byte partial/pre-current signed disable/inflight3-lock contention, same full341byte intent and spent after reenable/cold reload; five physical outcome-append faults after all341bytes delivered retain exact pending with no acknowledged outcome and quarantine before later reads. B10 controls equal outward. All original private arguments/assigned images/authenticated bytes and complete journal independently checked.; Native37 source6571/inventory1706:14 actual retention-capacity/maximum/private profiles,406originals/42images/126keys/42assignments/84fresh challenges;336queries/1106records/14coldreloadcharges and560ledger controls independently checked. All788482auth bytes plus signed context/domain/length/payload/bounds/cross-round/bundle corruptions refused. Role assignment84positive distinctions. Loss capacities0/1/10/11/22 applied before filters; missing metadata masks certificates, page0 is not absence; old full history/spent/owner/inode retained across actual reload. Actual A31/47 sensitivity and hiddenB0/10 outward equality.; Current Native37 binary5ffcb32c/source6571: authenticated DATA/no-query and same-owned-Flow/no-W5-capture baselines each match all14loss profiles at363650completefields/2884native producer references,126corruption controls. Each comparison uses493distinct originals/812record uses. Both actual no-W5 baselines independently validate5entry processes/129originals/private arguments and no image/registration/auth/query/ledger artifacts; shared unused test issuer and audit capture remain. Legacy nonowned Flow comparison failed field order at Source issue2 with23changed original nodes in world0; this different transport representation is retained as rejected counterevidence, not normalized away.; Current DISTRIBUTED-HISTORY-RELATION-v3 checks44worlds/3252journal prefixes/12hidden equal pairs/4authorized sensitive pairs/96corruptions. DISTRIBUTED-GRAPH-SOURCE-PROOF-MAP-v2 ties13current source files to13supplemental Lean modules and9explicit physical/semantic premises. Earlier unimplemented statements are dated history. SELECTED-PROFILE-SOURCE-PROOF-MAP-v1 adds14inspected bridges/19current source files/36formal modules for scalar/localgraph/catalog/historical/active, complementary to9distributed mappings. Explicit initial/future relation, own-source/custody, whole history and physical assumptions; no universal Rust simulation claim. SELECTED-HISTORY-RELATION-v1:28actual worlds/1386record prefixes/13hidden equal pairs/6authorized value or actual-write sensitivity pairs/80comparison controls. Complete scalar/localgraph/catalog/historical/active histories and current/accounting checked, complementary to44distributed worlds/3252prefixes. AB active pairs are finite prefix equality only; fixed-A future theorem remains separately scoped.",
           "next_check": "Integrate current accepted1750/45readers against all requirements/profile conditions and final independent review. Do not rerun accepted native campaigns or promote finite pairs to a universal future-secrecy theorem.",
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "host-isolation-and-timing",
@@ -1556,16 +1555,16 @@
           "reason": "現profileはhonest host/key custody/private filesystemを前提とする。env_clear/FD closeだけではOS隔離を供給しない。",
           "available_evidence": "OUTWARD-PROVENANCE-INVENTORY-v1の全channel表と明示TCB。",
           "next_check": "保証profileの境界を維持し、依存するhost/admission/classificationを別証拠で検証。より強いprofileは別設計と実機証拠を要求。",
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "current-full-docs",
           "test_rows": "documentation",
-          "status": "owner pause full passed6410unchanged and final focused343 passed; final W6 integration remains open",
+          "status": "accepted full initialwhole cut6410 and focused350/351; finalW6 integratedfullpending",
           "unchecked": "Final integrated snapshot validation after remaining acceptance evidence; do not transfer the pinned full-docs result across later documentation edits.",
           "reason": "Astra continuationでcurrent snapshotを更新。旧22focused/full6409cutは履歴、今回検査は後続。",
           "available_evidence": "full-docs-passive-input-verified-v1 PASS6410/259.5819458s frozen prior cut; focused72 PASS21. 68/71 failed and corrections retained.; focused167 passed21 checks. Full make docs passed260.77s/exit0 on6410unchanged input files,09:31:54UTC; all input pins checked before linking its receipt. New process-structure edits are later.",
-          "next_check": "No work while paused. Final integrated W6 docs follows resumed research.",
+          "next_check": "Keep current full/focused receipts; final integrated full after remaining W6 gates.",
           "focused_receipt": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused256-runtime-frontier-quota.json",
             "sha256": "a0bac06f15d79e4da524d4e6f52279b7afba9368812d701b6becc25ac50eabcf"
@@ -1617,7 +1616,7 @@
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
             "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
           },
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         },
         {
           "id": "client-safety-reason",
@@ -1627,7 +1626,7 @@
           "reason": "owner提供の表示文面のみ取得。サービス内部の判定情報や非表示本文は取得できない。",
           "available_evidence": "owner提供This content can’t be shown通知と公式help.openai.com/en/articles/20001326。local61/対照試験は独立したterminal receipts。",
           "next_check": "取得できない情報はUNRESOLVEDを維持。必要ならownerが公式feedback/supportへ報告。未取得回答を検証証拠にしない。",
-          "execution_control": "owner_paused; no next semantic work until explicit resume"
+          "execution_control": "owner-resumed bounded W6 LAB; dependency-ordered continuation and storage checks"
         }
       ]
     },
@@ -1706,8 +1705,8 @@
       "main_replay_condition_satisfied": true
     },
     "documentation_full_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
-      "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v2/RESULT.json",
+      "sha256": "8b0a7a5e34d5e27e44ffd49ba5c8dca1bcc47111c704a3fad449ba776eba2f58"
     },
     "native_active_kernel_candidate": {
       "status": "current69combinedPASS/sourcebinaryfrozen; boundedkernel only; Nativewire/wholeW6notaccepted",
@@ -3945,7 +3944,7 @@
       "sha256": "d92f233c403a71d5c82a250779e3ea000f6450e2b74dcf79d76d200ec74429d6"
     },
     "current_native_status": {
-      "status": "W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
+      "status": "W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。",
       "source_cut": "native-v63",
       "source_files": 6575,
       "source_preparation": {
@@ -8341,11 +8340,7 @@
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-BACKEND-SHAPE-CHECKPOINT-v1.json",
       "sha256": "1652ea3dc9f709519aa2ad269525372d728e7768f996ebd6c69e13827a3cc3c0"
     },
-    "owner_pause_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
-      "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
-    },
-    "execution_control": "Explicit owner resume required. No automatic reset or next semantic package.",
+    "execution_control": "Owner resumed W6 at20:00JST; monitor storage and follow QUOTA-OWNER-POLICY-v6. Plan250 remains paused.",
     "documentation_validation_before_owner_pause_20261029": {
       "at": "2026-10-29T09:32:52.718285+00:00",
       "status": "passed focused342 initial Backend shape synchronization; prior Bootstrap full passed6410 unchanged; final integrated full remains",
@@ -8420,35 +8415,73 @@
     "documentation_full_before_additional_storage_20261029": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-owner-pause-20261029-v1/RESULT.json",
       "sha256": "3f6836ea64b9ec30660365e40d0896bdbc287318e1e125b31927a8c1c8a062ea"
+    },
+    "initial_whole_image": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-JOIN-v1.json",
+      "sha256": "0d418b810acd52dead9136513b4b84718b2a53ffbe5e1dfedd54a6b1ad99708b"
+    },
+    "initial_whole_image_checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-CHECKPOINT-v1.json",
+      "sha256": "376e604b38ad712657c64638ecae85978ad66e7130036a7f6b54f48b50e4c128"
+    },
+    "historical_owner_pause_20261029": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
+      "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
+    },
+    "owner_resume_current": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-RESUME-20261029-v1.json",
+      "sha256": "1812bd329c9d8757e7423cde6dd2f3edd3c6c6d14d9872994bb1733c50c97ea6"
+    },
+    "documentation_validation_before_initial_whole": {
+      "at": "2026-10-29T10:45:26.399801+00:00",
+      "status": "passed full additional-storage cut and focused347/348 final documentation",
+      "full": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+        "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+      },
+      "focused_final": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
+        "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
+      },
+      "checkpoint": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+        "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+      },
+      "research_sizes": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
+        "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
+      },
+      "retained_docs_draft_failure": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
+        "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+      },
+      "whole_W6_complete": false,
+      "research_resumed": false,
+      "swap_changed": false
     }
   },
   "predecessor_snapshot_notice": "Root predecessor proof/baseline/oracle/acceptance fields retain the closed Astra research cut; current implementation status is in implementation. Historical evidence is not current native acceptance.",
   "documentation_validation_current": {
-    "at": "2026-10-29T10:45:26.399801+00:00",
-    "status": "passed full additional-storage cut and focused347/348 final documentation",
+    "at": "2026-10-29T11:42:32.176528+00:00",
+    "status": "passed full initialwhole6410 unchanged and focused352 metadata",
     "full": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
-      "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v2/RESULT.json",
+      "sha256": "8b0a7a5e34d5e27e44ffd49ba5c8dca1bcc47111c704a3fad449ba776eba2f58"
     },
     "focused_final": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
-      "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused352-initial-whole-image-commit.json",
+      "sha256": "f0a6dd46421d42e0c04cf59e1750b29f8f81f413e5e1724fb5f48480cea3ec97"
     },
     "checkpoint": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
-      "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-WHOLE-IMAGE-CHECKPOINT-v1.json",
+      "sha256": "376e604b38ad712657c64638ecae85978ad66e7130036a7f6b54f48b50e4c128"
     },
-    "research_sizes": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
-      "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
-    },
-    "retained_docs_draft_failure": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
-      "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+    "retained_first_full_failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v1/RESULT.json",
+      "sha256": "887960e30852e3aecc0b9881773aca0dd2f99c993e1f7652f6f95b21071553a9"
     },
     "whole_W6_complete": false,
-    "research_resumed": false,
-    "swap_changed": false
+    "final_integrated_review": false
   },
   "oracle_latest_readonly": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261027-v18.json",
@@ -8511,8 +8544,8 @@
     }
   },
   "documentation_full_current": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
-    "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-initial-whole-20261029-v2/RESULT.json",
+    "sha256": "8b0a7a5e34d5e27e44ffd49ba5c8dca1bcc47111c704a3fad449ba776eba2f58"
   },
   "documentation_full_before_storage_20261027": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-combined-v1/RESULT.json",
@@ -8634,12 +8667,12 @@
     "sha256": "9d2284cac66cb115d69e8f761917ff8f659313269317146b2164235193bd4fa6"
   },
   "quota_latest": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261028T104824Z.json",
-    "sha256": "b50ff7147a2934a6e398910d6fa2d8a8a700d9d694a996f03cda268ec4192736"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261029T110147Z.json",
+    "sha256": "ce5e0dfe5b98b6a9e5de79bff119e26f032ff16cf0521d25361cae54de269bf1"
   },
   "oracle_availability_current": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261028-v6.json",
-    "sha256": "b9285c485ac5321ae6d3b3da22695e1690429a8825549b2a59f3a3d8fc96a97d"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261029-v12.json",
+    "sha256": "27ab04a42a7d77bd0f25ef21edec5eb821e7f1b58752a06f335c33ed6bae6f18"
   },
   "documentation_validation_before_native61_acceptance": {
     "status": "focused271pending;finalfullUNRUN"
@@ -8717,7 +8750,7 @@
     "sha256": "5ddc9edcfb668b3a38faddbea31a275970fabc596eaff50aee8583267c5d8d08",
     "status": "focused281passed21;currentfinalfullUNRUN"
   },
-  "goal_status": "paused",
+  "goal_status": "active",
   "documentation_validation_before_owner_resume_20261028": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused285-owner-quota-pause.json",
     "sha256": "f20dab83b042baf4b606c24516d8e5a34d0dd96ad7bc3fee0619d9a4c1f14a7d",
@@ -8827,11 +8860,7 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-full-current-v1/RESULT.json",
     "sha256": "617ea64e4934f5d1fab5fe2b55d7ce63471e420612593d14fa49e1a3d52b3734"
   },
-  "owner_pause_current": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
-    "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
-  },
-  "execution_control": "Explicit owner resume required. No automatic reset or next semantic package.",
+  "execution_control": "Owner resumed W6 at20:00JST; monitor storage and follow QUOTA-OWNER-POLICY-v6. Plan250 remains paused.",
   "documentation_validation_before_owner_pause_20261029": {
     "at": "2026-10-29T09:32:52.718285+00:00",
     "status": "passed focused342 initial Backend shape synchronization; prior Bootstrap full passed6410 unchanged; final integrated full remains",
@@ -8929,5 +8958,40 @@
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-FIRST-PUSH-v1.json",
       "sha256": "8730b93a85889ebeaa5a446b2ec529a376764938ddd9da2bb2d0008a86a4fe3d"
     }
+  },
+  "historical_owner_pause_20261029": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
+    "sha256": "c5603d9fa5dda26855a74fbbb2aea343a3363aeae2d94289ed8f5e884bb1e3ba"
+  },
+  "owner_resume_current": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-RESUME-20261029-v1.json",
+    "sha256": "1812bd329c9d8757e7423cde6dd2f3edd3c6c6d14d9872994bb1733c50c97ea6"
+  },
+  "documentation_validation_before_initial_whole": {
+    "at": "2026-10-29T10:45:26.399801+00:00",
+    "status": "passed full additional-storage cut and focused347/348 final documentation",
+    "full": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-additional-storage-20261029-v1/RESULT.json",
+      "sha256": "807513293f6a9fc9636c9befc0f09ed2b7c3c559a3d1f8f4a4953f12c1b7df4a"
+    },
+    "focused_final": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused348-additional-storage-final.json",
+      "sha256": "9d499457e25330117641d0b0ae8cf9ceb7428e1c950d4175ca73f91ae55ff369"
+    },
+    "checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1.json",
+      "sha256": "908dba55d914aae99f7ee029c7ce09fdd15ccc68d5a3ab933faa8f46833910a3"
+    },
+    "research_sizes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/disk-usage-analysis-20261029-v1/POST-CLEANUP-SIZES.json",
+      "sha256": "a49ee2cd39f8c4ef0d2a4f0e086b40c6f7d3170ba63330c4750d8370af2c102f"
+    },
+    "retained_docs_draft_failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ADDITIONAL-STORAGE-DOCS-DRAFT-FAILURE-v1.json",
+      "sha256": "e12ae3056610e25c1d56cb8d59d4df926b480a8063c98eee45cafa95907ef70e"
+    },
+    "whole_W6_complete": false,
+    "research_resumed": false,
+    "swap_changed": false
   }
 }

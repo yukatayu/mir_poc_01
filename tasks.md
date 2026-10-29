@@ -1,44 +1,44 @@
 # tasks
 
-最終更新: 2026-10-29 19:39 JST
+最終更新: 2026-10-29 20:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 ## document role
 
-Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABも2026-10-29の最新owner指示で一時停止。I3-4/W7/Canon採用は開始しない。Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。単一report2617とW6_CHECKへ証拠を集約する。
+Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABは2026-10-29 20:00JSTのowner指示で再開。I3-4/W7/Canon採用は開始しない。Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。単一report2617とW6_CHECKへ証拠を集約する。
 
 ## current promoted package
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-現在実行中のpackageはありません。明示的な再開後に限り、下表の依存順で進めます。10/29 ownerへのrough estimateは順調なら残り2〜4日の実作業、資源前提の修正/レビュー差戻しで1週間以上の可能性。Oracle利用制限待ちとquota停止は別の不確定要因。完了日・完成率を保証しない。
+完全初回画像の条件付き合成を受理し、共通public初期履歴/cacheから全caller資源へ、下表の依存順で進めます。10/29 ownerへのrough estimateは順調なら残り2〜4日の実作業、資源前提の修正/レビュー差戻しで1週間以上の可能性。Oracle利用制限待ちとquota停止は別の不確定要因。完了日・完成率を保証しない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 復元と初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabric/完全Backendまで結合。完全初回画像→public初期履歴/cache/全caller物理資源。再開後の最初の対象 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 完全初回画像のsource条件付き上限を受理。次は共通public初期履歴/cache→全caller寿命/work/物理資源・進行 |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | Backend focused342受理。今回の停止記録full make docs通過（6410入力不変）。追加storage後の文書検証はADDITIONAL-STORAGE-DOCS-RECEIPT-20261029-v1へ保存。W6最終統合fullは再開後 |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 18:34:16JSTもOracle Pro5of5/Usage limit reached。最終review未実施、停止中のpollingなし |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 追加storageのfull make docs（6410入力不変）とfocused349を保持。今回再開/画像合成のfocused350は別receipt。最終統合fullは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 20:05JSTもOracle Pro5of5/Usage limit reached。最終review未実施。次回確認は21:05JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
 
-Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のrelease/全channel/資源/回帰に未完了項目を残して停止。再開前の技術的な残課題を記録する。初期化DATA、実Source、独立authorityを分ける。current roadmapはPlan250、W6 LABは別途owner許可範囲。
+Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のrelease/全channel/資源/回帰に未完了項目を継続する。技術的な残課題と採用判断を分ける。初期化DATA、実Source、独立authorityを分ける。current roadmapはPlan250、W6 LABは別途owner許可範囲。
 
 ## user decision gates
 
-容量: ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。
+容量: 2026-10-29 20:31 JST root約6.8GiB、MemAvailable約11.5GiB。全cacheを戻さず、必要な依存だけを復元する。初回画像のproof検証は小規模の新生成物だけで完了。再build・大きな出力前後に残量を確認し、原本/証明/失敗記録/検証済みarchiveを保持する。復元commandと条件はRESUME参照。
 
-Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証も現在はowner pause。再開後の技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
+Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証は継続可能。技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
 ## research discovery items
 
@@ -54,7 +54,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 ## maintenance tasks
 
-2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
 ## non-promoted references
 
@@ -62,4 +62,4 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-最終読取は2026-10-29 18:33:01JSTで週次残量60%、指定10/30 Full reset使用0回。18:34:16JSTのOracleはPro5of5/Usage limit reached。停止中は再照会・reset自動使用を行わない。
+2026-10-29 20:01JSTの週次残量54%、指定10/30 Full reset使用0回。次回確認は21:01JST以降。20:05JSTのOracleはPro5of5/Usage limit reached。指定resetは週次枯渇又は10/30 01:45JST以降の期限接近時に実UIを再確認して1回だけ使用し、その後残量35%で停止。別reset/購入は未許可。

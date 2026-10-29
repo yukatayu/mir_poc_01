@@ -1,20 +1,18 @@
-# RESUME — W6 owner pause after accepted initial Backend
+# RESUME — W6 resumed; initial whole image conditionally accepted
 
-Updated 2026-10-29 19:39 JST
+Updated 2026-10-29 20:30 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
-W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-## Authority and stopping point
+## Current authority
 
-2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
-Latest owner instruction: 「後でで良いので、一旦切りの良いところで手を止めておいてください（その際、再生可能なtarget等を一時的にクリーンアップしてください）。研究データが消えないように注意してください。」
-
-No next semantic package was started after INITIAL-BACKEND-SHAPE-JOIN-v1. Plan250 remains owner-paused separately. One main agent; no sub-agents, unsolicited external writes, notifications, shared-folder delivery, or automatic reset. The subsequent owner request explicitly authorizes committing/pushing this saved repository state.
+Owner messages: 「引き続きW6の作業をお願いします。」「ストレージの空きには適宜注意してくださいね」。W6-OWNER-RESUME-20261029-v1で6807保護fileと保存receiptを再照合済み。研究再開時HEAD=34adc79f88f40a85dcf07a228bb9b9adef05b94d、dirtyなし。先行pause/cleanup記録は履歴として保持する。
 
 ## Exact roots and preserved evidence
 
@@ -39,7 +37,7 @@ The selected initial ST Backend has N≤37932/S≤3925183, retaining both snapsh
 
 ## Cache cleanup and exact restoration
 
-ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。W6研究は再開しない。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。
+ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。このstorage checkpoint時点ではW6を再開していなかった。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。
 
 追加整理後の復元条件（初回pauseのCargo cacheとは別）:
 
@@ -58,7 +56,7 @@ archive作成前からの正味容量改善はroot約1.50GiB/tmpfs約0.57GiB。�
 
 Cleanup evidence: pause-cache-cleanup-20261029-v1/AUTHORITY.json, RESOURCE-AUDIT-BEFORE.json, PROTECTED.json, per-root MANIFEST/VERIFIED/RETIRED.json, RETIREMENT.json and FINAL-VERIFICATION.json. Resource audit includes df/free/lsblk/findmnt/du; configured external mount was absent. No shared folder was used.
 
-Restore only after owner resume and before dependent builds or cache-path hash checks:
+Owner resume is recorded. Restore only the required dependency subset before dependent builds or cache-path hash checks:
 
 ```bash
 python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/cleanup_w6_build_cache_20261029_v1.py restore --confirm
@@ -66,29 +64,41 @@ python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation
 
 The command verifies each archive and protected file before restoring, preserves exact bytes/modes/mtime, and will not overwrite an existing different file. It requires enough free space for each selected cache plus a 512MiB margin. Never substitute a new build for archived evidence or rewrite successful receipts. The retained executables remain at their original paths; the archived .rlib/.rmeta/.d files must be restored for direct rustc components. No restoration is needed merely to read the research records.
 
-## Remaining work after explicit resume
+## Remaining work after accepted whole-image join
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Join the accepted initial Flow/slots/source/DATA/Bootstrap/Parts/Process/Fabric/complete Backend into the whole initial image. Then connect common public initial history/cache H. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. The initial whole-image join is accepted conditionally. Connect common public initial history/cache H and prove reachable retained shapes. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
-完全初回画像の合成、共通public初期履歴/cache、全callerの保持寿命・非割当work・host/OS・物理資源と進行、他profile、全要件/出所/証明の最終照合、計測構成1790の必要回帰、W6最終統合docs/独立Oracle reviewは未完了。
+共通public初期履歴/cache、全callerの保持寿命・非割当work・host/OS・物理資源と進行、他profile、全要件/出所/証明の最終照合、計測構成1790の必要回帰、W6最終統合docs/独立Oracle reviewは未完了。
 
 The pause full-docs/focused343 receipts cover this saved state only. They do not close W6 or replace the future final integrated review. Earlier detailed restart notes are preserved in owner-pause-20261029-preimages-v1/docs/proof-first/RESUME.md and Report2617.
 
 ## Quota, Oracle and process state
 
-最終読取は2026-10-29 18:33:01JSTで週次残量60%、指定10/30 Full reset使用0回。18:34:16JSTのOracleはPro5of5/Usage limit reached。停止中は再照会・reset自動使用を行わない。
+2026-10-29 20:01JSTの週次残量54%、指定10/30 Full reset使用0回。次回確認は21:01JST以降。20:05JSTのOracleはPro5of5/Usage limit reached。指定resetは週次枯渇又は10/30 01:45JST以降の期限接近時に実UIを再確認して1回だけ使用し、その後残量35%で停止。別reset/購入は未許可。
 
-OWNER-PAUSE-20261029-v2 and QUOTA-OWNER-POLICY-v5 supersede autonomous scheduling during pause. The prior reset window is historical, not an instruction to act while stopped. Research/runtime/reader/measurement services were ended before cleanup; only the bounded stop-record validation runs for this closeout.
+W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
 ## Repository backup scope
 
-追加owner指示「あと、切りの良いところでcommit&pushも適宜お願いします（研究データが消えると悲しいので）」により、この停止記録と蓄積済みrepository変更のcommit/pushだけを許可。W6の研究停止は維持する。Git管理外の研究ソース/証明/raw原本/大容量ログ/cache archiveはローカル保持で、今回のGitHub pushに含めない。
+追加owner指示「あと、切りの良いところでcommit&pushも適宜お願いします（研究データが消えると悲しいので）」により、区切りごとのrepository変更のcommit/pushを許可。最新指示によりW6研究は再開した。Git管理外の研究ソース/証明/raw原本/大容量ログ/cache archiveはローカル保持で、今回のGitHub pushに含めない。
 
 停止記録のfull make docsは6410入力不変・exit0で通過。以後のcommit/push許可・検証結果の文書差分はfocused343で確認し、W6最終統合full/Oracleは未完了のまま保持する。
 
 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
 
 Additional disk analysis (2026-10-29 19:39 JST): 調査開始時、root使用約173.1GiB/一般利用者の空き約5.4GiB。Mirrorea研究作業85.3GiB（W6 63.2/W4等22.1）、Codex関連19.4GiB（session記録16.8）、swap.img16GiB。W6の圧縮済み保存物23.0GiB、JSON記録9.0GiB、保存image9.3GiB等が大きい。四世代のfull native実行記録は合計16.4GiBで前記分類の内数。通常のtargetディレクトリはroot上約0.14GiB。tmpfs約5.9GiBはRAM/swap側でroot使用量に加算しない。 swapは調査開始時約7.6GiB使用、整理中に約9GiBへ変動したが変更なし。sudoによるroot側全量auditはpasswordが必要で実行不可、読取可能範囲のduとstatvfsを区別する。rootの予約領域約8.9GiBはdfの一般利用者空きに含まれない。研究原本・旧成功/失敗・会話記録・他project・OS設定は削除しない。任意の全artifactを再生成可能と認定したものではない。
+
+## Initial whole image evidence
+
+2026-10-29 20:30 JST: OriginalImageの全6fieldを、初回Parts/Bootstrap/Flow/Process/Fabric/完全Backendへ同じ原本上で合成。2つのBackend snapshot、四authority、元source/owner plan、返却履歴を保持した。
+
+新82宣言と16反例をfresh/replayで検証し、既存2915宣言を再確認。56新logと271source入力を独立照合。9実画像・24実返却を完全に読み、source12/reader32/数値6改変を拒否。root N≤1115075/S≤228393048。
+
+各componentのsource事前条件と固定public初期materialが前提。NはJSON構文node/鍵、SはUTF-8文字列byteで、encoded長・heap/RSS・物理予約ではない。上限は後段encoder capを超え、capture成功からencode成功や失敗前費用の免除を導かない。任意import履歴/cacheはsymbolic residualを残し、到達可能性と共通public上限は未証明。Native変更・新実機実行はない。全caller寿命/work/host/物理資源/進行、他profile/最終統合reviewも未完。
+
+Leanの予約binder名とunused simp、凍結Parts generator参照、AST inventoryの実stdout、同名version fieldの改変対象を訂正。旧draft/失敗を保持し、成功条件を弱めない。
+
+再現: check_initial_whole_formal_v3.py（fresh/replay-v2）→ verify_initial_whole_v3.py → INITIAL-WHOLE-IMAGE-JOIN-v1.json。成功出力はno-clobber、再現時は新cut名を使う。

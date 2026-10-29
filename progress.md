@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-29 19:39 JST
+最終更新: 2026-10-29 20:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,17 +55,17 @@ public/production layers remain later.
 
 ## current milestone position
 
-W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
 | Task axis | Current status | Startability |
 |---|---|---|
-| 論理仕様 | 275module/41526宣言/1995反例をfresh/replayで受理。追加の寿命・局所費用・型rankは別cutで検証 | **技術上は着手可能・現在owner pause**。Native63の23意味対応/153outward出所を照合済み。全caller資源・他profileと最終受理は未完 |
-| ユーザ向け仕様 | 現行FD5の全field/status/count/order/length/EOF/no-frameと他channelの出所・認可・TCBをLABで棚卸し。成功emptyは不在証明ではない | graph/coverage/loss/absence/active debugの具体化は技術上着手可能だが現在owner pause。最終Q26/Q27は **要仕様確認**、未採用を維持 |
-| 実装 / 運用 | Native63全1750/45reader/全履歴と他1190/7doctestを受理。別計測構成の45校正と実3world/各2cold readerも受理 | **再開指示待ち**。計測構成全1790回帰、public全資源、最終reviewは残る |
+| 論理仕様 | 275module/41526宣言/1995反例をfresh/replayで受理。追加の寿命・局所費用・型rankは別cutで検証 | **着手可能・W6再開済み**。Native63の23意味対応/153outward出所を照合済み。全caller資源・他profileと最終受理は未完 |
+| ユーザ向け仕様 | 現行FD5の全field/status/count/order/length/EOF/no-frameと他channelの出所・認可・TCBをLABで棚卸し。成功emptyは不在証明ではない | graph/coverage/loss/absence/active debugの具体化は着手可能。最終Q26/Q27は **要仕様確認**、未採用を維持 |
+| 実装 / 運用 | Native63全1750/45reader/全履歴と他1190/7doctestを受理。別計測構成の45校正と実3world/各2cold readerも受理 | **着手可能・容量監視**。計測構成全1790回帰、public全資源、最終reviewは残る |
 
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
@@ -1329,3 +1329,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-29 19:03 JST: ownerが依頼した蓄積済み18文書/台帳をcommit 4259bb9e038bef2744d78cc3191feb873fc8edf3としてorigin/mainへpushし、git ls-remoteで同じcommitを確認。Git管理外の研究ソース・証明・raw/log・cache archiveはローカル保持でpush対象外。この追記は確認結果だけを保存し、semantic作業は再開しない。
 
 - 2026-10-29 19:39 JST: 再開対象は研究でなく追加cache整理とownerに確認。4553 Lean cache/17部品binaryをexact archiveへ保存し正味約4.10GiB削減、proof/source/raw保持。swap変更なし、W6 pause維持。
+
+- 2026-10-29 20:30 JST: owner指示でW6再開。完全初回画像を新82宣言/16反例・9画像24返却へ合成。共通public初期履歴/cache・全caller物理資源はOPEN。
