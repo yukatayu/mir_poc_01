@@ -100704,5 +100704,1902 @@
     "range": "complete source/replay recipe and exact twelve-source comparison",
     "role": "W6 selected Tree producer reproducible component",
     "status": "LAB saved source replay match; no duplicate test execution counted"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-CAPTURE-PROVENANCE-JOIN-v1.json",
+    "sha256": "453b0ba0db5681a089feb4df80a6dcf64366797e139e609b22f8122c3d309341",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-CAPTURE-CHECKPOINT-v1.json",
+    "sha256": "d2d057b9b91f567f27ad09cb18136cc459c12e92295082cc809200bf2b4ab1c9",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-capture-provenance-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "bfa71cc8de3d9c9e407c36859c1c2d747a7be5b0071d9dd37081a5e016d51003",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-capture-provenance-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "78290326b69d6d081b378825e970707f563f886e786def7fde7e7efdd6f1e340",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_capture_audit_v3.py",
+    "sha256": "12027cd0aef1210cd7bb91f7170e5489a5bc1d662b6fc0cd8bb31d7dfd1e54ba",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_capture_reader_v1.py",
+    "sha256": "adac7bbb4991437a79d4bffd202736dff2dbe83fa825654d4498799cc68e33ef",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_capture_source_v1.py",
+    "sha256": "d10bb3277e3e22636d40835e52f4bf8a323797a97251a559ef8822723b432d42",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_capture_component_v1.py",
+    "sha256": "56714435b07833e59b0dd3bd21a873ce91f61bf2cd72b6251dd9f3e20d85312d",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_tree_capture_v1.py",
+    "sha256": "f963a5f4f6df4e9a4a2e90b5b1613e490b2926b637bc9413316f9c67f7156e06",
+    "range": "complete source/component/independent reader and controls",
+    "role": "W6 constructor source capacity correspondence",
+    "status": "conditional LAB;recursive return/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/alpha_avatar_runtime.rs",
+    "sha256": "f2f73700c5078f958fcc0b9367c6a21cc311caf1e6dc2e304b237df9d01070a5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/alpha_layer_insertion_runtime.rs",
+    "sha256": "8859faa26f5c9c3061b71a268a59ac1e814ed54ddb9028ca4a4f9417ea688ff4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/alpha_local_runtime.rs",
+    "sha256": "b59fa02e9cda2ba0db2ad73f415d22b2da9688dc74062055bcd63d1d55224c66",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/alpha_network_runtime.rs",
+    "sha256": "45557c240dc8f25aff4599dbdd9ae625fb8f6dc2016cc3b530fb992b13661b16",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/bin/mir-clean-near-end.rs",
+    "sha256": "8696c0dcccdd4b1c0f32ecdf2043fedca4b74f8abf9aa358e07c2a8ca666a6b8",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/bin/mir-current-l2.rs",
+    "sha256": "342d18e00c91f681eb0e1711bbc4cc955843d6e70aba596e2da52125f805ba56",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/bin/mir.rs",
+    "sha256": "bf003fa6d1a3279b453626fd06bf8e81464739423a7bb71ea1c7023c622e9f6b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/checked_program_reference.rs",
+    "sha256": "58d405d51687c93a2cb846c8251241fa47f2be6d94cb0b349b23e94201932fd5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/clean_near_end.rs",
+    "sha256": "b86b7d1b96cf4d4b10d0fc66144553a8beb8ed60d5082ef0134039039663aa0c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/current_l2.rs",
+    "sha256": "5e9fed0769d31a3c47978b7d2ed01f3c7299351cc5b477444e1e5634b49f01c5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/current_l2_cli.rs",
+    "sha256": "ae1ef5c2c033e7b204171b5584dc664943430d76ce51461ef5ef962d2df63196",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/full_system_v1_local_split.rs",
+    "sha256": "59d399dd1ef9d6b08ee39ceb225da112864884586f35f36370b7556dc6881f92",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/full_system_v1_projection.rs",
+    "sha256": "c69bdeab40b20581063dff0c9180e0c785e61fbbb1db1f7cb3dab6c9610db960",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/full_system_v1_provider_admission.rs",
+    "sha256": "5ccff8a42f91f7a83b6ad6e19b9e1a97c37b1719b753e5a8535e0087a81e320b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/full_system_v1_renderer_pose_backend.rs",
+    "sha256": "33aa1f148f5c0567044e2b5cdb16acf0b21cd19ccddb29fcb72a471d20504212",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/full_system_v1_session.rs",
+    "sha256": "7ad2c76cb4dd26c9f53d76a187991e66bd527cccf5d2a685cdfd3b8b5251ec69",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/hotplug_runtime.rs",
+    "sha256": "e64dc0247d0a3889e1a3001a27ab24b171a5073418817f2244d909f979201849",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/i3_private_prepared_binding.rs",
+    "sha256": "e0cd5eb9e63e7288a171232c0efeb6be2ccc26950a28981c8843891627820d8f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/i3_read_only_provider_composite.rs",
+    "sha256": "acd1c974cf2fc006df7b5f7ebe21cca987992ad126df876852b98d80be381e10",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/i3_read_only_provider_composite_tests.rs",
+    "sha256": "2dac2b10fea6a7f8309385ebb45732ceb54e3b913686b897db7fec0d75e29d7c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/lib.rs",
+    "sha256": "7325bd7a7cba96ae7e9151185f2830f81f0dd6f6eaca9a0c3a8132fff958462d",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m10_reference_system.rs",
+    "sha256": "85e7c893ea668a3a6c95fd1ac3a8ad346dd37665e47f9cf73d120e5dedd6b172",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_owner_admission_gate.rs",
+    "sha256": "b0f6bb2ed7fd675c34dc7a479e76119c5864d505923c47bc1760b730160cca7e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs",
+    "sha256": "26f9934ac4ca5224c7052d696ab765ebfea42fa6bb2f88738799e920e02c388d",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_private_prepared_designated_binding.rs",
+    "sha256": "a30a6508c0ac0ea6986a68b6665f1685e48c4812455f519e65266bad5569c927",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_private_prepared_local_binding.rs",
+    "sha256": "880447e61b60d24f41945f82b2652603b2d73da7b83e0047507c6d70a830ab9c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_private_prepared_owner_binding.rs",
+    "sha256": "966e14955e3f860eff6ea0bdf8f1d2d8f24589d3e0c4bd267e4bb61c9bdb93b9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_private_prepared_relation_binding.rs",
+    "sha256": "a9d89beb0302339fe094e9a031447b72ab813ade27864418fa4aa11c7774a6be",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "a4adc3b1ad2d40d0bdc1e24ce15cd6c41868605f96c67913ef644d0c2485267a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_authority.rs",
+    "sha256": "e2576d035bfc604138992c8ad8592a33fc93c02611de03284082697a6b768914",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_designated_value.rs",
+    "sha256": "7a8e8b214401a68e67ebb097544727ea55ca5bbfead030583e73b3b2de5e35f3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_local_cut.rs",
+    "sha256": "c864f57b1d2a7b0de04bd637255be5c05e06aef4164bd52370cd19f80393e0d0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_observer.rs",
+    "sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "e049235ce7fa70079ec8a0e120e6c657988ee90c5e32dc0931759fea3158b762",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_patch.rs",
+    "sha256": "1bbc0d34c66d15c6739f44df1b7142cf8469ae3d59d231ad0fa54187f1a8f906",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_runtime_relation_projection.rs",
+    "sha256": "3e788a3640bed541d340b2fd73154d392105e2f51ddefc682865490721385f22",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_w6_recorded_graph.rs",
+    "sha256": "1726d9251365f6f2b440cccf96748aa177afc6e90f287f930f4e5689784bfc83",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m8_w6_recorded_graph_tests.rs",
+    "sha256": "2e0378ab5fcc9fbd961089e4a0bc9416f2f126e45a8b0de766cab4dfbcb40fef",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m9_auth_verification.rs",
+    "sha256": "3247682d86238f46fa32958d6f1561c95a83619da425b138bcbaf34e5cbbe564",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m9_auth_verification_i3_provider_composite_tests.rs",
+    "sha256": "802b5757e715d912956a17d1e19489ff34921fb21baf8164c65e6ea6f6f17010",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m9_auth_verification_i3_tests.rs",
+    "sha256": "a13010b528f86a2e8cb52d4a9b03c57a82b493d9553cb1c2d5c61e5e31aa622e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/m9_auth_verification_unit_tests.rs",
+    "sha256": "d5ce13b7bb2a8b8ceb5945da781a750e1b27b7d8b41a44e9bc410d63bbd63889",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/posegraph_runtime.rs",
+    "sha256": "7a4ba6f65378d3456ed508b4e36414a7231f583bdf831acaac1f59b2cf0d9abe",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha05_host_io.rs",
+    "sha256": "165f054a425de7bf8ac118c054dbd33feffcfb01bc7dccd2a116da51edbb8bdf",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha05_session.rs",
+    "sha256": "e0a86dda4da47b0b0aec585b8de878e59064014af9ac63cfe827be2b48b69bb6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha08_hotplug_session.rs",
+    "sha256": "4ae5862dab42d345d5369153db9d7a9e15795cba84633b2e4e2b3340cfe0eab0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha09_devtools.rs",
+    "sha256": "8de28be330056b8c80d2976f6bd9aac75900ad1c958b9e0ce3c51d6531dee923",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha1_avatar.rs",
+    "sha256": "c1e45ca2587d60aad850448cb1908f95d24ea9b3f8143ab0d048181e6607eb42",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha1_hotplug.rs",
+    "sha256": "7fb095404668f8db86ad861894a5c6abb9748b8bdeeec35a86e9e6ecd843ba68",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha1_local_runtime.rs",
+    "sha256": "9169a4f2aa15ec44ced5e4e3aab8203fdd4655f4a93b7f08c04d9cae02ac6e91",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha1_save_load.rs",
+    "sha256": "c61a7379ffa1cd213dbef00345b2321b2124085d21c8134de73f019b892c21c0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/practical_alpha1_transport.rs",
+    "sha256": "24fc7ddcd7207a307782fb47461926008dca7427b8640ab137961e957cb8a931",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/product_alpha1_devtools.rs",
+    "sha256": "a3782d2394bf5d4e8c7a0d9358b89c52484ec0dedd2b87e25d99c7dc58473f05",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/product_alpha1_session.rs",
+    "sha256": "30dacf0f809dbcbe11b697de745f698896b1365300132ef6e75f3a470205cb0f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/product_alpha1_transport.rs",
+    "sha256": "831fa078bfeff71161b5f93dec0d032551ad8b1126f048725be4e246975c9f9f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/proof_first_current_admission_tests.rs",
+    "sha256": "0e7ca091898a5bf64c81ad1645f69d920c98bf28e1731dc9375b466272bf20f5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+    "sha256": "985f070bce79b75c49ff223911b6a702118ea412992146d7adecb3cf9780595f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/semantic_runtime_kernel.rs",
+    "sha256": "7107297af2b2a7c53d68e05aa369fff58129d07b74253f4c32e31b15b104d2b5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/surface_source_patch_hotplug.rs",
+    "sha256": "d149531e14c2037019527ed91ebdd30852c525bd510d83de5dcbc3ec02d84c35",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys1_runtime_kernel_tests.rs",
+    "sha256": "eec68e39f506d3cc8936d6c23ac692261a19c69fe3438b843749cb6eaa5bc95f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys2_bounded_model.rs",
+    "sha256": "061c05fb131ccbef0618e87d914bbb73f6fccdd2b17fb37edc06fef7e3f87303",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys2_bounded_model_tests.rs",
+    "sha256": "a9b4c64bd68a4327482fdc7d6840fbe458fc404d5528a86f803bd2cffb8821fa",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys2_execution_backend.rs",
+    "sha256": "11cb8cc28a74a1ed2a22ed45afba12b572e6cbe64dccef70b08a9422a0e505a0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys2_execution_backend_tests.rs",
+    "sha256": "5198e9e5183c90c37193dfdc36f78635a93c8af4de9bcf87a0b0e9b53b094520",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "dda5fd0f57d6e0386bbcf2cbb8e115567f4ac09a8046389f06056f3a50bf0ed3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/lowering.rs",
+    "sha256": "c3fe2befde8b94cf4f17b1a8f5ac4dd1f3c9b1d017292d497c0b545c9df34936",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/mod.rs",
+    "sha256": "a36454d7b8c774f0049a936ea9243636ad459fb48ead982f7f28718c9357f92e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/model.rs",
+    "sha256": "f9343b35f1dd274032fe8948ea09becdde07b496a92c39482eb4c700b0eadfa7",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/read_only_provider_effect.rs",
+    "sha256": "09c9bc7f01dca86fc2a7b32554b9d054d4336bb80a496dd600f91323b4ba2eb9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/validate.rs",
+    "sha256": "cc0a8e86259a68c0b7fa6100c8c43eb8d96c1dce418b507f2b37f4db4888b3e6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection/w5_inert_model.rs",
+    "sha256": "916d2b61f9aeaad3de100dae2540c9479ca051d7a8a0d9e4d977a5c07c35ff13",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_projection_tests.rs",
+    "sha256": "f191c8472c892264cf4138cf0ec310130f126a01f21f588cd7b0db49d19b4c41",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys3_provider_effect_tests.rs",
+    "sha256": "66ce15842e5618346c0a5da9534dd8cb52aa3bfa2aeb973d7ed6b7826b14ddd3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "d6e3ef70eaa18aa82b05384b7f7d28c4b985e055cf5bbe30918d703123bcd7dc",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_dispatch_tests.rs",
+    "sha256": "01744fe238ea13268059a408e39dee211802ec91aea76236f8ad8b6c768872f2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_original_source.rs",
+    "sha256": "868a57164b406fa540e72fdf3be2eb29a1922c872e0bb39012d8fab78b219ae3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_original_source_tests.rs",
+    "sha256": "36f66535e550ea98244683f1f9e27d135204e7e0211f4cc004a5242016cbc6c6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_original_source_w6_bounded_context.rs",
+    "sha256": "ac4e1e5cafcfef8e82d1a9ddb0e4e702ef273af913e2cae7071b676e78812493",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_original_source_w6_classification.rs",
+    "sha256": "7c07a1a16f2727fdb5f91fb4f04caa96328c98f51468fa8526e02acf9715b8ac",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_source_authority.rs",
+    "sha256": "8363c4d63f201f7c74d3c6b60be4f5cc4073639e37f29a8b97f0544b4ea8b47e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_source_authority_tests.rs",
+    "sha256": "d22d093529a65b3a0d295fef94b731aff608a25c7972c4a0221ad0e4d41cef19",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_i3_source_authority_w6_historical.rs",
+    "sha256": "003d242e2e8fc613b832d1e2a56e2fddba397c1b98676cab99ef6c8530df11ba",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_invocation_tests.rs",
+    "sha256": "e24b28678508f0849af20db127defbb513fceada13935a857f098991aaf642da",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys4_private_prepared_fabric_binding.rs",
+    "sha256": "6a1d2ca20e6222b7c17f8a61827992de704ff7da21fc60ff1fba5aa0eec419b1",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_observation.rs",
+    "sha256": "dcc5011424568cf0d00a05f681d5a83579e53739bb9e4a5f1c41c06e34a418aa",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_process.rs",
+    "sha256": "2402e327d79cc1b28ef55340430153c15f499c037c010bcd94809f85dc449809",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_process_tests.rs",
+    "sha256": "cb6763f814b7c9a092748483f74c21de38274710ba7281a2b11ad62f2c2f8073",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_allocation_tests.rs",
+    "sha256": "5589421174825fa1b90bdea12e7a97d12d676839a6ed1139c721ea5b4131af6f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_capture.rs",
+    "sha256": "4215cba1898d5a146cc1faaeb8daa517bd57c27cd7355279977528bece8ca6c8",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_catalog.rs",
+    "sha256": "93e416456689207fd5194cfb5a7aef88f43f36f410e9029d28efec4a5e5e5c68",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_catalog_sender_tests.rs",
+    "sha256": "6c0298e69565a1b7334d50b9fd81525ab6d0b418be579c6db5c1a8c7b72d9e8f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_catalog_tests.rs",
+    "sha256": "b13d180d303b5a72714c019a191ab6be50db2f99f8f653ea3cffc78c37f0c0a2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_catalog_world_tests.rs",
+    "sha256": "d7d4a1d782c0cead2f568c0d6f8a16f23ec28953b3f134bab21cce5f519ea124",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_continuation_tests.rs",
+    "sha256": "3d2551dae525fe9b27c655548f4bf54e99bfc6ad7205e4f76977aa06ee153e4e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_delivery.rs",
+    "sha256": "284666faae8d468b5ac17a292fd502526ffbc4d75d334619a7c0e8bcbd25e02d",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_attestation.rs",
+    "sha256": "a92924302531edfef464719fc141de4737bc956b88c7d36f44e10e3f2634669b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_attestation_tests.rs",
+    "sha256": "2de0c5504757bb77a012354123c6eee782ce461f5fee67b033e1d77876915cde",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_data.rs",
+    "sha256": "8315ce029f75052882b183160bddca58f35ab7a575484c61361d437c78c334fa",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_graph.rs",
+    "sha256": "7c7ecec98ed222901f2c73b7a7ac4522160056f2caafe901eb15592e171af1da",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_loss_tests.rs",
+    "sha256": "491a09d111c75b7cecf86dd620b59e09b0f9f49c67d936f5794f8bbe2fac9d76",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_reload_tests.rs",
+    "sha256": "c1c4a6e96b44c53154e21e0edcda726f8feb533bb1ee87fd46bd1205067821ef",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_sender_tests.rs",
+    "sha256": "f00520c0357dc81c729e6e256ed0f7d0e0de0650680e0abc4c975cafd6455d7c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_service.rs",
+    "sha256": "cdbcd0bfdbaf61ecade08b30554c765b9563fa88dd085799b89ecef7fb08658c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_distributed_service_tests.rs",
+    "sha256": "824e7b2f4f3e3a46f022e3071f6c65a0b630eaffd457d2bfe330391a0ce51859",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_graph.rs",
+    "sha256": "20f6374592bed8c6f3f4fa905139bbae951cc885467e921533b8855b6e50eb43",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_graph_protocol_controls.rs",
+    "sha256": "bf8dc710692acaef28a6846b48402d00d6523b25860851d90c22c0b789807945",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_graph_response.rs",
+    "sha256": "ae42d945ce912e92f475515b3ecc0ae9775821fc1c26a1e01d77d2c982040836",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_graph_response_test.rs",
+    "sha256": "8d9cb6f7e4477ee70ce65b7b7409a780e950dfe098180fc976ef83336934c417",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_graph_tests.rs",
+    "sha256": "b3e4fe8cf5d4381b6df54224b47c4f3919d4cb09a18834f59315c1d70562cec0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_data.rs",
+    "sha256": "9f354000490990dfe227fe18bc6b2feb3c6341250c9fe61e4ed8dd6f92af49dc",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_data_tests.rs",
+    "sha256": "58d3d645f157d838626fe03f4388a8d62da753a3635f580f3b23d02793cae392",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_reload_tests.rs",
+    "sha256": "0ec7eb65fc987ab0be1f16a6d5e39632957eb0f6c5c7520ee013998e2483e593",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_sender_tests.rs",
+    "sha256": "b2f738da1c5540ce249d3a6e24b7b1da248a5a6245f35fd33bea60e730ada922",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_service.rs",
+    "sha256": "14bc2d7b2a6b60666c929f454f66af735b9d8d464657e39540662ff1ce7e120e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_historical_service_tests.rs",
+    "sha256": "c527b13699257bb2002814c959a1e7294b10e0eece4cab1308f78def606f6ede",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_ingress_tests.rs",
+    "sha256": "e8c72ddd7800cc091f163e5fa9e0a6a808daec60a12a785f4e2320861c97c75a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_input_journal_tests.rs",
+    "sha256": "adebdd180e9606eb2654f9bda63e789a86b660591f3e33f204244bd49fa713cc",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_lifetime.rs",
+    "sha256": "12cde57e212cbd69f52848e963cd776baae2fa8d234d1a8cbb11ac7df5aaa48b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_peer.rs",
+    "sha256": "176b3d727494a256b1267c867cf29c112b2857a1f792c9eb1cb5ddaa7fd66f91",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_service.rs",
+    "sha256": "28d5df99a87a5ce6a5ca5a089edf92fa0be64874cbd7ad16f96f9a3dde077063",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_service_test.rs",
+    "sha256": "57f19346a4b205236ce1147bf7dea40a9ea1492aefb3e14d4cb8a4ecd3717de7",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_successor_graph_data_tests.rs",
+    "sha256": "6ea95fb6a4b97fb9be9108535a54e7aacc2b8ae517b04ea029a94b17c089d820",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_w5_data_tests.rs",
+    "sha256": "3fc896e788b4843e2d9180eb758487376f5325160d863e0863002d45ab3fd0e1",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_original_source_w6_wire_journal.rs",
+    "sha256": "2caace6a5e3a7f394e9ffd5ec04e463d3f6b88614fb6dfc7d5b894ab44fb4743",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+    "sha256": "9f56f386a56e01171f2d4c3bc088f7e5a92d07e77924c054ba37c3516ac7a4c8",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "413858d279e06f10f679a8b763184b157a95d8a2b498a0af11a5e293c30ed75a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_private_quic_tests.rs",
+    "sha256": "6711e484b5ffea5c7131e1998ca5932491389d4c4c96352bbddc88dc200507f4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_private_quic_w6_historical_flow.rs",
+    "sha256": "c75b1c91d53c8152a2e259302a6e135cc21316aa1026c4eb9e9849460ac68fd3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_process_local_cut.rs",
+    "sha256": "ae1a66e3535bca72d79c2002f3bf4ec701ea954c2b2128b03d4da7e0a7accd29",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_process_local_cut_tests.rs",
+    "sha256": "39ceaec5521ca2969e6b5dbd22a86aec30de27da222ec740586092bf4a9bb3da",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "4e5e8f627bfca570f96b1345a97dda86636f1c81df77ae39287277f46aa49d27",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_process_snapshot.rs",
+    "sha256": "1b7434865cb41e29623f7513ee6a4e695b00539d77b589f528fed3795c0133eb",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_provider_composite_tests.rs",
+    "sha256": "25258ac11369fad6bd1b50400f19ebcb09c76fa50f4b486c2ec86d3b2f9ece7d",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_provider_control_tests.rs",
+    "sha256": "c533b883a03eed883e87bf5a0ac308e307cac254adaea7fbf754a91cf0dfb540",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_provider_execution_tests.rs",
+    "sha256": "a69e11a8a719f4c8bb79a522368439dd8737af547cc19874868048ce9feb3987",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_provider_runtime.rs",
+    "sha256": "0ad28d021bde465b07e1900cd5994f106b3018191b1ad5962c1d8b20c5a9fb63",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_provider_runtime_tests.rs",
+    "sha256": "b0ce274328b0c94832c9c06ce7c223746b5eba67cc7d569b1d8c11641b2e85de",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control.rs",
+    "sha256": "9291c7e61cf86ac34ff6fc4c1cacf32a53508287a0e5a77c29b9edc34c07621a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_tests.rs",
+    "sha256": "9f7465c034c96ff1e7ac7cb0c5b572b60fc5597f8cb193c43ffe07764e64b627",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_active.rs",
+    "sha256": "5ae60b5599171b7e5a5e9c4229f41c65306d4d92e42afa373e701de2182367c2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_bounded_hash.rs",
+    "sha256": "a46850d3d053f1226fa1dc11843255dd6e8ba1ec527962baeb597b998c3dc7a2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_distributed_registry.rs",
+    "sha256": "5fe46f26b7a5f9566828d332556f899aa758913d12d10c0552896b1b2b175a7a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_historical.rs",
+    "sha256": "e77b7e18db08c6dc04919220ee8007ab1e7f54edac20142af4d0f7a9b9e64702",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_historical_registry.rs",
+    "sha256": "bb8b97863e544c4fe79d60fa1f143ab779fa9b610d9cb876514e4f0026757a50",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_reconnect_tests.rs",
+    "sha256": "e295282aa3d65e192f72e92950885dbd205bf5b1e3ec5d2f3ddddc823c9031b4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_i3_source_control_w6_wire.rs",
+    "sha256": "7ee6c3d56df7c223bdd4eee147f3e5d01060f16f8594702fe904e8b86da78ae1",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_local_cut_patch_tests.rs",
+    "sha256": "a555c3bde3e062caa6413836fa219ef0e9c34609f4586b5c7dfd00d436ce928e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_local_slice.rs",
+    "sha256": "64f0b09065d3f0eceb415d12b8c4b7aff622a7f05f5e0ad1b36520e3972157e3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_local_slice_tests.rs",
+    "sha256": "2c724b0238b2dae3b029f9314fe057735570fe388ae3d348e0810b99f3e37e6b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_local_workflow.rs",
+    "sha256": "fab19fcd069df89f516cc93d8727a6b39640f741a6900c646d49d04a39fc805f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_local_workflow_tests.rs",
+    "sha256": "286abc9bc167f34a4c20a5bbdc63c03f6681090c7feb7e32c55c1c2e4c964db3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_relation_dispatch_tests.rs",
+    "sha256": "abca973608ae89575a8e5a720c55beba25f1b7c4ff3a14fc0a2c1fa52457d880",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys5_vertical_slice_tests.rs",
+    "sha256": "1447da3495d15e17e0f4435928a13e54e0c415784c7cbfaff50186ea606d40c0",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys6_i2_conformance.rs",
+    "sha256": "9c8dadf78b4bb6fdbe9a937c764053afbd3059876b92578aaad2e4b742a9bd37",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/sys6_i2_conformance_tests.rs",
+    "sha256": "1482e8a2f02c2dba2ea3b10ee12770d19cd02ec33200ae131a4266618617d7e7",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_admission_records.rs",
+    "sha256": "126dc58d83d20eb1a60ef785daf4770387062552f2dd58ab2a598c37e645a574",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_authority_snapshot.rs",
+    "sha256": "686ce10f70421c0d3bc36350d1dfa3288c0fbe8b53b382f70c92e518d30966f4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_authority_snapshot_tests.rs",
+    "sha256": "d8e8e4c99af64c4375115ddeb666f10ce3ad087575fb8cb7df53d83d1fcd228e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_cohort_control.rs",
+    "sha256": "3142249c72cefe775b56e99d66e73c74e50b94e323fa8c08e08ff76b03cf4703",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_image.rs",
+    "sha256": "b50fff129e495220fdb932264409b916fa3eb4f30d25fdc2691617f87d25c770",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_records_sys4_i3_source_authority.rs",
+    "sha256": "86d615c156284201cce03f0081c62a0fd0f6e07432f2cfadbc98ab61136caff9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_records_sys5_i3_original_source_observation.rs",
+    "sha256": "686728b1c738cd270a98ec5e74890345b803bab5809d1e8e7cb79e187bdf0b35",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_records_sys5_i3_original_source_process.rs",
+    "sha256": "bc32eac9eb2ec65ed0e56c2698ae998ae222618d8f43c61748da26cb6ff5d655",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_records_sys5_i3_source_control.rs",
+    "sha256": "83036b58e845d6144488d678ad44d06ae8d577c3833601df5c8f0b291637ef69",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_roots_generated.rs",
+    "sha256": "af823e8c02b7a2e1df06911a46760895fc965e5b68b00e4d7af0db369372e02f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_tests.rs",
+    "sha256": "d2f1851336050aa0e899253c4821ad14674de7a573b556c643ebb5594ce1bd8a",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_control_wire.rs",
+    "sha256": "5b8806b7d132e79afcddc36d30ae7341144294fa1e3852fdb61b13849e95e191",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_designated_image.rs",
+    "sha256": "8ba6b851ca5652ddb8c883a37c5149099083429fd3bdd16b890ea333c95729a3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_designated_record_tests.rs",
+    "sha256": "a0baeee4ab121b45317a59dede0468814c460e0836ad5704463c5dd3bdbca6c6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_designated_value_records.rs",
+    "sha256": "e32dd00fb02f783c94619f2a645ddd5e0795d5d53d0af0d9c3d56b98d94282d5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_fabric_gate_tests.rs",
+    "sha256": "2a3dbecbd0392ea5e249661e503dcffcc340db465a4e640d250289020940d31e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_fabric_image.rs",
+    "sha256": "e8a920a432cf984be94a4177ec511f2f5b33f953293eef1157359be2b49fd8d1",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_fabric_image_fields.rs",
+    "sha256": "6e56151994602675c166d4b66fb6be7e33f9d4024e3fb55a4f28c9d7d26404c9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_fabric_recovery_tests.rs",
+    "sha256": "1ce4c8e2763ea6035de74ea8fcdec331f32cfb386662aacedce02d0945a0b499",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_flow_image.rs",
+    "sha256": "b36eac0da72e0fdc5d16585549de1a3ec36154bd953270e56d1b54d99b2c93e6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_flow_process_data.rs",
+    "sha256": "88f22e639dc5f0e947276fb4de63e4564a3e4f05ad58d884958c74172c7806dd",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_flow_recovery_tests.rs",
+    "sha256": "e7608e047da988054d18f399674ae1d26679b446f028191ae0dd5c961bb085f5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_frozen_instance_image.rs",
+    "sha256": "7f85dfb211cdac32faa6d79b3be3b66e85f32feede9693dac82108a4b1c89c4c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_gate_image.rs",
+    "sha256": "89144e4f6f6fc151611b35f21bdbf74a4a3348cb7dced3d7937b58a6336ffc12",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_gate_recovery_tests.rs",
+    "sha256": "35576124f664a58965a6db7ee5ee3cf5afed23be8425773bbbd64b95b64b9a94",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_m8_runtime_authority.rs",
+    "sha256": "848adc5237933a85e9f16c9389b3aa10a42476b02246a58c47cb25bc5b50ffc6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_m8_runtime_local_cut.rs",
+    "sha256": "b9a89181d8cb0e2e9c9738301d2c77e24607ca4bba9190134f9a36b9df1bea21",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_m8_runtime_owner_queue.rs",
+    "sha256": "9acea34c3e9612665971f7b9e9c56de8975cbd8abc726c112173d529fc301f93",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_m8_runtime_relation_projection.rs",
+    "sha256": "3db55336993a0c8c1e1f96309596f0cda363cb3ac67724c6fe687754791bb285",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_m9_auth_verification.rs",
+    "sha256": "ed1df1c6cd7de9d89db094132d66b0c923785b17f2b2ca6dcf9310171437e105",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_restore.rs",
+    "sha256": "e65e82141ed657210e5b86133921ec9d7f15594f849284bc9c3f3ac1d703de31",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_semantic_runtime_kernel.rs",
+    "sha256": "96fbe33592d024255274025e820af88a4e4ddfe4dbdf98e44ecb1ed86b014b51",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_semantics.rs",
+    "sha256": "c42fb7bc79c3dcb1bdbc4847e83cde8fa3dd0cdffcc885912c993abc11d8f47c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_sys4_dispatch.rs",
+    "sha256": "4d9f80d582fe9385b579175efa5d71a6413ebc94fa59543b8e2188bcc2f0ced8",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_inert_tree.rs",
+    "sha256": "d4f11d56f24108525b6013761ae3a2b0292069061e54eeed36c1c36cac1150ee",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_instance_image.rs",
+    "sha256": "7861afa78b27bd5d75844ca4b810bc2ddc80af4ff652257de97e4412f0ad7741",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_interned_wire.rs",
+    "sha256": "f25ee7b9c2ed3df02c3fed6b5bde739469f01281784054f8ef5fcb455927170b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_invocation_image.rs",
+    "sha256": "b0d6708eafc3a7b73db54f0514d43e73888e03556295ffc91cdb46f0623a666f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_invocation_recovery_tests.rs",
+    "sha256": "d36811fe14ef8ce6f075ac2b49c5969302af6c793963538922212bd1d46c0ff1",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_local_cut_records.rs",
+    "sha256": "85fe1e740e2f176e62dbb40ddc422d5d10eecdbc528e3030dc51e9294256cd2d",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_local_image.rs",
+    "sha256": "48858a1036526131c7f56e6b55644872212740785050c82b030378e885587e9e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_local_record_tests.rs",
+    "sha256": "4a6c951fdd251dfce18d7d3e1b9fc9c3d192c9751a41d19b98796efa5784e9a3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_fabric.rs",
+    "sha256": "d36a768146f730d5eba9325e7b3970e0cb076c11e8397483b2659b6c3a8945b4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_fabric_tests.rs",
+    "sha256": "fee8a5a6f28e898a4f92a05983a4f577cac33da6e46d6d1aa3e0c905348bf14c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_invocation.rs",
+    "sha256": "e956c90bd29411082f845f1d7caded7cd58e69adb46362e0e8c976f22e898e53",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_invocation_tests.rs",
+    "sha256": "d10e8ced742cc037430cd4a620b0bb9627f8bf2b0587f4adf66be5e705d35831",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_local.rs",
+    "sha256": "7380bec2bdd4fbefb6cc55f47b0aac0ffc05720fdeeaec8c1ace80d939bb9a13",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_local_tests.rs",
+    "sha256": "2f5caff5d79bee65dadf7d61ae991d9de1abfe483198c419f73c18df6438a5c4",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_owner.rs",
+    "sha256": "af1eddfde4f4410eedc12b0476d6e9afc30d81effb31cac6d8266387a5c4e1f9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_owner_tests.rs",
+    "sha256": "b34a21525b2e97793a8916316f65260ad3a3364eaf9bfbe109135016043e9630",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_process.rs",
+    "sha256": "cc59726db261c83a5b35e368fe45ae67e79a8d076ecdf6438704f0cf2affc72b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_native_process_entry.rs",
+    "sha256": "a764dcff07fce2823e092d42da8631b3baff446baf844eb01cacfe158a15c004",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_declaration_image.rs",
+    "sha256": "ab20c7a472cf605fb827219b076b2073840af994bf8d353d9ab1d18e50873743",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_graph_support.rs",
+    "sha256": "927ab039f6588395e19841b4859010bb291f97d1a87789394dbd85f86bd586ad",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_parts_generated.rs",
+    "sha256": "d51f3e5dfb6066e886af36c9a54263befd8fb3f0deb65b28d9ca4a04cd4b5090",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_received_data.rs",
+    "sha256": "592a7c4745763e58204d9011ed3fbac744c41281106d4938ac89c07418f6c612",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_m8_runtime_local_cut.rs",
+    "sha256": "144514e05c0b64f661c9776de7526cab32dadcdbd1807a1702fc213647325fcf",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_support.rs",
+    "sha256": "17f94245cbc4bfc89fa7a3aed00b0363b80ae9328b6d4c04b5b0651944a7664e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_sys5_i3_original_source_process.rs",
+    "sha256": "c83202e8214142ba7d99e6ba484386a9ec06e051f4389c84586c6bad9559abdc",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_sys5_i3_process_runtime.rs",
+    "sha256": "c9f78eb4d545f9190141c74369e920cd33b05f0a854be8f7333ece46bda50969",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_records_sys5_i3_source_control.rs",
+    "sha256": "c8bd65233858f50360094ed5c26f6f616c332b3503ed7f225784a7c5a9aeadec",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_original_source_image.rs",
+    "sha256": "cdbef78d69fa070c31d31c37b30a9393a7cab5be025a7114ba1e04670ce3d4dc",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_ow1_recovery_tests.rs",
+    "sha256": "b32b2c530cb2b9e301cb504e4715da30020464bef4ebaf2704cd5898afd8756b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_image.rs",
+    "sha256": "8b37ad41149451f80e6198bce43bea62136f1e78112d68ee91ad8d834a0e4a40",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_image_tests.rs",
+    "sha256": "f3111e64f9a1f1beedd7942b58bf102a44729618451a9db990dbba4368f85977",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_plan_record.rs",
+    "sha256": "8997a3b3a369ff7970bd9fb599d795805e3df10721bacb8dec7b55f0c1b8c5c5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_queue_records.rs",
+    "sha256": "09649f0fde54db85ece89473693f9beae12f2267ed5e76e1818f431f470628aa",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_record_tests.rs",
+    "sha256": "e06664f718b84e1a99e66ef1f5e56c1dfed90a4e6a9e0e7ddcc794968b200670",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_owner_records.rs",
+    "sha256": "cd0baf7ae966f15832e1a5435781471a0b5acc8da39ac83011a7a19d6d96e868",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_prestaged_image.rs",
+    "sha256": "ef7fe0454fc97ff1aa344589724c0e786352bbcf8cdb96e43b1b3eb2eb59b35f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_process_image.rs",
+    "sha256": "b379edebda6ccdb5f03162e0ecfbe4baa63acf313ececfd2db9529410f141e3e",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_process_image_fields.rs",
+    "sha256": "5fc3286f83ad199e75aea79a86c0910f9d559bf6df3fff5fd4d54a0f6f5bb6e5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_process_records_sys4_dispatch.rs",
+    "sha256": "3aa0e188b970d5a5ba853f6f33d9f61e50d844dffcfbad1b2062775e2f285f5f",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_process_records_sys5_i3_process_runtime.rs",
+    "sha256": "f2681423e0137c1f9153934986854ceb7d175286a43e70f3cd614c05d02b86c5",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_process_recovery_tests.rs",
+    "sha256": "4f9b1be647291548f4aa51023f877f4472cf47d6dd5e844dadc5d8a05b7f87ef",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_publisher_image.rs",
+    "sha256": "7538453d10c15f4a448d8cffdd3fe4646224926b678d24ade9cfa85cba0899db",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_publisher_recovery_tests.rs",
+    "sha256": "8068076f359736834ce2f94aa3744a426cda8fdd6b31108466e057646120d9f6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_record_codec.rs",
+    "sha256": "a5ba46f7d7afa5c77662a2da5185ec9e4336dfa450a3cf70ec97923888aca2e6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_relation_image.rs",
+    "sha256": "215aaf7d08aff33c04c54bcd8bb164244f852163e3c492d5da8a90e123b95d71",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_relation_projection_records.rs",
+    "sha256": "352319b4ac516fea08ae927a581d59d641d265053b1b324c1f8e3330c5ee92e2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_relation_record_tests.rs",
+    "sha256": "6ed4fbde27a7b08a0bc4028e835b0f4f6c7f053c67d97706d9a1c736b491f638",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_m8_runtime_authority.rs",
+    "sha256": "51a497b67420f44843d44455aae352e74d68bb6962cffee64b265afcd9c14c97",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_m8_runtime_local_cut.rs",
+    "sha256": "6b87d916078ce09af7999c707780986fa462577d1153eca54902cd6c9426a372",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_m8_runtime_owner_queue.rs",
+    "sha256": "30b3602760c37a9ff822d914e5dbe96dd2a807b20c013ed12cdc32013abd10a3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_m8_runtime_relation_projection.rs",
+    "sha256": "3a6181289537655b3ca2062c1933309497d2fb02f498bb6079efeeea373124ad",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_m9_auth_verification.rs",
+    "sha256": "ef94c69509b4baf7363f35e9bf149c1b93b67f848ea1899d3e52f49b6febca96",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_semantic_runtime_kernel.rs",
+    "sha256": "ac4a0925fb304d3a9a13a9e620bbefdfda392e16f8ee03e96011669dba0e54d2",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_semantics.rs",
+    "sha256": "681b93f834d9b40af7bc03bbd9a4318be99adb451ef3570e9771d883867701a9",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_sys3_projection_model.rs",
+    "sha256": "b7634696d0a6bd0d5e62b3b4703553c8cd129c61203293e506b54b22accaaac3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_restore_sys4_dispatch.rs",
+    "sha256": "06f459429a71a03f2170698f44c333d2f6bb9fe2df891b34423a2c40ce630c39",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_semantic_snapshot.rs",
+    "sha256": "fbe5bd3439d3531162ff30118d1b13f9ee5b157c03c37bb7fdb856cae9a532e6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_semantic_snapshot_tests.rs",
+    "sha256": "cf5e5f9c9856347d9a29beabc24e484fa81861d7c68425d7edb7972e88210f20",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_semantics_records.rs",
+    "sha256": "73317abecd32add7276bd5a107afda6b363532ebf026060d8f98b568042f9311",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_source_authority_image.rs",
+    "sha256": "06a22728dd03b77c1bb268d44cd681ceca163d11930f8b7c46112d5e9a713d92",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_source_authority_tests.rs",
+    "sha256": "125dc714f28bfc46a386a2add697c1589e368fc32a808164426d1e3372ecb706",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_source_fabric_cycle.rs",
+    "sha256": "a36906cb826cdebc8a46c064f9e350b480227e57f9333d9e8b9d86dd022c25a3",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_source_image.rs",
+    "sha256": "0a32857f0031743dbdcc2384a785804d3fe578e6a7c34f247e04e81d597dac17",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_source_image_tests.rs",
+    "sha256": "903ee4df1f29744f61dc7ef93894725d143fc5f1759fe6570bbdd1655563d29c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_unified_codec_fixture_tests.rs",
+    "sha256": "4af14d6525c43879f94fc92f0c6b5692032e1efeb229d86718ba9df9e19b0a93",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_wire_tests.rs",
+    "sha256": "bc05e89203fb0a8b015e6b8025bfbb22443319b6c0a5fc945856519062e999ee",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w5_worker_image.rs",
+    "sha256": "429515c324234b152de3ad9eabaac04cca4990cf77e4cc72ec798e5c658b8f7c",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w6_allocation_probe.rs",
+    "sha256": "5eb44a95bb8ac5565bb83355715683cabeab5857d457a6c12759ac90e665c678",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w6_allocation_probe_selftests.rs",
+    "sha256": "7418716509e7e29eca97e8e8e042e79b325470ab23f68b23992f8728acd3f629",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w6_audit_stage.rs",
+    "sha256": "4e9c4476983b658566ac22c87da8396e1e91c3a9b8f20c1c9f21e00999a0939b",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w6_audit_stage_credit.rs",
+    "sha256": "9059994dbfe25af3b5c1759c6874236bc9660c466c6a2ead6251aa86d2527719",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-v63/workspace/crates/mir-runtime/src/w6_named_allocation.rs",
+    "sha256": "c2143594d9d5376de8c016268a2dcc3e63ed6089d26fa6a3d8a5516189ed12d6",
+    "range": "complete machine AST parse; selected constructors/aliases/imports/macros reviewed by source audit",
+    "role": "fixed261source universe and1313constructor-capacity argument inventory",
+    "status": "pinned source correspondence, not machine-verified Rust frontend/wholeprogram"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-capture-provenance-v1/OPAQUE-CAPTURE-BOUNDARY-v1.json",
+    "sha256": "5b33d63b7873e0d5a59a3c01c6dd7f1fab481ba28f0cef0b2d93aa0ad74a3b50",
+    "range": "all seven explicit macro-contained capture call tokens",
+    "role": "W6 remaining JSON/diagnostic macro caller lifetime/work boundary",
+    "status": "OPEN caller correspondence;1313direct constructor inventory unchanged"
   }
 ]

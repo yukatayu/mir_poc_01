@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; selected Tree producer capacities connected
+# RESUME — W6 resumed; Tree constructor source arguments inventoried
 
-Updated 2026-10-29 23:59 JST
+Updated 2026-10-30 00:46 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。funded scan/Tree保持量へ、選択した生成経路の容量条件を新117宣言/14反例・38部品実行で接続。全capture callerの網羅、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree容量の一般証明へruntime全261fileの1313生成呼出しと227直接/9マクロ実装を対応し、25部品41stageを検証。各子/コールバックと変更後の返却条件、callee保持量、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. Next audit all recursive capture call-sites and instantiate remaining callee/caller frames. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments are classified. Next establish each recursive child/callback/post-construction return contract and instantiate remaining callee/caller frames. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -208,3 +208,27 @@ Lean v1のmax_le名/opaque Propをv2で訂正。部品v1の計測shape helper/ca
 Repository backup: funded-scan-treeの13文書を77fe89aa9b3cdbdcd0a7832acffeb51647da4f46へcommit/push、ls-remote一致とcleanを確認（FUNDED-SCAN-TREE-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-30 00:05 JST: tree-producers cutのfull make docsは6410入力不変・exit0、focused363は21項目成功。検証記録追記はfocused364で別検証。W6最終統合full/Oracleは未完了。
+
+## Tree capture source correspondence
+
+2026-10-30 00:46 JST: runtime全261Rust fileを解析し、1171node入力、138借用iter/Result、2借用iter/通常collect、1借用chunks/Result、1反復controlを分類。親module/include/local import、constructorを関数値として渡す経路、型alias、trait default/global初期化を別に確認した。直接199Inert/28OriginalRecordと7snapshot/2recordマクロの本体を固定した。
+
+新規の外側Vecだけでは返却Tree全体の容量を保証しない。各子とコールバックの返却条件、および生成後に過剰予約しない条件が要る。任意callbackと生成後reserveの2反例は解析条件外であり、新runtime admissionではない。
+
+25部品実行/41stageを独立照合し、39容量条件成立と2反例を保持。実M9の3型/3capture実装をそのまま抽出し、入れ子Map/Set、UTF-8、6入力差分と2過剰予約入力の同内容性を確認。VecDeque/固定arrayの経路も実行。13source/14出力改変と、実compileした項目欠落/後置予約の2改変を拒否。既存117宣言/14反例を再利用し、新Lean宣言や全Native試験へ加算しない。
+
+計測構成の36producer source中33は全byte一致。残る3fileも全生成引数・227trait本体・9マクロ生成元が一致。test_initial_atの計測追加による全body差分は別に保持し、全1790回帰の代わりにしない。
+
+各子/コールバック/生成後変更を含む再帰的な返却契約、残るcallee peak/保持/escapeとcaller寿命、画像全体の到達可能履歴/共通public入力、失敗prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行は未完了。これは固定source対応で、Rust frontend/cfg全体の形式証明ではない。Native production/Canon変更、W6/T10受理なし。
+
+初回inventory buildはsyn3のtrait tupleが2要素であることを確認してv2へ訂正。audit v1の未解決名nodeを無関係な局所変数まで拾う誤りとv2のmacro token空白比較を、名前解決/正規化tokenでv3へ訂正。旧source/log/失敗cutを保持し、1313全生成経路と容量条件は弱めない。
+
+00:26JSTもGPT-6 Pro利用上限でprompt未送信。次回確認は01:26JST以降。
+
+再現: prepare_tree_capture_inventory_v1.py → build_tree_capture_inventory_v2.py / run_tree_capture_inventory_v1.py → prepare_tree_capture_inventory_v3.py / build_tree_capture_inventory_v3.py / run_tree_capture_inventory_v3.py → prepare_tree_capture_inventory_v4.py / build_tree_capture_inventory_v4.py / run_tree_capture_inventory_v4.py → verify_tree_capture_source_v1.py → prepare_tree_capture_component_v1.py / build_tree_capture_component_v1.py / run_tree_capture_component_v1.py / run_tree_capture_mutants_v1.py → verify_tree_capture_component_v1.py → qualify_tree_capture_v1.py。成功cutはno-clobber、再現は新cut名を使う。
+
+Repository backup: selected Tree producerの13文書を46c9be65b4aad63168b8234a005ca27b8f198c17へcommit/pushし、ls-remote一致とcleanを確認（TREE-PRODUCERS-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 00:55 JST: tree-capture cutのfull make docsは6410入力不変・exit0、focused365は21項目成功。検証記録追記はfocused366で別検証。W6最終統合full/Oracleは未完了。
+
+2026-10-30 00:55 JST: 通常ASTでは未展開のマクロ内capture呼出し7箇所（3eprintln/4json）を追加記録した。直接Tree constructorの追加はないため1313明示生成引数の分類は維持するが、この7呼出しの保持/一時費用と全caller対応は未完了。全macro展開又は再帰的返却契約の完了とは主張しない。

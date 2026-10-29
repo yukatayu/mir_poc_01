@@ -6,6 +6,8 @@ W6の有限LAB実装・検証は再開・未完了。2026-10-29 20:00JSTのowner
 
 ## Scope and assumptions
 
+2026-10-30 00:46 JST: 各子/コールバック/生成後変更を含む再帰的な返却契約、残るcallee peak/保持/escapeとcaller寿命、画像全体の到達可能履歴/共通public入力、失敗prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行は未完了。これは固定source対応で、Rust frontend/cfg全体の形式証明ではない。Native production/Canon変更、W6/T10受理なし。
+
 2026-10-29 23:59 JST: 全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。
 
 2026-10-29 23:31 JST: 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。
@@ -24,6 +26,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 
 ## Start state / dirty state
 
+2026-10-30 00:46 JST: 追加cutはHEAD 46c9be65b4aad63168b8234a005ca27b8f198c17、dirtyなし。
+
 2026-10-29 23:59 JST: 追加cutはHEAD 77fe89aa9b3cdbdcd0a7832acffeb51647da4f46、dirtyなし。
 
 2026-10-29 23:31 JST: 追加cutはHEAD 4a149f6f48524f2c67f1ebe198ec8bf69d184ba8、dirtyなし。
@@ -39,6 +43,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredecessor-rootへ保存。221Canon pins、閉じたReport2615/W5_CHECK/2616とAstra最終cutを保護。W5native6520files/75,291,730bytesをhash照合して新copyへ移した。
 
 ## Documents consulted
+
+2026-10-30 00:46 JST: Canon README/MAP/ADR0014/theory07、LAB current status/plan、既存TreeProducer/TreeResident、runtime全261fileのASTと生成元/primitive/Native63・現計測対応を確認。
 
 2026-10-29 23:59 JST: Canon README/MAP/ADR0014/theory05/07、LAB current status/Plan/source、既存TreeResidentとfunded scan、pinned Rust/serde source、9元画像を確認。
 
@@ -57,6 +63,8 @@ HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredec
 Canon README/MAPとtask-specific theory07/architecture08、RUN/00_START/workstreams/READING、W6 handoff/条件v8/試験v6、直接proof/native依存。全文/部分readと旧hash再利用はREAD_LEDGERに区別する。docs/reports一括readなし。
 
 ## Actions taken
+
+2026-10-30 00:46 JST: runtime全261Rust fileを解析し、1171node入力、138借用iter/Result、2借用iter/通常collect、1借用chunks/Result、1反復controlを分類。親module/include/local import、constructorを関数値として渡す経路、型alias、trait default/global初期化を別に確認した。直接199Inert/28OriginalRecordと7snapshot/2recordマクロの本体を固定した。 新規の外側Vecだけでは返却Tree全体の容量を保証しない。各子とコールバックの返却条件、および生成後に過剰予約しない条件が要る。任意callbackと生成後reserveの2反例は解析条件外であり、新runtime admissionではない。
 
 2026-10-29 23:59 JST: 成功したfresh Vec生成を、正しいsize hintと最終長以下のreserve要求から任意長の遷移として証明し、容量≤8*最終長を得た。各Tree constructorへ帰納的に合成して既存heap+72≤88*N+8*S_wireへ接続した。失敗途中の費用、元入力と返却値の同時保持は別に残す。 nodeのborrowed-name tuple88byte→owned-name tuple96byteは既存領域再利用の条件を満たさず、新規Vecへ写す。新規cloneはString/Vecを長さどおりに確保する。owned collect、sequence/mapへの任意Vec移動、過剰予約したValue::String、clone_fromは容量を保持し得るため一般的な正規化とは扱わない。
 
@@ -260,13 +268,15 @@ Native60失敗436fileのpinを保持し、archive作成〜最終write区間と�
 
 2026-10-24 12:15 JST: userの進捗照会へ主要機能後の資源保証/総合検証段階、1727成功/2失敗、残作業暫定2〜4日（外部review待ち除外）と回答。current表に残っていたNative56/59実行中記述も修正。件数を完了率へ換算しない。
 
-W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。funded scan/Tree保持量へ、選択した生成経路の容量条件を新117宣言/14反例・38部品実行で接続。全capture callerの網羅、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree容量の一般証明へruntime全261fileの1313生成呼出しと227直接/9マクロ実装を対応し、25部品41stageを検証。各子/コールバックと変更後の返却条件、callee保持量、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 同じW6 goalはowner指定の残量条件で一時停止。2026-10-28 03:19JSTの週残量41%で、40%を目安とする再開可能な区切りを保存した。指定Full resetは2026-10-22 15:54JSTに1回使用済み。追加reset/購入なし。再開時はAstra一人/sub-agentなし、Q26/Q27採用・119要件区分・Canon/Plan250のowner pauseを保持。W7/外部write/commit/push/通知/共有folderは開始しない。
 
 ASTRA-JOINT-REVIEW-v1は動的suffix/close予約を可逆な候補Aとして選び、同一journal内の静的枠分割Bを最小代替として保持。malformed/core count不一致、policy proposal/accepted decision、純粋dispatch/実crash phase、closeとowning quarantineを区別する。以前の作業証拠は日時つき履歴に保持。
 
 ## Files changed
+
+2026-10-30 00:46 JST: LAB13文書/台帳と隔離inventory/component/reader。Native/Canon221/閉じた5文書/119承認row不変。規範変更なし。
 
 2026-10-29 23:59 JST: LAB13文書/台帳と隔離proof/component/reader。Native/Canon221/閉じた5文書/119承認row不変。規範変更なし。
 
@@ -537,6 +547,8 @@ Root production/Canonは不変。external formal-v1へW6ActivationCatalogを追�
 - `docs/project-status.md`
 
 ## Commands run
+
+2026-10-30 00:46 JST: prepare_tree_capture_inventory_v1.py → build_tree_capture_inventory_v2.py / run_tree_capture_inventory_v1.py → prepare_tree_capture_inventory_v3.py / build_tree_capture_inventory_v3.py / run_tree_capture_inventory_v3.py → prepare_tree_capture_inventory_v4.py / build_tree_capture_inventory_v4.py / run_tree_capture_inventory_v4.py → verify_tree_capture_source_v1.py → prepare_tree_capture_component_v1.py / build_tree_capture_component_v1.py / run_tree_capture_component_v1.py / run_tree_capture_mutants_v1.py → verify_tree_capture_component_v1.py → qualify_tree_capture_v1.py。成功cutはno-clobber、再現は新cut名を使う。
 
 2026-10-29 23:59 JST: prepare_tree_producers_v1.py → check_tree_producers_formal_v2.py → prepare_tree_producer_component_v1.py / repair_tree_producer_component_v2.py → prepare_tree_producer_component_v3.py（再生成source全一致を確認） → build_tree_producer_component_v3.py → run_tree_producer_component_v3.py / run_tree_producer_mutants_v1.py → verify_tree_producer_source_v2.py → verify_tree_producers_v1.py → qualify_tree_producers_v1.py。成功cutはno-clobber、再現時は新cut名を使う。
 
@@ -1019,6 +1031,10 @@ focused-docs-v105はprogress.md更新日時が08:04実logより古い07:45のた
 run_native_active_originals_rebuild_v1.pyとsame-binary child-only/child-and-parent controls、verify_active_step_tuple_v1.py、run_native_frozen_gzip_v1.pyの全82と現全1628、check_formal_runtime_bounded_v3.py formal-fresh-v48、replay_formal_runtime_bounded_v3.py formal-fresh-v48 formal-replay-v48-a、verify_initialized_outcome_formal_v1.py、run_initialized_outcome_campaign_v1.py、verify_initialized_outcome_campaign_v1.py。source/binary/argv/logは各RESULT/PIN。旧compiler43/44のarchive/readback/--confirm retireは独立receiptへ全対象/資源auditを保存。
 
 ## Evidence / outputs / test results
+
+2026-10-30 00:55 JST: tree-capture full make docsは6410入力不変・exit0。全log SHA-256と入力を再照合。検証metadataはfocused366で別検証。最終W6統合review未実施。
+
+2026-10-30 00:46 JST: 25部品実行/41stageを独立照合し、39容量条件成立と2反例を保持。実M9の3型/3capture実装をそのまま抽出し、入れ子Map/Set、UTF-8、6入力差分と2過剰予約入力の同内容性を確認。VecDeque/固定arrayの経路も実行。13source/14出力改変と、実compileした項目欠落/後置予約の2改変を拒否。既存117宣言/14反例を再利用し、新Lean宣言や全Native試験へ加算しない。 計測構成の36producer source中33は全byte一致。残る3fileも全生成引数・227trait本体・9マクロ生成元が一致。test_initial_atの計測追加による全body差分は別に保持し、全1790回帰の代わりにしない。
 
 2026-10-30 00:05 JST: tree-producers full make docsは6410入力不変・exit0。全log SHA-256と入力を再照合。検証metadataはfocused364で別検証。最終W6統合review未実施。
 
@@ -1734,6 +1750,8 @@ native-foundation-complete-v1の統合25件はPASS、全source不変、保存bin
 
 ## What changed in understanding
 
+2026-10-30 00:46 JST: 新規の外側Vecだけでは返却Tree全体の容量を保証しない。各子とコールバックの返却条件、および生成後に過剰予約しない条件が要る。任意callbackと生成後reserveの2反例は解析条件外であり、新runtime admissionではない。 初回inventory buildはsyn3のtrait tupleが2要素であることを確認してv2へ訂正。audit v1の未解決名nodeを無関係な局所変数まで拾う誤りとv2のmacro token空白比較を、名前解決/正規化tokenでv3へ訂正。旧source/log/失敗cutを保持し、1313全生成経路と容量条件は弱めない。
+
 2026-10-29 23:59 JST: nodeのborrowed-name tuple88byte→owned-name tuple96byteは既存領域再利用の条件を満たさず、新規Vecへ写す。新規cloneはString/Vecを長さどおりに確保する。owned collect、sequence/mapへの任意Vec移動、過剰予約したValue::String、clone_fromは容量を保持し得るため一般的な正規化とは扱わない。 Lean v1のmax_le名/opaque Propをv2で訂正。部品v1の計測shape helper/capture_vec不足、v2の既存MAX_COUNT重複をv3で訂正し、実capture_vecをそのまま追加した。source比較の初回は既存抽出部品に未使用Tree check/encode/decodeが含まれないことを検出。v2で使用する完全constructor prefixを照合し、未使用methodを明示的に範囲外とした。失敗source/logと成功条件を保持。
 
 2026-10-29 23:31 JST: Treeは実String/Vec容量とprivate layout（Tree72、String/Tree96、Tree/Tree144byte）を使い、各String容量≤8*(長さ+1)、Vec容量≤8*要素数を前提にheap+600≤88*N+8*S_nativeを帰納的に証明。root inline72を含めても88*N+8*S_wireで覆う。serialized長さだけでは任意の事前確保を覆えない。 Leanの予約binder prefix、record projection簡約、recursion depth、reducible条件と関数適用空白を訂正。源コードの初回比較は計測Tree末尾の既存registry scanner追加を検出し、successorで完全な元prefixと使用constructorの一致を確認した。失敗cutを保持し、費用/容量条件は弱めない。
@@ -2006,6 +2024,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 
 ## Open questions
 
+2026-10-30 00:46 JST: 各子/コールバック/生成後変更を含む再帰的な返却契約、残るcallee peak/保持/escapeとcaller寿命、画像全体の到達可能履歴/共通public入力、失敗prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行は未完了。これは固定source対応で、Rust frontend/cfg全体の形式証明ではない。Native production/Canon変更、W6/T10受理なし。
+
 2026-10-29 23:59 JST: 全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。
 
 2026-10-29 23:31 JST: 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。
@@ -2127,6 +2147,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparison/runtime/setup/test-host/physical、Native61全体/45reader/workspace、最終source/proof/docs/Oracleが残る。
 
 ## Suggested next prompt
+
+2026-10-30 00:46 JST: 同じW6で再帰的なchild/callback/生成後変更の返却条件を接続し、残るcallee/whole history/common inputと全caller物理資源・進行へ進む。
 
 2026-10-29 23:59 JST: 同じW6で全capture call-siteの容量由来を分類し、残るcallee/whole history/common inputとcaller物理資源・進行へ接続する。
 
@@ -2252,6 +2274,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Plan update status
 
+2026-10-30 00:46 JST: LAB plan/indexへsource対応/条件/反例/次consumerを同期。新roadmap/Canon変更なし。
+
 2026-10-29 23:59 JST: LAB plan/indexへselected producer条件/反例/次consumerを同期。新roadmap/Canon変更なし。
 
 2026-10-29 23:31 JST: LAB plan/indexにsource-bound scanとTree容量条件/反証/次のconsumerを同期。新roadmap/Canon変更なし。
@@ -2370,6 +2394,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Documentation.md update status
 
+2026-10-30 00:46 JST: 現証拠と残課題を同期。
+
 2026-10-29 23:59 JST: 現証拠と残課題を同期。
 
 2026-10-29 23:31 JST: 現証拠と残課題を同期。
@@ -2485,6 +2511,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: M9証拠と全Native実行を区別。
 
 ## docs/project-status.md update status
+
+2026-10-30 00:46 JST: 同cutへ同期。大局phase/decision gate不変。
 
 2026-10-29 23:59 JST: 同cutへ同期。大局phase/decision gate不変。
 
@@ -2602,6 +2630,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## progress.md update status
 
+2026-10-30 00:46 JST: snapshotと取得日時logを同期。
+
 2026-10-29 23:59 JST: snapshotと取得日時logを同期。
 
 2026-10-29 23:31 JST: snapshotと取得日時logを同期。
@@ -2717,6 +2747,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: current summaryと実date log。大局phase不変。
 
 ## tasks.md update status
+
+2026-10-30 00:46 JST: 全体snapshotを再出力。再帰的返却条件とcallee/caller保持を次の具体作業へ。
 
 2026-10-29 23:59 JST: 全体snapshotを再出力。全capture由来とcallee/caller保持を次の具体作業へ。
 
@@ -2835,6 +2867,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 全snapshot更新済み: 全Native→45reader→workspace、全H/F/J/物理費用と最終gate。
 
 ## samples_progress.md update status
+
+2026-10-30 00:46 JST: source対応/部品evidence rowを追加。sample root/taxonomy不変。
 
 2026-10-29 23:59 JST: selected Tree producer部品evidence rowを追加。sample root/taxonomy不変。
 
@@ -2955,6 +2989,10 @@ Flow行同期時の旧outer行重複をfocused diffで発見し、1行をFlow証
 更新済み: 旧Native60実行中/旧reader current参照をNative61へ訂正、M9証拠row追加。workflow-readyへ昇格なし。
 
 ## Reviewer findings and follow-up
+
+2026-10-30 00:55 JST: 通常ASTでは未展開のマクロ内capture呼出し7箇所（3eprintln/4json）を追加記録した。直接Tree constructorの追加はないため1313明示生成引数の分類は維持するが、この7呼出しの保持/一時費用と全caller対応は未完了。全macro展開又は再帰的返却契約の完了とは主張しない。
+
+2026-10-30 00:46 JST: Mainが固定source AST、既存証明の前提、独立Python内容/容量/改変拒否を照合。owner指定の単独作業。Oracleは00:26JSTもPro利用上限、prompt未送信。次回01:26JST以降。
 
 2026-10-29 23:59 JST: Mainが全46log、独立Python DATA/容量/実sourceと反例を照合。owner指定に従い単独作業。Oracleは23:25JSTの利用上限を保持し、次回00:25JST以降。
 
@@ -3118,6 +3156,8 @@ mainが16native/24DTO、10constructor/18vector、156実M9shape/156欠落/156履�
 
 ## Skipped validations and reasons
 
+2026-10-30 00:46 JST: 各子/コールバック/生成後変更を含む再帰的な返却契約、残るcallee peak/保持/escapeとcaller寿命、画像全体の到達可能履歴/共通public入力、失敗prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行は未完了。これは固定source対応で、Rust frontend/cfg全体の形式証明ではない。Native production/Canon変更、W6/T10受理なし。 既受理Native63全1750/45readerは再実行せず。計測構成全1790と最終統合reviewは未実施。新Lean命題なし、既存117宣言のcutを再利用。
+
 2026-10-29 23:59 JST: 全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。 既受理Native63全1750/45readerは再実行せず。計測構成全1790と最終統合reviewは未実施。
 
 2026-10-29 23:31 JST: 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。 既受理Native63全1750/45readerは再実行せず。計測構成全1790と最終統合reviewは未実施。
@@ -3276,6 +3316,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 
 ## Commit / push status
 
+2026-10-30 00:46 JST: 先行46c9be65はpush照合済み。今回cutは文書検証後にowner許可のcommit/push。Git外原本はローカル保持。
+
 2026-10-29 23:59 JST: 先行77fe89aaはpush照合済み。今回cutは文書検証後にowner許可のcommit/push。Git外原本はローカル保持。
 
 2026-10-29 23:31 JST: 先行caller-frames4a149f6fはpush照合済み。今回cutは文書検証後にowner許可のcommit/push。Git外原本はローカル保持。
@@ -3401,6 +3443,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 未commit・未push。owner指定どおり既存未commit成果を保持。外部write/Discord通知/共有folder配置なし。
 
 ## Sub-agent session close status
+
+2026-10-30 00:46 JST: 単独作業、sub-agentなし。Oracleへの新prompt未送信。
 
 2026-10-29 23:59 JST: 単独作業、sub-agentなし。Oracleへの新prompt未送信。
 
