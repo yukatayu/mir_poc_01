@@ -1,14 +1,14 @@
 # samples_progress
 
-Last updated: 2026-10-30 01:24 JST
+Last updated: 2026-10-30 02:03 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
 閉じたAstraの証拠はReport2616/W6_CHECK、現在の実装証拠はReport2617/W6_CHECK.implementationで区別する。下表は現在の受理状態。旧Native21/61、旧223formal、各部分実行と失敗cutはReport2617と凍結receiptに保持し、現在の待機queueとして再掲しない。active sample rootsは不変で、external LAB evidenceをpublic workflow-readyと扱わない。
 
@@ -45,6 +45,7 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| CaptureGraph retained buffers | CAPTURE-GRAPH-RESIDENCY-JOIN-v1 | 31関数/58子呼出し・191宣言/8反例、実型28ケース/6校正、2compiled method改変22拒否。fresh成功capture前提付き、failedprefix/全caller物理資源はOPEN |
 | Tree return contracts | TREE-RETURN-CONTRACTS-JOIN-v1 | 258直接/9macro/37callback、51宣言/8反例・source19改変拒否。保持済み25部品/9原本を再読、新Native実行0。失敗prefix/全caller物理資源はOPEN |
 | Capture constructor source provenance | TREE-CAPTURE-PROVENANCE-JOIN-v1 | 261file/1313生成引数、227直接/9macro本体、25部品41stage、source13/出力14/compiled2改変拒否。再帰的返却契約はTree return contracts rowへ前方接続。全caller物理資源はOPEN |
 | Selected Tree producer capacity | TREE-PRODUCER-CAPACITY-JOIN-v1 | 条件付き117宣言/14反例、38部品138stage、source26/出力16/compiled2改変拒否。全capture callerと物理資源はOPEN |

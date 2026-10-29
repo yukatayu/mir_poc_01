@@ -1,16 +1,16 @@
-# RESUME — W6 resumed; successful Tree return contracts connected
+# RESUME — W6 resumed; CaptureGraph retention connected
 
-Updated 2026-10-30 01:24 JST
+Updated 2026-10-30 02:03 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
-最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
+最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
 Owner messages: 「引き続きW6の作業をお願いします。」「ストレージの空きには適宜注意してくださいね」。W6-OWNER-RESUME-20261029-v1で6807保護fileと保存receiptを再照合済み。研究再開時HEAD=34adc79f88f40a85dcf07a228bb9b9adef05b94d、dirtyなし。先行pause/cleanup記録は履歴として保持する。
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Next instantiate remaining callee/caller retained/peak/escape frames and failed-prefix costs. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Next instantiate other callee/caller retained/peak/escape frames and failed-prefix costs. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,9 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-2026-10-30 01:04JSTの週次残量41%、指定10/30 Full reset使用0回。次回確認は02:04JST以降。指定resetの期限接近windowは01:45JSTからで、使用前に正確な表示を再確認する。Oracleは01:27JSTもGPT-6 Pro利用上限、prompt未送信。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
+最新quotaは02:05JST残量99%、指定reset使用1回。次回確認は03:05JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は02:27JST以降。
+
+10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは01:27JSTのPro利用上限が最新で、次回確認は02:27JST以降。
 
 W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
@@ -254,3 +256,27 @@ Repository backup: source生成対応の13文書を53ce9c3125efd5c9e3a6cd912428f
 2026-10-30 01:31 JST: tree-returns cutのfull make docsは6410入力不変・exit0、focused367は21項目成功。検証記録追記はfocused368で別検証。W6最終統合full/Oracleは未完了。
 
 2026-10-30 01:31 JST: 01:27JSTもGPT-6 Pro5of5でUsage limit reachedを確認、prompt未送信。次回Oracle確認は02:27JST以降。quotaは01:04JST残量41%、指定reset未使用、期限接近window01:45JSTから正確な表示を再確認して1回だけ使用する。
+
+## CaptureGraph retained backing and roots
+
+2026-10-30 02:03 JST: 28OriginalRecordと3Parts関数の58子呼出しを返却Treeへ一度ずつ含め、3か所のgraph追加を対応。有限の成功capture導出に対し追加参照数≤返却TreeのJSON構造数Nを証明し、空からappendした3Vecのbacking≤64*Nを導いた。
+
+root複製は元graphを保持したまま8*(message数+reserved数)byteを追加し、合計≤72*N。Treeとの保持量は条件付きで≤152*N+8*S_wire。graph inline72byte・RootRefs inline192byteと既存pointeeは別。重複検査は借用pointer比較で追加heap/allocator要求0、比較回数≤n*(n-1)/2。比較回数はsource/modelの上限で、実時間又はハードウェア計測ではない。
+
+新191宣言/8反例をfresh/replay・全38logで独立照合。source14/出力18改変拒否。実Native型28ケースとallocator校正6件を実行し、25件はfreshかつ成功captureの前提を満たし、3件は事前確保・既存要素・失敗prefixとして除外。重複pointer3例は検査で拒否し、同内容の別objectは通過。別にcompileしたreserved複製省略・prefix反転の2method改変を22ケースで拒否。
+
+既存checked source fixtureの実生成message/実admission予約を使用。反復した借用rootのcaptureは配列の圧力試験で、保存可能な所有graphの受理ではない。9原本画像から復元した実received DATAを再captureし、全内容を独立照合。source6575fileと4test-only追記を固定。新しいwhole network worldは0、固定275formal/全1750/計測全1790へ加算しない。
+
+実capture失敗例では648byteの累積要求後にgraph32byteが残った。空の事前確保例は32768byteを保持する。成功返却Treeの上限を失敗prefixや事前確保へ流用せず、pointee/入力/DTOの保持も0と扱わない。
+
+全captureのpeak、残るcallee/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、失敗/部分prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Rust frontend/cfg/dispatch/codegen/allocator/serdeとsource対応はTCBに残る。Native production/Canon変更、W6/T10受理なし。
+
+Lean v1のinduction binder数を訂正し、v2で関数番号に依存しない有限導出へ整理。初回component準備はTree-return限定inventoryに非Tree返却のrootsを求めて停止し、既存full inventoryへ変更。実行前の検査で環境変数読取りをallocator計測区間外へ移した。旧source/失敗logを保持し、意味条件は弱めない。
+
+10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは01:27JSTのPro利用上限が最新で、次回確認は02:27JST以降。
+
+再現: prepare_capture_graph_v1.py → check_capture_graph_formal_v2.py → capture_graph_audit_v1.py / verify_capture_graph_source_v1.py → restore_capture_graph_dependencies_v1.py → prepare_capture_graph_component_v3.py → run_capture_graph_native_v1.py → verify_capture_graph_native_v1.py → qualify_capture_graph_v1.py。成功cutはno-clobber、再現は新cut名を使う。
+
+Repository backup: Tree返却契約の13文書を952b2a991d71290d29d09a84a51c9cba76161681へcommit/pushし、ls-remote一致とcleanを確認（TREE-RETURNS-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 02:10 JST: capture-graph cutのfull make docsは6410入力不変・exit0、focused370は21項目成功。検証metadataと旧quota current aliasの訂正はfocused371で別検証。W6最終統合full/Oracleは未完了。

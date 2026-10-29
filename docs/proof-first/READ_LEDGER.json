@@ -102671,5 +102671,75 @@
     "range": "all37bodytokenreferences and directcall counts; macros/globals/importaliaseschecked",
     "role": "W6 complete actual capture_vec references",
     "status": "finitepinnedsourcecorrespondence;RustfrontendTCB"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-RESIDENCY-JOIN-v1.json",
+    "sha256": "b760559960477f1d3a3902f020749c4b567cd9f05bb2967b886dc48fda02a2ca",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-CHECKPOINT-v1.json",
+    "sha256": "2f173af8378d0245bf1e358b76ba560071b0cb00d414dc068dfe4e09827ee78c",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-graph-residency-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "566c750e8a9c6ee40f0edf9ab26560f40906521954fb601f556d0ba7bba54efb",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-graph-residency-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "5a04c093bddfcf16801e769d2e33fc6117470cf97e7c95db176b4457e7f1850b",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-graph-residency-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "f39302b1b6bb6e8ea9fcfdd6b6d814437a6fc193c0703875990f55a30263077f",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6CaptureGraph_v2.lean",
+    "sha256": "25b411e08f7e0cf318bede77c6d4a94d389d0a2b2243560960eb270d7a6eae93",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture_graph_audit_v1.py",
+    "sha256": "d4f6b25af7ac28a371848e2e836b3404e39121bc27475170354f8d7dcb086eae",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture_graph_reader_v1.py",
+    "sha256": "35607bd0a00ba2498ed9ddc2248b8afafbdafddfdfe91e6a19ff811694509262",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_capture_graph_v1.py",
+    "sha256": "0d17d82ce655cb2a9ab4e455fa1038e76757912d263eab5af48dd4a343918cf1",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030-RESET-RECEIPT-v1.json",
+    "sha256": "940aaad5c3ea1829009d31cbafd5ae566802743b62dab485544eeeefaf5472e0",
+    "range": "complete general proof/source/native readback and controls",
+    "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
+    "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
   }
 ]

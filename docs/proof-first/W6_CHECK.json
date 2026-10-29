@@ -1,6 +1,6 @@
 {
-  "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
-  "updated_at": "2026-10-29T16:31:50.634757+00:00",
+  "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
+  "updated_at": "2026-10-29T17:10:05.519989+00:00",
   "base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
   "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation",
   "entry_design": "ENTRY-DESIGN.md",
@@ -191,7 +191,7 @@
     "sha256": "1577414d7742cf39c4e81adf037aa5826ed3aa6a550c9b45f19ea2a4223deefa"
   },
   "implementation": {
-    "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
+    "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
     "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation",
     "report": "docs/reports/2617-mirrorea-proof-first-w6-implementation.md",
     "owner_authorized_at": "2026-10-19T03:33:40Z",
@@ -330,21 +330,23 @@
       "scope": "frozen source-peer-green-v2/HostRegistry before later cuts; advisory only"
     },
     "latest_quota": {
-      "checked_at": "2026-10-27T17:19:51.838501+00:00",
-      "observed_at": "2026-10-27T17:19:37.442Z",
+      "checked_at": "2026-10-29T17:05:49.705911+00:00",
+      "observed_at": "2026-10-29T17:04:39.366Z",
       "weekly": {
-        "used_percent": 56.0,
+        "used_percent": 1.0,
         "window_minutes": 10080,
-        "resets_at": 1793606417
+        "resets_at": 1793897146
       },
-      "remaining_percent": 44.0,
-      "next_check_not_before": "2026-10-27T18:19:51.838501+00:00",
-      "owner_policy_version": 2,
-      "quota_phase": "after_designated_reset",
-      "next_action": "continue W6 toward owner40percent threshold; all further resets prohibited",
+      "remaining_percent": 99.0,
+      "next_check_not_before": "2026-10-29T18:05:49.705911+00:00",
+      "owner_policy_version": 6,
+      "owner_policy_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v6.json",
+      "designated_reset_uses": 1,
+      "quota_phase": "after_20261030_designated_reset",
+      "next_action": "continue W6 toward owner35percent threshold; all further resets prohibited",
       "redemption_performed_by_this_read_only_checker": false
     },
-    "updated_at": "2026-10-29T16:31:50.634757+00:00",
+    "updated_at": "2026-10-29T17:10:05.519989+00:00",
     "native_same_program_private_profile": {
       "pin": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-admission-all-v1/PIN.json",
       "status": "passed current five-profile campaign with independently signed negatives and constant sink",
@@ -447,19 +449,18 @@
       }
     },
     "documentation_validation_current": {
-      "status": "tree-returns full6410unchanged passed;metadata focused368 separate",
+      "status": "capturegraph full6410 unchanged passed;metadata focused371 separate",
       "full": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-tree-returns-20261030-v1/RESULT.json",
-        "sha256": "1bc0807df61bb07bd38d339666d1434f0835d8dfaf3ee2323d86e3914f0c6530"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-capture-graph-20261030-v1/RESULT.json",
+        "sha256": "839c8394a0b8909d46041beb6349859432d5fc2f0688f3025726cc7a4920a49f"
       },
       "focused_before": {
-        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused367-tree-returns.json",
-        "sha256": "d4cf272b8d16d97b54755df80bd37f604902cadb4bd3c7c0da80029916815f12"
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused370-capture-graph.json",
+        "sha256": "30740013692f3e48a3bd6df95a9f9eaa90e0c95b703076b15d4ee3fcee992611"
       },
-      "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused368-tree-returns-commit.json",
+      "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused371-capture-graph-commit.json",
       "whole_W6_complete": false,
-      "final_integrated_review": false,
-      "focused_wording_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused369-tree-returns-wording.json"
+      "final_integrated_review": false
     },
     "new_exact_claim_native_test": {
       "status": "passed component and all47; not a full1593library run",
@@ -891,8 +892,8 @@
       "local_evidence": "native61pass and intended negative detected; no incomplete gate promoted"
     },
     "unverified_checks": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v350.json",
-      "sha256": "03b501f03e80e4af24a3838367cdf42f2a880a6067cb1b96569b76b2f387fd62",
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v352.json",
+      "sha256": "e0603d04a5b1afe7ab3b364c56776af37aab6934bd4857e2176c1d95e9a4a47a",
       "items": [
         {
           "id": "current-full-regression",
@@ -1085,11 +1086,11 @@
         {
           "id": "physical-progress-cost",
           "test_rows": "T03,T04,T10,T11",
-          "status": "PARTIAL / finite-success Tree return contracts connected",
-          "unchecked": "Rust frontend/cfg/型とmethod dispatch/codegen/allocator/serdeは固定sourceと既存compilerのTCBに残る。全Rust形式証明、停止保証又は失敗prefixの費用免除ではない。残るcallee peak/保持/escape、元入力/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、並行worker、非割当work/stack/OS/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Native production/Canon変更、W6/T10受理なし。",
+          "status": "PARTIAL / CaptureGraph retained buffers and unique connected",
+          "unchecked": "全captureのpeak、残るcallee/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、失敗/部分prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Rust frontend/cfg/dispatch/codegen/allocator/serdeとsource対応はTCBに残る。Native production/Canon変更、W6/T10受理なし。",
           "reason": "prefunded journal/attempt limit/deadlineは全physical costや公平性の証明ではない。20msはadmin未完了の観測区間で、update_policy内lock待機時間ではない。16byte slow readerは自然なbackpressureでない。",
           "available_evidence": "Current Native63/current instrumented independent registry/prefix and fixed-role public contribution accepted.",
-          "next_check": "Instantiate remaining callee retained/peak/escape and failed-prefix costs;wholehistories/commoninput and allcaller physical progress.",
+          "next_check": "Instantiate remainingcallee temporary/peak/escape and failedprefix;wholehistories/commoninput/allcaller physical progress.",
           "initial_template_measured_comparison": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/INITIAL-TEMPLATE-MEASURED-COMPARISON-v1.json",
             "sha256": "4fa84184ffe75f5d618097e3846c17d8a76440161e6871f4503842384d9d56c4"
@@ -1519,6 +1520,10 @@
           "tree_return_contracts": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-RETURN-CONTRACTS-JOIN-v1.json",
             "sha256": "986bb73547b4aec521699b8e42def0a556b408ba233652334c229d4c3799db81"
+          },
+          "capture_graph_residency": {
+            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-RESIDENCY-JOIN-v1.json",
+            "sha256": "b760559960477f1d3a3902f020749c4b567cd9f05bb2967b886dc48fda02a2ca"
           }
         },
         {
@@ -1589,11 +1594,11 @@
         {
           "id": "current-full-docs",
           "test_rows": "documentation",
-          "status": "tree-returns full6410 unchanged exit0;metadata focused368 follows",
+          "status": "capturegraph full6410 unchanged exit0;metadata focused371 follows",
           "unchecked": "Final integrated snapshot validation after remaining acceptance evidence; do not transfer the pinned full-docs result across later documentation edits.",
           "reason": "Astra continuationでcurrent snapshotを更新。旧22focused/full6409cutは履歴、今回検査は後続。",
           "available_evidence": "full-docs-passive-input-verified-v1 PASS6410/259.5819458s frozen prior cut; focused72 PASS21. 68/71 failed and corrections retained.; focused167 passed21 checks. Full make docs passed260.77s/exit0 on6410unchanged input files,09:31:54UTC; all input pins checked before linking its receipt. New process-structure edits are later.",
-          "next_check": "Future final integrated W6 full docs and independent Oracle remain required.",
+          "next_check": "Final integrated W6 full docs/Oracle remains required.",
           "focused_receipt": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused256-runtime-frontier-quota.json",
             "sha256": "a0bac06f15d79e4da524d4e6f52279b7afba9368812d701b6becc25ac50eabcf"
@@ -1651,8 +1656,8 @@
             "sha256": "d7b5f0f966125c2778989259129588ede065eefb7db7966fdc209837f42da6c1"
           },
           "current_full": {
-            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-tree-returns-20261030-v1/RESULT.json",
-            "sha256": "1bc0807df61bb07bd38d339666d1434f0835d8dfaf3ee2323d86e3914f0c6530"
+            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-capture-graph-20261030-v1/RESULT.json",
+            "sha256": "839c8394a0b8909d46041beb6349859432d5fc2f0688f3025726cc7a4920a49f"
           }
         },
         {
@@ -2787,18 +2792,20 @@
       }
     },
     "weekly_quota_current": {
-      "checked_at": "2026-10-27T17:19:51.838501+00:00",
-      "observed_at": "2026-10-27T17:19:37.442Z",
+      "checked_at": "2026-10-29T17:05:49.705911+00:00",
+      "observed_at": "2026-10-29T17:04:39.366Z",
       "weekly": {
-        "used_percent": 56.0,
+        "used_percent": 1.0,
         "window_minutes": 10080,
-        "resets_at": 1793606417
+        "resets_at": 1793897146
       },
-      "remaining_percent": 44.0,
-      "next_check_not_before": "2026-10-27T18:19:51.838501+00:00",
-      "owner_policy_version": 2,
-      "quota_phase": "after_designated_reset",
-      "next_action": "continue W6 toward owner40percent threshold; all further resets prohibited",
+      "remaining_percent": 99.0,
+      "next_check_not_before": "2026-10-29T18:05:49.705911+00:00",
+      "owner_policy_version": 6,
+      "owner_policy_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v6.json",
+      "designated_reset_uses": 1,
+      "quota_phase": "after_20261030_designated_reset",
+      "next_action": "continue W6 toward owner35percent threshold; all further resets prohibited",
       "redemption_performed_by_this_read_only_checker": false
     },
     "registration_initialization_checkpoint": {
@@ -3167,8 +3174,8 @@
       "sha256": "675b31fb52a5cb040706fd5d07b838389c0e06509ad8c24aea579d044d6909bf"
     },
     "quota_owner_policy": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v4.json",
-      "sha256": "b4c85764cc225faca170b2d165276da701cc7290ec2c572d063af918fc221fd3"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v6.json",
+      "sha256": "399fa8aa945b2100bf14be0db3ba8ca58d0d6340ca002e3d68bb69ba9059d0ab"
     },
     "quota_reset_state_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030-RESET-STATE.json",
     "owned_wire_prerequisite_checkpoint": {
@@ -3981,7 +3988,7 @@
       "sha256": "d92f233c403a71d5c82a250779e3ea000f6450e2b74dcf79d76d200ec74429d6"
     },
     "current_native_status": {
-      "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
+      "status": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。",
       "source_cut": "native-v63",
       "source_files": 6575,
       "source_preparation": {
@@ -4046,18 +4053,20 @@
       "sha256": "0412a098fb67ede1ee414ab01797343e44e2df1e1b6e89bf52ddd059e77a96ca"
     },
     "quota_current": {
-      "checked_at": "2026-10-27T17:19:51.838501+00:00",
-      "observed_at": "2026-10-27T17:19:37.442Z",
+      "checked_at": "2026-10-29T17:05:49.705911+00:00",
+      "observed_at": "2026-10-29T17:04:39.366Z",
       "weekly": {
-        "used_percent": 56.0,
+        "used_percent": 1.0,
         "window_minutes": 10080,
-        "resets_at": 1793606417
+        "resets_at": 1793897146
       },
-      "remaining_percent": 44.0,
-      "next_check_not_before": "2026-10-27T18:19:51.838501+00:00",
-      "owner_policy_version": 2,
-      "quota_phase": "after_designated_reset",
-      "next_action": "continue W6 toward owner40percent threshold; all further resets prohibited",
+      "remaining_percent": 99.0,
+      "next_check_not_before": "2026-10-29T18:05:49.705911+00:00",
+      "owner_policy_version": 6,
+      "owner_policy_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-OWNER-POLICY-v6.json",
+      "designated_reset_uses": 1,
+      "quota_phase": "after_20261030_designated_reset",
+      "next_action": "continue W6 toward owner35percent threshold; all further resets prohibited",
       "redemption_performed_by_this_read_only_checker": false
     },
     "activation_catalog_native": {
@@ -5273,8 +5282,8 @@
       "whole_W6_complete": false
     },
     "quota_reset_receipt": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-RESET-RECEIPT-v1.json",
-      "sha256": "7b524546ce51a010ef371e1350c66862fd9baee7618bf77f321b86552d4a2d00"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030-RESET-RECEIPT-v1.json",
+      "sha256": "940aaad5c3ea1829009d31cbafd5ae566802743b62dab485544eeeefaf5472e0"
     },
     "focused_docs133": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/focused-docs-v133-distributed-data.json",
@@ -5747,8 +5756,8 @@
       "sha256": "43a1ea8b3ea9df174121ed64edb4a7d27629066227b989260545b8e6a41ebadf"
     },
     "quota_latest_readonly": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261027T171951Z.json",
-      "sha256": "186b8de6b62ac35f51f44f53a29f57578fe4ac78072b12db5b6d27fb4bd385a1"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261029T170549Z.json",
+      "sha256": "fa03939dc7b4ff5a871a39b0850f005c2cfddf83e64066f29622dc86c84d3bbe"
     },
     "native39_w5_cost_checkpoint": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE39-W5-COST-CHECKPOINT-v1.json",
@@ -7411,8 +7420,8 @@
       "sha256": "1e398b851b874357731fd98382e7fb541aaec7e72c5caa8ed9ace83f2e4b4c98"
     },
     "quota_latest": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261029T160434Z.json",
-      "sha256": "e0db509b06b818b8fc654e703d09515af66749f49aedab7f2e48a3ae1f4f6b50"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261029T170549Z.json",
+      "sha256": "fa03939dc7b4ff5a871a39b0850f005c2cfddf83e64066f29622dc86c84d3bbe"
     },
     "documentation_validation_before_m9_lifetime": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused257-runtime-reuse.json",
@@ -7887,7 +7896,8 @@
     "goal_status": "paused",
     "quota_pause": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-QUOTA-PAUSE-20261028-v1.json",
-      "sha256": "1a1bf295ae47f45e60b890e6734aa23e803a2cff62e1773373070c54ab8251f3"
+      "sha256": "1a1bf295ae47f45e60b890e6734aa23e803a2cff62e1773373070c54ab8251f3",
+      "classification": "historical; superseded by explicit owner resume"
     },
     "selected_prepared_cost_source_only": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/SELECTED-PREPARED-COST-SOURCE-v1.json",
@@ -8406,7 +8416,8 @@
     },
     "storage_pause_current": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json",
-      "sha256": "f23263e7318a9e92fb8c2c984b8557f71b49488e35dafbd5b7dfaac9c0486614"
+      "sha256": "f23263e7318a9e92fb8c2c984b8557f71b49488e35dafbd5b7dfaac9c0486614",
+      "classification": "historical cleanup;W6 resumed;selected374dependencycache restored from exact archive"
     },
     "documentation_validation_before_additional_storage_20261029": {
       "at": "2026-10-29T10:06:06.980154+00:00",
@@ -8689,23 +8700,53 @@
     "tree_return_callback_completeness": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-return-contracts-v1/CALLBACK-REFERENCE-COMPLETENESS-v1.json",
       "sha256": "76272742edf8955e03bd8e3c3dcbfb8afa621290d65905461f89003b4aadb098"
+    },
+    "capture_graph_residency": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-RESIDENCY-JOIN-v1.json",
+      "sha256": "b760559960477f1d3a3902f020749c4b567cd9f05bb2967b886dc48fda02a2ca"
+    },
+    "capture_graph_checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-CHECKPOINT-v1.json",
+      "sha256": "2f173af8378d0245bf1e358b76ba560071b0cb00d414dc068dfe4e09827ee78c"
+    },
+    "designated_reset_receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030-RESET-RECEIPT-v1.json",
+      "sha256": "940aaad5c3ea1829009d31cbafd5ae566802743b62dab485544eeeefaf5472e0"
+    },
+    "documentation_validation_before_capture_graph": {
+      "status": "tree-returns full6410unchanged passed;metadata focused368 separate",
+      "full": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-tree-returns-20261030-v1/RESULT.json",
+        "sha256": "1bc0807df61bb07bd38d339666d1434f0835d8dfaf3ee2323d86e3914f0c6530"
+      },
+      "focused_before": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused367-tree-returns.json",
+        "sha256": "d4cf272b8d16d97b54755df80bd37f604902cadb4bd3c7c0da80029916815f12"
+      },
+      "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused368-tree-returns-commit.json",
+      "whole_W6_complete": false,
+      "final_integrated_review": false,
+      "focused_wording_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused369-tree-returns-wording.json"
+    },
+    "quota_before_capture_graph": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-GRAPH-PRIOR-QUOTA-ALIASES-v1.json",
+      "sha256": "d92e7ea740fab980329254a3615265821238056a94ed563a5ee05712bfddb3a9"
     }
   },
   "predecessor_snapshot_notice": "Root predecessor proof/baseline/oracle/acceptance fields retain the closed Astra research cut; current implementation status is in implementation. Historical evidence is not current native acceptance.",
   "documentation_validation_current": {
-    "status": "tree-returns full6410unchanged passed;metadata focused368 separate",
+    "status": "capturegraph full6410 unchanged passed;metadata focused371 separate",
     "full": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-tree-returns-20261030-v1/RESULT.json",
-      "sha256": "1bc0807df61bb07bd38d339666d1434f0835d8dfaf3ee2323d86e3914f0c6530"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-capture-graph-20261030-v1/RESULT.json",
+      "sha256": "839c8394a0b8909d46041beb6349859432d5fc2f0688f3025726cc7a4920a49f"
     },
     "focused_before": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused367-tree-returns.json",
-      "sha256": "d4cf272b8d16d97b54755df80bd37f604902cadb4bd3c7c0da80029916815f12"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused370-capture-graph.json",
+      "sha256": "30740013692f3e48a3bd6df95a9f9eaa90e0c95b703076b15d4ee3fcee992611"
     },
-    "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused368-tree-returns-commit.json",
+    "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused371-capture-graph-commit.json",
     "whole_W6_complete": false,
-    "final_integrated_review": false,
-    "focused_wording_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused369-tree-returns-wording.json"
+    "final_integrated_review": false
   },
   "oracle_latest_readonly": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261027-v18.json",
@@ -9335,5 +9376,20 @@
     "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused366-tree-capture-commit.json",
     "whole_W6_complete": false,
     "final_integrated_review": false
+  },
+  "documentation_validation_before_capture_graph": {
+    "status": "tree-returns full6410unchanged passed;metadata focused368 separate",
+    "full": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/full-docs-tree-returns-20261030-v1/RESULT.json",
+      "sha256": "1bc0807df61bb07bd38d339666d1434f0835d8dfaf3ee2323d86e3914f0c6530"
+    },
+    "focused_before": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused367-tree-returns.json",
+      "sha256": "d4cf272b8d16d97b54755df80bd37f604902cadb4bd3c7c0da80029916815f12"
+    },
+    "focused_final_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused368-tree-returns-commit.json",
+    "whole_W6_complete": false,
+    "final_integrated_review": false,
+    "focused_wording_path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused369-tree-returns-wording.json"
   }
 }
