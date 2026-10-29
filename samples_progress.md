@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 05:19 JST
+Last updated: 2026-10-30 05:48 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。8scalarの生成費用とbyte capture共通上限を151宣言/19反例・実47ケースへ接続し、既存56wrapper原本を再照合。一般Stringのpublic入力条件、DTO/共有graph/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Record/DTOの所有移動と保持期間を202宣言/18反例・実389ケースへ接続し、失敗を含む共有graph26prefixを再照合。残るcallee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
@@ -45,9 +45,10 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Scalar / writer common bounds | SCALAR-WRITER-COMMON-BOUNDS-JOIN-v1 | 151宣言/19反例・実47ケースと1096数値命題。既存56原本/22byte関数を再照合。一般public入力/DTO/共有graph/物理資源はOPEN |
-| Funded capture wrappers | FUNDED-CAPTURE-FRAMES-JOIN-v1 | 64宣言/16反例、実56ケース/4校正と910数値命題。9自然な途中error/4事前拒否・compiled改変12拒否。8scalarは後続cutで接続済み。一般Stringのpublic入力条件、DTO/共有graph/物理資源はOPEN |
-| Collector prefix frames | COLLECTOR-PREFIX-FRAMES-JOIN-v1 | 142site分類/98宣言/17反例、実101ケース/4校正と303数値命題。35自然な途中error・compiled改変12拒否。外側DTO/共有graph/物理資源はOPEN |
+| Capture boundary ownership | CAPTURE-BOUNDARY-FRAMES-JOIN-v1 | 202宣言/18反例・実389ケース/2413有限命題。graph26prefixと失敗時32byte保持を接続。全caller/共通入力/物理資源はOPEN |
+| Scalar / writer common bounds | SCALAR-WRITER-COMMON-BOUNDS-JOIN-v1 | 151宣言/19反例・実47ケースと1096数値命題。既存56原本/22byte関数を再照合。Record/DTO stageと共有graph prefixは後続cutで接続。全caller/共通入力/物理資源はOPEN |
+| Funded capture wrappers | FUNDED-CAPTURE-FRAMES-JOIN-v1 | 64宣言/16反例、実56ケース/4校正と910数値命題。9自然な途中error/4事前拒否・compiled改変12拒否。8scalarは後続cutで接続済み。Record/DTO stageと共有graph prefixも接続済み。全caller/共通入力/物理資源はOPEN |
+| Collector prefix frames | COLLECTOR-PREFIX-FRAMES-JOIN-v1 | 142site分類/98宣言/17反例、実101ケース/4校正と303数値命題。35自然な途中error・compiled改変12拒否。Record/7snapshot stageと共有graph prefixは後続cutで接続。全caller/共通入力/物理資源はOPEN |
 | Tree literal arguments | TREE-LITERAL-ARGUMENTS-JOIN-v1 | 全1171site容量/60宣言/14反例、実81ケース/4校正と162数値命題。29自然な途中error・compiled改変12拒否。全callee/物理資源はOPEN |
 | Tree constructor transfer | TREE-CONSTRUCTOR-TRANSFER-JOIN-v1 | 3constructor/70宣言/12反例、実45ケース/4校正。21形状条件成立/24条件外、clone/reserve改変6拒否。全caller/物理資源はOPEN |
 | Guard capture lifetimes | GUARD-CAPTURE-LIFETIMES-JOIN-v1 | 258関数/4guard、59宣言/12反例、実型35ケース/45校正。寿命改変15拒否、注入error4。callee生成peak/全caller物理資源はOPEN |

@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：再開・scalarとbyte captureの共通費用を接続
+# W6 — 秘密を含む観測とdebug：再開・Record/DTOと共有graphの所有境界を接続
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。8scalarの生成費用とbyte capture共通上限を151宣言/19反例・実47ケースへ接続し、既存56wrapper原本を再照合。一般Stringのpublic入力条件、DTO/共有graph/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Record/DTOの所有移動と保持期間を202宣言/18反例・実389ケースへ接続し、失敗を含む共有graph26prefixを再照合。残るcallee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
-Updated 2026-10-30 05:19 JST
+Updated 2026-10-30 05:48 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -52,3 +52,5 @@ Updated 2026-10-30 05:19 JST
 - 2026-10-30 04:30 JST: 実capture_vec/tree_for_bytes/hex_chunkの関数全体を固定し、前段のcollector式へ外側metadata・引数Vec・hex一時文字列を合成。capture_vecはcapacityとelement_sizeのTreeを保持して子を収集し、byte captureは全chunkを先に生成してからcapacity Treeを作る。capture_bytesの転送関数は固定・linkしたが今回単独実行していない。 Vec側は88*3byteの旧literal backingと2metadataを子生成・途中error中も数える。byte側はchunk保持Cを後段metadataへ引き継ぎ、peak=max(C.peak,C.retained+176+max(M.peak,M.retained+seqNom+nodeNew))。既生成chunkを二重に生成・課金しない。hex文字列はscalar capture中だけ保持し、次chunk前に解放。失敗で局所heapを解放しても全要求を返金しない。 一般scalar/custom callbackの具体的共通peak、native DTO・共有CaptureGraph・残るwrapperと全caller/失敗prefixの合成は未完了。画像全体履歴/共通public入力、並行worker、非割当work/stack/TLS/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewも未完了。Rust型/評価順/drop/codegen/Vec/serdeとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
 
 - 2026-10-30 05:19 JST: 固定したString/bool/u8/u32/u64/usize/i64/unitの8scalarについて、image複製・復元比較・二つのtype名・bounded writer・UTF8移動を実ソースへ対応。writerは任意サイズの追記を扱い、受理済みprefixごとに旧新backingと全要求を数える。Stringの余剰入力capacityは借用元に残す。 writerの長さ≤Fならcapacity≤2F+8、旧新Layoutのpeakと累積要求≤4F+16。scalarはString長n（他7型は0）とtype名長Tに対して、peak≤T+max(2n,n+T+writer.high+error)、要求=2n+2T+writer.paid+error。独立したpublic上限N≥nを前提に一般化し、秘密の実測長から外向け予算を決めない。 一般Stringに共通なpublic入力上限は独立条件。generic Recordのnative DTO/共有CaptureGraph、残るcalleeと全caller/失敗prefixの合成は未完了。画像全体履歴/共通public入力、並行worker、非割当work/stack/TLS/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewも未完了。Rust型/評価/drop/codegen/Vec/serdeとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
+
+- 2026-10-30 05:48 JST: 消費するclone入力と新規要求を分けた所有移動の費用式を証明し、Recordの比較用temporaryと7snapshotのlet局所変数を実ソースへ対応。既存99Record/10DTOの費用が参照する34sourceを現Native63へ再照合した。新しい実行対象は9generic containerと7snapshotであり、全99実装又は全10DTOの新実行とはしない。 復元はcloneの所有領域を消費するため、cloneとnative返却値を独立した新規割当てとして二重計上しない。通常のRecordは比較後に復元temporaryを破棄するが、snapshotは元DTOとrestored局所変数を直列化終了まで同時保持する。借用元nativeの領域は別frameとして保持する。 残るcallee固有wrapper（original source/prestaged/generation等）と全caller/失敗・部分・並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust型/評価/drop/codegen/Clone/Eq/serdeとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。

@@ -103126,5 +103126,68 @@
     "range": "complete writer/scalar/public-bound proofs,exact8scalar/source/serde/error,all47native and56old wrapper raw/finite readback",
     "role": "W6 scalar writer and common byte bounds",
     "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-BOUNDARY-FRAMES-JOIN-v1.json",
+    "sha256": "ede98a40ee8fa42d9babb55bdddb3d6808b3bae02efa682d4449f0936ed4755f",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CAPTURE-BOUNDARY-CHECKPOINT-v1.json",
+    "sha256": "714279dc00a206fbd04e8f6eac77d22d17e8db4f30397b107308e3e18e623f13",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-boundary-frames-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "a21771f15f4321330955b0098a58af106ce2f3a0666fec31c91e59ae678b2132",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-boundary-frames-v1/FORMAL-VERIFICATION-v4.json",
+    "sha256": "9d6594932a1c78cf1a6c0ed8dacbed21a0abb85a325895473109b96748968946",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-boundary-frames-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "416a6e7395cf37326ef0b62e23dd9a00e4f6c240dd79f88c5fe752bd705b5f60",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture-boundary-frames-v1/NATIVE-VERIFICATION-v4.json",
+    "sha256": "2bcda5322ff8b0fc878fca1677fa3b25e52daa2c28a834f1d38d72649046dd68",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6CaptureBoundary_v2.lean",
+    "sha256": "fa6ec4e9856595a723f7c3819de4c9d8efcf50f75abf740adf25aac1f8c6177c",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/capture_boundary_reader_v2.py",
+    "sha256": "f836b389123eab829dbabdbc35202edb53ecff78d162b296a4410c1123f88f8f",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_capture_boundary_v1.py",
+    "sha256": "a89eeaf29208a000b28492005607360873b2bd4f20d4ca252855177216573854",
+    "range": "complete transfer/Record/snapshot scope proofs,34 prior sources,current source and all389 native plus28 old graph originals",
+    "role": "W6 capture boundary ownership and shared graph prefixes",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
   }
 ]
