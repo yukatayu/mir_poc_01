@@ -8831,10 +8831,10 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/predecessor-root/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
     "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
   },
-  "w6_implementation_updated_at": "2026-10-29T21:17:30.016907+00:00",
-  "w6_implementation_scope_notice": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。original sourceと2種のprestaged captureの保持期間を121宣言/20反例・実43ケースへ接続。残るrestore/callee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。",
+  "w6_implementation_updated_at": "2026-10-29T21:45:43.829714+00:00",
+  "w6_implementation_scope_notice": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。式の一時値10箇所と隠れたendpoint比較を101宣言/17反例・実20ケースと18構文形状試験へ接続。残る補助関数/restore/全caller、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。",
   "w6_implementation_base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
-  "updated_at": "2026-10-29T21:17:30.016907+00:00",
+  "updated_at": "2026-10-29T21:45:43.829714+00:00",
   "w6_execution_control": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
   "w6_owner_pause": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
@@ -8845,5 +8845,7 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-RESUME-20261029-v1.json",
     "sha256": "1812bd329c9d8757e7423cde6dd2f3edd3c6c6d14d9872994bb1733c50c97ea6"
   },
-  "w6_implementation_scope_before_source_capture": "W6は未完了。ownerの継続依頼で同じgoalを再開し、registry v9の実45cut・親M9の3cut、dormant v4の37入力116区間、fresh reader18件の初期FD3費用を独立照合した。Native60はNative59へ検証済み試験用stageを統合した6575sourceで、全1729試験を実行中。旧Native59の1727成功/2失敗は保持。Lean223module/35371宣言/1339偽も保持。全資源・host入口の会計、45reader、workspace、最終docs/Oracleは未完。 119出所/承認/採用行は不変。"
+  "w6_implementation_scope_before_source_capture": "W6は未完了。ownerの継続依頼で同じgoalを再開し、registry v9の実45cut・親M9の3cut、dormant v4の37入力116区間、fresh reader18件の初期FD3費用を独立照合した。Native60はNative59へ検証済み試験用stageを統合した6575sourceで、全1729試験を実行中。旧Native59の1727成功/2失敗は保持。Lean223module/35371宣言/1339偽も保持。全資源・host入口の会計、45reader、workspace、最終docs/Oracleは未完。 119出所/承認/採用行は不変。",
+  "w6_execution_control_before_expression_temporaries": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
+  "w6_implementation_scope_before_expression_temporaries": "W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。original sourceと2種のprestaged captureの保持期間を121宣言/20反例・実43ケースへ接続。残るrestore/callee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。"
 }

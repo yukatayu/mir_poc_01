@@ -103259,5 +103259,75 @@
     "range": "complete original/prestaged scope proofs,current source and all43normal6control native originals,TLSdiagnostic",
     "role": "W6 original/prestaged capture scopes and failed prefixes",
     "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/EXPRESSION-TEMPORARIES-JOIN-v1.json",
+    "sha256": "44c69d12d50fecc2dda6fb76aa4996b1fb90fe49bf096123d001848d8364024d",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/EXPRESSION-TEMPORARIES-CHECKPOINT-v1.json",
+    "sha256": "bd66b83aca4f0021232eadd9dfa1238f3c74324d34b1382e3955a42aa81bc376",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression-temporaries-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "1b76a788968b413ab2f25ede3042bee7ec8a8be8169388da9a23d425dbce7b8c",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression-temporaries-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "4f89af402cac10b9ff7d320a402a160df754444f277b5189db72afaa6888a6cc",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression-temporaries-v1/READBACK-VERIFICATION-v3.json",
+    "sha256": "fab1935be64e229d7237232a97ca0c46742a962556a6b5ed08a76218f800e949",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression-temporaries-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "13c149c55eb3ac88fa81f5795e2e6c6cfa80009eacbfa3721817bcc9610773f9",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6ExpressionTemporaries_v3.lean",
+    "sha256": "9dead3b8410519557896e99388bafa1f9c9d8f85faebb857894b8b36528c6561",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression_reader_v1.py",
+    "sha256": "6ba2100143877966283d4047784233bfc1b2b11c0c5f2fabb1b33df1a4e318bf",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_expression_temporaries_v3.py",
+    "sha256": "f3e61bbd852e36887ccb5295fd20457f147a20c5da47816e4fed5280108512ed",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/expression-temporaries-v1/RESOURCE-PREREGISTRATION-v2.json",
+    "sha256": "5c2213bb5701c98196f612e58ef483faea408e13163dbef840d4a753ebfd4edb",
+    "range": "complete expression-scope proofs,current source and all20native18shape10control originals",
+    "role": "W6 expression temporary scopes and hidden endpoint capture",
+    "status": "conditional LAB; remaining callers/common input/physical/W6 open"
   }
 ]

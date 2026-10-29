@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; original/prestaged capture scopes connected
+# RESUME — W6 resumed; expression temporary scopes connected
 
-Updated 2026-10-30 06:17 JST
+Updated 2026-10-30 06:45 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。original sourceと2種のprestaged captureの保持期間を121宣言/20反例・実43ケースへ接続。残るrestore/callee/全caller、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。式の一時値10箇所と隠れたendpoint比較を101宣言/17反例・実20ケースと18構文形状試験へ接続。残る補助関数/restore/全caller、共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -77,9 +77,9 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-最新quotaは06:11JST残量90%、指定reset使用1回。次回確認は07:11JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は06:29JST以降。
+最新quotaは06:11JST残量90%、指定reset使用1回。次回確認は07:11JST以降。35%停止、追加reset/購入なし。Oracleの次回確認は07:30JST以降。
 
-10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは05:29JSTのPro利用上限が最新で、次回確認は06:29JST以降。
+10/30 01:45JSTに指定Full reset（同日03:45期限）を許可どおり1回適用し、対象消滅と週次残量100%を画面で確認。追加reset・購入は許可されていない。以後は1時間以上を目安に残量確認し、35%で検証済み区切りを保存してowner指示のpauseとする。Oracleは06:30JSTのPro利用上限が最新で、次回確認は07:30JST以降。
 
 W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
@@ -490,3 +490,31 @@ Oracleは05:29JSTも同じtabでGPT-6 Pro5of5/Usage limit reached。prompt未送
 Repository backup: Record/DTO/共有graphの13文書をf353c6b6d6308f0f2ce5e6806838513e5f93416cへcommit/pushし、ls-remote一致とcleanを確認（CAPTURE-BOUNDARY-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-30 06:22 JST: source-capture cutのfull make docsは6410入力不変・exit0、focused386は21項目成功。検証metadataとcurrent Oracle/quota aliasの同期はfocused387で別検証。W6最終統合full/Oracleは未完了。
+
+## Expression temporary scopes and hidden endpoint capture
+
+2026-10-30 06:45 JST: 255個の非primitive Tree返却関数内の1262呼出しを分類し、一時値10箇所と11補助関数の全bodyを固定。json_treeのraw文字列、registry key、received candidate/preface、FlowBundle/encodeの一時値が残る式の範囲を対応した。Registry::check_endpoint内部の追加Tree生成も別に数える。
+
+借用receiverとなる一時値はcapture_inert直後に必ず解放されるわけではない。外側nodeと後続fieldまで残る式、let初期化のsemicolonで解放される式、callback/match arm内で解放される式を分けた。endpointは空keyならcaptureを省略し、非空なら不一致でもcapture費用を払い、比較終了後にTreeを解放する。
+
+各stageで保持量をtemporaryとoutputに分け、peak=max(先行peak,temporary+output+stage.peak)、要求累計を加算する。scope終了時はoutputだけを返し、失敗は局所保持0でも先行費用を残す。json_treeは旧literal backing88byteとrawをscalar/constructor中も保持し、child所有領域を二重に要求しない。各stage費用と借用元frameは独立条件で、全callerの共通public予算ではない。
+
+新101宣言/17反例と実20ケースの70有限命題をfresh/replayで受理し、全60logを独立照合。NativeのJSON8/socket4/endpoint8と、別のRust式形状18ケースは27成功/11自然な拒否。3493計測event/3294baseline event/460解放eventを全読戻しし、通常caseの内容・peak・累積要求は元関数と一致。3allocator校正/1無割当controlを確認。有限readback120宣言は一般定理又は固定275manifestへ加算しない。
+
+独立した二つのprivate seedでJSON/endpointと式形状の内容変化を確認。rawの早期解放とendpoint比較Treeの保持延長を含む3種のcompiled改変は、同じ内容を返す10ケースで寿命検査が拒否した。source22/reader22/結合15改変を拒否。socketの未読byteは自然なUnrepresentable、文字列超過はByteBudget、endpoint不一致/空keyはManifestとして区別した。
+
+10箇所の全native wrapperを新実行したわけではない。PublisherImage/FlowBundle内部、whole received-data、publisher/fabricの実経路はsource対応と既存条件付き式を保持する。18形状試験をこれらの全経路の実行へ読み替えない。新network worldは0。元native入力のsetup/保持、host/OS syscall費用は別に残す。
+
+残る補助関数内部/restore/calleeと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
+
+準備の先行receipt名、Leanの適用空白と帰納証明の展開、非Tree補助関数の参照元を訂正。初回nativeはtest-only loopの閉じ括弧不足でcompile失敗し、旧workspace/logを保持して後続cutで修正。readbackのState/valid名前衝突と保存時の空false-control manifest不足も後続cutで訂正。5compiler warningは既存unused import/variableと旧allocatorの未使用3項目に一致し、原logへ明示保持した。
+
+依存103libraryをread-only再利用し、cache復元/cleanupなし。旧compile失敗cutを含む新成果は512MiB上限内、全rawは7113414byte。root空き約3.3GiB、tmpfs約1.6GiB、MemAvailable約12GiBを確認。計測用3MiB/threadの別System heapはnativeの物理予算に混ぜない。
+
+Oracleは06:30JSTも同じtabでGPT-6 Pro5of5/Usage limit reached。prompt未送信、次回07:30JST以降。quotaは06:11JST残量90%、次回07:11JST以降。指定reset1回使用済み・35%停止、追加reset/購入なし。
+
+再現: prepare_expression_temporaries_v2.py → check_expression_temporaries_formal_v3.py → prepare_expression_native_v1.py（NATIVE-PREPARATION-v2の括弧修正）→ verify_expression_source_v1.py → run_expression_native_v2.py → verify_expression_native_v1.py → derive_expression_costs_v1.py → check_expression_readback_v3.py → qualify_expression_temporaries_v3.py。成功cutはno-clobber、再現は新cut名を使う。
+
+Repository backup: original/prestagedの13文書を48ceb9137380540d90def6d9d3c881042317e902へcommit/pushし、ls-remote一致とcleanを確認（SOURCE-CAPTURE-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-30 06:51 JST: expression-temporaries cutのfull make docsは6410入力不変・exit0、focused388は21項目成功。検証metadataとcurrent Oracle/quota aliasの同期はfocused389で別検証。W6最終統合full/Oracleは未完了。
