@@ -103469,5 +103469,75 @@
     "range": "complete restore proofs,current source and48normal12control full native originals; observeroverflow failure retained",
     "role": "W6 restore comparison and reference backing",
     "status": "conditional LAB; remaining callers/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-IMAGE-PIPELINE-JOIN-v1.json",
+    "sha256": "f45437baf8cd18e8deb3408aba091c58e30e84b8b60fe19547d4a5aa386980a7",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-PIPELINE-CHECKPOINT-v1.json",
+    "sha256": "a37e9e1f9d1ea68aa0b780cb11eb6730aa5d210bc99185c93ef9cd4a38d017fc",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-image-pipeline-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "1f37212703f5d6a610fb02ff80362631c1da00d55787de68a973661d5b4187c1",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-image-pipeline-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "01fd74a5bd94815afdb026f247af0880d73fd0d93d87004148e1e4dd2fd8b921",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6OriginalImagePipeline_v2.lean",
+    "sha256": "798815a3735444f984756a2a749c5f3956505c212ef17c7c4c936fd58695fca0",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_original_pipeline_v2.py",
+    "sha256": "95ebc961ae305e7ddc42bd3a67a59f915bcb292b50a5903d1e30d6a876c749db",
+    "range": "complete six pinned bodies,118 declarations/25falsifiers and all84logs",
+    "role": "W6 OriginalImage local pipeline",
+    "status": "conditional LAB; no new native execution; allcaller/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-IMAGE-PIPELINE-JOIN-v2.json",
+    "sha256": "0fc9ba5bc3d7906c2486049567021686eef85d674b88487764604f01c84dcfe5",
+    "range": "complete; original32MiB capacity overrun retained, later bounded read-only qualification",
+    "role": "W6 OriginalImage storage correction",
+    "status": "proof/source results separate from original failed resource plan; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-image-pipeline-v1/RESOURCE-AUDIT-v1.json",
+    "sha256": "1d0971974e6c69cab1b2e821313616ab9e521bcb693088e6c2069a89d66dbe51",
+    "range": "complete; original32MiB capacity overrun retained, later bounded read-only qualification",
+    "role": "W6 OriginalImage storage correction",
+    "status": "proof/source results separate from original failed resource plan; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-image-pipeline-v1/RESOURCE-REVISION-v2.json",
+    "sha256": "2e9d9dab18ef7d811f706771f4eb50c50943cb6cc677f83bf42a011f1505284c",
+    "range": "complete; original32MiB capacity overrun retained, later bounded read-only qualification",
+    "role": "W6 OriginalImage storage correction",
+    "status": "proof/source results separate from original failed resource plan; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-PIPELINE-CHECKPOINT-v2.json",
+    "sha256": "0c9087882d96014483e194256fb7ac2410919ceba8cf1ea3499acc4f2477ceea",
+    "range": "complete corrected checkpoint",
+    "role": "W6 OriginalImage source/formal and separate resource result",
+    "status": "full docs passed; original32MiB violation retained; W6 open"
   }
 ]

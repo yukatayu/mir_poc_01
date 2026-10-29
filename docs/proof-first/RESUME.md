@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; restore comparison scopes connected
+# RESUME — W6 resumed; OriginalImage local pipeline connected
 
-Updated 2026-10-30 07:34 JST
+Updated 2026-10-30 07:53 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。M9/Publisher復元と参照Vecの寿命を41宣言/14反例・実48ケース/184有限命題へ接続。約505MBの原ログを完全読戻しし、返却同一の寿命改変12件を拒否。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageのcapture/encode/decodeとV1/V2 codec全6関数の保持関係を118宣言/25反例へ接続。今回はsource/formal照合で、新native実行なし。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. Next compose remaining restore/callee and all caller retained/peak/escape and failed-prefix costs; inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. Next compose allcaller branches/workers/concurrent retained/peak/escape and failed-prefix costs; inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -574,3 +574,25 @@ Oracleは07:31JSTも同じtabでGPT-6 Pro5of5/Usage limit reached。prompt未送
 Repository backup: Publisher/Flow所有移動の13文書を1712c87536538c4a72c803094650ce21ba3f8a9cへcommit/pushし、ls-remote一致とcleanを確認（AUXILIARY-AGGREGATE-PUSH-v1）。Git外原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-30 07:39 JST: restore-comparison cutのfull make docsは6410入力不変・exit0、focused392は21項目成功。検証metadataとcurrent Oracle/quota aliasの同期はfocused393で別検証。W6最終統合full/Oracleは未完了。
+
+## OriginalImage capture and codec pipeline
+
+2026-10-30 07:53 JST: OriginalImageのcapture/validate/encode/decodeとV1/V2 codecの6関数全bodyを、Native63と計測構成の二つで照合。先行restore/correspondenceの67宣言と部品の費用/寿命を保持し、未接続だった画像全体の局所scopeを合成した。
+
+captureではPartsのsource TreeとCaptureGraph、flow Tree、key、runtimeがbootstrap生成中も残り、graphだけを最後に解放する。encodeのserde Valueはwire encoder終了まで残る。decodeはJSONを消費して型付き画像へ移し、その画像をvalidate/再encode中も保持する。汎用decoderと型付きdecoderの正規性encodeは別々に数える。
+
+encode peak=max(validate.peak,json.peak,json.retained+wire.peak)。decode peak=max(json.peak,conversion.peak,conversion.outgoing+max(validate.peak,reencode.peak))。conversion.incoming=json.retainedが所有条件であり、消費移動をclone扱いしない。V2ではjson/envelope/chunk一時値をscopeごとに数え、match arm終了後はparsed Valueだけを保持。失敗は実際に試行したprefixを課金し、解放で返金しない。借用入力は独立frameへ加える。
+
+新118宣言/25反例をfresh/replay両方で検証し、84log・全closure source・axiom auditを独立読戻し。source20改変と結合15改変を拒否。固定275manifestへ加算せず、先行の実48ケース/184有限命題と実3worldを再実行又は新規証拠へ読み替えない。
+
+全callerの分岐/worker/並行保持、各stageと初期履歴に対する共通public入力上限、一般Stringの事前上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理予約/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。W6/T10/Canon受理なし。
+
+一般Lean v1の再帰関数/list展開不足をv2で訂正し命題は保持。source v1の改変anchorが借用引数と返却fieldの2箇所に一致したため、v2で返却field suffixに固定。読戻しv1のcommand metadata参照labelを実schemaのlogへv2で訂正。失敗原本/logを保持した。
+
+新native binary、network world、allocator計測は0。source/formal/独立readerのみで進め、cache復元/cleanupなし。root空き約2.3GiB、tmpfs約1.2GiBを確認し、依存Lean cache込みの新保存物65368888byteが事前root32MiB枠を超過し、元の容量計画は失敗として保持。後続80MiB枠の読取専用監査で全原本と2GiB root/512MiB tmpfs予備を確認し、再実行や削除は行わなかった。tmpfs新生成なし。
+
+再現: check_original_pipeline_formal_v2.py → verify_original_pipeline_source_v2.py → qualify_original_pipeline_v3.py（元32MiB超過を保持、後続容量監査）。初回事前登録はoriginal-image-pipeline-v1/PREREGISTRATION.json。成功cutはno-clobberで、再現時は新cut名を使う。
+
+Repository backup: 先行復元scopeの13文書をb0005e1ea52183740c199843bce7f799fa91f321へcommit/pushし、ls-remote一致とcleanを確認（RESTORE-COMPARISON-PUSH-v1）。Git外の研究原本はローカル保持。
+
+2026-10-30 08:04 JST: OriginalImage pipelineは容量記述訂正後のfull make docsも6410入力不変・exit0。先行focused394は21項目成功、検証metadataはfocused395で別検証。元32MiB枠超過を成功扱いせず保持し、W6最終統合full/Oracleは未完了。

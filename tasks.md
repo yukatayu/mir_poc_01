@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-30 07:34 JST
+最終更新: 2026-10-30 07:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,7 +12,7 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABは2
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。M9/Publisher復元と参照Vecの寿命を41宣言/14反例・実48ケース/184有限命題へ接続。約505MBの原ログを完全読戻しし、返却同一の寿命改変12件を拒否。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageのcapture/encode/decodeとV1/V2 codec全6関数の保持関係を118宣言/25反例へ接続。今回はsource/formal照合で、新native実行なし。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
@@ -24,9 +24,9 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | M9/Publisher復元・参照Vec・比較保持を接続。残るhelper/全caller、共通入力/履歴と物理資源・進行へ継続 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | OriginalImage/V1/V2局所保持を接続。全callerの分岐/worker/並行frame、共通入力/履歴と物理資源・進行へ継続 |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | restore-comparison full6410入力不変・exit0。focused392通過、検証metadataはfocused393で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | OriginalImage容量記述訂正後full6410入力不変・exit0。focused394通過、metadataはfocused395で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
 | Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | owner login済み。10/30 07:31JSTもGPT-6 Pro利用上限でprompt未送信。最終review未実施。次回確認は08:31JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
@@ -36,7 +36,7 @@ Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のr
 
 ## user decision gates
 
-容量: 2026-10-30 07:34 JST 既存sourceのread-only hardlinkと依存103libraryを再利用し、変更fileだけ別inodeへ置換。原source/依存hashを前後照合した。新61原ログは505009811byteをgzip24692533byteへ可逆保存し、原/圧縮SHA256・長さ・EOF・全eventを検証。今回root158726447byteとtmpfs131723280byte、先行失敗cutも保持。root224MiB/tmpfs500MiBと実行中root2GiB/tmpfs512MiB reserveを維持。root空き約2.3GiB、tmpfs約1.2GiB、MemAvailable約12GiB。cache復元/cleanupなし。計測用48MiB/threadと保存処理はnative物理予算の外。
+容量: 2026-10-30 07:53 JST 新native binary、network world、allocator計測は0。source/formal/独立readerのみで進め、cache復元/cleanupなし。root空き約2.3GiB、tmpfs約1.2GiBを確認し、依存Lean cache込みの新保存物65368888byteが事前root32MiB枠を超過し、元の容量計画は失敗として保持。後続80MiB枠の読取専用監査で全原本と2GiB root/512MiB tmpfs予備を確認し、再実行や削除は行わなかった。tmpfs新生成なし。
 
 Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証は継続可能。技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
@@ -47,7 +47,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
 | Work and funding | 受動/能動のwire・暗号・journal入力を32query/8reloadへ合成。全M9入力Hと準備出力Jを分け、setup/driverと拒否後host-entryを別計上。実測最大値又は8MiB payloadを全service上限にする代替は不採用 |
-| Temporary ownership | M9/Publisher復元/fields実48ケース、同内容の寿命改変12拒否。完全gzip読戻し。全caller/共通入力/物理資源はOPEN |
+| Temporary ownership | OriginalImage/V1/V2全6関数と既存restoreを合成。118宣言/25反例。今回はsource/formalのみ。全caller/共通入力/物理資源はOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
 | Host and timing | honest host/key/filesystemは前提。scheduler/fsync/EINTR/同一UID隔離/一般availabilityは別の未証明境界。有限LABと本番保証を分ける |

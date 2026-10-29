@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 07:34 JST
+Last updated: 2026-10-30 07:53 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。M9/Publisher復元と参照Vecの寿命を41宣言/14反例・実48ケース/184有限命題へ接続。約505MBの原ログを完全読戻しし、返却同一の寿命改変12件を拒否。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。OriginalImageのcapture/encode/decodeとV1/V2 codec全6関数の保持関係を118宣言/25反例へ接続。今回はsource/formal照合で、新native実行なし。残る全caller/共通入力/履歴、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
@@ -45,6 +45,7 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| OriginalImage pipeline | ORIGINAL-IMAGE-PIPELINE-JOIN-v2 | 全6関数を118宣言/25反例に対応。84log読戻し、source20/結合15拒否。新native実行なし。元32MiB枠超過を保持し後続容量監査。全caller/共通入力/物理資源はOPEN |
 | Restore comparison scopes | RESTORE-COMPARISON-SCOPES-JOIN-v1 | 41宣言/14反例・実48/184有限命題。同内容改変12拒否。全原ログgzip読戻し。全caller/共通入力/物理資源はOPEN |
 | Auxiliary aggregate ownership | AUXILIARY-AGGREGATE-SCOPES-JOIN-v1 | 159宣言/18反例・実56/402有限命題。同内容改変12拒否。raw-cap launcher失敗を保持、独立readback受理。全caller/共通入力/物理資源はOPEN |
 | Expression temporary scopes | EXPRESSION-TEMPORARIES-JOIN-v1 | 101宣言/17反例、実20/形状18ケース、70有限命題。同内容の寿命改変10拒否。全caller/共通入力/物理資源はOPEN |
