@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; selected cache provenance connected
+# RESUME — W6 resumed; source caller frames connected conditionally
 
-Updated 2026-10-29 21:54 JST
+Updated 2026-10-29 22:41 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像と一般保存cache費用に続き、選択経路のcache由来を新165宣言/18反例で検証し、H≤23449953と既存90式へ接続。共通whole入力・画像全体の履歴・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。選択cache由来H≤23449953を接続済み。粗い共通累積上限は64bitを超え予約用には棄却し、実2構成の4methodとreader保持16群を新67宣言/14反例の寿命式へ対応。phase別public数値、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -64,10 +64,10 @@ python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation
 
 The command verifies each archive and protected file before restoring, preserves exact bytes/modes/mtime, and will not overwrite an existing different file. It requires enough free space for each selected cache plus a 512MiB margin. Never substitute a new build for archived evidence or rewrite successful receipts. The retained executables remain at their original paths; the archived .rlib/.rmeta/.d files must be restored for direct rustc components. No restoration is needed merely to read the research records.
 
-## Remaining work after selected cache provenance join
+## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is now connected; next establish whole-image reachable histories and common whole-input parameters, then allcaller lifetimes/usable physical funding. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Next derive type/field-specific public costs and instantiate actual retained/scratch caller frames, with whole-image reachable histories/common input and physical funding still required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-2026-10-29 21:01JSTの週次残量51%、指定10/30 Full reset使用0回。次回確認は22:01JST以降。21:07JSTのOracleはPro5of5/Usage limit reached。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
+2026-10-29 22:03JSTの週次残量47%、指定10/30 Full reset使用0回。次回確認は23:03JST以降。Oracleはowner login後も22:25JSTにGPT-6 Pro利用上限、prompt未送信。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
 
 W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
@@ -146,3 +146,23 @@ Leanのrecord field改行位置とDecidable、indexed constructorの余分なcas
 Repository backup: saved-cacheの13文書を15eb93a2a031939a7a0f3a10404a0a1616b33d31へcommit/pushし、ls-remote一致とcleanを確認（SAVED-CACHE-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
 
 2026-10-29 21:59 JST: reachable-cache cutのfull make docsは6410入力不変・exit0、focused357は21項目成功。検証記録追記はfocused358で別検証。W6最終統合full/Oracleは未完了。
+
+## Original caller frame evidence and rejected reservation
+
+2026-10-29 22:41 JST: 共通S/Nに一律の最大型費用とrankを掛ける予約候補を検査し、original_restore=31132022279638245799、追加対応検査まで=34020786534319897540でu64上限を超えると確認。この粗い上限の予約利用を棄却し、実sourceの型/field別費用と保持寿命を使う経路へ進む。実消費量の下限又はNative overflowとは主張しない。
+
+費用候補は新70宣言/6反例・56logと51部品/10stage、71数値改変拒否で照合。呼出寿命は新67宣言/14反例・36logをfresh/replayで照合。Native63と計測63の4method全bodyが同一で、callerの23binding/16保持群、source14/結合12改変拒否を確認。旧275module又は実機試験へ二重加算しない。
+
+Parts一時Treeは条件式後に解放されるがCaptureGraph backingは残り、ProcessBundle let bindingもbootstrap検査まで残る。restoreが返したRecoveredSourceは追加検査中も保持する。readerの入力・独立template・自分の実行ファイルbuffer・拒否試験用JSON/registration等をcaller frameへ残し、shadowingをdrop、partial moveを全消去と扱わない。
+
+対応検査の各calleeのpeak/保持/escape契約、callerの初期保持、失敗/drop prefixと全後続分岐はsymbolicな前提。共通public数値と画像全体履歴/到達可能性、全caller/並行worker、非割当work/OS/allocator/stack/kernel/物理資源/進行は未完了。Native変更・新Native実行・RSS/物理予約又はW6/T10受理なし。
+
+Lean予約語local、shapedのDecidable展開、簡約後の等式を訂正。source ASTがvisibilityをsignatureから除きfree functionにself_rawを持たない仕様へreaderを修正。数値反例の実エラー文is falseを照合。失敗source/cutを保持し、命題・成功条件は弱めない。
+
+ownerのログインを確認。22:25JSTにGPT-6/Pro5of5とUsage limit reachedを確認しprompt未送信。先行3回はlogin/attach metadata/model pickerの送信前エラー。低いmodel/powerへ変更せず、最終Oracle reviewは未実施。
+
+再現: prepare_whole_budget_feasibility_v1.py → check_whole_budget_feasibility_v1.py → qualify_whole_budget_feasibility_v2.py → WHOLE-BUDGET-FEASIBILITY-v1.json。check_original_caller_frames_v2.py → verify_original_caller_source_v3.py → qualify_original_caller_frames_v1.py → ORIGINAL-CALLER-FRAMES-JOIN-v1.json。成功cutはno-clobber、再現時は新cut名を使う。
+
+Repository backup: reachable-cacheの13文書をa25254539c853dd44e87ebea8756a3c3b26f92e4へcommit/pushし、ls-remote一致とcleanを確認（REACHABLE-CACHE-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-29 22:47 JST: caller-frames cutのfull make docsは6410入力不変・exit0、focused359は21項目成功。検証記録追記はfocused360で別検証。W6最終統合full/Oracleは未完了。

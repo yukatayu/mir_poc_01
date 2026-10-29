@@ -100220,5 +100220,75 @@
     "range": "complete source/proof/log/cache origin and unchanged90formula readback",
     "role": "W6 selected reachable cache origin",
     "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-CALLER-FRAMES-JOIN-v1.json",
+    "sha256": "1d8277969bf07704a437e701faca4ee8544f0bd93c7971e136ef64bdba0bdd3f",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/WHOLE-BUDGET-FEASIBILITY-v1.json",
+    "sha256": "260ac94279ba57fc89f2f06cf4717241c2b9eeecafcac93b89c0672ddeb1e8b4",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-CALLER-FRAMES-CHECKPOINT-v1.json",
+    "sha256": "d7cb0c92791386c5af9296c98cc3f1d39bc9d56150fa1914d1fe441bfea3ec64",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-caller-frames-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "bf3b4299d9eb0cc28a69e633f05c2fc7fd54e883e8d4ee82778059729b95873e",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-caller-frames-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "66bdc4eaa6f0a80859a8634febf2fac3fffbc9e71486e85c2aabce630641e306",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/whole-budget-feasibility-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "8d1d1d899287dc721b8f762e601c3a8b39a108dfe089af5e97c7df48513c2b38",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6OriginalCallerFrames_v2.lean",
+    "sha256": "d2e08e9ddad32dd0b0d605bf6dd279fc1d1b1701ed6e4003add17c5fbaca67d9",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_original_caller_source_v3.py",
+    "sha256": "c2fa96093312526b944cf59b872564871c6bcf7b58fc28e5e2092c15b17f58a6",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_whole_budget_feasibility_v2.py",
+    "sha256": "bfb5c30d87a93a07e0e7428357f575b4ca5ae021ad3a738b1febab698e3074d9",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261029-v14.json",
+    "sha256": "68cea22fe687210a3aaae53a587d5cfde44730dade683b6cb02f386789b22a1c",
+    "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
+    "role": "W6 caller frames and rejected coarse reservation",
+    "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
   }
 ]
