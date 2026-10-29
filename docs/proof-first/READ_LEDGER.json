@@ -103000,5 +103000,68 @@
     "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
     "role": "W6 collector growth and failed-prefix composition",
     "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/FUNDED-CAPTURE-FRAMES-JOIN-v1.json",
+    "sha256": "a401309685c6781e79f443945a3060cec97db76439f757fe78787701c197e4ea",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/FUNDED-CAPTURE-FRAMES-CHECKPOINT-v1.json",
+    "sha256": "671bd279149fa5300e233fb60ea3311707be185524272c7237e4509942d45c99",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded-capture-frames-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "b8f3d758b1b085ff81116954ae9a27b23d54ffedb2d335ffdfdd1d20149f3156",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded-capture-frames-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "bb5953d5bb53e8dc1756c5844af3d8996668a5abeb77763f821e6af420a37831",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded-capture-frames-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "1716801e78b51212b57ff814774e1d36474f259cd06deee6f38e3e165d6ed4f1",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded-capture-frames-v1/NATIVE-VERIFICATION-v2.json",
+    "sha256": "aa0a5c79852fff372fdc5998cd870ed1929a1e433fd11935f7f67c399e239a0e",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6FundedCaptureFrames_v2.lean",
+    "sha256": "7dae371af34312638d7c61aeef28738f13c413cfda531598e6fef6997eb3c495",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded_capture_reader_v2.py",
+    "sha256": "692a7ccce5dcba3541e428892beb4182f9bdc55a30d96dbfe6c2842a2944f917",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_funded_capture_frames_v1.py",
+    "sha256": "d8eb72c0e7153c5d96fab268379663dbdfc8b2955e266274c228902ffeeab6cf",
+    "range": "complete general proof,whole funded source bodies and markers,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 funded capture wrapper ownership and failure composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
   }
 ]
