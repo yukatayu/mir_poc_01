@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-29 20:36 JST
+最終更新: 2026-10-29 21:13 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,22 +12,22 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABは2
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式と完全初回画像に続き、fresh/V1/V2画像の条件付き事前形状を新104宣言/16反例・実codec24ケースで照合。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-完全初回画像の条件付き合成を受理し、共通public初期履歴/cacheから全caller資源へ、下表の依存順で進めます。10/29 ownerへのrough estimateは順調なら残り2〜4日の実作業、資源前提の修正/レビュー差戻しで1週間以上の可能性。Oracle利用制限待ちとquota停止は別の不確定要因。完了日・完成率を保証しない。
+初回画像とfresh/V1/V2の条件付き形状を受理し、保存cacheH・到達可能履歴から全caller資源へ、下表の依存順で進めます。10/29 ownerへのrough estimateは順調なら残り2〜4日の実作業、資源前提の修正/レビュー差戻しで1週間以上の可能性。Oracle利用制限待ちとquota停止は別の不確定要因。完了日・完成率を保証しない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 完全初回画像のsource条件付き上限を受理。次は共通public初期履歴/cache→全caller寿命/work/物理資源・進行 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 初回画像とfresh/V1/V2の事前形状を受理。次は保存cacheのnative形状/費用H→到達可能履歴→全caller寿命/work/物理資源・進行 |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 追加storageのfull make docs（6410入力不変）とfocused349を保持。今回再開/画像合成のfocused350は別receipt。最終統合fullは残る |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 20:05JSTもOracle Pro5of5/Usage limit reached。最終review未実施。次回確認は21:05JST以降 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 初回画像のfull make docs6410入力不変/focused352を保持。今回prior imageもfull6410入力不変/focused353を受理し、metadataは別検証。最終統合full/Oracleは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 21:07JSTもOracle Pro5of5/Usage limit reached。最終review未実施。次回確認は22:07JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
@@ -36,7 +36,7 @@ Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のr
 
 ## user decision gates
 
-容量: 2026-10-29 20:31 JST root約6.8GiB、MemAvailable約11.5GiB。全cacheを戻さず、必要な依存だけを復元する。初回画像のproof検証は小規模の新生成物だけで完了。再build・大きな出力前後に残量を確認し、原本/証明/失敗記録/検証済みarchiveを保持する。復元commandと条件はRESUME参照。
+容量: 2026-10-29 20:55 JST root約6.7GiB、MemAvailable約11GiB。今回codecのtarget約53MiBと小規模proofだけを追加。全cache復元なし。原本/証明/失敗記録/検証済みarchiveを保持し、大きな出力前後に残量を確認する。
 
 Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証は継続可能。技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
@@ -62,4 +62,4 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-2026-10-29 20:01JSTの週次残量54%、指定10/30 Full reset使用0回。次回確認は21:01JST以降。20:05JSTのOracleはPro5of5/Usage limit reached。指定resetは週次枯渇又は10/30 01:45JST以降の期限接近時に実UIを再確認して1回だけ使用し、その後残量35%で停止。別reset/購入は未許可。
+2026-10-29 21:01JSTの週次残量51%、指定10/30 Full reset使用0回。次回確認は22:01JST以降。21:07JSTのOracleはPro5of5/Usage limit reached。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。

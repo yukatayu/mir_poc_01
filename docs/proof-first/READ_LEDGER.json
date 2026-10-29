@@ -100024,5 +100024,61 @@
     "range": "complete result/source pins",
     "role": "Initial whole image final docs verification",
     "status": "accepted checkpoint; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/PRIOR-IMAGE-SHAPE-JOIN-v1.json",
+    "sha256": "5b5e054be086fcb8db41146c328ed27c1f8123e87f60d0d7de38af7c41a529b7",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/PRIOR-IMAGE-CHECKPOINT-v1.json",
+    "sha256": "c9b417f2cb01278305aa7f56477d4dcdc714d6a78bc892e4e408f10359294341",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prior-image-shape-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "2f75d2f277e2a1529048d72beda44eccd6c702daccda9480f60b2441b0a2fec5",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prior-image-shape-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "f1d3230a37a2ac7e5321d55413d1061953ff8f31b8d1f2e51cc642417cbefd73",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prior-image-shape-v1/PREREGISTRATION.json",
+    "sha256": "2fc2be66c474e8204a8e7671b1bd687b29be8bb2de129ef72d950bee96ecc359",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prior-image-shape-v1/native-v1/RESULT.json",
+    "sha256": "1d137dacb7d9701d1398583b59add599f8c03c1ed42200b23cdff0580c286c19",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/prior_image_reader_v2.py",
+    "sha256": "11ab7edd68d77661baed6d2642ebd60dfdd7d639e0733d0db182038fa7ce59d0",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_prior_image_v1.py",
+    "sha256": "8f0a81e01c7012e754d5cd2aefdcccb14d33ec0c197d19eb256a5e90c901c90a",
+    "range": "complete source/actual outputs and independent readback",
+    "role": "W6 prior-image shape/codec conditional join",
+    "status": "accepted finite LAB;savedcache/allcaller/physical/W6 remain open"
   }
 ]

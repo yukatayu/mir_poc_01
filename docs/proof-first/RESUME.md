@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; initial whole image conditionally accepted
+# RESUME — W6 resumed; prior-image geometry conditionally accepted
 
-Updated 2026-10-29 20:30 JST
+Updated 2026-10-29 21:06 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式と完全初回画像に続き、fresh/V1/V2画像の条件付き事前形状を新104宣言/16反例・実codec24ケースで照合。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -64,10 +64,10 @@ python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation
 
 The command verifies each archive and protected file before restoring, preserves exact bytes/modes/mtime, and will not overwrite an existing different file. It requires enough free space for each selected cache plus a 512MiB margin. Never substitute a new build for archived evidence or rewrite successful receipts. The retained executables remain at their original paths; the archived .rlib/.rmeta/.d files must be restored for direct rustc components. No restoration is needed merely to read the research records.
 
-## Remaining work after accepted whole-image join
+## Remaining work after admitted prior-image geometry
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. The initial whole-image join is accepted conditionally. Connect common public initial history/cache H and prove reachable retained shapes. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole and fresh/V1/V2 pre-typed/typed entry geometry are accepted conditionally. Connect saved-cache native shape/cost H and prove reachable retained histories; keep independent registry custody. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-2026-10-29 20:01JSTの週次残量54%、指定10/30 Full reset使用0回。次回確認は21:01JST以降。20:05JSTのOracleはPro5of5/Usage limit reached。指定resetは週次枯渇又は10/30 01:45JST以降の期限接近時に実UIを再確認して1回だけ使用し、その後残量35%で停止。別reset/購入は未許可。
+2026-10-29 21:01JSTの週次残量51%、指定10/30 Full reset使用0回。次回確認は22:01JST以降。21:07JSTのOracleはPro5of5/Usage limit reached。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
 
 W6-OWNER-RESUME-20261029-v1 and QUOTA-OWNER-POLICY-v6 supersede pause scheduling. No old Native63 full regression or reader service is restarted. Reuse accepted receipts and restore only the caches required for the next bounded check.
 
@@ -102,3 +102,15 @@ Additional disk analysis (2026-10-29 19:39 JST): 調査開始時、root使用約
 Leanの予約binder名とunused simp、凍結Parts generator参照、AST inventoryの実stdout、同名version fieldの改変対象を訂正。旧draft/失敗を保持し、成功条件を弱めない。
 
 再現: check_initial_whole_formal_v3.py（fresh/replay-v2）→ verify_initial_whole_v3.py → INITIAL-WHOLE-IMAGE-JOIN-v1.json。成功出力はno-clobber、再現時は新cut名を使う。
+
+## Prior image geometry evidence
+
+2026-10-29 21:06 JST: 既存V1のinterned展開とblob参照ごとの容量課金、ゼロ長root、16KiB chunkをV2の論理8MiB制限と分離。型補完と初回画像の上限へ合成し、同時保持は和、復元前後は既存recapture関係を要求した。
+
+新104宣言/16反例をfresh/replay・78logで照合。実codec24ケース（21成功/3拒否）と9原本画像を独立Pythonの完全wire/logical hash・形状へ一致。source10/output24/数値20改変と、実compileした課金省略・payload欠落の2改変を拒否。
+
+EntryのA/F/N≤478150656、S≤8598323200は閉じた型補完・初回source等の前提付き。V1の8MiB logical仮定は不可。保存cacheのnative形状/費用H、任意mutable履歴、全caller寿命/work/host/物理資源/進行は未受理。codec部品実行でありwhole typed restore/network/current authorityの新実行ではない。有限上限を物理予約又は使える容量へ読み替えない。
+
+再現: check_prior_image_formal_v2.py → run_prior_image_codec_v1.py → run_prior_image_mutants_v1.py → verify_prior_image_v1.py → PRIOR-IMAGE-SHAPE-JOIN-v1.json。成功cutはno-clobber、再現時は新cut名を使う。
+
+2026-10-29 21:13 JST: prior-image cutのfull make docsは6410入力不変・exit0、focused353は21項目成功。metadata追記はfocused354で別検証する。Oracleは21:07も利用上限で最終review未実施。

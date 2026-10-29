@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はownerの20:00JST指示で再開・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。完全初回画像を既受理の各componentへ合成し、新82宣言/16反例、9原本画像/24返却を検証。初回画像上限N1115075/S228393048はsource事前条件付き。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式と完全初回画像に続き、fresh/V1/V2画像の条件付き事前形状を新104宣言/16反例・実codec24ケースで照合。共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
-Updated 2026-10-29 20:30 JST
+Updated 2026-10-29 21:06 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -22,3 +22,5 @@ Updated 2026-10-29 20:30 JST
 - Additional storage checkpoint (2026-10-29 19:39 JST): ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。このstorage checkpoint時点ではW6を再開していなかった。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。
 
 - Current resume: W6-OWNER-RESUME-20261029-v1.json / QUOTA-OWNER-POLICY-v6.json。初回画像合成後、共通public初期履歴/cacheと全caller資源へ進む。
+
+- 2026-10-29 21:06 JST: PRIOR-IMAGE-SHAPE-JOIN-v1を受理。次は保存cacheHをnative型構造へ接続し、全caller資源へ進む。
