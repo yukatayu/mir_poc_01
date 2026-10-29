@@ -102601,5 +102601,75 @@
     "range": "all seven explicit macro-contained capture call tokens",
     "role": "W6 remaining JSON/diagnostic macro caller lifetime/work boundary",
     "status": "OPEN caller correspondence;1313direct constructor inventory unchanged"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-RETURN-CONTRACTS-JOIN-v1.json",
+    "sha256": "986bb73547b4aec521699b8e42def0a556b408ba233652334c229d4c3799db81",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-RETURNS-CHECKPOINT-v1.json",
+    "sha256": "32a24bf67a82141f7c5a6fa202ddaeed1306e1666d9b9aae2b46fb9ee7e973e4",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-return-contracts-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "0a33ada23261c60051159021a0f49cb48ce270ebe2ab40ddd2380b2e18908dbe",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-return-contracts-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "e311858d245963022720203253c6b57be7cf66002b1cc26a0afdadf439b35ea3",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_return_audit_v2.py",
+    "sha256": "bd953e815844b7e195401f8e2b02c20e0f65bba36ac27f3c8ae48b9bd7c1ef8f",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6TreeReturns_v2.lean",
+    "sha256": "ec1735111f096270599a3dc7d69660c57c6a410141d46a7dd9e74fcd5472930e",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_returns_source_v2.py",
+    "sha256": "573d8c851f014798bd2252d343645f7af7722871ea7f947e99ce1a9133d4022e",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_tree_returns_v1.py",
+    "sha256": "af762b53387aa796eef3568956a1d86528fe5165c8c1b6e5971cd2dc21145043",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-return-contracts-v1/SCOPE-ADDENDUM-v1.json",
+    "sha256": "3d35d57f1e0d4efd2a8fcd338e390b94a938672b614856f8ecc3935c472aaf72",
+    "range": "complete finite-success proof/source/retained-native readback and controls",
+    "role": "W6 successful Tree return capacity contracts",
+    "status": "conditional LAB;callee/failedprefix/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-return-contracts-v1/CALLBACK-REFERENCE-COMPLETENESS-v1.json",
+    "sha256": "76272742edf8955e03bd8e3c3dcbfb8afa621290d65905461f89003b4aadb098",
+    "range": "all37bodytokenreferences and directcall counts; macros/globals/importaliaseschecked",
+    "role": "W6 complete actual capture_vec references",
+    "status": "finitepinnedsourcecorrespondence;RustfrontendTCB"
   }
 ]

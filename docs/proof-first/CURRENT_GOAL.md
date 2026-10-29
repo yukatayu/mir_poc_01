@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：再開・明示的Tree生成の引数を対応
+# W6 — 秘密を含む観測とdebug：再開・有限成功時のTree返却契約を接続
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree容量の一般証明へruntime全261fileの1313生成呼出しと227直接/9マクロ実装を対応し、25部品41stageを検証。各子/コールバックと変更後の返却条件、callee保持量、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
-Updated 2026-10-30 00:46 JST
+Updated 2026-10-30 01:24 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -36,3 +36,5 @@ Updated 2026-10-30 00:46 JST
 - 2026-10-29 23:59 JST: 成功したfresh Vec生成を、正しいsize hintと最終長以下のreserve要求から任意長の遷移として証明し、容量≤8*最終長を得た。各Tree constructorへ帰納的に合成して既存heap+72≤88*N+8*S_wireへ接続した。失敗途中の費用、元入力と返却値の同時保持は別に残す。 全capture callerでの再帰的な生成由来と所有寿命、全calleeの保持/peak、画像全体履歴/共通public入力、並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。8反例は解析条件外の説明で、新runtime admissionではない。任意Valueやclone_fromへの一般化なし。Native production/Canon変更、W6/T10受理なし。
 
 - 2026-10-30 00:46 JST: runtime全261Rust fileを解析し、1171node入力、138借用iter/Result、2借用iter/通常collect、1借用chunks/Result、1反復controlを分類。親module/include/local import、constructorを関数値として渡す経路、型alias、trait default/global初期化を別に確認した。直接199Inert/28OriginalRecordと7snapshot/2recordマクロの本体を固定した。 新規の外側Vecだけでは返却Tree全体の容量を保証しない。各子とコールバックの返却条件、および生成後に過剰予約しない条件が要る。任意callbackと生成後reserveの2反例は解析条件外であり、新runtime admissionではない。 各子/コールバック/生成後変更を含む再帰的な返却契約、残るcallee peak/保持/escapeとcaller寿命、画像全体の到達可能履歴/共通public入力、失敗prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行は未完了。これは固定source対応で、Rust frontend/cfg全体の形式証明ではない。Native production/Canon変更、W6/T10受理なし。
+
+- 2026-10-30 01:24 JST: 各関数の返却式を、容量条件を持つprimitive又は厳密に子である呼出しの結果からの組立てへ対応。258直接関数を254組立て・3条件付きprimitive・1任意callbackを受けるwrapperに分類し、9macro生成recordを別に確認。全37callback箇所は36返却関数内と1通常controlで、子呼出し1301節・constructor組立て1281節・11identity helper・11早期Errを追った。 静的call graphに循環があっても、実際に成功した有限の呼出し導出へ帰納できる。callback条件と変更後の保存条件を明示し、返却TreeをProduced経由でheap+72≤88*N+8*S_wireへ接続した。任意callback、生成後reserve、循環だけからの停止推論は認めない。 Rust frontend/cfg/型とmethod dispatch/codegen/allocator/serdeは固定sourceと既存compilerのTCBに残る。全Rust形式証明、停止保証又は失敗prefixの費用免除ではない。残るcallee peak/保持/escape、元入力/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、並行worker、非割当work/stack/OS/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Native production/Canon変更、W6/T10受理なし。

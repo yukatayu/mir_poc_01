@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-30 00:46 JST
+最終更新: 2026-10-30 01:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,7 +12,7 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABは2
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree容量の一般証明へruntime全261fileの1313生成呼出しと227直接/9マクロ実装を対応し、25部品41stageを検証。各子/コールバックと変更後の返却条件、callee保持量、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。有限に成功した呼出しのTree返却容量を258関数・9macro・全37callback箇所へ条件付き接続し、新51宣言/8反例を検証。callee保持量と失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
@@ -24,10 +24,10 @@ W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doc
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 261file/1313生成呼出しの容量引数を分類。再帰的な子/callback/生成後変更の返却条件、callee保持量、画像全体履歴/共通入力と全caller物理資源・進行を継続 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 258返却関数/9macro/37callbackを有限成功時の容量契約へ接続。残るcallee peak/保持/escape、失敗prefix、画像全体履歴/共通入力と全caller物理資源・進行を継続 |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | tree-captureはfull6410入力不変・exit0。metadataはfocused366で別検証しcommit/pushへ進む。W6最終統合full/Oracleは残る |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | owner login済み。10/30 00:26JSTもGPT-6 Pro利用上限でprompt未送信。最終review未実施。次回確認は01:26JST以降 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | tree-returnsはfull6410入力不変・exit0。metadataはfocused368、呼出し分類の表記訂正はfocused369で別検証しcommit/pushへ進む。W6最終統合full/Oracleは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | owner login済み。10/30 01:27JSTもGPT-6 Pro利用上限でprompt未送信。最終review未実施。次回確認は02:27JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
@@ -36,7 +36,7 @@ Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のr
 
 ## user decision gates
 
-容量: 2026-10-30 00:46 JST root約5.7GiB。全source ASTと小規模部品binaryを追加、後続AST/出力はgzip保存。全cache復元・cleanupなし。原本/失敗cut/archiveを保持。
+容量: 2026-10-30 01:24 JST root約5.7GiB。新51宣言の小規模証明と約0.3MiBの圧縮構造ASTを追加。全cache復元・cleanupなし。原本/失敗cut/archiveを保持。
 
 Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証は継続可能。技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
@@ -47,7 +47,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
 | Work and funding | 受動/能動のwire・暗号・journal入力を32query/8reloadへ合成。全M9入力Hと準備出力Jを分け、setup/driverと拒否後host-entryを別計上。実測最大値又は8MiB payloadを全service上限にする代替は不採用 |
-| Temporary ownership | 1313生成引数を分類、一般の成功時Produced証明を再利用。任意callbackと後置reserveの反例を保持。再帰的返却契約/全callee/後続callerはOPEN。元入力と返却値の同時保持を残す |
+| Temporary ownership | 有限成功時の再帰的なTree返却契約を接続。元入力/DTO/破棄一時Treeと返却値の同時保持、callee peak/escape、失敗prefix/全後続callerはOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
 | Host and timing | honest host/key/filesystemは前提。scheduler/fsync/EINTR/同一UID隔離/一般availabilityは別の未証明境界。有限LABと本番保証を分ける |
@@ -62,4 +62,4 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-2026-10-30 00:04JSTの週次残量43%、指定10/30 Full reset使用0回。次回quota確認は01:04JST以降。Oracleは23:25JSTも利用上限。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
+2026-10-30 01:04JSTの週次残量41%、指定10/30 Full reset使用0回。次回quota確認は02:04JST以降。期限接近windowは01:45JSTから、使用前に正確な表示を再確認する。Oracleは01:27JSTも利用上限。指定resetの期限接近/枯渇条件と使用後35%停止はQUOTA-OWNER-POLICY-v6のまま。
