@@ -103539,5 +103539,82 @@
     "range": "complete corrected checkpoint",
     "role": "W6 OriginalImage source/formal and separate resource result",
     "status": "full docs passed; original32MiB violation retained; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-CALLER-PATHS-JOIN-v1.json",
+    "sha256": "9af367f928abc2da26aad07c2dd59dad95c4352b81433d1d58ec08d4cf16123b",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-CALLER-PATHS-CHECKPOINT-v1.json",
+    "sha256": "2d05e22c7901c88e00d3711669ba9a77f77d4c4106b31b7df3635777bdc997e9",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-caller-paths-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "2c08dd5a288b82a3863b72a5de7a9e90f9b72709c5d8f495cb52af6a6d444e08",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-caller-paths-v1/FORMAL-VERIFICATION-v4.json",
+    "sha256": "6c8a3a251a163b3d67a8eae349b1ba55ccc9bde1f114e75447f307040a3912d5",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6OriginalCallerPaths_v4.lean",
+    "sha256": "fb316ce0561d1a97c185a3829b77dbdc23117aea97c0652ada6d666347966f61",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_original_caller_paths_v1.py",
+    "sha256": "03ac4a61fa5a3748632ba12ab49f7253e786b44cca93c02a32f6cd0dd5ebafbe",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261029T231125Z.json",
+    "sha256": "10cdf27c096683d08b23c856199f3010e33f61a13f656e7c79d74ad66d1273b3",
+    "range": "complete caller AST/84 declarations/22 falsifiers/48logs; fixed imports remain separately accepted",
+    "role": "W6 OriginalImage caller paths",
+    "status": "conditional LAB; no new native execution; worker/common input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORIGINAL-CALLER-PATHS-CHECKPOINT-v2.json",
+    "sha256": "384dd3b9f448034aa31ef629c0e32194b644cdaefa0c2c16eb6ceea8a29ed03b",
+    "range": "complete caller paths checkpoint",
+    "role": "W6 OriginalImage caller scope/source/formal",
+    "status": "full docs passed; conditional worker/input/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v25.json",
+    "sha256": "115185553014538484e35b9829fd7e1d885f27cf0d8c5fdc5eb9c04307fc98e3",
+    "range": "whole metadata receipt",
+    "role": "W6 caller-path checkpoint availability and storage",
+    "status": "resource cap passed; Oracle unavailable; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v379.json",
+    "sha256": "de3ac06872d9f3afe26e0d82cb6b5bab2b1b1245a81f27f369a0760fc4232763",
+    "range": "whole metadata receipt",
+    "role": "W6 caller-path checkpoint availability and storage",
+    "status": "resource cap passed; Oracle unavailable; W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/original-caller-paths-v1/RESOURCE-FINAL-v1.json",
+    "sha256": "3576cbd12a528982b5ea5941417ab25dc12a6a360f1fa1c0fd6b5ff07b1eefde",
+    "range": "whole metadata receipt",
+    "role": "W6 caller-path checkpoint availability and storage",
+    "status": "resource cap passed; Oracle unavailable; W6 open"
   }
 ]
