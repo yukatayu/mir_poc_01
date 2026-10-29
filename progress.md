@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-29 21:31 JST
+最終更新: 2026-10-29 21:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像に続き、保存cacheのnative形状と条件付き費用Hを新45宣言/16反例で結合し、既存全90費用式を再照合。到達可能履歴・共通whole入力条件・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像と一般保存cache費用に続き、選択経路のcache由来を新165宣言/18反例で検証し、H≤23449953と既存90式へ接続。共通whole入力・画像全体の履歴・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
@@ -1335,3 +1335,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-29 21:06 JST: fresh/V1/V2の事前形状を新104宣言/16反例・codec24ケースで独立照合。保存cacheHと全caller物理資源へ進む。
 
 - 2026-10-29 21:31 JST: 保存cacheのnative形状/条件付きHを新45宣言/16反例・90費用式へ結合。共通whole入力・到達可能履歴・全caller物理資源はOPEN。
+
+- 2026-10-29 21:54 JST: 選択経路のcache由来を新165宣言/18反例で検証、H≤23449953と既存90式へ接続。画像全体の履歴/共通入力・全caller物理資源はOPEN。

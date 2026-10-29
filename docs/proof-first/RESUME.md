@@ -1,12 +1,12 @@
-# RESUME — W6 resumed; saved-cache cost conditionally connected
+# RESUME — W6 resumed; selected cache provenance connected
 
-Updated 2026-10-29 21:31 JST
+Updated 2026-10-29 21:54 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像に続き、保存cacheのnative形状と条件付き費用Hを新45宣言/16反例で結合し、既存全90費用式を再照合。到達可能履歴・共通whole入力条件・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像と一般保存cache費用に続き、選択経路のcache由来を新165宣言/18反例で検証し、H≤23449953と既存90式へ接続。共通whole入力・画像全体の履歴・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Current authority
 
@@ -64,10 +64,10 @@ python3 /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation
 
 The command verifies each archive and protected file before restoring, preserves exact bytes/modes/mtime, and will not overwrite an existing different file. It requires enough free space for each selected cache plus a 512MiB margin. Never substitute a new build for archived evidence or rewrite successful receipts. The retained executables remain at their original paths; the archived .rlib/.rmeta/.d files must be restored for direct rustc components. No restoration is needed merely to read the research records.
 
-## Remaining work after conditional saved-cache join
+## Remaining work after selected cache provenance join
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Next establish reachable histories and common whole-input parameters, then allcaller lifetimes/usable physical funding; keep independent registry custody. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is now connected; next establish whole-image reachable histories and common whole-input parameters, then allcaller lifetimes/usable physical funding. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -130,3 +130,19 @@ Lean namespace不足/冗長dsimpと、readerの改変用nested型構築の構文
 Repository backup: prior-imageの13文書を458a8c86910363e9962cc0cf3cffef704dc2eb3cへcommit/pushし、ls-remote一致とcleanを確認（PRIOR-IMAGE-PUSH-v1）。研究ソース/proof/raw/log/cache archiveはGit外のローカル保持。
 
 2026-10-29 21:38 JST: saved-cache cutのfull make docsは6410入力不変・exit0、focused355は21項目成功。検証記録追記はfocused356で別検証。W6最終統合full/Oracleは未完了。
+
+## Selected reachable cache evidence
+
+2026-10-29 21:54 JST: 初期の公開Source4/役割A-S-Tからのcache由来を、通常のprivate状態変更・権限更新・保存・保存値のcold復元を含む一般遷移へ接続。saved cacheと実行用instanceを別々に保持し、復元でcurrent registryに置換しない。
+
+新165宣言/18反例をfresh/replayで受理し全66logを独立照合。現9method/既存20public構築method、admitted更新経路、9画像/45独立registryを確認。source13/DATA27/結合14改変を拒否。既存90式/30logと27registry組/36実測区間を再利用し、新数値命題として二重加算しない。
+
+選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。
+
+Leanのrecord field改行位置とDecidable、indexed constructorの余分なcase binder、readerのdecoder import先を訂正。失敗source/cutを保持し、遷移関係・成功条件・対象profileは弱めない。
+
+再現: prepare_reachable_cache_v1.py → check_reachable_cache_formal_v3.py → prepare_reachable_cache_source_v1.py → verify_reachable_cache_source_v2.py → qualify_reachable_cache_v1.py → REACHABLE-CACHE-JOIN-v1.json。成功cutはno-clobber、再現時は新cut名を使う。
+
+Repository backup: saved-cacheの13文書を15eb93a2a031939a7a0f3a10404a0a1616b33d31へcommit/pushし、ls-remote一致とcleanを確認（SAVED-CACHE-PUSH-v1）。Git外研究原本/proof/raw/log/archiveはローカル保持。
+
+2026-10-29 21:59 JST: reachable-cache cutのfull make docsは6410入力不変・exit0、focused357は21項目成功。検証記録追記はfocused358で別検証。W6最終統合full/Oracleは未完了。

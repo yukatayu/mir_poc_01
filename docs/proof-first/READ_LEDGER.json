@@ -100150,5 +100150,75 @@
     "range": "complete source/actual output/independent native-geometry and90formula readback",
     "role": "W6 savedcache conditional native charge join",
     "status": "accepted finite LAB;wholeinput/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/REACHABLE-CACHE-JOIN-v1.json",
+    "sha256": "e9b7f9d68573b3812d73ee8bcbdc22b7ea526d11f1214980af78e4ae8ba88897",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/REACHABLE-CACHE-CHECKPOINT-v1.json",
+    "sha256": "8e829591297ba1ad64de67fd73718a54291365fc5ab956bdf0fb479b32e768e6",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/reachable-cache-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "b629c5705163ac0d68de2019d990a2b10659f13ae30dd1a802bd877c7e9cc555",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/reachable-cache-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "625555742e1c9a54e4bd9e2bd0b97fb0a4affcae7e59d3ef8311fd0e6ab0d540",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/public-registry-envelope-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "07c2d9512be4ed2fbb97a208699d6604727a04d4579c432c266eb476853fbf23",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/reachable-cache-v1/PREREGISTRATION.json",
+    "sha256": "7faea357ac8f1ccef86cc9d1dce2bf1c2a3a86b64443f2994538bb68c031390e",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/reachable-cache-v1/SOURCE-INVENTORY-v1.json",
+    "sha256": "74f0194594b5c188e167904e245a526ad01ec79ccbc6623c75cd2d67c1f67ee3",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6ReachableCache_v3.lean",
+    "sha256": "ffdd1110a0baf21cd7be2fc5d45da6a8ccbf24ace38f1f1b7db099ea5abdb8ef",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_reachable_cache_source_v2.py",
+    "sha256": "e22dad23a53bdb6f86055c765623e02edd0bfd65b2eb0f72e0c7dce0ee7aef9b",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_reachable_cache_v1.py",
+    "sha256": "671c0720e897f7723530336787f080d70ad7fcf6bcc6e60e97b3b930aeb17f52",
+    "range": "complete source/proof/log/cache origin and unchanged90formula readback",
+    "role": "W6 selected reachable cache origin",
+    "status": "accepted finite LAB;wholehistory/input/allcaller/physical/W6 open"
   }
 ]

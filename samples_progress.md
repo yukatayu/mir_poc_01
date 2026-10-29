@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-29 21:31 JST
+Last updated: 2026-10-29 21:54 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像に続き、保存cacheのnative形状と条件付き費用Hを新45宣言/16反例で結合し、既存全90費用式を再照合。到達可能履歴・共通whole入力条件・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像と一般保存cache費用に続き、選択経路のcache由来を新165宣言/18反例で検証し、H≤23449953と既存90式へ接続。共通whole入力・画像全体の履歴・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
@@ -45,6 +45,7 @@ W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Selected reachable cache | REACHABLE-CACHE-JOIN-v1 | 新165宣言/18反例、9画像/45registry、既存90式再照合。選択経路H≤23449953。任意import/画像全体履歴/物理資源はOPEN |
 | Saved cache native shape/cost | SAVED-CACHE-PUBLIC-JOIN-v2 | 新45宣言/16反例・90式、45実registry/9画像/7追加DATA例。H約205TiBは条件付き累積上限、物理予約ではない。全caller資源はOPEN |
 | Prior image shape | PRIOR-IMAGE-SHAPE-JOIN-v1 | 新104宣言/16反例、codec24ケース/9原本、compiled改変2拒否。fresh/V1/V2の条件付き事前形状。保存cacheH/物理資源はOPEN |
 | Initial whole image shape | INITIAL-WHOLE-IMAGE-JOIN-v1 | 新82宣言/16反例・9原本画像/24返却。source条件付きN1115075/S228393048。新Native実行なし、一般履歴/物理資源はOPEN |

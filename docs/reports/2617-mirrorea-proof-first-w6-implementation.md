@@ -6,6 +6,8 @@ W6の有限LAB実装・検証は再開・未完了。2026-10-29 20:00JSTのowner
 
 ## Scope and assumptions
 
+2026-10-29 21:54 JST: 選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。
+
 2026-10-29 21:31 JST: H=225726309597184は約205TiBの保守的な累積clone要求上限であり、使用可能な物理予約ではない。閉じた型/初回又はguarded入力条件、独立current registryを要する。任意mutable履歴の到達可能性、共通whole入力の全費用、全caller保持寿命/work/host/OS/物理資源・進行は未受理。既存cacheと同じことを一般の保存cacheへ仮定せず、spent/historyを残す。
 
 2026-10-29 21:06 JST: 主担当一人、W6のみ継続。EntryのA/F/N≤478150656、S≤8598323200は閉じた型補完・初回source等の前提付き。V1の8MiB logical仮定は不可。保存cacheのnative形状/費用H、任意mutable履歴、全caller寿命/work/host/物理資源/進行は未受理。codec部品実行でありwhole typed restore/network/current authorityの新実行ではない。有限上限を物理予約又は使える容量へ読み替えない。
@@ -16,6 +18,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 
 ## Start state / dirty state
 
+2026-10-29 21:54 JST: 追加cutはHEAD 15eb93a2a031939a7a0f3a10404a0a1616b33d31、dirtyなしから開始。
+
 2026-10-29 21:31 JST: この追加cutはHEAD 458a8c86910363e9962cc0cf3cffef704dc2eb3c、dirtyなしから開始。
 
 2026-10-29 21:06 JST: この追加cutはHEAD 40daed058ab17cb37afe87a779f25335b19e6433、dirtyなしから開始。
@@ -23,6 +27,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredecessor-rootへ保存。221Canon pins、閉じたReport2615/W5_CHECK/2616とAstra最終cutを保護。W5native6520files/75,291,730bytesをhash照合して新copyへ移した。
 
 ## Documents consulted
+
+2026-10-29 21:54 JST: Canon-first不変。選択Source4/public role、M8 admitted更新経路、保存/復元の実9method、一般cache形状と既存90費用式を参照。
 
 2026-10-29 21:31 JST: Canon-first不変。prior-image/public registry/closed clone/既存owning90式、現3moduleの完全ASTとschema/14import、45registry/9画像の原本。
 
@@ -33,6 +39,8 @@ HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredec
 Canon README/MAPとtask-specific theory07/architecture08、RUN/00_START/workstreams/READING、W6 handoff/条件v8/試験v6、直接proof/native依存。全文/部分readと旧hash再利用はREAD_LEDGERに区別する。docs/reports一括readなし。
 
 ## Actions taken
+
+2026-10-29 21:54 JST: 初期の公開Source4/役割A-S-Tからのcache由来を、通常のprivate状態変更・権限更新・保存・保存値のcold復元を含む一般遷移へ接続。saved cacheと実行用instanceを別々に保持し、復元でcurrent registryに置換しない。
 
 2026-10-29 21:31 JST: 保存cacheを実行用instance/独立registryと分け、全59型constructor/36named/72variantを現3module・14import/aliasへ照合。省略Noneと透明Option/Boxを含むnative形状から費用Hを導き、既存6registry項と90費用式の残項を保持して代入した。
 
@@ -228,13 +236,15 @@ Native60失敗436fileのpinを保持し、archive作成〜最終write区間と�
 
 2026-10-24 12:15 JST: userの進捗照会へ主要機能後の資源保証/総合検証段階、1727成功/2失敗、残作業暫定2〜4日（外部review待ち除外）と回答。current表に残っていたNative56/59実行中記述も修正。件数を完了率へ換算しない。
 
-W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像に続き、保存cacheのnative形状と条件付き費用Hを新45宣言/16反例で結合し、既存全90費用式を再照合。到達可能履歴・共通whole入力条件・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader/全履歴とworkspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。初回/fresh/V1/V2画像と一般保存cache費用に続き、選択経路のcache由来を新165宣言/18反例で検証し、H≤23449953と既存90式へ接続。共通whole入力・画像全体の履歴・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 同じW6 goalはowner指定の残量条件で一時停止。2026-10-28 03:19JSTの週残量41%で、40%を目安とする再開可能な区切りを保存した。指定Full resetは2026-10-22 15:54JSTに1回使用済み。追加reset/購入なし。再開時はAstra一人/sub-agentなし、Q26/Q27採用・119要件区分・Canon/Plan250のowner pauseを保持。W7/外部write/commit/push/通知/共有folderは開始しない。
 
 ASTRA-JOINT-REVIEW-v1は動的suffix/close予約を可逆な候補Aとして選び、同一journal内の静的枠分割Bを最小代替として保持。malformed/core count不一致、policy proposal/accepted decision、純粋dispatch/実crash phase、closeとowning quarantineを区別する。以前の作業証拠は日時つき履歴に保持。
 
 ## Files changed
+
+2026-10-29 21:54 JST: LAB13文書/台帳、隔離Lean/AST/reader/結合検査。Native/Canon/閉じた5文書/119承認row不変。規範変更なし。
 
 2026-10-29 21:31 JST: LAB13文書/台帳、隔離Lean/独立reader/AST/readback。Native63/Canon/閉じた5文書/119承認row不変。規範変更なし。
 
@@ -497,6 +507,8 @@ Root production/Canonは不変。external formal-v1へW6ActivationCatalogを追�
 - `docs/project-status.md`
 
 ## Commands run
+
+2026-10-29 21:54 JST: prepare_reachable_cache_v1.py → check_reachable_cache_formal_v3.py → prepare_reachable_cache_source_v1.py → verify_reachable_cache_source_v2.py → qualify_reachable_cache_v1.py → REACHABLE-CACHE-JOIN-v1.json。成功cutはno-clobber、再現時は新cut名を使う。
 
 2026-10-29 21:31 JST: check_saved_cache_formal_v3.py → verify_saved_cache_v2.py → compose_saved_cache_v1.py → check_saved_cache_readback_v2.py → qualify_saved_cache_v2.py → SAVED-CACHE-PUBLIC-JOIN-v2.json。成功cutはno-clobber、再現時は新cut名を使う。
 
@@ -971,6 +983,10 @@ focused-docs-v105はprogress.md更新日時が08:04実logより古い07:45のた
 run_native_active_originals_rebuild_v1.pyとsame-binary child-only/child-and-parent controls、verify_active_step_tuple_v1.py、run_native_frozen_gzip_v1.pyの全82と現全1628、check_formal_runtime_bounded_v3.py formal-fresh-v48、replay_formal_runtime_bounded_v3.py formal-fresh-v48 formal-replay-v48-a、verify_initialized_outcome_formal_v1.py、run_initialized_outcome_campaign_v1.py、verify_initialized_outcome_campaign_v1.py。source/binary/argv/logは各RESULT/PIN。旧compiler43/44のarchive/readback/--confirm retireは独立receiptへ全対象/資源auditを保存。
 
 ## Evidence / outputs / test results
+
+2026-10-29 21:59 JST: reachable-cache full make docsは6410入力不変・exit0。全log SHA-256と入力を再照合。検証metadataはfocused358で別検証。最終W6統合review未実施。
+
+2026-10-29 21:54 JST: 新165宣言/18反例をfresh/replayで受理し全66logを独立照合。現9method/既存20public構築method、admitted更新経路、9画像/45独立registryを確認。source13/DATA27/結合14改変を拒否。既存90式/30logと27registry組/36実測区間を再利用し、新数値命題として二重加算しない。 選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。
 
 2026-10-29 21:38 JST: saved-cache full make docsは6410入力不変・exit0。全log SHA-256と入力を再照合。検証metadataはfocused356で別検証。最終W6統合review未実施。
 
@@ -1670,6 +1686,8 @@ native-foundation-complete-v1の統合25件はPASS、全source不変、保存bin
 
 ## What changed in understanding
 
+2026-10-29 21:54 JST: Leanのrecord field改行位置とDecidable、indexed constructorの余分なcase binder、readerのdecoder import先を訂正。失敗source/cutを保持し、遷移関係・成功条件・対象profileは弱めない。 native PartialEqはcacheを含まないため、同じinstanceでも保存cacheの由来は別に必要。
+
 2026-10-29 21:31 JST: Lean namespace不足/冗長dsimpと、readerの改変用nested型構築の構文誤りはsuccessorで訂正。90式の最初のrunnerは16MiB生成物上限で停止し、失敗を保持。事前登録済み24MiB上限のrunnerを選び直し、同一proof/inputの新cutで両回成功。source/type/import対応と意味条件は弱めない。
 
 2026-10-29 21:06 JST: V1の共有blobはoccurrenceごとに課金・展開され、logical JSONは8MiBを超えうる。先行検査失敗のspentは残る。Reader v1のelse70構文誤りとLean v1のbinder/Decidable不足は失敗原本を保持し、successorで訂正。report Objectiveのstale pauseと18:54履歴へ混ざったresume文を元記録へ訂正。
@@ -1934,6 +1952,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 
 ## Open questions
 
+2026-10-29 21:54 JST: 選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。
+
 2026-10-29 21:31 JST: H=225726309597184は約205TiBの保守的な累積clone要求上限であり、使用可能な物理予約ではない。閉じた型/初回又はguarded入力条件、独立current registryを要する。任意mutable履歴の到達可能性、共通whole入力の全費用、全caller保持寿命/work/host/OS/物理資源・進行は未受理。既存cacheと同じことを一般の保存cacheへ仮定せず、spent/historyを残す。
 
 2026-10-29 21:06 JST: EntryのA/F/N≤478150656、S≤8598323200は閉じた型補完・初回source等の前提付き。V1の8MiB logical仮定は不可。保存cacheのnative形状/費用H、任意mutable履歴、全caller寿命/work/host/物理資源/進行は未受理。codec部品実行でありwhole typed restore/network/current authorityの新実行ではない。有限上限を物理予約又は使える容量へ読み替えない。
@@ -2047,6 +2067,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparison/runtime/setup/test-host/physical、Native61全体/45reader/workspace、最終source/proof/docs/Oracleが残る。
 
 ## Suggested next prompt
+
+2026-10-29 21:54 JST: 同じW6で画像全体の到達可能履歴・共通whole入力条件・全caller保持寿命と使える物理資源へ進む。
 
 2026-10-29 21:31 JST: 同じW6で到達可能履歴・共通whole入力条件・全caller保持寿命と使える物理資源へ進む。
 
@@ -2164,6 +2186,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Plan update status
 
+2026-10-29 21:54 JST: LAB plan/indexへ選択cache由来の証拠と次のconsumerを同期。新roadmap/Canon変更なし。
+
 2026-10-29 21:31 JST: LAB plan/indexへ条件付きsaved-cache証拠と次のdirect consumerを同期。新roadmap/Canon変更なし。
 
 2026-10-29 21:06 JST: LAB plan/indexへ条件付きprior-image証拠を追記。roadmap/Canon不変。
@@ -2274,6 +2298,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Documentation.md update status
 
+2026-10-29 21:54 JST: current statusと残課題を同期。
+
 2026-10-29 21:31 JST: current statusと残課題を同期。
 
 2026-10-29 21:06 JST: 現証拠と残課題を同期。
@@ -2381,6 +2407,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: M9証拠と全Native実行を区別。
 
 ## docs/project-status.md update status
+
+2026-10-29 21:54 JST: 同じcutへ同期。大局phase/decision gate不変。
 
 2026-10-29 21:31 JST: 同じcutへ同期。大局phase/decision gate不変。
 
@@ -2490,6 +2518,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## progress.md update status
 
+2026-10-29 21:54 JST: current snapshotと実日時logを同期。
+
 2026-10-29 21:31 JST: current snapshotと実日時logを同期。
 
 2026-10-29 21:06 JST: current snapshotと実日時logを更新。
@@ -2597,6 +2627,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: current summaryと実date log。大局phase不変。
 
 ## tasks.md update status
+
+2026-10-29 21:54 JST: 全体snapshotを再出力。画像全体の履歴/共通whole入力→全caller寿命/物理資源を保持。
 
 2026-10-29 21:31 JST: 全体snapshotを再出力。到達可能履歴/共通whole入力→全caller寿命/物理資源の依存を保持。
 
@@ -2707,6 +2739,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 全snapshot更新済み: 全Native→45reader→workspace、全H/F/J/物理費用と最終gate。
 
 ## samples_progress.md update status
+
+2026-10-29 21:54 JST: 選択cache由来の有限evidence rowを追加。active sample root/taxonomy不変。
 
 2026-10-29 21:31 JST: 保存cache有限evidence rowを追加。active sample root/taxonomy不変。
 
@@ -2819,6 +2853,8 @@ Flow行同期時の旧outer行重複をfocused diffで発見し、1行をFlow証
 更新済み: 旧Native60実行中/旧reader current参照をNative61へ訂正、M9証拠row追加。workflow-readyへ昇格なし。
 
 ## Reviewer findings and follow-up
+
+2026-10-29 21:54 JST: Mainの独立source/原本/全90式読戻しを通過。owner指定によりsub-agentなし。Oracleは21:07も利用上限、最終review未実施。
 
 2026-10-29 21:31 JST: Mainの独立source/原本/完全費用式読戻しを通過。owner指定によりsub-agentなし。Oracleは21:07も利用上限、最終review未実施。
 
@@ -2974,6 +3010,8 @@ mainが16native/24DTO、10constructor/18vector、156実M9shape/156欠落/156履�
 
 ## Skipped validations and reasons
 
+2026-10-29 21:54 JST: 選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。 新Native全体実行なし。既受理1750/45readerの重複実行なし。計測構成全1790と最終統合reviewは未実施。
+
 2026-10-29 21:31 JST: H=225726309597184は約205TiBの保守的な累積clone要求上限であり、使用可能な物理予約ではない。閉じた型/初回又はguarded入力条件、独立current registryを要する。任意mutable履歴の到達可能性、共通whole入力の全費用、全caller保持寿命/work/host/OS/物理資源・進行は未受理。既存cacheと同じことを一般の保存cacheへ仮定せず、spent/historyを残す。 新Native full/process実行なし。既受理1750/45readerの重複実行なし。計測構成全1790と最終統合reviewは未実施。
 
 2026-10-29 21:06 JST: EntryのA/F/N≤478150656、S≤8598323200は閉じた型補完・初回source等の前提付き。V1の8MiB logical仮定は不可。保存cacheのnative形状/費用H、任意mutable履歴、全caller寿命/work/host/物理資源/進行は未受理。codec部品実行でありwhole typed restore/network/current authorityの新実行ではない。有限上限を物理予約又は使える容量へ読み替えない。 既受理1750/45readerの重複実行なし。計測構成全1790と最終統合full/Oracleは未実施。
@@ -3124,6 +3162,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 
 ## Commit / push status
 
+2026-10-29 21:54 JST: 先行saved-cacheは15eb93a2をpush・ls-remote照合済み。今回reachable-cacheは文書検証後にowner許可のcommit/pushを行う。Git外研究原本はローカル保持。
+
 2026-10-29 21:31 JST: 先行prior-imageは458a8c86をpush・ls-remote照合済み。今回saved-cacheは文書検証後にowner許可のcommit/pushを行う。Git外研究原本はローカル保持。
 
 2026-10-29 21:13 JST: prior-image文書検証完了後、metadataのfocused検証を経てcommit/pushする。結果はPRIOR-IMAGE-PUSH-v1へ原記録し、次checkpointで履歴に同期。Git外の研究原本・証明・ログはローカル保持。
@@ -3241,6 +3281,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 未commit・未push。owner指定どおり既存未commit成果を保持。外部write/Discord通知/共有folder配置なし。
 
 ## Sub-agent session close status
+
+2026-10-29 21:54 JST: 単独作業、sub-agentなし。
 
 2026-10-29 21:31 JST: 単独作業、sub-agentなし。
 
