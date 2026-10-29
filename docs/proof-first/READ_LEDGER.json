@@ -102874,5 +102874,68 @@
     "range": "complete general proof/source/native allocation identity,whole output,event and drop readback",
     "role": "W6 threeTreeconstructor ownership/old-new backing transfer",
     "status": "conditional LAB;allcaller inputs/callee physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-LITERAL-ARGUMENTS-JOIN-v1.json",
+    "sha256": "567a8ebf0b666c3f775ce03bda85407ca9e2cdd376368e598e729f54f86bf7f7",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TREE-ARGUMENTS-CHECKPOINT-v1.json",
+    "sha256": "ead709455f5240c5b5e697db80be4a44c1f04ea3c306cc191266f1332549fe66",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-arguments-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "1065c1db4fb47e2284a61883f60379ebca1eaf947a02e9c5aafdca7621b6e612",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-arguments-v1/FORMAL-VERIFICATION-v4.json",
+    "sha256": "8372710ecb8900dedce2ad0de77f69c3fa9e111a7eb7ee8d503192ec033a4232",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-arguments-v1/READBACK-VERIFICATION-v2.json",
+    "sha256": "c360c3350fdda416118555c53101715149efe5d8f927d11230dc837609f5d451",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-arguments-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "298a5ec823f30c2bf89318ef15f27e53c8473ffe49d5f603ca1c5b117d32ed8a",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6TreeArguments_v2.lean",
+    "sha256": "ea436f4b277c075e7bab909ebc0cd4ccfe40d8441db44e6d043703e52c8ab2d8",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_arguments_reader_v1.py",
+    "sha256": "a878e85c4a225e44db20f6a24e3e1d90ec58e0a5ce02e87ebff2f603a7bdadf8",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_tree_arguments_v2.py",
+    "sha256": "8ade74f73467c1f50044e80cd71685f00cfc1291b7670b2edd2f6606b0c861dc",
+    "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 literal node argument capacity and evaluation",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
   }
 ]
