@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：再開・実caller保持を条件付き接続
+# W6 — 秘密を含む観測とdebug：再開・容量検査とTree保持を条件付き接続
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。選択cache由来H≤23449953を接続済み。粗い共通累積上限は64bitを超え予約用には棄却し、実2構成の4methodとreader保持16群を新67宣言/14反例の寿命式へ対応。phase別public数値、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。粗いwhole予約案の棄却とcaller保持対応を維持し、容量検査の一時領域とTree保持量を新189宣言/28反例・57部品実行で条件付き接続。全生成経路の容量前提、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。quotaはQUOTA-OWNER-POLICY-v6の指定reset条件と使用後35%停止条件を維持します。
 
-Updated 2026-10-29 22:41 JST
+Updated 2026-10-29 23:31 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -30,3 +30,5 @@ Updated 2026-10-29 22:41 JST
 - 2026-10-29 21:54 JST: REACHABLE-CACHE-JOIN-v1で選択cache由来/H≤23449953を検証。次は画像全体の履歴・共通whole入力と全caller寿命/物理資源。
 
 - 2026-10-29 22:41 JST: 粗い共通累積上限は予約用に棄却。実caller保持の条件付き式を受理。次は型/field別public費用と残る全caller/物理資源。
+
+- 2026-10-29 23:31 JST: 実funded scanが借用Treeを順に走査することを源コードへ対応し、各numberの一時領域をmax、失敗を含む全attemptの累積要求を和として保持。一般raw≤1MiBのscratch上限317825088byte、raw≤128を別に確認した入力では1193792byteを導いた。上限超過rawはparse前に拒否する。 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。

@@ -100290,5 +100290,89 @@
     "range": "complete source/conditional proofs/logs/caller ownership and numeric falsifier",
     "role": "W6 caller frames and rejected coarse reservation",
     "status": "finite conditional LAB;public numeric/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/FUNDED-SCAN-TREE-RESIDENT-JOIN-v1.json",
+    "sha256": "f57511b9c7dff354383697775471ce6a6699a84dea3f43abf8fd53daaee9d34a",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/FUNDED-SCAN-TREE-CHECKPOINT-v1.json",
+    "sha256": "13be022d6553b4e5fc989837bb0bc08b38557b590a8a4d8752cefd7b2e3bc0de",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded-scan-live-v1/INDEPENDENT-VERIFICATION-v2.json",
+    "sha256": "4c8e95bfa015e4eed33b6e9a44c2542146884e9f63559699597336766f768da6",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree-resident-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "140adb3f85a2a16211502c7222d22fda5be6eba67a7419036066aefb513065d3",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6FundedScan_v2.lean",
+    "sha256": "f529cc90be52d182a0a8dde4f2879f9bf2bfb471f92fa61c9400471ac2a3bd86",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6TreeResident_v2.lean",
+    "sha256": "83fce3aaac484fe4cc6f85212bb2e3c7a57912a0c1e7c220aa9a3a5216931930",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/funded_scan_reader_v1.py",
+    "sha256": "6abbb14f2a6e968415a9c2e3c707427339dc4563c15f232254729e9375afd928",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/tree_resident_reader_v1.py",
+    "sha256": "cfa3e11bff6637dc44647ecf3906f3f0fb0a6cc4b41401ccc7e3747b7fbac275",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_funded_scan_v2.py",
+    "sha256": "f6b9dfadd0eff0e3e7b4b5f1f602831f0afa8557a526b493127bfdd62039104e",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/verify_tree_resident_v1.py",
+    "sha256": "370b1777c981a708631372945d97f0b57f78b9903997c20f5f799ac5ff3a687c",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_funded_scan_tree_v1.py",
+    "sha256": "c46be4f005c05d8d2c89c2cbfd8df8bd0a312258771ee767379728cf40e9d3dd",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261029-v16.json",
+    "sha256": "6702fb8de2cf4941389b891fa4e9cc0e79afa249170e042a67fd0aa613a12a9b",
+    "range": "complete source/formal/actual component/capacity/allocator/log and negative controls",
+    "role": "W6 funded scan scratch and Tree residency",
+    "status": "finite conditional LAB;producer/allcaller/physical/W6 open"
   }
 ]

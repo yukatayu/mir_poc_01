@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; current W6 implementation evidence: Report2
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-29 22:41 JST): W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。選択cache由来H≤23449953を接続済み。粗い共通累積上限は64bitを超え予約用には棄却し、実2構成の4methodとreader保持16群を新67宣言/14反例の寿命式へ対応。phase別public数値、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
+Current package map (2026-10-29 23:31 JST): W6は再開・未完了。Native63全1750/45独立readerとworkspace他1190/7doctest、固定275formal（41526宣言/1995反例）、実3world/各2cold readerと30process/1116prefixを保持。粗いwhole予約案の棄却とcaller保持対応を維持し、容量検査の一時領域とTree保持量を新189宣言/28反例・57部品実行で条件付き接続。全生成経路の容量前提、画像全体の履歴/共通入力、全caller/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 ## Authority and retained history
 
@@ -4699,3 +4699,5 @@ W6 saved cache (2026-10-29 21:31 JST): 保存cacheを実行用instance/独立reg
 W6 selected reachable cache (2026-10-29 21:54 JST): 初期の公開Source4/役割A-S-Tからのcache由来を、通常のprivate状態変更・権限更新・保存・保存値のcold復元を含む一般遷移へ接続。saved cacheと実行用instanceを別々に保持し、復元でcurrent registryに置換しない。 新165宣言/18反例をfresh/replayで受理し全66logを独立照合。現9method/既存20public構築method、admitted更新経路、9画像/45独立registryを確認。source13/DATA27/結合14改変を拒否。既存90式/30logと27registry組/36実測区間を再利用し、新数値命題として二重加算しない。 選択経路でH≤23449953byte（約22.4MiB）の累積cache clone要求上限を得た。任意import/patch/未対応callerには適用せず、一般保存cacheの約205TiB条件付き上限を保持する。Leanのsaved履歴/paidは論理的な履歴・累積会計であり、全cacheの実メモリ保持や新runtime ledgerの実装を主張しない。共通whole入力・画像全体の到達可能履歴・全caller保持寿命/work/host/OS/物理資源・進行は未完了。
 
 W6 caller frames (2026-10-29 22:41 JST): 共通S/Nに一律の最大型費用とrankを掛ける予約候補を検査し、original_restore=31132022279638245799、追加対応検査まで=34020786534319897540でu64上限を超えると確認。この粗い上限の予約利用を棄却し、実sourceの型/field別費用と保持寿命を使う経路へ進む。実消費量の下限又はNative overflowとは主張しない。 Parts一時Treeは条件式後に解放されるがCaptureGraph backingは残り、ProcessBundle let bindingもbootstrap検査まで残る。restoreが返したRecoveredSourceは追加検査中も保持する。readerの入力・独立template・自分の実行ファイルbuffer・拒否試験用JSON/registration等をcaller frameへ残し、shadowingをdrop、partial moveを全消去と扱わない。 対応検査の各calleeのpeak/保持/escape契約、callerの初期保持、失敗/drop prefixと全後続分岐はsymbolicな前提。共通public数値と画像全体履歴/到達可能性、全caller/並行worker、非割当work/OS/allocator/stack/kernel/物理資源/進行は未完了。Native変更・新Native実行・RSS/物理予約又はW6/T10受理なし。
+
+W6 funded scan / Tree (2026-10-29 23:31 JST): 実funded scanが借用Treeを順に走査することを源コードへ対応し、各numberの一時領域をmax、失敗を含む全attemptの累積要求を和として保持。一般raw≤1MiBのscratch上限317825088byte、raw≤128を別に確認した入力では1193792byteを導いた。上限超過rawはparse前に拒否する。 Treeは実String/Vec容量とprivate layout（Tree72、String/Tree96、Tree/Tree144byte）を使い、各String容量≤8*(長さ+1)、Vec容量≤8*要素数を前提にheap+600≤88*N+8*S_nativeを帰納的に証明。root inline72を含めても88*N+8*S_wireで覆う。serialized長さだけでは任意の事前確保を覆えない。 全Tree生成経路の容量由来、全calleeの保持/peak、画像全体履歴と共通public入力、全caller/並行worker、非割当work/再帰stack/OS/allocator/kernel/物理資源/進行は未完了。3事前確保例の除外は解析の適用条件であり、新runtime admissionではない。Native production/Canon変更、W6/T10受理なし。
