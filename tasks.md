@@ -1,62 +1,65 @@
-# Current Task Map (LAB)
+# tasks
 
-最終更新: 2026-10-14 01:04 JST
+最終更新: 2026-10-29 18:54 JST
 
-**Canon notice:** `mirrorea_canon/` is the normative source. Everything outside is LAB; if LAB conflicts with canon, canon wins. This snapshot creates no Canon/THM/OBL/SCN/Gate/Phase decision or new roadmap.
+**Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 ## document role
 
-Plan250 remains the sole Canon-authorized roadmap, owner-paused after accepted I3-3 under ADR-0043. I3-4 requires explicit owner resume; Plans247/249 are closed baselines. The W4 task was separately authorized and does not alter that program.
+Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABも2026-10-29の最新owner指示で一時停止。I3-4/W7/Canon採用は開始しない。Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。単一report2617とW6_CHECKへ証拠を集約する。
 
 ## current promoted package
 
-Canon current-position source: `mirrorea_canon/adr/ADR-0043.md`.
-LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
+Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 外部未採用40 Rust pathについて最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過。source→Core→生成owner→実QUIC→native結果→型付き観測と、同じ3プロセスでの次source activation・実M9更新を検証しました。証明はfresh205module/20989所有宣言/211偽命題対照、417commandです。
+W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-119行と元のQ/PT/SC/α条件には個別dispositionを追加し、U/D・承認区分を保持します。A/Bのnative動的構築とDの固定cohort QUICは別証拠です。一般の分散instance/relation/hot-plug、保存復旧、二実行の秘密保持、αの単一システム統合は未達です。採用済みRust/Lean、Canon、Plan250のpauseは変更しません。
-
-このW4候補の検証・保存で停止し、後続packageは開始しません。 W5以降、新goal、採用、Plan250/I3-4は自動開始しません。証拠と再現条件はReport2614、`docs/proof-first/W4_CHECK.json`、`docs/proof-first/RESUME.md`、既存foundation planにあります。今回D/Eの独立reviewはownerの禁止に従い実施していません。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-次に自走で進める順番とrough estimate。今回の有限候補を検証・保存した時点が停止線です。W5以降の新規packageは選択しません。
+現在実行中のpackageはありません。明示的な再開後に限り、下表の依存順で進めます。10/29 ownerへのrough estimateは順調なら残り2〜4日の実作業、資源前提の修正/レビュー差戻しで1週間以上の可能性。Oracle利用制限待ちとquota停止は別の不確定要因。完了日・完成率を保証しない。
 
-| Package / macro position | Direct consumer and required evidence | Readiness / estimate |
+| Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
-| W4 A–E / Macro1/3/5/6 finite candidate | Existing Report2614 and exact E receipts; source, proof, real-path positive/falsifier, all-entry,119 and regression union | 有限候補の技術・文書検証済み。保存結果はE-GIT-CLOSE-v1.json。後続なし。 |
-| Save/recovery, private observation/debug, unified alpha / Macro1/5/6/7 | Original W5/W6/W7 boundaries; a concrete successor needs its used proof premises, scope and owner authorization | 今回対象外。仕様と候補が未確定のため新見積もりを捏造しない |
+| Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
+| Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 復元と初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabric/完全Backendまで結合。完全初回画像→public初期履歴/cache/全caller物理資源。再開後の最初の対象 |
+| Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | Backend focused342受理。今回の停止記録full make docs通過（6410入力不変）。以後の文書差分はfocused343で確認。W6最終統合fullは再開後 |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/29 18:34:16JSTもOracle Pro5of5/Usage limit reached。最終review未実施、停止中のpollingなし |
+| W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
 
-Macro0 holds exact evidence and current snapshots; Macro1/5 hold conditional semantics/proofs; Macro3/6 have finite native/source/private-QUIC evidence. This is snapshot maintenance, not a whole-project phase recut. Mir, Mirrorea, Typed-Effect, PrismCascade and View/app remain separable. No new active package is selected.
+Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のrelease/全channel/資源/回帰に未完了項目を残して停止。再開前の技術的な残課題を記録する。初期化DATA、実Source、独立authorityを分ける。current roadmapはPlan250、W6 LABは別途owner許可範囲。
 
 ## user decision gates
 
-このW4候補の検証・保存で停止し、後続packageは開始しません。 L0/L1, authority/privacy weakening, public API/ABI/wire, adoption, Q18 and H/H2/C/C2 policy adoption, public operations and Canon/Plan250 resume remain owner-reserved. Native request reservation does not decide prepared-patch authority reservation. A further task must not be inferred from W4 completion or a quota checkpoint.
+容量: 再生成可能Cargo cacheだけを5177file（計測2811/native63非実行2366）整理。全内容をhash照合済みの2archive（計817469713byte）へ保持し、証拠用実行ファイル281本は元pathに残した。Canon221/閉じた5文書/Native63全6575source/主要6receiptの計6807fileと119要件の承認rowを保持。研究ソース・証明・raw原本・ログは削除しない。 archive作成前からの正味容量改善はroot約1.50GiB/tmpfs約0.57GiB。整理後の確認時点でroot約5.3GiB/tmpfs約2.0GiB空き。並行する他作業により空きは変動する。 再開後、Native63依存cache又は計測targetを要する再build/依存hash再検査の前に、cleanup_w6_build_cache_20261029_v1.py restore --confirmでexact archiveをno-clobber復元する。保存済みの試験成功は維持するが、整理したcacheが元pathに存在すると仮定しない。
+
+Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証も現在はowner pause。再開後の技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
 ## research discovery items
 
-| Item | Impact / alternatives / current position and falsifier |
+| Item | Effect / alternatives / current view |
 |---|---|
-| Wider source/dynamic distribution | A/B native construction/mutation and D QUIC assignments are separate witnesses. Before a QUIC instance/relation/patch consumer, supply its actual generation, lifetime, authority and graph evidence. Fixed cohort cannot stand in for that result. |
-| All protected entry/resource paths | Final C/D review covers the selected owning path and alternative ingress. Any new writer, restore/clone/deserialization route, caller or larger funding profile reopens the smallest affected premise before use. |
-| Known failure/unknown and recovery | Genuine expiry is typed terminal failure; missing completion remains unknown. New cancellation/retry/recovery must not refund, retry or resurrect from missing evidence. |
-| Observation/privacy | Current reference/count projection has actual joins and inherited redaction. General two-run secrecy, timing/resource noninterference and active-debug authority need separate evidence. |
-| Legacy helper and designated input | Old W1 AssignmentAdmission/finite source-contract helpers remain unreviewed and unused by B206/D205. Raw missing-SourceRef designated input is a static panic candidate, not an executed new defect; reproduce/repair before using that route. |
-| Reproduction/TCB | Local exact overlays depend on pinned external TLS fixtures, tools and serial tests. Portable fresh-checkout workflow and mechanized Rust/OS correctness remain open. |
+| Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
+| Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
+| Work and funding | 受動/能動のwire・暗号・journal入力を32query/8reloadへ合成。全M9入力Hと準備出力Jを分け、setup/driverと拒否後host-entryを別計上。実測最大値又は8MiB payloadを全service上限にする代替は不採用 |
+| Temporary ownership | zero-retained scratchの逐次maxと全spent加算、initial/escape/並行ownerのframe、置換L+Cを明示。現30processの1116prefixを受理。全caller上限は未受理。phase peak/RSS/public保証を導かない |
+| Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
+| Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
+| Host and timing | honest host/key/filesystemは前提。scheduler/fsync/EINTR/同一UID隔離/一般availabilityは別の未証明境界。有限LABと本番保証を分ける |
 
 ## maintenance tasks
 
-One Report2614; existing plan, CURRENT_GOAL/RESUME, append-only READ_LEDGER and historical W4_CHECK keys are retained. 最終16ファイルに対する`make docs`は通過しました。実行時の全入力hashと実ログは外部E/e-docs-validation-v1に保存しています。結果metadata更新後の確認はW4_CHECKのdocs_validation_currentに記録します。 このE統合cutの保存は`git commit --no-gpg-sign`と通常pushで行い、HEAD・remote一致・cleanの実結果を外部E-GIT-CLOSE-v1.jsonへ記録します。自己参照するcommit hashは文書内に作りません。保存後の最終判定はE-FINAL-CLOSE-v1.jsonです。
-
-Heavy commands remain serial with resource audit; Rust8GiB/-j1/testthreads1 and explicit no incremental/debug, Lean6GiB/--trust=0. No automatic cleanup, notifications, subagents, Oracle or hostshare. 週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
 
 ## non-promoted references
 
-実行範囲はLinux固定3cohort・native ST・既存Surface v0の通常代入・事前確保した1/2 activationです。確定期限切れのsource接続は既存budgeted singletonのactivation0を対象とし、tickはhostが実native handleへ供給します。一般のOW1分散継続、物理clock、OS/allocator/OOM保証、復旧、広いcallee/構築/関係/指定結果/patch catalog、非干渉、公開API/wire/grammarは未達です。外部絶対pathのTLS fixtureとserial testに依存し、fresh checkoutでの公開workflowとは扱いません。
+閉じたW4/W5/Astraと未採用W6 LABを区別する。focused Native/formal supplement/旧last fullはW6全体又はCanon採用ではない。旧失敗と全cut範囲はreport2617と凍結receiptへ保持。
 
-整形は最終40pathで`cargo fmt --all --check`を実行。Clippyの全feature構成は既存2警告のみ、通常default構成は既存32警告と一致しました。`-D warnings`は既存の`collapsible_if`と`single_element_loop`を明示的に除外した構成で通過し、厳密な全体警告ゼロとは扱いません。private通常buildの採用済みbaselineは既存E0599で停止するため、候補の12警告との完全比較はできません。追加表示6件の宣言は、通過する採用済みdefault baselineにも未使用警告として存在します。
+既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-All119 U/D/source approval/adoption fields, original Q/PT/SC/alpha and R01–R12 retain their individual scope. No final public/product completion, lifecycle promotion or new active sample root follows.
+最終読取は2026-10-29 18:33:01JSTで週次残量60%、指定10/30 Full reset使用0回。18:34:16JSTのOracleはPro5of5/Usage limit reached。停止中は再照会・reset自動使用を行わない。

@@ -1,0 +1,1302 @@
+{
+  "schema": "mirrorea-proof-first-w5-v1",
+  "status": "complete-lab-candidate",
+  "base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
+  "workroot": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery",
+  "owner_record": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/W5-OWNER-START-v1.json",
+  "startup_baseline": {
+    "command": [
+      "python3",
+      "/home/codex/dev/mir_poc_01/scripts/proof_first_durable_dispatch_check.py",
+      "test",
+      "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/baseline-durable-dispatch-v1"
+    ],
+    "cwd": "/home/codex/dev/mir_poc_01",
+    "started_at": "2026-10-14T05:31:05.948118+00:00",
+    "ended_at": "2026-10-14T05:31:07.745386+00:00",
+    "elapsed_seconds": 1.797277709003538,
+    "exit_code": 0,
+    "source_sha256": "9897d5846a7abf0cfdba471b078286f1146afe19eb1ed49ce18d75992733aacb",
+    "stdout_sha256": "b81e24166f837468e9fe156de47d925b212ef7fc0bf68259eca2f4701d8ff37b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scope": "Fresh rerun of unchanged historical W2 nonproduction process-crash experiment; not W5 recovery implementation"
+  },
+  "baseline_case_count": 18,
+  "limits": [
+    "finite registered LAB profiles only; source/Canon/policy/alpha unadopted",
+    "independent head/registration and all-writer lifetime plus honest host/OS/toolchain/hash are premises",
+    "whole-cohort restored DATA is quarantined; unknown cannot replay and old physical ACK cannot publish",
+    "no arbitrary live network continuation, fresh public import, GC, provider compensation or universal power-loss guarantee",
+    "W6/W7 and Plan250/I3-4 remain inactive"
+  ],
+  "next": "Requested W5 finite LAB candidate complete; stop. No W6/W7, new goal, source/Canon/policy/alpha adoption or Plan250/I3-4 activation.",
+  "complete": true,
+  "entry_theory_20261014": {
+    "at": "2026-10-14T06:11:47.074806+00:00",
+    "status": "conditional foundational evidence; whole-runtime W5 remains open",
+    "proof": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v3/RESULT.json",
+      "sha256": "c901b3a75ba13470374715ff3fe82ac9db767d1a99f0fa7d1c615dc8d9d74da9"
+    },
+    "modules": 3,
+    "owned_declarations": 437,
+    "false_controls": 10,
+    "physical": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/journal-fresh-v1/RESULT.json",
+      "sha256": "00a66cbdfc664ded2dd30793831d23b2e64c54f794692cdd7a704963d43ca3d1"
+    },
+    "physical_cases": 25,
+    "actual_sigkill_boundaries": 5,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v1.json",
+      "sha256": "c14884a34b5eceb0cd38f32cf93556e50b8f87c628f3077d4e7424595cd37a3b"
+    },
+    "syntax_inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/inventory-v2/RESULT.json",
+      "sha256": "6bd7fb99467496e85ec61a828ff286c5b9fd9c5599bb0fe2ff0a8bfe5701ccaf"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/RECOVERY-CORRESPONDENCE-v1.md",
+      "sha256": "46a7f7052a1d4154cb2ec9e9c6adacf165cb57f7a19ac90adc1faa97e17709fe"
+    },
+    "retained_red": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/journal-red-all-writer-v1/RESULT.json",
+      "sha256": "43094089fc1b3cd6172625f6046ebb7deef2723a5fb26c2d5bb10e88ef1aa832"
+    },
+    "limitations": [
+      "journal uses3test components, not complete Mir state",
+      "structural/injective fingerprint premise is not an unconditional SHA256 theorem",
+      "cooperative host and independently retained anchor; joint rollback falsifier retained",
+      "Rust/QUIC/source continuation/pending/prepared/fencing restoration is still open",
+      "no power-loss or hardware monotonicity claim"
+    ]
+  },
+  "writer_lifetime_20261014": {
+    "at": "2026-10-14T06:25:59.074982+00:00",
+    "proof": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v4/RESULT.json",
+      "sha256": "6f8a829a56f071b4af26afa5c6033b9267b7ba3d662598283c0f796cffd22c68"
+    },
+    "modules": 4,
+    "owned_declarations": 549,
+    "false_controls": 13,
+    "physical": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/lifetime-fresh-v1/RESULT.json",
+      "sha256": "703bfef1e6580ff5d7c748200c558a7f46bc80e08dfdef1a5d6b37fe21d4b020"
+    },
+    "physical_cases": 8,
+    "limits": [
+      "host-only lifetime mechanism; no native runtime admission integration",
+      "exclusive held lock and separately retained monotone epoch are host premises",
+      "SIGSTOP is confirmed with waitpid and does not permit takeover",
+      "leases are not authority; original source/M9/current-use closure still required"
+    ]
+  },
+  "f03_recovery_20261014": {
+    "at": "2026-10-14T06:50:36.380374+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v6/RESULT.json",
+      "sha256": "84811debdcb007dce0251ee8df223c9afd2d12c9d7476497fde86044b49cb49e"
+    },
+    "modules": 6,
+    "owned_declarations": 796,
+    "false_controls": 18,
+    "physical": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/f3-fresh-v1/RESULT.json",
+      "sha256": "178e1581db8abc16e76235584d8ef80c550fe1c9f2becb21c7f965dacdb7d50c"
+    },
+    "cases": 18,
+    "actual_sigkill_boundaries": 2,
+    "state_components": 21,
+    "schema": "typed acyclic object heap, exact type tags/fields and shared identity; pinned F0.3 model and Python AST schema",
+    "status": "finite F0.3 full Data recovery and host command boundary validated; native Rust/QUIC recovery OPEN",
+    "entry_closure": "21 mutators through lifetime plus journal; 4 current read queries; drive classified as composite and not exposed by adapter; old checkpoint/recover excluded",
+    "non_effects": [
+      "not an authentication mechanism or guest-facing host API",
+      "F0.3 has no physical external provider; external-unknown mechanism remains separate evidence",
+      "no W3/W4 native carrier rehydration yet",
+      "no power-loss/whole-host rollback guarantee",
+      "no Q18/Q20 adoption"
+    ],
+    "native_baseline": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/BASELINE.json",
+      "sha256": "2cd59d90a30a415d9c781488057c221a34aac3dc194c17b94c0a4b03868ddfae"
+    }
+  },
+  "quota_latest": {
+    "checked_at": "2026-10-18T19:24:33.465651+00:00",
+    "observed_at": "2026-10-18T19:24:19.072Z",
+    "weekly": {
+      "used_percent": 18.0,
+      "window_minutes": 10080,
+      "resets_at": 1792894456
+    },
+    "remaining_percent": 82.0
+  },
+  "docs_entry_failed": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-entry-v1/RESULT.json",
+    "sha256": "19b52b8efab4bc320fd8f7ff06e09de4692b9becc250d023b8adc34a6f6b494e"
+  },
+  "native_components_20261014": {
+    "at": "2026-10-14T07:22:02.637087+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v8/RESULT.json",
+      "sha256": "902cfceb4c51b188ae6abb394fc86c6acc266fd308f179308d2a6882394fe57b"
+    },
+    "modules": 8,
+    "owned_declarations": 856,
+    "false_controls": 21,
+    "native": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/source-graph-check-v1/RESULT.json",
+      "sha256": "7ab06b2e16009fa464e7d4404a86bcce2b6cf67ee8bc54264cf1f00d6aa9fe27"
+    },
+    "cases": 13,
+    "limits": [
+      "inert records only",
+      "capture requires all-writer quiescence; recheck is not a concurrent snapshot proof",
+      "no live source/owner/QUIC restoration",
+      "default feature build only at this checkpoint",
+      "native run receipts before pinning-runner upgrade have command/log but no full before/after source pins"
+    ]
+  },
+  "docs_checkpoint_failed": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-checkpoint-v2/RESULT.json",
+    "sha256": "6373c2730ec65095fd05137bbbcc926bcfca9b9a2efcd5a30ae899143ee46185"
+  },
+  "docs_template_failed": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-checkpoint-v3/RESULT.json",
+    "sha256": "e1da7c924b58fb6ef53a1867303e3cee2d19fd3093cc737a534e3c1033af165c"
+  },
+  "native_owner_recovery_20261014": {
+    "at": "2026-10-14T07:56:39.603999+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v11/RESULT.json",
+      "sha256": "cfa414570ec0d7f5c729482b46fe4eb2ded4c4f11bb10f9356cb2c27ff96d54e"
+    },
+    "modules": 9,
+    "owned_declarations": 925,
+    "false_controls": 22,
+    "native_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/native-owner-private-v1/RESULT.json",
+      "sha256": "2d7d1bac931c0b85e52b9342a29727bb346e5ac715e343679d3b41fe42885d7e"
+    },
+    "native_cases": 19,
+    "host": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-host-fresh-v1/RESULT.json",
+      "sha256": "ef5949aa409dee664e5576f4c34f1f4a1c0ca7791ba180109119e3fe843ea495"
+    },
+    "host_cases": 9,
+    "actual_sigkill_commit_boundaries": 2,
+    "orphan_native_worker_lifetime": true,
+    "retained_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/native-owner-binary-v2/PINS.json",
+      "sha256": "5764f99e71f518b2e29e78b53bc0d1f621b745dcc0dc1fd3c5fbe396f99c07e6"
+    },
+    "retirement_test_correction": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-host-red-retire-v1/RESULT.json",
+      "sha256": "2f1cb45b1775cc4c6584ec38c319338834089dd7e4899304c2a25669ce488780"
+    },
+    "full_regression_timeout": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/native-owner-full-private-v1/RESULT.json",
+      "sha256": "4440f5f1b700ae3325dc591a7b414f58437fa235ea679ce16e3731cf7b3937a6"
+    },
+    "current_mutable_workspace": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/workspace",
+    "limits": [
+      "closed owner-only native profile; no provider/transport/M9 issuer",
+      "host current head and lifetime select state; inherited fd is a trusted local test channel, not new guest authority",
+      "restored descriptor/control/held-use exactness checked; full native185root closure still open",
+      "no queued-work cancellation policy inferred from entity retirement",
+      "full private regression in progress; no final pass claimed"
+    ]
+  },
+  "docs_taskmap_failed": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-checkpoint-v4/RESULT.json",
+    "sha256": "1dbf90a50669a0e112e0e2ba905104095aa619ae92aca3d9a35dcbee8532da57"
+  },
+  "native_local_recovery_20261014": {
+    "at": "2026-10-14T08:34:16.754224+00:00",
+    "source": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/workspace",
+    "binary_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/native-local-binary-v2/PINS.json",
+      "sha256": "54c306782b33a67e167e0c127b13a10e9d789c90961b8da58fc13ed1e2c2f53c"
+    },
+    "private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/native-local-formatted-private-v1/RESULT.json",
+      "sha256": "d0ce9ed28c5c73ca9b4e08fa9e0ee482db5a6de60c8d7101a0ab033b766cc5de"
+    },
+    "default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/native-local-formatted-default-v1/RESULT.json",
+      "sha256": "51be8bad8b252b956dca88f5764618f803857160620805dfeff2bb146f709c41"
+    },
+    "rust_tests": {
+      "total": 41,
+      "new": 30,
+      "borrowed_fixture": 11
+    },
+    "production_builds": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/production-check-v1/RESULT.json",
+      "sha256": "28a31aab0b2b4bab9bfd024c126ea15408c3acb2013e39a86931af380dc6776b"
+    },
+    "host": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-local-host-fresh-v3/RESULT.json",
+      "sha256": "00aba77cd2baa8547993dd8fef5f33a1f1c9fa276b101363d8fdadea5300066d"
+    },
+    "host_tests": 7,
+    "real_sigkill_points": 2,
+    "retained_budget_failure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-local-budget-diagnostic-v1/DIAGNOSIS.json",
+      "sha256": "6bb97b2fb3d8d486fce373493f68faa4ab070667de781d4a85f96985cec74bb4"
+    },
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v5.json",
+      "sha256": "9567a51484bf245bf406017999c43db9ff516c5a1bc295afed031f050ed97e27"
+    },
+    "prior_owner_full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v1/native-owner-full-private-v2/RESULT.json",
+      "sha256": "42ee52142115164adad1be73e9f622f6f3a3d8dcb689a7d1f1cb75dd03458151"
+    },
+    "prior_owner_tests": 1439,
+    "docs_previous_cut": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-checkpoint-v5/RESULT.json",
+      "sha256": "9f51c4ccfdc9274e352ab2c24c34e50fb64a28ea449e7cfafc87ae734101f6bd"
+    },
+    "limits": [
+      "ordinary finite local profiles only",
+      "private cfg(test,unix) live reconstruction; production decode is inert",
+      "independent host head/lifetime and original compiled source are premises",
+      "no authentic M9 issuer/fabric/process/QUIC/W3-wide recovery closure",
+      "no power-loss or joint-host-rollback claim"
+    ]
+  },
+  "owner_pause_20261014": {
+    "at": "2026-10-14T08:55:26.107223+00:00",
+    "reason": "User explicitly requested a convenient stop after asking about progress; not quota exhaustion",
+    "user_request": "進捗は順調ですか？ 一旦切りの良いところで手を止めておいてください。",
+    "remaining_weekly_last_observed": {
+      "at": "2026-10-14T08:31:00Z",
+      "percent": 64
+    },
+    "source_pins": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/PAUSE-SOURCE-PINS-v1.json",
+      "sha256": "c13f2358c9a91dcb3dfba20c6ca34bf51e85426de08e6092292eb04cf6a0500d"
+    },
+    "default42": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/pause-formatted-default-v1/RESULT.json",
+      "sha256": "6102888cf7cf109d6e78b5a073d2ef7bd9b93d0306399caf060f6eac0d8a9c64"
+    },
+    "private42": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/pause-formatted-private-v1/RESULT.json",
+      "sha256": "b5d3396553316ad8d99a90630183c2a2f4bcd0e1a70863cc97787a48d810eb48"
+    },
+    "production_default_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/production-pause-v1/RESULT.json",
+      "sha256": "5bbe14f95263c3622b5530cf952c81bd40eba08056e55b72a94c77a9e5cee8b2"
+    },
+    "retained_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/native-pause-binary-v1/PINS.json",
+      "sha256": "d57f26a220f0eaa0480e8560ec7c54a8dc04312f4083e1f32e76827ae82394e2"
+    },
+    "inert_generation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v2/FABRIC-INERT-GENERATION-v2.json",
+      "sha256": "37de23c3d5061777928f10ecd04d79052aece4db5f792502956d0fdc1a1a9c16"
+    },
+    "docs_previous_full": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/docs-checkpoint-v6/RESULT.json",
+      "sha256": "8d4e002a619ffcefb635a979db59d936d00c49e972f8330db80dba86f703c52b"
+    },
+    "focused_docs_precursor": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/PAUSE-DOCS-FOCUSED-v1.json",
+      "sha256": "dca3cf0d83774902d188b4b7d0d6502daddb0a109abab5aba082642fed48c2dc"
+    },
+    "final_focused_docs_result": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/PAUSE-DOCS-FOCUSED-v3.json",
+    "scope": [
+      "Final42 focused tests in default/private;31 authored checks plus11 borrowed fixture tests",
+      "Latest whole-suite1439 remains older owner-only cut",
+      "Actual native host7 uses previously pinned local-binary-v2, not pause binary",
+      "Inert fabric intermediate has one real mailbox/receipt test; no native fabric restore",
+      "M9 publisher draft compiled but no behavior/integration test; generated closure full semantic review remains open",
+      "Whole process/QUIC/W3 recovery and119 final dispositions remain incomplete"
+    ],
+    "commit_push": "Uncommitted root documentation; no external write; native source unadopted"
+  },
+  "cleanup_20261016": {
+    "at": "2026-10-16T00:56:35.804663+00:00",
+    "status": "completed; W5 remains owner-paused/incomplete",
+    "only_removed": "/home/codex/dev/mir_poc_01/target",
+    "removed_allocated_bytes": 13302038528,
+    "available_bytes_after": 24003854336,
+    "receipts": {
+      "RESOURCES-BEFORE.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/RESOURCES-BEFORE.json",
+        "sha256": "889df75adc2b211d350ec082c6a7895a0c880485bc9dde353fb7fa93bc36f689"
+      },
+      "DELETE-PRECHECK.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/DELETE-PRECHECK.json",
+        "sha256": "f924cfe8f40dc82e7c8b7bfcd2436274ab82ebe9c1dbe4021ea610dac1147dd0"
+      },
+      "CLEANUP.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/CLEANUP.json",
+        "sha256": "77e20749aa1823c8fe6ec5125839b52e34861785acad925ff6801cb0c194bf6c"
+      },
+      "PRESERVATION-BEFORE.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/PRESERVATION-BEFORE.json",
+        "sha256": "4cb0b2a65f9168c4e7d65b6c3aa877fc2ac9dc18af41591ccaaa51f8ababcee2"
+      },
+      "PRESERVATION-AFTER.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/PRESERVATION-AFTER.json",
+        "sha256": "8815deca96ed85e2962a38670c2a1c030b34120d6116c43edcc5a16941056ac8"
+      },
+      "PRECHECK-REFUSAL.json": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/PRECHECK-REFUSAL.json",
+        "sha256": "2f95abee004affc262a5565fc16f2ad8e59f1d12351bf57b0e156b4a9d9cf3bb"
+      }
+    },
+    "source_files_matched": 6460,
+    "root_files_unchanged_during_cleanup": 6405,
+    "w5_evidence_files_unchanged": 15757,
+    "retained_workers_started": 5,
+    "focused_docs_result": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261016-v1/DOCS-FOCUSED-v2.json",
+    "next": "Wait for explicit resume. Recheck capacity/mount and rebuild Cargo cache only when needed; candidate native-v2/workspace and all historical cuts remain distinct.",
+    "not_rerun": "Rust/Lean/physical host semantic suites unchanged; this task verifies preservation and executable launch only.",
+    "focused_docs_precursor": "DOCS-FOCUSED-v1.json: duplicate project-status update declaration; corrected"
+  },
+  "resume_20261018": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/RESUME-START.json",
+    "sha256": "9afaa3ff522afdc64da105cbe7f019de4de132767a546a6f30fb2668439bd4ae",
+    "active_workspace": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/workspace",
+    "weekly_stop_remaining_percent": 60,
+    "cleanup_at_completion": true
+  },
+  "publisher_recovery_20261018": {
+    "at": "2026-10-18T12:42:29.214701+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v14/RESULT.json",
+      "sha256": "771f5c171a60a71becd36b14432f69bf8f354ef11f5b296049a438efda518424"
+    },
+    "modules": 10,
+    "owned_declarations": 966,
+    "false_controls": 25,
+    "rust_focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-focused-formatted-default-v1/RESULT.json",
+      "sha256": "cb2b7d21a437df0d1c9e80ecdfe62c42b0ba1b31fac5ddfd65b550ac1acd853d"
+    },
+    "rust_focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-focused-formatted-private-v1/RESULT.json",
+      "sha256": "d3d5c96f5c6e66876b0b24d57894ef5a2d63d3e306a851ee0d33ee04b80fb8a0"
+    },
+    "test_count": 46,
+    "new_publisher_tests": 4,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-production-v1/RESULT.json",
+      "sha256": "a6be926b51eb6ffa9baddcdadc1e32caf46f6455679520c436ffec2adbf27d15"
+    },
+    "accepted_source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-accepted-source-v1/MANIFEST.json",
+      "sha256": "83c2f122c365e646567bc72d179a4c96ddea48bde7bde56d5227d7c7470f76b8"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/REGISTERED-PUBLISHER-CORRESPONDENCE-v1.md",
+      "sha256": "952f1262ad24b51b01b543576a1613f03352afa9fb7ad61ccb6343109ae52fa2"
+    },
+    "next_correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/FABRIC-RECOVERY-CORRESPONDENCE-v1.md",
+      "sha256": "54b16eca1a36733fa0396e4cd1fe9b2f50a75fcb9c8c6b523df781eb73605cbd"
+    },
+    "retained_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-recovery-red-v1/RESULT.json",
+        "sha256": "217256dd6f195d667b5fb00f2086e7649860b4ca9be11eb1adfd2a46efce9db2"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/publisher-recovery-build-v1/RESULT.json",
+        "sha256": "0036e9244b3d3576683f8a6e2642f6383e16402c233c601349bf0753049de704"
+      }
+    ],
+    "limits": [
+      "same immutable registered binding is a host premise; string key alone is insufficient",
+      "private test host only; no publisher journal campaign yet",
+      "full fabric/process/QUIC/W3 and provider integration remain OPEN"
+    ]
+  },
+  "fabric_recovery_20261018": {
+    "at": "2026-10-18T13:19:26.557968+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v16/RESULT.json",
+      "sha256": "229d5478fb556f35989b9467530f043f484281dd4b8f6987f6137c78584dfcec"
+    },
+    "modules": 12,
+    "owned_declarations": 1225,
+    "false_controls": 31,
+    "rust_focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-formatted-default-v1/RESULT.json",
+      "sha256": "ad1b9c95060795b9d1a4ae0548f5c67c8b05eba8d37ed98380b56dcf764be398"
+    },
+    "rust_focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-formatted-private-v1/RESULT.json",
+      "sha256": "ebe1830216ce3879e0d06c0ff692df41e1cc1872705fc777f5b4e808c2f5310d"
+    },
+    "test_count": 57,
+    "new_fabric_tests": 6,
+    "wire_tests": 5,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-production-v1/RESULT.json",
+      "sha256": "6070626a217c48200407193e5a58a61d0c96395aea5d102d0c8ad6fb951c86f3"
+    },
+    "accepted_source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-accepted-source-v1/MANIFEST.json",
+      "sha256": "ce9c87f69c34af130a08cf13d6eeab307c2e5785c271ceb8389966c3c9071749"
+    },
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v6.json",
+      "sha256": "5293e77c7efec8441d79246ec8786a0c59a7c7b2736e0f07965516994854d39d"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/FABRIC-RECOVERY-CORRESPONDENCE-v1.md",
+      "sha256": "54b16eca1a36733fa0396e4cd1fe9b2f50a75fcb9c8c6b523df781eb73605cbd"
+    },
+    "wire_correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/INTERNED-WIRE-CORRESPONDENCE-v1.md",
+      "sha256": "62b92fe6064561e70eb4a54861123b9ae542b5eb51a10fee73b9fecdf302dd0f"
+    },
+    "next_host_correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/NATIVE-FABRIC-HOST-CORRESPONDENCE-v1.md",
+      "sha256": "30cd8ab33351e93efe14f8cf4ed4d85a97a211c64167a4a4de8733a205fdf588"
+    },
+    "retained_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-recovery-expanded-v1/RESULT.json",
+        "sha256": "688f9445c2ec6c5d72dff4821344dc6df301df5e98f8f4f05f85354714d0ccd6"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-source-history-fix-v1/RESULT.json",
+        "sha256": "5f6809a7dfcc89511c1330af55d5efd629b7a4d46613009c83ab5a1c1074d83d"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/fabric-interned-private-v1/RESULT.json",
+        "sha256": "704b4a45db4d3df27bc55ec3926b5b027a7f9355fa841effd7f810dfc082c760"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/interned-wire-depth-diagnostic-v1/RESULT.json",
+        "sha256": "e9b518707405a65ab2437bebfc8fd1c18743b6800ff945d86145ab8613355dd7"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/flat-wire-red-v1/RESULT.json",
+        "sha256": "2959609b940d3da5b6100a5d52d7e233c1b904832060a858ed7597180f54764f"
+      }
+    ],
+    "limits": [
+      "component source-cycle retains upper Invocation fields in place",
+      "OW1/live gates refuse whole save",
+      "same immutable registry binding/current head/host lifetime remain separate premises",
+      "no physical fabric journal campaign yet",
+      "full process/QUIC/W3 and provider integration remain OPEN"
+    ]
+  },
+  "latest_quota": {
+    "checked_at": "2026-10-18T20:24:59.469455+00:00",
+    "observed_at": "2026-10-18T20:24:47.459Z",
+    "weekly": {
+      "used_percent": 20.0,
+      "window_minutes": 10080,
+      "resets_at": 1792894456
+    },
+    "remaining_percent": 80.0,
+    "receipt": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/QUOTA-20261018T202459Z.json",
+      "sha256": "a43f5dec9b11c2be237260348f7bf12e811dc7331139cadcc97165dd537f8cb0"
+    },
+    "owner_stop_remaining_percent": 60
+  },
+  "native_fabric_host_20261018": {
+    "at": "2026-10-18T13:42:00.689591+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v17/RESULT.json",
+      "sha256": "ce85fa9e6082dfed86c353373af84da88bbdcaae7a997af8e761f28e6f93db8b"
+    },
+    "modules": 13,
+    "owned_declarations": 1272,
+    "false_controls": 34,
+    "rust_focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-gated-default-v1/RESULT.json",
+      "sha256": "4327dd50b733b02d2fb913a652b3512e1b54e3011c0e8ddcfa58ca8c5e3ba83b"
+    },
+    "rust_focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-gated-private-v1/RESULT.json",
+      "sha256": "cac640b343ffc7c923c189de3d1b1208768ed7c18992733274fbcd0a86279eb5"
+    },
+    "test_count": 61,
+    "native_worker_tests": 4,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-production-v2/RESULT.json",
+      "sha256": "55497d2c81c744b692e3cdb8936c631903609a96e02ba93808370da550af22f7"
+    },
+    "accepted_source_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-binary-v3/MANIFEST.json",
+      "sha256": "2ef78eb670bff47843ff24e0a6d95dfb449cc5c55219bb653dde4d983ae6e854"
+    },
+    "physical_host": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-fabric-host-fresh-v3/RESULT.json",
+      "sha256": "f1eb68d4116b8a0c133f04f25d4795d3f0fbcf564f9824e0db7864e13921c30c"
+    },
+    "host_test_count": 6,
+    "sigkill_boundaries": 2,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v7.json",
+      "sha256": "1d52ff2131cc77c7dde16b1c38be65dac6f674c8a12bb62093fe49afb433a917"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/NATIVE-FABRIC-HOST-CORRESPONDENCE-v2.md",
+      "sha256": "5b67c30b448a6f1e357ddab38058fb3d1aaeee1fb50902f59faeceb2fba7af71"
+    },
+    "next_reading": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/OW1-RECOVERY-READING-v2.md",
+      "sha256": "a874c7566e9a6a96241bb751bac086f90f05aa3f25d35ff1a592ebb6cfb7c028"
+    },
+    "retained_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-worker-red-v1/RESULT.json",
+        "sha256": "2701756b15c13ecc0d2ed138aa4a9e7fa8d2366a946402bee51b31ecba56c94d"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-worker-build-v1/RESULT.json",
+        "sha256": "e596cdfaf25accfc54ee9b01bd82abbba0cbc45066316cd9646165871a453a33"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-fabric-production-v1/RESULT.json",
+        "sha256": "4828de95de80db1c6a79b16dc14022e36ff49bfc85adc997224e5cfebe0536db"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-fabric-host-red-v1/RESULT.json",
+        "sha256": "7bd3e0cafb058971ebae1e5a877a9b03475f29595d8086b967666114a9a49295"
+      }
+    ],
+    "limits": [
+      "ordinary two-fabric/four-locus ST only; native commands have no external provider/network effects",
+      "all source/authority/static dependency binding remains host-controlled, not decoded authority",
+      "component source-cycle retains upper Invocation fields in place",
+      "OW1/live gates refuse whole save",
+      "whole process/QUIC/W3 and native external/prepared integration remain OPEN"
+    ],
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-native-fabric-v1/RESULT.json",
+      "sha256": "bcfe0d060e4acb312a1d0c85a3c27491bf2e2b6976f25419f044d3f2a5416870"
+    }
+  },
+  "ow1_recovery_20261018": {
+    "at": "2026-10-18T14:14:27.071090+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v18/RESULT.json",
+      "sha256": "5ceda419cd220ee4621eb5b309d9dbe14c0cb06bb8ab173c3c57a3ca974a4472"
+    },
+    "modules": 14,
+    "owned": 1371,
+    "false_controls": 37,
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-formatted-default-v1/RESULT.json",
+      "sha256": "1025225633570072a67da7cdedc29a14c33fbe66f418711fd99bbb18dfbe3d0a"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-formatted-private-v1/RESULT.json",
+      "sha256": "db297599ab071f0e3887d04316dce38772a4abfe092df9d6bfcb18ac6ef10bed"
+    },
+    "focused_each": 72,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-production-v1/RESULT.json",
+      "sha256": "66edb31b8433f23cceb6d1bf8a515abab209f40a20f2112721487c178c2c6c66"
+    },
+    "source_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/native-ow1-fabric-binary-v1/MANIFEST.json",
+      "sha256": "e08daa7ed36f282c3d1504d9f5a0782bb7ce33bc68b26ca1bd7a567e6643f6f5"
+    },
+    "physical_st": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-fabric-host-fresh-v4/RESULT.json",
+      "sha256": "f3c406c200acbc5b1db41719715bc7c04439f313e7c59103c9646f6b5d90557c"
+    },
+    "physical_ow1": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-ow1-fabric-host-fresh-v1/RESULT.json",
+      "sha256": "8ad076a91498ac3beb35ef79217135fa361e11b9ece3ab10fc2242c997d60c2e"
+    },
+    "physical_cases": 12,
+    "sigkills": 4,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v8.json",
+      "sha256": "af8e3555f02dd642070933416277492a02945fd5315e2950bf2e8977293299b6"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/OW1-RECOVERY-CORRESPONDENCE-v2.md",
+      "sha256": "9b465497ac43863f8a588d2dc264c736ed4ae4de10ba51563fa8c8fc1f9a3f08"
+    },
+    "next_source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/BASE-v1.json",
+      "sha256": "fb2bfbcb708b31a0b64a6af617e4ab153261b0e57c11f14e53d4e3293b1273ad"
+    },
+    "full_library": {
+      "status": "failed",
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-full-library-private-v1/RESULT.json",
+      "sha256": "52252fdd9f96799873a9a8ceaf4e66f50a0f1b01075af62d48544c3af4e557bf",
+      "passed": 1491,
+      "failed": 1,
+      "immutable_cut_unchanged": true,
+      "failure": "production_projection_module_does_not_depend_on_conformance_or_runtime_facades: m8_runtime_ in test-only sys3_projection/w5_restore_model.rs",
+      "followup": "native-v4 moves test-only helper outside projection tree and reruns the unchanged guard"
+    },
+    "retained_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/root-identity-red-v1/RESULT.json",
+        "sha256": "1e534c185cfc328f8d820e510081a7205b4c7d78b0d6f0c97219943c1882d946"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-recovery-red-v1/RESULT.json",
+        "sha256": "2afa1d0afa05a370942e4e9119ccb8cf100c4543c1a3cbfa61d5ca5e65576922"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-fabric-red-v1/RESULT.json",
+        "sha256": "1fea14a222ee7b3cb7aca6b4432be4474829d3c33bd1dafb535fb1ea8eba01df"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v3/ow1-native-worker-red-v1/RESULT.json",
+        "sha256": "02b8abad0403c1797f30c3c6cc225764a85e654fb2c6ce65d71e30387d2bb288"
+      }
+    ],
+    "limits": [
+      "native no-external-operation host profiles only",
+      "Invocation upper fields still in place in component test",
+      "live gates/process/QUIC/Flow/full W3 and external/prepared remain OPEN",
+      "not whole-W5 completion or adoption"
+    ],
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-ow1-v1/RESULT.json",
+      "sha256": "21f5f8e390836f64a42dac8b60e6642e5f0149ca7d78d0315034b49a2a7533ce",
+      "elapsed": 264.34729317505844,
+      "source_unchanged": true
+    }
+  },
+  "invocation_recovery_20261018": {
+    "at": "2026-10-18T14:52:01.982042+00:00",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v22/RESULT.json",
+      "sha256": "c786956804c4a158ef913664f5fd8d630be0744cbed2994a15c2422ff817fd94"
+    },
+    "modules": 16,
+    "owned": 1483,
+    "false_controls": 42,
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-formatted-default-v1/RESULT.json",
+      "sha256": "4eab3ea7d09948810fc6ba8659c0e9fe1463d768d91c12d7329883b6d534f6f1"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-formatted-private-v1/RESULT.json",
+      "sha256": "aed8ef931513c8d675051676133b2a3573f626140d26fe7e52dbf33ecd8de216"
+    },
+    "focused_each": 84,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-production-v1/RESULT.json",
+      "sha256": "9192d7343c6169fbb6c775a077c2f8831d12b0a1f09363594ff89c0480768133"
+    },
+    "source_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/native-invocation-binary-v1/MANIFEST.json",
+      "sha256": "e160a019c548c713c43371eb9e7e0579a34dacb1640c1b110cfa668bc62a3159"
+    },
+    "physical_st": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-fabric-host-fresh-v5/RESULT.json",
+      "sha256": "05226109ef635a410dd71139702114d4afc8ce9a89971b0f29fee92a8c0fd9ac"
+    },
+    "physical_ow1": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-ow1-fabric-host-fresh-v2/RESULT.json",
+      "sha256": "3cce62841a18ada2210ed5d94acab6fa77df58492782833c72966aca88e353d5"
+    },
+    "physical_invocation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-invocation-host-fresh-v1/RESULT.json",
+      "sha256": "99d57ff7d59b077143e45ec1a7de761259ddbf134f22382934d24c06351dd79a"
+    },
+    "physical_cases": 17,
+    "sigkills": 8,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v9.json",
+      "sha256": "1554f3ae9ab913d9bc3cca0793bbdaa7f330826b2dee7b68b7e3dbebd0a93d85"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/INVOCATION-RECOVERY-CORRESPONDENCE-v2.md",
+      "sha256": "a128aff08e10ddf1e8274de59e5a6e5140eb642b5d79558cd053e3b37dd6bac0"
+    },
+    "next_source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v5/BASE-v1.json",
+      "sha256": "a62f228584f6f14a16416c7ab763cf5825fe8cbaf7854dfa1567d86daa3c869a"
+    },
+    "full_library": {
+      "status": "passed",
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-full-library-private-v1/RESULT.json",
+      "sha256": "fbcc2f359c794b8138861fcc551daea6e513c44bdc30b696e390ff11c273312a",
+      "passed_tests": 1504,
+      "failed_tests": 0,
+      "elapsed_seconds": 1363.5731927920133,
+      "immutable_cut_unchanged": true,
+      "finished_at": "2026-10-18T15:08:30.436052+00:00"
+    },
+    "projection_layout_guard": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/projection-support-layout-v1/RESULT.json",
+      "sha256": "eb2ff308c7201eb5aa409e2497fd06be4f175fc2d0445e39cc7e8944ed1a41a8"
+    },
+    "retained_failures": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-recovery-red-v1/RESULT.json",
+        "sha256": "c19d0e664f6d54f21160cce1d0e401a5ad52e8f2724753001ccb28a81e88c1b9"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/invocation-stack-diagnostic-v1/RESULT.json",
+        "sha256": "49714d3b5729d2534589d38339858fb97c113315449d293b53cb1e8d93462400"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v4/native-invocation-red-v1/RESULT.json",
+        "sha256": "7a3a1e15f0c7277a5ab22c936d6b0a5e2643c67904945ff58f0b31a215f40557"
+      }
+    ],
+    "limits": [
+      "ordinary no-external-operation host profiles only",
+      "live gate/process/Flow/W3 and native external/prepared remain OPEN",
+      "not whole-W5 completion or adoption"
+    ],
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-invocation-v1/RESULT.json",
+      "sha256": "37c19094e75c403ad4c72b8b8421146c5b2c1793fb5d71a58429fff694ec82f3"
+    }
+  },
+  "gate_recovery_20261019": {
+    "at": "2026-10-18T15:22:00.629190+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v5/FROZEN-GATE-FABRIC-v1.json",
+      "sha256": "477e6faa695b14a27836b2c1cd8a7edf460b6e4dbd72e862f74306292126cd04"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v5/gate-fabric-focused-private-v1/RESULT.json",
+      "sha256": "a78a9822a328f01c34461c932f2496b607e37adf0f6d02da194c050b52d80a1d"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v5/gate-fabric-focused-default-v1/RESULT.json",
+      "sha256": "0fb8c9d3dacf22e1fe3706172312d16fc70446347a986d988127da9ff4178f0f"
+    },
+    "focused_each": 89,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v5/gate-production-v1/RESULT.json",
+      "sha256": "4a0a1d847fc7600bd287beebcf9771e722c84afb17966a4ce0b8a663cbf7267f"
+    },
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v24/RESULT.json",
+      "sha256": "d50d4de5280d709ed3e47715776f6bb288e7a73dbd7e1c7a9a59af5f72bad31a"
+    },
+    "modules": 18,
+    "owned": 1669,
+    "false_controls": 48,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v10.json",
+      "sha256": "ce774d5eb97222c18cbb8c008f424826f1030f33e97c6a15f0ccca101e9bc6e0"
+    },
+    "plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/PROCESS-RECOVERY-PLAN-v1.md",
+      "sha256": "8695096971a5bb3901815a7dff01e2e1dfc815604374de0f72ff96f78771fa43"
+    },
+    "gate_physical_journal": "OPEN",
+    "whole_process": "OPEN",
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-gate-v1/RESULT.json",
+      "sha256": "0d6878d45af6bf4303795d3afa6a681e3e40888331d4bffc1dc18703e8a4242f",
+      "status": "passed",
+      "elapsed_seconds": 254.85568071401212,
+      "source_unchanged": true
+    }
+  },
+  "process_recovery_20261019": {
+    "at": "2026-10-18T15:55:39.646466+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v6/FROZEN-PROCESS-v1.json",
+      "sha256": "4b0d2720623c3def5d10a9b3d210933f1721bcbb65a741f64dae72bb8f0d3d1b"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v6/process-formatted-private-v1/RESULT.json",
+      "sha256": "a62fbf09d4e2fdae7c161e97cc18358894998568438ac984a96ae675c8d03f70"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v6/process-formatted-default-v1/RESULT.json",
+      "sha256": "5d2b1c8f2d880a1b1183e874ee111fad7957abdbdfe00a0554c45338f323ffb6"
+    },
+    "fault_seam": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v6/process-formatted-seams-v1/RESULT.json",
+      "sha256": "03e675927b1976733b7a50841eda48ec19dd2e7af580c956a34b3210203815a1"
+    },
+    "focused_each": 94,
+    "fault_seam_count": 95,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v6/process-production-v1/RESULT.json",
+      "sha256": "eec3acc2a40099b237f4d12160ecc689f35c7f447478818d55ebb0d2fe3ae4b7"
+    },
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v11.json",
+      "sha256": "d87f23d3bca4a69693f612488cd74ca268938049fb62e29f031b0810502e15a9"
+    },
+    "registration_finding": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/PROCESS-REGISTRATION-FINDING-v1.md",
+      "sha256": "40cb6016be970871e42f4738a661d5bde45b38343a4b07e3dad1872540eb4ce0"
+    },
+    "journal_plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/NATIVE-PROCESS-JOURNAL-PLAN-v1.md",
+      "sha256": "a3ef597989161c6db787a814c63520b43e68290470a1ecbd6c1fafba6838d587"
+    },
+    "physical_journal": "OPEN",
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-process-v1/RESULT.json",
+      "sha256": "564625b2db120c9c2591e57f8759d5ff2ad790ed8675d42993a82bab7fe843cc",
+      "elapsed": 272.9510644261027,
+      "source_unchanged": true
+    },
+    "host_identity_finding": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/PROCESS-HOST-IDENTITY-FINDING-v1.md",
+      "sha256": "ef83b0c9c3a3ce391e6e3794f776bcb22a367102ec169460ad972a4101b361f9",
+      "status": "correction under test; not accepted physical profile"
+    }
+  },
+  "process_journal_20261019": {
+    "at": "2026-10-18T16:14:20.437655+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/FROZEN-PROCESS-HOST-v1.json",
+      "sha256": "c8f2eec7cc2e2009f4c7b3a7bb6fed09697d610d2c15e93e04920cb67e8f4275"
+    },
+    "binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/native-process-binary-v2/PIN.json",
+      "sha256": "367bdd6bfc2a516935438eff16a5824ee72421c8d963fbd49bef72e859f208f1"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/process-native-identity-focused-private-v1/RESULT.json",
+      "sha256": "0cd09c635f21d1f713c4253628d972f4e630fd5b700ed5e7d44df689e9d2b472"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/process-native-identity-focused-default-v1/RESULT.json",
+      "sha256": "b786533265de66e1e6f86186d6217013964f486f6875d0e4b8ad00a294df71d9"
+    },
+    "focused_each": 97,
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/process-production-v1/RESULT.json",
+      "sha256": "76054d1301452d45a19f94f5c380bc08814185602edc18308a0ee451b8246544"
+    },
+    "physical": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-process-host-fresh-v2/RESULT.json",
+      "sha256": "3dd611699748897502b7a1fe41d6d9b9c5fc40ba3994e363f969994178920e2a"
+    },
+    "physical_cases": 6,
+    "sigkill": 4,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v12.json",
+      "sha256": "87986a9c703eba62fea2a810efb79d886f396241592c301cbeb876c8310e3d71"
+    },
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v25/RESULT.json",
+      "sha256": "63216efa634b439693183db5b787e525aa7b96bbd004ae815f19f0badf031179"
+    },
+    "modules": 19,
+    "owned": 1712,
+    "false_controls": 51,
+    "flow_plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/FLOW-RECOVERY-PLAN-v1.md",
+      "sha256": "3dc16409f91222d47abb22b4c60b3273984faf77695fa85f350cb7513f1471c0"
+    },
+    "full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v7/process-full-library-private-v1/RESULT.json",
+      "sha256": "4e4a7c5d44b81d8b40b3c1421d69635dfcec7fabd2949c558e8302735741910e",
+      "status": "passed",
+      "passed": 1517,
+      "failed": 0,
+      "elapsed": 1366.8465738949599,
+      "immutable_cut_unchanged": true,
+      "finished_at": "2026-10-18T16:34:01.880333+00:00"
+    },
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-process-host-v1/RESULT.json",
+      "sha256": "5ed92520a30fcf2a6f8f536f9541a5a63aad2edd0257f5a8d94275c8eec03a8f",
+      "elapsed": 265.83912266395055,
+      "status": "passed",
+      "source_unchanged": true,
+      "finished_at": "2026-10-18T16:18:46.777314+00:00"
+    }
+  },
+  "flow_data_20261019": {
+    "at": "2026-10-18T16:40:26.248935+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/FROZEN-FLOW-DATA-v1.json",
+      "sha256": "3f2c85cfbe37292828fbb633cee921cca976cae95fd078591048fe3c009d2f60"
+    },
+    "binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/native-flow-binary-v1/PIN.json",
+      "sha256": "4ef39a044ac9a146e0b853dc8e8eb6bf81e64681d463264b6525842d9af12e5a"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/flow-focused-private-v1/RESULT.json",
+      "sha256": "7d92a79d9f66fc1d3016c626628baf11c0db0deaa345ec2e1f9fcc1f6a10e579"
+    },
+    "focused_seams": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/flow-focused-seams-v1/RESULT.json",
+      "sha256": "ade7a2f0d010dfcd0ded73884c68053bfa33eef80ad1467b4aba2d33b82ff18e"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/flow-focused-default-v1/RESULT.json",
+      "sha256": "54459cd06600111d94a997a8983efcaecefe0895beee8ff7e0b1f35925269a0e"
+    },
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/flow-production-v1/RESULT.json",
+      "sha256": "f0ca6b8945371d3d074441a8a378c767ffaa726ffa0cce43ad8af6abd7a2540a"
+    },
+    "network_cases": 11,
+    "dormant_process_decodes_per_configuration": 24,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v14.json",
+      "sha256": "a43b2bb3c33708f38fa6a0cfac171814152bc4ed1597bef666868d1604553db5"
+    },
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v27/RESULT.json",
+      "sha256": "74b831b8175ff9130c6db4b8db13ab63f5bf1f77c029f1dbd48fcafdd7bdd7de"
+    },
+    "modules": 20,
+    "owned": 1792,
+    "false_controls": 55,
+    "next_plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/ORIGINAL-RECOVERY-PLAN-v1.md",
+      "sha256": "6761352511c7b8e65595db78c0b02c8b500f16de15a51e17adc96b19e1236b5c"
+    },
+    "full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v8/flow-full-library-private-v1/RESULT.json",
+      "sha256": "47ee8cccaf64ad0731ff665b89047d046c9b1954e7a2b52da814476e6483171d",
+      "status": "passed",
+      "tests": 1529,
+      "elapsed": 1361.9504356570542,
+      "finished_at": "2026-10-18T17:00:58.678371+00:00",
+      "immutable_cut_unchanged": true
+    },
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-flow-v1/RESULT.json",
+      "sha256": "28889e6b121cf7931a401f38142403c9a57d8f458bf2c0bed0a51e7f1963d25c",
+      "status": "passed",
+      "elapsed": 262.75736891303677,
+      "source_unchanged": true,
+      "finished_at": "2026-10-18T16:44:49.535936+00:00"
+    }
+  },
+  "control_data_20261019": {
+    "at": "2026-10-18T17:38:42.234640+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/FROZEN-CONTROL-DATA-v1.json",
+      "sha256": "86c1eca293b18f070e91b19f420d4560f32a4d1642086dffa3629076155fe7f9"
+    },
+    "binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/native-control-binary-v1/PIN.json",
+      "sha256": "79f154f9ec276499904e7a5578b80da1c31180cc6a389e182d71a3e8f8cbe5f3"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/control-focused-private-v1/RESULT.json",
+      "sha256": "46c3061f5f1b8b7751fa700372e44ede77b82bcbc4e7e89b13633816edfed28d"
+    },
+    "focused_seams": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/control-focused-seams-v1/RESULT.json",
+      "sha256": "e0bb6f3061f38be02b8917c28764f3519b5dc6ae0610213cc21ccabf64f5f341"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/control-focused-default-v1/RESULT.json",
+      "sha256": "88cdbdc4b305e5965d9f18927baff13c4d39f1d2e869efa9801edad40f9a8f4d"
+    },
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/control-production-v1/RESULT.json",
+      "sha256": "6a18c49b8549d1bc2b52c366a23157be0068a53e823e493ea1f9da67bd491b2a"
+    },
+    "fresh_process_cases_per_configuration": 3,
+    "root_types": 6,
+    "root_fields": 74,
+    "backing_types": 51,
+    "backing_fields": 252,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v16.json",
+      "sha256": "5e81d90d1bff31ef611684b4203b1b52348c18dfb1a09b63a6e513da0ffb0ac4"
+    },
+    "finding": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/CONTROL-BLOB-FINDING-v1.md",
+      "sha256": "3a836575da981f315109abb87ceb62107f9928323a3acb954ce89dd43287f54c"
+    },
+    "generation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/GENERATION-REPRODUCIBILITY-v1.json",
+      "sha256": "8068486648d02ca44a8708f2c37c681f534c84e009b304c37ee729470ef4ba80"
+    },
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v28/RESULT.json",
+      "sha256": "cd2409ac9ce3fa2e2a9b1b46a7bee6b3e1d14e1ce7a92bdc05920a548a9a454a"
+    },
+    "modules": 21,
+    "owned": 1894,
+    "false_controls": 59,
+    "full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v9/control-full-library-private-v1/RESULT.json",
+      "sha256": "439b0a1b93328a4f8c2cf6a4de7d6ba17a67baed90c532aac8bb9f9598f9e9c9",
+      "status": "passed",
+      "tests": 1540,
+      "elapsed": 1432.5595179820666,
+      "finished_at": "2026-10-18T18:01:04.896466+00:00",
+      "immutable_cut_unchanged": true
+    },
+    "full_docs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-control-v1/RESULT.json",
+      "sha256": "44c722756fb1c458e4633a106286cc7ee276c3adf4a18129d69c7471b562ef18",
+      "status": "passed",
+      "elapsed": 265.7697286560433,
+      "source_unchanged": true
+    }
+  },
+  "original_source_work_20261019": {
+    "at": "2026-10-18T18:06:23.825005+00:00",
+    "status": "partial, active native-v10; not frozen or accepted as whole W5",
+    "initial_data": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/INITIAL-WHOLE-SOURCE-v1.json",
+      "sha256": "6478b970254897f4f9fb60fce7337f85692cf3cedd71252d898143e0a3d542a6"
+    },
+    "plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/WHOLE-SOURCE-PLAN-v1.md",
+      "sha256": "4af7c8a2f234c302dd46786b41ca89cded59f462064f31a3b0fdc70b36326078"
+    },
+    "next": "Exercise real nonempty retained histories/Reserved/occupied Flow before full-source journal and pre-IO integration."
+  },
+  "original_source_data_20261019": {
+    "at": "2026-10-18T18:53:19.985496+00:00",
+    "source": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/FROZEN-ORIGINAL-DATA-v1.json",
+      "sha256": "6a59a7d1a267d378c9165da7c8af5e8a09676b66bca07b5af2088c206f528f1c"
+    },
+    "binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/native-original-binary-v1/PIN.json",
+      "sha256": "ede41793fdfbe9ccdffa7040d8321c1ab0354b435da220c632d0cea127eb196b"
+    },
+    "focused_private": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/original-focused-private-v2/RESULT.json",
+      "sha256": "5d62ce521fc0a1075c493af5706d6d6c93ff3beab660ec8d8d1b49c3a8a6c6ac"
+    },
+    "focused_seams": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/original-focused-seams-v2/RESULT.json",
+      "sha256": "990b5fda57d6f8ebd7d500ff4c49e3238dce867ed9d8b822eb781f7383401445"
+    },
+    "focused_default": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/original-focused-default-v2/RESULT.json",
+      "sha256": "b3e101ad326a9da1b188d2ae15065d736ac04d87242837560e3b3047edc0f2ad"
+    },
+    "production": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/original-production-v2/RESULT.json",
+      "sha256": "073a1e60a6b16ab97c39fb492f58c4dcb8291ed6123e149a306ea400a2205e25"
+    },
+    "fresh_process_states": 3,
+    "roles_per_state": 3,
+    "root_fields": 11,
+    "additional_types": 25,
+    "additional_rows": 163,
+    "inventory": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v18.json",
+      "sha256": "91203f5a42d53c1f538aa1b95a0d9a2edbc0afce94fde285988570fb43fc1126"
+    },
+    "generation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/GENERATION-REPRODUCIBILITY-v1.json",
+      "sha256": "201767945e86c07059dc01fbaeeda438ffecd5a2b5dbda45f188f6731b58914a"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/WHOLE-SOURCE-CORRESPONDENCE-v1.md",
+      "sha256": "4fa46010d37821cd94688fa3432379eb8cee920412d5475c01c3304e0aa6c9c5"
+    },
+    "next_candidate_plan": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/WHOLE-COHORT-JOURNAL-PLAN-v1.md",
+      "sha256": "c0d7c69701e2d36a1b73fe59928a4064e9687dae29a7c9af7ee6756edc1218b9"
+    },
+    "formal_unchanged": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v28/RESULT.json",
+      "sha256": "cd2409ac9ce3fa2e2a9b1b46a7bee6b3e1d14e1ce7a92bdc05920a548a9a454a"
+    },
+    "full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v10/original-full-library-private-v1/RESULT.json",
+      "sha256": "b9be146a9546a05c950a43c210d95d8fe468711994d5802985c25c1fbacdc59f",
+      "status": "passed",
+      "tests": 1543,
+      "elapsed": 1930.4958453180734,
+      "finished_at": "2026-10-18T19:25:20.952570+00:00",
+      "immutable_cut_unchanged": true
+    },
+    "documentation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-original-v1/RESULT.json",
+      "sha256": "2f3255e97ecca4cfaead85ee9fdfb37beacbcfc69d2e48d166b1a2403e752c2d",
+      "status": "passed",
+      "source_unchanged": true
+    }
+  },
+  "cohort_candidate_20261019": {
+    "status": "corrected whole-cohort physical campaign and final1546full regression passed; original failed precursor retained",
+    "failed_precursor": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/native-cohort-fresh-v1/RESULT.json",
+      "sha256": "cf937e2898bd04d4aa665b1c26aaa43fc7b3216f2954f0e39ceb1b571d7033fa"
+    },
+    "corrected_prepared": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/native-cohort-prepared-v2/RESULT.json",
+      "sha256": "b20f87a8ef6d72d4cdb6db030a5c9c0d824fa4e5edeb941279c9b9b9ba16f5c0"
+    },
+    "finding": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/FRESH-COUNTER-FINDING-v1.md",
+      "sha256": "3e51f68df9a91e28bc21c315dfaedb4d1304c9ca5ace6fc7c5dafc9d37169ddd"
+    },
+    "current_binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-probe-binary-v3/PIN.json",
+      "sha256": "b5f9ad4051ed7583d157b3d24c2fe9735493c67068f8a4df606d5c6eac1d5d0f"
+    },
+    "current_campaign": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/native-cohort-fresh-v2/RESULT.json"
+  },
+  "whole_cohort_journal_20261019": {
+    "at": "2026-10-18T19:52:12.427964+00:00",
+    "status": "bounded actual whole-cohort component passed; included in final technical acceptance",
+    "binary": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/native-cohort-binary-v1/PIN.json",
+      "sha256": "b17c7a5a9366b08337a6c21cca92e0b6791be5285a55e3e035416e4f3b6f1dcf"
+    },
+    "actual_campaign": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/native-cohort-fresh-v2/RESULT.json",
+      "sha256": "96760edf7a53920f60a4ff1b260a00177fb5fe453017c3c903f969d4e89209ef"
+    },
+    "actual_crashes": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/native-cohort-fresh-v2/cases/ACTUAL-SIGKILL-RECEIPTS.json",
+      "sha256": "bc0f28c61304e9c0d0c4fbb5513e6039994c154428911274c96b30bdb33c545b"
+    },
+    "focused": {
+      "cohort-focused-private-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-focused-private-v2/RESULT.json",
+        "sha256": "2a24dc1f3ee11b7c763300860b9e584c99c159bb9908e74913b09416d8e594f1"
+      },
+      "cohort-focused-seams-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-focused-seams-v2/RESULT.json",
+        "sha256": "b46197b9bf79b2c5e1b0dd4bf5deb377b3332534529a138509ae2c0f53e38f4b"
+      },
+      "cohort-focused-default-v2": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-focused-default-v2/RESULT.json",
+        "sha256": "10fc4a744bb42760ce675cc94280d27d9b7a2eea2a08826d99fda10bc8532e4d"
+      },
+      "cohort-production-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-production-v1/RESULT.json",
+        "sha256": "a8ce09c0752a6b1aea476022937cda1972aff389885649d5f6d641b04063d3ca"
+      }
+    },
+    "full_regression": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/native-v11/cohort-full-library-private-v1/RESULT.json",
+      "sha256": "02c6987b1e10b0e0d2b04534cbf67a20c15fa6dc108cea877a6f8078b81f479a",
+      "status": "passed",
+      "tests": 1546
+    },
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/formal-fresh-v30/RESULT.json",
+      "sha256": "4a08d858c0eee67085cbf72770e769737f4ea30fc2a4bb2cb77dcff11c822a65"
+    },
+    "formal_modules": 23,
+    "formal_owned": 2166,
+    "false_controls": 68,
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/whole-source-host-v1/COHORT-CORRESPONDENCE-v1.md",
+      "sha256": "fa2d3cff520c056f159275b951ba8e48dd0b56a8a702e8403712d9f1c66a88d8"
+    },
+    "tests": 4,
+    "sigkill_cuts": 7,
+    "live_writers": 4,
+    "completed_prepared_reserved_profiles": 3,
+    "limits": [
+      "isolated complete DATA; no arbitrary live network continuation",
+      "Started stays unknown and cannot replay",
+      "old physical Prepared ACK never grants publication",
+      "host/current-head/source/registration premises remain explicit",
+      "W3 and119dispositions accepted separately at final technical cut; no live network recovery or public adoption"
+    ],
+    "manifest_objects": 8,
+    "bootstrap_scope": "FD3 install/setup I/O precedes this whole-run effect boundary; Started precedes all registered post-install protocol actions",
+    "documentation": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-cohort-v1/RESULT.json",
+      "sha256": "1dc898700d064f2bbd84ca9f15d84dc8aea578b903033a918245443054f00ba8"
+    }
+  },
+  "current_inventory": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/COMPONENT-INVENTORY-v21.json",
+    "sha256": "466108a191b3db435f0320d7d468c4a7163e6a36f52d38ee56774f052192f436"
+  },
+  "w3_session_20261019": {
+    "at": "2026-10-18T20:00:52.227328+00:00",
+    "status": "bounded actual Session recovery passed; included in final technical acceptance",
+    "formal": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/FORMAL-ACCEPTANCE-v1.json",
+      "sha256": "bd19ea3cbd21b0f159cbed31ba35fc6002660409b08b25335dc290441b745bff"
+    },
+    "native_build": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/native-build-v1/RESULT.json",
+      "sha256": "66c4fde97ca27f031855fea8ec75395b0945039871c90c5047a0ff128dff0759"
+    },
+    "actual_programs": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/all-programs-audit-v1/RESULT.json",
+      "sha256": "256ede0938d6b869c36e3d1d375f24bf1d297f12daa61d415e5e2c8608b92d4b"
+    },
+    "host": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/HOST-ACCEPTANCE-v1.json",
+      "sha256": "593bb8de6de02b18051e9f6bcfb8fe852e65de8a6e1a10a461fd0150d229ea9f"
+    },
+    "correspondence": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/CORRESPONDENCE-v1.md",
+      "sha256": "80012b61be2e0367d4b8e4cfe6314ae6ef2de4601ab71b329487f97f1bca0d19"
+    },
+    "codec_fields": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/w3-session-v1/SESSION-CODEC-FIELDS-v1.json",
+      "sha256": "f43752f43bdf8ea843a3d08d3d568fefd00c054059a10a5a7b0ac09a53386841"
+    },
+    "source_proofs": 93,
+    "native_modules": 94,
+    "formal_new_owned": 660,
+    "formal_dependency_owned": 10713,
+    "kernel_false_controls": 4,
+    "executable_false_controls": 8,
+    "host_categories": 5,
+    "sigkill": 4,
+    "orphan_lifetime": 1,
+    "actual_source_statements": 17,
+    "actual_ticks": 21,
+    "final_history_frames": 21,
+    "retained_superseded_programs": 3,
+    "limits": [
+      "independent protected head/registration and honest same-uid host are premises",
+      "fixed registered unbounded function dependencies; unsupported replacement is not serialized",
+      "pure volatile Session operations can be retried only when no durable receipt exists; restore itself executes no command",
+      "returned private observation is not public/current disclosure authority",
+      "all receipts retained; explicit finite budgets; no GC policy",
+      "not arbitrary fresh import, native QUIC continuation, Q18/Q20 or public adoption"
+    ]
+  },
+  "historical_entry_limits": [
+    "existing W2 reference only",
+    "no W5 full-component persistence yet",
+    "no power-loss or whole-host rollback guarantee"
+  ],
+  "history_rule": "Timestamped earlier fields preserve their original checkpoint evidence and limitations. Historical OPEN/running/not-whole-W5 wording is superseded only by the final technical_acceptance/current_inventory and final_close records; no old failure is converted to a pass.",
+  "technical_acceptance_20261019": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/final-acceptance-v1/RESULT.json",
+    "sha256": "d29bb5829395d282e47a08db7b741079fd0520f80b3a8aad5235888482cb6035"
+  },
+  "requirements_20261019": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/final-acceptance-v1/REQUIREMENT_DISPOSITIONS.json",
+    "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
+  },
+  "registry_dispositions_20261019": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/final-acceptance-v1/REGISTRY-DISPOSITIONS.json",
+    "sha256": "861febc0233576e33dd89b891da4fdbe7b3aec41471a16a2549bc41248d8fc87"
+  },
+  "cleanup_20261019": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/cleanup-20261019-v1/RESULT.json",
+    "sha256": "8f100e9bf3743dbd01e198d9de154aa8185210c6c41fbf7fbe2a9594f6d99438"
+  },
+  "completed_at": "2026-10-18T20:25:16.033431+00:00",
+  "docs_validation_final": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/docs-final-v1/RESULT.json",
+    "sha256": "4c6214d9705dd8cd9c68d009e313cd6cff84ad515a987755a19cf25251981c86"
+  },
+  "requirement_predecessor_snapshot": {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/final-acceptance-v1/RECONCILIATION-PROVENANCE.json",
+    "sha256": "f092a1af4b0998cf08b0a2c7ee01bdb145565c23f86d8fb20a80e404d9ec0070"
+  },
+  "final_close_path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/final-acceptance-v1/FINAL-CLOSE.json",
+  "docs_attachment_final_path": "/home/codex/.local/state/mirrorea-proof-first/w5-20261014-recovery/resume-20261018-v1/FINAL-DOCS-ATTACHMENT-v1.json"
+}

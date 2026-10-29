@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-10-14 01:04 JST
+最終更新: 2026-10-29 18:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process.
 Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
@@ -46,11 +46,11 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 
 ## 現在地
 
-W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 外部未採用40 Rust pathについて最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過。source→Core→生成owner→実QUIC→native結果→型付き観測と、同じ3プロセスでの次source activation・実M9更新を検証しました。証明はfresh205module/20989所有宣言/211偽命題対照、417commandです。
+W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-119行と元のQ/PT/SC/α条件には個別dispositionを追加し、U/D・承認区分を保持します。A/Bのnative動的構築とDの固定cohort QUICは別証拠です。一般の分散instance/relation/hot-plug、保存復旧、二実行の秘密保持、αの単一システム統合は未達です。採用済みRust/Lean、Canon、Plan250のpauseは変更しません。
+W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-このW4候補の検証・保存で停止し、後続packageは開始しません。 W5以降、新goal、採用、Plan250/I3-4は自動開始しません。証拠と再現条件はReport2614、`docs/proof-first/W4_CHECK.json`、`docs/proof-first/RESUME.md`、既存foundation planにあります。今回D/Eの独立reviewはownerの禁止に従い実施していません。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
 
 | 観点 | 状態 | 根拠 |
 |---|---|---|
@@ -108,7 +108,7 @@ Report2606; they are not current implementation tasks. No provider/session
 authority, hidden retry, exactly-once, public API or production guarantee follows.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2とI3-3はbounded evidenceとしてclosedした。official I3 lifecycle entry remains unaccepted、I3-3 accepted; owner pause leaves no active semantic milestone、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive、I5 implementation は inactiveである。
-I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。過去の最終検証後は約63GiB free。今回のM8 baseline後は約60GiB free、target4.4GiB。大きなvariant buildは測定付きstorage planまで保留し、小容量の証明・反例検査は継続する。
+I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。I3/M8当時の資源記録（63GiB/60GiB free、target4.4GiB）は履歴である。現在のW5資源とtarget整理は上の記録・Report2615を参照する。
 The retained bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir

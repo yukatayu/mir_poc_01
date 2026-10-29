@@ -1,18 +1,77 @@
 # samples_progress
 
-Last updated: 2026-10-14 01:04 JST
+Last updated: 2026-10-29 18:54 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
-W4 A–Eは技術検証・元義務照合・文書検査を終えた有限LAB候補です。 外部未採用40 Rust pathについて最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過。source→Core→生成owner→実QUIC→native結果→型付き観測と、同じ3プロセスでの次source activation・実M9更新を検証しました。証明はfresh205module/20989所有宣言/211偽命題対照、417commandです。
+W6「秘密を含む観測とdebug」は、ownerの停止指示に従い、検証済みの完全Backend初回形状を区切りに一時停止しています。W6全体は未完了で、再開指示までは研究・実装を進めません。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-119行と元のQ/PT/SC/α条件には個別dispositionを追加し、U/D・承認区分を保持します。A/Bのnative動的構築とDの固定cohort QUICは別証拠です。一般の分散instance/relation/hot-plug、保存復旧、二実行の秘密保持、αの単一システム統合は未達です。採用済みRust/Lean、Canon、Plan250のpauseは変更しません。
+W6はowner指示で一時停止中・未完了。Native63全1750/45独立reader/全履歴、workspace他1190/7doctestを受理。固定275formal（41526宣言/1995反例）と別cutの寿命・型補完・再取得・費用を検証。実3world/各2cold reader、registry27組/36費用区間、30process/1116prefixを受理。全90費用式へ復元形状を接続。初回Flow/slot・元source・受信DATA・Bootstrap/Parts/Process/Fabricに続き完全Backendを554certificate宣言/16反例・実16case/2コード改変/9画像で結合。Backend上限N37932/S3925183は両snapshotと四authorityを保持。完全初回画像、共通public初期履歴/cache・全caller保持/物理資源/進行、他profile、最終docs/Oracleは未完了。
 
-このW4候補の検証・保存で停止し、後続packageは開始しません。 W5以降、新goal、採用、Plan250/I3-4は自動開始しません。証拠と再現条件はReport2614、`docs/proof-first/W4_CHECK.json`、`docs/proof-first/RESUME.md`、既存foundation planにあります。今回D/Eの独立reviewはownerの禁止に従い実施していません。週間残量は2026-10-13T15:15:26.908Zの実記録で79%でした。確認時刻は2026-10-13T15:15:43.358976+00:00、次の確認は2026-10-13T16:15:43.358976+00:00以降です。停止目安は60%程度です。
+2026-10-29の最新owner指示は、切りのよいところで停止し、研究データを保持して再生成可能なtarget等を一時整理すること。検証済みarchiveへCargo cacheを退避し、研究ソース・証明・実行原本・ログを保持しました。指定Full resetは未使用のまま、停止中の自動使用・quota監視を停止します。以前の自律継続/reset条件はこのpause中は実行しません。W7/Canon/Plan250-I3-4/未依頼の外部write/通知/共有folderは開始しません。追加owner指示による、この停止記録のcommit/pushだけを行います。
 
-| Current W4 evidence | Reproduction / exact record | Status and boundary |
+閉じたAstraの証拠はReport2616/W6_CHECK、現在の実装証拠はReport2617/W6_CHECK.implementationで区別する。下表は現在の受理状態。旧Native21/61、旧223formal、各部分実行と失敗cutはReport2617と凍結receiptに保持し、現在の待機queueとして再掲しない。active sample rootsは不変で、external LAB evidenceをpublic workflow-readyと扱わない。
+
+| Current W6 finite LAB evidence | Reproduction / receipt | Boundary |
 |---|---|---|
-| Final source/private QUIC candidate | W4_CHECK → e_integration_20261013; RESUME exact overlay command and external40-path pins | 最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過; finite local research evidence, not adopted source or public workflow |
+| Paused build cache | pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json | 5177fileをexact archiveへ一時退避。証拠binary281本/研究原本を保持。再build前のrestore --confirmはRESUME参照。受理済み試験の再実行ではない |
+| Current native regression | NATIVE63-FULL1750-ACCEPTANCE-v1; native-full1750-v1/PIN | 全1750/0failed/0ignored、6575source/実binary/7488raw/21plain/53stageを受理。再起動不要。Native59/60/62の旧失敗は保持 |
+| Current independent readers | NATIVE63-FULL1750-READER-QUEUE-MANIFEST-v1 / RESULT-v1 | 全45readerを現原本へ新規実行・独立照合済み。旧prefix成功を流用しない |
+| Workspace | NATIVE63-WORKSPACE-PARTITION-ACCEPTANCE-v1 | 14package/148artifact/32example/5CLI、他1190試験/7doctestを受理。unique2940=1750+1190。追加単独21を二重加算しない |
+| General and finite formal evidence | COMBINED-FORMAL-ACCEPTANCE-v2 | 275module/237一般module/38読戻し、41526宣言/1995反例、fresh/replay各2309commandを受理。後続moduleは下の別cut |
+| Passive capture / current release | 現45readerのpassive_preimages/boundaries/budget/journal/registration/initial_history | 実producerと全応答/支払/旧履歴を現原本へ照合。一般host timing/資源保証は別 |
+| Historical scalar / DAG / lifecycle | 現45readerのhistorical_profile4種/historical_dag/graph_components/scalar_restart/successor_data | off/on/drop/slowと復元/継続の有限経路。全scope/任意sourceの保証へ拡大しない |
+| Catalog / private input / erasure | 現45readerのcatalog_baseline/lifecycle/sender/erasure | 独立private入力感度、不可視入力の対照、current/部分送信/unknown、受動消去を保持。物理timingは別 |
+| W5 / original custody / historical Flow | 現45readerのw5_prefix/historical_w5_prefix/attestation/guard/shared/sender/reload/distributed_prefix/historical_flow | 保存DATAと現registry/元custodyを分離。fresh readerの認証、spent/history/失効/再参加を検査 |
+| Distributed service / loss / sender / reload | 現45readerのdistributed_attestation/service/reload/sender/loss | 3roleの22node/12edge、loss/absence範囲、送信途中/外部unknownを現原本へ照合。汎用network進行保証は別 |
+| Active same-owner reconnect | 現45readerのactive_profiles/active_worlds/owned_reconnect/owned_reconnect_failures/reconnect_append | 独立control権限、実Source/step、旧spent/history、失敗と15物理append cutを保持 |
+| Full response histories | 現45readerのdistributed_history/selected_history | 全応答prefix・future authority・旧knowledgeの有限実行対応を受理。最終要件別の一般条件照合は残る |
+| Actual M9 / bounded input | 現45readerのm9_exact_authority/m9_genuine_mutators/bounded_acquisition | 真のauthority更新と独立current、複製前入力検査を照合。transportを権限にしない |
+| Current source / outward / costs | native63-semantic-source-v2; owning-feature-composition-v1 | 33source/23対応/153出力、現9画像90費用式を保持。全費用式を再構築しない |
+| Isolated global Layout measurement | NATIVE-REGISTRY-LIVE63-ACCEPTANCE-v1 | 45allocator校正、実3world/各2cold reader、45registry/27組/36区間、87原本、30process/1116prefixを受理。最大観測prefixは予約263120089byte/要求累計7325990566byte。RSS/terminal peak/共通上限ではない。別binary全1790回帰は未実行 |
+| Allocation lifetime / stable snapshot / scratch | LIVE-ALLOCATION-LIFETIME-JOIN-v1; ALLOCATION-STABLE-SNAPSHOT-JOIN-v1; SCOPED-SCRATCH-JOIN-v1 | 349宣言47反例、初期/返却/並行保持と置換L+C、stable cutを区別。全callerへの接続は未完 |
+| Public registry contribution | PUBLIC-REGISTRY-ENVELOPE-JOIN-v1 | 固定Source4/3役割の共通6費用。119宣言13関連反例/90式、45registry/27組/36実測。任意cache/画像依存費用は別 |
+| Owning Plan envelope | OWNING-PLAN-ENVELOPE-JOIN-v1 | 任意構造にR+D×C。77宣言14反例、現153計画/306適用を両回検証。3504定義は数値転記。D≤10は次rowでsourceへ結合。C/Rのpublic条件は未受理 |
+| Source type rank | OWNING-TYPE-RANK-JOIN-v1 | 全variantの603状態からD≤10、69一般宣言/10具体宣言/13反例を両回検証。47source/153計画へ対応。C/R・全caller資源は別 |
+| Public Record/atom contribution | RECORD-PUBLIC-ENVELOPE-JOIN-v1 / ATOM-PUBLIC-ENVELOPE-JOIN-v1 | 個別152/123宣言（結合271）/28反例、現9画像153計画。wireとtyped/captured形状を区別し、固定費用・再capture・preface2回・全Map keyを保持。public入力/全caller資源は未受理 |
+| Generic structural public mass | STRUCTURAL-PUBLIC-ENVELOPE-JOIN-v1 | 190一般/10型証明/286数値・14反例を両回検証。型高さ23、885分析root/32791再帰呼出し。事前public S/Nとcustom/全caller資源は別 |
+| Custom outer public mass | OUTER-PUBLIC-ENVELOPE-JOIN-v1 | Bootstrap/Gate/local Record/Treeを97一般宣言/450数値・16反例で両回検証。9画像の条件付き証拠。完全画像合成は下記Whole rowへ接続。共通public初期条件・全caller資源は別 |
+| Expanded Flow public mass | FLOW-PUBLIC-ENVELOPE-JOIN-v1 | 展開Flow/slotを124一般宣言/129数値・15反例で両回検証。9画像/12Flowの条件付き証拠。完全画像合成は下記Whole rowへ接続。共通public初期条件・全caller資源は別 |
+| Whole-image conditional public mass | WHOLE-PUBLIC-ENVELOPE-JOIN-v1 | 選択profileの51項/全90費用式を315一般module宣言/639数値・16反例で両回検証。9画像の条件付き証拠。共通public初期条件/保存cache/全caller資源は未完 |
+| Outer typed completion | TYPED-COMPLETION-ENVELOPE-JOIN-v1 | 外側151型/180variantの補完後形状を152宣言/16反例・実Rust945入力/14拒否例で照合。完全入力BからN≤57B/S≤1025B。datatype1試験、内部型変換は次row。初回capture/物理資源は別 |
+| Inner raw typed completion | INNER-TYPED-COMPLETION-JOIN-v1 | 内部140型/226variantの補完後形状を53宣言/関連11反例・実Rust2636入力/555拒否で照合。9画像1174原文を再抽出。datatype17試験、初回capture/復元後再取得/物理資源は別 |
+| Record native recapture shape | RECORD-RECAPTURE-SHAPE-JOIN-v1 | 99実装・172宣言/14反例と実Rust1429入力/5693出力、現9画像1174原文を照合。並べ替え2件も形状保存。datatype10試験であり初回capture/別DTO/全caller物理資源は別 |
+| DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
+| Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
+| Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Initial Backend shape | INITIAL-BACKEND-SHAPE-JOIN-v1 | 554certificate宣言/16反例、実16case/2コード改変/9画像。Backend N37932/S3925183、両snapshot/四authority保持。全画像・物理資源は別 |
+| Initial Fabric shape | INITIAL-FABRIC-SHAPE-JOIN-v1 | 774certificate宣言/16反例、実18初回画像・最終15成功3拒否/2コード改変/9画像。FabricBundle N479731+BackendN/S81488704+BackendS。Backend/全画像・物理資源は別 |
+| Initial Process shape | INITIAL-PROCESS-SHAPE-JOIN-v1 | 456certificate宣言/16反例、実18case/2コード改変/9画像。ProcessBundle N418076+FabricN/S52355055+FabricS。Fabric/全画像・物理資源は別 |
+| Initial complete raw returns | INITIAL-RAW-SHAPE-JOIN-v2 | 450certificate宣言/16反例、実24case/2コード改変/9画像。Parts N152282/S46566064へ結合。全画像・物理資源は別 |
+| Initial Parts shell | INITIAL-PARTS-SHAPE-JOIN-v1 | 2返却Treeへ引数付き、129一般宣言/16反例、実13case/2コード改変/9画像。内部返却上限・全画像・物理資源は別 |
+| Initial Bootstrap shape | INITIAL-BOOTSTRAP-SHAPE-JOIN-v1 | N26015/S39844716、58一般宣言/16反例、実46case/2コード改変/9画像。全画像・物理資源は別 |
+| Initial received DATA | INITIAL-RECEIVED-SHAPE-JOIN-v1 | N120/S921226とgraphの累積費用。95宣言/16反例、実57case/2コード改変。全画像/物理資源は別 |
+| Exact initial Source4 cost | INITIAL-SOURCE-COST-JOIN-v1 | 同じ費用式をC301090601/R3281176862要求byteへ精密化。62宣言/14反例、既存32case/9画像の再照合。新Native実行なし、物理予約は別 |
+| Initial native source declaration | INITIAL-SOURCE-SHAPE-JOIN-v1 | Source4からN202/S492333と既存費用式へ接続。71宣言/14反例、実32ケース/2コード改変、後段拒否前Tree1件。完全初回画像/物理予約は別 |
+| Initial Flow slot Tree | NATIVE-SLOTS-SHAPE-JOIN-v1 | N1030/S4213001とnative capture式へ接続。42宣言/14反例、helper16入力/後段encode拒否4例、source23/実コード3改変拒否。物理予約は別 |
+| Initial native Flow shape | NATIVE-FLOW-CAPTURE-SHAPE-JOIN-v1 | source事前条件からN737/S3345977。84宣言/14反例、serde25入力、原本9画像12Flow、source22/reader10改変拒否。完全画像/物理資源は別 |
+| Restored Flow expansion | FLOW-EXPANSION-JOIN-v1 | 150宣言/16反例、codec32入力/原本9画像、実11型/17分岐の補完61正/16拒否。source18/compiled6/counter60改変拒否。初回native capture/物理資源は別 |
+| Whole recapture shape | WHOLE-RECAPTURE-SHAPE-JOIN-v2 | 62宣言/14反例、58source/10完全関数。実31試験/1123対/後段拒否2、現3world/9画像/18cold prefix。source12/reader11改変拒否。初回capture/全caller資源は別 |
+| Source-family / retained-state envelopes | SOURCE-PROFILE-ENVELOPE-JOIN-v3; SELECTED-NATIVE-ENVELOPE-JOIN-v1; existing resource receipts | 固定source/役割、retained graph/rows、typed/Record/Flow費用は既存証拠を再利用。初期履歴・全caller・非割当work/host/physical fundingへ暗黙に拡張しない |
+| Whole integration | W6_CHECK.implementation.unverified_checks; W6_CHECK.implementation.unverified_checks | owner許可のW6を継続中。共通public入力/全caller保持・work/host/物理資源/他profile/最終要件/docs/Oracleが残る。W7/Canon/Plan250-I3-4は開始しない |
+
+| Retained W5 evidence | Exact record / command | Boundary |
+|---|---|---|
+| Generic head/codec/manifest/receipt/lifetime/cohort proof | W5_CHECK `technical_acceptance_20261019` → formal-fresh-v30/RESULT.json |23modules/2166owned/68false controls; explicit conditional model, not an OS/Rust theorem |
+| Complete native inventory and regression | COMPONENT-INVENTORY-v21.json; native-v11/cohort-full-library-private-v1; `mir-runtime-tests --test-threads=1` |1546pass/0fail; initial185rows classified as129live roots and56legacy cut fields excluded from archive admission; recursive fields separately inventoried |
+| Native real journal/restart | native-final-hosts-v1/RESULT.json; six copied `test_native_*host.py` campaigns |39tests on the same final binary, real currentness/receipt/fault paths; exact host profile per receipt |
+| Whole native cohort | whole-source-host-v1/native-cohort-fresh-v2; `python3 test_native_cohort_host.py -v` |4tests/3normal profiles/7SIGKILL; complete parent+3roles/8objects; unknown stays unknown and physical grants are not revived |
+| Actual W3 current/history Session | w3-session-v1/HOST-ACCEPTANCE-v1.json and FORMAL-ACCEPTANCE-v1.json |93formal/94native modules;5host categories,4SIGKILL+orphan; actual parser/source/continuation/revocation, no physical external provider |
+| Source and evidence preservation | cleanup-20261019-v1/RESULT.json |Target cache only removed;6405repo source/docs and88821experimental files unchanged across deletion; next Cargo run rebuilds |
+
+| Retained W4 evidence | Reproduction / exact record | Status and boundary |
+|---|---|---|
+| Final source/private QUIC candidate | W4_CHECK → e_integration_20261013; Report2614 and preserved W4 source/overlay receipts with external40-path pins | 最終9command、workspace2630・private通常1420・default通常1022・doc1件を通過; finite local research evidence, not adopted source or public workflow |
 | Fresh general proof cone | D/declared-observer-fresh205-v1, indexed from W4_CHECK |205modules/20989owned/211false/417commands; explicit model/TCB premises |
 | I3 regression | E/I3-3-REGRESSION-MAP-v2.json |20families/9order boundaries/67 distinct passed names; evidence classes retained, no I3-4/5/6 acceptance |
 | Required source/corpus/119 | E source/corpus/registry receipts and repo REQUIREMENT_DISPOSITIONS |119 individual boundaries and2920 corpus dispositions; generated-record dispositions are not full semantic reads |
@@ -501,3 +560,19 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 2026-10-06に再生成可能なCargo増分キャッシュtarget/debug/incrementalだけを確認付きで削除し、空きを約5.7GBから約12GBへ戻しました。追跡6403ファイル・現在の外部source38・3manifestの計6444hash一致を確認。研究source・実験・証明・検証ログ・receipt・browser状態は保持しています。詳細はINCREMENTAL-CLEANUP-20261006-v1.json。後続buildで空きは変動します。
 
 2026-10-06の全体回帰後、再生成されたCargo増分キャッシュだけを再度確認付きで整理しました。INCREMENTAL-CLEANUP-20261006-v2.jsonに資源auditと計6444hashの保持結果を保存しています。研究source・実験・証明・ログ・receipt・browser状態を保持。後続buildで空きは変動します。
+
+Retained first graph DATA component evidence: native-first-graph-controls-v1 / NATIVE-FIRST-GRAPH-CAPTURE-VERIFICATION-v1。実6worlds/158原本、容量4/2/0、24origin再計算、採取前後全field一致、25Native負例/72reader改変拒否、既存回帰11。graph応答ではなくexternal LAB component evidence。active sample roots不変。
+
+2026-10-22 15:45 JST: Native31 source/owner distributed DATA readerは実5world試験中、workflow-readyではない。前Native30重点受理とNative21全1678を維持。
+
+現workspace inventoryはWORKSPACE14-TARGET-INVENTORY-v3。14package/148test target/13doctest/32example、extra featureを確認したが実行は未完。旧生成物整理は容量gateの準備でありsample acceptanceではない。
+
+W5構造資源readback9画像/27controlsは保持。Native56全1729はstack overflowで失敗、Native57の修正を検証中。45reader/workspace148target/13doctestは最終cutの全回帰後。
+
+Current resource evidence: DISTRIBUTED-QUERY-WORK-ENVELOPE-v1（実3worlds/24容量負例）、FORMAL-STAGE-RESOURCE-VERIFICATION-v1（150owned declarations/8false fresh・replay）。新Native sample又はwhole-service workflow完了ではない。
+
+Current M9/workspace evidence: M9-COMPARISON-WORK-ENVELOPE-v1、FORMAL-BORROWED-COMPARISON-VERIFICATION-v1、workspace-supervisor-calibration-v1。実9role floorと監視手順の校正であり、新Native sample又はworkspace workflow完了ではない。
+
+W5 resource evidence: W5-PROCESS-STRUCTURE-v1は9実保存画像のruntime構造を独立検査。新sample/全restore資源workflow受理ではない。全docsの6410入力固定cutの通過とcurrent Native回帰を区別する。
+
+Borrowed-root preparation: 9実W5画像の部品試験とLean補足のみ。Native本体への適用/回帰、新sample workflow、全資源会計は未受理。
