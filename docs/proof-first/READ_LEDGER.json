@@ -102741,5 +102741,75 @@
     "range": "complete general proof/source/native readback and controls",
     "role": "W6 CaptureGraph backing/root clone/unique and owner quota condition",
     "status": "conditional LAB;remainingcallee/failedprefix/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/GUARD-CAPTURE-LIFETIMES-JOIN-v1.json",
+    "sha256": "dd0874cbd4f3fb8b62641c9398a8e48ffffbcc6211ca3114d21bba32a3b35300",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/GUARD-CAPTURE-CHECKPOINT-v1.json",
+    "sha256": "1cdc2ff68c0be5ffa3c06c7242d8d2a90fa976baab70a8fc02d1319cb67652a1",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard-capture-lifetimes-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "66c82295d0873403b6d858cc9ccb614ad63087146dad8ad78aa1df0848a3c944",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard-capture-lifetimes-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "a9e06a4d99530401ca1b405f40927c9a278a23ca0afea23cbb8ababfa83a3088",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard-capture-lifetimes-v1/NATIVE-VERIFICATION-v2.json",
+    "sha256": "977dc9c871daa2b27af85572cf687acbd299c483972858629dcfcf35bf852b1f",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard-capture-lifetimes-v1/STORAGE-DEVIATION-v1.json",
+    "sha256": "ada1fb23ac250bdb977c14afe7dbbd420bd82746e7b49fe224916dfe15b19dc0",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6GuardCapture_v2.lean",
+    "sha256": "0653d83b6248191528799a1f15caaff3d7edc3984e09a0571b261b32113c9cee",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard_capture_audit_v1.py",
+    "sha256": "5035f4db0b3d37da2d4e32d751928f0864caba2ab372a9bc7d8902ac3cb1f458",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/guard_capture_reader_v1.py",
+    "sha256": "698ef6227014cd468ca1e8895d838576b9bca2e83912624a3a17426d57e2fa50",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_guard_capture_v1.py",
+    "sha256": "07adf82b15b8019918fa57ba322e5ff406986f149b76523b6c176fc06b91dd5e",
+    "range": "complete general proof/source/native lifetime readback and controls",
+    "role": "W6 discarded guard Tree/native/registry ownership and failed prefix",
+    "status": "conditional LAB;callee construction peak/allcaller physical/W6 open"
   }
 ]

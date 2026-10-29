@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：再開・CaptureGraph保持量を接続
+# W6 — 秘密を含む観測とdebug：再開・比較用一時領域の寿命を接続
 
 W6「秘密を含む観測とdebug」は、2026-10-29 20:00JSTのowner指示で再開しました。研究原本と検証済みarchiveを保持し、容量を確認して必要なcacheだけを復元します。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。258関数の成功時Tree容量に続き、31capture関数の参照追加とCaptureGraph保持量・root複製・重複検査を191宣言/8反例と実型28ケースへ接続。残るcallee保持/peak・失敗prefix、画像全体履歴/共通入力、全caller物理資源/進行、他profile、最終docs/Oracleは未完了。
+W6は再開・未完了。Native63全1750/45独立reader、workspace他1190/7doctest、固定275formal、実3world/各2cold readerと30process/1116prefixを保持。Tree返却/CaptureGraph保持に続き、3関数4か所の比較用一時Treeとsnapshot/registryの寿命を59宣言/12反例・実型35ケースへ接続。残るcallee生成peak/全caller寿命、画像全体履歴/共通入力、物理資源/進行、他profile、最終docs/Oracleは未完了。
 
 最新owner指示はW6の継続とストレージ残量への注意です。主担当一人で可逆な有限LABを進め、区切りごとのcommit/pushを行います。研究ソース・証明・原本・ログとexact archiveを保持し、必要なcacheだけを復元します。W7/Canon採用/Plan250-I3-4/未依頼の外部write・通知・共有folderは開始しません。指定10/30 Full resetは01:45JSTに1回適用済みです。QUOTA-OWNER-POLICY-v6の使用後35%停止条件を維持し、追加reset・購入は行いません。
 
-Updated 2026-10-30 02:03 JST
+Updated 2026-10-30 02:40 JST
 
 - Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -40,3 +40,5 @@ Updated 2026-10-30 02:03 JST
 - 2026-10-30 01:24 JST: 各関数の返却式を、容量条件を持つprimitive又は厳密に子である呼出しの結果からの組立てへ対応。258直接関数を254組立て・3条件付きprimitive・1任意callbackを受けるwrapperに分類し、9macro生成recordを別に確認。全37callback箇所は36返却関数内と1通常controlで、子呼出し1301節・constructor組立て1281節・11identity helper・11早期Errを追った。 静的call graphに循環があっても、実際に成功した有限の呼出し導出へ帰納できる。callback条件と変更後の保存条件を明示し、返却TreeをProduced経由でheap+72≤88*N+8*S_wireへ接続した。任意callback、生成後reserve、循環だけからの停止推論は認めない。 Rust frontend/cfg/型とmethod dispatch/codegen/allocator/serdeは固定sourceと既存compilerのTCBに残る。全Rust形式証明、停止保証又は失敗prefixの費用免除ではない。残るcallee peak/保持/escape、元入力/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、並行worker、非割当work/stack/OS/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Native production/Canon変更、W6/T10受理なし。
 
 - 2026-10-30 02:03 JST: 28OriginalRecordと3Parts関数の58子呼出しを返却Treeへ一度ずつ含め、3か所のgraph追加を対応。有限の成功capture導出に対し追加参照数≤返却TreeのJSON構造数Nを証明し、空からappendした3Vecのbacking≤64*Nを導いた。 root複製は元graphを保持したまま8*(message数+reserved数)byteを追加し、合計≤72*N。Treeとの保持量は条件付きで≤152*N+8*S_wire。graph inline72byte・RootRefs inline192byteと既存pointeeは別。重複検査は借用pointer比較で追加heap/allocator要求0、比較回数≤n*(n-1)/2。比較回数はsource/modelの上限で、実時間又はハードウェア計測ではない。 全captureのpeak、残るcallee/DTO/破棄一時Treeとcallerの同時保持、画像全体履歴/共通public入力、失敗/部分prefix、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Rust frontend/cfg/dispatch/codegen/allocator/serdeとsource対応はTCBに残る。Native production/Canon変更、W6/T10受理なし。
+
+- 2026-10-30 02:40 JST: 258直接Tree返却関数を再照合。3条件付きprimitiveを除く255本体の2587既知Tree生成式のうち、2583式は返却組立てで一度ずつ使用し、残る4式は3関数の比較用一時Treeだった。bootstrap/parentのguardは後続capture前に破棄し、generationの2比較Treeは同時保持後に破棄する。 generationのsnapshotと復元native値はlet局所変数として返却値のencodeまで残る。bootstrapではendpointをcloneしたregistryをcapture返却まで保持する。比較のpeakはmax(left.peak,left.retained+right.peak)、失敗途中でも先行保持量と全要求費用を含む。返却Treeのheapをcallee生成peakへ読み替えない。 実callee生成peak、constructorの旧/新backing同時保持、他DTO/一時領域と全caller寿命、全失敗/部分prefix、画像全体履歴/共通public入力、並行worker、非割当work/stack/OS/allocator/kernel/物理資源/進行、他profileと最終統合reviewは未完了。Rust frontend/cfg/dispatch/drop/codegen/serdeはTCB。Native production/Canon変更、W6/T10受理なし。
