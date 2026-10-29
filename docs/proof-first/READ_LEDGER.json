@@ -102937,5 +102937,68 @@
     "range": "complete general proof,all literal source sites,native output/allocation/order/failed-prefix numeric readback",
     "role": "W6 literal node argument capacity and evaluation",
     "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/COLLECTOR-PREFIX-FRAMES-JOIN-v1.json",
+    "sha256": "0716972c7984744da710e29ee26ccaf21070de41ab08610c581772cec4274756",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/COLLECTOR-FRAMES-CHECKPOINT-v1.json",
+    "sha256": "f82786d8f0f1622a8232923af3f3f85576cff8535feb4f5d3f95964b07d6a619",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/collector-frames-v1/SOURCE-VERIFICATION-v4.json",
+    "sha256": "50427f5ffade2c03eabc1db0e8ea2f102f95fe7d18f5d2f342b9e4ce75a270cc",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/collector-frames-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "fa1f75719ecc971a074f458425fa155e22c292c5b37ca40569e9364ab58bc715",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/collector-frames-v1/READBACK-VERIFICATION-v1.json",
+    "sha256": "69a3d73b77dc5ea58d3006273713fdfc3a6546dbc9dd7ef5df4c21708869f52a",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/collector-frames-v1/NATIVE-VERIFICATION-v1.json",
+    "sha256": "7f2ccc29da213f90034a136d6fbac432db0dffdfe9bb3eee3aba4f86cfa75834",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6CollectorFrames_v3.lean",
+    "sha256": "9dbcf237d219ed21d2bdecb6aab8139e3e13b1963a6151f010e9de12e0832e33",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/collector_frames_reader_v1.py",
+    "sha256": "90249acf785890b0c2b44db126efc5a01d8028cb429a096d4f2e2f4fc6576509",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_collector_frames_v1.py",
+    "sha256": "94396c516e2855e08d0dea3f30b3622c3155cb82b91aace20633a756acee256d",
+    "range": "complete general proof,all collector source sites,native output/allocation/order/failed-prefix numeric readback",
+    "role": "W6 collector growth and failed-prefix composition",
+    "status": "conditional LAB;remainingcallees/physical/W6 open"
   }
 ]
