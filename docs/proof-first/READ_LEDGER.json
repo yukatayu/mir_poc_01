@@ -106157,5 +106157,96 @@
     "range": "complete currentdistributed_send documentation checkpoint",
     "role": "W6distributed_send",
     "status": "focused21passed;caller19/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MISSING-FIELDS-JOIN-v1.json",
+    "sha256": "992fefb9d8704ea21a0af7e32b6bd823d65145799d3808048c9e3fd7c7fba9d4",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/PARTITION-MISSING-FIELDS-v1.json",
+    "sha256": "2014943dbf9add4b7c22c12654e91a791a57eff1099f2c02bd88ff743eca9990",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/PREREGISTRATION.json",
+    "sha256": "aa01bd101652216ea7a022f6ec4fd5fa66a08e9713e543a596313ff24072dc36",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "95994674151a807e5de4a27c34042288dfb1e2580de52d29fc34ef1d3bf3d65d",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/BOUND-PLAN-v1.json",
+    "sha256": "562ae47122b2c467a8b0dbeccf78700b4ebca1f9a9fc9d2931ee82bbdd3efff6",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "c4179670b5ff828f601d151b4d8aaabca8ff6691d139b822a7c6473679622461",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/FORMAL-FAILURE-v1.json",
+    "sha256": "a1255f35c4c7f40956a6af72fabbdc8145c5cd43dc5ea4fbc3c10f9a743d3c90",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "288931c3116cdae8cc8a047ac8ba7ebd507e7635ecd31a7bc5051e6c3df837d3",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/READER-FAILURE-v1.json",
+    "sha256": "a54e5f5ef9b8fae1e5989b502d450712c3c2aacc7dbc61f7a45f0d956a837d43",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/SYNC-FAILURE-v1.json",
+    "sha256": "bee0f856c7830b73c8cdfbb554c58eced3f29401b450190053816b5764c6c284",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/PUSH-v1.json",
+    "sha256": "917878a13643dc5572fe481751fed5dfde543df8b4f14696644830ece12a655b",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/CHECKPOINT-v1.json",
+    "sha256": "ee4650ebd419105f81ffb719a9f3c8464667c0a6404b0bcda90ed34dc1d4df82",
+    "range": "complete current missing-field refusal and conditional unreachable evidence",
+    "role": "caller262conditionalprefix;fivepaniczero-use;postinstallunrun",
+    "status": "72mutations18registries144fees216numeric46newlogs;caller13/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "665dae76e541805f232445f4e71ebc792678c1a44340a8efdbac7ec4e8d65b37",
+    "range": "complete currentmissing_fields documentation checkpoint",
+    "role": "W6missing_fields",
+    "status": "focused21passed;caller13/commoninput/physical/wholeW6open"
   }
 ]
