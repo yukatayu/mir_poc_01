@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-31 02:24 JST
+Last updated: 2026-10-31 02:42 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。現型の初期化・借用・host callback21箇所を、74部品結果/160区間と全321ASTへ対応。caller区分119/132/残70。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。分類8箇所へ固定policy構築・実source分類・現guard費用を対応し、現原本99区間を再照合。caller区分127/132/残62。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,7 +45,8 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller concrete borrows and defaults / current | CALLER-BORROW-DEFAULT-JOIN-v1 / qualify_caller_borrow_default_v1.py | 既存74一般宣言/14反例を再照合。37case×2/160区間と14一次source、21siteを局所要求0へ対応。6対照各4096byte。区分119/132/残70、全caller/共通入力/物理進行OPEN |
+| Caller source classification / current | CALLER-CLASSIFICATION-JOIN-v1 / qualify_caller_classification_v1.py | 5構築条件×2/222改変、現原本99区間/27boot/939改変。既存一般証明・36数値式の106logを再照合。policy514byte+本体+guardを8siteへ対応。区分127/132/残62、共通入力/物理進行OPEN |
+| Caller concrete borrows and defaults / prior | CALLER-BORROW-DEFAULT-JOIN-v1 / qualify_caller_borrow_default_v1.py | 既存74一般宣言/14反例を再照合。37case×2/160区間と14一次source、21siteを局所要求0へ対応。6対照各4096byte。区分119/132/残70、全caller/共通入力/物理進行OPEN |
 | Caller whole image codecs / prior | CALLER-IMAGE-CODEC-JOIN-v1 / qualify_caller_image_codec_v1.py | 既存436一般宣言/234数値代入/8反例、72case×2の完全wire/値/診断/450区間費用。7siteを対応し区分119/111/残91。共通入力/全caller/物理進行はOPEN |
 | Caller typed attempts / prior | CALLER-TYPED-ATTEMPT-JOIN-v1 / qualify_caller_typed_attempt_v1.py | 新30宣言/8反例、現151型/132container/77Record一致、108case×2の完全値/診断/費用。直接1siteを対応し区分112/111/残98。後続whole codec対応へ接続。物理進行はOPEN |
 | Caller mutation fees | CALLER-MUTATION-FEES-JOIN-v1 / qualify_caller_mutation_fees_v1.py | 56宣言/14反例、524出力を両回照合。12操作の局所feeを対応し、後続typed/whole codec費用へ接続済み。共通入力/全caller/物理進行はOPEN |

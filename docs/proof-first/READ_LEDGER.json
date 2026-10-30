@@ -105065,5 +105065,82 @@
     "range": "complete current concretecaller document checkpoint",
     "role": "W6borrowdefaultsourcecostcorrespondence",
     "status": "full6410passed;74results160regionsaccepted;caller70/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-CLASSIFICATION-JOIN-v1.json",
+    "sha256": "17978e40f6895dfaf3a7d87538b0d5646bfc4271332f70819d44a18f559d1c7e",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/PREREGISTRATION.json",
+    "sha256": "157e6c054f6055b56d5a56f51a1b124dbfe9b5001aa810b94cab98c06f66bc2e",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/PREPARATION-v2.json",
+    "sha256": "5f2cc06340fa2d0ea747b3a3a00f272f1ae180dc519d09022a617b42a3589447",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/component-v2/RESULT.json",
+    "sha256": "5dc424f814524cf6716ada2f140c207ac3fd65b377f198c83f31444168b1e357",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "987359910b24563c740f38a566daafaf09bcbef8312147a242b3592568c2ba65",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/LIVE64-CHILD-VERIFICATION-v1.json",
+    "sha256": "ca7cee583f6816517a82e8be672e7ecf1e9b0983fc33620832301ceb45cfdd2a",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/LIVE64-PARENT-VERIFICATION-v1.json",
+    "sha256": "60eeccba9430c8659aece074caad8dec13eca4e29752f4a35f2ae682d4bdf480",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/PARTITION-CLASSIFICATION-v1.json",
+    "sha256": "3c15ab3bf20cd661b424b0a1184ae117f30c9f09e3a7ef123e2b7e2033928fde",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/PUSH-v1.json",
+    "sha256": "1503c7c8136c26a7fce985eeebc70931cdb387aec684ce96e08f60f088f268e2",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/CHECKPOINT-v1.json",
+    "sha256": "88dafc43ea2a86ad5a493fc1c4d7c54af4ddf2d9c5122d626740c6b612937cb9",
+    "range": "whole current classification construction/source/measurement/formalreuse readback",
+    "role": "conditional8fees;notwholecallerphysicalacceptance",
+    "status": "10construction/99actualintervals;106formallogs;caller62/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "824b9710ac26fe0da39b323cf1e2991422a19a25b0887331c69262a2dd509ee0",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6classificationsourcecostcorrespondence",
+    "status": "full6410passed;10construction99actualintervalsaccepted;caller62/commoninput/physical/wholeW6open"
   }
 ]
