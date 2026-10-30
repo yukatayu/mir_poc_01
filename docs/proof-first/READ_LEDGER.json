@@ -104281,5 +104281,75 @@
     "range": "complete caller reader output document checkpoint",
     "role": "W6 actual caller output/source/formal/component correspondence",
     "status": "full docs passed; reader4output shape/copy/writer conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NAMED-GUARD-COST-JOIN-v1.json",
+    "sha256": "364b913fb393018ba76bd332de5082de28f090acbff8aff70404425544d51c33",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NAMED-GUARD-COST-CHECKPOINT-v1.json",
+    "sha256": "4bcf2f1cacf8a85e8a619e145877bd25a37536aa2f5d137179d3677dbd8efc1c",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "f12938b34bc86af533e77cbf234ce268ec789b8d934f93f86b2ecaf4fde9b7f2",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "853ec9b1c1a91724c2650d95bb97d9d148f56c649a34db3b59f3670b325c7454",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/component-v1/RESULT.json",
+    "sha256": "cf15aae4d92a56a0d966f387df81e8e75e4bbd86f1420e038c972c8cf3ad0765",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/ENTRY-FORMAL-VERIFICATION-v2.json",
+    "sha256": "16366698b631a1f6eb2654cb18aaeaf9b6fece9f39330e7236918db3772d8aea",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/entry-drop-v1/RESULT.json",
+    "sha256": "6c605c417d1d4a8516ef56c03e7908c81bf28d3f34f21ef1a50aac5e5bf4ea79",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/compiled-mutants-v1/RESULT.json",
+    "sha256": "bf7fc8da4ab1982eb3c1922b33d7c1afc7a91a39682b77596f231cc541164bd6",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/PREREGISTRATION.json",
+    "sha256": "c06058843828f3584938dc3931d506ce94a77162165199b207ec358c079707cf",
+    "range": "complete namedguard source/formal/component/lifetime correspondence and limits",
+    "role": "W6 actual named guard overhead and scope entry ownership",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/NAMED-GUARD-COST-DOCS-CHECKPOINT-v1.json",
+    "sha256": "2a1db9f4c93368c4661e08bd7e7a0ebc06f3c430eb5d6a8d8310eae3b9c6ca1f",
+    "range": "complete named guard document checkpoint",
+    "role": "W6 named guard source/formal/component/entry ownership correspondence",
+    "status": "full docs passed; base guard setup/logging/entry ownership conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

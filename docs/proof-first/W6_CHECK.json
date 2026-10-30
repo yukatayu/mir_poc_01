@@ -1,6 +1,6 @@
 {
-  "status": "W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。",
-  "updated_at": "2026-10-30T12:54:04.093456+00:00",
+  "status": "W6継続・未完了。通常NamedRegionの開始/保持path/記録費用を実caller6箇所へ接続。148宣言/22反例・両回70log、既存510記録、19部品case×2と寿命4例を照合。開始前所有のroot/ID解放が計測内へ入る境界を保持。Native64全1750は実行中、終了後45reader。全caller/共通入力/物理進行/最終照合は未完。",
+  "updated_at": "2026-10-30T13:31:18.653453+00:00",
   "base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
   "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation",
   "entry_design": "ENTRY-DESIGN.md",
@@ -69,8 +69,8 @@
     "sha256": "1252e39bb7fcbe0c742d4cdb69d75061d14dae49bd07fc2fc17aafaff2e34f09"
   },
   "latest_quota": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-    "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+    "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
   },
   "release_linearization": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/RELEASE-LINEARIZATION-ANALYSIS-v1.md",
@@ -180,7 +180,7 @@
     "sha256": "1577414d7742cf39c4e81adf037aa5826ed3aa6a550c9b45f19ea2a4223deefa"
   },
   "implementation": {
-    "status": "W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。",
+    "status": "W6継続・未完了。通常NamedRegionの開始/保持path/記録費用を実caller6箇所へ接続。148宣言/22反例・両回70log、既存510記録、19部品case×2と寿命4例を照合。開始前所有のroot/ID解放が計測内へ入る境界を保持。Native64全1750は実行中、終了後45reader。全caller/共通入力/物理進行/最終照合は未完。",
     "workroot": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation",
     "report": "docs/reports/2617-mirrorea-proof-first-w6-implementation.md",
     "owner_authorized_at": "2026-10-19T03:33:40Z",
@@ -319,10 +319,10 @@
       "scope": "frozen source-peer-green-v2/HostRegistry before later cuts; advisory only"
     },
     "latest_quota": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-      "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+      "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
     },
-    "updated_at": "2026-10-30T12:54:04.093456+00:00",
+    "updated_at": "2026-10-30T13:31:18.653453+00:00",
     "native_same_program_private_profile": {
       "pin": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-admission-all-v1/PIN.json",
       "status": "passed current five-profile campaign with independently signed negatives and constant sink",
@@ -425,16 +425,16 @@
       }
     },
     "documentation_validation_current": {
-      "status": "Caller reader output full6410 unchanged passed; final metadata focused419 separate",
+      "status": "Named guard full6410 unchanged passed; final metadata focused421 separate",
       "full": {
-        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-caller-reader-output-v1/RESULT.json",
-        "sha256": "edceda0bf2bb3b919f91abc15716e7ca92a4036cb82b05f397c0ca636bde8ee5"
+        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-named-guard-v1/RESULT.json",
+        "sha256": "853275da77a3a8856620929ce0e0d357397af0c289efb87867598d0606ffe044"
       },
       "focused_before": {
-        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused418.json",
-        "sha256": "52cc45f29079638400876d795bc6e583600ddb1fc0323f1ec3d2d6db938c122c"
+        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/focused420.json",
+        "sha256": "4aa9fb8d0fa7e8a2ed767e2d6aaa1f688f88aea215c043a522b9e486edbd8767"
       },
-      "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused419.json",
+      "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/focused421.json",
       "whole_W6_complete": false,
       "final_integrated_review": false
     },
@@ -868,8 +868,8 @@
       "local_evidence": "native61pass and intended negative detected; no incomplete gate promoted"
     },
     "unverified_checks": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v400.json",
-      "sha256": "5f8bbc55b8f8048181b7b3d32f2f0f5c84dfc5ae64d7112fab118a01e818952d",
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v402.json",
+      "sha256": "d37bb44c165bcad4f1a3348c301bcb1fe0ff402e7e56d877cc42770570530250",
       "items": [
         {
           "id": "current-full-regression",
@@ -1070,8 +1070,8 @@
         {
           "id": "physical-progress-cost",
           "test_rows": "T03,T04,T10,T11",
-          "status": "PARTIAL / reader4output copy/writer fee connected;wholecaller physical open",
-          "unchecked": "共通public入力/初期履歴、残るcaller操作とcalleeの数値費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。閉じた成功出力形・Rust/compiler/serde/source対応を前提とし、任意不正入力又は実時間を保証しない。Native64全1750と後続45reader、計測構成1790の必要回帰、他profile/119要件/outward/history/最終統合docs/Oracleも未完。累積要求をlive peak/RSS/物理予約又はW6/T10受理へ読み替えない。",
+          "status": "PARTIAL / base named guard setup/logging/entry ownership connected;wholecaller physical open",
+          "unchecked": "独立public入力/初期履歴、残caller/callee費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。成功env/parse/checked_sub/elapsed≤u64/host書込みとRust/std/serde/compiler対応が前提。panic/部分送信/時刻の上限は結論しない。追加5fieldとglobal snapshotを持つ全process計測構成は今回の費用対象外。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。累積要求をlive peak/RSS/物理予約/W6/T10受理へ読み替えない。",
           "reason": "prefunded journal/attempt limit/deadlineは全physical costや公平性の証明ではない。20msはadmin未完了の観測区間で、update_policy内lock待機時間ではない。16byte slow readerは自然なbackpressureでない。",
           "available_evidence": "Current Native63/current instrumented independent registry/prefix and fixed-role public contribution accepted.",
           "next_check": "Instantiate remaininglocalfees and commonpublicinput/history;retained frames,host/work/progress stay open.",
@@ -1609,6 +1609,10 @@
           "caller_reader_output": {
             "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-READER-OUTPUT-JOIN-v1.json",
             "sha256": "a4cb0cf17ad4aeee370a3e0ea1b10ee43cc8df70eedd9c6c46d4dc537b742c49"
+          },
+          "named_guard_cost": {
+            "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NAMED-GUARD-COST-JOIN-v1.json",
+            "sha256": "364b913fb393018ba76bd332de5082de28f090acbff8aff70404425544d51c33"
           }
         },
         {
@@ -1679,7 +1683,7 @@
         {
           "id": "current-full-docs",
           "test_rows": "documentation",
-          "status": "Caller reader output full6410 unchanged exit0; final metadata focused419 follows",
+          "status": "Named guard full6410 unchanged exit0; final metadata focused421 follows",
           "unchecked": "Final integrated snapshot validation after remaining acceptance evidence; do not transfer the pinned full-docs result across later documentation edits.",
           "reason": "Astra continuationでcurrent snapshotを更新。旧22focused/full6409cutは履歴、今回検査は後続。",
           "available_evidence": "full-docs-passive-input-verified-v1 PASS6410/259.5819458s frozen prior cut; focused72 PASS21. 68/71 failed and corrections retained.; focused167 passed21 checks. Full make docs passed260.77s/exit0 on6410unchanged input files,09:31:54UTC; all input pins checked before linking its receipt. New process-structure edits are later.",
@@ -1741,8 +1745,8 @@
             "sha256": "d7b5f0f966125c2778989259129588ede065eefb7db7966fdc209837f42da6c1"
           },
           "current_full": {
-            "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-caller-reader-output-v1/RESULT.json",
-            "sha256": "edceda0bf2bb3b919f91abc15716e7ca92a4036cb82b05f397c0ca636bde8ee5"
+            "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-named-guard-v1/RESULT.json",
+            "sha256": "853275da77a3a8856620929ce0e0d357397af0c289efb87867598d0606ffe044"
           }
         },
         {
@@ -2877,8 +2881,8 @@
       }
     },
     "weekly_quota_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-      "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+      "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
     },
     "registration_initialization_checkpoint": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/REGISTRATION-INITIALIZATION-CHECKPOINT-v1.json",
@@ -4060,7 +4064,7 @@
       "sha256": "d92f233c403a71d5c82a250779e3ea000f6450e2b74dcf79d76d200ec74429d6"
     },
     "current_native_status": {
-      "status": "W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。",
+      "status": "W6継続・未完了。通常NamedRegionの開始/保持path/記録費用を実caller6箇所へ接続。148宣言/22反例・両回70log、既存510記録、19部品case×2と寿命4例を照合。開始前所有のroot/ID解放が計測内へ入る境界を保持。Native64全1750は実行中、終了後45reader。全caller/共通入力/物理進行/最終照合は未完。",
       "source_cut": "native-v63",
       "source_files": 6575,
       "source_preparation": {
@@ -4125,8 +4129,8 @@
       "sha256": "0412a098fb67ede1ee414ab01797343e44e2df1e1b6e89bf52ddd059e77a96ca"
     },
     "quota_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-      "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+      "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
     },
     "activation_catalog_native": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE-ACTIVATION-CATALOG-VERIFICATION-v3.json",
@@ -4301,8 +4305,8 @@
       "sha256": "966aed01e922e58153a5f31683a053929d1004e05bf7c73208ed9bca877c1601"
     },
     "oracle_availability_latest": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-      "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+      "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
     },
     "documentation_validation_previous_w5_completeness": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/focused-docs-v107-w5-completeness.json",
@@ -5815,8 +5819,8 @@
       "sha256": "43a1ea8b3ea9df174121ed64edb4a7d27629066227b989260545b8e6a41ebadf"
     },
     "quota_latest_readonly": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-      "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+      "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
     },
     "native39_w5_cost_checkpoint": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE39-W5-COST-CHECKPOINT-v1.json",
@@ -6327,8 +6331,8 @@
       "sha256": "62cab4b8832660cbbb42e72a3eb469a52e6cab3e7a1a3fc3b902ed2f0dac985c"
     },
     "oracle_availability": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v25.json",
-      "sha256": "115185553014538484e35b9829fd7e1d885f27cf0d8c5fdc5eb9c04307fc98e3"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+      "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
     },
     "native58_verified_checkpoint": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE58-59-RESOURCE-CHECKPOINT-v1.json",
@@ -6473,8 +6477,8 @@
       "sha256": "a3146af3b37f463739b5c7548cb4a5dad2e15eec6143db3e8d4a6e0a8c5ee8d2"
     },
     "oracle_latest_readonly": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-      "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+      "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
     },
     "typed_failure_checkpoint": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TYPED-FAILURE-FUNDING-CHECKPOINT-v1.json",
@@ -7479,8 +7483,8 @@
       "sha256": "1e398b851b874357731fd98382e7fb541aaec7e72c5caa8ed9ace83f2e4b4c98"
     },
     "quota_latest": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-      "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+      "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
     },
     "documentation_validation_before_m9_lifetime": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused257-runtime-reuse.json",
@@ -7515,8 +7519,8 @@
       "sha256": "849cdfb5caeb9f8781e83ffdb331dc2bce618252c6a1b7468c22125403418559"
     },
     "oracle_availability_current": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-      "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+      "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
     },
     "m8_trace_projection": {
       "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/M8-TRACE-PROJECTION-JOIN-v1.json",
@@ -8800,8 +8804,8 @@
       "sha256": "1cdc2ff68c0be5ffa3c06c7242d8d2a90fa976baab70a8fc02d1319cb67652a1"
     },
     "oracle_latest_availability": {
-      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-      "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+      "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
     },
     "documentation_validation_before_guard_capture": {
       "status": "capturegraph full6410 unchanged passed;metadata focused371 separate",
@@ -9440,34 +9444,60 @@
     "caller_reader_output_docs_checkpoint": {
       "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-READER-OUTPUT-DOCS-CHECKPOINT-v1.json",
       "sha256": "a6f8cb63699a65a010f692732bc039cf84d9edb4bd8273ca3b271848b264da46"
+    },
+    "named_guard_cost": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NAMED-GUARD-COST-JOIN-v1.json",
+      "sha256": "364b913fb393018ba76bd332de5082de28f090acbff8aff70404425544d51c33"
+    },
+    "named_guard_cost_checkpoint": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NAMED-GUARD-COST-CHECKPOINT-v1.json",
+      "sha256": "4bcf2f1cacf8a85e8a619e145877bd25a37536aa2f5d137179d3677dbd8efc1c"
+    },
+    "documentation_validation_before_named_guard_cost": {
+      "status": "Caller reader output full6410 unchanged passed; final metadata focused419 separate",
+      "full": {
+        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-caller-reader-output-v1/RESULT.json",
+        "sha256": "edceda0bf2bb3b919f91abc15716e7ca92a4036cb82b05f397c0ca636bde8ee5"
+      },
+      "focused_before": {
+        "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused418.json",
+        "sha256": "52cc45f29079638400876d795bc6e583600ddb1fc0323f1ec3d2d6db938c122c"
+      },
+      "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused419.json",
+      "whole_W6_complete": false,
+      "final_integrated_review": false
+    },
+    "named_guard_cost_docs_checkpoint": {
+      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/NAMED-GUARD-COST-DOCS-CHECKPOINT-v1.json",
+      "sha256": "2a1db9f4c93368c4661e08bd7e7a0ebc06f3c430eb5d6a8d8310eae3b9c6ca1f"
     }
   },
   "predecessor_snapshot_notice": "Root predecessor proof/baseline/oracle/acceptance fields retain the closed Astra research cut; current implementation status is in implementation. Historical evidence is not current native acceptance.",
   "documentation_validation_current": {
-    "status": "Caller reader output full6410 unchanged passed; final metadata focused419 separate",
+    "status": "Named guard full6410 unchanged passed; final metadata focused421 separate",
     "full": {
-      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-caller-reader-output-v1/RESULT.json",
-      "sha256": "edceda0bf2bb3b919f91abc15716e7ca92a4036cb82b05f397c0ca636bde8ee5"
+      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-named-guard-v1/RESULT.json",
+      "sha256": "853275da77a3a8856620929ce0e0d357397af0c289efb87867598d0606ffe044"
     },
     "focused_before": {
-      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused418.json",
-      "sha256": "52cc45f29079638400876d795bc6e583600ddb1fc0323f1ec3d2d6db938c122c"
+      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/focused420.json",
+      "sha256": "4aa9fb8d0fa7e8a2ed767e2d6aaa1f688f88aea215c043a522b9e486edbd8767"
     },
-    "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused419.json",
+    "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/named-guard-cost-v1/focused421.json",
     "whole_W6_complete": false,
     "final_integrated_review": false
   },
   "oracle_latest_readonly": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-    "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+    "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
   },
   "latest_focused_docs": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/docs-validation-focused305-public-registry.json",
     "sha256": "ed5a598c6b088992c6a45fea7700ff11ead6a5612566150594a628fd5e7f75a1"
   },
   "quota_latest_readonly": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-    "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+    "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
   },
   "prior_current_quota_before_registry_v8": {
     "latest_quota": {
@@ -9641,12 +9671,12 @@
     "sha256": "9d2284cac66cb115d69e8f761917ff8f659313269317146b2164235193bd4fa6"
   },
   "quota_latest": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
-    "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T125759Z.json",
+    "sha256": "40f79dc296bcec829484cfb8c2626ec169cfb307c085a520076d8d852ab79969"
   },
   "oracle_availability_current": {
-    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
-    "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026"
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v33.json",
+    "sha256": "9733f04f932b597fd366f5b5b2515bc291609ae6d2a789b70b5a59cce48b616d"
   },
   "documentation_validation_before_native61_acceptance": {
     "status": "focused271pending;finalfullUNRUN"
@@ -10478,6 +10508,20 @@
       "sha256": "b4380705f534c1a72dd58661f3ff0410d3c11c61cf5f048cf50bb5662b9803fb"
     },
     "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/focused417.json",
+    "whole_W6_complete": false,
+    "final_integrated_review": false
+  },
+  "documentation_validation_before_named_guard_cost": {
+    "status": "Caller reader output full6410 unchanged passed; final metadata focused419 separate",
+    "full": {
+      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-caller-reader-output-v1/RESULT.json",
+      "sha256": "edceda0bf2bb3b919f91abc15716e7ca92a4036cb82b05f397c0ca636bde8ee5"
+    },
+    "focused_before": {
+      "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused418.json",
+      "sha256": "52cc45f29079638400876d795bc6e583600ddb1fc0323f1ec3d2d6db938c122c"
+    },
+    "focused_final_path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/focused419.json",
     "whole_W6_complete": false,
     "final_integrated_review": false
   }

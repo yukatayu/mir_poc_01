@@ -1,12 +1,12 @@
-# RESUME — W6 active; reader output costs connected, Native64 full regression running
+# RESUME — W6 active; named guard overhead connected, Native64 full regression running
 
-Updated 2026-10-30 21:48 JST
+Updated 2026-10-30 22:24 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。
+W6継続・未完了。通常NamedRegionの開始/保持path/記録費用を実caller6箇所へ接続。148宣言/22反例・両回70log、既存510記録、19部品case×2と寿命4例を照合。開始前所有のroot/ID解放が計測内へ入る境界を保持。Native64全1750は実行中、終了後45reader。全caller/共通入力/物理進行/最終照合は未完。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. OriginalImage caller branches/loop/conditions are now connected. Selected enclosing worker/join/TLS/detach and concurrent shared/exclusive partitions are now connected. The smallest one-notification driver now has general/component/focused Native64 correspondence; its full1750 regression is running. Selected caller binary/frame/metadata byte buffers and exact writer geometry now have conditional public bounds. Four authentic caller JSON file/parse shapes are now conditionally connected. Selected Value copy/to_value/json expression and integer/string writer stages are now conditionally connected. Prefix hex/row/iterator plus outer Value copy now have conditional bounds with policy and borrowed input retained separately. Selected Path/environment/current_exe directsite budgets are now connected with independent public parameters. Original caller321syntaxsites are now enumerated,9directcopy sites/max22calls connected to acceptedfees. Reader4output shapes and matching macro/writer fee components are now connected, including depth1 payload and final8field metadata; digestformat remains priorPathEnvfee and sha2/getpid work separate. Instantiate otherlocalfees from existingstage evidence and unresolvedcallees, then common public inputs/history and allcaller numeric/executor/host budgets; whole inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. OriginalImage caller branches/loop/conditions are now connected. Selected enclosing worker/join/TLS/detach and concurrent shared/exclusive partitions are now connected. The smallest one-notification driver now has general/component/focused Native64 correspondence; its full1750 regression is running. Selected caller binary/frame/metadata byte buffers and exact writer geometry now have conditional public bounds. Four authentic caller JSON file/parse shapes are now conditionally connected. Selected Value copy/to_value/json expression and integer/string writer stages are now conditionally connected. Prefix hex/row/iterator plus outer Value copy now have conditional bounds with policy and borrowed input retained separately. Selected Path/environment/current_exe directsite budgets are now connected with independent public parameters. Original caller321syntaxsites are now enumerated,9directcopy sites/max22calls connected to acceptedfees. Reader4output shapes and matching macro/writer fee components are now connected, including depth1 payload and final8field metadata; digestformat remains priorPathEnvfee and sha2/getpid work separate. Base NamedRegion setup/retained path/logging fees and start-return root/id destruction are connected for6directsites. Extended globalobserver extra5fields/snapshots remain separate. Instantiate otherlocalfees from existingstage evidence and unresolvedcallees, then common public inputs/history and allcaller numeric/executor/host budgets; whole inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -77,7 +77,7 @@ The pause full-docs/focused343 receipts cover this saved state only. They do not
 
 ## Quota, Oracle and process state
 
-W6 active。20:57JSTの週間残量67.0%、次回21:57JST以降。Oracle20:57JSTもGPT-6 Pro利用上限でprompt未送信、次回21:57JST以降。指定reset使用1回、35%停止、追加reset/購入なし。 Native64全1750は専用service実行中。
+W6 active。21:57JSTの週間残量64.0%、次回22:57JST以降。Oracle21:58JSTもGPT-6 Pro利用上限でprompt未送信、次回22:58JST以降。指定reset使用1回、35%停止、追加reset/購入なし。 Native64全1750は専用service実行中。
 
 ## Repository backup scope
 
@@ -900,3 +900,27 @@ Lean初回はimport名valueCopyが実名copyRequestsと異なり、feeの展開�
 Repository backup: 操作台帳13文書をc3476c49068175e664e1777d7ccf8306dcb99b86へcommit/pushしremote一致を確認。Git外原本はSSD等のローカル保持。
 
 2026-10-30 21:54 JST: reader4出力費用対応のfull make docsは6410入力不変・exit0。先行focused418は21項目成功、検証metadataはfocused419で別検証。W6最終統合full/Oracleは未完了。
+
+## Named allocation guard costs
+
+2026-10-30 22:24 JST: 現案は通常の計測guard自身について、環境値の複製/名前/path生成、元から保持するpath、Stats一時Valueと出力Value/pretty書込、LinuxのCString費用を分離する。最小代替はguard全体を未知feeに保つ案で、既存stageとの具体的対応を失うため採らない。元実装sourceは変更しない。
+
+独立の公開byte上限に対する費用単調性/合成/有限反復/既払い保持と、任意の有効な割当・解放列のlive+released=incoming+requestedを検証。2module計148宣言/22反例をfresh/replay・70log/148保存fileで照合。固定275manifestとは別cut。
+
+元NamedRegion/Probeを変更せずimportした19部品caseを各2回実行。通常/無効/入れ子/抑止、長いflag/ID/root、先頭ゼロの多いchild、最大整数/escape、u64を超えるelapsedの拒否を確認。既受理Native63の510原本を読戻し、対象6phaseの108記録を区別。source12/原本8/部品12改変と実compileした上書き/無効時開始2改変を拒否。新Native/network実行ではない。
+
+E=flag値byte、P=root、I=ID、C=raw child環境値、L=phaseの独立上限として、要求byteは開始E+17P+33I+C+32L+2896、記録P+I+26L+47932、計E+18P+34I+C+58L+50828。実caller6箇所は各最大1回/L≤17で、callee本体は別。L=17の出力は30field/736文字列byte/61node、pretty上限1529byte、JSON要求41885byte、writer要求6388byte。
+
+本文の割当576byteだけからguard全費用を推定しない。Region開始後にstart-local rootとIDが解放され、この部品例の記録は4解放/576+P+I byteとなる。一般のincoming所有量を必要とし、requests−releasedをliveとしない。root/IDを開始前にdropする単一の隔離変更を短/長root各2回で検証し、要求576byte不変・2解放/576byteへの変化を確認。元sourceは保持する。
+
+独立public入力/初期履歴、残caller/callee費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。成功env/parse/checked_sub/elapsed≤u64/host書込みとRust/std/serde/compiler対応が前提。panic/部分送信/時刻の上限は結論しない。追加5fieldとglobal snapshotを持つ全process計測構成は今回の費用対象外。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。累積要求をlive peak/RSS/物理予約/W6/T10受理へ読み替えない。
+
+独立readerの本文だけ2解放という仮説を実4解放が反証した。元失敗を保持し、source寿命/一般incoming台帳/単一変更実行で原因を対応した。serdeのu64変換表記、historical JSONのpin参照先、Pythonのescape/else字句、Leanのrecord簡約/余分なtacticはsuccessorで訂正し、旧source/logを保持。条件を弱めた成功にはしない。
+
+再現: prepare_named_guard_cost_v1.py → check_named_guard_cost_formal_v1.py → verify_named_guard_source_v3.py → prepare_named_guard_component_v2.py → run_named_guard_component_v1.py / run_named_guard_mutants_v1.py → prepare_named_entry_drop_v1.py → check_named_guard_entry_formal_v2.py → run_named_entry_drop_v1.py → qualify_named_guard_cost_v3.py → NAMED-GUARD-COST-JOIN-v1.json。部品は6GiB/Swap0 scope。成功cutはno-clobber、再現は新cut名を使用。
+
+追加SSDのnamed-guard-cost-v1へsource/receiptを保持。Lean生成物はRAM、検証process上限6GiB/Swap0、hot総量2GiB。研究環境の制限をW6物理予約とは扱わない。
+
+Repository backup: reader出力13文書をd86d4d2555700944a94c89bbc92db22fd4cc0c9fへcommit/pushしremote一致を確認。Git外原本はSSD等のローカル保持。
+
+2026-10-30 22:31 JST: 通常guard費用/開始前所有対応のfull make docsは6410入力不変・exit0。先行focused420は21項目成功、検証metadataと部品例の表記はfocused421で別検証。W6最終統合full/Oracleは未完了。
