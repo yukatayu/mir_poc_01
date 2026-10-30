@@ -103791,5 +103791,82 @@
     "range": "complete worker ownership document checkpoint",
     "role": "W6 worker source/formal/lifetime correspondence",
     "status": "full docs passed; worker ownership conditionally connected; numeric/commoninput/physical/wholeW6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/DRIVER-NOTIFY-COMPONENT-JOIN-v1.json",
+    "sha256": "df6aea6391426702fb5eca7e280021037d4adf35c3ad56fd66248d16b084d08a",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-DRIVER-FOCUSED-QUALIFICATION-v1.json",
+    "sha256": "e44caadf04ec973bbcc8a19221967974b9d05cad6ae7c9bf4a3a3be694f54400",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/DRIVER-NOTIFY-CHECKPOINT-v1.json",
+    "sha256": "b639f14dd2bf35ef77d66d40e768d942938269c1af0ee0ef6f2d6d2639ec2595",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/driver-notify-v1/COMBINED-FORMAL-READBACK-v2.json",
+    "sha256": "d8e1820da2b0646189e0ad71e3b28f0657d46acf8008561557e7bbd48e379edb",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/driver-notify-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "1466d68d93ff14049bce20deb8fc9785300cb9984aca1ef4ad372b58c75cfcef",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/driver-notify-v1/component-v1/RESULT.json",
+    "sha256": "e0fd09977e9fe8123a7d1660b80b74e06907d6b403301c1177284a5b35837017",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-DRIVER-CATALOG-LIFECYCLE-VERIFICATION-v1.json",
+    "sha256": "92e7acfc487f85bbe0b789fdb13ad81929859fd6a5d36e46821beca501aeee0a",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-FULL1750-PREREGISTRATION-v2.json",
+    "sha256": "3e23f0c5ca171d6bf7755415680df2d2a3dcbff8f36320032b7025cae6a2b0de",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T085555Z.json",
+    "sha256": "adeccd6c27f440d0ac6e71f30e4b077c0fa8261444a746731f942b990c613a84",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v29.json",
+    "sha256": "fa61817b96ce4ab2e69336585cecb339a435e0f1d329d4d7f5a5d0f184d863fd",
+    "range": "complete fixed notification model/source/component/focused evidence and full-run preregistration",
+    "role": "W6 no-periodic-driver and callback/join correspondence",
+    "status": "conditional LAB;Native64full1750running;physical/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/DRIVER-NOTIFY-DOCS-CHECKPOINT-v1.json",
+    "sha256": "049f3c36823474a5aff32df7084b31d4bf32f4415029d44859454a36203caad2",
+    "range": "complete notification driver document checkpoint",
+    "role": "W6 notification source/formal/focused correspondence",
+    "status": "full docs passed; notification component/focused conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

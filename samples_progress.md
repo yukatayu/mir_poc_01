@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 15:30 JST
+Last updated: 2026-10-30 18:10 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。workerの7source/69関数/806localを両構成で照合し、新Lean262宣言/22反例・48log、source14/reader5/結合18改変拒否とstd部品8例×2回を受理。join後の返却、TLS退避、detach中の保持を区別。poll回数の共通上限は未成立。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。共通入力/履歴・全caller費用・物理資源/進行・最終照合は未完。
+W6継続・未完了。周期pollを通知1回へ置換する候補を一般Lean399宣言/40反例・88log、実部品9例×2回、2compile改変拒否へ対応。隔離Native64の1関数だけを変更し、実QUIC等10試験と424原本、catalog10world/220query/786改変拒否を照合。新全1750は実行中。Native63全1750/45reader・他1190/7doctestを保持。共通入力/履歴・全caller費用・物理資源/進行・最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,6 +45,8 @@ W6継続・未完了。workerの7source/69関数/806localを両構成で照合�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Single-notification driver | DRIVER-NOTIFY-COMPONENT-JOIN-v1 / qualify_driver_notify_component_v1.py | 399宣言/40反例、9部品×2回/2compile拒否。一般executor費用/進行はOPEN |
+| Native64 focused | NATIVE64-DRIVER-FOCUSED-QUALIFICATION-v1 / qualify_native64_driver_focused_v1.py | 1関数差分の実QUIC等10試験/424原本。全1750実行中、45reader未実施。旧Native63 baseline保持 |
 | Worker ownership | WORKER-OWNERSHIP-JOIN-v1 / qualify_worker_ownership_v1.py | 7source/69関数を262宣言/22反例へ対応、std部品8例×2回。W6新実行なし。各lane数値費用・poll共通上限・物理資源はOPEN |
 | W6 SSD migration / RAM restore | MIGRATION-RESULT / RAM POLICY / restore_w6_ram_paths_20261030_v1.py | 175root/783026file全照合、旧path維持、保護6807file一致。RAM cacheは交換可能。新native sample実行なし、W6継続 |
 | W6 reboot preservation | owner-reboot-20261030-v1/RESULT.json | tmpfs12384file/17853entryを永続archiveへ全照合。10/30 08:49時点の停止履歴。worker草稿未検証で保存し、runnable evidenceを再生成しなかった |
