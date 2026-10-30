@@ -8831,10 +8831,10 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/predecessor-root/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
     "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
   },
-  "w6_implementation_updated_at": "2026-10-30T19:00:11.161320+00:00",
-  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。保存画像全体の比較を現151型と費用へ対応し、63入力×2の完全値・504区間を独立照合。caller区分134/152/残35。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
+  "w6_implementation_updated_at": "2026-10-30T19:11:00.060539+00:00",
+  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。capture/正常復元/照合8callerを既存費用式へ対応し、9画像・独立registry27組・既存36区間を再照合。caller区分142/152/残27。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
   "w6_implementation_base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
-  "updated_at": "2026-10-30T19:00:11.161320+00:00",
+  "updated_at": "2026-10-30T19:11:00.060539+00:00",
   "w6_execution_control": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
   "w6_owner_pause": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",

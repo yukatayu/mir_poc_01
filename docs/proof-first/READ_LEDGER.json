@@ -105478,5 +105478,89 @@
     "range": "complete currentimageequality documentation checkpoint",
     "role": "W6imageequalitycorrespondence",
     "status": "focused21passed;caller35/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-OWNED-CALLEES-JOIN-v1.json",
+    "sha256": "0919c74b7797942c2fa3f6da5a7ab0661536a91bf895311d7762f339df186fdd",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/PREREGISTRATION.json",
+    "sha256": "84005f98dd9bfcb1bc3572b8c7c2f4097b76fa3bcca7d306c10d3316233bec8c",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "3ca9949eed53a95491fb36c3bd436a0a0c2ce6b53bb68b04d32f3488627cba4d",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "4b944e88ad954bb5a98f1606d7f3c31a1d4135511557fbcaba6e4af448139bb4",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/SOURCE-REVIEW-v1.json",
+    "sha256": "3f7c3145818b9fd99d6b3fd2a50951b70aee1952ca46139e196f369b22e80e8c",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/PARTITION-OWNED-CALLEES-v1.json",
+    "sha256": "1e1181247eb3b3babeb0cfd4e83598498ecf0c931d9e0dbc947a372110ccbfd1",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/PUSH-v1.json",
+    "sha256": "b2689a38d5015de1010f921a07a9fe358e1d2da5c616b9d00d6fd5fef9f633b5",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T190039Z.json",
+    "sha256": "583ac65fe27a96416fd1499cfd22cdf38a474aec3efb367649abe90f47285b01",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v4.json",
+    "sha256": "87a4a9d7ebe9667ea84aa0d9325636ac0e367b683613a87272b3be2a6e1ba743",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/CHECKPOINT-v1.json",
+    "sha256": "763d2e18782020b42601c74b5cd6683ac9267210b908b8fdfa67c6846f7a1f43",
+    "range": "complete current8owningcallers/source/formal/independentoriginalregistry",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "9images27registries36priorintervals;308reusedformallogs;caller27/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "b58e46c2d3635f96a318b5b4bfef68236582e133eb8c322f7b771b060caa2544",
+    "range": "complete currentowningcallees documentation checkpoint",
+    "role": "W6owningcalleeapplication",
+    "status": "focused21passed;caller27/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/CHECKPOINT-v2.json",
+    "sha256": "50c05bb21e41f3ea177bd5e1ce73723c797bbf82795bd6e3181ea6a826457726",
+    "range": "complete immutable quota reference correction",
+    "role": "W6owningcalleeapplication",
+    "status": "same quota bytes; no semantic/evidence mutation"
   }
 ]
