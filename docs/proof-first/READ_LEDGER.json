@@ -106647,5 +106647,124 @@
     "range": "current residuals complete; priorv453 retained",
     "role": "fix stale current Oracle aliases within unverified row",
     "status": "07:04 usage limit; next08:04; no new prompt"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-NATIVE-PREFIX-COST-JOIN-v1.json",
+    "sha256": "4ceb0c86f00fb75e5b9aa745801a1406cb8c2a9238a0681518e32670e3e7514f",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/PARTITION-NATIVE-PREFIX-v1.json",
+    "sha256": "4a07b479b16e73e75addcc7b9a83ebccee31373752b2dea72844b1fb66283029",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/PREREGISTRATION.json",
+    "sha256": "da8c176f60d783a4079c72cf5faaba805d6f7b674a93c1a1ca6e252dfa0d6b0c",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "c44063ec08117664ca991033e7e513b9545b6a49e52f9e464e11dda428ab5122",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/NUMERIC-VERIFICATION-v1.json",
+    "sha256": "4d54f017bf8a86ba9509b3d6905850a32f9132ae5bae9dd4b7d31202741977ca",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/CLONE-SCHEMA-VERIFICATION-v2.json",
+    "sha256": "ea853c1dc03b84f135d89f4e3b6ac263c8fbcf60163b4b3308f387f70daf873c",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/CLONE-COMPONENT-VERIFICATION-v1.json",
+    "sha256": "a6444ba6dcf9e6b12bf6399062b5f46cd91f8484fed964b2afdb4e19bc1c7c66",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "5435d8fea91ab30d0dcedce868de1867fc1d3e9f02c85b6b86804cc7ba0da56e",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/COST-PLAN-v1.json",
+    "sha256": "d95a8084ed417992048285f96ebcea650e33cfbd583097ce3e8d93666029b7e3",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/DRAFT-FAILURES-v2.json",
+    "sha256": "97a7b9c2ff9b8b4162a8ac314548d9aec94be07c8582d4eaecc16d5d46231e81",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PREFIX-SELECTED-ACCEPTANCE-v1.json",
+    "sha256": "743c97f25cc89bb7126e68844bd54c1b74b056bbf4ad4be5c709e463957a3cfc",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PUSH-v1.json",
+    "sha256": "79ce90e6d7f96d51c21cd2e745ac820e2a427d9efc5e268c302a413b60a2361a",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T220213Z.json",
+    "sha256": "f6c34639c4b4c154aa2f954130180c546751da5c3d3a7d9986eff39779447636",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v7.json",
+    "sha256": "6f9886d7d1260f1b0c6937028fdb6c22311f2188863d27afe2a72471a5e583ba",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/CHECKPOINT-v1.json",
+    "sha256": "aaaa678d24cec97dc560f39d92a68d2b689db5a7e441d889ff58c7821c0c7835",
+    "range": "complete native-prefix conditional requested-cost evidence",
+    "role": "caller27/175actual18calls;currentregistryandoriginalsource",
+    "status": "108formulas18intervals324controls;caller4/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-capture-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "e85fe5e90adb83e71426b396f8e946e2c1c45215cae4ced0032405a24e91f884",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6nativeprefixcostcorrespondence",
+    "status": "full6410passed;18calls18intervals108formulasaccepted;caller4/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v7.json",
+    "sha256": "6f9886d7d1260f1b0c6937028fdb6c22311f2188863d27afe2a72471a5e583ba",
+    "range": "complete visible menu only",
+    "role": "independentOracleavailability",
+    "status": "ProUsageLimitReached;no prompt;next08:04JST"
   }
 ]
