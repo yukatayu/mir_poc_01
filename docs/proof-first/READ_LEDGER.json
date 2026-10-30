@@ -103931,5 +103931,68 @@
     "range": "complete caller public input document checkpoint",
     "role": "W6 notification source/formal/focused correspondence",
     "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-SIDECAR-INPUT-JOIN-v2.json",
+    "sha256": "3b521e430510933a6113f6cac2972c6fe56c833f30eb22df730b5e5a0fba5914",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-SIDECAR-INPUT-CHECKPOINT-v1.json",
+    "sha256": "21467cc56019bbb965f3d9616719900259ab45e598545888fd32458e6a66ae54",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-sidecar-input-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "bfde495e9ba0cd370ee5258e3bc6e6b78a968520d7c62bf0198e0f74145671f8",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-sidecar-input-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "a94ded4d9d52b3ae6142afd412567ee2b5e6c9f2c4d019cbd7781f2dcbd4cc9a",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-sidecar-input-v1/component-v1/RESULT.json",
+    "sha256": "71e3a8061b89b0e7564e1840cee993a116176c77105a44cca128f62f3f8914a3",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-sidecar-input-v1/PREREGISTRATION.json",
+    "sha256": "7c8d8b24b7e7dadc992e2a1efe3cd80d92d7a70c913c1b2756737ba278a706d7",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T095606Z.json",
+    "sha256": "5a0b881a0d4e81bac0ba9430a361ea40ea212086ae0fbd419c347f372789813c",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v30.json",
+    "sha256": "215782ce78147b5320f330fcfb5c5ebb5a909bf70f955e677c7a4d009a22ecfc",
+    "range": "complete four JSON input/source/producer/parser/component evidence and limits",
+    "role": "W6 selected caller file and fresh Value parse bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-SIDECAR-INPUT-DOCS-CHECKPOINT-v1.json",
+    "sha256": "1a6f9ef631978a0dbb89f98d0e74cd9069daccffa4d5c07f47c1201b86aeb3cd",
+    "range": "complete caller sidecar input document checkpoint",
+    "role": "W6 sidecar input source/formal/component correspondence",
+    "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]
