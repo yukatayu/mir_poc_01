@@ -104512,5 +104512,61 @@
     "range": "complete caller host IO document checkpoint",
     "role": "W6 caller host IO source/component and reused general proof correspondence",
     "status": "full docs passed; caller host IO direct file/CString/socket fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATION-SHAPE-JOIN-v1.json",
+    "sha256": "8fa0fbf536c6fe03bd995a837e7910b75883d3939562af22eef4a4316c3083cc",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATION-SHAPE-CHECKPOINT-v1.json",
+    "sha256": "ffb2e3d6559b3ea29e078c90bd97b95453114615691b531742918eb30a943206",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-shape-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "a6744c5f943f492db203721c151af2dd153bb4f57cce01c8bdf9b2fd168b00bd",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-shape-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "a90672c0534f59ae05ae558a7fdfba70fa19974ef0c73b62f2a32021cb7743db",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-shape-v1/component-v1/RESULT.json",
+    "sha256": "115c21a975969ec3b20dfc7bea82696c38a8c98b75f936fe0a8b9f8c329b16dc",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-shape-v1/SOURCE-PREMISE-CORRECTION-v1.json",
+    "sha256": "6bfad0f0a2c4c7e978e16c9fc6bc28e128123ff58910ed031e4a19ff705e3c23",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-shape-v1/PREREGISTRATION.json",
+    "sha256": "82cf39c320c2d260f3ca529a6426f72d3c86a74e8224c6164fa3a7a32f545bee",
+    "range": "complete caller mutation source/general proof/datatype component",
+    "role": "W6 rejection input shape prerequisite;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-MUTATION-SHAPE-DOCS-CHECKPOINT-v1.json",
+    "sha256": "3cc047ca2daf01db561fa19f6cfb36bf6cd29e4649123ee8ea4d4c164bfb3dac",
+    "range": "complete caller mutation shape document checkpoint",
+    "role": "W6 caller mutation shape source/component and reused general proof correspondence",
+    "status": "full docs passed; caller mutation shape rejection input shapes conditionally connected; invalidcallee fees remain open;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

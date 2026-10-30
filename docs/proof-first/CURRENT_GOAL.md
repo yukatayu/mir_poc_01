@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。直接10書込みのCString費用と9socket pair箇所/最大17呼出しを対応。18部品case×2でbyte原本、FD返却/通信/解放、missing-parent/FD不足を照合。321操作は費用対応104/局所非割当て106/残111。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣言/16反例で検証し、9原本×21変形等の計390出力を両回で完全読戻し。元画像だけの費用流用を拒否。321操作の残fee111は未解決のまま。Native64全1750実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 23:27 JST
+Updated 2026-10-30 23:53 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -90,3 +90,5 @@ Updated 2026-10-30 23:27 JST
 - 2026-10-30 23:08 JST: 既受理W6CallerOperationLedgerのall_sites/partial_is_paid/retain_residual等を再利用し、74宣言/14反例・両回40log/84保存fileを再照合。新しい一般宣言・反例実行は追加しない。各局所費用と実行回数が満たされることが定理適用の前提であり、未解決feeを0にはしない。 106箇所の0は、receiver/引数の評価後に成功するSome/Ok移動又はbuiltin借用/predicateの局所割当てだけを指す。130局所feeに加えmacro内部・暗黙の解放・部品の未計上項を残す。metadata652byteのfile費用は4入力へ一度だけ計上。Path/env式は5個のJSON macro内の6formatも含み、hash/cohort/getpidは別。通常guardのdrop費用は開始側で計上し、残差へ二重計上しない。 共通public入力/初期履歴、130局所feeとhidden/implicit/component残差、全callerの元/返却/並行保持、非割当work/host/物理資源/進行は未完。成功branchとRust/std/serde/compiler対応が前提で、panic/任意Debug・Drop・比較を含む全式の無割当ては保証しない。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。構文行の分類数を完了率にしない。
 
 - 2026-10-30 23:27 JST: 先行一般all_sites/paid-prefixとPath/CString上限を再利用し、74宣言/14反例・両回40log/84保存fileを再照合。新しい一般宣言・反例実行は追加しない。成功する型付きbuiltin経路と公開path長の前提を保持し、Rust/libc/kernel自体の機械証明へ読み替えない。 Pを独立の公開root byte長上限とし、直接10書込みのCString要求上限は10P+486byte。実path383byteは要求0、384/768byteは385/769byteを要求。9pair箇所は最大17成功呼出しでRust要求0、最大34個のowned FDを返す。10書込みが作るfile handleは最大10個。いずれも選択した呼出しの累積生成数であり、全callerのlive FD/heap/kernel資源上限ではない。 321操作は費用対応104/条件付き局所非割当て106/残111で、hidden/implicit/component残差、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行は未完。実file byte一致はfsync/永続化保証ではない。openのEINTR再試行、short write、close、OS schedulingは別条件。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。
+
+- 2026-10-30 23:53 JST: 任意有限の入れ子context/部分木置換/縮小/複製/有限反復の一般命題と、既存typedClone/valueHeap/wire費用式の単調性を検証。新1module167宣言/16反例をfresh/replay・38log/80保存fileで照合。固定275manifestとは別cut。 A=array slot、F=object field、S=keyを含むUTF-8 byte、N=valueとkey nodeの独立上限として、各別個の変形画像は2*(A,F,S,N)+(1,16388,450660,36873)以下。元画像の上限、Flow≤4096、nominal82byte等が前提。Noneは(0,4,110,9)、最大usizeのRecordはenvelope65byteを含む(0,3,92,7)。縮小した構文形からVec/BTreeの保持容量削減や既払い返却を導かない。 321操作は費用対応104/条件付き局所非割当て106/残111のまま。変形形状は費用の前提であり、不正入力のtyped変換/拒否までの費用は未接続。共通public入力/初期履歴、hidden/implicit/component残差、全caller保持・非割当work・host/物理資源/進行は未完。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。

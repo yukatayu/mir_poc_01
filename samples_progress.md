@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 23:27 JST
+Last updated: 2026-10-30 23:53 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。直接10書込みのCString費用と9socket pair箇所/最大17呼出しを対応。18部品case×2でbyte原本、FD返却/通信/解放、missing-parent/FD不足を照合。321操作は費用対応104/局所非割当て106/残111。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣言/16反例で検証し、9原本×21変形等の計390出力を両回で完全読戻し。元画像だけの費用流用を拒否。321操作の残fee111は未解決のまま。Native64全1750実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,6 +45,7 @@ W6継続・未完了。直接10書込みのCString費用と9socket pair箇所/�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Caller mutation shape | CALLER-MUTATION-SHAPE-JOIN-v1 / qualify_caller_mutation_shape_v1.py | 167宣言/16反例、9原本の390出力を両回照合。変形上限のみ、拒否までのfee/保持容量/物理進行はOPEN。type名fixtureをlive sessionと数えない |
 | Caller host IO | CALLER-HOST-IO-JOIN-v1 / qualify_caller_host_io_v1.py | 10write/9pair箇所、18部品×2。CString10P+486/最大34owned FD返却。累積生成数とkernel/live上限は別。残111局所fee/物理進行はOPEN |
 | Caller fee partition | CALLER-FEE-PARTITION-JOIN-v1 / qualify_caller_fee_partition_v1.py | 321操作=既存fee85/条件付き局所非割当て106/残130。79部品case×2、引数/destructor残差を保持。新一般宣言なし、全caller/物理進行はOPEN |
 | Global observer guard | GLOBAL-GUARD-COST-JOIN-v1 / qualify_global_guard_cost_v1.py | 46宣言/12反例、510原本/30部品case×2。snapshot一時Valueと複製を課金。after cutとvalid表現の境界を保持、全caller/物理進行はOPEN |
