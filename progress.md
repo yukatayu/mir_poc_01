@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-31 02:00 JST
+最終更新: 2026-10-31 02:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。現codecの正常・拒否72case×2、450区間の完全byte/値/診断/費用を照合。caller7箇所を対応し区分119/111/残91。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。現型の初期化・借用・host callback21箇所を、74部品結果/160区間と全321ASTへ対応。caller区分119/132/残70。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -65,7 +65,7 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 |---|---|---|
 | 論理仕様 | 275module/41526宣言/1995反例をfresh/replayで受理。追加の寿命・局所費用・型rankは別cutで検証 | **着手可能・W6再開済み**。Native63の23意味対応/153outward出所を照合済み。全caller資源・他profileと最終受理は未完 |
 | ユーザ向け仕様 | 現行FD5の全field/status/count/order/length/EOF/no-frameと他channelの出所・認可・TCBをLABで棚卸し。成功emptyは不在証明ではない | graph/coverage/loss/absence/active debugの具体化は着手可能。最終Q26/Q27は **要仕様確認**、未採用を維持 |
-| 実装 / 運用 | Native63全1750/45reader/全履歴と他1190/7doctestを受理。別計測構成の45校正と実3world/各2cold readerも受理 | **着手可能・W6再開済み**。計測構成全1790回帰、public全資源、最終reviewは残る |
+| 実装 / 運用 | Native64全1750/45reader/全履歴と計測64 selectedを受理。Native63他1190/7doctestは旧baseline | **着手可能・W6再開済み**。計測64全1790/後続reader、public全資源、最終reviewは残る |
 
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
@@ -1415,3 +1415,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-31 01:22 JST: 現151型/108case×2の完全返却値・拒否診断・費用と30一般宣言/8反例を照合。caller区分112/111/残98、全codec/物理進行は未完。計測64全1790は実行継続。
 
 - 2026-10-31 02:00 JST: 現codec72case×2の完全wire・返却値・拒否診断・450区間費用を、既存436一般宣言/234数値代入/8反例へ照合。caller区分119/111/残91、共通入力/全caller/物理進行は未完。計測64全1790は実行継続。
+
+- 2026-10-31 02:24 JST: 現borrow/default/host callback21箇所を、37case×2/160区間・6非零対照・全321ASTへ対応。caller区分119/132/残70、共通入力/全caller/物理進行は未完。

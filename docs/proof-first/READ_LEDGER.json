@@ -105002,5 +105002,68 @@
     "range": "complete current whole codec document checkpoint",
     "role": "W6currentwholecodeccost/sourcecorrespondence",
     "status": "full6410passed;codec144observations450stagesaccepted;caller91/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-BORROW-DEFAULT-JOIN-v1.json",
+    "sha256": "9bcba8af3b9e3dae5d3ca5d0ffc020278827c6a47999ed2ff1571b1d838ca840",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/PREREGISTRATION.json",
+    "sha256": "73b4d23a741504460b248e197d9002bad706927bb3de8e1b092a9581ff943e9e",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/PREPARATION.json",
+    "sha256": "daa657a449aea1af0fd439b6e707b163ba4285f71036d289871d04c06c42409b",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/execution-v1/RESULT.json",
+    "sha256": "00b49f427536ec5532a37e33aab25a424ac4fb65728f98718da69478f6e30717",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "b0902432492b7d670ce7aef280c2c9cf94e3164994d8ec6a0cc42581f1f155ca",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/PARTITION-BORROW-DEFAULT-v1.json",
+    "sha256": "b15a494a73e9542e92a77b2c222d51f4da00d0e4fc2bb08f6f52238de7f38819",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/PUSH-v1.json",
+    "sha256": "f1a5391075ba3449cd544dc79c8254c8e89f9ca6fb59426b832815a12dd12749",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/CHECKPOINT-v1.json",
+    "sha256": "f86e59f9a00fdb2baf618d95e4d0ef3d8bd5cf2772e5fa7ac50d5d4ad0fa25dc",
+    "range": "whole current concreteborrow/default source/measurement/formalreuse/readback",
+    "role": "conditional21localzero;notwholecallerphysicalacceptance",
+    "status": "74results160regions;14primary/321AST;caller70/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-borrow-default-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "1f2d440f61a030cca08f7a4ecf03cd70baadb14f44e0bd64e56a48fc0a498b97",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6borrowdefaultsourcecostcorrespondence",
+    "status": "full6410passed;74results160regionsaccepted;caller70/commoninput/physical/wholeW6open"
   }
 ]

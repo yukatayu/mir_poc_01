@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-31 02:00 JST
+最終更新: 2026-10-31 02:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,21 +12,21 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABはo
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。現codecの正常・拒否72case×2、450区間の完全byte/値/診断/費用を照合。caller7箇所を対応し区分119/111/残91。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。現型の初期化・借用・host callback21箇所を、74部品結果/160区間と全321ASTへ対応。caller区分119/132/残70。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 Native64全1750/0failed/0ignored、全6575source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを新規実行で受理。旧prefixの流用なし、queue改変10件を拒否。新binaryのarchiveは全byte読戻し、元実行fileも保持。旧Native63の他1190/7doctestは履歴baselineであり、Native64の新workspace全受理へ自動継承しない。 Native59/60/62等の旧失敗を保持。残分類はW6_CHECK.implementation.unverified_checks、再開手順はdocs/proof-first/RESUME.md。
 
 ## ordered self-driven packages
 
-計測64の全1790を監視し、終了後に全原本/意味/履歴readerへ進む。並行して残91局所fee・hidden/implicit/component、変形入力のrestore等のcallee費用/失敗prefix、共通public入力/履歴、全caller保持・物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
+計測64の全1790を監視し、終了後に全原本/意味/履歴readerへ進む。並行して残70局所fee・hidden/implicit/component、変形入力のrestore等のcallee費用/失敗prefix、共通public入力/履歴、全caller保持・物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63の14package/148target/32example/5CLIを固定。隔離Native64はtest helper1関数だけを変更、全6575入力/1750名を照合 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native64全1750/45readerを保持。計測64の45校正/実3worldと独立reader受理、全1790は専用serviceで実行中。終了後全reader。Native63他1190/7doctestは旧baseline |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 現whole codec72case×2/450区間を対応。正常・拒否7siteのfeeを追加し区分119/111/残91。共通入力/全caller/物理進行はOPEN |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 現graph/default/集合借用/Option/実callback21箇所を局所要求0へ対応。74結果/160区間、6非零対照。区分119/132/残70、全caller/共通入力/物理進行はOPEN |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 現whole codecの費用対応のfull6410入力不変・exit0。focused437通過、metadataはfocused438で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 現borrow/default/実callbackのfull6410入力不変・exit0。focused439通過、metadataはfocused440で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
 | Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/31 02:03JSTもGPT-6 Pro利用上限、prompt未送信。次回03:03JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
@@ -46,7 +46,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 |---|---|
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
-| Work and funding | 元画像feeを変形画像へ無条件流用しない。残91/hidden/implicit/callee/共通入力/全caller/物理進行はOPEN |
+| Work and funding | 元画像feeを変形画像へ無条件流用しない。残70/hidden/implicit/callee/共通入力/全caller/物理進行はOPEN |
 | Temporary ownership | worker7source/69関数を条件付き対応。新driverはguard通知/return/Err/panic/joinを分離。全caller数値費用と物理資源はOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
