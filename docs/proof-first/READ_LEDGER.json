@@ -105240,5 +105240,82 @@
     "range": "complete current concretecaller document checkpoint",
     "role": "W6registrationcodeccostcorrespondence",
     "status": "full6410passed;27inputstwice126intervalsaccepted;caller59/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PREFIX-VALUE-JOIN-v1.json",
+    "sha256": "3946f10b4e3bf4ae6e7777e0851f996269677d4eebb81b800c68f097b4e01302",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/PREREGISTRATION.json",
+    "sha256": "296a0c310d37956f244bff02a1a064714ce70656899ac98ba71792d3989f973e",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/PREPARATION.json",
+    "sha256": "b68f0e65d630f44f6f2e98771ffca501493025cc9a0616b74e248d344ec0997e",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/execution-v1/RESULT.json",
+    "sha256": "25ceb53131688e88f71ded84f273b13b2164c9d07eec0598adfbe90c38403924",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "70cf3d654c7246cf2cdf7ef25e02f59182514785bab4bb52b083aefcc7abdb04",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/FORMULA-FORMAL-VERIFICATION-v3.json",
+    "sha256": "56f8b1532bcc57a9f19f39f3ae5d1569734016efdced4707e921bbe65b9a37ac",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/PROVENANCE-VERIFICATION-v1.json",
+    "sha256": "3da66a4802ff25d2a5670e19c32e16a7efa54e14a87996d342c4be96089f07d9",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/PARTITION-PREFIX-VALUE-v1.json",
+    "sha256": "5d0c973aa16f041f0577c10e3f5e8803bf0edde1afe7f99e78ce2adc8dbcee7e",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/PUSH-v1.json",
+    "sha256": "ceda023599b94724e182e13d9d9ffe57a6e07638f39008cda12c5d640dfd5f97",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/CHECKPOINT-v1.json",
+    "sha256": "6b693771bc0925282e9f9afde1806a42343cec6ae0c0bd0a8f0d7d4f21ba17eb",
+    "range": "whole currentprefix Value source/component/formal/provenance",
+    "role": "conditional4fees;notwholecallerphysicalacceptance",
+    "status": "24inputs twice/48outputs/2controls;62formallogs;caller55/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "e177dceba2a7b2c7a86c611e940c112997d72231b967e79f20f0db2870d85ede",
+    "range": "complete currentprefix documentation checkpoint",
+    "role": "W6prefixcostcorrespondence",
+    "status": "focused21passed;caller55/commoninput/physical/wholeW6open"
   }
 ]
