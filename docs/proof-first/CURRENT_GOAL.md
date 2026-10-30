@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。拡張計測の追加5fieldとsnapshot一時Value/複製の費用を接続。46宣言/12反例・両回38log、既存510記録、30部品case×2を照合。after cut後の記録費用と任意入力のvalid表示の境界を保持。Native64全1750は実行中、終了後45reader。全caller/共通入力/物理進行/最終照合は未完。
+W6継続・未完了。実caller321操作を、既存費用へ接続85、条件付き局所非割当て106、明示した未解決130へ分けた。既存一般proof40logを再照合し、新宣言は追加せず、79部品case×2で移動/借用と引数・destructorの別費用を確認。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 22:47 JST
+Updated 2026-10-30 23:08 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -86,3 +86,5 @@ Updated 2026-10-30 22:47 JST
 - 2026-10-30 22:24 JST: 独立の公開byte上限に対する費用単調性/合成/有限反復/既払い保持と、任意の有効な割当・解放列のlive+released=incoming+requestedを検証。2module計148宣言/22反例をfresh/replay・70log/148保存fileで照合。固定275manifestとは別cut。 E=flag値byte、P=root、I=ID、C=raw child環境値、L=phaseの独立上限として、要求byteは開始E+17P+33I+C+32L+2896、記録P+I+26L+47932、計E+18P+34I+C+58L+50828。実caller6箇所は各最大1回/L≤17で、callee本体は別。L=17の出力は30field/736文字列byte/61node、pretty上限1529byte、JSON要求41885byte、writer要求6388byte。 独立public入力/初期履歴、残caller/callee費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。成功env/parse/checked_sub/elapsed≤u64/host書込みとRust/std/serde/compiler対応が前提。panic/部分送信/時刻の上限は結論しない。追加5fieldとglobal snapshotを持つ全process計測構成は今回の費用対象外。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。累積要求をlive peak/RSS/物理予約/W6/T10受理へ読み替えない。
 
 - 2026-10-30 22:47 JST: 任意の公開byte上限とbefore/after分岐に対する形・費用の単調性/合成/増分を、46宣言/12反例・fresh/replay38log/80保存fileで照合。通常guard費用をimportし、既受理の安定snapshot/寿命proofは保持。固定275manifestとは別cut。 E=flag値byte、P=root、I=ID、C=raw child環境値、L=phaseの独立上限として、開始E+17P+33I+C+32L+2896は不変。記録P+I+26L+77579、計E+18P+34I+C+58L+80475で、通常guardからの増分は29647byte。L=17の出力は45field/1239文字列byte/91node、pretty上限2364byte、JSON要求68192byte、writer要求9728byte。割当要求量の上限であり、公開入力上限を選定したものではない。 独立public入力/初期履歴、残caller/callee費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。実snapshotのGlobal/Busy/Invalidは割当0を確認したが、Changedは今回typed表現試験であり、生成の証拠は先行interleavingへ残す。snapshotの8回atomic loadに割当が無くても、callbackのCAS再試行/進行保証は導かない。成功env/parse/checked_sub/elapsed≤u64/host書込みとRust/std/serde/compiler対応を前提とする。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleは未完。累積要求をlive peak/RSS/物理予約/W6/T10受理へ読み替えない。
+
+- 2026-10-30 23:08 JST: 既受理W6CallerOperationLedgerのall_sites/partial_is_paid/retain_residual等を再利用し、74宣言/14反例・両回40log/84保存fileを再照合。新しい一般宣言・反例実行は追加しない。各局所費用と実行回数が満たされることが定理適用の前提であり、未解決feeを0にはしない。 106箇所の0は、receiver/引数の評価後に成功するSome/Ok移動又はbuiltin借用/predicateの局所割当てだけを指す。130局所feeに加えmacro内部・暗黙の解放・部品の未計上項を残す。metadata652byteのfile費用は4入力へ一度だけ計上。Path/env式は5個のJSON macro内の6formatも含み、hash/cohort/getpidは別。通常guardのdrop費用は開始側で計上し、残差へ二重計上しない。 共通public入力/初期履歴、130局所feeとhidden/implicit/component残差、全callerの元/返却/並行保持、非割当work/host/物理資源/進行は未完。成功branchとRust/std/serde/compiler対応が前提で、panic/任意Debug・Drop・比較を含む全式の無割当ては保証しない。Native64全1750/後続45reader、計測構成1790、他profile/119要件/outward/history/最終統合docs/Oracleも未完。構文行の分類数を完了率にしない。

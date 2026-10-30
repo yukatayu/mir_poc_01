@@ -104400,5 +104400,61 @@
     "range": "complete global guard document checkpoint",
     "role": "W6 global guard source/formal/component/entry ownership correspondence",
     "status": "full docs passed; global guard extra field/snapshot fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-FEE-PARTITION-JOIN-v1.json",
+    "sha256": "2e3a4f1b7eee75624d1f770e7ee10f13746f619039b76afc73d530375a4abd65",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-FEE-PARTITION-CHECKPOINT-v1.json",
+    "sha256": "7df0053d6f08d890c54fc89a6d97c9df0a4deb8378461b897005383291d79baa",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "59fc7bac7608f3822ad168cee860ddffa629996d3edf294e1dd7faea5f3ddc70",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-fee-partition-v1/SOURCE-VERIFICATION-v4.json",
+    "sha256": "cb61d5270c02a305bfa037bfdc9b7b6803f1f2d06a62c3f49a07dc7c4ab36fe2",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-fee-partition-v1/component-v1/RESULT.json",
+    "sha256": "260c68b38667a30e3b449ef087b2a511b54ace9b93a1cc27decc0e755a7e12c2",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-fee-partition-v1/PARTITION-v1.json",
+    "sha256": "58bf1c03d01c2fb4e8c4adc1c868d32119452e44ff1c11709ab85a0fd3c011ac",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-fee-partition-v1/PREREGISTRATION.json",
+    "sha256": "d77e09f841514ea8b4f8126a7c539de462f81782c9c2d89b43dfc0a5f6ce58a4",
+    "range": "complete callerfee partition/source/component and reusedformal correspondence",
+    "role": "W6 caller operation fee partition and intrinsic operation boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-FEE-PARTITION-DOCS-CHECKPOINT-v1.json",
+    "sha256": "3b207af8505add5b0cb47686518cfc7eafa530cb3cf91e372ca0bc6a73c02dec",
+    "range": "complete caller fee partition document checkpoint",
+    "role": "W6 caller fee partition source/component and reused general proof correspondence",
+    "status": "full docs passed; caller fee partition extra field/snapshot fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]
