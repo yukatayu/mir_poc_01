@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 21:25 JST
+Last updated: 2026-10-30 21:48 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。実callerの321構文操作を台帳化し、9箇所・最大22回の直接複製を既存費用式へ接続。74宣言/14反例を両回・40logで検証。残る312操作の局所費用は本cutで未代入、macro/callee/元保持を省略しない。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,7 +45,8 @@ W6継続・未完了。実callerの321構文操作を台帳化し、9箇所・�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller operation ledger | CALLER-OPERATION-LEDGER-JOIN-v1 / qualify_caller_operation_v2.py | 321構文操作、9箇所/最大22直接copy、74宣言/14反例。現9画像の式適用は計測でなく、312局所fee/全caller/物理進行はOPEN |
+| Caller reader output costs | CALLER-READER-OUTPUT-JOIN-v1 / qualify_caller_reader_output_v1.py | 4出力形、72宣言/14反例、48原本/64部品case×2。input/format/workは別費用、全caller/物理進行はOPEN |
+| Caller operation ledger | CALLER-OPERATION-LEDGER-JOIN-v1 / qualify_caller_operation_v2.py | 321構文操作、9箇所/最大22直接copy、74宣言/14反例。現9画像の式適用は計測でなく、他費用は後続row/残操作へ継続、全caller/物理進行はOPEN |
 | Caller Path/environment costs | CALLER-PATH-ENV-JOIN-v1 / qualify_caller_path_env_v1.py | 99宣言/16反例、101部品の各2回、実compile改変2拒否。公開parameterによる直下費用式、共通入力/callee/全caller/物理進行はOPEN |
 | Caller prefix construction | CALLER-PREFIX-CONSTRUCTION-JOIN-v1 / qualify_caller_prefix_construction_v1.py | 40宣言/12反例、106部品/全256u8の各2回、実compile改変2拒否。条件付き構築要求≤636473、policy/全caller/物理進行はOPEN |
 | Caller Value copy/write | CALLER-VALUE-WRITE-JOIN-v1 / qualify_caller_value_write_v1.py | 51宣言/14反例、229部品+tiny8例の各2回。正確な型/件数/元所有の条件付き要求量、全caller/物理進行はOPEN |

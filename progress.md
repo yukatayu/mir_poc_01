@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-30 21:25 JST
+最終更新: 2026-10-30 21:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。実callerの321構文操作を台帳化し、9箇所・最大22回の直接複製を既存費用式へ接続。74宣言/14反例を両回・40logで検証。残る312操作の局所費用は本cutで未代入、macro/callee/元保持を省略しない。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -1395,3 +1395,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-30 20:59 JST: Path/環境/閉じた名前生成を99宣言/16反例、101部品の各2回へ対応。直下費用を公開parameterへ合成し、実compile改変2件を拒否。共通上限/callee/元保持/物理進行は残す。
 
 - 2026-10-30 21:25 JST: 実caller321操作/19controlを照合し、直接複製9箇所・最大22回を費用式へ接続。74宣言/14反例・両回40log、source12/台帳8改変拒否。312局所feeと共通入力/全caller/物理進行は残す。
+
+- 2026-10-30 21:48 JST: reader4出力の追加field/入れ子indent/copy/writerを合成。72宣言/14反例・両回38log、48原本と64部品case×2を照合。全caller/共通入力/物理進行は残す。

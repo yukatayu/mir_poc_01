@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。実callerの321構文操作を台帳化し、9箇所・最大22回の直接複製を既存費用式へ接続。74宣言/14反例を両回・40logで検証。残る312操作の局所費用は本cutで未代入、macro/callee/元保持を省略しない。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。実readerの4出力形を既存copy/writer費用へ接続。72宣言/14反例を両回・38logで検証し、保存済み48出力と64部品case×2を照合。追加field/入れ子indent/元保持を省略しない。Native64全1750は実行中、終了後45reader。残る全caller/共通入力/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 21:25 JST
+Updated 2026-10-30 21:48 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -80,3 +80,5 @@ Updated 2026-10-30 21:25 JST
 - 2026-10-30 20:59 JST: 任意有限の初期容量付きbuffer成長、Pathのclone/join、extension事前確保、環境値copy、formatを合成。readlinkのfull-read列は独立した結果長上限Xの下で呼出し数≤X+1となり、初期256と最後のshrink要求を残す。99宣言/16反例をfresh/replay・38log/80保存fileで検証。先行81宣言/12反例cutを保持し、source式を前方追加した。固定275manifestとは別。 直下の対象費用は180P+11E+16K+17X+32223byte。Pは借用rootのbyte長、Eは各環境値、Kはregistered.key、Xは各current_exe読戻しの独立上限。join176P+7904、extension4P+239、format16K+23552、env11E、exe17X+528を合成。image_root/registration/cohort helper、全callee、元容量、hashとOS費用は別。private実測値から共通上限を作らず、物理予約とは扱わない。 共通public P/E/K/X、typed/native/image cloneを含む全callerと初期入力・履歴の数値費用、残るguard/executor/host/物理資源/進行は未完。任意環境/Path長、PATH_MAX、失敗/panic/OOM、allocator余剰/RSS/stack/OS進行は保証しない。Rust/std/serde/source対応はTCB。Native64全1750は実行中で45readerは終了後、計測構成1790は別の未実行回帰。他profile、119要件/outward/history、最終統合docs/Oracleも残る。W6/T10/Canon受理なし。
 
 - 2026-10-30 21:25 JST: 任意有限のsite列について各実行回数と局所費用の上限から全要求量を合成し、途中終了の既払い、独立optional branch、反復と残差を保持。共通上限から2実行の費用一致は導かない。既存typedClone/Value copy式をimportし、新74宣言/14反例をfresh/replay・40log/84保存fileで検証。固定275manifestとは別cut。 直接画像cloneは最大13回、JSON cloneは7回、画像又はruntime subtreeのto_valueは2回。A=array slot、F=object field、S=keyを含むUTF-8 byte、N=nodeとして、対象費用は13*(8240A+176N+S)+9*(32A+1024F+S)=107408A+9216F+2288N+22S。reader直下のdecode最大8/restore15/correspondence4も記録したが、その費用をここで0にはしない。restore内部のclone等はcallee費用内に残す。 残る312構文操作の局所費用は本cutで未代入であり、既存他stageの対応と未解決calleeを今後結ぶ。共通public A/F/S/N・初期入力/履歴、全caller保持/非割当work/host/物理資源/進行は未完。実9画像の値を共通public上限へしない。Rust/compiler/derive/library/source対応はTCB。Native64全1750と後続45reader、計測構成1790の必要回帰、他profile/119要件/outward/history/最終統合docs/Oracleは未完。W6/T10/Canon受理なし。
+
+- 2026-10-30 21:48 JST: 任意のpayload上限に対して追加fieldを持つ出力形の単調性、copy/writeの加算、独立optional branchの全加算、元frameと途中既払いの保持を検証。新72宣言/14反例をfresh/replay・38log/80保存fileで照合した。固定275manifestとは別cut。 prefix/distributed/Flow/最終metadataのwire上限は16654/4856987/5828156/441byte、Value構築要求上限は286599/8675470/8838625/8559byte、writer要求上限は66888/19428220/23312896/2036byte。最終metadataは8field・固定scope151byteで、writerの12field metadataを流用しない。4組のmacro/writerは各最大1回で、optional3出力は排他的でない。 共通public入力/初期履歴、残るcaller操作とcalleeの数値費用、元/返却/並行保持、非割当work/host/物理資源/進行は未完。閉じた成功出力形・Rust/compiler/serde/source対応を前提とし、任意不正入力又は実時間を保証しない。Native64全1750と後続45reader、計測構成1790の必要回帰、他profile/119要件/outward/history/最終統合docs/Oracleも未完。累積要求をlive peak/RSS/物理予約又はW6/T10受理へ読み替えない。

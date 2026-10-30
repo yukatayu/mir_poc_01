@@ -104232,5 +104232,54 @@
     "range": "complete caller operation ledger document checkpoint",
     "role": "W6 actual caller operation/source/formal correspondence",
     "status": "full docs passed; caller321sites/9directcopysites conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-READER-OUTPUT-JOIN-v1.json",
+    "sha256": "a4cb0cf17ad4aeee370a3e0ea1b10ee43cc8df70eedd9c6c46d4dc537b742c49",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-READER-OUTPUT-CHECKPOINT-v1.json",
+    "sha256": "05a579061c435ee9ea2fc361ad744d917184e6e60083d0cf2929774b542602e7",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "7c9013b6e99e3c69bb1e69824de6aba923d562b23db5e8442ed5129b0b601a61",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "d8d826ea4b42bec0ad2048fa1011181fdce2432d9d2b4ed6a360ad6ed2d8f09c",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/component-v1/RESULT.json",
+    "sha256": "71bf69898c8d37c9d07a2bc9b9cd8ee05012cf17560e28f40321d2b5442095a8",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-reader-output-v1/PREREGISTRATION.json",
+    "sha256": "10c2abde709458d29818066df1ee71567131ee865bcc126976e91b0899d992aa",
+    "range": "complete readeroutput source/formal/component/independentreadback and limits",
+    "role": "W6 actual caller output cost composition",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-READER-OUTPUT-DOCS-CHECKPOINT-v1.json",
+    "sha256": "a6f8cb63699a65a010f692732bc039cf84d9edb4bd8273ca3b271848b264da46",
+    "range": "complete caller reader output document checkpoint",
+    "role": "W6 actual caller output/source/formal/component correspondence",
+    "status": "full docs passed; reader4output shape/copy/writer conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]
