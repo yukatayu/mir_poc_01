@@ -1,33 +1,33 @@
 # tasks
 
-最終更新: 2026-10-30 08:49 JST
+最終更新: 2026-10-30 15:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 ## document role
 
-Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABもSSD増設/再起動前のowner pause。I3-4/W7/Canon採用は開始しない。Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。単一report2617とW6_CHECKへ証拠を集約する。
+Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABはowner再開指示により継続中。I3-4/W7/Canon採用は開始しない。Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。単一report2617とW6_CHECKへ証拠を集約する。
 
 ## current promoted package
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
+W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-自走研究は停止。次に自走で進める順番は、明示再開後のstorage確認/必要subset復元、worker保持、共通入力/履歴、物理資源/進行、最終照合。直前の追加3〜7日という見積りは低確度の実作業見込みで、今回の停止・増設待ち時間を含まない。
+storage復元/移行は検証済み。次はworker所有・並行保持のsource対応と独立読戻し、共通入力/履歴、物理資源/進行、最終照合。直前の追加3〜7日という見積りは低確度の実作業見込みで、今回の停止・増設・storage移行時間を含まない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | owner pause。caller paths受理まで保持。workerはsource解析/未実行Lean草稿を保存。再開指示後に継続 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | caller paths受理まで保持。worker一般Lean262宣言/22反例を両回実行。実source対応/独立読戻しは次。storage移行は実装資源の受理へ加算しない |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | c3f286d3のfull6410/focused397は受理済み。今回停止metadataはfocused398の21項目を通過。receipt metadataはfocused399で確認。最終W6受理は未完 |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | owner pause。08:31JST利用上限を最終観測として保持。待機browser終了、確認/prompt送信停止 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | SSD移行・再開のfull6410入力不変・exit0。focused400通過、metadataはfocused401で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 14:27JSTもGPT-6 Pro利用上限。prompt未送信。次回確認は15:27JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
@@ -36,7 +36,7 @@ Macro1/5の一般証明とMacro3/5の実Source/kernelを接続し、Macro3/6のr
 
 ## user decision gates
 
-容量: 2026-10-30 08:49 JST 再起動で消えるW6 tmpfs全81rootの12384 regular file、17853全entry、論理7417200732byteをw6-volatile.tar.zst（1330292039byte）へ保存。全fileのSHA256/長さ、mode/uid/gid/mtime、hardlink/symlink関係、圧縮EOFを独立読戻しで照合。原本削除なし。archive SHA256=74e89575e2a19cb90a51bb5460c1f823061ef53cd649b4b010da9be8b4d4801d。 SATA SSDの別mountへheavy artifact/cache/logを配置することは可能だが、増設後の実mount/filesystem/空き/権限を確認するまで新pathを前提にしない。NVMeのTBW増加原因は未測定。tmpfsもswapを利用し得るため、再開後に実I/Oとswap配置を点検する。今回はformat/fstab/mount/swap変更なし。
+容量: 2026-10-30 15:02 JST 移行開始時からroot空きは56794910720byte増え、60476727296byte（約60.5GB）。SSD空き203691089920byte（約203.7GB）。並行する他作業で空きは変動する。 58個/19385573byteのimport cacheをRAMへhash一致で配置。process cgroup MemoryMax=6GiB/MemorySwapMax=0の実propertyを確認。RAM hot領域2GiB上限と合わせ約8GiBの保守的運用枠とし、必要分だけ使う。RAMは唯一の証拠保存先にしない。全OSのswap設定は変更しない。
 
 Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。可逆LAB候補と反証は継続可能。技術検証と最終採用判断を分ける。privacy弱化/L0-L1/public contract/production/Canon採用はowner判断。119要件/30Q/18PT/24SC/8alphaの出所・承認・採用区分を保持する。
 
@@ -54,7 +54,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 ## maintenance tasks
 
-最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
 ## non-promoted references
 
@@ -62,4 +62,4 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-最終観測: quota08:11JST残量85%、Oracle08:31JST利用上限。owner pause中は確認しない。指定resetは使用1回、追加使用/購入なし。
+最終観測: quota14:21JST残量80%、次回15:21JST以降。Oracle14:27JST利用上限、次回15:27JST以降。指定reset使用1回、35%停止、追加使用/購入なし。

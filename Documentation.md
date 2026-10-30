@@ -22,11 +22,11 @@ memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
-W6「秘密を含む観測とdebug」は、2026-10-30のSSD増設・PC再起動に備えるowner指示で停止しました。研究原本・検証済みarchiveと未検証草稿を保存済みです。閉じたAstra研究handoffはReport2616、単一実装reportは2617を維持し、明示再開まで新しい研究を行いません。
+W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
+W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
 
-最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
 ALIGN-2 の受理済み境界は
 [`architecture/07-browser-host-trust-boundaries.md`](mirrorea_canon/architecture/07-browser-host-trust-boundaries.md)

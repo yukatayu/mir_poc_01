@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; current W6 implementation evidence: Report2
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-10-30 08:49 JST): W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
+Current package map (2026-10-30 15:02 JST): W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
 
 ## Authority and retained history
 
@@ -21,7 +21,7 @@ only for task procedural separate-role advice; no sub-agents, signatures, owner
 keys or independent kernel execution are invented. Signed acceptance remains
 fail-closed where its trust anchor is absent. L0/privacy/authority weakening,
 irreversible public compatibility and publication/paid/production operations
-remain excluded. Independent reversible research is technically available but execution is owner-paused as of 2026-10-29; explicit resume is required.
+remain excluded. The owner resumed W6 on2026-10-30 and requested verified SSD migration/RAM use before continuing. Plan250 remains owner-paused.
 
 ## Evidence and direct consumers
 
@@ -4737,3 +4737,5 @@ W6 OriginalImage pipeline (2026-10-30 07:53 JST): OriginalImageのcapture/valida
 W6 OriginalImage caller paths (2026-10-30 08:26 JST): OriginalImageの呼出し元test_initial_at全bodyをASTで解析し、Native63の30block/73local宣言と2つのif-let束縛、計測構成の38block/99localを照合。9補助関数とFreshHostTurnを渡す2つのwrapperを保持し、全30scopeの所有関係を対応した。計測用registry監査2blockだけを除くと元Native63のbodyへ厳密に一致する。 成功した型付き画像はserdeの6field、復元済みSourceはfieldsの長さ/name照合により8field、rewriteは固定2反復、検証済みFlowはentries≤capacity≤4096。これらは実測最大値から作った上限ではない。任意のimport画像、成功前の拒否prefixと一般履歴には独立条件が残る。 外側worker/process/thread/setupと並行保持、各stage・条件・初期履歴に対する共通public入力上限、一般Stringの事前上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理予約/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegen/macrosとsource対応はTCB。W6/T10/Canon受理なし。
 
 W6 owner pause (2026-10-30 08:49 JST): 検証済みcaller pathsを維持して研究を停止。worker-ownership-v1の両構成7source解析、parser、38保存file/13019324byteと未実行W6WorkerOwnership_v1.leanをhash固定した。一般証明・source guard/反例・native component・worker全体受理は未実行。 再起動で消えるW6 tmpfs全81rootの12384 regular file、17853全entry、論理7417200732byteをw6-volatile.tar.zst（1330292039byte）へ保存。全fileのSHA256/長さ、mode/uid/gid/mtime、hardlink/symlink関係、圧縮EOFを独立読戻しで照合。原本削除なし。archive SHA256=74e89575e2a19cb90a51bb5460c1f823061ef53cd649b4b010da9be8b4d4801d。 SATA SSDの別mountへheavy artifact/cache/logを配置することは可能だが、増設後の実mount/filesystem/空き/権限を確認するまで新pathを前提にしない。NVMeのTBW増加原因は未測定。tmpfsもswapを利用し得るため、再開後に実I/Oとswap配置を点検する。今回はformat/fstab/mount/swap変更なし。 W6未完了。worker/並行保持、共通入力/履歴、物理資源/進行、他profile/全要件/計測構成1790の必要回帰、最終統合docs/Oracleは残る。停止は完了受理又はquota不足によるblockedではない。
+
+W6 storage/resume (2026-10-30 15:02 JST): 追加SSDのext4 mount/UUID/容量/権限を確認。再起動前の17853entry/12384fileを全SHA256・属性・hardlink/symlink照合で復元し、旧RAM81rootをSSDへ対応。さらに175大容量rootの861464entry/783026file（763258unique file inode）を別SSDへcopy/全読戻し後、明示--confirmで旧重複copyを整理。元のlogical pathをaliasで維持し、6807保護fileと受理済みNative63実行fileを再照合した。 移行開始時からroot空きは56794910720byte増え、60476727296byte（約60.5GB）。SSD空き203691089920byte（約203.7GB）。並行する他作業で空きは変動する。 58個/19385573byteのimport cacheをRAMへhash一致で配置。process cgroup MemoryMax=6GiB/MemorySwapMax=0の実propertyを確認。RAM hot領域2GiB上限と合わせ約8GiBの保守的運用枠とし、必要分だけ使う。RAMは唯一の証拠保存先にしない。全OSのswap設定は変更しない。 これは研究環境の容量/配置の検証であり、W6実装の物理資源/進行保証又はT10受理ではない。物理device/inodeは移行で変わり、live ledger同一性や実機試験の再実行を主張しない。worker/source対応、共通public入力/履歴、全caller・host/物理資源/進行、他profile/計測構成1790の必要回帰、最終統合docs/Oracleは未完了。

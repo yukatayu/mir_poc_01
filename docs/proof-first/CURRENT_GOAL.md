@@ -1,14 +1,14 @@
-# W6 — 秘密を含む観測とdebug：SSD増設前のowner pause
+# W6 — 秘密を含む観測とdebug：SSD移行検証済み・継続中
 
-W6「秘密を含む観測とdebug」は、2026-10-30のSSD増設・PC再起動に備えるowner指示で停止しました。研究原本・検証済みarchiveと未検証草稿を保存済みです。閉じたAstra研究handoffはReport2616、単一実装reportは2617を維持し、明示再開まで新しい研究を行いません。
+W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はSSD増設・PC再起動に備えるowner pauseで未完了。検証済み区切りはc3f286d3のOriginalImage caller paths（84宣言/22反例/48log）。Native63全1750/45reader、他1190/7doctest、固定275formalを保持。worker調査はsource解析まででLean草稿未実行。RAM上12384fileを永続archiveへ全照合済み。明示再開まで研究・quota/Oracle確認を停止する。
+W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
 
-最新owner指示はSSD増設・PC分解/再起動前の安全な停止です。W6はowner pauseで、再開には明示指示を要します。増設候補は別ドライブのSATA SSDで、NVMe書込量への懸念も記録しました。再開後にmount/filesystem/空き容量を確認し、heavy artifact/cache/logの配置とswapを点検します。今回はdevice/partition/mount/OS設定を変更せず、cleanupもしません。指定reset使用1回とQUOTA-OWNER-POLICY-v6の35%条件を保持し、pause中はquota/Oracle確認、追加reset・購入を行いません。W7/Canon/Plan250-I3-4も開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 08:49 JST
+Updated 2026-10-30 15:02 JST
 
-- Authority: explicit owner resume at 2026-10-29 20:00JST; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
+- Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
 - Direct consumer: actual W5 ordinary-source/owner/QUIC observer and independent active-control boundary.
 - Exact workroot: /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation. Baseline HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main; predecessor16dirty paths protected.
@@ -62,3 +62,5 @@ Updated 2026-10-30 08:49 JST
 - 2026-10-30 07:13 JST: 14個の補助関数全bodyを固定し、PublisherImageのexpected比較Vec、restrictionsのVecから配列への移動、FlowのDATA clone後のfield置換、dormant復元と再capture比較を対応した。返却値・一時値・消費した入力を分け、3関数のmarker付き本体を元sourceへ厳密に戻せることを確認。2改変も別にcompileした。 PublisherImageのexpectedは全field生成後まで残り、restrictionsを配列へ移すと子Treeは残ってVec backingだけが解放される。Flow recaptureでは新しいhexの生成中も置換前のhexを保持する。dormant復元は入力DTOを移動し、復元bufferと再capture比較DTOを同時保持した後、比較DTOだけを解放する。 残るtransitive callee/restoreと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust/serde/型/評価/drop/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
 
 - 2026-10-30 07:34 JST: 14個の復元関数全bodyを固定し、M9のfield参照Vec4個、expected Tree、返却nativeと再capture比較の保持を対応。PublisherImageのexpected Vec、復元したrestrictionsとnative、比較DTOも接続した。2つの通常本体と3つの寿命改変を別関数としてcompileし、markerと明示改変を除けば元source全体へ戻ることを照合した。 field参照Vecは参照先Treeを所有・複製せず、8byte pointerを5個ずつ持つ4Vecの計160byteを独立に保持する。early encodeの一時Vecはsemicolonで消えるが、expectedとfield参照Vecはnative生成・再captureまで残る。比較用Tree/DTOは比較後に解放され、成功返却にはnativeだけが残る。 残るtransitive helperと全callerの保持・escape・失敗/部分/並行frame、画像全体の到達可能履歴/共通public入力、一般Stringの事前public上限、非割当work/stack/TLS/host/OS/allocator/kernel/物理資源/進行は未完了。他profile、119要件とoutward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも未完了。Rust型/評価/drop/serde/codegenとsource対応はTCB。Native production/Canon変更、W6/T10受理なし。
+
+- 2026-10-30 15:02 JST: 追加SSDのext4 mount/UUID/容量/権限を確認。再起動前の17853entry/12384fileを全SHA256・属性・hardlink/symlink照合で復元し、旧RAM81rootをSSDへ対応。さらに175大容量rootの861464entry/783026file（763258unique file inode）を別SSDへcopy/全読戻し後、明示--confirmで旧重複copyを整理。元のlogical pathをaliasで維持し、6807保護fileと受理済みNative63実行fileを再照合した。 移行開始時からroot空きは56794910720byte増え、60476727296byte（約60.5GB）。SSD空き203691089920byte（約203.7GB）。並行する他作業で空きは変動する。 58個/19385573byteのimport cacheをRAMへhash一致で配置。process cgroup MemoryMax=6GiB/MemorySwapMax=0の実propertyを確認。RAM hot領域2GiB上限と合わせ約8GiBの保守的運用枠とし、必要分だけ使う。RAMは唯一の証拠保存先にしない。全OSのswap設定は変更しない。 これは研究環境の容量/配置の検証であり、W6実装の物理資源/進行保証又はT10受理ではない。物理device/inodeは移行で変わり、live ledger同一性や実機試験の再実行を主張しない。worker/source対応、共通public入力/履歴、全caller・host/物理資源/進行、他profile/計測構成1790の必要回帰、最終統合docs/Oracleは未完了。

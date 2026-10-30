@@ -103658,5 +103658,68 @@
     "range": "complete pause/archive metadata; archived regular bytes independently read back",
     "role": "W6 owner reboot pause",
     "status": "preserved; worker proof unexecuted; W6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6-OWNER-STORAGE-20261030-v1.json",
+    "sha256": "439f8aed0561244746f0e2e80c1def0fb02d8fff2748dbaeac5fd7e8343ebd3f",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v381.json",
+    "sha256": "f6a0c9e90a2046392d0a9dc5aadb48538da2c0f117d5860cd6ea570408690b1e",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/RESULT.json",
+    "sha256": "f4b004882e67687d3fe3695ba70ca184db03aee935eb214dd3666488bfedfbef",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/storage-migration/MIGRATION-RESULT.json",
+    "sha256": "2c88ea58e814ff335e0e695f1e44e3a2975c9ea3b5e60906548079e2889efc14",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/storage-migration/SOURCE-SUMMARY.json",
+    "sha256": "55163561abbee63ac41430f425f67bb204bb72dffd838a646547f153f55bc459",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/storage-migration/COPY-VERIFIED.json",
+    "sha256": "965d4c2a576f721f7e7f13a7b70f38406ffe68b48296879f61edd2a49fc976ea",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/ram-policy/POLICY.json",
+    "sha256": "8d4f607a61f0c537a666806fa286636dae249915ef670e42633754f89c750e3b",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/reboot-checks/20261030T055806.535462Z.json",
+    "sha256": "fd82f52a98aae6043f4e36eceb10c76eb335ceb2912a7f399bfb9ad629455281",
+    "range": "complete operational metadata; source/destination bytes independently hashed by migration reader",
+    "role": "W6 SSD recovery/migration and resumed bounded work",
+    "status": "verified storage only; worker source/wholeW6 incomplete"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/STORAGE-RESUME-DOCS-CHECKPOINT-v1.json",
+    "sha256": "4b26f685e1e76dba31e2a2d5a9746fa3189418b53c91c61c6be790260f26621e",
+    "range": "complete storage/resume document checkpoint",
+    "role": "W6 SSD recovery and bounded RAM continuation",
+    "status": "full docs passed; worker correspondence and wholeW6 open"
   }
 ]
