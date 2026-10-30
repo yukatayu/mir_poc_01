@@ -105317,5 +105317,89 @@
     "range": "complete currentprefix documentation checkpoint",
     "role": "W6prefixcostcorrespondence",
     "status": "focused21passed;caller55/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-ASSERT-SUCCESS-JOIN-v1.json",
+    "sha256": "1cbc685b011ad3f63fa9aabe92a34a31cadf1bb2c0d2eff20f7f5924f05013b0",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/PREREGISTRATION.json",
+    "sha256": "0f4f930de3143e5a8a98811c2a0ba9ebaf02a4468b0a729a7f5f137ebbc35491",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/PREPARATION.json",
+    "sha256": "9ddcf4a8269352ccb7fbc913993f631048913cb8d4491332492981ba6ca336a8",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/execution-v1/RESULT.json",
+    "sha256": "3d7ea2a4c15eff4b04407bc87ce140d10710de3ef8aeb234dd2a3f3cc0c298b3",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "c17bd009a1dd6b6f32b1878de8e6bd55e2abe75741165eea37d5d39cae209304",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "cfd429ac9903eb554bdcdc95bdb717183001ea9e0f9d3725cc9819f9e5b45b49",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/PROVENANCE-VERIFICATION-v1.json",
+    "sha256": "8433652c388063b0c800e6bd8db33f46723742bdff82eb82f0d44a6308a1ab5c",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/PARTITION-ASSERT-SUCCESS-v1.json",
+    "sha256": "9042743914db9eb58db05e6efdbd41983a37c89bd5da97dec8c8eb1c9ab75559",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-prefix-value-v1/PUSH-v1.json",
+    "sha256": "029a00bb2bc38f146396c606ed071ff1b1a31f067b54c2852734c22c15d73880",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/CHECKPOINT-v1.json",
+    "sha256": "122f02d51b42520f101a9c7f77c39fe088250bdc3f8655fa5896c75cd913f4e8",
+    "range": "whole current successful assertions source/component/formal/provenance",
+    "role": "conditional19localzero;notwholecallerphysicalacceptance",
+    "status": "36inputs twice/72outputs/288intervals/6controls;40reusedformallogs;caller36/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "7f3f5ee65e519f83a73d4d5cf18fe57d447f4d46f4767a8001cf181ec082ff9e",
+    "range": "complete currentassert documentation checkpoint",
+    "role": "W6assertcostcorrespondence",
+    "status": "focused21passed;caller36/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v431.json",
+    "sha256": "07c8f42c4ac568ba4ba315a78d92483824f491c439f36f7d89129dc9d74f8de4",
+    "range": "whole current aliases",
+    "role": "currentstate maintenance",
+    "status": "caller36/measurement64running;prior snapshots retained;wholeW6open"
   }
 ]
