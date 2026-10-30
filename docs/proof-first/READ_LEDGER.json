@@ -104456,5 +104456,61 @@
     "range": "complete caller fee partition document checkpoint",
     "role": "W6 caller fee partition source/component and reused general proof correspondence",
     "status": "full docs passed; caller fee partition extra field/snapshot fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-HOST-IO-JOIN-v1.json",
+    "sha256": "1f5d1db6c7015b229965e559f79863fb908963aa106ad9105efe5b6da8296dd2",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-HOST-IO-CHECKPOINT-v1.json",
+    "sha256": "41145e0849419760ca52ac2bd4e393de4e918cf46a9325234d8c2a3dc2856b7d",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "59fc7bac7608f3822ad168cee860ddffa629996d3edf294e1dd7faea5f3ddc70",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-host-io-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "6e5ec65233c53ea78dc27806646f2f4d08a29095e3607e727ff8ee2bc6514302",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-host-io-v1/component-v1/RESULT.json",
+    "sha256": "ea582b83a4a7373a15a157c4ff2185c46c563b780833cfa60a02c203cc0562d9",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-host-io-v1/PARTITION-HOST-v1.json",
+    "sha256": "c64b46386e133791e764455354ba4db2dab19e6504373b87c22664d40dd13a86",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-host-io-v1/PREREGISTRATION.json",
+    "sha256": "7550f66605a2832c62e6ad0752d5384c8c9bbd71eb271472aa8604b4c0dc8857",
+    "range": "complete callerhostIO source/component/partition and reusedformal correspondence",
+    "role": "W6 direct hostIO requestedallocation and returnedFD boundary",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-HOST-IO-DOCS-CHECKPOINT-v1.json",
+    "sha256": "5ee5d4b00e77e745bf2fe18c0ba78c228f52492ecc259229e35a536b24bccf8d",
+    "range": "complete caller host IO document checkpoint",
+    "role": "W6 caller host IO source/component and reused general proof correspondence",
+    "status": "full docs passed; caller host IO direct file/CString/socket fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]
