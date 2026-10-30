@@ -104057,5 +104057,68 @@
     "range": "complete caller Value copy/write document checkpoint",
     "role": "W6 Value copy/write source/formal/component correspondence",
     "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PREFIX-CONSTRUCTION-JOIN-v1.json",
+    "sha256": "41faebe4603873b71a97fbe03ec0e8d4b4929055acc2cbc32d8e30974902b862",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PREFIX-CONSTRUCTION-CHECKPOINT-v1.json",
+    "sha256": "97f7cd0cb3184bad0fc89a87fc95ac13777ad214966fbcdfd0b07bed384178f5",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-prefix-construction-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "29e3fb91a4da73c7f701bb25be0dfa24e3f3c981e3dd257c16e6e6ce5ae3cdb3",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-prefix-construction-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "4a38eefd301049f838af6115a6bcc4a51ff673c16bc5ae0dec3bcc8d97d3bf62",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-prefix-construction-v1/component-v1/RESULT.json",
+    "sha256": "0d7e0b12fc0955c1f9d2bb5a2ed100bb7b024e693f2a15adf623f996ab2ad4f5",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-prefix-construction-v1/PREREGISTRATION.json",
+    "sha256": "f97e3bbb4b400b3bfa1b332c372cae336e7eacd16be303b4ee77b2ecd1a89c2e",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T105641Z.json",
+    "sha256": "763b64f146ff4f082c1b39541535eb35e15bc939abf04bdcf7329ce08078c00e",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v31.json",
+    "sha256": "367aa7a3880e4b7170d921bfee23007fb2b73ab3c52c4daa0cb1fea82267e67b",
+    "range": "complete prefix construction source/proof/component evidence and limits",
+    "role": "W6 selected prefix hex/row/iterator construction bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-PREFIX-CONSTRUCTION-DOCS-CHECKPOINT-v1.json",
+    "sha256": "0db22da585195d7e57bd1206501a32e58c7cbc0e49fae475993399531811fcbd",
+    "range": "complete caller prefix construction document checkpoint",
+    "role": "W6 prefix construction source/formal/component correspondence",
+    "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

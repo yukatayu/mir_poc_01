@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：Value複製/直列化の条件付き費用
+# W6 — 秘密を含む観測とdebug：prefix構築の条件付き費用
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。callerのValue複製/直列化を一般Lean51宣言/14反例・36log、同一library部品229例+小入力8例の各2回へ条件付き接続。複製は32A+1024F+S、出力Vec累積要求は272+4W。任意Serializeの虚偽件数/重複fieldと、元の保持容量を省く反例を保存。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
+W6継続・未完了。prefixのhex/row/iterator生成を一般Lean40宣言/12反例・34log、同一library106部品と全256u8の各2回へ条件付き接続。64行以下の選択構築は累積要求636473byte以下、policy処理と元入力は別加算。実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 20:15 JST
+Updated 2026-10-30 20:34 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -74,3 +74,5 @@ Updated 2026-10-30 20:15 JST
 - 2026-10-30 19:54 JST: 一般List合成でarray slot A、object field F、keyを含むUTF-8 string byte S、node N、pretty wireを保存し、既存のfresh Value解析式256A+1024F+17Sへ接続。key/indent/escapeを課金し、同時に残る前段frameは加算する。新1module113宣言/14反例をfresh/replayで検証し、全34log/72保存fileを独立読戻し。固定275manifestとは別cut。 metadata、prefix、distributed、Flowのwire上限は順に652/15364/4330690/5301659byte、fresh Value解析の累積要求上限は22674/398857/69973476/71337511byte。4回のfile+parse合計151380883byteは生成元の型/上限から導く条件付き上限で、観測したprivate入力の最大値を流用しない。先行binary/raw/protectedや生成側Value/clone/serialize、Path/guard/executor/OS/stackは含めない。 生成側Value構築/clone/serialize、Path/環境/guard/executor、全callerの共通初期入力・履歴/数値費用、host/物理資源/進行は未完。Rust/std/serde/allocator/codegen/source対応はTCB。Native64全1750は実行中で45readerは終了後、測定構成1790は別の未実行回帰。他profile、119要件/outward/history、最終統合docs/Oracleも残る。W6/T10/Canon受理なし。
 
 - 2026-10-30 20:15 JST: 任意の正確なarray長、正のkeyを持つBTree node列、文字列長に対し、Value複製の要求量32A+1024F+Sを合成。初期128byteを持つ任意有限のVec成長traceから累積要求≤272+4W、容量≤136+2Wを導く。借用中の入力と複数結果を保持し、繰返し費用を和にする。新1module51宣言/14反例をfresh/replay・全36log/76保存fileで検証。固定275manifestと別cut。 metadata/prefix/distributed/Flowの単一Value複製要求上限は16754/278137/8665956/8829111byte。既存wire上限へ対応する出力Vec累積要求上限は2880/61728/17323032/21206908byte（metadataはcompactのみ）。原入力、capture/native/Tree clone、hash/format、前段iterator Vec、Path/env/OS等は別費用。これを全callerの保持容量又は物理予約とは扱わない。 prefix hex/iterator Vec、typed capture、image/native cloneを含む全callerの共通初期入力・履歴/数値費用、Path/環境/guard/executor、host/物理資源/進行は未完。任意Serialize/Clone、失敗/panic、allocator余剰/RSS/stackは保証しない。Rust/std/serde/codegen/source対応はTCB。Native64全1750は実行中で45readerは終了後、測定構成1790は別の未実行回帰。他profile、119要件/outward/history、最終統合docs/Oracleも残る。W6/T10/Canon受理なし。
+
+- 2026-10-30 20:34 JST: 任意有限のbyte列について先頭Stringを移して継ぎ足す成長と、各byteのformat一時領域を別に課金し、hex要求≤40*nを導く。rows backingは32*n、filterしたi64 Vecの累積要求は64*n。新1module40宣言/12反例をfresh/replay・34log/72保存fileで検証し、固定275manifestとは別cutに保持した。 4field rowの構築要求は4183byteにorigin hex1280byteを別加算。外側Value複製278137byteへ、32*n+4183*n+1280*(n+2)+64*nを加える。既存guardのn≤64なら合計≤636473byte。policy_data_bindingとborrowed native入力の保持量は独立に加える。最終Valueだけを数えたり、累積要求を物理予約へ読み替えたりしない。 残るtyped/native/image cloneを含む全callerの共通初期入力・履歴/数値費用、Path/環境/guard/executor、host/物理資源/進行は未完。任意formatter/Serialize、失敗/panic/OOM、allocator余剰/RSS/stackは保証しない。Rust/std/serde/source対応はTCB。Native64全1750は実行中で45readerは終了後、計測構成1790は別の未実行回帰。他profile、119要件/outward/history、最終統合docs/Oracleも残る。W6/T10/Canon受理なし。
