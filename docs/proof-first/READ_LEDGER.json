@@ -104351,5 +104351,54 @@
     "range": "complete named guard document checkpoint",
     "role": "W6 named guard source/formal/component/entry ownership correspondence",
     "status": "full docs passed; base guard setup/logging/entry ownership conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/GLOBAL-GUARD-COST-JOIN-v1.json",
+    "sha256": "217364ee7b0149bd37058377820cf00017f792d23e01c8e55b618c174bfe9d71",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/GLOBAL-GUARD-COST-CHECKPOINT-v1.json",
+    "sha256": "2b6a3d50afb8f47dc61ed2fcf4ec91280a5c88de9e12d67c51a95b53ada1d67c",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/global-guard-cost-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "c521d2cc8ed2f5a88e2465270a8ed10e7a200361b4cb386f8242252dd98985b2",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/global-guard-cost-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "b03f5677dfdaf10dd01b678cf6685bf999168c5500ae0b855ac47980c94c9cc2",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/global-guard-cost-v1/component-v1/RESULT.json",
+    "sha256": "885020ccd7fba9ad9b1d903529d6a41eff23fa7a95d839d6678e9d9254ec403a",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/global-guard-cost-v1/PREREGISTRATION.json",
+    "sha256": "928c255ead295431ce0eee44aaf69d7d449538a88fb754e0901860dadf117520",
+    "range": "complete globalguard source/formal/component representation correspondence and limits",
+    "role": "W6 extended global observer representation overhead and cuts",
+    "status": "conditional LAB;wholecaller/publicinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/GLOBAL-GUARD-COST-DOCS-CHECKPOINT-v1.json",
+    "sha256": "471ad9613972143ed8fe0cd007b691cc74bdf016c1348c65030a07d654523058",
+    "range": "complete global guard document checkpoint",
+    "role": "W6 global guard source/formal/component/entry ownership correspondence",
+    "status": "full docs passed; global guard extra field/snapshot fees conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]
