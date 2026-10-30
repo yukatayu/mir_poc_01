@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。分類8箇所へ固定policy構築・実source分類・現guard費用を対応し、現原本99区間を再照合。caller区分127/132/残62。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。登録情報の復号2箇所・複製1箇所を閉じた型と一般費用へ接続し、27入力×2/126計測区間を読戻し。caller区分130/132/残59。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 02:42 JST
+Updated 2026-10-31 03:04 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -106,3 +106,5 @@ Updated 2026-10-31 02:42 JST
 - 2026-10-31 02:24 JST: 全6575sourceを固定し、新binary1751名=既存1750+部品1、6allocator校正を確認。37caseを各2回、74結果/160区間へ実行し、独立Pythonが完全値・型・pointer一致・全費用を照合。1600計測改変/346返却改変を拒否。14標準library一次source、実graph/defaultのcompiler展開、実callback/転送元、全321ASTを再照合し、63字句欠落を拒否した。新live Source/network/restore/全Native実行ではない。 対象21箇所は2default、8集合借用、2Option/Result操作、9callback箇所（最大17呼出し）。既存集合やString/元画像の保持と、先行引数作成費用を残した上で、新たなRust割当て要求だけが0である。Result::okのNotUnicode側は既存OsStringを解放するが既払いを返却しない。任意Default/Fn/Iterator/Deref/Err destructorと先行引数構築の6対照は各4096byteを要求した。 321操作は費用対応119/条件付き局所非割当て132/残70。hidden/implicit/component、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。借用操作の要求0から所有領域0、CPU費用0、進行保証を導かない。観測した秘密入力の最大値からpublic上限を選ばない。
 
 - 2026-10-31 02:42 JST: 実sourceから抽出したpolicy構築部品を5条件×2回実行し、完全値・型・ABI・費用を独立照合、222改変を拒否。514byte/18割当て（16Stringと2Vec）を追加費用として確認。現計測64の実原本から9画像・24source-binding出力・99分類区間（87child/12parent）、3parent/6reader round/27bootを再読戻しし、939改変を拒否。6実sourceの監査区間をNative64/計測64と照合、74字句欠落を拒否し、全321ASTも再確認。分類実行自体は既存原本であり、新live Source/network/restore/全Native実行ではない。 各呼出しの条件付き上限は514+4969472+dtoImage(S)+instrumentation+diagnostic+guard。Sは実fragments/program全体の独立public shapeであり、式4096個の制限から導かない。guardは基底Native64でE+18P+34I+C+58L+50828、計測64で末尾80475を使い、L≤17と他の独立public byte上限・成功条件を要求する。計測区間外のsetup/loggingと保持path、先行policy、借用元・返却planを省かない。 321操作は費用対応127/条件付き局所非割当て132/残62。hidden/implicit/component、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。要求byteをlive/RSS/物理予約や進行保証へ読み替えず、観測した秘密入力の最大値からpublic上限を選ばない。
+
+- 2026-10-31 03:04 JST: 全6575sourceを固定し、1部品testだけを追加したbinary1751名と6allocator校正を確認。現live64の9登録原本と18不正変形の計27入力を各2回実行。54完全結果/126区間について、独立Pythonでwire全byte・返却JSON・型・診断・費用を照合し、metadata/型/費用1080改変と返却値222改変を拒否。3型/5containerの閉包と生成Clone、現source85字句欠落、全321ASTを確認。新live Source/session/restore/network/全Native実行ではない。 復号はcontrolDecode+ B(A,F,S,N,128)、B=65728A+65536F+170S+176N+1114176。manifest/展開/診断/canonical再符号化の既存費用を残し、Valueのheap費用だけでnative型変換を賄ったことにしない。複製はkey UTF-8 byte+typedClone(endpoint)+typedClone(immutable)、typedClone=8240A+176N+S。各site最大1回。元wire・返却登録・元/新複製の同時保持を残す。独立public入力形・depth<128が前提であり、実測最大depth20は予算の選定根拠ではない。 321操作は費用対応130/条件付き局所非割当て132/残59。hidden/implicit/component、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。要求byteをlive/RSS/物理予約へ読み替えず、観測した秘密入力の最大値からpublic上限を選ばない。

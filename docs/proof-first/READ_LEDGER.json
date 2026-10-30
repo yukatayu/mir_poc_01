@@ -105142,5 +105142,103 @@
     "range": "complete current concretecaller document checkpoint",
     "role": "W6classificationsourcecostcorrespondence",
     "status": "full6410passed;10construction99actualintervalsaccepted;caller62/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-REGISTRATION-JOIN-v1.json",
+    "sha256": "865aa6538ca880932012caa424c4b53f0464c4089a96eed16f9968a16a5b22c9",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/PREREGISTRATION.json",
+    "sha256": "9db170e4783a8822933c30dd2f995c12d6fc1a2c513ce7cb547db1327928de55",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/PREPARATION.json",
+    "sha256": "255963f7f2428d651f37365dc194a55fa96e7aae69c9fb9526b3f2a0b5b3066b",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/execution-v1/RESULT.json",
+    "sha256": "96a51084e74452b6908cfcbc79d1a1a7cbd4c4666b23729ae3e6f743143865cb",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "9e0962f8ea0b2c5d0029804328dde670436cc46727127f24041aa7d434018dab",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/SCHEMA-VERIFICATION-v2.json",
+    "sha256": "ae745fa306851f2c528206392910742edda33f9a3cfb4a5576af150065a9c623",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/FORMAL-VERIFICATION-v2.json",
+    "sha256": "08756a8cde8d9ef0d67745435c8856738a743146dbb30830f2f0435bcbb243aa",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/FORMULA-FORMAL-VERIFICATION-v2.json",
+    "sha256": "e4b2741e037e2a0f80cd0e12febd0f9ec5ed2182c70c5b6c1800c034d74bfab5",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/PARTITION-REGISTRATION-v1.json",
+    "sha256": "27706193e5154ccd441e8412d719691228aa833fbf5a3a4a131d2f747602fb2e",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-classification-v1/PUSH-v1.json",
+    "sha256": "ee7aabdeefb34a44f14b36e001451a97f1453ffcb201179e11c319d575a4042b",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T180034Z.json",
+    "sha256": "e57e848f3e4a1fbe7e65fe95cdfde8f03e8851912d127b7e9faa18b66bf9298d",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v3.json",
+    "sha256": "a3084da5217adfb93988a3598482c035130a6cfdb63f32ea1f77255cb1df387a",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/CHECKPOINT-v1.json",
+    "sha256": "b1a18fc694ee2951e2b10bc75818a93dbb2322e01a21ce886ecf0baa86570234",
+    "range": "whole current registration source/schema/component/formal readback",
+    "role": "conditional3fees;notwholecallerphysicalacceptance",
+    "status": "27inputs twice/126intervals;98formallogs;caller59/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-registration-codec-v2/DOCS-CHECKPOINT-v1.json",
+    "sha256": "7f208f476aecb3634784433a45e89a4235036f41b98b53c8c56645385a711ab7",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6registrationcodeccostcorrespondence",
+    "status": "full6410passed;27inputstwice126intervalsaccepted;caller59/commoninput/physical/wholeW6open"
   }
 ]
