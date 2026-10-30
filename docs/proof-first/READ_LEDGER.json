@@ -106451,5 +106451,201 @@
     "range": "complete currenthistorical_send documentation checkpoint",
     "role": "W6historical_send",
     "status": "focused21passed;caller8/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-POSTINSTALL-COST-JOIN-v1.json",
+    "sha256": "ef1ad6b37a76377bef8659c2ab810664c1567f1b2160467463fdbd76ba7fcb64",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PARTITION-POSTINSTALL-v1.json",
+    "sha256": "6f56a665dc1e886abff6c96d5c6c3bbfa99b5ab85167d78b36fd376d62b73d30",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PREREGISTRATION.json",
+    "sha256": "325b4e00fd7ca0a2bf202ddb732f22e3cb7a87e829f1a91f08b00e91084097ca",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "b1d8fd5dd7ffafb5b216b94dcf1e69ef737e80fddbdef0189149812119a4ddbb",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "f86da48ed20aaf1bf80fe0cefc9f4aab9ae1b6d8a0bd5da303c7cbd5f1ed7122",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/POSTINSTALL-BOUND-PLAN-v1.json",
+    "sha256": "c9a9efb9dbb9aec8384d37e7af0fc3687b46638331267cbffdcf7cdd64e1a4cf",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/NUMERIC-VERIFICATION-v1.json",
+    "sha256": "d117214d0eda5dcd6bd32fdfbc8f2128e0cf76f1b976fd4839cfd25f4a28bf5f",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PLAN-FAILURE-v1.json",
+    "sha256": "fdc44e7ba18c11f1108e1202674254479e6485b328f1c225e4bfc5bd44a15ee1",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PLAN-FAILURE-v2.json",
+    "sha256": "6bd1154a4befc724ae93ddaaef746f9eceeae8067041775bcd133b48e9a1af57",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/COST-READER-FAILURE-v1.json",
+    "sha256": "6e316f25d1d34d0c0496858c0b85781cf56e855325a053d436c4dfdbfbe1aed3",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/NUMERIC-LAUNCH-FAILURE-v1.json",
+    "sha256": "1a2077929c56d24326b3609c4d057fe627bfc900bff3aae9f6564bfd8f5db563",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/ROUND-AND-GATE-CORRECTION-v1.json",
+    "sha256": "8eee3e3439ce1a8e111845510e60e5931314dcdc005493f819378f74be0c5f56",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-POSTINSTALL-SELECTED-ACCEPTANCE-v1.json",
+    "sha256": "09242345cb653cb62c25215e82cecfba6f2b881c3526ea09955da4dc4e6c7848",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/MEASUREMENT64-FULL1790-ACCEPTANCE-v1.json",
+    "sha256": "f1b600d2bfffee88432280fd998956f60dd1ce7b4660cafbb25c9a4e823ba3b2",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/MEASUREMENT64-FULL1790-MEASUREMENT-ACCEPTANCE-v1.json",
+    "sha256": "662d19fcecbdef77f0e91eb06c50b0925e5d08341d100efb6b9225943a48fdfc",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/MEASUREMENT64-FULL1790-READER-QUEUE-RESULT-v3.json",
+    "sha256": "e231273c092032ceca992b4622a9531c1ebf550a771ab33b7a216e5b4e3dc506",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/measurement64-full-extra-v1/READER-FAILURE-M9-v1.json",
+    "sha256": "561fc0713e939197d2fcd8c679de75080cb2bf0a24c404ada0520b4fc9e11129",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/measurement64-full-extra-v1/READER-FAILURE-SYS4-v1.json",
+    "sha256": "ef1b88949e2fa6b60e6019183d02a89ec55e6383d494118a7d61981c173b2917",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/measurement64-full-extra-v1/SUPPLEMENTAL27-FAILURE-v1.json",
+    "sha256": "f060af519d2ae87345873c85c06f08dcf51c8022b213bc372e98129071d2b6b5",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/PUSH-v1.json",
+    "sha256": "c8105ad62a199830742fe2bf16f387559c2b48704f0581ac9ee84d8852a00ebb",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T210137Z.json",
+    "sha256": "d0a2120a62cefb9c10aaa5dbcaac9d767b3d04e4ac1d67a8bfb47c78caa221f9",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v6.json",
+    "sha256": "2e9b66f5f3d666f11870f2cbdb27a23bd22d5bcc7a84424105444e2bbf4868a5",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/CHECKPOINT-v1.json",
+    "sha256": "863b4b37d9c6220e940b5d1fa20767a48440f0488b0a1271164dc6a1e5ddad97",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PRIOR-CURRENT-ALIASES-v1.json",
+    "sha256": "7488580372da29c4d2592f0cd59cfafd53132f95058adacc3e9b90b268d0a8e8",
+    "range": "complete current full1790 and postinstall requested-cost evidence",
+    "role": "caller155/160actual18inputs;full1790/45+4readers",
+    "status": "18inputs36intervals162formulas432controls;caller6/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T220213Z.json",
+    "sha256": "f6c34639c4b4c154aa2f954130180c546751da5c3d3a7d9986eff39779447636",
+    "range": "complete",
+    "role": "ownerquota hourly check",
+    "status": "39remaining;continue;35stop;noreset"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "432597e28b1f3c4a43905f8055dfcd994d1d9bb2e20dbbc732884767c9499a37",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6postinstallcost/full1790correspondence",
+    "status": "full6410passed;18inputs36intervals162formulasaccepted;caller6/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v7.json",
+    "sha256": "6f9886d7d1260f1b0c6937028fdb6c22311f2188863d27afe2a72471a5e583ba",
+    "range": "complete visible menu only",
+    "role": "independentOracleavailability",
+    "status": "ProUsageLimitReached;no prompt;next08:04JST"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/UNVERIFIED-CHECKS-v454.json",
+    "sha256": "2b1a60488d9a6782aeb2afcecdf8a2277507058065cbfbc732206576c1d68529",
+    "range": "current residuals complete; priorv453 retained",
+    "role": "fix stale current Oracle aliases within unverified row",
+    "status": "07:04 usage limit; next08:04; no new prompt"
   }
 ]

@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。履歴送信2経路の5実world/10原画像・認証通信を再照合し、各policy257byteの条件付き費用へ接続。321callerは費用156・局所0が152・不達5・残8。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerを保持し、計測64全1790/45readerと追加4計測readerを受理。初期化後18入力のcapture/二重start拒否を162数値式・36実計測へ接続。321callerは費用158・局所0が152・不達5・残6。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 06:23 JST
+Updated 2026-10-31 07:01 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -132,3 +132,5 @@ Updated 2026-10-31 06:23 JST
 - 2026-10-31 06:13 JST: 現9原画像を完全復号し、実callerと別実装の変形処理で27画像を再導出。18独立restore-template registryの6変数を再確認し54費用適用、630入力/費用改変拒否を照合。元/Native64/計測64の22関数と47source改変拒否を確認。18cold readerの原本完了記録・source順序から各3拒否の実行を推論する。新Native実行・新しい個別計測ではない。 Flow全除去277はProcess/Parts/Flow/Bootstrap復元と変形画像cloneを経て、Parts再capture後のreceived照合で拒否される費用まで含む。message追加293は変更Processの復号/再capture/検証・追加graph枠を課金し、graph.finishの未消費rootで止まる。参照重複301は同じmessageの二度目のtakeで拒否し、未実行suffixを含む変更Parts全体の保守的費用を保持する。各経路がより早く拒否されても、既に要求した費用を払い戻さない。 321操作は費用対応154/条件付き局所非割当て152/条件付き不達5/残10。現9画像にServeReservedはなく、その書換え分岐は使用回数0で実機試験済みとはしない。postinstall155/160は準備のみでnative lock解放待ち。共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密標本最大値をpublic予算にせず、累積要求byteを物理予約へ読み替えない。 10/31 06:01JSTの週間残量44%、次回07:01JST以降。Oracle06:03JSTもGPT-6 Pro利用上限でprompt未送信、次回07:03JST以降。指定reset使用1回、35%停止、追加reset/購入なし。
 
 - 2026-10-31 06:23 JST: Native64全6575sourceと計測64全6580sourceを確認。5実worldの129原本fieldと10owner画像・20認証付き送信を独立readerで再照合し、通信/出所改変36676件を拒否。27callee/getterと既存共通host7関数を対応し、54source改変・60費用記録改変も拒否した。新Native実行や個別sender計測はない。 両senderの費用は最大policy257byte（計測env1byteと診断上限256byte）。check_bootがpolicyを最大1回呼ぶ。writerは169byte boot/233byte wire、readerは265byte boot/3402byte wireをstackに持ち、最大64行を借用して照合・符号化する。親receiveのVec/target clone・監査費用は含めず別に残す。秘密標本の最大値から費用を作らない。 321操作は費用対応156/条件付き局所非割当て152/条件付き不達5/残8。postinstall155/160は準備のみでnative lock解放待ち。6capture caller、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。固定stack wireをwhole resident保証にせず、hashCPU/OS/foreign/cancellation等を0にしない。 10/31 06:01JSTの週間残量44%、次回07:01JST以降。Oracle06:03JSTもGPT-6 Pro利用上限でprompt未送信、次回07:03JST以降。指定reset使用1回、35%停止、追加reset/購入なし。
+
+- 2026-10-31 07:01 JST: 計測64全1790/0failed/0ignored、全6580source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを受理。追加4readerで72registry、うち追加27件の18互換/9fresh拒否（6source不一致）、36費用区間、585対/1170有効cut/48processを照合。queue改変10・追加join改変12・追加registry改変189件を拒否。最大観測prefixは予約262608971byte/累積要求7325464083byteで、public予算・terminal peak/RSS・物理予約・進行保証ではない。 独立6580sourceのcopyで実caller2箇所だけへ計測を追加し、45校正・実registry control・3秘密world/各2cold readerを実行。87原本/69query/240ledger/12charged restart、45registry/3parent/27組の費用変数、1116有効cut/30processを再読戻し。追加18保存状態と36whole-call区間を完全照合し、432入力/費用/計測改変を拒否。基準Native64と計測64のsource/binaryは変更しない。 321操作は費用対応158/条件付き局所非割当て152/条件付き不達5/残6。6capture caller、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。postinstall計測copyには全1790回帰を実行しておらず、計測64の全成功を継承しない。秘密標本最大値をpublic予算にしない。

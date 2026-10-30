@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-31 06:23 JST
+Last updated: 2026-10-31 07:01 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。履歴送信2経路の5実world/10原画像・認証通信を再照合し、各policy257byteの条件付き費用へ接続。321callerは費用156・局所0が152・不達5・残8。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerを保持し、計測64全1790/45readerと追加4計測readerを受理。初期化後18入力のcapture/二重start拒否を162数値式・36実計測へ接続。321callerは費用158・局所0が152・不達5・残6。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -29,7 +29,8 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 | Full response histories | 現45readerのdistributed_history/selected_history | 全応答prefix・future authority・旧knowledgeの有限実行対応を受理。最終要件別の一般条件照合は残る |
 | Actual M9 / bounded input | 現45readerのm9_exact_authority/m9_genuine_mutators/bounded_acquisition | 真のauthority更新と独立current、複製前入力検査を照合。transportを権限にしない |
 | Current source / outward / costs | native63-semantic-source-v2; owning-feature-composition-v1 | 33source/23対応/153出力、現9画像90費用式を保持。全費用式を再構築しない |
-| Isolated global Layout measurement / current selected | NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1 / run_measurement64_selected_readers_v1.py | 45校正、実3world/各2cold reader、45registry/27組/36区間、87原本、30process/1116cutを再実行受理。全1790実行中・後続全reader未実施。最大観測prefix262607600/累計7325443891byteは共通上限/RSSでない。旧LIVE63は履歴保持 |
+| Isolated global Layout measurement / prior selected | NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1 / run_measurement64_selected_readers_v1.py | 45校正、実3world/各2cold reader、45registry/27組/36区間、87原本、30process/1116cutを再実行受理。selected時点の記録。後続full受理は次行。最大観測prefix262607600/累計7325443891byteは共通上限/RSSでない。旧LIVE63は履歴保持 |
+| Measurement64 full1790 / current | MEASUREMENT64-FULL1790-MEASUREMENT-ACCEPTANCE-v1 / run_measurement64_full_chain_v3.py → qualify_measurement64_full_extra_v1.py | 全1790/45reader/4追加reader、72registry/1170有効cut/48process。旧画像合成はfresh9件を拒否、物理進行/全要件はOPEN |
 | Allocation lifetime / stable snapshot / scratch | LIVE-ALLOCATION-LIFETIME-JOIN-v1; ALLOCATION-STABLE-SNAPSHOT-JOIN-v1; SCOPED-SCRATCH-JOIN-v1 | 349宣言47反例、初期/返却/並行保持と置換L+C、stable cutを区別。全callerへの接続は未完 |
 | Public registry contribution | PUBLIC-REGISTRY-ENVELOPE-JOIN-v1 | 固定Source4/3役割の共通6費用。119宣言13関連反例/90式、45registry/27組/36実測。任意cache/画像依存費用は別 |
 | Owning Plan envelope | OWNING-PLAN-ENVELOPE-JOIN-v1 | 任意構造にR+D×C。77宣言14反例、現153計画/306適用を両回検証。3504定義は数値転記。D≤10は次rowでsourceへ結合。C/Rのpublic条件は未受理 |
@@ -45,7 +46,8 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller historical sender / current | CALLER-HISTORICAL-SEND-JOIN-v1 / qualify_caller_historical_send_v2.py | 5実world/129原本field/10画像・20認証送信、36676通信出所/54source/60費用記録改変拒否。各policy257byte、費用156・局所0が152・不達5・残8。新Native/個別計測なし、物理進行OPEN |
+| Caller postinstall / current | CALLER-POSTINSTALL-COST-JOIN-v1 / verify_caller_postinstall_cost_v2.py | 18実入力/36whole区間/162数値式/17反例のfresh-replay、432改変拒否。費用158・局所0が152・不達5・残6。独立計測copyに全1790回帰は未実施、物理進行OPEN |
+| Caller historical sender / prior | CALLER-HISTORICAL-SEND-JOIN-v1 / qualify_caller_historical_send_v2.py | 5実world/129原本field/10画像・20認証送信、36676通信出所/54source/60費用記録改変拒否。各policy257byte、費用156・局所0が152・不達5・残8。新Native/個別計測なし、物理進行OPEN |
 | Caller altered restore / prior | CALLER-MUTATED-RESTORE-JOIN-v1 / verify_caller_mutated_restore_v1.py | 現27変形画像/18registry/54費用適用、171数値式/新46log、630入力費用/47source改変拒否。費用154・局所0が152・不達5・残10。新Native実行なし、共通入力/物理進行OPEN |
 | Caller missing fields / prior | CALLER-MISSING-FIELDS-JOIN-v1 / verify_caller_missing_fields_v2.py | 現72削除形状/18registry/144費用適用、216数値式/新46log、510入力費用/22source改変拒否。5panicは条件付き不達。費用151・局所0が152・不達5・残13。新Native実行なし、共通入力/物理進行OPEN |
 | Caller distributed send / prior | CALLER-DISTRIBUTED-SEND-JOIN-v1 / verify_caller_distributed_send_retained_v1.py / qualify_caller_distributed_send_v2.py | 現9入力/18sender・18parent区間、既存36式/96log、414記録/36費用/22source改変拒否。新Native/Leanなし、区分150/152/残19、postinstall準備のみ、共通入力/物理進行OPEN |
