@@ -105401,5 +105401,82 @@
     "range": "whole current aliases",
     "role": "currentstate maintenance",
     "status": "caller36/measurement64running;prior snapshots retained;wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-IMAGE-EQUALITY-JOIN-v1.json",
+    "sha256": "d7a246c58787f30c512e7ea56bb8b36b17bd58e1f2b8a8089457b3b62641ada5",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/PREREGISTRATION.json",
+    "sha256": "85c510864769a25e15b311a992c65c39b9e9b4c58344135fd547e81a17eb4abe",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/PREPARATION.json",
+    "sha256": "ed9ff067705b76a818ba0a55cc9f4082491070a0459c90f37c3bb5e7b1126a0f",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/execution-v1/RESULT.json",
+    "sha256": "019d5b775ec3692604eacb64cc048797f59e69e5ab210b4f5b3b3b8cfdc2ba2a",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "ddc7bd8108982ac82c265c08f8eb1d8fc83b571560244c62285919b8b0daa718",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "313e4587cdbf9b1137046e32331a14264fd03fd4bd06f2d3901878b3429105e6",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/SOURCE-VERIFICATION-v4.json",
+    "sha256": "e4e371ba3c48484f91a5e1ac157e012ded4d82d86562433edbc567e6cb75aa24",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/PARTITION-IMAGE-EQUALITY-v1.json",
+    "sha256": "33ed00afe76598f76b3091a92902a8f4f1144612b2741be1aa6c39ce4fe38256",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-assert-success-v1/PUSH-v1.json",
+    "sha256": "487e93ee52473704cce20ad4206cfaa5331c3eb0c736e727ee6aa96477d345c0",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/CHECKPOINT-v1.json",
+    "sha256": "b82b291beaf57a9a2899ceac94f894cd4a1fb7917cdfac8f8fb3ce1c86767292",
+    "range": "whole current151imageequality source/component/formal/custody",
+    "role": "conditionalimageequalitylocalzero;notwholecallerphysicalacceptance",
+    "status": "63inputs twice/126pairs/504intervals/4controls;80reusedformallogs;caller35/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-equality-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "4de8ee7b5425553568f815a77eb9b6ae9c63683b57a847a034e5c0204168d13f",
+    "range": "complete currentimageequality documentation checkpoint",
+    "role": "W6imageequalitycorrespondence",
+    "status": "focused21passed;caller35/commoninput/physical/wholeW6open"
   }
 ]
