@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-30 15:02 JST
+最終更新: 2026-10-30 15:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
+W6継続・未完了。workerの7source/69関数/806localを両構成で照合し、新Lean262宣言/22反例・48log、source14/reader5/結合18改変拒否とstd部品8例×2回を受理。join後の返却、TLS退避、detach中の保持を区別。poll回数の共通上限は未成立。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。共通入力/履歴・全caller費用・物理資源/進行・最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -1379,3 +1379,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-30 08:49 JST: SSD増設/再起動前のowner pause。caller pathsの検証済みcommitを保持し、worker未実行草稿とtmpfs12384fileの永続archiveを全照合。研究とquota/Oracle確認を停止。
 
 - 2026-10-30 15:02 JST: owner再開後、揮発12384file復元と175大容量root移行を全照合し、旧重複copy整理でroot空き約60.5GB。RAM58import/6+2GiB運用を準備。W6 worker source検証へ継続。
+
+- 2026-10-30 15:30 JST: worker7source/69関数/806localを262宣言/22反例へ条件付き対応し、48log、source14/reader5/結合18拒否とstd部品8例×2回を照合。poll共通上限/全caller費用/物理資源はOPEN。

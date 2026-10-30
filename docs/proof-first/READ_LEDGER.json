@@ -103721,5 +103721,75 @@
     "range": "complete storage/resume document checkpoint",
     "role": "W6 SSD recovery and bounded RAM continuation",
     "status": "full docs passed; worker correspondence and wholeW6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/WORKER-OWNERSHIP-JOIN-v1.json",
+    "sha256": "beef635b985a455f5502af1edffaf29e84bfb433f67a4c91de5a9dd2f37e6fa3",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/WORKER-OWNERSHIP-CHECKPOINT-v1.json",
+    "sha256": "9c2d5f5eae7794b2b259f4b8f601eb3de729cdd771111a4c7786d2959c6c87ac",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/worker-ownership/FORMAL-VERIFICATION-v1.json",
+    "sha256": "555fbe2fef2439555f3311759f8d8237dbf879fab696360a40beb5aa049435eb",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/worker-ownership/SOURCE-VERIFICATION-v4.json",
+    "sha256": "7f9826f8acb50ca581ddbead484138953c6db1aaee35422c06a74ded2cbd679e",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/worker-ownership/native-component-v1/RESULT.json",
+    "sha256": "2d60f6661ccc005df26a4cc4088c37961889d3d9afe299b51e6bcf7683e318b1",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/W6WorkerOwnership_v1.lean",
+    "sha256": "7b5ab6f85d72c7eb78cfde2c56f345c72009178af38899e6755bd0df3c27e114",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/qualify_worker_ownership_v1.py",
+    "sha256": "f563330aa749edf30f66576358c974862d9c423f730b474cf9912a5c7602bde9",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T062303Z.json",
+    "sha256": "d0797fb8a3e0e25d5e6c6aeb7671183ba2da02e7609a348403bd84077cc5e94d",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v27.json",
+    "sha256": "0b6c202c07a6e5eb92e1460162277f19bcb95c90738bbbefcdca91fd34b55c6a",
+    "range": "complete pinned worker source/formal/std component evidence; independent readback",
+    "role": "W6 worker retained/shared/TLS/detach correspondence",
+    "status": "conditional LAB; no new W6 native execution; numeric/commoninput/physical/W6 open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/WORKER-OWNERSHIP-DOCS-CHECKPOINT-v1.json",
+    "sha256": "aa95dc64ae16c5f5556d795dc6776395e228a675cc651511bfa24825c184d9a4",
+    "range": "complete worker ownership document checkpoint",
+    "role": "W6 worker source/formal/lifetime correspondence",
+    "status": "full docs passed; worker ownership conditionally connected; numeric/commoninput/physical/wholeW6 open"
   }
 ]

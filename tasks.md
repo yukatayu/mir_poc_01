@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-30 15:02 JST
+最終更新: 2026-10-30 15:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,22 +12,22 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABはo
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6はowner指示で再開・未完了。再起動前の12384fileをSSDへ復元し、175大容量root/783026fileを全照合して移行。旧重複copy整理でroot空き約60.5GB、SSD約203.7GB。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。worker Lean262宣言/22反例は両回成功、source対応/独立読戻しは未完。
+W6継続・未完了。workerの7source/69関数/806localを両構成で照合し、新Lean262宣言/22反例・48log、source14/reader5/結合18改変拒否とstd部品8例×2回を受理。join後の返却、TLS退避、detach中の保持を区別。poll回数の共通上限は未成立。Native63全1750/45reader・他1190/7doctest・固定275formalを保持。共通入力/履歴・全caller費用・物理資源/進行・最終照合は未完。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-storage復元/移行は検証済み。次はworker所有・並行保持のsource対応と独立読戻し、共通入力/履歴、物理資源/進行、最終照合。直前の追加3〜7日という見積りは低確度の実作業見込みで、今回の停止・増設・storage移行時間を含まない。
+workerの所有移管/並行保持は条件付きに接続済み。次はpolling driverの共通work条件と最小代替の検証、各caller/共通public入力・履歴の費用、物理資源/進行、最終照合。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63のcfg-only3file、4library構成check通過。14packages/148targets/32examples/5CLIのビルドと独立照合通過。147他target/1190試験・21追加runtime・13doctest/7例を独立受理 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native63全1750と45原本reader/全履歴を受理。他1190試験と7doctestも受理。別の計測構成は1790inventoryの全回帰を未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | caller paths受理まで保持。worker一般Lean262宣言/22反例を両回実行。実source対応/独立読戻しは次。storage移行は実装資源の受理へ加算しない |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | worker69関数/806localと262宣言/22反例を条件付き対応。poll共通上限と各caller/入力/履歴の数値費用、物理資源・進行はOPEN |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | SSD移行・再開のfull6410入力不変・exit0。focused400通過、metadataはfocused401で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 14:27JSTもGPT-6 Pro利用上限。prompt未送信。次回確認は15:27JST以降 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | worker所有関係対応のfull6410入力不変・exit0。focused402通過、metadataはfocused403で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 15:27JSTもGPT-6 Pro利用上限。prompt未送信。次回16:27JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
@@ -47,7 +47,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
 | Work and funding | 受動/能動のwire・暗号・journal入力を32query/8reloadへ合成。全M9入力Hと準備出力Jを分け、setup/driverと拒否後host-entryを別計上。実測最大値又は8MiB payloadを全service上限にする代替は不採用 |
-| Temporary ownership | 呼出し元30scope/73localと計測構成38scope/99localを84宣言/22反例へ対応。新native実行なし。worker/共通入力/物理資源はOPEN |
+| Temporary ownership | worker7source/69関数を条件付き対応。返却/TLS/detach/共有backingを保持。全caller数値費用と物理資源はOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
 | Host and timing | honest host/key/filesystemは前提。scheduler/fsync/EINTR/同一UID隔離/一般availabilityは別の未証明境界。有限LABと本番保証を分ける |
