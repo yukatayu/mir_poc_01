@@ -103868,5 +103868,68 @@
     "range": "complete notification driver document checkpoint",
     "role": "W6 notification source/formal/focused correspondence",
     "status": "full docs passed; notification component/focused conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PUBLIC-INPUT-JOIN-v1.json",
+    "sha256": "b2c8610a53f270541d27eb7f3e41d19368245f6b373a49be0659cc2af8b92b58",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PUBLIC-INPUT-CHECKPOINT-v1.json",
+    "sha256": "ca104d453802c3298915ece936b4510dc8f5bd3b4d979680b6eb8ebddae704ec",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-public-input-v1/FORMAL-VERIFICATION-v6.json",
+    "sha256": "5945d84bc2ad43043d8c03ea1b51f91b105632f4241e7e34ae625e2a0404ee97",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-public-input-v1/INDEPENDENT-VERIFICATION-v3.json",
+    "sha256": "8eec288842c4ae525b36909bff22d12083490fee2b05e70ad2e5736cd557e7ac",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-public-input-v1/component-v1/RESULT.json",
+    "sha256": "d057d01f328de00fa58c443300f1cdb3a861601f94a66c616af007f6bd4dae66",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-public-input-v1/PREREGISTRATION.json",
+    "sha256": "a50befaea9b434b1e745f0b1047baad1bd86afab06ecfb1246c34747ee821b0a",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T095606Z.json",
+    "sha256": "5a0b881a0d4e81bac0ba9430a361ea40ea212086ae0fbd419c347f372789813c",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v30.json",
+    "sha256": "215782ce78147b5320f330fcfb5c5ebb5a909bf70f955e677c7a4d009a22ecfc",
+    "range": "complete caller byte-input/source/std/producer/component evidence and limits",
+    "role": "W6 selected outer caller byte buffers and metadata geometry",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-PUBLIC-INPUT-DOCS-CHECKPOINT-v1.json",
+    "sha256": "56b5045400008ae421726d3d1cb59d7f6d0b98cbcc04568b923876c29e190fb9",
+    "range": "complete caller public input document checkpoint",
+    "role": "W6 notification source/formal/focused correspondence",
+    "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

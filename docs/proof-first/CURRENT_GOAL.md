@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：単一通知driverを実経路へ接続
+# W6 — 秘密を含む観測とdebug：caller入力費用を条件付き対応
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。周期pollを通知1回へ置換する候補を一般Lean399宣言/40反例・88log、実部品9例×2回、2compile改変拒否へ対応。隔離Native64の1関数だけを変更し、実QUIC等10試験と424原本、catalog10world/220query/786改変拒否を照合。新全1750は実行中。Native63全1750/45reader・他1190/7doctestを保持。共通入力/履歴・全caller費用・物理資源/進行・最終照合は未完。
+W6継続・未完了。OriginalImage callerの公開byte入力を、一般Lean186宣言/19反例・42log、Rust部品25例×2回と実9writer原本へ条件付き接続。metadata上限652byte/N33/S370、Native64の選択buffer合計140798542byte。真正な生成file・正確なsize・非成長が前提で、全heap/RSS/物理予約ではない。Native64全1750は実行中、終了後45reader。共通入力/履歴・全caller費用/進行と最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-30 18:10 JST
+Updated 2026-10-30 18:58 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -68,3 +68,5 @@ Updated 2026-10-30 18:10 JST
 - 2026-10-30 15:30 JST: Common/Historical taskはjoin待機中にactual semantic snapshotとraw evidenceを保持し、join後の返却Valueも所有する。cleanupはAbort又はfalseを送ってjoinし、成功受理へ加算しない。TLSへのtask移動は所有を保ち、実SourceのDrop後に通知・joinする。Catalogの早期threadはArc実体を共有し、joinしたInitialQueriesのresponses/snapshot/prefixをcallerへ移動する。live JoinHandleの破棄はdetachで、処理とその保持領域を残す。 現在のdriverは2ms sleepを含むwhile pollで、queryが有限でもcallback完了までの反復回数は任意に大きくなり得る。一般Leanはこの反例族を示す。共通work上限には別の明示上限又は実際のschedule/work条件が要り、sleep間隔をcallback deadline又は進行保証に読み替えない。 各callee/callerの共通public入力・初期履歴、数値費用、closure/channel/Arc管理領域、thread stack/TLS、child process/pipe/file、非割当work、host/OS/allocator/kernel/物理予約/進行は未完了。他profile、119要件/outward/history対応、計測構成1790の必要回帰、最終統合docs/Oracleも残る。Rust/syn/字句reader/型/cfg/macro/std/codegen対応はTCBで、コンパイラ所有権の形式証明ではない。W6/T10/Canon受理なし。
 
 - 2026-10-30 18:10 JST: 単一producer/receiverのstored-permit状態遷移を任意の有限traceに対して検証。wait/signal/receiveは各1回以下、両方の到着順序で通知を保持し、独立した各操作の費用上限を仮定してprotocol費用を加算する。idle/delayは任意に長くでき、実executor/OSのwork又は完了時間の上限にはしない。callbackのok/error/panic、workerのreturn/abort、joinを直積モデルで分け、通知の消費だけをcallback成功へ読み替えない。 新Native64全1750の実行を開始。旧Native63全1750/45readerと他1190/7doctestは固定baselineとして保持し、新binaryへ自動継承しない。現時点の実行prefixを全成功と数えない。終了後に全named結果、7488raw/21plain/53stageの完全inventoryと必要な45独立readerを照合する。計測構成の全1790回帰も別の未完了項目。 Tokio1.53.1のlock/atomic/waker、Rust/std/codegen、実source対応はTCB。Notifiedの再poll/spurious wake、runtime有用task、thread生成/stack/TLS、callback全caller/共通public入力・履歴、物理資源・進行は未完了。他profile、119要件/outward/history、最終統合docs/Oracleも残る。通知guardはcurrent authority又は成功を生成しない。W6/T10/Canon受理なし。
+
+- 2026-10-30 18:58 JST: 任意のunsigned値についてdecimal桁数を証明し、12個の固定key、7個のusize64 count、pidu32、4field lifetimeと3個の64桁SHA256からmetadataのwire≤652/N≤33/S≤370を導く。Nはkeyを含むJSON node、Sはkey/stringのUTF-8 byte。任意有限read traceではpositive read/error後data/EOF/割込みを分け、byte≤capacity、attempt≤capacity+retry+1を保つ。retryの共通上限がなければwork上限は導けない。 Native64のbinary、independentからmoveしたprotected、raw、parse中metadataの4byte bufferに、121890728+2×(9453580+1)+652=140798542byteの条件付き上限を対応。logical byte/要求payloadだけであり、old Value/BTreeMap、binary_sha、PathBuf、registry、image、worker、stack、allocator/OSを含む全保持容量ではない。moveでprotected用の追加copyを課金せず、元bufferも消去しない。 3種のoptional prefix/distributed/Flow sidecar、環境/Path、parsed Value、全callerの共通初期入力・履歴と数値費用、物理資源/進行は未完。Rust/std/serde/allocator/codegen/source対応はTCB。Native64全1750は実行中で45readerは終了後、測定構成1790は別の未実行回帰。他profile、119要件/outward/history、最終統合docs/Oracleも残る。W6/T10/Canon受理なし。
