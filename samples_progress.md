@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 23:53 JST
+Last updated: 2026-10-31 00:27 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣言/16反例で検証し、9原本×21変形等の計390出力を両回で完全読戻し。元画像だけの費用流用を拒否。321操作の残fee111は未解決のまま。Native64全1750実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・全履歴readerを受理。画像変形12箇所の局所費用を56宣言/14反例と全524出力の読戻しへ対応し、321操作は費用対応111/条件付き局所非割当て111/残99。不正入力のcallee費用、共通入力/全caller/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -16,9 +16,9 @@ W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣
 |---|---|---|
 | Additional paused generated cache | ADDITIONAL-STORAGE-CHECKPOINT-20261029-v1 | Lean cache4553/部品binary17を全byte照合済みarchiveへ保存。再実行/hash照合前の復元はRESUME。source/proof/raw/log保持、W6再開済み |
 | Paused build cache | pause-cache-cleanup-20261029-v1/FINAL-VERIFICATION.json | 5177fileをexact archiveへ一時退避。証拠binary281本/研究原本を保持。再build前のrestore --confirmはRESUME参照。受理済み試験の再実行ではない |
-| Current native regression | NATIVE63-FULL1750-ACCEPTANCE-v1; native-full1750-v1/PIN | 全1750/0failed/0ignored、6575source/実binary/7488raw/21plain/53stageを受理。再起動不要。Native59/60/62の旧失敗は保持 |
-| Current independent readers | NATIVE63-FULL1750-READER-QUEUE-MANIFEST-v1 / RESULT-v1 | 全45readerを現原本へ新規実行・独立照合済み。旧prefix成功を流用しない |
-| Workspace | NATIVE63-WORKSPACE-PARTITION-ACCEPTANCE-v1 | 14package/148artifact/32example/5CLI、他1190試験/7doctestを受理。unique2940=1750+1190。追加単独21を二重加算しない |
+| Current native regression | NATIVE64-FULL1750-ACCEPTANCE-v1 / qualify_native64_readers_v1.py | 全1750/0failed/0ignored、6575source/実binary/7488raw/21plain/53stageと45reader新規実行受理。計測1790/全W6は未受理 |
+| Current independent readers | NATIVE64-FULL1750-READER-QUEUE-MANIFEST-v1 / RESULT-v1 | 全45readerを今回原本へ新規実行・独立照合。queue改変10件拒否、旧prefix流用なし |
+| Workspace / Native63 historical baseline | NATIVE63-WORKSPACE-PARTITION-ACCEPTANCE-v1 | 14package/148artifact/32example/5CLI、他1190試験/7doctestを受理。Native63当時unique2940=1750+1190、Native64へ自動継承しない。追加単独21を二重加算しない |
 | General and finite formal evidence | COMBINED-FORMAL-ACCEPTANCE-v2 | 275module/237一般module/38読戻し、41526宣言/1995反例、fresh/replay各2309commandを受理。後続moduleは下の別cut |
 | Passive capture / current release | 現45readerのpassive_preimages/boundaries/budget/journal/registration/initial_history | 実producerと全応答/支払/旧履歴を現原本へ照合。一般host timing/資源保証は別 |
 | Historical scalar / DAG / lifecycle | 現45readerのhistorical_profile4種/historical_dag/graph_components/scalar_restart/successor_data | off/on/drop/slowと復元/継続の有限経路。全scope/任意sourceの保証へ拡大しない |
@@ -45,9 +45,10 @@ W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Caller mutation fees | CALLER-MUTATION-FEES-JOIN-v1 / qualify_caller_mutation_fees_v1.py | 56宣言/14反例、524出力を両回照合。12操作の局所feeだけを対応、残99/拒否callee/共通入力/物理進行はOPEN |
 | Caller mutation shape | CALLER-MUTATION-SHAPE-JOIN-v1 / qualify_caller_mutation_shape_v1.py | 167宣言/16反例、9原本の390出力を両回照合。変形上限のみ、拒否までのfee/保持容量/物理進行はOPEN。type名fixtureをlive sessionと数えない |
-| Caller host IO | CALLER-HOST-IO-JOIN-v1 / qualify_caller_host_io_v1.py | 10write/9pair箇所、18部品×2。CString10P+486/最大34owned FD返却。累積生成数とkernel/live上限は別。残111局所fee/物理進行はOPEN |
-| Caller fee partition | CALLER-FEE-PARTITION-JOIN-v1 / qualify_caller_fee_partition_v1.py | 321操作=既存fee85/条件付き局所非割当て106/残130。79部品case×2、引数/destructor残差を保持。新一般宣言なし、全caller/物理進行はOPEN |
+| Caller host IO | CALLER-HOST-IO-JOIN-v1 / qualify_caller_host_io_v1.py | 10write/9pair箇所、18部品×2。CString10P+486/最大34owned FD返却。累積生成数とkernel/live上限は別。後続変形費用との統合は111/111/残99、物理進行はOPEN |
+| Caller fee partition / prior | CALLER-FEE-PARTITION-JOIN-v1 / qualify_caller_fee_partition_v1.py | 321操作=既存fee85/条件付き局所非割当て106/残130。79部品case×2、引数/destructor残差を保持。新一般宣言なし、後続host/変形費用で111/111/残99。全caller/物理進行はOPEN |
 | Global observer guard | GLOBAL-GUARD-COST-JOIN-v1 / qualify_global_guard_cost_v1.py | 46宣言/12反例、510原本/30部品case×2。snapshot一時Valueと複製を課金。after cutとvalid表現の境界を保持、全caller/物理進行はOPEN |
 | Named allocation guard | NAMED-GUARD-COST-JOIN-v1 / qualify_named_guard_cost_v3.py | 148宣言/22反例、510原本/19部品case×2/寿命4例。開始前所有の解放を保持。拡張計測は別rowで対応、全caller/物理進行はOPEN |
 | Caller reader output costs | CALLER-READER-OUTPUT-JOIN-v1 / qualify_caller_reader_output_v1.py | 4出力形、72宣言/14反例、48原本/64部品case×2。input/format/workは別費用、全caller/物理進行はOPEN |
@@ -58,7 +59,7 @@ W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣
 | Caller sidecar input | CALLER-SIDECAR-INPUT-JOIN-v2 / qualify_caller_sidecar_v2.py | 113宣言/14反例、42部品×2回、33保存原本。4file+解析151380883byteは条件付き要求量。全caller/物理進行はOPEN |
 | Caller public input | CALLER-PUBLIC-INPUT-JOIN-v1 / qualify_caller_public_input_v1.py | 186宣言/19反例、25部品×2回、9保存原本。metadata652/N33/S370と選択byte bufferのみ。全caller/物理進行はOPEN |
 | Single-notification driver | DRIVER-NOTIFY-COMPONENT-JOIN-v1 / qualify_driver_notify_component_v1.py | 399宣言/40反例、9部品×2回/2compile拒否。一般executor費用/進行はOPEN |
-| Native64 focused | NATIVE64-DRIVER-FOCUSED-QUALIFICATION-v1 / qualify_native64_driver_focused_v1.py | 1関数差分の実QUIC等10試験/424原本。全1750実行中、45reader未実施。旧Native63 baseline保持 |
+| Native64 focused / predecessor | NATIVE64-DRIVER-FOCUSED-QUALIFICATION-v1 | 1関数差分の10focused/424原本を保持。後続full1750/45readerは上行で受理 |
 | Worker ownership | WORKER-OWNERSHIP-JOIN-v1 / qualify_worker_ownership_v1.py | 7source/69関数を262宣言/22反例へ対応、std部品8例×2回。W6新実行なし。各lane数値費用・poll共通上限・物理資源はOPEN |
 | W6 SSD migration / RAM restore | MIGRATION-RESULT / RAM POLICY / restore_w6_ram_paths_20261030_v1.py | 175root/783026file全照合、旧path維持、保護6807file一致。RAM cacheは交換可能。新native sample実行なし、W6継続 |
 | W6 reboot preservation | owner-reboot-20261030-v1/RESULT.json | tmpfs12384file/17853entryを永続archiveへ全照合。10/30 08:49時点の停止履歴。worker草稿未検証で保存し、runnable evidenceを再生成しなかった |

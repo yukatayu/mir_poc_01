@@ -104568,5 +104568,110 @@
     "range": "complete caller mutation shape document checkpoint",
     "role": "W6 caller mutation shape source/component and reused general proof correspondence",
     "status": "full docs passed; caller mutation shape rejection input shapes conditionally connected; invalidcallee fees remain open;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATION-FEES-JOIN-v1.json",
+    "sha256": "1ca2eb06e0cf55d33be1904698bb7860ecad1ccb071b4409bcb7b239791371ac",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATION-FEES-CHECKPOINT-v1.json",
+    "sha256": "dc3554ceca78d55bc89c3e09ff381c21e70687dfc86598cb7cefd3e3e75c04c3",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-fees-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "e4871ee0ee5212cf1c157a33c1a6419377910d041240c88f353a56241ab9e3e0",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-fees-v1/SOURCE-VERIFICATION-v4.json",
+    "sha256": "2c8c9da9d288fcd81e162c96ff7b3edf982286e94c131a3dcd6a6ebd71f6825f",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-fees-v1/component-v1/RESULT.json",
+    "sha256": "3b4ceadfe38426bd985194671105b7d89163e71af463de0ef63c99d923e24794",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-fees-v1/PARTITION-MUTATION-v1.json",
+    "sha256": "06cf025a973ef43ebdc103b752c7265e4df5c2341573645f67e0fce0edf5f9be",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-mutation-fees-v1/PREREGISTRATION.json",
+    "sha256": "a9b162d4eb112972f807dae8d13e1a8d71266a99ffde68b7fcd77a4c79e1930c",
+    "range": "complete caller mutation cost/source/general proof/datatype component",
+    "role": "W6 selected mutation operation fees;not invalidcallee allocation guarantee",
+    "status": "conditional LAB;fullcaller/commoninput/physical/wholeW6open;Native64full1750and45readersaccepted"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-FULL1750-ACCEPTANCE-v1.json",
+    "sha256": "d07c216486ec2e468fae04e000f71efaffaecc5f1ee40ad7c6d9ae174700f988",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native64-full1750-v1/PIN.json",
+    "sha256": "c7019a60859e23693167cb51911431dd2df91653f6fdc38d47ca651afa18ed7c",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-FULL1750-READER-QUEUE-RESULT-v1.json",
+    "sha256": "33c170fefa3d101d60170e21b01eb19123e379bfda04027e21f92f1e8a5835ef",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE64-FULL1750-READER-QUEUE-MANIFEST-v1.json",
+    "sha256": "068fc8de39d2850228f3d22ab05b7878c13d8e00aea23b0a62916c8d15767ccb",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native64-full-reader-preparation-v1/ACTUAL-REBASE-VERIFICATION-v1.json",
+    "sha256": "87e3d7d46f102e5dbb55b8478acd0bd1abd88db7702361f43b25f907cce79c38",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native64-full1750-executable-v1/VERIFIED.json",
+    "sha256": "2d173727cae1e066edfc7dabc45e4841da46d82c00078d808a2a0508e2d6fd07",
+    "range": "complete Native64 terminal/readers/source/binary/queue preservation",
+    "role": "current exact full1750 plus45semantic raw history readers",
+    "status": "accepted selected private regression;not otherworkspace/measurement1790/physical/fullW6"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATION-FEES-CHECKPOINT-v2.json",
+    "sha256": "66377f5403e2ddaad10ea068539570455fbbc9fdc7633f9c0b8fac7ae742fcd2",
+    "range": "complete current alias correction",
+    "role": "Native64 current acceptance vs historical Native63/older keys",
+    "status": "LAB same W6; final integrated review open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-MUTATION-FEES-DOCS-CHECKPOINT-v1.json",
+    "sha256": "f97a6284d9a9e20a50c0b65a707194ac68731c32bee83f9c22ba45efbabdbc4f",
+    "range": "complete caller mutation fees document checkpoint",
+    "role": "W6 caller mutation fees source/component and reused general proof correspondence",
+    "status": "full docs passed; caller mutation fees rejection input shapes conditionally connected; invalidcallee fees remain open;Native64full1750and45readersaccepted;numeric/commoninput/physical/wholeW6open"
   }
 ]

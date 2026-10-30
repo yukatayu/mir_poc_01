@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-30 23:53 JST
+最終更新: 2026-10-31 00:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,21 +12,21 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABはo
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6継続・未完了。拒否試験へ渡す画像変形の一般上限を167宣言/16反例で検証し、9原本×21変形等の計390出力を両回で完全読戻し。元画像だけの費用流用を拒否。321操作の残fee111は未解決のまま。Native64全1750実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・全履歴readerを受理。画像変形12箇所の局所費用を56宣言/14反例と全524出力の読戻しへ対応し、321操作は費用対応111/条件付き局所非割当て111/残99。不正入力のcallee費用、共通入力/全caller/物理進行/最終照合は未完。
 
-現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。新Native64は1関数変更の10focused受理、全1750実行中。再開手順は `docs/proof-first/RESUME.md`。
+Native64全1750/0failed/0ignored、全6575source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを新規実行で受理。旧prefixの流用なし、queue改変10件を拒否。新binaryのarchiveは全byte読戻し、元実行fileも保持。旧Native63の他1190/7doctestは履歴baselineであり、Native64の新workspace全受理へ自動継承しない。 Native59/60/62等の旧失敗を保持。残分類はW6_CHECK.implementation.unverified_checks、再開手順はdocs/proof-first/RESUME.md。
 
 ## ordered self-driven packages
 
-拒否用画像の変形後上限を対応。Native64全1750と後続45readerを追跡し、変形入力にも成立するcalleeの費用/失敗prefixを確立してから残111局所feeへ結ぶ。共通public入力/履歴・全caller保持・物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
+Native64全1750/45readerと変形12操作の局所費用を受理。残99局所fee・hidden/implicit/component、変形入力のcallee費用/失敗prefix、共通public入力/履歴、全caller保持・物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63の14package/148target/32example/5CLIを固定。隔離Native64はtest helper1関数だけを変更、全6575入力/1750名を照合 |
-| Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native64全1750実行中、終了後45reader。旧Native63全1750/45reader・他1190/7doctestは固定baseline。計測構成1790は未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 変形入力上限を対応、fee区分104/106/残111は不変。不正入力のcallee費用、共通上限/全caller/物理進行はOPEN |
+| Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native64全1750/45reader受理。Native63他1190/7doctestは旧baseline。計測構成1790は未実行 |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 変形12操作を対応、fee区分111/111/残99。不正入力のcallee費用、共通上限/全caller/物理進行はOPEN |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | caller拒否用画像変形の上限対応のfull6410入力不変・exit0。focused429通過、metadataはfocused430で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | 画像変形の局所費用・Native64全回帰受理のfull6410入力不変・exit0。focused431通過、metadataはfocused432で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
 | Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 23:58JSTもGPT-6 Pro利用上限。prompt未送信。次回10/31 00:58JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
@@ -46,7 +46,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 |---|---|
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
-| Work and funding | 元画像feeを変形画像へ無条件流用しない。残111/hidden/implicit/callee/共通入力/全caller/物理進行はOPEN |
+| Work and funding | 元画像feeを変形画像へ無条件流用しない。残99/hidden/implicit/callee/共通入力/全caller/物理進行はOPEN |
 | Temporary ownership | worker7source/69関数を条件付き対応。新driverはguard通知/return/Err/panic/joinを分離。全caller数値費用と物理資源はOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
