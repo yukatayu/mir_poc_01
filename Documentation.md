@@ -24,7 +24,7 @@ memoryです。現在の停止線は
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。callerのmetadata/prefix/distributed/Flowの4入力を、一般Lean113宣言/14反例・34log、現serializer部品42例×2回、実33原本へ条件付き接続。4file読込み+Value解析の累積要求上限151380883byteは型/件数/文字列長から導く。真正な生成file・正確なsize・非成長が前提で、全heap/RSS/物理予約ではない。Native64全1750は実行中、終了後45reader。生成/保存側・全caller/共通履歴・物理進行/最終照合は未完。
+W6継続・未完了。callerのValue複製/直列化を一般Lean51宣言/14反例・36log、同一library部品229例+小入力8例の各2回へ条件付き接続。複製は32A+1024F+S、出力Vec累積要求は272+4W。任意Serializeの虚偽件数/重複fieldと、元の保持容量を省く反例を保存。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 

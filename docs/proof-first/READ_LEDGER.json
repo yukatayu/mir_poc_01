@@ -103994,5 +103994,68 @@
     "range": "complete caller sidecar input document checkpoint",
     "role": "W6 sidecar input source/formal/component correspondence",
     "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-VALUE-WRITE-JOIN-v1.json",
+    "sha256": "e8291f251c8c2d907b011924ccc11091dc289fcc5453cde3a868e68f5335273b",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-VALUE-WRITE-CHECKPOINT-v1.json",
+    "sha256": "b5b3e7184aca29b73d1243865fc7d7d593499c6b686a46d99fa4be9057aac112",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-value-write-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "8669987fa83c7e2bed512a9a557b5a4dc8e4d0e12173b7e51ab6277a4c7f1c51",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-value-write-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "1b137b11a1157c9c87c4f3577e8d404e6d408b07c72c8475002832d339eb2d16",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-value-write-v1/component-v1/RESULT.json",
+    "sha256": "aba0bbbf8589c1b522432b2178dad3b8748f0b775b0d97c53e75cdd4a5ab85c5",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-value-write-v1/PREREGISTRATION.json",
+    "sha256": "f1b8c2e71ae5070646e52f01c5d47e474cdd90e1c8f0f488b4235e0de4ce82e9",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T105641Z.json",
+    "sha256": "763b64f146ff4f082c1b39541535eb35e15bc939abf04bdcf7329ce08078c00e",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v31.json",
+    "sha256": "367aa7a3880e4b7170d921bfee23007fb2b73ab3c52c4daa0cb1fea82267e67b",
+    "range": "complete Value copying/wire source/proof/component evidence and limits",
+    "role": "W6 selected Value clone/to_value/json expression and serializer bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-VALUE-WRITE-DOCS-CHECKPOINT-v1.json",
+    "sha256": "afcd42f57bf56cab0e78185d70a8fa05f0a1687359a05b05dd4933fe259faaa1",
+    "range": "complete caller Value copy/write document checkpoint",
+    "role": "W6 Value copy/write source/formal/component correspondence",
+    "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

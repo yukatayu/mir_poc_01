@@ -8831,10 +8831,10 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/predecessor-root/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
     "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
   },
-  "w6_implementation_updated_at": "2026-10-30T10:54:38.710720+00:00",
-  "w6_implementation_scope_notice": "W6継続・未完了。callerのmetadata/prefix/distributed/Flowの4入力を、一般Lean113宣言/14反例・34log、現serializer部品42例×2回、実33原本へ条件付き接続。4file読込み+Value解析の累積要求上限151380883byteは型/件数/文字列長から導く。真正な生成file・正確なsize・非成長が前提で、全heap/RSS/物理予約ではない。Native64全1750は実行中、終了後45reader。生成/保存側・全caller/共通履歴・物理進行/最終照合は未完。",
+  "w6_implementation_updated_at": "2026-10-30T11:15:20.923378+00:00",
+  "w6_implementation_scope_notice": "W6継続・未完了。callerのValue複製/直列化を一般Lean51宣言/14反例・36log、同一library部品229例+小入力8例の各2回へ条件付き接続。複製は32A+1024F+S、出力Vec累積要求は272+4W。任意Serializeの虚偽件数/重複fieldと、元の保持容量を省く反例を保存。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。",
   "w6_implementation_base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
-  "updated_at": "2026-10-30T10:54:38.710720+00:00",
+  "updated_at": "2026-10-30T11:15:20.923378+00:00",
   "w6_execution_control": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
   "w6_owner_pause": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
