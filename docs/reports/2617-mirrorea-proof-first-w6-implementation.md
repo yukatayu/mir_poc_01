@@ -6,6 +6,8 @@ W6の有限LAB実装・検証は再開・未完了。2026-10-29 20:00JSTのowner
 
 ## Scope and assumptions
 
+2026-10-31 04:37 JST: 現案は初期登録1callerと重複Flow拒否1callerを、既存の条件付き費用式へ接続する。最小代替は2箇所を未知qに残す案。現source・実入力・既存一般式の対応を確認したため、今回の有限入力に限って現案を採る。 321操作は費用対応146/条件付き局所非割当て152/残23。初期登録全体はsource/式対応であり、既存endpoint区間は監査内での再capture。writer完了とsource順序からの重複拒否到達は推論で、独立した個別traceではない。返却registry/借用process/元bootstrap、復号temporary、Dropと非割当workを保持する。共通public入力/初期履歴、残23/hidden/implicit/component、全caller/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。各画像内の候補上限を秘密標本間の共通public予算にせず、累積要求を物理予約へ読み替えない。
+
 2026-10-31 04:19 JST: 現案は名前空間不一致で終了するrestore2箇所を、先行validateの既存費用へ対応する。最小代替は未知q又は正常restore全体のfeeを残す案。実sourceの順序・具体的なkey不一致・検証引数不変を確認したため、早期prefixとして条件付きで採る。 321操作は費用対応144/条件付き局所非割当て152/残25。clone/format/key追加/UnixStream pair/makeは別siteで課金済み又は別条件。拒否でも渡したFDの破棄とclose/host work・peer所有を残す。元画像と元登録keyの対応が前提で、任意importや後段の不正restoreへ拡張しない。共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力の最大値をpublic予算にせず、累積要求を物理予約へ読み替えない。
 
 2026-10-31 04:11 JST: 現案はOriginalImage capture・正常restore・4回の明示correspondenceとParts capture2箇所の計8callerを、既存の条件付きowning費用式へ接続する。最小代替は8箇所を未知qに残す案。実caller/引数・現source・原本/独立registryと式の対応を確認したため現案を条件付きで採る。 321操作は費用対応142/条件付き局所非割当て152/残27。式は当該正常画像とcurrent registry/事前入力条件に限る。実36区間はrestoreと最初の明示照合だけで、writer capture/Parts/後続照合の新計測は主張しない。変形/不正画像のrestore途中、初期化/registration、共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力標本の最大値をpublic予算にせず、累積要求をresident/RSS/物理予約へ読み替えない。
@@ -112,6 +114,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 
 ## Start state / dirty state
 
+2026-10-31 04:37 JST: HEAD 29cde27ed244e2c4a89a91fcbece166c980a7b4a、clean。主担当単独。
+
 2026-10-31 04:19 JST: HEAD 85501af83c352346a3527763d0020fe8c6b8380e、clean。主担当単独。
 
 2026-10-31 04:11 JST: HEAD fbe218308ad79f8504b24414eee1153d381b2dfe、clean。主担当単独。
@@ -215,6 +219,8 @@ RUN_CODEX_MIRROREAの主担当一人・証明先行を維持。Q26/Q27採用、1
 HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredecessor-rootへ保存。221Canon pins、閉じたReport2615/W5_CHECK/2616とAstra最終cutを保護。W5native6520files/75,291,730bytesをhash照合して新copyへ移した。
 
 ## Documents consulted
+
+2026-10-31 04:37 JST: Canon README/MAP/theory07/ADR0014/ADR0043とowner境界、LAB現status/plan、現caller/Bootstrap/Flow費用、Native64/計測64の実登録・保存wire・旧/現ソース。
 
 2026-10-31 04:19 JST: Canon README/MAP/theory07/ADR0043/ADR0014とowner境界、LAB現status/plan、現owning/所有寿命/caller式、Native64/計測64/標準library/既存9原本と18reader完了記録。
 
@@ -321,6 +327,8 @@ HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main、既存16dirty pathsをpredec
 Canon README/MAPとtask-specific theory07/architecture08、RUN/00_START/workstreams/READING、W6 handoff/条件v8/試験v6、直接proof/native依存。全文/部分readと旧hash再利用はREAD_LEDGERに区別する。docs/reports一括readなし。
 
 ## Actions taken
+
+2026-10-31 04:37 JST: 部品の費用適用前にBootstrap/structural/Flow/dormant/caller合成のfresh/replay原本を確認した。初期登録126log/264保存fileと重複Flow114log/240保存fileを再読戻し、重複を除く200log/420保存fileを保持。新一般定理、新Lean実行又は固定275manifest追加ではない。 初期登録は全27installed登録原本（writer9/fresh reader18）からkey・endpoint・immutable4fieldを取り出し、18旧writer代入を含む244改変を拒否。別Python式で27件を再計算し81改変・42依存を照合した。重複Flowは9完全保存wireとwriter完了記録を読戻し、24候補の先頭受信rootを全列挙して88改変を拒否。全6575Native/6580計測sourceと旧/現callee対応も確認。新Native実行又は新しい個別割当て計測ではない。
 
 2026-10-31 04:19 JST: 既存owning/pipeline/所有寿命/caller合成のfresh/replay計308log/640保存fileを再読戻しした。拒否prefixでも先行要求を保持する既存結果の適用であり、新一般定理、新Lean実行又は固定275manifest追加ではない。 現行Native/計測版のrestore・validate・callerと標準String比較、UnixStreamのOwnedFd破棄、unit型エラーを照合。現9保存wireを完全復号し、各2key変形の18入力について実検証が読む3Tree引数の同一性・既存feeを確認。既存18cold reader完了記録の原本/binaryを照合し、費用/入力/順序59改変を拒否。両assert到達は完了記録とsource順序からの推論で、新しい個別traceや割当て計測ではない。
 
@@ -618,13 +626,15 @@ Native60失敗436fileのpinを保持し、archive作成〜最終write区間と�
 
 2026-10-24 12:15 JST: userの進捗照会へ主要機能後の資源保証/総合検証段階、1727成功/2失敗、残作業暫定2〜4日（外部review待ち除外）と回答。current表に残っていたNative56/59実行中記述も修正。件数を完了率へ換算しない。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。名前空間不一致のrestore2callerを先行画像検証の費用へ対応し、18入力・既存18reader完了記録を再照合。caller区分144/152/残25。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。初期登録27実入力と重複Flow拒否9画像の費用をcallerへ対応。保存log200本を再照合、現caller区分146/152/残23。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 同じW6 goalはowner指定の残量条件で一時停止。2026-10-28 03:19JSTの週残量41%で、40%を目安とする再開可能な区切りを保存した。指定Full resetは2026-10-22 15:54JSTに1回使用済み。追加reset/購入なし。再開時はAstra一人/sub-agentなし、Q26/Q27採用・119要件区分・Canon/Plan250のowner pauseを保持。W7/外部write/commit/push/通知/共有folderは開始しない。
 
 ASTRA-JOINT-REVIEW-v1は動的suffix/close予約を可逆な候補Aとして選び、同一journal内の静的枠分割Bを最小代替として保持。malformed/core count不一致、policy proposal/accepted decision、純粋dispatch/実crash phase、closeとowning quarantineを区別する。以前の作業証拠は日時つき履歴に保持。
 
 ## Files changed
+
+2026-10-31 04:37 JST: LAB13文書/台帳と外部研究reader/照合記録。runtime/Canon/実test source不変。
 
 2026-10-31 04:19 JST: LAB13文書/台帳と外部研究reader/照合記録。runtime/Canon/実test source不変。
 
@@ -983,6 +993,8 @@ Root production/Canonは不変。external formal-v1へW6ActivationCatalogを追�
 - `docs/project-status.md`
 
 ## Commands run
+
+2026-10-31 04:37 JST: verify_caller_registration_v1.py→v2→v3→v4（前3稿の失敗を保持）→verify_caller_registration_arithmetic_v1.py→v2→verify_caller_duplicate_flow_v1.py。成果はCALLER-INITIAL-REGISTRATION-JOIN-v1 / INDEPENDENT-ARITHMETIC-v1 / CALLER-DUPLICATE-FLOW-JOIN-v1 / PARTITION-DUPLICATE-FLOW-v1。成功cutはno-clobber、再現は新cut名。 focused457/458とgit diff --checkで今回変更を検証する。
 
 2026-10-31 04:19 JST: verify_caller_namespace_refusal_v1.py（参照形式の失敗を保持）→ verify_caller_namespace_refusal_v2.py → CALLER-NAMESPACE-REFUSAL-JOIN-v1.json / PARTITION-NAMESPACE-REFUSAL-v1.json。成功cutはno-clobber、再現は新cut名。 focused455/456とgit diff --checkで今回変更を検証する。
 
@@ -1617,6 +1629,10 @@ focused-docs-v105はprogress.md更新日時が08:04実logより古い07:45のた
 run_native_active_originals_rebuild_v1.pyとsame-binary child-only/child-and-parent controls、verify_active_step_tuple_v1.py、run_native_frozen_gzip_v1.pyの全82と現全1628、check_formal_runtime_bounded_v3.py formal-fresh-v48、replay_formal_runtime_bounded_v3.py formal-fresh-v48 formal-replay-v48-a、verify_initialized_outcome_formal_v1.py、run_initialized_outcome_campaign_v1.py、verify_initialized_outcome_campaign_v1.py。source/binary/argv/logは各RESULT/PIN。旧compiler43/44のarchive/readback/--confirm retireは独立receiptへ全対象/資源auditを保存。
 
 ## Evidence / outputs / test results
+
+2026-10-31 04:37 JST: 初期登録/重複Flow2caller費用対応のfocused457は21項目成功。検証metadataはfocused458で別検証。今回はruntime/validator/WRK/history不変のevidence/status更新に限定し、full make docsは再実行せず先行full6410を別cutとして保持。W6最終統合full/Oracleは未完。
+
+2026-10-31 04:37 JST: 初期登録は全27installed登録原本（writer9/fresh reader18）からkey・endpoint・immutable4fieldを取り出し、18旧writer代入を含む244改変を拒否。別Python式で27件を再計算し81改変・42依存を照合した。重複Flowは9完全保存wireとwriter完了記録を読戻し、24候補の先頭受信rootを全列挙して88改変を拒否。全6575Native/6580計測sourceと旧/現callee対応も確認。新Native実行又は新しい個別割当て計測ではない。 初期登録AST6はkey UTF-8 byte数＋現endpoint capture＋現immutable4field capture。fresh readerの登録値を旧writer画像から代入しない。重複Flow AST22は先行slots復号＋2つの借用参照のmatching。各画像の全先頭候補に対する上限を確認し、空rootは分岐未実行。DuplicateKeyで拒否されてもString複製・照合Vec・使用済み集合の先行要求を払い戻さない。
 
 2026-10-31 04:20 JST: 名前空間不一致2caller費用対応のfocused455は21項目成功。検証metadataはfocused456で別検証。今回はruntime/validator/WRK/history不変のevidence/status更新に限定し、full make docsは再実行せず先行full6410を別cutとして保持。W6最終統合full/Oracleは未完。
 
@@ -2512,6 +2528,8 @@ native-foundation-complete-v1の統合25件はPASS、全source不変、保存bin
 
 ## What changed in understanding
 
+2026-10-31 04:37 JST: 初期登録にはfresh reader固有のimmutable入力を使う必要があり、旧writerの保存画像からその費用入力を代入できない。重複拒否も復号と先行照合費用を残す。
+
 2026-10-31 04:19 JST: namespace不一致は検証より後に判断されるため、その拒否にも検証費用を残す。FDの破棄は所有権の終端であり、kernel/host費用や進行保証の省略根拠にはならない。
 
 2026-10-31 04:11 JST: restore内部の照合に加え、callerの4回の明示照合と2回のParts captureはそれぞれ費用を加える。既存式を実際のsiteへ接続しても、全callerの共通public入力や物理資源の前提は消えない。
@@ -2872,6 +2890,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 
 ## Open questions
 
+2026-10-31 04:37 JST: 321操作は費用対応146/条件付き局所非割当て152/残23。初期登録全体はsource/式対応であり、既存endpoint区間は監査内での再capture。writer完了とsource順序からの重複拒否到達は推論で、独立した個別traceではない。返却registry/借用process/元bootstrap、復号temporary、Dropと非割当workを保持する。共通public入力/初期履歴、残23/hidden/implicit/component、全caller/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。各画像内の候補上限を秘密標本間の共通public予算にせず、累積要求を物理予約へ読み替えない。
+
 2026-10-31 04:19 JST: 321操作は費用対応144/条件付き局所非割当て152/残25。clone/format/key追加/UnixStream pair/makeは別siteで課金済み又は別条件。拒否でも渡したFDの破棄とclose/host work・peer所有を残す。元画像と元登録keyの対応が前提で、任意importや後段の不正restoreへ拡張しない。共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力の最大値をpublic予算にせず、累積要求を物理予約へ読み替えない。
 
 2026-10-31 04:11 JST: 321操作は費用対応142/条件付き局所非割当て152/残27。式は当該正常画像とcurrent registry/事前入力条件に限る。実36区間はrestoreと最初の明示照合だけで、writer capture/Parts/後続照合の新計測は主張しない。変形/不正画像のrestore途中、初期化/registration、共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力標本の最大値をpublic予算にせず、累積要求をresident/RSS/物理予約へ読み替えない。
@@ -3081,6 +3101,8 @@ fresh readerの入力は旧保存templateとは別物であり、6個の固定�
 UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparison/runtime/setup/test-host/physical、Native61全体/45reader/workspace、最終source/proof/docs/Oracleが残る。
 
 ## Suggested next prompt
+
+2026-10-31 04:37 JST: 同W6を継続し、残23callee/共通public入力/全caller/物理進行と全1790終端・後続readerへ進む。
 
 2026-10-31 04:19 JST: 同W6を継続し、全1790終端/後続readerと残25callee/共通入力/全caller/物理進行へ進む。
 
@@ -3294,6 +3316,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Plan update status
 
+2026-10-31 04:37 JST: 関連LAB memory/indexを同期。roadmap/phase/owner境界不変。
+
 2026-10-31 04:19 JST: 関連LAB memory/indexを同期。roadmap/phase/owner境界不変。
 
 2026-10-31 04:11 JST: 関連LAB memory/indexを同期。roadmap/phase/owner境界不変。
@@ -3500,6 +3524,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## Documentation.md update status
 
+2026-10-31 04:37 JST: current summaryを同期。
+
 2026-10-31 04:19 JST: current summaryを同期。
 
 2026-10-31 04:11 JST: current summaryを同期。
@@ -3703,6 +3729,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: M9証拠と全Native実行を区別。
 
 ## docs/project-status.md update status
+
+2026-10-31 04:37 JST: 同cutへ同期。大局phase/owner境界不変。
 
 2026-10-31 04:19 JST: 同cutへ同期。大局phase/owner境界不変。
 
@@ -3908,6 +3936,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 
 ## progress.md update status
 
+2026-10-31 04:37 JST: snapshotと実日時logを同期。
+
 2026-10-31 04:19 JST: snapshotと実日時logを同期。
 
 2026-10-31 04:11 JST: snapshotと実日時logを同期。
@@ -4111,6 +4141,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 更新済み: current summaryと実date log。大局phase不変。
 
 ## tasks.md update status
+
+2026-10-31 04:37 JST: 全体snapshotを再出力。残23と全回帰監視、owner採用判断を分離。
 
 2026-10-31 04:19 JST: 全体snapshotを再出力。残25と全回帰監視、owner採用判断を分離。
 
@@ -4317,6 +4349,8 @@ UNVERIFIED-CHECKS-v211の14分類を維持。全H/F/J、残M9 work/drop/comparis
 全snapshot更新済み: 全Native→45reader→workspace、全H/F/J/物理費用と最終gate。
 
 ## samples_progress.md update status
+
+2026-10-31 04:37 JST: 現caller費用のreader/receipt/条件rowを追加。新sample/実行実績ではなく、active taxonomy不変。
 
 2026-10-31 04:19 JST: current式適用reader/receipt/境界rowを追加。新sample/実行実績ではなく、active taxonomy不変。
 
@@ -4525,6 +4559,8 @@ Flow行同期時の旧outer行重複をfocused diffで発見し、1行をFlow証
 更新済み: 旧Native60実行中/旧reader current参照をNative61へ訂正、M9証拠row追加。workflow-readyへ昇格なし。
 
 ## Reviewer findings and follow-up
+
+2026-10-31 04:37 JST: 初期登録readerは監査専用2関数まで旧AST一致を要求したため、既存7関数の完全一致と追加監査費用の分離へ修正。既存codec receipt名との衝突はno-clobberで停止し別名を採用、次稿の参照version誤置換も訂正した。独立計算初稿のbyte-node名を実sourceのW5OwnedBytesV2へ訂正し、capacity条件を実4MiB上限へ厳しくした。全失敗稿/logを保持し、runtime/費用式/成功条件を弱めない。主担当単独の照合で独立agent reviewではなく、Rust/compiler/ABI/stdlib/allocatorとモデル対応はTCB条件。
 
 2026-10-31 04:19 JST: 主担当単独のsource/現入力/費用/原本/registry/反例読戻し。独立agent reviewではない。reader初稿は標準library原本/extractedの対を単一path参照と誤認して照合前に停止した。v2で両方の原byteを照合し、初稿/logを保持した。source/runtime/式/反例/成功条件の変更なし。Rust/compiler/std/allocator対応、正常な所有FD破棄・非panicはTCB条件。closeのsyscall結果/不確実性/進行をRust割当て0から導かない。
 
@@ -4786,6 +4822,8 @@ mainが16native/24DTO、10constructor/18vector、156実M9shape/156欠落/156履�
 
 ## Skipped validations and reasons
 
+2026-10-31 04:37 JST: 全1790実行中/後続reader未実施。04:03JSTのOracleは利用上限でprompt未送信。既存一般式のcaller適用でruntime・validator・WRK/history不変のためNative/Lean/full make docsを再実行せず、新読戻しと変更対象21docs checksを使う。先行full6410は別cut。W6最終統合full/Oracle・全要件照合未完。
+
 2026-10-31 04:19 JST: 全1790実行中/後続reader未実施。04:03JSTのOracleは利用上限でprompt未送信。既存受理証拠のcaller適用でruntime・validator・WRK/history不変のためNative/Lean/full make docsを再実行せず、新readbackと変更対象21docs checksを使う。先行full6410は別cut。W6最終統合full/Oracle・全要件照合未完。
 
 2026-10-31 04:11 JST: 全1790実行中/後続reader未実施。04:03JSTのOracleは利用上限でprompt未送信。既存受理証拠のcaller適用でruntime・validator・WRK/history不変のためNative/Lean/full make docsを再実行せず、新readbackと変更対象21docs checksを使う。先行full6410は別cut。W6最終統合full/Oracle・全要件照合未完。
@@ -5032,6 +5070,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 
 ## Commit / push status
 
+2026-10-31 04:37 JST: 先行namespace対応13文書を29cde27eとしてpushしremote一致。今回検証後commit/push。Git外研究原本はSSDに保持しpush対象外。
+
 2026-10-31 04:19 JST: 先行owning対応13文書を85501af8としてpushしremote一致。今回検証後commit/push。Git外研究原本はSSDに保持しpush対象外。
 
 2026-10-31 04:11 JST: 先行画像比較13文書をfbe21830としてpushしremote一致。今回検証後commit/push。Git外研究原本はSSDに保持しpush対象外。
@@ -5245,6 +5285,8 @@ Native61全1729は実行中。45full reader/workspace未実行（workspaceは3Gi
 未commit・未push。owner指定どおり既存未commit成果を保持。外部write/Discord通知/共有folder配置なし。
 
 ## Sub-agent session close status
+
+2026-10-31 04:37 JST: owner指定の主担当単独、sub-agentなし。同W6継続。全1790service実行中。
 
 2026-10-31 04:19 JST: owner指定の主担当単独、sub-agentなし。同W6継続。全1790serviceだけ実行中。
 

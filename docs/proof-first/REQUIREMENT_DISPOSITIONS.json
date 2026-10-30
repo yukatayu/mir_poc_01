@@ -8831,10 +8831,10 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/predecessor-root/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
     "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
   },
-  "w6_implementation_updated_at": "2026-10-30T19:19:53.597561+00:00",
-  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。名前空間不一致のrestore2callerを先行画像検証の費用へ対応し、18入力・既存18reader完了記録を再照合。caller区分144/152/残25。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
+  "w6_implementation_updated_at": "2026-10-30T19:37:17.824829+00:00",
+  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。初期登録27実入力と重複Flow拒否9画像の費用をcallerへ対応。保存log200本を再照合、現caller区分146/152/残23。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
   "w6_implementation_base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
-  "updated_at": "2026-10-30T19:19:53.597561+00:00",
+  "updated_at": "2026-10-30T19:37:17.824829+00:00",
   "w6_execution_control": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
   "w6_owner_pause": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",
