@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-31 06:13 JST
+最終更新: 2026-10-31 06:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。Flow除去・message追加・参照重複の27変形画像について、18registry/54費用適用を照合。321callerは費用154・局所0が152・不達5・残10。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。履歴送信2経路の5実world/10原画像・認証通信を再照合し、各policy257byteの条件付き費用へ接続。321callerは費用156・局所0が152・不達5・残8。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -1443,3 +1443,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-31 05:53 JST: 必須field削除72入力の復元拒否prefixを18registry/144費用へ接続し、216数値式/新46logと510入力費用/22source改変拒否を照合。5panic不達は条件付き。費用151・局所0が152・不達5・残13。共通入力/全caller/物理進行、全1790終端/後続reader未完。
 
 - 2026-10-31 06:13 JST: Flow除去/message追加/参照重複の27変形画像を18registry/54費用適用へ接続。171数値式/46新logと630入力費用/47source改変拒否を照合。費用154・局所0が152・不達5・残10。共通入力/全caller/物理進行と全1790終端/後続readerは未完。10/31 06:01JSTの週間残量44%、次回07:01JST以降。Oracle06:03JSTもGPT-6 Pro利用上限でprompt未送信、次回07:03JST以降。指定reset使用1回、35%停止、追加reset/購入なし。
+
+- 2026-10-31 06:23 JST: Native64全6575sourceと計測64全6580sourceを確認。5実worldの129原本fieldと10owner画像・20認証付き送信を独立readerで再照合し、通信/出所改変36676件を拒否。27callee/getterと既存共通host7関数を対応し、54source改変・60費用記録改変も拒否した。新Native実行や個別sender計測はない。 321操作は費用対応156/条件付き局所非割当て152/条件付き不達5/残8。postinstall155/160は準備のみでnative lock解放待ち。6capture caller、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。固定stack wireをwhole resident保証にせず、hashCPU/OS/foreign/cancellation等を0にしない。 10/31 06:01JSTの週間残量44%、次回07:01JST以降。Oracle06:03JSTもGPT-6 Pro利用上限でprompt未送信、次回07:03JST以降。指定reset使用1回、35%停止、追加reset/購入なし。

@@ -106353,5 +106353,103 @@
     "range": "complete currentmutated_restore documentation checkpoint",
     "role": "W6mutated_restore",
     "status": "focused21passed;caller10/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-HISTORICAL-SEND-JOIN-v1.json",
+    "sha256": "82036258c43efd721c7173012abca45fc29ef28c22bac9148ae19662a80b6192",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/PARTITION-HISTORICAL-SEND-v1.json",
+    "sha256": "e773383b2cb7cd163f9940f2b7bb2e8d1f9a937f325a6b30bcdf1ed42d7416ea",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/PREREGISTRATION.json",
+    "sha256": "e8c0d24c6114f56d9fe56304c2940a9a5b0a4619a24bce8ede7d81b4d6be9765",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "f9755f8157691bf4c2f2c83604b5204b220c2d7011c91c969bb7ff87f95faa13",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "69fea3dc15c7eb7deaf32ee22c301247b9cc3afd21553cb3218033202f85e905",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/SOURCE-FAILURE-v1.json",
+    "sha256": "cff4ddd6ab1c4db57448ec7c7fadebf8c6331004904dc2bb5cd09f7c434838b4",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/READER-RUN-v1.json",
+    "sha256": "22a20e02f2325481a9e3443c13ec18ae6956d3433063163f7c5c96910b4a441e",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-HISTORICAL-SEND-ORIGINALS-v1.json",
+    "sha256": "930c905043616e06d7bdf69ce2edf254188bee948c81539d7f37d7ff527007c9",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/PUSH-v1.json",
+    "sha256": "cedf12f7cfa1a62ff6711cd53e76e1156a61b40de987f30283e0b09c65d90d70",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T210137Z.json",
+    "sha256": "d0a2120a62cefb9c10aaa5dbcaac9d767b3d04e4ac1d67a8bfb47c78caa221f9",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v6.json",
+    "sha256": "2e9b66f5f3d666f11870f2cbdb27a23bd22d5bcc7a84424105444e2bbf4868a5",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/CHECKPOINT-v1.json",
+    "sha256": "c57138406518e85b8db970d54585359f13e2d65d3c8c48deb173db545fb64a12",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/PRIOR-QUOTA-ORACLE-ALIASES-v1.json",
+    "sha256": "f1bc8d3043b789c96daddbcdeb4d4d03662863dc41db115c42db1baf6ddb756c",
+    "range": "complete historical sender allocation source and authentic retained original evidence",
+    "role": "caller69/189send;postinstallunrun",
+    "status": "5world10images20sends129fields36676controls;caller8/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-historical-send-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "098f885116be36bd8d59f06c422ee13e750125a8a50a7df73b5b4ea58979ea74",
+    "range": "complete currenthistorical_send documentation checkpoint",
+    "role": "W6historical_send",
+    "status": "focused21passed;caller8/commoninput/physical/wholeW6open"
   }
 ]
