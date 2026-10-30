@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-31 04:59 JST
+Last updated: 2026-10-31 05:17 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。Flow合算予算拒否の9実入力/18部品実行/72区間と先行する費用証明をcallerへ接続。現caller区分147/152/残22。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。保存初期状態の復元・初期化callerを現9入力/18計測へ接続し、54数値式を両回検証。現caller区分148/152/残21。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,7 +45,8 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller Flow budget refusal / current | CALLER-FLOW-BUDGET-JOIN-v1 / verify_caller_flow_budget_v2.py / verify_caller_flow_budget_join_v1.py | 9実入力/18callee/72区間、6校正、先行証明46log、312記録/18source/25join改変拒否。局所部品の証拠で新live Sourceなし、区分147/152/残22、共通入力/物理進行OPEN |
+| Caller initial template start / current | CALLER-TEMPLATE-START-JOIN-v1 / verify_caller_template_start_v2.py | 9実初期入力/18既存whole区間、54数値式の両回、16反例、171記録/20source改変拒否。新Nativeなし、区分148/152/残21、共通入力/物理進行OPEN |
+| Caller Flow budget refusal / prior | CALLER-FLOW-BUDGET-JOIN-v1 / verify_caller_flow_budget_v2.py / verify_caller_flow_budget_join_v1.py | 9実入力/18callee/72区間、6校正、先行証明46log、312記録/18source/25join改変拒否。局所部品の証拠で新live Sourceなし、区分147/152/残22、共通入力/物理進行OPEN |
 | Caller initial registration / duplicate Flow / prior | CALLER-INITIAL-REGISTRATION-JOIN-v1 / CALLER-DUPLICATE-FLOW-JOIN-v1 / verify_caller_registration_v4.py / verify_caller_duplicate_flow_v1.py | 27実登録と9画像/24受信先頭候補、既存200保存formal log照合。244+81+88改変拒否。新Native/計測なし、区分146/152/残23、共通入力/物理進行OPEN |
 | Caller namespace refusal / prior | CALLER-NAMESPACE-REFUSAL-JOIN-v1 / verify_caller_namespace_refusal_v2.py | 2site先行検証費用。18入力/既存18reader完了・308formal log再読戻し、59改変拒否。新Native/計測なし、区分144/152/残25、共通入力/物理進行OPEN |
 | Caller owning callee costs / prior | CALLER-OWNED-CALLEES-JOIN-v1 / verify_caller_owned_callees_v1.py | 8site条件付き式対応。9画像/27registry/既存36区間・308formal log再読戻し、288費用入力/56source改変拒否。新Native実行なし、区分142/152/残27、共通入力/物理進行OPEN |
