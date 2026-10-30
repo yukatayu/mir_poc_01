@@ -104183,5 +104183,54 @@
     "range": "complete caller Path/env stages document checkpoint",
     "role": "W6 Path/env stages source/formal/component correspondence",
     "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-OPERATION-LEDGER-JOIN-v1.json",
+    "sha256": "7d3bffb6e3fd7335f429c5db27f83fe5afe890d415ac118f1fc6177b0f69dc7d",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-OPERATION-LEDGER-CHECKPOINT-v1.json",
+    "sha256": "4ef68fd5186ee2f19d7e9734d3446b924b1e137e9ce46b51b71afb41cef753a7",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "59fc7bac7608f3822ad168cee860ddffa629996d3edf294e1dd7faea5f3ddc70",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "f75f77535ed77f75e0f047b0f369372760be8197eab72ecdab2eb18b7d75fe90",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/TYPED-TRAVERSAL-QUALIFICATION-v3.json",
+    "sha256": "938cda041ffd994fff81ff3b5a9be1fc2c633d99873939824e72e80cd0ec7176",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-operation-ledger-v1/PREREGISTRATION.json",
+    "sha256": "3015ccddd8ed89faa90c7ec30c0b79dfa3bb55a49251a8ff8d4ff34ca01b254e",
+    "range": "complete caller operation/copy source/formal/independentreadback and limits",
+    "role": "W6 actual caller cost composition",
+    "status": "conditional LAB;312sitefees/publicinput/wholecaller/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-OPERATION-LEDGER-DOCS-CHECKPOINT-v1.json",
+    "sha256": "40f4a6f0b08a8f380a08ff9e223b5294e87a1c9bc62c0df8db51418ff76dd5d5",
+    "range": "complete caller operation ledger document checkpoint",
+    "role": "W6 actual caller operation/source/formal correspondence",
+    "status": "full docs passed; caller321sites/9directcopysites conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

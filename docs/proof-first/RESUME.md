@@ -1,12 +1,12 @@
-# RESUME — W6 active; Path/environment costs connected, Native64 full regression running
+# RESUME — W6 active; original caller operation/copy costs connected, Native64 full regression running
 
-Updated 2026-10-30 20:59 JST
+Updated 2026-10-30 21:25 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。選択callerのPath/環境/名前生成を一般Lean99宣言/16反例・38log、同一std101部品の各2回へ条件付き接続。直下の対象費用は180P+11E+16K+17X+32223、共通public上限とcallee/元保持/OSは別。環境複製省略・base複製省略の実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
+W6継続・未完了。実callerの321構文操作を台帳化し、9箇所・最大22回の直接複製を既存費用式へ接続。74宣言/14反例を両回・40logで検証。残る312操作の局所費用は本cutで未代入、macro/callee/元保持を省略しない。Native64全1750は実行中、終了後45reader。共通入力/全caller/物理進行/最終照合は未完。
 
 ## Current authority
 
@@ -67,7 +67,7 @@ The command verifies each archive and protected file before restoring, preserves
 ## Remaining work after caller-frame correspondence
 
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep the current accepted Native63 full1750/45 readers and workspace1190/7 doctests without redundant reruns.
-2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. OriginalImage caller branches/loop/conditions are now connected. Selected enclosing worker/join/TLS/detach and concurrent shared/exclusive partitions are now connected. The smallest one-notification driver now has general/component/focused Native64 correspondence; its full1750 regression is running. Selected caller binary/frame/metadata byte buffers and exact writer geometry now have conditional public bounds. Four authentic caller JSON file/parse shapes are now conditionally connected. Selected Value copy/to_value/json expression and integer/string writer stages are now conditionally connected. Prefix hex/row/iterator plus outer Value copy now have conditional bounds with policy and borrowed input retained separately. Selected Path/environment/current_exe directsite budgets are now connected with independent public parameters. Next instantiate common public inputs/history and allcaller numeric/executor/host budgets; whole inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
+2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. OriginalImage caller branches/loop/conditions are now connected. Selected enclosing worker/join/TLS/detach and concurrent shared/exclusive partitions are now connected. The smallest one-notification driver now has general/component/focused Native64 correspondence; its full1750 regression is running. Selected caller binary/frame/metadata byte buffers and exact writer geometry now have conditional public bounds. Four authentic caller JSON file/parse shapes are now conditionally connected. Selected Value copy/to_value/json expression and integer/string writer stages are now conditionally connected. Prefix hex/row/iterator plus outer Value copy now have conditional bounds with policy and borrowed input retained separately. Selected Path/environment/current_exe directsite budgets are now connected with independent public parameters. Original caller321syntaxsites are now enumerated,9directcopy sites/max22calls connected to acceptedfees. Instantiate remaining312localfees from existingstage evidence and unresolvedcallees, then common public inputs/history and allcaller numeric/executor/host budgets; whole inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
 4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
@@ -852,3 +852,27 @@ trueだけ返すflag判定でも8192/65536byteを複製。NotUnicodeは32byteを
 Repository backup: prefix構築13文書を1a28a800d89ee7cd03bc9f911bc3c4f35c13b823へcommit/pushしremote一致を確認。Git外原本はSSD等のローカル保持。
 
 2026-10-30 21:06 JST: caller Path/環境費用対応のfull make docsは6410入力不変・exit0。先行focused414は21項目成功、検証metadataはfocused415で別検証。W6最終統合full/Oracleは未完了。
+
+## Caller operation ledger
+
+2026-10-30 21:25 JST: 現案は固定sourceのcall/method/assert引数とopaque macroを列挙し、既存費用式を実際の反復回数へ接続する。最小代替はcaller全体を一つの未知費用に保つ案で、直接費用の対応が失われるため採らない。実装sourceは変更しない。
+
+任意有限のsite列について各実行回数と局所費用の上限から全要求量を合成し、途中終了の既払い、独立optional branch、反復と残差を保持。共通上限から2実行の費用一致は導かない。既存typedClone/Value copy式をimportし、新74宣言/14反例をfresh/replay・40log/84保存fileで検証。固定275manifestとは別cut。
+
+実test_initial_at本体が旧受理済み全scope ASTと一致。新syn readerはassert引数も含む321操作/19controlを記録し、6/8/4096/2の既存loop条件を使用。9箇所の最大22回へ対応し、12source改変と8台帳改変を拒否。Native63/64各6575入力を照合し、差分が既受理driver1関数だけであることを確認。151型の既存Clone closureを再利用、現9画像を全decodeして式へ適用。新Native実行/計測ではない。
+
+直接画像cloneは最大13回、JSON cloneは7回、画像又はruntime subtreeのto_valueは2回。A=array slot、F=object field、S=keyを含むUTF-8 byte、N=nodeとして、対象費用は13*(8240A+176N+S)+9*(32A+1024F+S)=107408A+9216F+2288N+22S。reader直下のdecode最大8/restore15/correspondence4も記録したが、その費用をここで0にはしない。restore内部のclone等はcallee費用内に残す。
+
+assert内のdecode/restore、loopごとのclone、独立optional branchの全加算を省く改変を拒否。opaque macroは内部式を含む別fee、通常callは別評価の引数/receiverを除く局所feeと区別する。構文順は実行順ではなく、原入力/返却/並行所有を解放済みとしない。
+
+残る312構文操作の局所費用は本cutで未代入であり、既存他stageの対応と未解決calleeを今後結ぶ。共通public A/F/S/N・初期入力/履歴、全caller保持/非割当work/host/物理資源/進行は未完。実9画像の値を共通public上限へしない。Rust/compiler/derive/library/source対応はTCB。Native64全1750と後続45reader、計測構成1790の必要回帰、他profile/119要件/outward/history/最終統合docs/Oracleは未完。W6/T10/Canon受理なし。
+
+parser起動の引数位置誤り、Leanの乗算分配不足、proof保存時のclosure_modules欠落をsuccessorで訂正。source diffにdriver局所structが含まれるため、型が無いという誤ったguardを完全関数置換照合へ訂正。台帳改変試験の1回siteを1回にする無変化を、反復siteを選ぶ形へ修正。旧source/失敗cutを保持し、成功条件を弱めない。
+
+再現: build_caller_operation_parser_v2.py → check_caller_operation_formal_v3.py → verify_caller_operation_source_v2.py → qualify_caller_operation_v2.py → CALLER-OPERATION-LEDGER-JOIN-v1.json。成功cutはno-clobber、再現は新cut名を使用。
+
+追加SSDのcaller-operation-ledger-v1へsource/parser/receiptを保持。Lean生成物はRAM、検証process上限6GiB/Swap0、hot総量2GiB。研究環境の制限をW6物理予約とは扱わない。
+
+Repository backup: Path/env13文書を51ac0e928a091535e9f3747f9dcbc564cd5ba221へcommit/pushしremote一致を確認。Git外原本はSSD等のローカル保持。
+
+2026-10-30 21:30 JST: caller操作台帳と直接copy対応のfull make docsは6410入力不変・exit0。先行focused416は21項目成功、検証metadataはfocused417で別検証。W6最終統合full/Oracleは未完了。
