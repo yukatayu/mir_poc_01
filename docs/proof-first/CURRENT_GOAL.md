@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。保存初期状態の復元・初期化callerを現9入力/18計測へ接続し、54数値式を両回検証。現caller区分148/152/残21。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。認証付きdistributed送信2callerを現9入力/18送信・18親区間と既存36式へ接続。現caller区分150/152/残19。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 05:17 JST
+Updated 2026-10-31 05:40 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -124,3 +124,5 @@ Updated 2026-10-31 05:17 JST
 - 2026-10-31 04:59 JST: 全6575元sourceを保持した隔離copyへ部品test1件を追記し、新binary1751名と6allocator校正を確認。現9保存wireから取り出した実Flow入力を各2回実行。変更していない実callee18回と別途の中間値取得から18完全出力/72区間を読戻し、312記録改変を拒否。旧/現/計測/部品版の9関数・20source ASTと実callerを照合し18source改変を拒否。保存joinの再照合でも9原本を完全復号し、caller112だけの差分と25改変拒否を確認した。 元Flow復号＋変更後の個別検証・Vec費用を全入力に課金し、2件ある3入力では元Tree clone＋変更Flow capture＋拒否される全Tree復号を加える。各5MiBは個別8MiB以内でも合計10MiBは拒否される。残6入力は1件で早期returnするが先行費用は残す。bad Treeのusize最大値はshape上限用で、正当なimportとは扱わない。実capture容量4MiB以下とFlowBundle幅224byteを確認し、事前の保守的上限4096byteを使用する。 321操作は費用対応147/条件付き局所非割当て152/残22。実calleeの局所実行と中間値照合であり、新live Source/restore/network実行ではない。元Tree・復号Flow・temporaryの同時保持、Drop、非割当work、共通public入力/初期履歴、残22/hidden/implicit/component、全caller/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。実測最大からpublic予算を選ばず、累積要求byteをresident/RSS/物理予約へ読み替えない。
 
 - 2026-10-31 05:17 JST: 現9保存registrationと画像を完全復号し、初期image/source/expectedの原byteおよびsocketのfd/cookie以外の全初期DATAが旧費用入力と一致することを確認。現独立restore-template registry18件と18whole-template計測区間を再照合し、171入力/費用/計測改変を拒否。92原source、37Rust moduleの2構成、主要10関数と実callerを対応し20source改変を拒否。新Native実行はない。 caller152の費用は、現在のinitial_bootstrap復元費用＋同じ原入力のinstaller費用。bootstrapには三重rootの復元/再capture、immutable再capture、registry複製2回、SocketSupplyとreceipt出力を含める。control decode・ホストsocket生成は前段別費用。18計測は呼出し全体で、差し引きによる部品計測値は作らない。旧socket識別値は実ソケット又は権限の根拠にしない。 321操作は費用対応148/条件付き局所非割当て152/残21。成功ordinary reader・無効なwriter/diagnostic hook・現在の具体型/featureが条件。返却aggregateと借用元の同時保持、初期化後のcaptureと二重start拒否、Drop/非割当work、共通public入力/初期履歴、残21/hidden/implicit/component、全caller/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密標本の最大値をpublic予算にせず、累積要求byteをresident/RSS/物理予約へ読み替えない。
+
+- 2026-10-31 05:40 JST: 現在の9原画像からprefix/Flowを再導出し、18認証付きwire roundと18sender whole区間・18親decoder区間を照合。414記録改変・36費用改変を拒否。51source/8module対応、実sendとhelper11関数、22source改変を照合。writerの費用はsource対応であり新たな個別計測ではない。新Native実行なし。 caller77はpolicy費用257byte。caller232はwire393485byte＋policy2回＋typed prefix生成＋全packet delivery/parse/失敗prefix費用。policy257はenv値1byteと既存の診断256byte上限が条件。固定SHA/HMAC/Unix wrapperの追加Rust要求0は先行source対応の条件付き結論で、外国語library内部・kernel・物理費用0を意味しない。外側NamedRegionは既存caller guard費用に属する。senderとparentの差分を部品費用の証明には使わない。 次の初期化後capture/二重start拒否にはcaller-postinstall-v1を準備。6580sourceのコピーで実callerだけを計測し全入力を保存する設計を事前登録し、先行148log/308fileと不変11関数・30改変を照合した。build/実process/費用適用は未実施で、全1790が保有するnative-campaign lockを迂回しない。この準備をcaller155/160受理へ数えない。 321操作は費用対応150/条件付き局所非割当て152/残19。共通public入力/初期履歴、返却値と借用元の同時保持、残callee/hidden/implicit/component、Drop/非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密標本最大値をpublic予算にせず、累積要求byteをresident/RSS/物理予約へ読み替えない。

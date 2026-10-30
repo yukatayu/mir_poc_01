@@ -106038,5 +106038,124 @@
     "range": "complete currentinitialtemplate documentation checkpoint",
     "role": "W6initialtemplate",
     "status": "focused21passed;caller21/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-DISTRIBUTED-SEND-JOIN-v1.json",
+    "sha256": "fdfeb4e5e09d67feef1967e0b64ad5772dc76bdbd287ee933517ef064cb1fb74",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/PARTITION-DISTRIBUTED-SEND-v1.json",
+    "sha256": "f8e7de878d326f4c0a9fda882f704ffca628148d4f5d60ebb728be345b66b7a6",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/PREREGISTRATION.json",
+    "sha256": "5b9e2cee9f4a134faacf166e40cbfb3f86f5eb5db7b4e040148b802e0e31d407",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "b3ad749f1e74eb5e529d84148cea3f281fc6fccb352bb50ce1a194bb9e7df622",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/READER-PREPARATION-v1.json",
+    "sha256": "8f5cb7fd6ef0aee52166981c370e40d42fe7be1ff5aaba7cc9c974d44167c4c5",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/CURRENT-RETAINED-VERIFICATION-v1.json",
+    "sha256": "abc8d073389ee20b3b29a02ae4b9b9c861a1357c6159e8b5922cb46458726d7f",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/READER-RUN-v1.json",
+    "sha256": "acae4607294a33ca0c6d2e5906e90d539d6a3f2f5a268114f8016a82dcd3d43b",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "553c8a40a0a854fd4c2cb43d8c1340f5a547f1bb533ac81b0d36cb62c28aac82",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/SOURCE-FAILURE-v1.json",
+    "sha256": "751ab0a1425506c307c7c58d78b9f5b819236cb7148c75b5c1f5d6ce4ebe80dd",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-template-start-v1/PUSH-v1.json",
+    "sha256": "e571adc527174d607c5e49110c0495293312f609a83873dd31a33b43c18367e1",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PREREGISTRATION.json",
+    "sha256": "325b4e00fd7ca0a2bf202ddb732f22e3cb7a87e829f1a91f08b00e91084097ca",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/PREPARATION.json",
+    "sha256": "14b378cd050192bb1024bcaca5df3aab15e78bb23696be32d787129af14a4315",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "b1d8fd5dd7ffafb5b216b94dcf1e69ef737e80fddbdef0189149812119a4ddbb",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "f86da48ed20aaf1bf80fe0cefc9f4aab9ae1b6d8a0bd5da303c7cbd5f1ed7122",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-postinstall-v1/READER-REBASE-v1.json",
+    "sha256": "c2f12fab4fa10c666a1b785243d0e2f50f87a84d8f986dbe77eaea011d28d7f6",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/CHECKPOINT-v1.json",
+    "sha256": "00168814a41190e3cc274258b6b4fe26e42003e0477cffb074bfcb45a8157f97",
+    "range": "complete currentdistributed sender evidence or explicitly unrun postinstall preparation",
+    "role": "conditional77/232fee;155/160notaccepted",
+    "status": "9inputs36retainedintervals36exactpriorformulas96logs;caller19/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-send-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "2e42e3ce154be33e7446ef7a9b9f5ead09ae14f701b3fdb9ccd0e008cbb5eab5",
+    "range": "complete currentdistributed_send documentation checkpoint",
+    "role": "W6distributed_send",
+    "status": "focused21passed;caller19/commoninput/physical/wholeW6open"
   }
 ]
