@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-31 07:52 JST
+Last updated: 2026-10-31 08:24 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。native prefixの実capture18件を108数値式・18whole区間へ接続。321callerは費用160・局所0が152・不達5・残4。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。分散prefixの実capture27件を243数値式・27whole区間へ接続。321callerは費用162・局所0が152・不達5・残2。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -46,7 +46,8 @@ W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller native prefix / current | CALLER-NATIVE-PREFIX-COST-JOIN-v1 / qualify_prefix_capture_cost_v1.py | 18実call/108数値式/18whole区間、324改変拒否。clone144出力/288改変拒否。費用160・局所0が152・不達5・残4。追加copy全1792は未実施、共通入力/物理進行OPEN |
+| Caller distributed prefix / current | CALLER-DISTRIBUTED-PREFIX-COST-JOIN-v1 / qualify_distributed_capture_cost_v1.py | 27実call/243数値式/27whole区間、675改変拒否。graph部品3840出力。費用162・局所0が152・不達5・残2。追加copy全1790は未実施、共通入力/物理進行OPEN |
+| Caller native prefix / prior | CALLER-NATIVE-PREFIX-COST-JOIN-v1 / qualify_prefix_capture_cost_v1.py | 18実call/108数値式/18whole区間、324改変拒否。clone144出力/288改変拒否。費用160・局所0が152・不達5・残4。追加copy全1792は未実施、共通入力/物理進行OPEN |
 | Caller postinstall / prior | CALLER-POSTINSTALL-COST-JOIN-v1 / verify_caller_postinstall_cost_v2.py | 18実入力/36whole区間/162数値式/17反例のfresh-replay、432改変拒否。費用158・局所0が152・不達5・残6。独立計測copyに全1790回帰は未実施、物理進行OPEN |
 | Caller historical sender / prior | CALLER-HISTORICAL-SEND-JOIN-v1 / qualify_caller_historical_send_v2.py | 5実world/129原本field/10画像・20認証送信、36676通信出所/54source/60費用記録改変拒否。各policy257byte、費用156・局所0が152・不達5・残8。新Native/個別計測なし、物理進行OPEN |
 | Caller altered restore / prior | CALLER-MUTATED-RESTORE-JOIN-v1 / verify_caller_mutated_restore_v1.py | 現27変形画像/18registry/54費用適用、171数値式/新46log、630入力費用/47source改変拒否。費用154・局所0が152・不達5・残10。新Native実行なし、共通入力/物理進行OPEN |

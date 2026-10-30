@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。native prefixの実capture18件を108数値式・18whole区間へ接続。321callerは費用160・局所0が152・不達5・残4。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。分散prefixの実capture27件を243数値式・27whole区間へ接続。321callerは費用162・局所0が152・不達5・残2。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 07:52 JST
+Updated 2026-10-31 08:24 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -136,3 +136,5 @@ Updated 2026-10-31 07:52 JST
 - 2026-10-31 07:01 JST: 計測64全1790/0failed/0ignored、全6580source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを受理。追加4readerで72registry、うち追加27件の18互換/9fresh拒否（6source不一致）、36費用区間、585対/1170有効cut/48processを照合。queue改変10・追加join改変12・追加registry改変189件を拒否。最大観測prefixは予約262608971byte/累積要求7325464083byteで、public予算・terminal peak/RSS・物理予約・進行保証ではない。 独立6580sourceのcopyで実caller2箇所だけへ計測を追加し、45校正・実registry control・3秘密world/各2cold readerを実行。87原本/69query/240ledger/12charged restart、45registry/3parent/27組の費用変数、1116有効cut/30processを再読戻し。追加18保存状態と36whole-call区間を完全照合し、432入力/費用/計測改変を拒否。基準Native64と計測64のsource/binaryは変更しない。 321操作は費用対応158/条件付き局所非割当て152/条件付き不達5/残6。6capture caller、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。postinstall計測copyには全1790回帰を実行しておらず、計測64の全成功を継承しない。秘密標本最大値をpublic予算にしない。
 
 - 2026-10-31 07:52 JST: 独立6580source copyの2fileへ2caller計測と2clone試験を追加し、1792名のinventoryを確認。45校正・実registry control・clone部品2試験・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再読戻し。18whole区間と324入力/費用改変拒否を照合。基準Native64/計測64は不変で、追加copyの全1792回帰は未実施。 11sourceの60type/Clone/serde/Record対応と33method/24ASTを照合し、60type欠落・66source改変を拒否。36requestと36contractの各2回cloneを144出力/288改変拒否で照合。実contractのfrontierは空であり、非空BTreeの実部品試験とは主張しない。 321操作は費用対応160/条件付き局所非割当て152/条件付き不達5/残4。残るdistributed39/204とFlow51/227、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。今回の成功OwnerRequest以外の不正/他profileを暗黙に含めず、秘密標本最大値をpublic予算にしない。
+
+- 2026-10-31 08:24 JST: 独立6580source copyの2fileに2caller計測と型幅確認だけを追加し、1790名のinventoryを確認。45校正・実registry control・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再照合。27whole区間と675入力/費用改変拒否を受理。基準Native64/計測64は不変、このcopyの全1790回帰は未実施。 93method/30ASTと10標準library参照を照合し、186source改変を拒否。元画像9graphと空/重複/cycle/dangling/Unicode/denseの6graphについて、実source2methodを使う部品の全1920対を各2回、3840出力/19200改変拒否で照合。モデルtraceはnative実測traceとは区別する。 321操作は費用対応162/条件付き局所非割当て152/条件付き不達5/残2。Flow51/227、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。成功profile以外の不正入力を暗黙に含めず、累積要求量をpeak/RSS/実予約へ読み替えない。
