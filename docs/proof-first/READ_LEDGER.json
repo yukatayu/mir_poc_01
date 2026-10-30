@@ -105562,5 +105562,82 @@
     "range": "complete immutable quota reference correction",
     "role": "W6owningcalleeapplication",
     "status": "same quota bytes; no semantic/evidence mutation"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-NAMESPACE-REFUSAL-JOIN-v1.json",
+    "sha256": "ccf2213f149e48249d74c53c7a2228dbe8e8c0f804858d200f8eab40a44c28c9",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-namespace-refusal-v1/PREREGISTRATION.json",
+    "sha256": "feda467dab619223b68efab123f38f959f46846e62e3592d66eb82fc3814c1b4",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "3ca9949eed53a95491fb36c3bd436a0a0c2ce6b53bb68b04d32f3488627cba4d",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "4b944e88ad954bb5a98f1606d7f3c31a1d4135511557fbcaba6e4af448139bb4",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-namespace-refusal-v1/FAILURE-v1.json",
+    "sha256": "4362d45abc08432271ff81c3f4c9e0c3b9f92611e70a683bc171ce78d614fa45",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-namespace-refusal-v1/PARTITION-NAMESPACE-REFUSAL-v1.json",
+    "sha256": "7875ddb7ea310e4a2e3267db35aafa3035c2f17199ad3ae2813a2c1d3d4b9b9d",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-owned-callees-v1/PUSH-v1.json",
+    "sha256": "42d2f8c155c20c2a7204ba08760607d68920588a45a0a33f79bb0e257f31d85c",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T190039Z.json",
+    "sha256": "583ac65fe27a96416fd1499cfd22cdf38a474aec3efb367649abe90f47285b01",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v4.json",
+    "sha256": "87a4a9d7ebe9667ea84aa0d9325636ac0e367b683613a87272b3be2a6e1ba743",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-namespace-refusal-v1/CHECKPOINT-v1.json",
+    "sha256": "349f363551c95b87bb23cb16bd11722316a4e82824ceb0e3a7812a3848968f60",
+    "range": "complete current2namespaceprefix/source/formal/original/reader",
+    "role": "conditionalcallerformulaapplication;notnewNativeorwholecallerphysical",
+    "status": "18inputapplications18priorreaderterminals;308reusedformallogs;caller25/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-namespace-refusal-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "2211b362158983a6d3e512389a2712c799bfc10940b631028d26bbac5e4466f1",
+    "range": "complete currentnamespaceprefix documentation checkpoint",
+    "role": "W6namespaceprefix",
+    "status": "focused21passed;caller25/commoninput/physical/wholeW6open"
   }
 ]

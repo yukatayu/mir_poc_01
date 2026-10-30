@@ -2,11 +2,11 @@
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。capture/正常復元/照合8callerを既存費用式へ対応し、9画像・独立registry27組・既存36区間を再照合。caller区分142/152/残27。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。名前空間不一致のrestore2callerを先行画像検証の費用へ対応し、18入力・既存18reader完了記録を再照合。caller区分144/152/残25。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 04:11 JST
+Updated 2026-10-31 04:19 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -116,3 +116,5 @@ Updated 2026-10-31 04:11 JST
 - 2026-10-31 04:00 JST: 全6575sourceを固定し、隔離copyの1fileへ部品test1件だけを追記。新binary1751名と6allocator校正を確認。現live64の9画像について等値1・各root field変更6の計63入力を各2回実行。126完全入力対/504区間・4非零対照を独立Pythonで照合し、6300改変を拒否。現151型/302trait、外部3sourceのNative/計測版と生成比較を照合し、251関数body改変を拒否。9保存wireを既存独立decoderで全読戻し。新live Source/session/restore/network/全Native実行ではない。 比較と成功assertの局所要求は0。既存の構造的比較単位は3*((12*N1+1)+(12*N2+1))+S1+S2以下、片方の破棄単位は12*N+1以下。Nは全serialized JSON value node、Sはkeyを含むUTF-8 byte。実CPU時間又は一定時間性ではない。AST63の先行復号費用と返却temporary・元画像の同時保持、破棄/allocator/host workを別に残す。public上限を実測最大から選ばない。 321操作は費用対応134/条件付き局所非割当て152/残35。5panic/unreachable、残callee/失敗prefix、hidden/implicit/component、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。局所要求0をCPU費用0、所有領域0又は進行保証へ読み替えない。
 
 - 2026-10-31 04:11 JST: Native64全6575sourceと計測64全6580sourceを確認。7source×2構成と8関数、全321caller ASTを照合。現9保存wireを独立decoderで完全復号し、各実画像から90既存式とParts式を再計算。実registry27組の6独立変数と全費用、既存restore/correspondence36区間、旧画像と不一致のfresh registry18件を再照合。費用/独立入力288改変とcaller/関数56改変を拒否。新Native実行又は新計測ではない。 writer対象分はoriginal_capture+parts_capture、reader対象分はoriginal_restore+4*original_correspondence+parts_capture。restore内部の照合とその後の4回を別々に課金する。Partsの返却Treeを破棄してもgraph/backing/借用元と既払要求を残し、返却RecoveredSource/元画像の同時保持を別に賄う。 321操作は費用対応142/条件付き局所非割当て152/残27。式は当該正常画像とcurrent registry/事前入力条件に限る。実36区間はrestoreと最初の明示照合だけで、writer capture/Parts/後続照合の新計測は主張しない。変形/不正画像のrestore途中、初期化/registration、共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力標本の最大値をpublic予算にせず、累積要求をresident/RSS/物理予約へ読み替えない。
+
+- 2026-10-31 04:19 JST: 現行Native/計測版のrestore・validate・callerと標準String比較、UnixStreamのOwnedFd破棄、unit型エラーを照合。現9保存wireを完全復号し、各2key変形の18入力について実検証が読む3Tree引数の同一性・既存feeを確認。既存18cold reader完了記録の原本/binaryを照合し、費用/入力/順序59改変を拒否。両assert到達は完了記録とsource順序からの推論で、新しい個別traceや割当て計測ではない。 AST144/309のfeeは元正常画像のtyped_validate。version=1と非空keyを保持し、namespace比較前にFlow復号/3Tree検証を行う。異なるkeyならManifestで終了し、native再構築とcorrespondenceへ進まない。key追加は検証対象Treeを変えないため、元の保守的検証上限を使える。 321操作は費用対応144/条件付き局所非割当て152/残25。clone/format/key追加/UnixStream pair/makeは別siteで課金済み又は別条件。拒否でも渡したFDの破棄とclose/host work・peer所有を残す。元画像と元登録keyの対応が前提で、任意importや後段の不正restoreへ拡張しない。共通public入力/履歴、hidden/implicit/component、全caller保持・非割当work・host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。秘密入力の最大値をpublic予算にせず、累積要求を物理予約へ読み替えない。
