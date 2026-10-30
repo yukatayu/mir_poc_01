@@ -104897,5 +104897,110 @@
     "range": "complete current typed attempt document checkpoint",
     "role": "W6current151closedtypedattemptcost/sourcecorrespondence",
     "status": "full6410passed;typed216observationsaccepted;fullcodec/caller98/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-IMAGE-CODEC-JOIN-v1.json",
+    "sha256": "b7fa97eb630b796e1f877ef645e95f4ccb77497d88f72f83e23f58b11bf06b32",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/PREREGISTRATION.json",
+    "sha256": "9767a35cb207c2c8104902e8bdf89d63901ac4a2617450b754107f947bcd513a",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/PREPARATION.json",
+    "sha256": "196ce1ea680748bd5c4bc44a4a3cb2cbec5d9f15560e1f436456914ff8171efc",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/execution-v1/RESULT.json",
+    "sha256": "3b9319ac5517a20872f836215d85e1692acaf15bb8103d2d862b3cac02ce65a7",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/COMPONENT-VERIFICATION-v2.json",
+    "sha256": "b220921cd796d9be7945fdda4eb6ce24222ed6dfaf6ac8687a6c4ef42ed20125",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/FORMULA-PREPARATION-v1.json",
+    "sha256": "13087f4ba12930719ed3a9ee439cbdeb47cb57b2ec51d9781758676246e25698",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/FORMAL-VERIFICATION-v1.json",
+    "sha256": "158f3fb04561778c942151fd076bbe9c6ff1ef8920590fa6dd5916cf7febae9f",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/READER-TYPE-COUNTEREXAMPLE-v1.json",
+    "sha256": "da8bd23d6d1eb784264d3fd7b366bcc230911e7a7c045ff3a78069e025f86687",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/PARTITION-IMAGE-CODEC-v1.json",
+    "sha256": "515624def40ceecd4643f196545cf63d5648dba2f581e71b9f9bb0b540f6e270",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-typed-attempt-v1/PUSH-v2.json",
+    "sha256": "5b08a6f1e559b4ca700f10d0736578d251ea052f3f15ea6afcb0ed16ccf4716c",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T170015Z.json",
+    "sha256": "bd2e7b997b8c5ba82dc485485d4c627a3ec58a1f2f3cee8a5c88d9398fa6afd5",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v1.json",
+    "sha256": "59196061c6526bda0788c72307dae336c4cc786ab359166d2fea413aede52471",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/CHECKPOINT-v1.json",
+    "sha256": "7fdf1fd3ee43a3179a0cecec1019b32e0939ff0a36e931eddeadc055e99af74e",
+    "range": "whole current codec source/measurement/formal/independent readback",
+    "role": "conditional wholecodec caller fee correspondence;notwholecallerphysicalacceptance",
+    "status": "436reusedgeneral/234numericdeclarations,72case×2,450stagesaccepted;caller91/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v2.json",
+    "sha256": "729477974a0ebef5c027519c0c5134786c50d72c1941a97182c05a8ecff6ac5e",
+    "range": "complete model availability receipt",
+    "role": "independent final review availability",
+    "status": "ProUsageLimitReached; no prompt; final Oracle remains open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-image-codec-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "d0f36838b9eacb2a73c4cfe72c917aa8e2f4034a8cc5c902d6b3887d492d31ac",
+    "range": "complete current whole codec document checkpoint",
+    "role": "W6currentwholecodeccost/sourcecorrespondence",
+    "status": "full6410passed;codec144observations450stagesaccepted;caller91/commoninput/physical/wholeW6open"
   }
 ]
