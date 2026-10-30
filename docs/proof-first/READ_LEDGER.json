@@ -105779,5 +105779,138 @@
     "range": "complete currentinitialregistration/duplicateFlow documentation checkpoint",
     "role": "W6initialregistration/duplicateFlow",
     "status": "focused21passed;caller23/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-FLOW-BUDGET-JOIN-v1.json",
+    "sha256": "72f9fa3c8160d9ea7e4c1ec06c8874c6ce4367f4749c9d598205155a46abc429",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/PARTITION-FLOW-BUDGET-v1.json",
+    "sha256": "772b9cd9c913f48c991b9b43a66138695dff41d168c5b2403973a7d7d967b57c",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/JOIN-READBACK-v1.json",
+    "sha256": "7090c023038c0e273a51b8c758f8f1eaaa0bc9b28b19fe0047ee4730fdb8072b",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/PREREGISTRATION.json",
+    "sha256": "00c74ba21f5386f187dd5ba4e845e83e996fd52f361f7f1a570c29c6e1f96520",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/BOUND-PLAN-v4.json",
+    "sha256": "ac739c134a871e308d8d948adef5d13c4747ceca54531dc836b3c270ca57b832",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/W6CallerFlowBudget-v4.lean",
+    "sha256": "4f625b19276cead68a330c516229f9bb720405f96612fe5bb530b01966b92a70",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "695bb129e6a1014c4415d3f7c5ef8c3aa089d2946c0658abb6d201d1c9f9e9df",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "ce3567a4b719be1c299914897b2d38d203379d96e9e72c5ab3849aff16036b3e",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/PREPARATION.json",
+    "sha256": "b50c48e85d23d22bce1e0bb6561b8196c64a82520f8014323ef8895396baec4e",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/execution-v1/RESULT.json",
+    "sha256": "10b4dc6336cad75297d06fa6dd5289a66734d693dec309ecadd33cf4a1db5461",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "25b465302bfaab5512795dc7a33d8a5c45ace707dc5cc0498e9fe55cf3db069d",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/COMPONENT-VERIFICATION-v1.json",
+    "sha256": "c56416d8733448547c6c33c9e6bd0a8e7066cc2ae68a74564cd8840fe87c293e",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/FORMAL-FAILURE-v1.json",
+    "sha256": "eea9d34531791d8d0b799c70a66e913a0e33809cd0c3c2de36fd7265386f0f9a",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/FORMAL-FAILURE-v2.json",
+    "sha256": "ecafe4196d1f3766df88a23bcc3e96abe86081a2e26ef331841c9d92abca5ae5",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/SOURCE-FAILURE-v1.json",
+    "sha256": "fdf34720bad38931ade1f96003d44e2ff8477fba07b9dd936a2a70ded6021b90",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/READER-FAILURE-v1.json",
+    "sha256": "a47dc6490a1210e09618c286f7b092448c0610b1b7d0ff3e067498e75ae60d08",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-duplicate-flow-v1/PUSH-v1.json",
+    "sha256": "bafa0081e4f797be03e3293625884770e354e2f1537596f01d73466a402a249e",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/CHECKPOINT-v1.json",
+    "sha256": "c614ac3ea0dd486b098f7bc2425241a66a76bf609ed383dc70509cb414f4f5eb",
+    "range": "complete currentFlowbudget source/formal/actualinput/component/reader",
+    "role": "conditionalcaller112formulaandactualcallee;notwholecallerphysical",
+    "status": "9inputs18wholecalls72intervals46formallogs;caller22/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-budget-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "d03cb194a6354191ddc2bbf8cf0f3ef366ce861e4211c841825926803f4c8cae",
+    "range": "complete currentFlowbudgetrefusal documentation checkpoint",
+    "role": "W6Flowbudgetrefusal",
+    "status": "focused21passed;caller22/commoninput/physical/wholeW6open"
   }
 ]
