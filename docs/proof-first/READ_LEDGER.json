@@ -106892,5 +106892,124 @@
     "range": "complete visible menu only",
     "role": "independentOracleavailability",
     "status": "ProUsageLimitReached;no prompt;next09:04JST"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-FLOW-CAPTURE-COST-JOIN-v1.json",
+    "sha256": "fa5c17d086a3aba719d2db01915c94ecdecb1f92b28f9ea0463ac605373336d4",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/PARTITION-FLOW-CAPTURE-v1.json",
+    "sha256": "b7ae6d76eab7938cfa3d6d012665220a6e9c687aab1a13a34e30de3e857ca087",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/PREREGISTRATION.json",
+    "sha256": "c0b45c2e29e5d48c31349590d8bb60f5219165d6e96cfec4c12874dad4ba1ecb",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "a8944bdb22b89f4e890c254636c70448d22f51ab1f7e67e22fae0ea14e27693a",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/NUMERIC-VERIFICATION-v1.json",
+    "sha256": "98941cf0307dee7b9848bbc97d49c0a7ebb6ac26c925e2fe8ca3d05e415ed2f4",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/SCHEMA-VERIFICATION-v3.json",
+    "sha256": "090968fe4da35f231627f82d3743902990bb270af6fa3cf73fe7a0e9c8a46f02",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/SOURCE-VERIFICATION-v3.json",
+    "sha256": "7bef216b8419b8728d6014a62d4ed8cc232c4219b8041ad65ccc6402dcc3d39f",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/COST-PLAN-v1.json",
+    "sha256": "5ea97da5a339771a4b17c1b180ca049504174955465397fe4ece6780a63271ba",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/flow-whole-meter-component-v1/RESULT.json",
+    "sha256": "a94c789330cf9816c27a4405ab13cc0b2622d9b16fe7d0d9c0dd771a9e534ced",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-FLOW-SELECTED-ACCEPTANCE-v1.json",
+    "sha256": "735a40de5f302907a53d1b7ecf9a022da4a07d977513390fea2b931cdc691a90",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-measurement-v1/READER-REBASE-v2.json",
+    "sha256": "96e4bf0dbfd915cbfb38083dd0c65803ed7a7a29fa1e2813a3ab6ac3d5055331",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-distributed-capture-v1/PUSH-v1.json",
+    "sha256": "940b1907ecc9b2161dcbd34de710daf7e8b9e33d3048fc6ffc72493b50eda710",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T230214Z.json",
+    "sha256": "f4df2c075745aa3578f8c56d7d6c15295931f41fd8992f9d272fe3af5391a5a6",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v8.json",
+    "sha256": "31daf112d407336c3c85d068851f178b5ef3c16bd7f62ed2bca9c42ded03e0aa",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/CHECKPOINT-v1.json",
+    "sha256": "4ea7eeea457c296c047ce029b83b6828de61297400afdc4d1f06a84881740773",
+    "range": "complete Flow capture conditional requested-cost evidence",
+    "role": "caller51/227actual27wholecalls;currentregistry/originalcontrol/ingress/probes",
+    "status": "588formulas27intervals837controls;all321classified/commoninput/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-flow-capture-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "3e9849f005285c274adb1b1cde854b506cefbe1cb3e84f3b3d23a85b00d75fea",
+    "range": "complete current concretecaller document checkpoint",
+    "role": "W6flowcapturecostcorrespondence",
+    "status": "full6410passed;27calls27intervals588formulasaccepted;all321classified/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v8.json",
+    "sha256": "31daf112d407336c3c85d068851f178b5ef3c16bd7f62ed2bca9c42ded03e0aa",
+    "range": "complete visible menu only",
+    "role": "independentOracleavailability",
+    "status": "ProUsageLimitReached;no prompt;next09:04JST"
   }
 ]

@@ -8831,10 +8831,10 @@
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-observation/predecessor-root/docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
     "sha256": "7ffeb2b7800f1fb4b5d6a11f43b43b9f6948963002e12459e5b803fb406210cb"
   },
-  "w6_implementation_updated_at": "2026-10-30T23:24:55.768501+00:00",
-  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。分散prefixの実capture27件を243数値式・27whole区間へ接続。321callerは費用162・局所0が152・不達5・残2。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
+  "w6_implementation_updated_at": "2026-10-30T23:48:01.809810+00:00",
+  "w6_implementation_scope_notice": "W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。Flowの実capture27件を588数値式・probe込みwhole区間へ接続。321callerは費用164・局所0が152・不達5・残0。共通入力/全caller/物理進行、他profile/最終照合は未完。 119要件の出所・承認・採用区分は不変。",
   "w6_implementation_base_head": "42f476538fc17f11506d68ca1b8f7a875d987656",
-  "updated_at": "2026-10-30T23:24:55.768501+00:00",
+  "updated_at": "2026-10-30T23:48:01.809810+00:00",
   "w6_execution_control": "owner_resumed_20261029; bounded W6 LAB active; requirements/adoption rows unchanged",
   "w6_owner_pause": {
     "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261029-v2.json",

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-10-31 08:24 JST
+最終更新: 2026-10-31 08:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ public/production layers remain later.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。分散prefixの実capture27件を243数値式・27whole区間へ接続。321callerは費用162・局所0が152・不達5・残2。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。Flowの実capture27件を588数値式・probe込みwhole区間へ接続。321callerは費用164・局所0が152・不達5・残0。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -1451,3 +1451,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-10-31 07:52 JST: 独立6580source copyの2fileへ2caller計測と2clone試験を追加し、1792名のinventoryを確認。45校正・実registry control・clone部品2試験・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再読戻し。18whole区間と324入力/費用改変拒否を照合。基準Native64/計測64は不変で、追加copyの全1792回帰は未実施。 321操作は費用対応160/条件付き局所非割当て152/条件付き不達5/残4。残るdistributed39/204とFlow51/227、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。今回の成功OwnerRequest以外の不正/他profileを暗黙に含めず、秘密標本最大値をpublic予算にしない。
 
 - 2026-10-31 08:24 JST: 独立6580source copyの2fileに2caller計測と型幅確認だけを追加し、1790名のinventoryを確認。45校正・実registry control・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再照合。27whole区間と675入力/費用改変拒否を受理。基準Native64/計測64は不変、このcopyの全1790回帰は未実施。 321操作は費用対応162/条件付き局所非割当て152/条件付き不達5/残2。Flow51/227、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。成功profile以外の不正入力を暗黙に含めず、累積要求量をpeak/RSS/実予約へ読み替えない。
+
+- 2026-10-31 08:48 JST: 独立6580source copyの3fileへ計測/型幅確認を追加し、全呼出し用counter1fileを加えて6581source/1791名を確認。46校正・実registry control・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再照合。27whole区間と837入力/費用改変拒否を受理。別の同一allocator source部品でzeroed/realloc実割当てと失敗/overflow合成callbackの2校正も通過。基準Native64/計測64は不変、このcopyの全1791回帰は未実施。 321構文操作は費用対応164/条件付き局所非割当て152/条件付き不達5/未分類0。これは全callerの共通予算又はW6完了を意味しない。共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。成功profile以外の不正入力を暗黙に含めず、秘密標本最大をpublic予算にしない。
