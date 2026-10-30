@@ -104673,5 +104673,131 @@
     "range": "complete caller mutation fees document checkpoint",
     "role": "W6 caller mutation fees source/component and reused general proof correspondence",
     "status": "full docs passed; caller mutation fees rejection input shapes conditionally connected; invalidcallee fees remain open;Native64full1750and45readersaccepted;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1.json",
+    "sha256": "f335f0b1ce20a60482fcb95d701fbf0d566df320e05cd21eb1821d605c9c1f6c",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/PREREGISTRATION.json",
+    "sha256": "c540efb5fe212f3da3cc4dd2b784887bfa21bad4568f89044b48a568f0804a8d",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/PREPARATION.json",
+    "sha256": "0b2a822a8ab8e83b4be14d918b6c051d6cb156fbad93d028e49ade75df5f6f09",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/build-v1/RESULT.json",
+    "sha256": "03ab9c59d154255b71eeaa0a7acc3e361803188fcf9c9c17cea2d6e12af649f6",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/RESULT-v2.json",
+    "sha256": "689bf787063956d81ef1e3156b05546ef494a8f5c39bc8e2c6e79542cca44220",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/READER-REBASE-v1.json",
+    "sha256": "83f768ba860223aa0114509cc7ea581916fc8b0f270d30bef7d247622b03a345",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/SELECTED-READER-RESULT-v1.json",
+    "sha256": "86e0b0d4b22a251ae8b5ff07d5a029cbdcde19d3e48d309b87596589bcd4bec2",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/MEASUREMENT64-FULL1790-PREREGISTRATION-v1.json",
+    "sha256": "a833c708d5580a9c1eeb2a9398e3be40b36a24ee9e06f74c4f6aab8a944e7741",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/ram-policy/AGGREGATE-20261031-v1.json",
+    "sha256": "e58161145d9402ff7d279994b5d2e6934ac8780789f5bd05bfaf901db8701433",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/RESULT-v2.json",
+    "sha256": "689bf787063956d81ef1e3156b05546ef494a8f5c39bc8e2c6e79542cca44220",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/PREPARATION.json",
+    "sha256": "0b2a822a8ab8e83b4be14d918b6c051d6cb156fbad93d028e49ade75df5f6f09",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/INDEPENDENT-VERIFICATION-v1.json",
+    "sha256": "96e5c3b49999eda823e4f074eea958e1be7377087d2d6093764e735f56d73253",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/OWNING-COMPOSITION-VERIFICATION-v1.json",
+    "sha256": "8ffb29cba201f288b8ef4a206a95d3d330ee77545f968ca81a5cfeed9ccbcb62",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/LAYOUT-PREFIX-VERIFICATION-v2.json",
+    "sha256": "1a92b766f3c84d37912ba8dda7e6cc1806a0fa1555b4dc8501513bf1c977bb16",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/ORIGINALS-VERIFICATION-v1.json",
+    "sha256": "00da720cc6b094f178d4f68e79933287c20e2b94c9744687726ffaa81870523e",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/DOCS-SYNC-FAILURE-v1.json",
+    "sha256": "d8b9d1f954e78e1fac3afff4e61fbbdbe3aa893bf273d606dfab7bf236421332",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/native-registry-live64-v1/SELECTED-CHECKPOINT-v1.json",
+    "sha256": "1f85f12cb6603ac50dc9d0ffe2b3cb58628698daf52bcd45ee5f7e36aca4ec7c",
+    "range": "whole measurement64 source/build/selectedexecution/independentreader/nextfullregistration",
+    "role": "current selected measurement evidence;not full1790acceptance",
+    "status": "selected45calibration/3world87raw1116cutsaccepted;full1790running;physical/commoninput/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/native-registry-live64-v1/SELECTED-DOCS-CHECKPOINT-v1.json",
+    "sha256": "1c1421cf0a75bd10c7c42b45a189b899f7539ecd547d92a540fd858b9206f2fc",
+    "range": "complete selectedmeasurement docs checkpoint",
+    "role": "focused validation scope and pending wholeW6review",
+    "status": "focused433passed;metadata434separate;full1790runningnotaccepted"
   }
 ]

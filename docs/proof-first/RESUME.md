@@ -1,16 +1,16 @@
-# RESUME — W6 active; Native64 full regression accepted, mutation fees connected
+# RESUME — W6 active; measurement64 selected accepted, full1790 running
 
-Updated 2026-10-31 00:27 JST
+Updated 2026-10-31 00:55 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. This is a LAB restart snapshot; Report2617 and exact receipts retain history.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・全履歴readerを受理。画像変形12箇所の局所費用を56宣言/14反例と全524出力の読戻しへ対応し、321操作は費用対応111/条件付き局所非割当て111/残99。不正入力のcallee費用、共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerを保持。通知driverを計測構成へ1関数移し、45校正・実3world/各2cold reader・87原本・1116計測cutを独立読戻しで受理。別binaryの全1790回帰を開始し、終了後の全readerは未実施。caller費用の残99、拒否callee/共通入力/物理進行/最終照合は未完。
 
 ## Current authority
 
-最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
 2026-10-30のowner goal activeと追加指示によりW6を再開し、root空き確保を先行しました。W6-OWNER-RESUME-20261030-v1 / W6-OWNER-STORAGE-20261030-v1を現在のexecution authorityとします。先行pause/cleanup/復元記録は履歴として保持します。
 
@@ -26,9 +26,11 @@ Native63: NATIVE63-FULL1750-ACCEPTANCE-v1.json / native-full1750-v1/PIN.json / N
 
 Workspace: NATIVE63-WORKSPACE-PARTITION-ACCEPTANCE-v1.json。4library構成、14package/148artifact/32example/5CLI、他1190と7doctestを受理。2940unique試験=1750+1190、追加21の単独試験を重複加算しない。Native61の旧全1729/45readerも保持。
 
-Current measurement: NATIVE-REGISTRY-LIVE63-ACCEPTANCE-v1.json。隔離した現計測構成で45allocator校正、1genuine registry control、実3private world/各2cold readerを受理。独立registry45記録、27組の6費用変数、36実測区間、54改変拒否、旧画像に対するfresh registry18拒否を照合。87原本/9画像/69query/240ledger/12charged restart/192ledger改変を確認。30processの558対/1116有効cut、16計測改変と3無効理由保持を検証した。
+Current measurement: NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1.json / native-registry-live64-v1。新buildの1790名は既存1750＋registry1＋allocator39に一致。45校正と実registry control、3秘密入力world/各2cold readerを実行し、45registry/3parent/27組の6費用変数/36区間/18旧画像拒否、87原本/69query/240ledger/12charged restartを独立読戻し。558対/1116有効cut/30process、54費用改変・192ledger改変・16計測改変拒否も再確認。
 
-最大観測prefixは予約Layout263120089byte、累積要求7325990566byte。これは各processの標本であり、terminal peak/RSS/物理予約/共通public容量/進行保証ではない。先行setup/probe/loggingを含み、自身のcut後serializationと直接System/libc/stack/kernel/allocator内部は別。独立6費用変数は今回の完全入力に対する値であり、任意の初期履歴や全callerの共通上限にはしない。計測binaryはNative63全1750と別で、1790inventoryの全回帰は未実行。
+最大観測prefixは予約262607600byte、累積要求7325443891byte。実測標本であり、terminal peak/RSS/物理予約/共通public容量/進行保証ではない。先行setup/probe/loggingを含み、自身のcut後serializationと直接System/libc/stack/kernel/allocator内部は対象外。計測64の全1790は実行中、後続45reader/追加計測照合は未実施。旧Native63計測とNative64全1750を新構成の全回帰成功へ流用しない。残99caller fee、拒否callee、共通入力/履歴、全caller/host/物理進行、他profile/119要件/最終docs/OracleはOPEN。
+
+Prior measurement: NATIVE-REGISTRY-LIVE63-ACCEPTANCE-v1.jsonは旧source/binary/原本/全readerとともに保持する。新構成の成功へ読み替えない。
 
 Formal: COMBINED-FORMAL-ACCEPTANCE-v2.json。275module/237一般module/38独立readback、41526宣言/1995反例、fresh/replay各2309command/全4618logを受理。追加寿命/snapshot2module299宣言33偽とscoped scratch50宣言14偽は別cutで両回受理。固定275manifestへ黙って加算しない。
 
@@ -71,15 +73,21 @@ The command verifies each archive and protected file before restoring, preserves
 1. Re-read current Canon/owner direction and verify preserved receipts/source plus available disk/RAM. Restore only required cache using the command above; keep current Native64 full1750/45readers and the historical Native63 full1750/45readers plus otherworkspace1190/7doctests without redundant reruns.
 2. Initial whole/fresh/V1/V2 geometry and saved-cache native shape/cost H are conditionally connected. Selected cache provenance is connected. The coarse uniform cumulative envelope is rejected as a reservation. Funded scalar scratch and conditional Tree resident bounds are now connected. Selected fresh/clone/serde capacity premises are connected. All261source/1313constructor arguments and the258direct/9macro/37callback local return contracts are connected to finite successful call induction. Fresh CaptureGraph backing/root clone/unique are now connected. Discarded guard Trees and native/registry locals are connected. Three constructor transfers/old-new backing are connected conditionally. All1171 literal node argument capacities are now instantiated, with3prebound children and conditional sequential generation/error prefixes retained. All142 collector sites are classified, with139 fallible and2 exact routes connected to growth, retained children and failed-prefix composition. Actual capture_vec/tree_for_bytes/hex_chunk outer metadata,prebound chunks and temporary hex lifetimes are now connected. Eight scalar generation and guarded byte capture now have common bounds, with independent publicN required for general String. Generic Record and seven snapshot stage ownership, conditional prior DTO/native cost caps and shared graph failed prefixes are connected. Original source and prestaged captures are connected. OriginalImage capture/validate/encode/decode and V1/V2 local scopes are connected. OriginalImage caller branches/loop/conditions are now connected. Selected enclosing worker/join/TLS/detach and concurrent shared/exclusive partitions are now connected. The smallest one-notification driver now has general/component/focused Native64 correspondence; its full1750 regression and all45readers are accepted. Selected caller binary/frame/metadata byte buffers and exact writer geometry now have conditional public bounds. Four authentic caller JSON file/parse shapes are now conditionally connected. Selected Value copy/to_value/json expression and integer/string writer stages are now conditionally connected. Prefix hex/row/iterator plus outer Value copy now have conditional bounds with policy and borrowed input retained separately. Selected Path/environment/current_exe directsite budgets are now connected with independent public parameters. Original caller321syntaxsites are now enumerated,9directcopy sites/max22calls connected to acceptedfees. Reader4output shapes and matching macro/writer fee components are now connected, including depth1 payload and final8field metadata; digestformat remains priorPathEnvfee and sha2/getpid work separate. Base NamedRegion setup/retained path/logging fees and start-return root/id destruction are connected for6directsites. Extended globalobserver extra5fields/two temporary snapshot Values and copies are now conditionally connected; callback CAS work/progress remains separate. All321caller syntaxsites now partition into111linkedfees/111conditionallocalzero/99namedresiduals after10directwrites,9pair sites and12mutation sites. PathCString requestedfees and17paircalls/34returnedownedFDs are connected; hidden/implicit/component/kernel/progress extras remain. Named rejection-input transformations retain390shape readbacks, and12intrinsic operation fees now have524complete cost/output readbacks. No invalid-callee fee is resolved. Use mutation bounds/failed prefixes before reusing original successful costs. Instantiate residualfees and common public inputs/history, then allcaller numeric/executor/host budgets; whole inputF/common history remains independent. Whole-image reachable histories/common input and physical funding remain required. Keep independent registry custody and arbitrary-import residuals. Existing restoration shape and all90 cost formulas remain accepted conditional evidence, not a whole caller budget.
 3. Connect all callers' ownership lifetimes, initial/returned/concurrent frames, non-allocating work, host/OS, physical funding and progress. Do not derive a public bound from the maxima of the measured three private inputs.
-4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and appropriate measurement-configuration regression (full1790 remains unrun). Complete final integrated docs and independent Oracle review. Keep every missing premise open.
+4. Reconcile other profiles, all requirements, source/proof/outward/history correspondence and the running measurement64 full1790 and its required subsequent independent readers. Complete final integrated docs and independent Oracle review. Keep every missing premise open.
 
-共通public初期履歴/cache、全callerの保持寿命・非割当work・host/OS・物理資源と進行、他profile、全要件/出所/証明の最終照合、計測構成1790の必要回帰、W6最終統合docs/独立Oracle reviewは未完了。
+共通public初期履歴/cache、全callerの保持寿命・非割当work・host/OS・物理資源と進行、他profile、全要件/出所/証明の最終照合、計測64全1790は実行中で後続reader未実施、W6最終統合docs/独立Oracle reviewは未完了。
 
 The pause full-docs/focused343 receipts cover this saved state only. They do not close W6 or replace the future final integrated review. Earlier detailed restart notes are preserved in owner-pause-20261029-preimages-v1/docs/proof-first/RESUME.md and Report2617.
 
 ## Quota, Oracle and process state
 
 W6 active。23:58JSTの週間残量60.0%、次回10/31 00:58JST以降。Oracle23:58JSTもGPT-6 Pro利用上限でprompt未送信、次回10/31 00:58JST以降。指定reset使用1回、35%停止、追加reset/購入なし。 Native64全1750と45readerは終了・受理済み。
+
+## Current measurement64 campaign
+
+2026-10-31 00:55 JST: prepare_native_registry_live64_v1.py → build_native_registry_live64_v1.py → run_native_registry_live64_v1.py → run_measurement64_selected_readers_v1.py（5reader）→ NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1.json → prepare_measurement64_full1790_v1.py → run_measurement64_full1790_v1.py measurement-v64 measurement64-full1790-v1 "" 1790。全回帰serviceはmirrorea-w6-measurement64-full1790-v1、監視記録はmeasurement64-full1790-v1/RESULT.json。成功cutは再実行・上書きせず新cutを使用。
+
+新しい並行検証はw6research20261031.sliceで合計MemoryMax6GiB/Swap0を確認し、既存hot領域2GiB上限と併用。設定はuser runtime限定、source/raw/logはSSD保持。これは検証用の運用制限であり、runtimeの物理資源定理ではない。
 
 ## Repository backup scope
 
@@ -1048,3 +1056,7 @@ Repository backup: 画像変形上限の13文書をd7021d29d211dec6d8df74a34eec0
 2026-10-31 00:27 JST: Native64全1750/0failed/0ignored、全6575source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを新規実行で受理。旧prefixの流用なし、queue改変10件を拒否。新binaryのarchiveは全byte読戻し、元実行fileも保持。旧Native63の他1190/7doctestは履歴baselineであり、Native64の新workspace全受理へ自動継承しない。
 
 2026-10-31 00:35 JST: 画像変形の局所費用・Native64全回帰受理のfull make docsは6410入力不変・exit0。先行focused431は21項目成功、検証metadataはfocused432で別検証。W6最終統合full/Oracleは未完了。
+
+2026-10-31 00:55 JST: 現案は全6580sourceを固定した計測構成のコピーに、受理済みNative64のtest_report_transport_driverだけを移す。最小代替は旧periodic driverのまま全1790を行う案で、今回のcaller費用proofとの対応を揃えるため採らない。allocator/registryの34source差分、試験assertionとdeadlineを保持した。 新buildの1790名は既存1750＋registry1＋allocator39に一致。45校正と実registry control、3秘密入力world/各2cold readerを実行し、45registry/3parent/27組の6費用変数/36区間/18旧画像拒否、87原本/69query/240ledger/12charged restartを独立読戻し。558対/1116有効cut/30process、54費用改変・192ledger改変・16計測改変拒否も再確認。 最大観測prefixは予約262607600byte、累積要求7325443891byte。実測標本であり、terminal peak/RSS/物理予約/共通public容量/進行保証ではない。先行setup/probe/loggingを含み、自身のcut後serializationは含まない。計測64の全1790は実行中、後続45reader/追加計測照合は未実施。旧Native63計測とNative64全1750を新構成の全回帰成功へ流用しない。残99caller fee、拒否callee、共通入力/履歴、全caller/host/物理進行、他profile/119要件/最終docs/OracleはOPEN。
+
+2026-10-31 00:58 JST: 計測64 selected/current runningのfocused433は21項目成功。最終metadataはfocused434で別検証。status/evidence mirrorのため今回full make docsは再実行せず、先行full6410を新cutへ移さない。W6最終統合full/Oracleは未完。

@@ -1,12 +1,12 @@
-# W6 — 秘密を含む観測とdebug：実callerの費用合成
+# W6 — 秘密を含む観測とdebug：計測構成の全回帰とcaller費用
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・全履歴readerを受理。画像変形12箇所の局所費用を56宣言/14反例と全524出力の読戻しへ対応し、321操作は費用対応111/条件付き局所非割当て111/残99。不正入力のcallee費用、共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerを保持。通知driverを計測構成へ1関数移し、45校正・実3world/各2cold reader・87原本・1116計測cutを独立読戻しで受理。別binaryの全1790回帰を開始し、終了後の全readerは未実施。caller費用の残99、拒否callee/共通入力/物理進行/最終照合は未完。
 
-最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 00:27 JST
+Updated 2026-10-31 00:55 JST
 
 - Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
@@ -96,3 +96,5 @@ Updated 2026-10-31 00:27 JST
 - 2026-10-31 00:27 JST: 任意有限の正のkey数を持つBTree探索経路、1回のVec/String成長、単調性・反復・既払い保持をLeanで検証。新1module56宣言/14反例をfresh/replay・32log/68保存fileで読戻し。固定275manifestとは別cut。 A=array slot、F=object field、S=keyを含むUTF-8 byteを元画像の独立上限とし、対象変形操作の累積要求は96A+1024F+3S+361163byte以下。元top6field、Flow≤4096、index書換え≤2回等が前提。map挿入8192と未知key7、None1個86、Value複製32A+1024F+S、1回のVec追加64A+128、usize書換え286、ASCII key追加2S+8を加算。型変換/拒否callee費用、元容量や物理予約を含まない。 321操作は費用対応111/条件付き局所非割当て111/残99。残99とtyped from_value/拒否callee、hidden/implicit/component残差、共通public入力/初期履歴、全caller保持・非割当work・host/物理資源/進行は未完。Native64全1750と45readerは今回受理し、計測構成1790は別の未実行回帰。他profile/119要件/outward/history/最終統合docs/Oracleも未完。任意Clone/Drop/比較/allocatorへ一般化せず、Rust/std/serde/layout/compiler対応はTCBに残す。
 
 2026-10-31 00:27 JST: Native64全1750/0failed/0ignored、全6575source/実binary/7488raw/21plain/53stageと45原本・意味・全履歴readerを新規実行で受理。旧prefixの流用なし、queue改変10件を拒否。新binaryのarchiveは全byte読戻し、元実行fileも保持。旧Native63の他1190/7doctestは履歴baselineであり、Native64の新workspace全受理へ自動継承しない。
+
+- 2026-10-31 00:55 JST: 現案は全6580sourceを固定した計測構成のコピーに、受理済みNative64のtest_report_transport_driverだけを移す。最小代替は旧periodic driverのまま全1790を行う案で、今回のcaller費用proofとの対応を揃えるため採らない。allocator/registryの34source差分、試験assertionとdeadlineを保持した。 新buildの1790名は既存1750＋registry1＋allocator39に一致。45校正と実registry control、3秘密入力world/各2cold readerを実行し、45registry/3parent/27組の6費用変数/36区間/18旧画像拒否、87原本/69query/240ledger/12charged restartを独立読戻し。558対/1116有効cut/30process、54費用改変・192ledger改変・16計測改変拒否も再確認。 最大観測prefixは予約262607600byte、累積要求7325443891byte。実測標本であり、terminal peak/RSS/物理予約/共通public容量/進行保証ではない。先行setup/probe/loggingを含み、自身のcut後serializationは含まない。計測64の全1790は実行中、後続45reader/追加計測照合は未実施。旧Native63計測とNative64全1750を新構成の全回帰成功へ流用しない。残99caller fee、拒否callee、共通入力/履歴、全caller/host/物理進行、他profile/119要件/最終docs/OracleはOPEN。

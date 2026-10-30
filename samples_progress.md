@@ -1,14 +1,14 @@
 # samples_progress
 
-Last updated: 2026-10-31 00:27 JST
+Last updated: 2026-10-31 00:55 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・全履歴readerを受理。画像変形12箇所の局所費用を56宣言/14反例と全524出力の読戻しへ対応し、321操作は費用対応111/条件付き局所非割当て111/残99。不正入力のcallee費用、共通入力/全caller/物理進行/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerを保持。通知driverを計測構成へ1関数移し、45校正・実3world/各2cold reader・87原本・1116計測cutを独立読戻しで受理。別binaryの全1790回帰を開始し、終了後の全readerは未実施。caller費用の残99、拒否callee/共通入力/物理進行/最終照合は未完。
 
-最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
+最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
 閉じたAstraの証拠はReport2616/W6_CHECK、現在の実装証拠はReport2617/W6_CHECK.implementationで区別する。下表は現在の受理状態。旧Native21/61、旧223formal、各部分実行と失敗cutはReport2617と凍結receiptに保持し、現在の待機queueとして再掲しない。active sample rootsは不変で、external LAB evidenceをpublic workflow-readyと扱わない。
 
@@ -29,7 +29,7 @@ W6継続・未完了。Native64全1750/0failed/0ignoredと45原本・意味・�
 | Full response histories | 現45readerのdistributed_history/selected_history | 全応答prefix・future authority・旧knowledgeの有限実行対応を受理。最終要件別の一般条件照合は残る |
 | Actual M9 / bounded input | 現45readerのm9_exact_authority/m9_genuine_mutators/bounded_acquisition | 真のauthority更新と独立current、複製前入力検査を照合。transportを権限にしない |
 | Current source / outward / costs | native63-semantic-source-v2; owning-feature-composition-v1 | 33source/23対応/153出力、現9画像90費用式を保持。全費用式を再構築しない |
-| Isolated global Layout measurement | NATIVE-REGISTRY-LIVE63-ACCEPTANCE-v1 | 45allocator校正、実3world/各2cold reader、45registry/27組/36区間、87原本、30process/1116prefixを受理。最大観測prefixは予約263120089byte/要求累計7325990566byte。RSS/terminal peak/共通上限ではない。別binary全1790回帰は未実行 |
+| Isolated global Layout measurement / current selected | NATIVE-REGISTRY-LIVE64-SELECTED-ACCEPTANCE-v1 / run_measurement64_selected_readers_v1.py | 45校正、実3world/各2cold reader、45registry/27組/36区間、87原本、30process/1116cutを再実行受理。全1790実行中・後続全reader未実施。最大観測prefix262607600/累計7325443891byteは共通上限/RSSでない。旧LIVE63は履歴保持 |
 | Allocation lifetime / stable snapshot / scratch | LIVE-ALLOCATION-LIFETIME-JOIN-v1; ALLOCATION-STABLE-SNAPSHOT-JOIN-v1; SCOPED-SCRATCH-JOIN-v1 | 349宣言47反例、初期/返却/並行保持と置換L+C、stable cutを区別。全callerへの接続は未完 |
 | Public registry contribution | PUBLIC-REGISTRY-ENVELOPE-JOIN-v1 | 固定Source4/3役割の共通6費用。119宣言13関連反例/90式、45registry/27組/36実測。任意cache/画像依存費用は別 |
 | Owning Plan envelope | OWNING-PLAN-ENVELOPE-JOIN-v1 | 任意構造にR+D×C。77宣言14反例、現153計画/306適用を両回検証。3504定義は数値転記。D≤10は次rowでsourceへ結合。C/Rのpublic条件は未受理 |
