@@ -106248,5 +106248,110 @@
     "range": "complete currentmissing_fields documentation checkpoint",
     "role": "W6missing_fields",
     "status": "focused21passed;caller13/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-MUTATED-RESTORE-JOIN-v1.json",
+    "sha256": "c329ef15e6add51dc02610d15974ac356ba9cb98228bf38a161ba97fe27ce197",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/PARTITION-MUTATED-RESTORE-v1.json",
+    "sha256": "64ae0e5b1c3272068c24500e88450bdd45cb4399bae0c24d6c7228d82f0f3d9b",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/PREREGISTRATION.json",
+    "sha256": "4c77dd368806af142ac9492ba9c7b99ddd3c9d56c0879d80f452a2be549052e1",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/FORMAL-PREREQUISITE-v1.json",
+    "sha256": "a7533bc03898df66e947f9229fb7a66f2f5def75d78d870a1aafa32848f9e7bb",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/BOUND-PLAN-v2.json",
+    "sha256": "d85194d01ca626ad3c86cc843c30f2ff174106c729cd8b48119875411576b378",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/FORMAL-VERIFICATION-v2.json",
+    "sha256": "04aa8a1936e033fa21d17736e2dd2b9a86a475a872d6d43b6d0341c2bb3036b0",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/FORMAL-FAILURE-v1.json",
+    "sha256": "af60de932ca30fdf255fc91bea873976eddf17e8e161d7602e70b27380c3cfce",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/SOURCE-VERIFICATION-v2.json",
+    "sha256": "d4aeb5ea1b9ac69e8c2b6af77693f21c1f3fd27e7e11ff102814dc51533831a0",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/SOURCE-FAILURE-v1.json",
+    "sha256": "9439108b319b957332bf6bfbac2756bb497570c6f76d9730b837a96d217fda25",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-missing-fields-v1/PUSH-v1.json",
+    "sha256": "39f74385647dcc06ba3c6e86883d6e100d8c3ffeacce10fe6af1ad2a534af879",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T210137Z.json",
+    "sha256": "d0a2120a62cefb9c10aaa5dbcaac9d767b3d04e4ac1d67a8bfb47c78caa221f9",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261031-v6.json",
+    "sha256": "2e9b66f5f3d666f11870f2cbdb27a23bd22d5bcc7a84424105444e2bbf4868a5",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/CHECKPOINT-v1.json",
+    "sha256": "37815c5e87778cd6d4157c2855ddadeaaf128da6cb33311beac2dce520a1e3d7",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/PRIOR-QUOTA-ORACLE-ALIASES-v1.json",
+    "sha256": "75f0305ec535ba233717cbf24b85b3181e94a5dd73fdc0b774bf6944f18d0811",
+    "range": "complete current altered-image restore and conditional skipped-branch evidence",
+    "role": "caller277/293/301prefix;postinstallunrun",
+    "status": "27mutations18registries54fees171numeric46newlogs;caller10/physical/W6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-mutated-restore-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "3e73d367aaa61bd9e04f1ee2d844cd0c9c6b3ec5097f66e7fd71b3f953b22f38",
+    "range": "complete currentmutated_restore documentation checkpoint",
+    "role": "W6mutated_restore",
+    "status": "focused21passed;caller10/commoninput/physical/wholeW6open"
   }
 ]

@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-31 05:53 JST
+Last updated: 2026-10-31 06:13 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。必須field削除72入力の復元拒否費用を現18registryへ対応し、5panic分岐の不達条件も確認。321callerは費用151・局所0が152・不達5・残13。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保持し、全1790回帰は実行中。Flow除去・message追加・参照重複の27変形画像について、18registry/54費用適用を照合。321callerは費用154・局所0が152・不達5・残10。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,7 +45,8 @@ W6継続・未完了。Native64全1750/45readerと計測64 selected受理を保�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
-| Caller missing fields / current | CALLER-MISSING-FIELDS-JOIN-v1 / verify_caller_missing_fields_v2.py | 現72削除形状/18registry/144費用適用、216数値式/新46log、510入力費用/22source改変拒否。5panicは条件付き不達。費用151・局所0が152・不達5・残13。新Native実行なし、共通入力/物理進行OPEN |
+| Caller altered restore / current | CALLER-MUTATED-RESTORE-JOIN-v1 / verify_caller_mutated_restore_v1.py | 現27変形画像/18registry/54費用適用、171数値式/新46log、630入力費用/47source改変拒否。費用154・局所0が152・不達5・残10。新Native実行なし、共通入力/物理進行OPEN |
+| Caller missing fields / prior | CALLER-MISSING-FIELDS-JOIN-v1 / verify_caller_missing_fields_v2.py | 現72削除形状/18registry/144費用適用、216数値式/新46log、510入力費用/22source改変拒否。5panicは条件付き不達。費用151・局所0が152・不達5・残13。新Native実行なし、共通入力/物理進行OPEN |
 | Caller distributed send / prior | CALLER-DISTRIBUTED-SEND-JOIN-v1 / verify_caller_distributed_send_retained_v1.py / qualify_caller_distributed_send_v2.py | 現9入力/18sender・18parent区間、既存36式/96log、414記録/36費用/22source改変拒否。新Native/Leanなし、区分150/152/残19、postinstall準備のみ、共通入力/物理進行OPEN |
 | Caller initial template start / prior | CALLER-TEMPLATE-START-JOIN-v1 / verify_caller_template_start_v2.py | 9実初期入力/18既存whole区間、54数値式の両回、16反例、171記録/20source改変拒否。新Nativeなし、区分148/152/残21、共通入力/物理進行OPEN |
 | Caller Flow budget refusal / prior | CALLER-FLOW-BUDGET-JOIN-v1 / verify_caller_flow_budget_v2.py / verify_caller_flow_budget_join_v1.py | 9実入力/18callee/72区間、6校正、先行証明46log、312記録/18source/25join改変拒否。局所部品の証拠で新live Sourceなし、区分147/152/残22、共通入力/物理進行OPEN |
