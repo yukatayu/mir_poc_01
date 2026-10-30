@@ -1,12 +1,12 @@
 # samples_progress
 
-Last updated: 2026-10-30 20:34 JST
+Last updated: 2026-10-30 20:59 JST
 
 Plan250 execution control: I3-3 accepted, owner-paused with no active semantic milestone. I3-4 requires explicit owner resume; later milestones remain inactive.
 
 W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
 
-W6継続・未完了。prefixのhex/row/iterator生成を一般Lean40宣言/12反例・34log、同一library106部品と全256u8の各2回へ条件付き接続。64行以下の選択構築は累積要求636473byte以下、policy処理と元入力は別加算。実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
+W6継続・未完了。選択callerのPath/環境/名前生成を一般Lean99宣言/16反例・38log、同一std101部品の各2回へ条件付き接続。直下の対象費用は180P+11E+16K+17X+32223、共通public上限とcallee/元保持/OSは別。環境複製省略・base複製省略の実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
 
 最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、検証process上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
@@ -45,6 +45,7 @@ W6継続・未完了。prefixのhex/row/iterator生成を一般Lean40宣言/12�
 | DTO native recapture shape | DTO-RECAPTURE-SHAPE-JOIN-v1 | 別10DTO/元source DATAの372入力/1002出力、decode665/capture1264値、現9画像243subtreeを照合。拒否4件にも先行capture。datatype1試験であり全画像/初回capture/資源計測は別 |
 | Generic Tree recapture shape | GENERIC-RECAPTURE-SHAPE-JOIN-v1 | 51宣言/12反例、現596型状態/885root/32791呼出しを照合。再番号20byte/参照を保持。実formatter61値、source9/reader10改変拒否。全画像/初回capture/全caller資源は別 |
 | Custom recapture shape | CUSTOM-RECAPTURE-SHAPE-JOIN-v1 | 47宣言/14反例、7custom型/9完全関数/36field。実Flow54入力/27拒否（capture後9）、socket scalar36/実8組、source10/reader13改変拒否。全画像/初回capture/全caller資源は別 |
+| Caller Path/environment costs | CALLER-PATH-ENV-JOIN-v1 / qualify_caller_path_env_v1.py | 99宣言/16反例、101部品の各2回、実compile改変2拒否。公開parameterによる直下費用式、共通入力/callee/全caller/物理進行はOPEN |
 | Caller prefix construction | CALLER-PREFIX-CONSTRUCTION-JOIN-v1 / qualify_caller_prefix_construction_v1.py | 40宣言/12反例、106部品/全256u8の各2回、実compile改変2拒否。条件付き構築要求≤636473、policy/全caller/物理進行はOPEN |
 | Caller Value copy/write | CALLER-VALUE-WRITE-JOIN-v1 / qualify_caller_value_write_v1.py | 51宣言/14反例、229部品+tiny8例の各2回。正確な型/件数/元所有の条件付き要求量、全caller/物理進行はOPEN |
 | Caller sidecar input | CALLER-SIDECAR-INPUT-JOIN-v2 / qualify_caller_sidecar_v2.py | 113宣言/14反例、42部品×2回、33保存原本。4file+解析151380883byteは条件付き要求量。全caller/物理進行はOPEN |

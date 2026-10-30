@@ -104120,5 +104120,68 @@
     "range": "complete caller prefix construction document checkpoint",
     "role": "W6 prefix construction source/formal/component correspondence",
     "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PATH-ENV-JOIN-v1.json",
+    "sha256": "5af8148a105944acb648da4acf93d26ea9f9707009dcdf01d8863b719efe73a1",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-PATH-ENV-CHECKPOINT-v1.json",
+    "sha256": "31655c36da6fc86c763a280ab1fc31f8dd54fe1d36573d586b02835ac8b01224",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-path-env-v1/FORMAL-VERIFICATION-v4.json",
+    "sha256": "96077acc9451bfce6768447e29ae3aeb3fe5ef0d9200ef44767284cfc687dab4",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-path-env-v1/SOURCE-VERIFICATION-v1.json",
+    "sha256": "ff008546681483241f20936225f5fa32503aebc21b2dc418296d6094a07274c9",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-path-env-v1/component-v1/RESULT.json",
+    "sha256": "f5778ddb3f6fe4d3b9a4854ab334ffe525e49b2e1f3ba529fae6dd063c0fd0d4",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/caller-path-env-v1/PREREGISTRATION.json",
+    "sha256": "55ffdc9a6df9039b8621f186123e0cdb0f568b184595d9726959205ae450121d",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261030T115740Z.json",
+    "sha256": "1869869ab2caea83cb91714fc9f4453796acdc3d1d2d5f6d403fd66cba731696",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/ORACLE-AVAILABILITY-20261030-v32.json",
+    "sha256": "e8a40ef0b0af8e89f3f50a83620ba6fa9105c72a68105f2ed2a7f17a09a0c026",
+    "range": "complete Path/environment costs source/proof/component evidence and limits",
+    "role": "W6 selected caller Path/env/current_exe bounds",
+    "status": "conditional LAB;allcaller/wholeinput/physical/wholeW6open;Native64full1750running"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/CALLER-PATH-ENV-DOCS-CHECKPOINT-v1.json",
+    "sha256": "849ace5884348089fe75820f1b080fa09643fa29cb61b2542886ed1f1447ba99",
+    "range": "complete caller Path/env stages document checkpoint",
+    "role": "W6 Path/env stages source/formal/component correspondence",
+    "status": "full docs passed; caller input source/std component conditionally connected;Native64full1750running;numeric/commoninput/physical/wholeW6open"
   }
 ]

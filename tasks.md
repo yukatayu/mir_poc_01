@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-10-30 20:34 JST
+最終更新: 2026-10-30 20:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,22 +12,22 @@ Plan250/ADR0043のowner pauseを維持し、別途許可されたW6有限LABはo
 
 Sources: Canon `mirrorea_canon/adr/ADR-0043.md`、LAB `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、`plan/proof-first-foundation-correspondence.md`。
 
-W6継続・未完了。prefixのhex/row/iterator生成を一般Lean40宣言/12反例・34log、同一library106部品と全256u8の各2回へ条件付き接続。64行以下の選択構築は累積要求636473byte以下、policy処理と元入力は別加算。実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
+W6継続・未完了。選択callerのPath/環境/名前生成を一般Lean99宣言/16反例・38log、同一std101部品の各2回へ条件付き接続。直下の対象費用は180P+11E+16K+17X+32223、共通public上限とcallee/元保持/OSは別。環境複製省略・base複製省略の実compile改変2件を拒否。Native64全1750は実行中、終了後45reader。全caller/共通履歴/物理進行/最終照合は未完。
 
 現全private実行/全readerまで受理済みなのはNative63。Native21/1678/21readerは旧baselineへ移した。Native59/60/62の失敗を保存。Native63はbuildと独立workspace partitionを受理。現runtime1750と45原本reader/全履歴を受理。残分類はW6_CHECK.implementation.unverified_checks。新Native64は1関数変更の10focused受理、全1750実行中。再開手順は `docs/proof-first/RESUME.md`。
 
 ## ordered self-driven packages
 
-prefixのhex/row/iteratorと外側Value複製を条件付き合成。Native64全1750と後続45readerを追跡し、Path/環境・全caller/共通履歴の費用、物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
+Path/環境の直下費用を条件付き合成。Native64全1750と後続45readerを追跡し、共通public入力/履歴と全callerの数値費用、物理資源/進行を続ける。既存3〜7日の見積りは低確度で、待機/停止時間を含まない。
 
 | Package / macro position | Direct consumer / exit | Current state |
 |---|---|---|
 | Current build / Macro3/6後段 | ordinary library/CLI/integration/example | Native63の14package/148target/32example/5CLIを固定。隔離Native64はtest helper1関数だけを変更、全6575入力/1750名を照合 |
 | Current full regression / Macro3/6後段 | 全runtimeと原本・全workspace | Native64全1750実行中、終了後45reader。旧Native63全1750/45reader・他1190/7doctestは固定baseline。計測構成1790は未実行 |
-| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | prefix選択構築≤636473byteを対応。policy/元保持、Path/env、全caller/共通履歴/物理進行はOPEN |
+| Resource correspondence / Macro3/6後段 | allF/J/work/setup/host/physical | 直下Path/env費用180P+11E+16K+17X+32223を対応。共通上限/callee/元保持/全caller/物理進行はOPEN |
 | Combined source/proof/history / Macro1/5・3/5後段 | future authority/full response/current/reload | 現33source/23対応/153出力は照合済み。275module/41526宣言/1995反例の両回と全4618ログを受理。寿命/snapshot/scratch3moduleは別途両回検証。現全履歴も45原本readerで受理 |
-| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | caller prefix構築対応のfull6410入力不変・exit0。focused412通過、metadataはfocused413で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
-| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 19:56JSTもGPT-6 Pro利用上限。prompt未送信。次回20:56JST以降 |
+| Stable docs / Macro3/6後段 | 再現commandと受理証拠 | caller Path/環境費用対応のfull6410入力不変・exit0。focused414通過、metadataはfocused415で別検証しcommit/pushへ。W6最終統合full/Oracleは残る |
+| Independent final review / Macro3/6後段 | T01〜T15/全要件/反例/TCB | 10/30 20:57JSTもGPT-6 Pro利用上限。prompt未送信。次回21:57JST以降 |
 | W7 / Macro3/6後段 | W6受理後の別owner範囲 | inactive、今回範囲外 |
 
 ## self-driven macro phase reading
@@ -46,7 +46,7 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 |---|---|
 | Historical currentness | 元publisher/current registryと独立leaseは保存DATAと別。same-owner再読込み/active再参加を検証。元custody全喪失後の一般再開は未選択 |
 | Current release | 現案Aはcanonical M9/owner→observer guardをdurable intent/全DATA write中保持。最小代替Bの失効後writeは未採用。kernelにqueued済みの到着とwrite時currentは別 |
-| Work and funding | prefix hex/row/iterator/外側複製を条件付き合成。policy/Path/envと全caller/初期履歴/物理進行はOPEN |
+| Work and funding | Path/envの直下式を対応。共通public入力/callee/元保持と全caller/初期履歴/物理進行はOPEN |
 | Temporary ownership | worker7source/69関数を条件付き対応。新driverはguard通知/return/Err/panic/joinを分離。全caller数値費用と物理資源はOPEN |
 | Graph/absence/loss | local closed/lossless/page remainder/distributed typed crossingを分ける。M8直接依存とSource順序/Flow crossingを混同しない。current全1750/全原本readerへ結合済み。最終要件別照合は残る |
 | Mutation/refinement | 実7lifecycle/全6publication監査を保持。restricted-child2familiesと現147target受理結果の意味対応照合は残る。全writer/分類/historyを期待JSONだけで受理しない |
@@ -62,4 +62,4 @@ Q26の最終channel/timing/in-flight政策とQ27のdebugger範囲は未採用。
 
 既存Process/Fabric/Bootstrap/Flow割当式、registry27cut/36区間とdormant37入力116区間は再利用する。再実装するqueueへ戻さない。
 
-19:56JSTの週間残量69.0%、次回20:56JST以降。Oracle19:56JSTもGPT-6 Pro利用上限でprompt未送信、次回20:56JST以降。指定reset使用1回、35%停止、追加reset/購入なし。
+20:57JSTの週間残量67.0%、次回21:57JST以降。Oracle20:57JSTもGPT-6 Pro利用上限でprompt未送信、次回21:57JST以降。指定reset使用1回、35%停止、追加reset/購入なし。
