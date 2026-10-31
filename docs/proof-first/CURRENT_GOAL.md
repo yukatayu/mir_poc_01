@@ -1,14 +1,14 @@
-# W6 — 秘密を含む観測とdebug：計測構成の全回帰とcaller費用
+# W6 — owner quota pause; caller evidence preserved
 
-W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-31の週間残量確認でowner指定の停止条件に達したため一時停止中です。研究原本・履歴・既存の受理証拠を保持し、明示的なowner再開を待ちます。閉じたAstra研究handoffはReport2616、未完了の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。Flowの実capture27件を588数値式・probe込みwhole区間へ接続。321callerは費用164・局所0が152・不達5・残0。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6はowner指定の週間残量35%停止条件により一時停止。09:02JST確認は32%。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。321callerの構文分類とFlow27whole費用・cohort2hidden呼出しを保存。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
-最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
+2026-10-31 09:02JSTの1時間間隔の確認で週間残量32%となり、QUOTA-OWNER-POLICY-v6の35%停止条件に達しました。新規研究は停止し、検証済み・再開可能な状態を保存します。明示的なowner再開までW6を続行しません。指定resetは使用済み1回、追加reset/購入なし。永続成果はSSDに保持し、RAMは唯一の証拠保存先にしません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
-Updated 2026-10-31 08:48 JST
+Updated 2026-10-31 09:04 JST
 
-- Authority: explicit owner resume at 2026-10-30 and verified-storage-first continuation; retain RUN_CODEX_MIRROREA and archive restoration prerequisites. No W7 or Canon adoption.
+- Authority: QUOTA-OWNER-POLICY-v6 owner35percent stop;09:02JST32percent observed. New W6research paused until explicit ownerresume. Retain all exact source/proof/raw and required restoration prerequisites. No W7/Canon/I3-4.
 - Layer/side: PL2/PL3/PL5 and S2–S6; theory-to-internal-source implementation.
 - Direct consumer: actual W5 ordinary-source/owner/QUIC observer and independent active-control boundary.
 - Exact workroot: /home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation. Baseline HEAD42f476538fc17f11506d68ca1b8f7a875d987656/main; predecessor16dirty paths protected.
@@ -21,7 +21,7 @@ Updated 2026-10-31 08:48 JST
 
 - Additional storage checkpoint (2026-10-29 19:39 JST): ownerはtarget等の追加整理を明示し、確認への回答も「target等の追加整理を続ける」。このstorage checkpoint時点ではW6を再開していなかった。4553個のLean生成cacheと、終了済み/source-pinnedの部品test binary17本をexact archiveへ保存・全読戻し後に展開copyだけ整理。生成物の正味削減は4.10GiB、確認時のroot空きは約8.2GiB。元proof/source/raw/logとNative63全試験/計測の実行ファイルは保持。 再開後、現/旧formalのimport又はcache hash照合前にcleanup_additional_lean_cache_20261029_v1.py restore --confirm、該当17componentの実行又はbinary hash照合前にcleanup_component_binaries_20261029_v1.py restore --confirm。先行Cargo cacheのcleanup_w6_build_cache_20261029_v1.py restore --confirmも別の必要条件。全て元bytes/mode/mtimeをno-clobberで復元し、source/hash/free-spaceを確認する。
 
-- Current resume: W6-OWNER-RESUME-20261029-v1.json / QUOTA-OWNER-POLICY-v6.json。初回画像合成後、共通public初期履歴/cacheと全caller資源へ進む。
+- Historical Oct29 resume: W6-OWNER-RESUME-20261029-v1.json。現在はOWNER-PAUSE-20261031-v1による停止中。共通public入力/全caller資源は明示的なowner再開後の残作業。
 
 - 2026-10-29 21:06 JST: PRIOR-IMAGE-SHAPE-JOIN-v1を受理。次は保存cacheHをnative型構造へ接続し、全caller資源へ進む。
 
@@ -140,3 +140,7 @@ Updated 2026-10-31 08:48 JST
 - 2026-10-31 08:24 JST: 独立6580source copyの2fileに2caller計測と型幅確認だけを追加し、1790名のinventoryを確認。45校正・実registry control・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再照合。27whole区間と675入力/費用改変拒否を受理。基準Native64/計測64は不変、このcopyの全1790回帰は未実施。 93method/30ASTと10標準library参照を照合し、186source改変を拒否。元画像9graphと空/重複/cycle/dangling/Unicode/denseの6graphについて、実source2methodを使う部品の全1920対を各2回、3840出力/19200改変拒否で照合。モデルtraceはnative実測traceとは区別する。 321操作は費用対応162/条件付き局所非割当て152/条件付き不達5/残2。Flow51/227、共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。成功profile以外の不正入力を暗黙に含めず、累積要求量をpeak/RSS/実予約へ読み替えない。
 
 - 2026-10-31 08:48 JST: 独立6580source copyの3fileへ計測/型幅確認を追加し、全呼出し用counter1fileを加えて6581source/1791名を確認。46校正・実registry control・3秘密world/各2cold readerを実行。5readerで87原本/69query/240ledger/12charged restart、45registry/3parent/27費用組、1116有効cut/30processを再照合。27whole区間と837入力/費用改変拒否を受理。別の同一allocator source部品でzeroed/realloc実割当てと失敗/overflow合成callbackの2校正も通過。基準Native64/計測64は不変、このcopyの全1791回帰は未実施。 23閉じた型・46serde対応・4default・4sourceを確認。最大Vec要素104byteと返却FlowPair880byteを既存ABIから照合し、実binaryでも型幅を確認。44method/20AST・88source改変拒否と23型欠落拒否を照合。旧sourceとの差は型/import/trait ASTで確認し、元画像からcontrol/peer/ingressと完全Flow出力を再導出した。 321構文操作は費用対応164/条件付き局所非割当て152/条件付き不達5/未分類0。これは全callerの共通予算又はW6完了を意味しない。共通public入力/初期履歴、保持寿命・Drop・hidden/implicit/component、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終統合docs/Oracleは未完。成功profile以外の不正入力を暗黙に含めず、秘密標本最大をpublic予算にしない。
+
+- 2026-10-31 08:59 JST: writer metadataのcohort enabled/lifetime生成を、外側JSONへのcopyと別に課金。独立に与える環境値byte上限Eroot/Efdに対し、有効時Eroot+Efd+4752、無効時Eroot。fd>=200のi32/24byte以下のproc path/4数値field・key16byteと固定Rust/std/serde条件を保持する。空のroot値は有効、先頭0付きFD文字列は数値が同じでも長さ費用が増える。 一般合成26宣言/8反例をfresh/replay、28log/60保存fileで確認。元2method/6ASTとstd一次sourceを照合。実regular FDを継承した58部品実行（成功50、うち校正2、拒否8）と344出力/費用改変・4source改変拒否を照合した。現Flow計測copyの9writer原本と現source/元hashを再確認し、lifetime=Noneから無効分岐を推論。新Native個別計測ではない。 この追加対応は321構文行の外にある2呼出しだけで、構文分類数は不変。残るhidden/implicit/Drop/component、共通public入力/初期履歴、全caller保持、非割当work/host/物理資源/進行、他profile/119要件/outward/history/最終Oracleは未完。累積要求をresident/RSS/物理予約へ読み替えない。
+
+- 2026-10-31 09:04 JST: 10/31 09:02JSTの週間残量32%、owner35%条件により一時停止。指定reset使用1回、追加reset/購入なし。Oracle最終確認は08:04JSTにGPT-6 Pro利用上限、prompt未送信。以後の再確認/最終reviewはowner再開後。 W6はowner指定の週間残量35%停止条件により一時停止。09:02JST確認は32%。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。321callerの構文分類とFlow27whole費用・cohort2hidden呼出しを保存。共通入力/全caller/物理進行、他profile/最終照合は未完。

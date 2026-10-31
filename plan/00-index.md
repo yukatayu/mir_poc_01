@@ -15,7 +15,7 @@
 
 今回の task-local proof-first LAB evidence / dependency memory は
 [`proof-first-foundation-correspondence.md`](proof-first-foundation-correspondence.md)。
-Current owner task (2026-10-31 08:48 JST): W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。Flowの実capture27件を588数値式・probe込みwhole区間へ接続。321callerは費用164・局所0が152・不達5・残0。共通入力/全caller/物理進行、他profile/最終照合は未完。
+Current owner task (2026-10-31 09:04 JST): W6はowner指定の週間残量35%停止条件により一時停止。09:02JST確認は32%。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。321callerの構文分類とFlow27whole費用・cohort2hidden呼出しを保存。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
 W5「全成分の永続化と更新」は、登録した有限LAB profileとして技術検証・文書検証・安全なクリーンアップを完了しました。全component manifest、実journalと再起動、更新・失効との直列化、pending/prepared/external-unknownの扱いを確認しました。119要件の承認状態は変えず、正式採用・公開仕様への昇格はしていません。 証跡はReport2615/W5_CHECK、manifestはCOMPONENT-INVENTORY-v21。native全1546件・6host39件とW3完全Sessionを受理し、119要件/80登録の区分とcleanupを記録。W5の文書検証も通過し、その依頼は完了。
 

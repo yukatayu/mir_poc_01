@@ -22,11 +22,11 @@ memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
-W6「秘密を含む観測とdebug」は、2026-10-30のowner再開指示により継続中です。SSD増設後の復元とroot空き確保を検証し、研究原本・履歴・既存の受理証拠を保持しました。閉じたAstra研究handoffはReport2616、現在の単一実装reportは2617です。
+W6「秘密を含む観測とdebug」は、2026-10-31の週間残量確認でowner指定の停止条件に達したため一時停止中です。研究原本・履歴・既存の受理証拠を保持し、明示的なowner再開を待ちます。閉じたAstra研究handoffはReport2616、未完了の単一実装reportは2617です。
 
-W6継続・未完了。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。Flowの実capture27件を588数値式・probe込みwhole区間へ接続。321callerは費用164・局所0が152・不達5・残0。共通入力/全caller/物理進行、他profile/最終照合は未完。
+W6はowner指定の週間残量35%停止条件により一時停止。09:02JST確認は32%。Native64全1750/45reader、計測64全1790/45readerと追加4readerを保持。321callerの構文分類とFlow27whole費用・cohort2hidden呼出しを保存。共通入力/全caller/物理進行、他profile/最終照合は未完。
 
-最新owner指示はroot空きを増やし、頻用データを合計約8GB以内のRAM運用へ置き、その後W6を継続することです。SSDへ全照合済みの旧重複copyだけを整理しました。研究原本/成功失敗履歴を保持し、主担当一人で可逆LABを進めます。永続成果はSSD、頻用cache/小規模一時生成はRAM、並行する検証processの合計上限6GiBとRAM領域2GiBを併用します。指定resetは使用済み1回、QUOTA-OWNER-POLICY-v6の35%停止を維持し、追加reset/購入は行いません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
+2026-10-31 09:02JSTの1時間間隔の確認で週間残量32%となり、QUOTA-OWNER-POLICY-v6の35%停止条件に達しました。新規研究は停止し、検証済み・再開可能な状態を保存します。明示的なowner再開までW6を続行しません。指定resetは使用済み1回、追加reset/購入なし。永続成果はSSDに保持し、RAMは唯一の証拠保存先にしません。W7/Canon/Plan250-I3-4/未依頼の通知・共有folder配置は開始しません。
 
 ALIGN-2 の受理済み境界は
 [`architecture/07-browser-host-trust-boundaries.md`](mirrorea_canon/architecture/07-browser-host-trust-boundaries.md)

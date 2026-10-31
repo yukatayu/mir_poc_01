@@ -107011,5 +107011,75 @@
     "range": "complete visible menu only",
     "role": "independentOracleavailability",
     "status": "ProUsageLimitReached;no prompt;next09:04JST"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/CALLER-COHORT-HIDDEN-JOIN-v2.json",
+    "sha256": "392c5b4484f4a68ce07eaabff9534dba23ed7fede6c77bd900130b59a48814fa",
+    "range": "complete hidden cohort conditional fee / exact original and component correspondence",
+    "role": "W6callerhiddenbudget",
+    "status": "Eroot+Efd+4752;58componentrows/344controls;current9disabled/sourceinference;allcallerphysicalOPEN"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-cohort-hidden-v1/PREREGISTRATION.json",
+    "sha256": "86a0e995820dc2ed9a5aad13c6826a5ee3c2d7327e047f3b011a7fb988c07d3f",
+    "range": "complete hidden cohort conditional fee / exact original and component correspondence",
+    "role": "W6callerhiddenbudget",
+    "status": "Eroot+Efd+4752;58componentrows/344controls;current9disabled/sourceinference;allcallerphysicalOPEN"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-cohort-hidden-v1/FORMAL-VERIFICATION-v3.json",
+    "sha256": "bde5cb9f1f9b7bf4ca6aab635ced28b3a029a18de402eb1eec0945c1d99b7d46",
+    "range": "complete hidden cohort conditional fee / exact original and component correspondence",
+    "role": "W6callerhiddenbudget",
+    "status": "Eroot+Efd+4752;58componentrows/344controls;current9disabled/sourceinference;allcallerphysicalOPEN"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-cohort-hidden-v1/component-v1/EXECUTION.json",
+    "sha256": "f48014b6225de58a61eb8f234fe4660dd3a24d9a43bcb7a9c5da5f525638a3b6",
+    "range": "complete hidden cohort conditional fee / exact original and component correspondence",
+    "role": "W6callerhiddenbudget",
+    "status": "Eroot+Efd+4752;58componentrows/344controls;current9disabled/sourceinference;allcallerphysicalOPEN"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-cohort-hidden-v1/CHECKPOINT-v1.json",
+    "sha256": "73c1470100f2d7ee91dc58dde463ca16dab5679f5b65acb7e41b0eb68182a22f",
+    "range": "complete hidden cohort conditional fee / exact original and component correspondence",
+    "role": "W6callerhiddenbudget",
+    "status": "Eroot+Efd+4752;58componentrows/344controls;current9disabled/sourceinference;allcallerphysicalOPEN"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/OWNER-PAUSE-20261031-v1.json",
+    "sha256": "921aa61c9b213f78b93937e97aaacc38682a35c351a86e5a661adc5493df0d37",
+    "range": "complete current preservation/ownerquota control",
+    "role": "W6ownerpausecheckpoint",
+    "status": "researchpaused;currentcohortfullpassed;pause docs separate;wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/QUOTA-20261031T000237Z.json",
+    "sha256": "1236ed835e1f07923237ab35b94d08d8ef5453a1bca9e3e57489334dbc2d36e8",
+    "range": "complete current preservation/ownerquota control",
+    "role": "W6ownerpausecheckpoint",
+    "status": "researchpaused;currentcohortfullpassed;pause docs separate;wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/caller-cohort-hidden-v1/HIDDEN-SUPPLEMENT-v1.json",
+    "sha256": "cef0c11d0fcd8d08c1d8be3db4a323447bdaa7d969d1a1969f413043a1539161",
+    "range": "complete current preservation/ownerquota control",
+    "role": "W6ownerpausecheckpoint",
+    "status": "researchpaused;currentcohortfullpassed;pause docs separate;wholeW6open"
+  },
+  {
+    "path": "/mnt/ssd_sub/mirrorea-work/w6-resume-20261030-v1/full-docs-cohort-hidden-v1/RESULT.json",
+    "sha256": "a71bf05f0abe90ffc816507041be82795e4c8f80c9dc9a2f7d6d1ca6da98838b",
+    "range": "complete current preservation/ownerquota control",
+    "role": "W6ownerpausecheckpoint",
+    "status": "researchpaused;currentcohortfullpassed;pause docs separate;wholeW6open"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w6-20261019-implementation/owner-quota-pause-20261031-v1/DOCS-CHECKPOINT-v1.json",
+    "sha256": "a56cc2528f3330fc63b68d48a06012cc473c1d734eabbf3ae3e4321d741c815b",
+    "range": "complete verified ownerpause checkpoint",
+    "role": "W6preservationonly",
+    "status": "full6410passed;metadata482separate;newresearchstopped;wholeW6open"
   }
 ]
